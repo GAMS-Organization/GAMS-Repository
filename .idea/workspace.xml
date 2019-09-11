@@ -2,7 +2,147 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae8e431-839d-4c67-ba63-4c1cbde8c90c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/routes/testAPI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/api/bin/www" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/.bin/cleancss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/History.md" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/History.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/bin/cleancss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/lib/clean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/colors/hex-name-shortener.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/colors/hsl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/colors/rgb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/imports/inliner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/break-up.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/can-override.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/clone.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/compactable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/every-combination.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/has-inherit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/invalid-property-error.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/optimizer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/override-compactor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/populate-components.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/remove-unused.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/restore-from-optimizing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/restore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/shorthand-compactor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/validator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/vendor-prefixes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/properties/wrap-for-optimizing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/advanced.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/clean-up.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/extractor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/is-special.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/merge-adjacent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/merge-media-queries.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/merge-non-adjacent-by-body.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/merge-non-adjacent-by-selector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/reduce-non-adjacent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/remove-duplicate-media-queries.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/remove-duplicates.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/reorderable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/restructure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/selectors/simple.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/source-maps/track.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/stringifier/helpers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/stringifier/one-time.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/stringifier/simple.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/stringifier/source-maps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/text/comments-processor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/text/escape-store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/text/expressions-processor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/text/free-text-processor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/text/urls-processor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/tokenizer/extract-properties.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/tokenizer/extract-selectors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/tokenizer/tokenize.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/lib/tokenizer/tokenize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/urls/rebase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/urls/reduce.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/urls/rewrite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/compatibility.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/input-source-map-tracker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/object.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/quote-scanner.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/source-reader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/source-tracker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/split.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/lib/utils/split.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/node_modules/commander/History.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/node_modules/commander/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/node_modules/commander/Readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/node_modules/commander/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/node_modules/commander/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/clean-css/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/clean-css/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/.release.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/History.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/Readme_zh-cn.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/bin/jade.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/block-code.html" beforeDir="false" afterPath="$PROJECT_DIR$/api/test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/jade.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/compiler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/doctypes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/filters-client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/filters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/inline-tags.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/lexer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/attrs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/block-comment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/block.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/case.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/code.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/comment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/doctype.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/each.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/literal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/mixin-block.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/mixin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/node.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/tag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/nodes/text.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/parser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/runtime.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/lib/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/release.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/jade/runtime.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/source-map/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/assert-shim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/mini-require.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/prefix-source-map.jsm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/prefix-utils.jsm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/suffix-browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/suffix-source-map.jsm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/suffix-utils.jsm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/test-prefix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/build/test-suffix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/array-set.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/base64-vlq.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/base64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/binary-search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/mapping-list.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/quick-sort.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/source-map-consumer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/source-map-generator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/source-node.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/lib/source-map/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/node_modules/source-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/node_modules/source-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,16 +155,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/website/package.json">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/tsconfig.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+            <state relative-caret-position="-506">
+              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/views/error.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,22 +197,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api/bin/www" />
         <option value="$PROJECT_DIR$/api/routes/testAPI.js" />
         <option value="$PROJECT_DIR$/website/src/App.js" />
-        <option value="$PROJECT_DIR$/api/package.json" />
         <option value="$PROJECT_DIR$/api/app.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/website/tsconfig.json" />
         <option value="$PROJECT_DIR$/website/package.json" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/GAMS.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/api/test.ts" />
+        <option value="$PROJECT_DIR$/api/tsconfig.json" />
+        <option value="$PROJECT_DIR$/api/app.ts" />
+        <option value="$PROJECT_DIR$/api/bin/www" />
+        <option value="$PROJECT_DIR$/api/package.json" />
       </list>
     </option>
   </component>
@@ -71,6 +231,35 @@
               <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
               <item name="GAMS" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GAMS" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GAMS" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GAMS" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GAMS" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GAMS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GAMS" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -78,10 +267,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/build" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/api/node_modules/typescript/lib" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -105,19 +296,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568153229283</updated>
-      <workItem from="1568153230392" duration="4724000" />
+      <workItem from="1568153230392" duration="9081000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4724000" />
+    <option name="totallyTimeSpent" value="9081000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24986301" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23013699" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" visible="true" weight="0.3289183" />
@@ -138,13 +330,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/bin/www">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/routes/testAPI.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -153,9 +338,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/website/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/create-react-app">
@@ -178,24 +360,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/package.json">
+    <entry file="file://$PROJECT_DIR$/website/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/website/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
+        <state relative-caret-position="286">
+          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/app.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="154">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/website/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        <state relative-caret-position="239">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/build/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/test.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/build/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/views/index.jade">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-506">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/views/error.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>

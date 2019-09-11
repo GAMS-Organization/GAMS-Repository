@@ -1,0 +1,8 @@
+node_modules/
+.idea/
+__pycache__
+*.log
+.env
+*.map
+.env.prod
+.DS_Store
