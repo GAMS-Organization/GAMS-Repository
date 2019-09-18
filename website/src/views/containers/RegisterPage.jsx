@@ -15,16 +15,16 @@ import Check from "@material-ui/icons/Check";
 import Face from "@material-ui/icons/Face";
 
 // core components
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
-import CardHeader from "../../components/Card/CardHeader.jsx";
-import CardFooter from "../../components/Card/CardFooter.jsx";
+import GridContainer from "../components/Grid/GridContainer.jsx";
+import GridItem from "../components/Grid/GridItem.jsx";
+import CustomInput from "../components/CustomInput/CustomInput.jsx";
+import Button from "../components/CustomButtons/Button.jsx";
+import Card from "../components/Card/Card.jsx";
+import CardBody from "../components/Card/CardBody.jsx";
+import CardHeader from "../components/Card/CardHeader.jsx";
+import CardFooter from "../components/Card/CardFooter.jsx";
 
-import registerPageStyle from "../../assets/jss/material-dashboard-react/views/registerPageStyle.jsx";
+import registerPageStyle from "../../styles/jss/material-dashboard-react/views/registerPageStyle.jsx";
 
 const { REACT_APP_SERVER_URL } = process.env;
 

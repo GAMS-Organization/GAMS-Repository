@@ -14,16 +14,16 @@ import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
 
 // core components
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
-import Button from "../../components/CustomButtons/Button.jsx";
-import Card from "../../components/Card/Card.jsx";
-import CardBody from "../../components/Card/CardBody.jsx";
-import CardHeader from "../../components/Card/CardHeader.jsx";
-import CardFooter from "../../components/Card/CardFooter.jsx";
+import GridContainer from "../components/Grid/GridContainer.jsx";
+import GridItem from "../components/Grid/GridItem.jsx";
+import CustomInput from "../components/CustomInput/CustomInput.jsx";
+import Button from "../components/CustomButtons/Button.jsx";
+import Card from "../components/Card/Card.jsx";
+import CardBody from "../components/Card/CardBody.jsx";
+import CardHeader from "../components/Card/CardHeader.jsx";
+import CardFooter from "../components/Card/CardFooter.jsx";
 
-import loginPageStyle from "../../assets/jss/material-dashboard-react/views/loginPageStyle.jsx";
+import loginPageStyle from "../../styles/jss/material-dashboard-react/views/loginPageStyle.jsx";
 
 const { REACT_APP_SERVER_URL } = process.env;
 

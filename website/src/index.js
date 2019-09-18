@@ -7,7 +7,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Admin from "layouts/Admin.jsx";
 import Auth from "layouts/Auth.jsx";
 
-import "assets/css/material-dashboard-react.css?v=1.6.0";
+import "./styles/css/material-dashboard-react.css?v=1.6.0";
 
 const hist = createBrowserHistory();
 
