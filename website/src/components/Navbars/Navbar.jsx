@@ -12,16 +12,17 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
 import RTLNavbarLinks from "./RTLNavbarLinks.jsx";
-import Button from "components/CustomButtons/Button.jsx";
+import Button from "../../components/CustomButtons/Button.jsx";
 
-import headerStyle from "assets/jss/material-dashboard-react/components/headerStyle.jsx";
+import headerStyle from "../../assets/jss/material-dashboard-react/components/headerStyle.jsx";
+import { rooftopBlueColor } from '../../assets/jss/material-dashboard-react';
 
 function Header({ ...props }) {
   function makeBrand() {
     var name;
     props.routes.map((prop, key) => {
       if (prop.layout + prop.path === props.location.pathname) {
-        name = props.rtlActive ? prop.rtlName : prop.name;
+        name = prop.name;
       }
       return null;
     });
@@ -59,7 +60,7 @@ function Header({ ...props }) {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"])
+  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger", "rooftopBlueColor"])
 };
 
 export default withStyles(headerStyle)(Header);

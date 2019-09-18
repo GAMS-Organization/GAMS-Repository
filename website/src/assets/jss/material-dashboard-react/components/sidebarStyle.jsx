@@ -12,11 +12,14 @@ import {
   whiteColor,
   grayColor,
   blackColor,
+  rooftopBlueColor,
+  rooftopOrangeColor,
   hexToRgb
-} from "assets/jss/material-dashboard-react.jsx";
+} from "../../material-dashboard-react.jsx";
 
 const sidebarStyle = theme => ({
   drawerPaper: {
+    backgroundColor: rooftopBlueColor[0],
     border: "none",
     position: "fixed",
     top: "0",
@@ -72,7 +75,7 @@ const sidebarStyle = theme => ({
       height: "1px",
       right: "15px",
       width: "calc(100% - 30px)",
-      backgroundColor: "rgba(" + hexToRgb(grayColor[6]) + ", 0.3)"
+      backgroundColor: rooftopBlueColor[0]
     }
   },
   logoLink: {
@@ -94,14 +97,14 @@ const sidebarStyle = theme => ({
     textAlign: "right"
   },
   logoImage: {
-    width: "30px",
+    width: "180px",
     display: "inline-block",
     maxHeight: "30px",
     marginLeft: "10px",
     marginRight: "15px"
   },
   img: {
-    width: "35px",
+    width: "inherit",
     top: "22px",
     position: "absolute",
     verticalAlign: "middle",
@@ -278,6 +281,50 @@ const sidebarStyle = theme => ({
         hexToRgb(blackColor) +
         ",.12), 0 7px 8px -5px rgba(" +
         hexToRgb(dangerColor[0]) +
+        ",.2)"
+    }
+  },
+  rooftopBlue: {
+    backgroundColor: rooftopBlueColor[0],
+    boxShadow:
+      "0 12px 20px -10px rgba(" +
+      hexToRgb(rooftopBlueColor[0]) +
+      ",.28), 0 4px 20px 0 rgba(" +
+      hexToRgb(blackColor) +
+      ",.12), 0 7px 8px -5px rgba(" +
+      hexToRgb(rooftopBlueColor[0]) +
+      ",.2)",
+    "&:hover,&:focus": {
+      backgroundColor: rooftopBlueColor[0],
+      boxShadow:
+        "0 12px 20px -10px rgba(" +
+        hexToRgb(rooftopBlueColor[0]) +
+        ",.28), 0 4px 20px 0 rgba(" +
+        hexToRgb(blackColor) +
+        ",.12), 0 7px 8px -5px rgba(" +
+        hexToRgb(rooftopBlueColor[0]) +
+        ",.2)"
+    }
+  },
+  rooftopOrange: {
+    backgroundColor: rooftopOrangeColor[0],
+    boxShadow:
+      "0 12px 20px -10px rgba(" +
+      hexToRgb(rooftopOrangeColor[0]) +
+      ",.28), 0 4px 20px 0 rgba(" +
+      hexToRgb(blackColor) +
+      ",.12), 0 7px 8px -5px rgba(" +
+      hexToRgb(rooftopOrangeColor[0]) +
+      ",.2)",
+    "&:hover,&:focus": {
+      backgroundColor: rooftopOrangeColor[0],
+      boxShadow:
+        "0 12px 20px -10px rgba(" +
+        hexToRgb(rooftopOrangeColor[0]) +
+        ",.28), 0 4px 20px 0 rgba(" +
+        hexToRgb(blackColor) +
+        ",.12), 0 7px 8px -5px rgba(" +
+        hexToRgb(rooftopOrangeColor[0]) +
         ",.2)"
     }
   },

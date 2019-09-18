@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import axios from "axios/index";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputAdornment from "@material-ui/core/InputAdornment/index";
+import Icon from "@material-ui/core/Icon/index";
+import Checkbox from "@material-ui/core/Checkbox/index";
+import FormControlLabel from "@material-ui/core/FormControlLabel/index";
 
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
@@ -15,16 +15,16 @@ import Check from "@material-ui/icons/Check";
 import Face from "@material-ui/icons/Face";
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
+import GridContainer from "../../components/Grid/GridContainer.jsx";
+import GridItem from "../../components/Grid/GridItem.jsx";
+import CustomInput from "../../components/CustomInput/CustomInput.jsx";
+import Button from "../../components/CustomButtons/Button.jsx";
+import Card from "../../components/Card/Card.jsx";
+import CardBody from "../../components/Card/CardBody.jsx";
+import CardHeader from "../../components/Card/CardHeader.jsx";
+import CardFooter from "../../components/Card/CardFooter.jsx";
 
-import registerPageStyle from "assets/jss/material-dashboard-react/views/registerPageStyle.jsx";
+import registerPageStyle from "../../assets/jss/material-dashboard-react/views/registerPageStyle.jsx";
 
 const { REACT_APP_SERVER_URL } = process.env;
 

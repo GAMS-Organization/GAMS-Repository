@@ -3,8 +3,9 @@ import {
   dangerColor,
   successColor,
   grayColor,
+  rooftopOrangeColor,
   defaultFont
-} from "assets/jss/material-dashboard-react.jsx";
+} from "../../material-dashboard-react.jsx";
 
 const customInputStyle = {
   disabled: {
@@ -18,7 +19,7 @@ const customInputStyle = {
       borderWidth: "1px !important"
     },
     "&:after": {
-      borderColor: primaryColor[0]
+      borderColor: rooftopOrangeColor[0]
     }
   },
   underlineError: {

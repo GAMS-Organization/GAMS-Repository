@@ -8,8 +8,9 @@ import {
   warningColor,
   dangerColor,
   whiteColor,
-  grayColor
-} from "assets/jss/material-dashboard-react.jsx";
+  grayColor,
+  rooftopBlueColor
+} from "../../material-dashboard-react.jsx";
 
 const headerStyle = theme => ({
   appBar: {
@@ -23,7 +24,8 @@ const headerStyle = theme => ({
     zIndex: "1029",
     color: grayColor[7],
     border: "0",
-    borderRadius: "3px",
+    borderBottomLeftRadius: "3px",
+    borderBottomRightRadius: "3px",
     padding: "10px 0",
     transition: "all 150ms ease 0s",
     minHeight: "50px",
@@ -75,6 +77,13 @@ const headerStyle = theme => ({
     backgroundColor: dangerColor[0],
     color: whiteColor,
     ...defaultBoxShadow
+  },
+  rooftopBlue: {
+  backgroundColor: rooftopBlueColor[0],
+  color: whiteColor,
+  ...defaultBoxShadow,
+    borderTopLeftRadius: "0",
+    borderTopRightRadius: "0"
   }
 });
 

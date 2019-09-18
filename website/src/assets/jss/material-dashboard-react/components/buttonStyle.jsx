@@ -8,8 +8,12 @@ import {
   roseColor,
   whiteColor,
   blackColor,
-  hexToRgb
-} from "assets/jss/material-dashboard-react.jsx";
+  hexToRgb,
+  secondaryColor,
+  rooftopBlueColor,
+  rooftopOrangeColor,
+  rooftopYellowColor,
+} from "../../material-dashboard-react.jsx";
 
 const buttonStyle = {
   button: {
@@ -138,6 +142,30 @@ const buttonStyle = {
         ", 0.2)"
     }
   },
+  secondary: {
+    color: 'rgba(' + hexToRgb(rooftopOrangeColor[0]) + ',.87)',
+    backgroundColor: secondaryColor[0],
+    boxShadow:
+      '0 2px 2px 0 rgba(' +
+      hexToRgb(secondaryColor[0]) +
+      ',.14), 0 3px 1px -2px rgba(' +
+      hexToRgb(secondaryColor[0]) +
+      ',.2), 0 1px 5px 0 rgba(' +
+      hexToRgb(secondaryColor[0]) +
+      ',.12)',
+    '&:hover,&:focus': {
+      boxShdow:
+        '0 14px 26px -12px rgba(' +
+        hexToRgb(secondaryColor[0]) +
+        ',.42), 0 4px 23px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 8px 10px -5px rgba(' +
+        hexToRgb(secondaryColor[0]) +
+        ',.2)',
+      color: 'rgba(' + hexToRgb(rooftopOrangeColor[0]) + ',.87)',
+      backgroundColor: grayColor[19],
+    },
+  },
   info: {
     backgroundColor: infoColor[0],
     boxShadow:
@@ -226,6 +254,72 @@ const buttonStyle = {
         ", 0.2)"
     }
   },
+  rooftopBlue: {
+    backgroundColor: rooftopBlueColor[0],
+    boxShadow:
+      '0 2px 2px 0 rgba(' +
+      hexToRgb(rooftopBlueColor[0]) +
+      ', 0.14), 0 3px 1px -2px rgba(' +
+      hexToRgb(rooftopBlueColor[0]) +
+      ', 0.2), 0 1px 5px 0 rgba(' +
+      hexToRgb(rooftopBlueColor[0]) +
+      ', 0.12)',
+    '&:hover,&:focus': {
+      backgroundColor: rooftopBlueColor[0],
+      boxShadow:
+        '0 14px 26px -12px rgba(' +
+        hexToRgb(rooftopBlueColor[0]) +
+        ', 0.42), 0 4px 23px 0px rgba(' +
+        hexToRgb(blackColor) +
+        ', 0.12), 0 8px 10px -5px rgba(' +
+        hexToRgb(rooftopBlueColor[0]) +
+        ', 0.2)',
+    },
+  },
+  rooftopOrange: {
+    backgroundColor: rooftopOrangeColor[0],
+    boxShadow:
+      '0 2px 2px 0 rgba(' +
+      hexToRgb(rooftopOrangeColor[0]) +
+      ', 0.14), 0 3px 1px -2px rgba(' +
+      hexToRgb(rooftopOrangeColor[0]) +
+      ', 0.2), 0 1px 5px 0 rgba(' +
+      hexToRgb(rooftopOrangeColor[0]) +
+      ', 0.12)',
+    '&:hover,&:focus': {
+      backgroundColor: rooftopOrangeColor[0],
+      boxShadow:
+        '0 14px 26px -12px rgba(' +
+        hexToRgb(rooftopOrangeColor[0]) +
+        ', 0.42), 0 4px 23px 0px rgba(' +
+        hexToRgb(blackColor) +
+        ', 0.12), 0 8px 10px -5px rgba(' +
+        hexToRgb(rooftopOrangeColor[0]) +
+        ', 0.2)',
+    },
+  },
+  rooftopYellow: {
+    backgroundColor: rooftopYellowColor[0],
+    boxShadow:
+      '0 2px 2px 0 rgba(' +
+      hexToRgb(rooftopYellowColor[0]) +
+      ', 0.14), 0 3px 1px -2px rgba(' +
+      hexToRgb(rooftopYellowColor[0]) +
+      ', 0.2), 0 1px 5px 0 rgba(' +
+      hexToRgb(rooftopYellowColor[0]) +
+      ', 0.12)',
+    '&:hover,&:focus': {
+      backgroundColor: rooftopYellowColor[0],
+      boxShadow:
+        '0 14px 26px -12px rgba(' +
+        hexToRgb(rooftopYellowColor[0]) +
+        ', 0.42), 0 4px 23px 0px rgba(' +
+        hexToRgb(blackColor) +
+        ', 0.12), 0 8px 10px -5px rgba(' +
+        hexToRgb(rooftopYellowColor[0]) +
+        ', 0.2)',
+    },
+  },
   simple: {
     "&,&:focus,&:hover": {
       color: whiteColor,
@@ -260,6 +354,24 @@ const buttonStyle = {
     "&$danger": {
       "&,&:focus,&:hover,&:visited": {
         color: dangerColor[0]
+      }
+    }
+    ,
+    "&$rooftopBlue": {
+      "&,&:focus,&:hover,&:visited": {
+        color:rooftopBlueColor[0]
+      }
+    }
+    ,
+    "&$rooftopOrange": {
+      "&,&:focus,&:hover,&:visited": {
+        color: rooftopOrangeColor[0]
+      }
+    }
+    ,
+    "&$rooftopYellow": {
+      "&,&:focus,&:hover,&:visited": {
+        color: rooftopYellowColor[0]
       }
     }
   },

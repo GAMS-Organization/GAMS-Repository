@@ -71,11 +71,15 @@ const defaultFont = {
 };
 
 const primaryColor = ["#9c27b0", "#ab47bc", "#8e24aa", "#af2cc5"];
+const secondaryColor = ['#fafafa'];
 const warningColor = ["#ff9800", "#ffa726", "#fb8c00", "#ffa21a"];
 const dangerColor = ["#f44336", "#ef5350", "#e53935", "#f55a4e"];
 const successColor = ["#4caf50", "#66bb6a", "#43a047", "#5cb860"];
 const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
 const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#eb3573"];
+const rooftopYellowColor = ['#FFB907', '#FFEDC1', '#FFDC83', '#FFCB45', '#402E02', '#7F5C03', '#BF8B05'];
+const rooftopOrangeColor = ['#FF642A', '#FFD9CB', '#FFB498', '#FF8E64', '#401A0C', '#7F3418', '#BF4E24'];
+const rooftopBlueColor = ['#28323C', '#C9CCCE', '#94999E', '#5E656D', '#0A0D0F', '#14191E', '#1E252D'];
 const grayColor = [
   "#999",
   "#777",
@@ -110,6 +114,30 @@ const primaryBoxShadow = {
     hexToRgb(blackColor) +
     ",.14), 0 7px 10px -5px rgba(" +
     hexToRgb(primaryColor[0]) +
+    ",.4)"
+};
+const rooftopOrangeBoxShadow = {
+  boxShadow:
+    "0 4px 20px 0 rgba(" +
+    hexToRgb(blackColor) +
+    ",.14), 0 7px 10px -5px rgba(" +
+    hexToRgb(rooftopOrangeColor[0]) +
+    ",.4)"
+};
+const rooftopBlueBoxShadow = {
+  boxShadow:
+    "0 4px 20px 0 rgba(" +
+    hexToRgb(blackColor) +
+    ",.14), 0 7px 10px -5px rgba(" +
+    hexToRgb(rooftopBlueColor[0]) +
+    ",.4)"
+};
+const rooftopYellowBoxShadow = {
+  boxShadow:
+    "0 4px 20px 0 rgba(" +
+    hexToRgb(blackColor) +
+    ",.14), 0 7px 10px -5px rgba(" +
+    hexToRgb(rooftopYellowColor[0]) +
     ",.4)"
 };
 const infoBoxShadow = {
@@ -177,6 +205,21 @@ const primaryCardHeader = {
   background:
     "linear-gradient(60deg, " + primaryColor[1] + ", " + primaryColor[2] + ")",
   ...primaryBoxShadow
+};
+const rooftopOrangeCardHeader = {
+  background:
+    "linear-gradient(60deg, " + rooftopOrangeColor[0] + ", " + rooftopOrangeColor[6] + ")",
+  ...rooftopOrangeBoxShadow
+};
+const rooftopBlueCardHeader = {
+  background:
+    "linear-gradient(60deg, " + rooftopBlueColor[0] + ", " + rooftopBlueColor[6] + ")",
+  ...rooftopBlueBoxShadow
+};
+const rooftopYellowCardHeader = {
+  background:
+    "linear-gradient(60deg, " + rooftopYellowColor[0] + ", " + rooftopYellowColor[6] + ")",
+  ...rooftopYellowBoxShadow
 };
 const roseCardHeader = {
   background:
@@ -285,12 +328,18 @@ export {
   successBoxShadow,
   warningBoxShadow,
   dangerBoxShadow,
+  rooftopBlueBoxShadow,
+  rooftopOrangeBoxShadow,
+  rooftopYellowBoxShadow,
   roseBoxShadow,
   warningCardHeader,
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  rooftopBlueCardHeader,
+  rooftopOrangeCardHeader,
+  rooftopYellowCardHeader,
   roseCardHeader,
   cardActions,
   cardHeader,
@@ -298,5 +347,9 @@ export {
   title,
   cardTitle,
   cardSubtitle,
-  cardLink
+  cardLink,
+  secondaryColor,
+  rooftopBlueColor,
+  rooftopOrangeColor,
+  rooftopYellowColor
 };

@@ -4,9 +4,12 @@ import {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  rooftopOrangeCardHeader,
+  rooftopBlueCardHeader,
+  rooftopYellowCardHeader,
   roseCardHeader,
   whiteColor
-} from "assets/jss/material-dashboard-react.jsx";
+} from "../../material-dashboard-react.jsx";
 
 const cardHeaderStyle = {
   cardHeader: {
@@ -111,6 +114,24 @@ const cardHeaderStyle = {
     color: whiteColor,
     "&:not($cardHeaderIcon)": {
       ...primaryCardHeader
+    }
+  },
+  rooftopOrangeCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...rooftopOrangeCardHeader
+    }
+  },
+  rooftopBlueCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...rooftopBlueCardHeader
+    }
+  },
+  rooftopYellowCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...rooftopYellowCardHeader
     }
   },
   roseCardHeader: {

@@ -1,9 +1,9 @@
 import {
   defaultFont,
   container,
-  primaryColor,
-  grayColor
-} from "assets/jss/material-dashboard-react.jsx";
+  grayColor,
+  rooftopOrangeColor
+} from "../../material-dashboard-react.jsx";
 
 const footerStyle = {
   block: {
@@ -36,9 +36,9 @@ const footerStyle = {
   },
   container,
   a: {
-    color: primaryColor,
-    textDecoration: "none",
-    backgroundColor: "transparent"
+    color: rooftopOrangeColor[0],
+    textDecoration: 'none',
+    backgroundColor: 'transparent',
   },
   list: {
     marginBottom: "0",

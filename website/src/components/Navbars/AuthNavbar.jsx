@@ -22,9 +22,9 @@ import LockOpen from "@material-ui/icons/LockOpen";
 import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
 // core components
-import Button from "components/CustomButtons/Button";
+import Button from "../../components/CustomButtons/Button";
 
-import authNavbarStyle from "assets/jss/material-dashboard-react/components/authNavbarStyle.jsx";
+import authNavbarStyle from "../../assets/jss/material-dashboard-react/components/authNavbarStyle.jsx";
 
 class AuthNavbar extends React.Component {
   constructor(props) {
