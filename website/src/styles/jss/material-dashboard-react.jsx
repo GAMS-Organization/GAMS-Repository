@@ -80,6 +80,11 @@ const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#eb3573"];
 const rooftopYellowColor = ['#FFB907', '#FFEDC1', '#FFDC83', '#FFCB45', '#402E02', '#7F5C03', '#BF8B05'];
 const rooftopOrangeColor = ['#FF642A', '#FFD9CB', '#FFB498', '#FF8E64', '#401A0C', '#7F3418', '#BF4E24'];
 const rooftopBlueColor = ['#28323C', '#C9CCCE', '#94999E', '#5E656D', '#0A0D0F', '#14191E', '#1E252D'];
+const gamsBlack = ["#2d2d2a", "#40403d", "#151514"];
+const gamsGray = ["#4c4c47","#7c7c79","#31312e"];
+const gamsBlue = ["#324a5f","#576a7c","#253646"];
+const gamsRed = ["#c14953", "#cc6a72","#7b2f35"];
+const gamsWhite = ["#dddbf1","#e9e8f6","#c9c8dc"];
 const grayColor = [
   "#999",
   "#777",
@@ -351,5 +356,6 @@ export {
   secondaryColor,
   rooftopBlueColor,
   rooftopOrangeColor,
-  rooftopYellowColor
+  rooftopYellowColor,
+    gamsBlack
 };

@@ -10,9 +10,14 @@ import {
   blackColor,
   hexToRgb,
   secondaryColor,
-  rooftopBlueColor,
-  rooftopOrangeColor,
-  rooftopYellowColor,
+    rooftopBlueColor,
+    rooftopOrangeColor,
+    rooftopYellowColor,
+  gamsWhite,
+  gamsRed,
+  gamsGray,
+  gamsBlue,
+  gamsBlack
 } from "../../material-dashboard-react.jsx";
 
 const buttonStyle = {
@@ -254,71 +259,27 @@ const buttonStyle = {
         ", 0.2)"
     }
   },
-  rooftopBlue: {
-    backgroundColor: rooftopBlueColor[0],
+  gamsBlack: {
+    backgroundColor: gamsBlack[0],
     boxShadow:
-      '0 2px 2px 0 rgba(' +
-      hexToRgb(rooftopBlueColor[0]) +
-      ', 0.14), 0 3px 1px -2px rgba(' +
-      hexToRgb(rooftopBlueColor[0]) +
-      ', 0.2), 0 1px 5px 0 rgba(' +
-      hexToRgb(rooftopBlueColor[0]) +
-      ', 0.12)',
-    '&:hover,&:focus': {
-      backgroundColor: rooftopBlueColor[0],
+        "0 2px 2px 0 rgba(" +
+        hexToRgb(gamsBlack[0]) +
+        ", 0.14), 0 3px 1px -2px rgba(" +
+        hexToRgb(gamsBlack[0]) +
+        ", 0.2), 0 1px 5px 0 rgba(" +
+        hexToRgb(gamsBlack[0]) +
+        ", 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: gamsBlack[0],
       boxShadow:
-        '0 14px 26px -12px rgba(' +
-        hexToRgb(rooftopBlueColor[0]) +
-        ', 0.42), 0 4px 23px 0px rgba(' +
-        hexToRgb(blackColor) +
-        ', 0.12), 0 8px 10px -5px rgba(' +
-        hexToRgb(rooftopBlueColor[0]) +
-        ', 0.2)',
-    },
-  },
-  rooftopOrange: {
-    backgroundColor: rooftopOrangeColor[0],
-    boxShadow:
-      '0 2px 2px 0 rgba(' +
-      hexToRgb(rooftopOrangeColor[0]) +
-      ', 0.14), 0 3px 1px -2px rgba(' +
-      hexToRgb(rooftopOrangeColor[0]) +
-      ', 0.2), 0 1px 5px 0 rgba(' +
-      hexToRgb(rooftopOrangeColor[0]) +
-      ', 0.12)',
-    '&:hover,&:focus': {
-      backgroundColor: rooftopOrangeColor[0],
-      boxShadow:
-        '0 14px 26px -12px rgba(' +
-        hexToRgb(rooftopOrangeColor[0]) +
-        ', 0.42), 0 4px 23px 0px rgba(' +
-        hexToRgb(blackColor) +
-        ', 0.12), 0 8px 10px -5px rgba(' +
-        hexToRgb(rooftopOrangeColor[0]) +
-        ', 0.2)',
-    },
-  },
-  rooftopYellow: {
-    backgroundColor: rooftopYellowColor[0],
-    boxShadow:
-      '0 2px 2px 0 rgba(' +
-      hexToRgb(rooftopYellowColor[0]) +
-      ', 0.14), 0 3px 1px -2px rgba(' +
-      hexToRgb(rooftopYellowColor[0]) +
-      ', 0.2), 0 1px 5px 0 rgba(' +
-      hexToRgb(rooftopYellowColor[0]) +
-      ', 0.12)',
-    '&:hover,&:focus': {
-      backgroundColor: rooftopYellowColor[0],
-      boxShadow:
-        '0 14px 26px -12px rgba(' +
-        hexToRgb(rooftopYellowColor[0]) +
-        ', 0.42), 0 4px 23px 0px rgba(' +
-        hexToRgb(blackColor) +
-        ', 0.12), 0 8px 10px -5px rgba(' +
-        hexToRgb(rooftopYellowColor[0]) +
-        ', 0.2)',
-    },
+          "0 14px 26px -12px rgba(" +
+          hexToRgb(gamsBlack[0]) +
+          ", 0.42), 0 4px 23px 0px rgba(" +
+          hexToRgb(blackColor) +
+          ", 0.12), 0 8px 10px -5px rgba(" +
+          hexToRgb(gamsBlack[0]) +
+          ", 0.2)"
+    }
   },
   simple: {
     "&,&:focus,&:hover": {

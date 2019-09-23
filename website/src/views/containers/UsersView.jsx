@@ -128,7 +128,7 @@ class UsersView extends React.Component {
                   </GridContainer>
                 </CardBody>
                 <CardFooter>
-                  <Button type="submit" color="primary">
+                  <Button type="submit" color="gamsBlack" round simple>
                     Update Profile
                   </Button>
                 </CardFooter>
