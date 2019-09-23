@@ -95,8 +95,9 @@ class LoginPage extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={8}>
             <h4 className={classes.textCenter} style={{ marginTop: 0 }}>
-              Log in to see how you can speed up your web development with out
-              of the box CRUD for #User Management and more.{" "}
+              Bienvenidos a GAMS, el sistema de gestion de activos y de actividades
+              para el área de Mantenimiento y Servicios Generales de la UTN “Facultad
+              Regional San Francisco”{" "}
             </h4>
           </GridItem>
         </GridContainer>
@@ -108,25 +109,7 @@ class LoginPage extends React.Component {
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="primary"
                 >
-                  <h4 className={classes.cardTitle}>Log in</h4>
-                  <div className={classes.socialLine}>
-                    {[
-                      "fa fa-facebook-square",
-                      "fa fa-twitter",
-                      "fa fa-google-plus"
-                    ].map((prop, key) => {
-                      return (
-                        <Button
-                          color="transparent"
-                          justIcon
-                          key={key}
-                          className={classes.customButtonClass}
-                        >
-                          <i className={prop} />
-                        </Button>
-                      );
-                    })}
-                  </div>
+                  <h4 className={classes.cardTitle}>Ingresar</h4>                 
                 </CardHeader>
                 <CardBody>
                   <p

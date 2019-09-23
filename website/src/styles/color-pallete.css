@@ -1,22 +1,23 @@
 .algo{
-    color: #484a47;
-    color:#5c6d70;
-    color:#a37774;
-    color:#e88873;
-    color:#e0ac9d;
+    GAMS-black: #2d2d2a;
+    GAMS-black-light: #40403d;
+    GAMS-balck-dark: #151514;
 
+    GAMS-gray: #4c4c47;
+    GAMS-gray-light: #7c7c79;
+    GAMS-gray-dark: #31312e;
 
-    color: #eaf0ce;
-    color: #c0c5c1;
-    color: #7d8491;
-    color: #574b60;
-    color: #3f334d;
+    GAMS-blue: #324a5f;
+    GAMS-blue-light: #576a7c;
+    GAMS-blue-dark: #253646;
 
-    color: #f7dba7;
-    color: #f1ab86;
-    color: #c57b57;
-    color: #1e2d2f;
-    color: #041f1e;
+    GAMS-red: #c14953;
+    GAMS-red-light: #cc6a72;
+    GAMS-red-dark: #7b2f35;
+    
+    GAMS-white: #dddbf1;
+    GAMS-white-light: #e9e8f6;
+    GAMS-white-dark: #c9c8dc;
 
     /*https://coolors.co/f7dba7-f1ab86-c57b57-1e2d2f-041f1e*/
 }
