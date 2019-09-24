@@ -74,19 +74,11 @@ const roseColor = ['#e91e63', '#ec407a', '#d81b60', '#eb3573'];
 const rooftopYellowColor = ['#FFB907', '#FFEDC1', '#FFDC83', '#FFCB45', '#402E02', '#7F5C03', '#BF8B05'];
 const rooftopOrangeColor = ['#FF642A', '#FFD9CB', '#FFB498', '#FF8E64', '#401A0C', '#7F3418', '#BF4E24'];
 const rooftopBlueColor = ['#28323C', '#C9CCCE', '#94999E', '#5E656D', '#0A0D0F', '#14191E', '#1E252D'];
-<<<<<<< HEAD
-const gamsBlack = ['#2d2d2a', '#40403d', '#151514'];
-const gamsGray = ['#4c4c47', '#7c7c79', '#31312e'];
-const gamsBlue = ['#324a5f', '#576a7c', '#253646'];
-const gamsRed = ['#c14953', '#cc6a72', '#7b2f35'];
-const gamsWhite = ['#dddbf1', '#e9e8f6', '#c9c8dc'];
-=======
-const gamsBlackColor= ["#2d2d2a", "#40403d", "#151514"];
-const gamsGrayColor = ["#4c4c47","#7c7c79","#31312e"];
-const gamsBlueColor = ["#324a5f","#576a7c","#253646"];
-const gamsRedColor = ["#c14953", "#cc6a72","#7b2f35"];
-const gamsWhiteColor = ["#dddbf1","#e9e8f6","#c9c8dc"];
->>>>>>> aecce15d63718cb1bf86d90c13e3e96c961586c7
+const gamsBlackColor = ['#2d2d2a', '#40403d', '#151514'];
+const gamsGrayColor = ['#4c4c47', '#7c7c79', '#31312e'];
+const gamsBlueColor = ['#324a5f', '#576a7c', '#253646'];
+const gamsRedColor = ['#c14953', '#cc6a72', '#7b2f35'];
+const gamsWhiteColor = ['#dddbf1', '#e9e8f6', '#c9c8dc'];
 const grayColor = [
   '#999',
   '#777',
@@ -165,43 +157,23 @@ const roseBoxShadow = {
 };
 const gamsBlackBoxShadow = {
   boxShadow:
-    "0 4px 20px 0 rgba(" +
-    hexToRgb(blackColor) +
-    ",.14), 0 7px 10px -5px rgba(" +
-    hexToRgb(gamsBlackColor[0]) +
-    ",.4)"
+    '0 4px 20px 0 rgba(' + hexToRgb(blackColor) + ',.14), 0 7px 10px -5px rgba(' + hexToRgb(gamsBlackColor[0]) + ',.4)',
 };
 const gamsWhiteBoxShadow = {
   boxShadow:
-    "0 4px 20px 0 rgba(" +
-    hexToRgb(blackColor) +
-    ",.14), 0 7px 10px -5px rgba(" +
-    hexToRgb(gamsWhiteColor[0]) +
-    ",.4)"
+    '0 4px 20px 0 rgba(' + hexToRgb(blackColor) + ',.14), 0 7px 10px -5px rgba(' + hexToRgb(gamsWhiteColor[0]) + ',.4)',
 };
 const gamsGrayBoxShadow = {
   boxShadow:
-    "0 4px 20px 0 rgba(" +
-    hexToRgb(blackColor) +
-    ",.14), 0 7px 10px -5px rgba(" +
-    hexToRgb(gamsGrayColor[0]) +
-    ",.4)"
+    '0 4px 20px 0 rgba(' + hexToRgb(blackColor) + ',.14), 0 7px 10px -5px rgba(' + hexToRgb(gamsGrayColor[0]) + ',.4)',
 };
 const gamsRedBoxShadow = {
   boxShadow:
-    "0 4px 20px 0 rgba(" +
-    hexToRgb(blackColor) +
-    ",.14), 0 7px 10px -5px rgba(" +
-    hexToRgb(gamsRedColor[0]) +
-    ",.4)"
+    '0 4px 20px 0 rgba(' + hexToRgb(blackColor) + ',.14), 0 7px 10px -5px rgba(' + hexToRgb(gamsRedColor[0]) + ',.4)',
 };
 const gamsBlueBoxShadow = {
   boxShadow:
-    "0 4px 20px 0 rgba(" +
-    hexToRgb(blackColor) +
-    ",.14), 0 7px 10px -5px rgba(" +
-    hexToRgb(gamsBlueColor[0]) +
-    ",.4)"
+    '0 4px 20px 0 rgba(' + hexToRgb(blackColor) + ',.14), 0 7px 10px -5px rgba(' + hexToRgb(gamsBlueColor[0]) + ',.4)',
 };
 
 const warningCardHeader = {
@@ -241,29 +213,24 @@ const roseCardHeader = {
   ...roseBoxShadow,
 };
 const gamsBlackCardHeader = {
-  background:
-    "linear-gradient(60deg, " + gamsBlackColor[1] + ", " + gamsBlackColor[2] + ")",
-  ...gamsBlackBoxShadow
+  background: 'linear-gradient(60deg, ' + gamsBlackColor[1] + ', ' + gamsBlackColor[2] + ')',
+  ...gamsBlackBoxShadow,
 };
 const gamsWhiteCardHeader = {
-  background:
-    "linear-gradient(60deg, " + gamsWhiteColor[1] + ", " + gamsWhiteColor[2] + ")",
-  ...gamsWhiteBoxShadow
+  background: 'linear-gradient(60deg, ' + gamsWhiteColor[1] + ', ' + gamsWhiteColor[2] + ')',
+  ...gamsWhiteBoxShadow,
 };
 const gamsBlueCardHeader = {
-  background:
-    "linear-gradient(60deg, " + gamsBlueColor[1] + ", " + gamsBlueColor[2] + ")",
-  ...gamsBlueBoxShadow
+  background: 'linear-gradient(60deg, ' + gamsBlueColor[1] + ', ' + gamsBlueColor[2] + ')',
+  ...gamsBlueBoxShadow,
 };
 const gamsRedCardHeader = {
-  background:
-    "linear-gradient(60deg, " + gamsRedColor[1] + ", " + gamsRedColor[2] + ")",
-  ...gamsRedBoxShadow
+  background: 'linear-gradient(60deg, ' + gamsRedColor[1] + ', ' + gamsRedColor[2] + ')',
+  ...gamsRedBoxShadow,
 };
 const gamsGrayCardHeader = {
-  background:
-    "linear-gradient(60deg, " + gamsGrayColor[1] + ", " + gamsGrayColor[2] + ")",
-  ...gamsGrayBoxShadow
+  background: 'linear-gradient(60deg, ' + gamsGrayColor[1] + ', ' + gamsGrayColor[2] + ')',
+  ...gamsGrayBoxShadow,
 };
 
 const cardActions = {
@@ -391,9 +358,6 @@ export {
   rooftopBlueColor,
   rooftopOrangeColor,
   rooftopYellowColor,
-<<<<<<< HEAD
-  gamsBlack,
-=======
   gamsBlackCardHeader,
   gamsWhiteCardHeader,
   gamsGrayCardHeader,
@@ -408,6 +372,5 @@ export {
   gamsWhiteColor,
   gamsRedColor,
   gamsGrayColor,
-  gamsBlueColor
->>>>>>> aecce15d63718cb1bf86d90c13e3e96c961586c7
+  gamsBlueColor,
 };
