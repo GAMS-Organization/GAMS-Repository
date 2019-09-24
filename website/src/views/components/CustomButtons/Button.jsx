@@ -46,8 +46,23 @@ function RegularButton({ ...props }) {
 
 RegularButton.propTypes = {
   classes: PropTypes.object.isRequired,
+<<<<<<< HEAD
   color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger', 'rose', 'white', 'transparent']),
   size: PropTypes.oneOf(['sm', 'lg']),
+=======
+  color: PropTypes.oneOf([
+    "primary",
+    "info",
+    "success",
+    "warning",
+    "danger",
+    "rose",
+    "white",
+    "gamsBlackColor",
+    "transparent"
+  ]),
+  size: PropTypes.oneOf(["sm", "lg"]),
+>>>>>>> aecce15d63718cb1bf86d90c13e3e96c961586c7
   simple: PropTypes.bool,
   round: PropTypes.bool,
   disabled: PropTypes.bool,

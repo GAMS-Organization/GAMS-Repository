@@ -1,29 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
-import axios from "axios/index";
+import React from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios/index';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment/index";
-import Icon from "@material-ui/core/Icon/index";
-import Checkbox from "@material-ui/core/Checkbox/index";
-import FormControlLabel from "@material-ui/core/FormControlLabel/index";
+import withStyles from '@material-ui/core/styles/withStyles';
+import InputAdornment from '@material-ui/core/InputAdornment/index';
+import Icon from '@material-ui/core/Icon/index';
+import Checkbox from '@material-ui/core/Checkbox/index';
+import FormControlLabel from '@material-ui/core/FormControlLabel/index';
 
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import Check from "@material-ui/icons/Check";
+import Email from '@material-ui/icons/Email';
+import Check from '@material-ui/icons/Check';
 
 // core components
-import GridContainer from "../components/Grid/GridContainer.jsx";
-import GridItem from "../components/Grid/GridItem.jsx";
-import CustomInput from "../components/CustomInput/CustomInput.jsx";
-import Button from "../components/CustomButtons/Button.jsx";
-import Card from "../components/Card/Card.jsx";
-import CardBody from "../components/Card/CardBody.jsx";
-import CardHeader from "../components/Card/CardHeader.jsx";
-import CardFooter from "../components/Card/CardFooter.jsx";
+import GridContainer from '../components/Grid/GridContainer.jsx';
+import GridItem from '../components/Grid/GridItem.jsx';
+import CustomInput from '../components/CustomInput/CustomInput.jsx';
+import Button from '../components/CustomButtons/Button.jsx';
+import Card from '../components/Card/Card.jsx';
+import CardBody from '../components/Card/CardBody.jsx';
+import CardHeader from '../components/Card/CardHeader.jsx';
+import CardFooter from '../components/Card/CardFooter.jsx';
 
-import loginPageStyle from "../../styles/jss/material-dashboard-react/views/loginPageStyle.jsx";
+import loginPageStyle from '../../styles/jss/material-dashboard-react/views/loginPageStyle.jsx';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
     super(props);
     this.state = {
       checked: [],
-      errors: {}
+      errors: {},
     };
   }
   login = async e => {
@@ -40,12 +40,12 @@ class LoginPage extends React.Component {
 
     const { history } = this.props;
 
-    const fields = ["username", "password"];
+    const fields = ['username', 'password'];
     const formElements = e.target.elements;
 
     const formValues = fields
       .map(field => ({
-        [field]: formElements.namedItem(field).value
+        [field]: formElements.namedItem(field).value,
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
@@ -54,22 +54,22 @@ class LoginPage extends React.Component {
       loginRequest = await axios.post(
         `http://${REACT_APP_SERVER_URL}/login`,
         {
-          ...formValues
+          ...formValues,
         },
         {
-          withCredentials: true
-        }
+          withCredentials: true,
+        },
       );
     } catch ({ response }) {
       loginRequest = response;
     }
     const { data: loginRequestData } = loginRequest;
     if (loginRequestData.success) {
-      return history.push("/dashboard");
+      return history.push('/dashboard');
     }
 
     this.setState({
-      errors: loginRequestData.messages && loginRequestData.messages.errors
+      errors: loginRequestData.messages && loginRequestData.messages.errors,
     });
   };
   handleToggle = value => {
@@ -84,7 +84,7 @@ class LoginPage extends React.Component {
     }
 
     this.setState({
-      checked: newChecked
+      checked: newChecked,
     });
   };
   render() {
@@ -95,9 +95,8 @@ class LoginPage extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={8}>
             <h4 className={classes.textCenter} style={{ marginTop: 0 }}>
-              Bienvenidos a GAMS, el sistema de gestion de activos y de actividades
-              para el área de Mantenimiento y Servicios Generales de la UTN “Facultad
-              Regional San Francisco”{" "}
+              Bienvenidos a GAMS, el sistema de gestion de activos y de actividades para el área de Mantenimiento y
+              Servicios Generales de la UTN “Facultad Regional San Francisco”{' '}
             </h4>
           </GridItem>
         </GridContainer>
@@ -105,18 +104,12 @@ class LoginPage extends React.Component {
           <GridItem xs={12} sm={6} md={4}>
             <form onSubmit={this.login}>
               <Card className={classes[this.state.cardAnimaton]}>
-                <CardHeader
-                  className={`${classes.cardHeader} ${classes.textCenter}`}
-                  color="primary"
-                >
-                  <h4 className={classes.cardTitle}>Ingresar</h4>                 
+                <CardHeader className={`${classes.cardHeader} ${classes.textCenter}`} color="gamsBlue">
+                  <h4 className={classes.cardTitle}>Ingresar</h4>
                 </CardHeader>
                 <CardBody>
-                  <p
-                    className={`${classes.textCenter} ${classes.checkboxLabel}`}
-                  >
-                    Or Sign in with <strong>admin@material.com</strong> and the
-                    password <strong>secret</strong>{" "}
+                  <p className={`${classes.textCenter} ${classes.checkboxLabel}`}>
+                    Or Sign in with <strong>admin@material.com</strong> and the password <strong>secret</strong>{' '}
                   </p>
                   <CustomInput
                     labelText="Email..."
@@ -124,16 +117,16 @@ class LoginPage extends React.Component {
                     error={errors.username || errors.invalidEmailOrPassword}
                     formControlProps={{
                       fullWidth: true,
-                      className: classes.formControlClassName
+                      className: classes.formControlClassName,
                     }}
                     inputProps={{
                       required: true,
-                      name: "username",
+                      name: 'username',
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                   <CustomInput
@@ -142,27 +135,22 @@ class LoginPage extends React.Component {
                     error={errors.password || errors.invalidEmailOrPassword}
                     formControlProps={{
                       fullWidth: true,
-                      className: classes.formControlClassName
+                      className: classes.formControlClassName,
                     }}
                     inputProps={{
-                      type: "password",
+                      type: 'password',
                       required: true,
                       endAdornment: (
                         <InputAdornment position="end">
-                          <Icon className={classes.inputAdornmentIcon}>
-                            lock_outline
-                          </Icon>
+                          <Icon className={classes.inputAdornmentIcon}>lock_outline</Icon>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                   />
                   <FormControlLabel
                     classes={{
-                      root:
-                        classes.checkboxLabelControl +
-                        " " +
-                        classes.checkboxLabelControlClassName,
-                      label: classes.checkboxLabel
+                      root: classes.checkboxLabelControl + ' ' + classes.checkboxLabelControlClassName,
+                      label: classes.checkboxLabel,
                     }}
                     control={
                       <Checkbox
@@ -172,7 +160,7 @@ class LoginPage extends React.Component {
                         icon={<Check className={classes.uncheckedIcon} />}
                         classes={{
                           checked: classes.checked,
-                          root: classes.checkRoot
+                          root: classes.checkRoot,
                         }}
                       />
                     }
@@ -196,7 +184,7 @@ class LoginPage extends React.Component {
 LoginPage.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object,
-  errors: PropTypes.object
+  errors: PropTypes.object,
 };
 
 export default withStyles(loginPageStyle)(LoginPage);
