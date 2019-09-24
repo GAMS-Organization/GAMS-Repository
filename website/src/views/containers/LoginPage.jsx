@@ -107,7 +107,7 @@ class LoginPage extends React.Component {
               <Card className={classes[this.state.cardAnimaton]}>
                 <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
-                  color="primary"
+                  color="gamsBlue"
                 >
                   <h4 className={classes.cardTitle}>Ingresar</h4>                 
                 </CardHeader>

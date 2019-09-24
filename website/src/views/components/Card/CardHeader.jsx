@@ -45,7 +45,12 @@ CardHeader.propTypes = {
     "danger",
     "info",
     "primary",
-    "rose"
+    "rose",
+    "gamsBlackColor",
+    "gamsGrayColor",
+    "gamsBlueColor",
+    "gamsRedColor",
+    "gamsWhiteColor"
   ]),
   plain: PropTypes.bool,
   stats: PropTypes.bool,

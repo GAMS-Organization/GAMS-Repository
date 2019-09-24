@@ -8,7 +8,12 @@ import {
   rooftopBlueCardHeader,
   rooftopYellowCardHeader,
   roseCardHeader,
-  whiteColor
+  whiteColor,
+  gamsWhiteCardHeader,
+  gamsBlackCardHeader,
+  gamsGrayCardHeader,
+  gamsBlueCardHeader,
+  gamsRedCardHeader
 } from "../../material-dashboard-react.jsx";
 
 const cardHeaderStyle = {
@@ -22,7 +27,7 @@ const cardHeaderStyle = {
       margin: "0 15px",
       padding: "0",
       position: "relative",
-      color: whiteColor
+      color: "primary"
     },
     "&:first-child": {
       borderRadius: "calc(.25rem - 1px) calc(.25rem - 1px) 0 0"
@@ -139,7 +144,37 @@ const cardHeaderStyle = {
     "&:not($cardHeaderIcon)": {
       ...roseCardHeader
     }
-  }
+  },
+  gamsBlackCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...gamsBlackCardHeader
+    }
+  },
+  gamsWhiteCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...gamsWhiteCardHeader
+    }
+  },
+  gamsGrayCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...gamsGrayCardHeader
+    }
+  },
+  gamsRedCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...gamsRedCardHeader
+    }
+  },
+  gamsBlueCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...gamsBlueCardHeader
+    }
+  },
 };
 
 export default cardHeaderStyle;

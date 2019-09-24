@@ -13,11 +13,11 @@ import {
     rooftopBlueColor,
     rooftopOrangeColor,
     rooftopYellowColor,
-  gamsWhite,
-  gamsRed,
-  gamsGray,
-  gamsBlue,
-  gamsBlack
+  gamsWhiteColor,
+  gamsRedColor,
+  gamsGrayColor,
+  gamsBlueColor,
+  gamsBlackColor
 } from "../../material-dashboard-react.jsx";
 
 const buttonStyle = {
@@ -259,25 +259,25 @@ const buttonStyle = {
         ", 0.2)"
     }
   },
-  gamsBlack: {
-    backgroundColor: gamsBlack[0],
+  gamsBlackColor: {
+    backgroundColor: gamsBlackColor[0],
     boxShadow:
         "0 2px 2px 0 rgba(" +
-        hexToRgb(gamsBlack[0]) +
+        hexToRgb(gamsBlackColor[0]) +
         ", 0.14), 0 3px 1px -2px rgba(" +
-        hexToRgb(gamsBlack[0]) +
+        hexToRgb(gamsBlackColor[0]) +
         ", 0.2), 0 1px 5px 0 rgba(" +
-        hexToRgb(gamsBlack[0]) +
+        hexToRgb(gamsBlackColor[0]) +
         ", 0.12)",
     "&:hover,&:focus": {
-      backgroundColor: gamsBlack[0],
+      backgroundColor: gamsBlackColor[0],
       boxShadow:
           "0 14px 26px -12px rgba(" +
-          hexToRgb(gamsBlack[0]) +
+          hexToRgb(gamsBlackColor[0]) +
           ", 0.42), 0 4px 23px 0px rgba(" +
           hexToRgb(blackColor) +
           ", 0.12), 0 8px 10px -5px rgba(" +
-          hexToRgb(gamsBlack[0]) +
+          hexToRgb(gamsBlackColor[0]) +
           ", 0.2)"
     }
   },

@@ -54,7 +54,7 @@ RegularButton.propTypes = {
     "danger",
     "rose",
     "white",
-    "gamsBlack",
+    "gamsBlackColor",
     "transparent"
   ]),
   size: PropTypes.oneOf(["sm", "lg"]),
