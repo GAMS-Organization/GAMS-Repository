@@ -10,14 +10,19 @@ import {
   blackColor,
   hexToRgb,
   secondaryColor,
-    rooftopBlueColor,
-    rooftopOrangeColor,
-    rooftopYellowColor,
+  rooftopBlueColor,
+  rooftopOrangeColor,
+  rooftopYellowColor,
   gamsWhiteColor,
   gamsRedColor,
   gamsGrayColor,
   gamsBlueColor,
-  gamsBlackColor
+  gamsBlackColor,
+  gamsBlueBoxShadow,
+  gamsRedBoxShadow,
+  gamsBlackBoxShadow,
+  gamsWhiteBoxShadow,
+  gamsGrayBoxShadow
 } from "../../material-dashboard-react.jsx";
 
 const buttonStyle = {
@@ -261,7 +266,7 @@ const buttonStyle = {
   },
   gamsBlackColor: {
     backgroundColor: gamsBlackColor[0],
-    boxShadow:
+    gamsBlackBoxShadow:
         "0 2px 2px 0 rgba(" +
         hexToRgb(gamsBlackColor[0]) +
         ", 0.14), 0 3px 1px -2px rgba(" +
@@ -271,13 +276,101 @@ const buttonStyle = {
         ", 0.12)",
     "&:hover,&:focus": {
       backgroundColor: gamsBlackColor[0],
-      boxShadow:
+      gamsBlackBoxShadow:
           "0 14px 26px -12px rgba(" +
           hexToRgb(gamsBlackColor[0]) +
           ", 0.42), 0 4px 23px 0px rgba(" +
           hexToRgb(blackColor) +
           ", 0.12), 0 8px 10px -5px rgba(" +
           hexToRgb(gamsBlackColor[0]) +
+          ", 0.2)"
+    }
+  },
+  gamsRedColor: {
+    backgroundColor: gamsRedColor[0],
+    boxShadow:
+        "0 2px 2px 0 rgba(" +
+        hexToRgb(gamsRedColor[0]) +
+        ", 0.14), 0 3px 1px -2px rgba(" +
+        hexToRgb(gamsRedColor[0]) +
+        ", 0.2), 0 1px 5px 0 rgba(" +
+        hexToRgb(gamsRedColor[0]) +
+        ", 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: gamsRedColor[0],
+      boxShadow:
+          "0 14px 26px -12px rgba(" +
+          hexToRgb(gamsRedColor[0]) +
+          ", 0.42), 0 4px 23px 0px rgba(" +
+          hexToRgb(blackColor) +
+          ", 0.12), 0 8px 10px -5px rgba(" +
+          hexToRgb(gamsRedColor[0]) +
+          ", 0.2)"
+    }
+  },
+  gamsGrayColor: {
+    backgroundColor: gamsGrayColor[0],
+    boxShadow:
+        "0 2px 2px 0 rgba(" +
+        hexToRgb(gamsGrayColor[0]) +
+        ", 0.14), 0 3px 1px -2px rgba(" +
+        hexToRgb(gamsGrayColor[0]) +
+        ", 0.2), 0 1px 5px 0 rgba(" +
+        hexToRgb(gamsGrayColor[0]) +
+        ", 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: gamsGrayColor[0],
+      boxShadow:
+          "0 14px 26px -12px rgba(" +
+          hexToRgb(gamsGrayColor[0]) +
+          ", 0.42), 0 4px 23px 0px rgba(" +
+          hexToRgb(blackColor) +
+          ", 0.12), 0 8px 10px -5px rgba(" +
+          hexToRgb(gamsGrayColor[0]) +
+          ", 0.2)"
+    }
+  },
+  gamsWhiteColor: {
+    backgroundColor: gamsWhiteColor[0],
+    boxShadow:
+        "0 2px 2px 0 rgba(" +
+        hexToRgb(gamsWhiteColor[0]) +
+        ", 0.14), 0 3px 1px -2px rgba(" +
+        hexToRgb(gamsWhiteColor[0]) +
+        ", 0.2), 0 1px 5px 0 rgba(" +
+        hexToRgb(gamsWhiteColor[0]) +
+        ", 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: gamsWhiteColor[0],
+      boxShadow:
+          "0 14px 26px -12px rgba(" +
+          hexToRgb(gamsWhiteColor[0]) +
+          ", 0.42), 0 4px 23px 0px rgba(" +
+          hexToRgb(blackColor) +
+          ", 0.12), 0 8px 10px -5px rgba(" +
+          hexToRgb(gamsWhiteColor[0]) +
+          ", 0.2)"
+    }
+  },
+  gamsBlueColor: {
+    backgroundColor: gamsBlueColor[0],
+    boxShadow:
+        "0 2px 2px 0 rgba(" +
+        hexToRgb(gamsBlueColor[0]) +
+        ", 0.14), 0 3px 1px -2px rgba(" +
+        hexToRgb(gamsBlueColor[0]) +
+        ", 0.2), 0 1px 5px 0 rgba(" +
+        hexToRgb(gamsBlueColor[0]) +
+        ", 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: gamsBlueColor[0],
+      boxShadow:
+          "0 14px 26px -12px rgba(" +
+          hexToRgb(gamsBlueColor[0]) +
+          ", 0.42), 0 4px 23px 0px rgba(" +
+          hexToRgb(blackColor) +
+          ", 0.12), 0 8px 10px -5px rgba(" +
+          hexToRgb(gamsBlueColor[0]) +
           ", 0.2)"
     }
   },
@@ -335,6 +428,37 @@ const buttonStyle = {
         color: rooftopYellowColor[0]
       }
     }
+    ,
+    "&$gamsBlackColor": {
+      "&,&:focus,&:hover,&:visited": {
+        color: gamsBlackColor[0]
+      }
+    }
+    ,
+    "&$gamsRedColor": {
+      "&,&:focus,&:hover,&:visited": {
+        color: gamsRedColor[0]
+      }
+    }
+    ,
+    "&$gamsGrayColor": {
+      "&,&:focus,&:hover,&:visited": {
+        color: gamsGrayColor[0]
+      }
+    }
+    ,
+    "&$gamsWhiteColor": {
+      "&,&:focus,&:hover,&:visited": {
+        color: gamsWhiteColor[0]
+      }
+    }
+    ,
+    "&$gamsBlueColor": {
+      "&,&:focus,&:hover,&:visited": {
+        color: gamsBlueColor[0]
+      }
+    }
+    , 
   },
   transparent: {
     "&,&:focus,&:hover": {

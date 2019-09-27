@@ -113,10 +113,9 @@ class LoginPage extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <p
-                    className={`${classes.textCenter} ${classes.checkboxLabel}`}
+                    className={`${classes.textCenter} ${classes.checkboxLabel}`}                    
                   >
-                    Or Sign in with <strong>admin@material.com</strong> and the
-                    password <strong>secret</strong>{" "}
+                    Inicie sesion con su <strong>Email</strong> y su <strong>Contraseña</strong>{" "}
                   </p>
                   <CustomInput
                     labelText="Email..."
@@ -137,7 +136,7 @@ class LoginPage extends React.Component {
                     }}
                   />
                   <CustomInput
-                    labelText="Password"
+                    labelText="Contraseña..."
                     id="password"
                     error={errors.password || errors.invalidEmailOrPassword}
                     formControlProps={{
@@ -176,12 +175,12 @@ class LoginPage extends React.Component {
                         }}
                       />
                     }
-                    label={<span>Remember me</span>}
+                    label={<span>Recordarme</span>}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button type="submit" color="primary" simple size="lg" block>
-                    Let's Go
+                  <Button type="submit" color="gamsRedColor" simple size="lg" block>
+                    Entrar
                   </Button>
                 </CardFooter>
               </Card>

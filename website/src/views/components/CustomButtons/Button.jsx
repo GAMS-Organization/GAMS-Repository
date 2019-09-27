@@ -55,7 +55,16 @@ RegularButton.propTypes = {
     "rose",
     "white",
     "gamsBlackColor",
-    "transparent"
+    "transparent",
+    "gamsBlueColor",
+    "gamsWhiteColor",
+    "gamsRedColor",
+    "gamsGrayCOlor",
+    "gamsBlueBoxShadow",
+    "gamsRedBoxShadow",
+    "gamsBlackBoxShadow",
+    "gamsWhiteBoxShadow",
+    "gamsGrayBoxShadow"
   ]),
   size: PropTypes.oneOf(["sm", "lg"]),
   simple: PropTypes.bool,

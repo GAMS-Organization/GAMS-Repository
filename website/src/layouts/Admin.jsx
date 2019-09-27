@@ -78,7 +78,7 @@ class Dashboard extends React.Component {
       this.setState({ mobileOpen: false });
     }
   }
-  /*
+ /* 
   async componentDidMount() {
     const { history } = this.props;
 
@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
       return userInfo = getSessionRequestData.userInfo;
     }
     return history.push("/auth/login-page");
-  }*/
+  }
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.resizeFunction);
-  }
+  }*/
   render() {
     const { classes, ...rest } = this.props;
 
