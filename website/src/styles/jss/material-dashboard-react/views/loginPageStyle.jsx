@@ -3,7 +3,12 @@ import {
   whiteColor,
   grayColor,
   blackColor,
-  hexToRgb
+  hexToRgb,
+  gamsRedColor,
+  gamsBlueColor,
+  gamsGrayColor,
+  gamsWhiteColor,
+  gamsBlackColor
 } from "../../material-dashboard-react.jsx";
 
 import customCheckboxRadioSwitch from "../../material-dashboard-react/checkboxAdnRadioStyle.jsx";
@@ -81,6 +86,13 @@ const loginPageStyle = theme => ({
   },
   checkboxLabel: {
     color: "rgba(" + hexToRgb(blackColor) + ", 0.26)"
+  },
+  textPassword: {
+    color: gamsRedColor[0],
+    padding: "40px",
+    "&:hover": {
+      color: gamsRedColor[1]
+    }
   }
 });
 

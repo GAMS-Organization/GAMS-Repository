@@ -14,11 +14,6 @@ function Footer({ ...props }) {
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
-                Home
-              </a>
-            </ListItem>
           </List>
         </div>
         <p className={classes.right}>
@@ -31,7 +26,7 @@ function Footer({ ...props }) {
             <a href="https://www.facebook.com/javi.sicardi" target="_blank"  className={classes.a}>
               Javier Sicardi
             </a>{" "}
-            para la{" "}
+            para la {" "}
             <a href="http://www.sanfrancisco.utn.edu.ar/" target="_blank" className={classes.a}>
             "UTN Facultad Regional San Francisco"
             </a>{" "}

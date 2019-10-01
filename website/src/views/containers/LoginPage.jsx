@@ -175,16 +175,19 @@ class LoginPage extends React.Component {
                         }}
                       />
                     }
-                    label={<span>Recordarme</span>}
+                    label={<span><strong>Recordarme</strong></span>}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button type="submit" color="gamsRedColor" simple size="lg" block>
+                  <Button type="submit" color="gamsBlueColor">
                     Entrar
-                  </Button>
+                  </Button>                 
                 </CardFooter>
               </Card>
             </form>
+            <div className={classes.textCenter}>
+              <a href="#" className={classes.textPassword}>¿has olvidado tu contraseña?</a>
+            </div>                       
           </GridItem>
         </GridContainer>
       </div>

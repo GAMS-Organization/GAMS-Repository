@@ -3,7 +3,10 @@ import {
   primaryColor,
   grayColor,
   gamsRedColor,
-  gamsBlueColor
+  gamsBlueColor,
+  gamsBlackColor,
+  gamsWhiteColor,
+  gamsGrayColor
 } from "../../material-dashboard-react.jsx";
 
 const footerStyle = {
@@ -59,9 +62,12 @@ const footerStyle = {
     }
   },
   a: {
-    color: gamsBlueColor,
+    color: gamsRedColor[0],
     textDecoration: "none",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    "&:hover": {
+      color: gamsRedColor[1]
+    }
   },
   list: {
     marginBottom: "0",

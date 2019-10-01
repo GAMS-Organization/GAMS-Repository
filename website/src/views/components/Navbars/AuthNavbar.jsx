@@ -78,7 +78,7 @@ class AuthNavbar extends React.Component {
           </NavLink>
         </ListItem>
       </List>
-    );
+          );
     return (
       <AppBar position="static" className={classes.appBar + appBarClasses}>
         <Toolbar className={classes.container}>
