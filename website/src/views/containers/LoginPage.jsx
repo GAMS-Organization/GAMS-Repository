@@ -95,9 +95,8 @@ class LoginPage extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={8}>
             <h4 className={classes.textCenter} style={{ marginTop: 0 }}>
-              Bienvenidos a GAMS, el sistema de gestion de activos y de actividades
-              para el área de Mantenimiento y Servicios Generales de la UTN “Facultad
-              Regional San Francisco”{" "}
+              Bienvenidos a GAMS, el software de gestión de activos
+              para la UTN “Facultad Regional San Francisco”{" "}  
             </h4>
           </GridItem>
         </GridContainer>
@@ -115,7 +114,8 @@ class LoginPage extends React.Component {
                   <p
                     className={`${classes.textCenter} ${classes.checkboxLabel}`}                    
                   >
-                    Inicie sesion con su <strong>Email</strong> y su <strong>Contraseña</strong>{" "}
+                    <strong>Inicie sesion con su Email y su
+                      Contraseña</strong>{" "}
                   </p>
                   <CustomInput
                     labelText="Email..."

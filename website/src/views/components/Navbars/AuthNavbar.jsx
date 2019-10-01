@@ -64,21 +64,6 @@ class AuthNavbar extends React.Component {
         </ListItem>
         <ListItem className={classes.listItem}>
           <NavLink
-            to={"/auth/register-page"}
-            className={cx(classes.navLink, {
-              [classes.navLinkActive]: this.activeRoute("/auth/register-page")
-            })}
-          >
-            <PersonAdd className={classes.listItemIcon} />
-            <ListItemText
-              primary={"Register"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
-          </NavLink>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <NavLink
             to={"/auth/login-page"}
             className={cx(classes.navLink, {
               [classes.navLinkActive]: this.activeRoute("/auth/login-page")

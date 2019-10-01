@@ -1,7 +1,9 @@
 import {
   defaultFont,
   primaryColor,
-  grayColor
+  grayColor,
+  gamsRedColor,
+  gamsBlueColor
 } from "../../material-dashboard-react.jsx";
 
 const footerStyle = {
@@ -57,7 +59,7 @@ const footerStyle = {
     }
   },
   a: {
-    color: primaryColor,
+    color: gamsBlueColor,
     textDecoration: "none",
     backgroundColor: "transparent"
   },

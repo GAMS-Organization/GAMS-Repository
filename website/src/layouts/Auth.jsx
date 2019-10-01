@@ -14,7 +14,7 @@ import routes from "../routes.js";
 import pagesStyle from "../styles/jss/material-dashboard-react/layouts/authStyle.jsx";
 
 import register from "../styles/img/register.jpeg";
-import login from "../styles/img/login.jpeg";
+import login from "../styles/img/imagenTaller.jpg";
 
 const switchRoutes = (
   <Switch>
