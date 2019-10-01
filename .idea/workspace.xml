@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bae8e431-839d-4c67-ba63-4c1cbde8c90c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/layouts/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/layouts/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/styles/jss/material-dashboard-react/components/tableStyle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/styles/jss/material-dashboard-react/components/tableStyle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/views/containers/UsersView.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/views/containers/UsersView.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/views/sections/users/newUser.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/views/sections/users/NewUserSection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/src/views/sections/users/usersTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/website/src/views/sections/users/UsersTableSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/website/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +101,9 @@
       <workItem from="1569281257936" duration="893000" />
       <workItem from="1569282266577" duration="4015000" />
       <workItem from="1569531864232" duration="4757000" />
-      <workItem from="1569753858947" duration="9980000" />
+      <workItem from="1569753858947" duration="10135000" />
+      <workItem from="1569866298327" duration="53000" />
+      <workItem from="1569962841996" duration="136000" />
     </task>
     <servers />
   </component>
