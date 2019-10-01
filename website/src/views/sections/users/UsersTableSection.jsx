@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import Table from '../../components/Table/Table.jsx';
+import UsersTable from '../../components/Table/UsersTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
@@ -39,19 +39,19 @@ const styles = {
   },
 };
 
-function UsersTable(props) {
+function UsersTableSection(props) {
   const { classes } = props;
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}>Simple Table</h4>
-            <p className={classes.cardCategoryWhite}>Here is a subtitle for this table</p>
+          <CardHeader color="gamsBlue">
+            <h4 className={classes.cardTitleWhite}>Usuarios</h4>
+            <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
           </CardHeader>
           <CardBody>
-            <Table
-              tableHeaderColor="primary"
+            <UsersTable
+              tableHeaderColor="gamsBlue"
               tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Contraseña', 'Tipo de cuenta', 'Token']}
               tableData={[
                 ['1', 'Alejandro', 'Minacori', 'alenemo4@hotmail', '1234', 'cliente', '987asd1qw321'],
@@ -69,4 +69,4 @@ function UsersTable(props) {
   );
 }
 
-export default withStyles(styles)(UsersTable);
+export default withStyles(styles)(UsersTableSection);

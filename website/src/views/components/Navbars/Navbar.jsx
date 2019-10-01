@@ -1,19 +1,19 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from "@material-ui/core/AppBar/index";
-import Toolbar from "@material-ui/core/Toolbar/index";
-import IconButton from "@material-ui/core/IconButton/index";
-import Hidden from "@material-ui/core/Hidden/index";
+import withStyles from '@material-ui/core/styles/withStyles';
+import AppBar from '@material-ui/core/AppBar/index';
+import Toolbar from '@material-ui/core/Toolbar/index';
+import IconButton from '@material-ui/core/IconButton/index';
+import Hidden from '@material-ui/core/Hidden/index';
 // @material-ui/icons
-import Menu from "@material-ui/icons/Menu";
+import Menu from '@material-ui/icons/Menu';
 // core components
-import AdminNavbarLinks from "./AdminNavbarLinks.jsx";
-import Button from "../CustomButtons/Button.jsx";
+import AdminNavbarLinks from './AdminNavbarLinks.jsx';
+import Button from '../CustomButtons/Button.jsx';
 
-import headerStyle from "../../../styles/jss/material-dashboard-react/components/headerStyle.jsx";
+import headerStyle from '../../../styles/jss/material-dashboard-react/components/headerStyle.jsx';
 import { rooftopBlueColor } from '../../../styles/jss/material-dashboard-react';
 
 function Header({ ...props }) {
@@ -29,7 +29,7 @@ function Header({ ...props }) {
   }
   const { classes, color } = props;
   const appBarClasses = classNames({
-    [" " + classes[color]]: color
+    [' ' + classes[color]]: color,
   });
   return (
     <AppBar className={classes.appBar + appBarClasses}>
@@ -44,11 +44,7 @@ function Header({ ...props }) {
           <AdminNavbarLinks {...props} />
         </Hidden>
         <Hidden mdUp implementation="css">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={props.handleDrawerToggle}
-          >
+          <IconButton color="inherit" aria-label="open drawer" onClick={props.handleDrawerToggle}>
             <Menu />
           </IconButton>
         </Hidden>
@@ -59,7 +55,18 @@ function Header({ ...props }) {
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger", "rooftopBlueColor"])
+  color: PropTypes.oneOf([
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'gamsBlue',
+    'gamsWhite',
+    'gamsBlack',
+    'gamsRed',
+    'gamsGray',
+  ]),
 };
 
 export default withStyles(headerStyle)(Header);

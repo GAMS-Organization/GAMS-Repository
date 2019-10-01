@@ -14,12 +14,17 @@ import {
   blackColor,
   rooftopBlueColor,
   rooftopOrangeColor,
+  gamsRedColor,
+  gamsBlueColor,
+  gamsWhiteColor,
+  gamsGrayColor,
+  gamsBlackColor,
   hexToRgb,
 } from '../../material-dashboard-react.jsx';
 
 const sidebarStyle = theme => ({
   drawerPaper: {
-    backgroundColor: rooftopBlueColor[0],
+    backgroundColor: gamsBlueColor[2],
     border: 'none',
     position: 'fixed',
     top: '0',

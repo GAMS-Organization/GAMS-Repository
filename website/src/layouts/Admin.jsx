@@ -47,7 +47,6 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: image,
       color: 'blue',
       hasImage: true,
       fixedClasses: 'dropdown show',
@@ -124,14 +123,13 @@ class Dashboard extends React.Component {
           routes={routes}
           logoText={'GAMS'}
           logo={logo}
-          image={this.state.image}
           handleDrawerToggle={this.handleDrawerToggle}
           open={this.state.mobileOpen}
           color={this.state.color}
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">
-          <Navbar routes={routes} handleDrawerToggle={this.handleDrawerToggle} color={this.state.color} {...rest} />
+          <Navbar routes={routes} handleDrawerToggle={this.handleDrawerToggle} color="gamsBlue" {...rest} />
           {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
@@ -141,14 +139,6 @@ class Dashboard extends React.Component {
             <div className={classes.map}>{switchRoutes}</div>
           )}
           {this.getRoute() ? <Footer /> : null}
-          <FixedPlugin
-            handleImageClick={this.handleImageClick}
-            handleColorClick={this.handleColorClick}
-            bgColor={this.state['color']}
-            bgImage={this.state['image']}
-            handleFixedClick={this.handleFixedClick}
-            fixedClasses={this.state.fixedClasses}
-          />
         </div>
       </div>
     );
