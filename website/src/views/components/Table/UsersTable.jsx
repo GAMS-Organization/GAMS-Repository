@@ -15,63 +15,82 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Close from '@material-ui/icons/Close';
 import UpdateUserSection from '../../sections/users/UpdateUserSection';
 
-function handleClickUpdate() {
-  return <UpdateUserSection />;
-}
+class UsersTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+    };
+    this.handleClickUpdate = this.handleClickUpdate.bind(this);
+  }
 
-function UsersTable({ ...props }) {
-  const { classes, tableHead, tableData, tableHeaderColor } = props;
-  return (
-    <div className={classes.tableResponsive}>
-      <Table className={classes.table}>
-        {tableHead !== undefined ? (
-          <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
-            <TableRow>
-              {tableHead.map((prop, key) => {
-                return (
-                  <TableCell className={classes.tableCell + ' ' + classes.tableHeadCell} key={key}>
-                    {prop}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-        ) : null}
-        <TableBody>
-          {tableData.map((prop, key) => {
-            return (
-              <TableRow key={key}>
-                {prop.map((prop, key) => {
+  handleClickUpdate() {
+    this.setState({ modal: true });
+  }
+
+  componentDidMount() {
+    this.setState({ modal: false });
+  }
+
+  render() {
+    const { classes, tableHead, tableData, tableHeaderColor } = this.props;
+    return (
+      <div className={classes.tableResponsive}>
+        <UpdateUserSection open={this.state.modal} />
+        <Table className={classes.table}>
+          {tableHead !== undefined ? (
+            <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
+              <TableRow>
+                {tableHead.map((prop, key) => {
                   return (
-                    <TableCell className={classes.tableCell} key={key}>
+                    <TableCell className={classes.tableCell + ' ' + classes.tableHeadCell} key={key}>
                       {prop}
                     </TableCell>
                   );
                 })}
-                <TableCell className={classes.tableActions}>
-                  <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                    <IconButton aria-label="Edit" className={classes.tableActionButton} onClick={handleClickUpdate}>
-                      <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip
-                    id="tooltip-top-start"
-                    title="Eliminar"
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <IconButton aria-label="Close" className={classes.tableActionButton}>
-                      <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </div>
-  );
+            </TableHead>
+          ) : null}
+          <TableBody>
+            {tableData.map((prop, key) => {
+              return (
+                <TableRow key={key}>
+                  {prop.map((prop, key) => {
+                    return (
+                      <TableCell className={classes.tableCell} key={key}>
+                        {prop}
+                      </TableCell>
+                    );
+                  })}
+                  <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickUpdate}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Eliminar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton aria-label="Close" className={classes.tableActionButton}>
+                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
 }
 
 UsersTable.defaultProps = {

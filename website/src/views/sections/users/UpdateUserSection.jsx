@@ -36,7 +36,14 @@ class UpdateUserSection extends React.Component {
       errors: {},
       classicModal: false,
     };
+    this.handleClose = this.handleClose.bind(this);
     this.createUser = this.createUser.bind(this);
+  }
+
+  handleClose() {
+    let open = !this.state.classicModal;
+    console.log(open);
+    this.setState({ classicModal: open });
   }
 
   handleType = event => {
@@ -78,8 +85,11 @@ class UpdateUserSection extends React.Component {
   }
 
   render() {
-    const { classes, name, lastName, email, password, type } = this.props;
+    const { classes, name, lastName, email, password, open } = this.props;
     const { errors } = this.state;
+    if (open && !this.state.classicModal) {
+      this.handleClose();
+    }
     const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="down" ref={ref} {...props} />;
     });
@@ -92,7 +102,7 @@ class UpdateUserSection extends React.Component {
         open={this.state.classicModal}
         TransitionComponent={Transition}
         keepMounted
-        onClose={() => this.handleClose('classicModal')}
+        onClose={this.handleClose}
         aria-labelledby="classic-modal-slide-title"
         aria-describedby="classic-modal-slide-description"
       >
@@ -104,7 +114,127 @@ class UpdateUserSection extends React.Component {
           <h4 className={classes.modalTitle}>Modal title</h4>
         </DialogTitle>
         <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-          <NewUserSection />
+          <form onSubmit={this.createUser}>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={3}>
+                <CustomInput
+                  labelText="Nombre"
+                  id="name"
+                  error={errors.name}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: name,
+                    name: 'name',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={3}>
+                <CustomInput
+                  labelText="Apellido"
+                  id="lastName"
+                  error={errors.lastName}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: lastName,
+                    name: 'lastName',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CustomInput
+                  labelText="Correo"
+                  id="email-address"
+                  error={errors.username}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: email,
+                    name: 'username',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={3}>
+                <CustomInput
+                  labelText="Contraseña"
+                  id="password"
+                  error={errors.password}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: password,
+                    name: 'password',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={3}>
+                <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                  <Select
+                    MenuProps={{
+                      className: classes.selectMenu,
+                    }}
+                    classes={{
+                      select: classes.select,
+                    }}
+                    value={this.state.typeSelected}
+                    onChange={this.handleType}
+                    inputProps={{
+                      name: 'typeSelected',
+                      id: 'type',
+                    }}
+                  >
+                    <MenuItem
+                      disabled
+                      classes={{
+                        root: classes.selectMenuItem,
+                      }}
+                    >
+                      Tipo
+                    </MenuItem>
+                    <MenuItem
+                      classes={{
+                        root: classes.selectMenuItem,
+                        selected: classes.selectMenuItemSelected,
+                      }}
+                      value="1"
+                    >
+                      Cliente
+                    </MenuItem>
+                    <MenuItem
+                      classes={{
+                        root: classes.selectMenuItem,
+                        selected: classes.selectMenuItemSelected,
+                      }}
+                      value="2"
+                    >
+                      Personal
+                    </MenuItem>
+                    <MenuItem
+                      classes={{
+                        root: classes.selectMenuItem,
+                        selected: classes.selectMenuItemSelected,
+                      }}
+                      value="3"
+                    >
+                      Administrador
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </GridItem>
+            </GridContainer>
+            <Button type="submit" color="gamsRed">
+              Crear
+            </Button>
+          </form>
         </DialogContent>
         <DialogActions className={classes.modalFooter}>
           <Button link>Nice Button</Button>

@@ -42,7 +42,6 @@ class UsersView extends React.Component {
       <div>
         <NewUserSection />
         <UsersTable />
-        <UpdateUserSection />
       </div>
     );
   }
