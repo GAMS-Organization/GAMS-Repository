@@ -6,6 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewUserSection from '../sections/users/NewUserSection';
 import UsersTable from '../sections/users/UsersTableSection';
+import UpdateUserSection from '../sections/users/UpdateUserSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,6 +42,7 @@ class UsersView extends React.Component {
       <div>
         <NewUserSection />
         <UsersTable />
+        <UpdateUserSection />
       </div>
     );
   }

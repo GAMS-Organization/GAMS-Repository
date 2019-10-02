@@ -1,36 +1,36 @@
-import React from "react";
-import cx from "classnames";
-import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from "@material-ui/core/AppBar/index";
-import Toolbar from "@material-ui/core/Toolbar/index";
-import Hidden from "@material-ui/core/Hidden/index";
-import Drawer from "@material-ui/core/Drawer/index";
-import List from "@material-ui/core/List/index";
-import ListItem from "@material-ui/core/ListItem/index";
-import ListItemText from "@material-ui/core/ListItemText/index";
+import withStyles from '@material-ui/core/styles/withStyles';
+import AppBar from '@material-ui/core/AppBar/index';
+import Toolbar from '@material-ui/core/Toolbar/index';
+import Hidden from '@material-ui/core/Hidden/index';
+import Drawer from '@material-ui/core/Drawer/index';
+import List from '@material-ui/core/List/index';
+import ListItem from '@material-ui/core/ListItem/index';
+import ListItemText from '@material-ui/core/ListItemText/index';
 
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Menu from "@material-ui/icons/Menu";
-import PersonAdd from "@material-ui/icons/PersonAdd";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-import LockOpen from "@material-ui/icons/LockOpen";
-import MonetizationOn from "@material-ui/icons/MonetizationOn";
+import Dashboard from '@material-ui/icons/Dashboard';
+import Menu from '@material-ui/icons/Menu';
+import PersonAdd from '@material-ui/icons/PersonAdd';
+import Fingerprint from '@material-ui/icons/Fingerprint';
+import LockOpen from '@material-ui/icons/LockOpen';
+import MonetizationOn from '@material-ui/icons/MonetizationOn';
 
 // core components
-import Button from "../CustomButtons/Button";
+import Button from '../CustomButtons/Button';
 
-import authNavbarStyle from "../../../styles/jss/material-dashboard-react/components/authNavbarStyle.jsx";
+import authNavbarStyle from '../../../styles/jss/material-dashboard-react/components/authNavbarStyle.jsx';
 
 class AuthNavbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
   handleDrawerToggle = () => {
@@ -48,48 +48,25 @@ class AuthNavbar extends React.Component {
   render() {
     const { classes, color, brandText } = this.props;
     const appBarClasses = cx({
-      [" " + classes[color]]: color
+      [' ' + classes[color]]: color,
     });
     var list = (
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
-          <NavLink to={"/admin/dashboard"} className={classes.navLink}>
+          <NavLink to={'/admin/dashboard'} className={classes.navLink}>
             <Dashboard className={classes.listItemIcon} />
-            <ListItemText
-              primary={"Dashboard"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
+            <ListItemText primary={'Dashboard'} disableTypography={true} className={classes.listItemText} />
           </NavLink>
         </ListItem>
         <ListItem className={classes.listItem}>
           <NavLink
-            to={"/auth/register-page"}
+            to={'/auth/login-page'}
             className={cx(classes.navLink, {
-              [classes.navLinkActive]: this.activeRoute("/auth/register-page")
-            })}
-          >
-            <PersonAdd className={classes.listItemIcon} />
-            <ListItemText
-              primary={"Register"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
-          </NavLink>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <NavLink
-            to={"/auth/login-page"}
-            className={cx(classes.navLink, {
-              [classes.navLinkActive]: this.activeRoute("/auth/login-page")
+              [classes.navLinkActive]: this.activeRoute('/auth/login-page'),
             })}
           >
             <Fingerprint className={classes.listItemIcon} />
-            <ListItemText
-              primary={"Login"}
-              disableTypography={true}
-              className={classes.listItemText}
-            />
+            <ListItemText primary={'Login'} disableTypography={true} className={classes.listItemText} />
           </NavLink>
         </ListItem>
       </List>
@@ -127,14 +104,14 @@ class AuthNavbar extends React.Component {
             <Hidden mdUp>
               <Drawer
                 variant="temporary"
-                anchor={"right"}
+                anchor={'right'}
                 open={this.state.open}
                 classes={{
-                  paper: classes.drawerPaper
+                  paper: classes.drawerPaper,
                 }}
                 onClose={this.handleDrawerToggle}
                 ModalProps={{
-                  keepMounted: true // Better open performance on mobile.
+                  keepMounted: true, // Better open performance on mobile.
                 }}
               >
                 {list}
@@ -149,8 +126,8 @@ class AuthNavbar extends React.Component {
 
 AuthNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf(["primary", "info", "success", "warning", "danger"]),
-  brandText: PropTypes.string
+  color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger']),
+  brandText: PropTypes.string,
 };
 
 export default withStyles(authNavbarStyle)(AuthNavbar);

@@ -334,6 +334,118 @@ const sidebarStyle = theme => ({
         ',.2)',
     },
   },
+  gamsBlue: {
+    backgroundColor: gamsBlueColor[0],
+    boxShadow:
+      '0 12px 20px -10px rgba(' +
+      hexToRgb(gamsBlueColor[0]) +
+      ',.28), 0 4px 20px 0 rgba(' +
+      hexToRgb(blackColor) +
+      ',.12), 0 7px 8px -5px rgba(' +
+      hexToRgb(gamsBlueColor[0]) +
+      ',.2)',
+    '&:hover,&:focus': {
+      backgroundColor: gamsBlueColor[0],
+      boxShadow:
+        '0 12px 20px -10px rgba(' +
+        hexToRgb(gamsBlueColor[0]) +
+        ',.28), 0 4px 20px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 7px 8px -5px rgba(' +
+        hexToRgb(gamsBlueColor[0]) +
+        ',.2)',
+    },
+  },
+  gamsRed: {
+    backgroundColor: gamsRedColor[0],
+    boxShadow:
+      '0 12px 20px -10px rgba(' +
+      hexToRgb(gamsRedColor[0]) +
+      ',.28), 0 4px 20px 0 rgba(' +
+      hexToRgb(blackColor) +
+      ',.12), 0 7px 8px -5px rgba(' +
+      hexToRgb(gamsRedColor[0]) +
+      ',.2)',
+    '&:hover,&:focus': {
+      backgroundColor: gamsRedColor[0],
+      boxShadow:
+        '0 12px 20px -10px rgba(' +
+        hexToRgb(gamsRedColor[0]) +
+        ',.28), 0 4px 20px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 7px 8px -5px rgba(' +
+        hexToRgb(gamsRedColor[0]) +
+        ',.2)',
+    },
+  },
+  gamsGray: {
+    backgroundColor: gamsGrayColor[0],
+    boxShadow:
+      '0 12px 20px -10px rgba(' +
+      hexToRgb(gamsGrayColor[0]) +
+      ',.28), 0 4px 20px 0 rgba(' +
+      hexToRgb(blackColor) +
+      ',.12), 0 7px 8px -5px rgba(' +
+      hexToRgb(gamsGrayColor[0]) +
+      ',.2)',
+    '&:hover,&:focus': {
+      backgroundColor: gamsGrayColor[0],
+      boxShadow:
+        '0 12px 20px -10px rgba(' +
+        hexToRgb(gamsGrayColor[0]) +
+        ',.28), 0 4px 20px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 7px 8px -5px rgba(' +
+        hexToRgb(gamsGrayColor[0]) +
+        ',.2)',
+    },
+  },
+  gamsBlack: {
+    backgroundColor: gamsBlackColor[0],
+    boxShadow:
+      '0 12px 20px -10px rgba(' +
+      hexToRgb(gamsBlackColor[0]) +
+      ',.28), 0 4px 20px 0 rgba(' +
+      hexToRgb(blackColor) +
+      ',.12), 0 7px 8px -5px rgba(' +
+      hexToRgb(gamsBlackColor[0]) +
+      ',.2)',
+    '&:hover,&:focus': {
+      backgroundColor: gamsBlackColor[0],
+      boxShadow:
+        '0 12px 20px -10px rgba(' +
+        hexToRgb(gamsBlackColor[0]) +
+        ',.28), 0 4px 20px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 7px 8px -5px rgba(' +
+        hexToRgb(gamsBlackColor[0]) +
+        ',.2)',
+    },
+  },
+  gamsWhite: {
+    color: blackColor,
+    backgroundColor: gamsWhiteColor[0],
+    boxShadow:
+      '0 12px 20px -10px rgba(' +
+      hexToRgb(gamsWhiteColor[0]) +
+      ',.28), 0 4px 20px 0 rgba(' +
+      hexToRgb(blackColor) +
+      ',.12), 0 7px 8px -5px rgba(' +
+      hexToRgb(gamsWhiteColor[0]) +
+      ',.2)',
+    '&:hover,&:focus': {
+      color: blackColor,
+      backgroundColor: gamsWhiteColor[0],
+      boxShadow:
+        '0 12px 20px -10px rgba(' +
+        hexToRgb(gamsWhiteColor[0]) +
+        ',.28), 0 4px 20px 0 rgba(' +
+        hexToRgb(blackColor) +
+        ',.12), 0 7px 8px -5px rgba(' +
+        hexToRgb(gamsWhiteColor[0]) +
+        ',.2)',
+    },
+  },
   sidebarWrapper: {
     position: 'relative',
     height: 'calc(100vh - 75px)',

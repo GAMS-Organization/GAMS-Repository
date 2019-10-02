@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
           logo={logo}
           handleDrawerToggle={this.handleDrawerToggle}
           open={this.state.mobileOpen}
-          color={this.state.color}
+          color="gamsRed"
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">

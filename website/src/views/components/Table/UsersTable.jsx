@@ -13,6 +13,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit';
 import Tooltip from '@material-ui/core/Tooltip';
 import Close from '@material-ui/icons/Close';
+import UpdateUserSection from '../../sections/users/UpdateUserSection';
+
+function handleClickUpdate() {
+  return <UpdateUserSection />;
+}
 
 function UsersTable({ ...props }) {
   const { classes, tableHead, tableData, tableHeaderColor } = props;
@@ -45,7 +50,7 @@ function UsersTable({ ...props }) {
                 })}
                 <TableCell className={classes.tableActions}>
                   <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                    <IconButton aria-label="Edit" className={classes.tableActionButton}>
+                    <IconButton aria-label="Edit" className={classes.tableActionButton} onClick={handleClickUpdate}>
                       <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                     </IconButton>
                   </Tooltip>

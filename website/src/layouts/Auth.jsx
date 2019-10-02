@@ -1,32 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Switch, Route } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // core components
-import AuthNavbar from "../views/components/Navbars/AuthNavbar.jsx";
-import Footer from "../views/components/Footer/AuthFooter.jsx";
+import AuthNavbar from '../views/components/Navbars/AuthNavbar.jsx';
+import Footer from '../views/components/Footer/AuthFooter.jsx';
 
-import routes from "../routes.js";
+import routes from '../routes.js';
 
-import pagesStyle from "../styles/jss/material-dashboard-react/layouts/authStyle.jsx";
+import pagesStyle from '../styles/jss/material-dashboard-react/layouts/authStyle.jsx';
 
-import register from "../styles/img/register.jpeg";
-import login from "../styles/img/login.jpeg";
+import register from '../styles/img/register.jpeg';
+import login from '../styles/img/imagenTaller.jpg';
 
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/auth") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+      if (prop.layout === '/auth') {
+        return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
       }
       return null;
     })}
@@ -35,21 +29,19 @@ const switchRoutes = (
 
 class Pages extends React.Component {
   componentDidMount() {
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = 'unset';
   }
   getBgImage = () => {
-    if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
+    if (window.location.pathname.indexOf('/auth/register-page') !== -1) {
       return register;
-    } else if (window.location.pathname.indexOf("/auth/login-page") !== -1) {
+    } else if (window.location.pathname.indexOf('/auth/login-page') !== -1) {
       return login;
     }
   };
   getActiveRoute = routes => {
-    let activeRoute = "Default Brand Text";
+    let activeRoute = 'Default Brand Text';
     for (let i = 0; i < routes.length; i++) {
-      if (
-        window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-      ) {
+      if (window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1) {
         return routes[i].name;
       }
     }
@@ -61,10 +53,7 @@ class Pages extends React.Component {
       <div>
         <AuthNavbar brandText={this.getActiveRoute(routes)} {...rest} />
         <div className={classes.wrapper}>
-          <div
-            className={classes.fullPage}
-            style={{ backgroundImage: "url(" + this.getBgImage() + ")" }}
-          >
+          <div className={classes.fullPage} style={{ backgroundImage: 'url(' + this.getBgImage() + ')' }}>
             {switchRoutes}
             <Footer white />
           </div>
@@ -75,7 +64,7 @@ class Pages extends React.Component {
 }
 
 Pages.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(pagesStyle)(Pages);

@@ -95,8 +95,7 @@ class LoginPage extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={8}>
             <h4 className={classes.textCenter} style={{ marginTop: 0 }}>
-              Bienvenidos a GAMS, el sistema de gestion de activos y de actividades para el área de Mantenimiento y
-              Servicios Generales de la UTN “Facultad Regional San Francisco”{' '}
+              Bienvenidos a GAMS, el software de gestión de activos para la UTN “Facultad Regional San Francisco”{' '}
             </h4>
           </GridItem>
         </GridContainer>
@@ -109,7 +108,7 @@ class LoginPage extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <p className={`${classes.textCenter} ${classes.checkboxLabel}`}>
-                    Or Sign in with <strong>admin@material.com</strong> and the password <strong>secret</strong>{' '}
+                    <strong>Inicie sesion con su Email y su Contraseña</strong>{' '}
                   </p>
                   <CustomInput
                     labelText="Email..."
@@ -130,7 +129,7 @@ class LoginPage extends React.Component {
                     }}
                   />
                   <CustomInput
-                    labelText="Password"
+                    labelText="Contraseña..."
                     id="password"
                     error={errors.password || errors.invalidEmailOrPassword}
                     formControlProps={{
@@ -164,12 +163,12 @@ class LoginPage extends React.Component {
                         }}
                       />
                     }
-                    label={<span>Remember me</span>}
+                    label={<span>Recordarme</span>}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button type="submit" color="primary" simple size="lg" block>
-                    Let's Go
+                  <Button type="submit" color="gamsRedColor" simple size="lg" block>
+                    Entrar
                   </Button>
                 </CardFooter>
               </Card>
