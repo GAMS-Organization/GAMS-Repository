@@ -1,8 +1,13 @@
 node_modules/
 .idea/
+packages/*/dist/*.js
+packages/*/out
+packages/*/dist/*.js.map
+packages/*/*.log
 __pycache__
 *.log
 .env
+logs/
 *.map
 .env.prod
 .DS_Store
