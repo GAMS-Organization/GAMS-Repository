@@ -6,7 +6,7 @@ import DestroyEducationCommand from '../../../../Application/Commands/Educations
 @injectable()
 export default class DestroyEducationAdapter {
   public from(request: Request): DestroyEducationCommand {
-    const id = request.params.id;
+    const id = parseInt(request.params.id);
 
     if (!id) {
       throw new ValidationException('Education id is required');

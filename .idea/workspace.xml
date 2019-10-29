@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bae8e431-839d-4c67-ba63-4c1cbde8c90c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/API/Http/Adapters/Educations/DestroyEducationAdapter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/src/API/Http/Adapters/Educations/DestroyEducationAdapter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/website/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/website/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +37,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gamsdocker" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -111,6 +116,7 @@
       <workItem from="1571739889019" duration="606000" />
       <workItem from="1572187018828" duration="4755000" />
       <workItem from="1572261338522" duration="11000" />
+      <workItem from="1572376970201" duration="3804000" />
     </task>
     <servers />
   </component>

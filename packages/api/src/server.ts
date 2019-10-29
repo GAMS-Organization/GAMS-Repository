@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
 
 /* Use this line to get port from environment variable */
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 /*
 Start Express Project on a specific PORT
