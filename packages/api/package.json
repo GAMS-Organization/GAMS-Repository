@@ -31,8 +31,12 @@
     "@types/morgan": "^1.7.35",
     "@types/reflect-metadata": "^0.1.0",
     "@types/request": "^2.48.1",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "joi-to-swagger": "^3.2.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
@@ -65,6 +69,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "perfect-scrollbar": "^1.4.0",
+    "prettier": "^1.18.2",
     "react-chartist": "^0.13.3",
     "react-google-map": "^3.1.1",
     "react-google-maps": "^9.4.5",
@@ -73,6 +78,8 @@
     "request": "^2.88.0",
     "style-loader": "^1.0.0",
     "swagger-ui-express": "^4.1.2",
-    "typeorm": "^0.2.16"
+    "typeorm": "^0.2.16",
+    "winston": "^3.2.1",
+    "winston-sentry-log": "^1.0.11"
   }
 }

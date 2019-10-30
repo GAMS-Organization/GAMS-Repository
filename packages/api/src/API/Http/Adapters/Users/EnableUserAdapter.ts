@@ -6,7 +6,7 @@ import ValidationException from '../../../../Application/Exceptions/ValidationEx
 @injectable()
 export default class EnableUserAdapter {
   public from(request: Request): EnableUserCommand {
-    const userId = request.params.id;
+    const userId = parseInt(request.params.id);
 
     if (!userId) {
       throw new ValidationException('User id are required');

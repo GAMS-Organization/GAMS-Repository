@@ -21,7 +21,7 @@ export default class UpdateUserAdapter {
     }
 
     return new UpdateUserCommand(
-      request.params.id,
+        parseInt(request.params.id),
       request.body.name,
       request.body.surname,
       request.body.email,

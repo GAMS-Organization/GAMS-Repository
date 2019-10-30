@@ -6,7 +6,7 @@ import DestroyRooftopperCommand from '../../../../Application/Commands/Rooftoppe
 @injectable()
 export default class DestroyRooftopperAdapter {
   public from(request: Request): DestroyRooftopperCommand {
-    const rooftopperId = request.params.id;
+    const rooftopperId = parseInt(request.params.id);
 
     if (!rooftopperId) {
       throw new ValidationException('Rooftopper id are required');

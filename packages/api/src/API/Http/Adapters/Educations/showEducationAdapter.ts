@@ -6,7 +6,7 @@ import ShowEducationCommand from '../../../../Application/Commands/Educations/sh
 @injectable()
 export default class ShowEducationAdapter {
   public from(request: Request): ShowEducationCommand {
-    const id = request.params.id;
+    const id = parseInt(request.params.id);
 
     if (!id) {
       throw new ValidationException('Education id is required');

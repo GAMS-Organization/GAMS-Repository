@@ -6,7 +6,7 @@ import DisableRooftopperCommand from '../../../../Application/Commands/Rooftoppe
 @injectable()
 export default class DisableRooftopperByIdAdapter {
   public from(request: Request): DisableRooftopperCommand {
-    const rooftopperId = request.params.id;
+    const rooftopperId = parseInt(request.params.id);
 
     if (!rooftopperId) {
       throw new ValidationException('Rooftopper id are required');

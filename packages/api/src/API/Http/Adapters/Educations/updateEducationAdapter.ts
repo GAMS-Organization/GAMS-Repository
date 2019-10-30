@@ -21,7 +21,7 @@ export default class UpdateEducationAdapter {
     }
 
     return new UpdateEducationsCommand(
-      request.params.id,
+      parseInt(request.params.id),
       request.body.title,
       request.body.grade,
       request.body.institution,
