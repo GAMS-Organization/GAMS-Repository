@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import { Column, CreateDateColumn, Entity, Index, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import UserRole from './UserRole';
 import { UserStates } from '../Enums/UserStates';
@@ -16,9 +16,6 @@ export default class User {
   @Column()
   public email: string;
   @Column()
-  @Index({ unique: true })
-  public username: string;
-  @Column()
   public password: string;
   @Column({ default: UserStates.user_active })
   public state: UserStates;
@@ -31,8 +28,7 @@ export default class User {
   @UpdateDateColumn()
   public updatedAt: Date;
 
-  public constructor(username: string, name: string, surname: string, email: string, state?: UserStates) {
-    this.username = username;
+  public constructor(name: string, surname: string, email: string, state?: UserStates) {
     this.name = name;
     this.surname = surname;
     this.email = email;
@@ -69,14 +65,6 @@ export default class User {
 
   public setEmail(email: string): void {
     this.email = email;
-  }
-
-  public getUsername(): string {
-    return this.username;
-  }
-
-  public setUsername(username: string): void {
-    this.username = username;
   }
 
   public setUserState(state: UserStates): void {

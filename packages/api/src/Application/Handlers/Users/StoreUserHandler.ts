@@ -18,7 +18,7 @@ export default class StoreUserHandler {
   }
 
   public async execute(command: StoreUserCommand): Promise<User> {
-    const user = new User(command.getUsername(), command.getName(), command.getSurname(), command.getEmail());
+    const user = new User(command.getName(), command.getSurname(), command.getEmail());
     user.hashPassword(command.getPassword());
     return this.userRoleService.setUserRolesToUser(await this.userRepository.persist(user), command.getRoles());
   }

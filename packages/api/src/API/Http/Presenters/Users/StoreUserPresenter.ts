@@ -15,7 +15,6 @@ export default class StoreUserPresenter implements IPresenter {
   public getData(): object {
     return {
       id: this.result.getId(),
-      username: this.result.getUsername(),
       name: this.result.getName(),
       surname: this.result.getSurname(),
       email: this.result.getEmail(),

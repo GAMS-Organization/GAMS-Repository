@@ -16,17 +16,10 @@ import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
-import Card from '../../components/Card/Card.jsx';
-import CardHeader from '../../components/Card/CardHeader.jsx';
-import CardBody from '../../components/Card/CardBody.jsx';
-import CardFooter from '../../components/Card/CardFooter.jsx';
 // @material-ui/icons components
 import Close from '@material-ui/icons/Close';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import NewUserSection from './NewUserSection';
-
-const { REACT_APP_SERVER_URL } = process.env;
 
 class UpdateUserSection extends React.Component {
   constructor(props) {
@@ -52,7 +45,8 @@ class UpdateUserSection extends React.Component {
     this.setState({ open: false });
   }
 
-  method() {
+  showModal() {
+    console.log("se llamo desde el padre");
     this.setState({ open: true });
   }
 
@@ -71,6 +65,7 @@ class UpdateUserSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    /*
     let registerRequest;
     try {
       registerRequest = await axios.post(
@@ -92,14 +87,13 @@ class UpdateUserSection extends React.Component {
         errors: registerRequestData.messages && registerRequestData.messages.errors,
       });
     }
+    */
+
   }
 
   render() {
-    const { classes, name, lastName, email, password } = this.props;
+    const { classes, name, lastName, email, password, Transition } = this.props;
     const { errors } = this.state;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <Dialog
         classes={{
@@ -192,10 +186,10 @@ class UpdateUserSection extends React.Component {
                     classes={{
                       select: classes.select,
                     }}
-                    value={this.state.typeSelected}
+                    value={this.state.rolSelected}
                     onChange={this.handleType}
                     inputProps={{
-                      name: 'typeSelected',
+                      name: 'rolSelected',
                       id: 'type',
                     }}
                   >
@@ -241,13 +235,11 @@ class UpdateUserSection extends React.Component {
             <Button type="submit" color="gamsRed">
               Crear
             </Button>
+            <Button color="danger" simple onClick={this.handleClose}>
+              Close
+            </Button>
           </form>
         </DialogContent>
-        <DialogActions className={classes.modalFooter}>
-          <Button color="danger" simple onClick={this.handleClose}>
-            Close
-          </Button>
-        </DialogActions>
       </Dialog>
     );
   }

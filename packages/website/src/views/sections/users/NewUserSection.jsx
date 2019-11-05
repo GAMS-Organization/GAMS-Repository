@@ -24,20 +24,20 @@ class NewUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      typeSelected: '1',
+      rolSelected: '1',
       errors: {},
     };
     this.createUser = this.createUser.bind(this);
   }
 
-  handleType = event => {
+  handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   async createUser(e) {
     e.preventDefault();
 
-    const fields = ['name', 'lastName', 'username', 'password', 'type'];
+    const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'rol'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -45,10 +45,12 @@ class NewUserSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    console.log(formValues);
+    /*
     let registerRequest;
     try {
       registerRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/profile/update-profile-info`,
+        `http://localhost:3001/api/users/`,
         {
           ...formValues,
         },
@@ -66,9 +68,11 @@ class NewUserSection extends React.Component {
         errors: registerRequestData.messages && registerRequestData.messages.errors,
       });
     }
+
+     */
   }
   render() {
-    const { classes, name, lastName, email, password, type } = this.props;
+    const { classes, name, surname, email, password, rol } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-user">
@@ -100,30 +104,30 @@ class NewUserSection extends React.Component {
                     <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Apellido"
-                        id="lastName"
-                        error={errors.lastName}
+                        id="surname"
+                        error={errors.surname}
                         formControlProps={{
                           fullWidth: true,
                         }}
                         inputProps={{
                           required: true,
-                          defaultValue: lastName,
-                          name: 'lastName',
+                          defaultValue: surname,
+                          name: 'surname',
                         }}
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="Correo"
-                        id="email-address"
-                        error={errors.username}
+                        id="email"
+                        error={errors.email}
                         formControlProps={{
                           fullWidth: true,
                         }}
                         inputProps={{
                           required: true,
                           defaultValue: email,
-                          name: 'username',
+                          name: 'email',
                         }}
                       />
                     </GridItem>
@@ -143,6 +147,21 @@ class NewUserSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
+                      <CustomInput
+                          labelText="Confirmar contraseña"
+                          id="passwordConfirmation"
+                          error={errors.passwordConfirmation}
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                          inputProps={{
+                            required: true,
+                            defaultValue: password,
+                            name: 'passwordConfirmation',
+                          }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={3}>
                       <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
                         <Select
                           MenuProps={{
@@ -151,11 +170,11 @@ class NewUserSection extends React.Component {
                           classes={{
                             select: classes.select,
                           }}
-                          value={this.state.typeSelected}
-                          onChange={this.handleType}
+                          value={this.state.rolSelected}
+                          onChange={this.handleRol}
                           inputProps={{
-                            name: 'typeSelected',
-                            id: 'type',
+                            name: 'rolSelected',
+                            id: 'rol',
                           }}
                         >
                           <MenuItem
@@ -164,7 +183,7 @@ class NewUserSection extends React.Component {
                               root: classes.selectMenuItem,
                             }}
                           >
-                            Tipo
+                            Tipo de usuario
                           </MenuItem>
                           <MenuItem
                             classes={{
@@ -173,7 +192,7 @@ class NewUserSection extends React.Component {
                             }}
                             value="1"
                           >
-                            Cliente
+                            Usuario
                           </MenuItem>
                           <MenuItem
                             classes={{
@@ -215,7 +234,7 @@ class NewUserSection extends React.Component {
 NewUserSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
-  lastName: PropTypes.string,
+  surname: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
   type: PropTypes.string,

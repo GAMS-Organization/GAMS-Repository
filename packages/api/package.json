@@ -36,6 +36,7 @@
     "joi-to-swagger": "^3.2.0",
     "morgan": "^1.9.1",
     "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   },
   "dependencies": {

@@ -26,7 +26,7 @@ class UsersTable extends React.Component {
   }
 
   handleClickUpdate() {
-    this.child.method()
+    this.child.showModal()
   }
 
   componentWillMount() {

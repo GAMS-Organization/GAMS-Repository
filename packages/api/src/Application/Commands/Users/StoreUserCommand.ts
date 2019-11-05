@@ -2,7 +2,6 @@ export default class StoreUserCommand {
   private name: string;
   private surname: string;
   private email: string;
-  private username: string;
   private password: string;
   private roles: string[];
 
@@ -10,14 +9,12 @@ export default class StoreUserCommand {
     name: string,
     surname: string,
     email: string,
-    username: string,
     password: string,
     roles: string[],
   ) {
     this.name = name;
     this.surname = surname;
     this.email = email;
-    this.username = username;
     this.password = password;
     this.roles = roles;
   }
@@ -32,10 +29,6 @@ export default class StoreUserCommand {
 
   public getEmail(): string {
     return this.email;
-  }
-
-  public getUsername(): string {
-    return this.username;
   }
 
   public getPassword(): string {

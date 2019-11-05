@@ -20,6 +20,6 @@ export default class LoginAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new LoginCommand(request.body.username, request.body.password);
+    return new LoginCommand(request.body.email, request.body.password);
   }
 }

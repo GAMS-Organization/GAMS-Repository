@@ -22,7 +22,6 @@ export default class GetAllUsersPresenter implements IPresenter {
         surname: user.getSurname(),
         email: user.getEmail(),
         state: user.getUserState(),
-        username: user.getUsername(),
         roles: user.getRolesFromUserRole(),
       });
     });

@@ -18,17 +18,17 @@ export default class LoginHandler {
   }
 
   public async execute(command: LoginCommand): Promise<{ user: User; token: string }> {
-    const user = await this.userRepository.findOneByUsername(command.getUsername());
+    const user = await this.userRepository.findOneByUsername(command.getEmail());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getUsername()} not found`);
+      throw new EntityNotFoundException(`User with id: ${command.getEmail()} not found`);
     }
     if (user.getUserState() == UserStates.user_inactive) {
-      throw new AuthorizationFailed(`User with username: ${command.getUsername()} is inactive.`);
+      throw new AuthorizationFailed(`User with email: ${command.getEmail()} is inactive.`);
     }
     if (user.checkIfUnencryptedPasswordIsValid(command.getPassword())) {
       const token = jwt.sign(
-        { userId: user.id, username: user.username, roles: user.getRolesFromUserRole() },
+        { userId: user.id, email: user.email, roles: user.getRolesFromUserRole() },
         jwtConfig.jwtSecret,
         {
           expiresIn: jwtConfig.expirationTime,
@@ -36,7 +36,7 @@ export default class LoginHandler {
       );
       return { user, token };
     } else {
-      throw new AuthorizationFailed(`Wrong password on User with username: ${command.getUsername()}`);
+      throw new AuthorizationFailed(`Wrong password on User with email: ${command.getEmail()}`);
     }
   }
 }

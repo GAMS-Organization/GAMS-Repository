@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import * as customErrorMessages from '../Utils/BaseErrorSchema';
 
 export const LoginSchema = {
-  username: Joi.string()
+  email: Joi.string()
     .min(3)
     .max(100)
     .required()
@@ -19,7 +19,7 @@ export const LoginSchema = {
 };
 
 export const SignInSchema = {
-  username: Joi.string()
+  email: Joi.string()
     .min(3)
     .max(100)
     .required()

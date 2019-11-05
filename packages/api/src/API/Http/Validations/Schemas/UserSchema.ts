@@ -23,13 +23,6 @@ export const storeUserSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  username: Joi.string()
-    .min(3)
-    .max(100)
-    .required()
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
   password: Joi.string()
     .min(3)
     .max(20)

@@ -24,7 +24,6 @@ export default class StoreUserAdapter {
       request.body.name,
       request.body.surname,
       request.body.email,
-      request.body.username,
       request.body.password,
       request.body.roles,
     );

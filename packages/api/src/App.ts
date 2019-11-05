@@ -27,7 +27,7 @@ class App {
   }
 
   private setRoutes(): void {
-    this.app.use('/v1/', routes);
+    this.app.use('/api/', routes);
   }
 
   private catchErrors(): void {

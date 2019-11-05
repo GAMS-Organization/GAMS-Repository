@@ -27,7 +27,6 @@ export default class UpdateUserHandler {
     user.setSurname(command.getSurname());
     user.setEmail(command.getEmail());
     user.setUserState(command.getUserState());
-    user.setUsername(command.getUsername());
     await this.userRoleService.destroyUserRolesFromUser(command.getId());
     return await this.userRoleService.setUserRolesToUser(await this.userRepository.persist(user), command.getRoles());
   }

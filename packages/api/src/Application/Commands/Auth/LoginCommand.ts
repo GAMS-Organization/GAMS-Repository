@@ -1,14 +1,14 @@
 export default class LoginCommand {
-  private username: string;
+  private email: string;
   private password: string;
 
-  public constructor(username: string, password: string) {
-    this.username = username;
+  public constructor(email: string, password: string) {
+    this.email = email;
     this.password = password;
   }
 
-  public getUsername(): string {
-    return this.username;
+  public getEmail(): string {
+    return this.email;
   }
 
   public getPassword(): string {
