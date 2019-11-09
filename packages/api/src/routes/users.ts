@@ -25,9 +25,6 @@ router.get(
 
 router.post(
   '/',
-  (req, res, next): void => {
-    authMiddleware(req, res, next, ['']);
-  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeUsersAction: StoreUsersAction = DIContainer.resolve<StoreUsersAction>(StoreUsersAction);
     await storeUsersAction.execute(request, response);

@@ -16,6 +16,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
+import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
 
 const { REACT_APP_SERVER_URL } = process.env;
@@ -46,6 +47,15 @@ class NewUserSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     console.log(formValues);
+    formValues.rol = Object.values(formValues.rol);
+
+    const response = serviceUser.create(formValues);
+
+    if (response.type === 'CREATED_SUCCESFUL') {
+      console.log('se creo');
+    } else {
+      console.log('no se creo', response.error);
+    }
     /*
     let registerRequest;
     try {
@@ -148,17 +158,17 @@ class NewUserSection extends React.Component {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
-                          labelText="Confirmar contraseña"
-                          id="passwordConfirmation"
-                          error={errors.passwordConfirmation}
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            required: true,
-                            defaultValue: password,
-                            name: 'passwordConfirmation',
-                          }}
+                        labelText="Confirmar contraseña"
+                        id="passwordConfirmation"
+                        error={errors.passwordConfirmation}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: true,
+                          defaultValue: password,
+                          name: 'passwordConfirmation',
+                        }}
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>

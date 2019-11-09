@@ -5,83 +5,81 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import BubbleChart from '@material-ui/icons/BubbleChart';
 import LocationOn from '@material-ui/icons/LocationOn';
 import Notifications from '@material-ui/icons/Notifications';
-import Register from '@material-ui/icons/GroupAdd';
 import Login from '@material-ui/icons/LockOpen';
 // core components/views for Admin layout
-import DashboardPage from 'views/containers/Dashboard.jsx';
-import UsersView from 'views/containers/UsersView.jsx';
-import TableList from 'views/containers/TableList.jsx';
-import Typography from 'views/containers/Typography.jsx';
-import Icons from 'views/containers/Icons.jsx';
-import Maps from 'views/containers/Maps.jsx';
-import NotificationsPage from 'views/containers/Notifications.jsx';
-
+import DashboardPage from '../containers/Dashboard/Dashboard.jsx';
+import RooftoppersPage from '../containers/Rooftoppers/Rooftoppers.jsx';
+import UserProfile from '../containers/UserProfile/UserProfile.jsx';
+import TableList from '../containers/TableList/TableList.jsx';
+import Typography from '../containers/Typography/Typography.jsx';
+import Icons from '../containers/Icons/Icons.jsx';
+import Maps from '../containers/Maps/Maps.jsx';
+import NotificationsPage from '../containers/Notifications/Notifications.jsx';
 // core components/views for Auth layout
-import LoginPage from 'views/containers/LoginPage.jsx';
-import RegisterPage from 'views/containers/RegisterPage.jsx';
+import LoginPage from '../containers/Login/LoginPage.jsx';
 
 const dashboardRoutes = [
+  {
+    path: '/rooftoppers',
+    name: 'Rooftoppers',
+    icon: Dashboard,
+    component: RooftoppersPage,
+    layout: '/dashboard-website',
+  },
   {
     path: '/dashboard',
     name: 'Dashboard',
     icon: Dashboard,
     component: DashboardPage,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
-    path: '/users',
-    name: 'Users',
+    path: '/user',
+    name: 'User Profile',
     icon: Person,
-    component: UsersView,
-    layout: '/admin',
+    component: UserProfile,
+    layout: '/dashboard-website',
   },
   {
     path: '/table',
     name: 'Table List',
     icon: 'content_paste',
     component: TableList,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
     path: '/typography',
     name: 'Typography',
     icon: LibraryBooks,
     component: Typography,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
     path: '/icons',
     name: 'Icons',
     icon: BubbleChart,
     component: Icons,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
     path: '/maps',
     name: 'Maps',
     icon: LocationOn,
     component: Maps,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
     path: '/notifications',
     name: 'Notifications',
     icon: Notifications,
     component: NotificationsPage,
-    layout: '/admin',
+    layout: '/dashboard-website',
   },
   {
     path: '/login-page',
     name: 'Login Page',
     icon: Login,
     component: LoginPage,
-    layout: '/auth',
-  },
-  {
-    path: '/register-page',
-    name: 'Register Page',
-    icon: Register,
-    component: RegisterPage,
     layout: '/auth',
   },
 ];
