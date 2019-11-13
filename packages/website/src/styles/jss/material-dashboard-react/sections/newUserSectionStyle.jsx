@@ -1,7 +1,6 @@
 import customSelect from '../components/customSelectStyle.jsx';
 
 const newUserSectionStyle = {
-  ...customSelect,
   cardCategoryWhite: {
     color: 'rgba(255,255,255,.62)',
     margin: '0',
@@ -23,6 +22,7 @@ const newUserSectionStyle = {
       marginTop: '13px',
     },
   },
+  ...customSelect,
 };
 
 export default newUserSectionStyle;

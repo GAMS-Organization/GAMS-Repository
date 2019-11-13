@@ -18,6 +18,8 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
+import AddAlert from "@material-ui/icons/AddAlert";
+import Snackbar from "../../components/Snackbar/Snackbar";
 
 const { REACT_APP_SERVER_URL } = process.env;
 
@@ -25,20 +27,26 @@ class NewUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rolSelected: '1',
+      rolSelected: 'user',
       errors: {},
+      notification: false,
     };
     this.createUser = this.createUser.bind(this);
+    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  closeNotification(){
+    this.setState({notification: false});
+  }
+
   async createUser(e) {
     e.preventDefault();
 
-    const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'rol'];
+    const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'roles'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -46,15 +54,16 @@ class NewUserSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    console.log(formValues);
-    formValues.rol = Object.values(formValues.rol);
+    formValues.roles = [formValues.roles];
 
-    const response = serviceUser.create(formValues);
+    const response = await serviceUser.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
-      console.log('se creo');
+      this.setState({notification:true});
+      console.log(this.state);
     } else {
-      console.log('no se creo', response.error);
+      this.setState({notification:true,
+      errors: response.error});
     }
     /*
     let registerRequest;
@@ -82,10 +91,19 @@ class NewUserSection extends React.Component {
      */
   }
   render() {
-    const { classes, name, surname, email, password, rol } = this.props;
+    const { classes, name, surname, email, password, roles } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-user">
+        <Snackbar
+            place="tr"
+            color={this.state.errors.code? "danger" : "success"}
+            icon={AddAlert}
+            message={this.state.errors.code? `Error ${this.state.errors.code}, ${this.state.errors.errors}` : "Usuario creado correctamente" }
+            open={this.state.notification}
+            closeNotification={this.closeNotification}
+            close
+        />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
             <form onSubmit={this.createUser}>
@@ -184,7 +202,7 @@ class NewUserSection extends React.Component {
                           onChange={this.handleRol}
                           inputProps={{
                             name: 'rolSelected',
-                            id: 'rol',
+                            id: 'roles',
                           }}
                         >
                           <MenuItem
@@ -200,16 +218,16 @@ class NewUserSection extends React.Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected,
                             }}
-                            value="1"
+                            value="user"
                           >
-                            Usuario
+                            Cliente
                           </MenuItem>
                           <MenuItem
                             classes={{
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected,
                             }}
-                            value="2"
+                            value="personal"
                           >
                             Personal
                           </MenuItem>
@@ -218,7 +236,7 @@ class NewUserSection extends React.Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected,
                             }}
-                            value="3"
+                            value="admin"
                           >
                             Administrador
                           </MenuItem>

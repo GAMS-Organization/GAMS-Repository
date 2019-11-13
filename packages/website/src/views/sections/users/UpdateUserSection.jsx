@@ -19,18 +19,21 @@ import Button from '../../components/CustomButtons/Button.jsx';
 // @material-ui/icons components
 import Close from '@material-ui/icons/Close';
 
+import serviceUser from '../../../services/api/user';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
 class UpdateUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      typeSelected: '1',
+      user: {},
+      typeSelected: 'user',
       errors: {},
       open: false,
+      notification: false,
     };
     this.handleClose = this.handleClose.bind(this);
-    this.createUser = this.createUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
@@ -45,19 +48,19 @@ class UpdateUserSection extends React.Component {
     this.setState({ open: false });
   }
 
-  showModal() {
-    console.log("se llamo desde el padre");
-    this.setState({ open: true });
+  showModal(user) {
+    console.log(user);
+    this.setState({ open: true, user:user });
   }
 
-  handleType = event => {
+  handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  async createUser(e) {
+  async updateUser(e) {
     e.preventDefault();
 
-    const fields = ['name', 'lastName', 'username', 'password', 'type'];
+    const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'roles'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -65,11 +68,22 @@ class UpdateUserSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    formValues.roles = [formValues.roles];
+
+    const response = await serviceUser.create(formValues);
+
+    if (response.type === 'CREATED_SUCCESFUL') {
+      this.setState({notification:true});
+      console.log(this.state);
+    } else {
+      this.setState({notification:true,
+        errors: response.error});
+    }
     /*
     let registerRequest;
     try {
       registerRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/profile/update-profile-info`,
+        `http://localhost:3001/api/users/`,
         {
           ...formValues,
         },
@@ -87,12 +101,13 @@ class UpdateUserSection extends React.Component {
         errors: registerRequestData.messages && registerRequestData.messages.errors,
       });
     }
-    */
+
+     */
 
   }
 
   render() {
-    const { classes, name, lastName, email, password, Transition } = this.props;
+    const { classes, name, surname, email, password, roles, Transition } = this.props;
     const { errors } = this.state;
     return (
       <Dialog
@@ -108,14 +123,10 @@ class UpdateUserSection extends React.Component {
         aria-describedby="classic-modal-slide-description"
       >
         <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-          <Button simple className={classes.modalCloseButton} key="close" aria-label="Close">
-            {' '}
-            <Close className={classes.modalClose} />
-          </Button>
           <h4 className={classes.modalTitle}>Modal title</h4>
         </DialogTitle>
         <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-          <form onSubmit={this.createUser}>
+          <form onSubmit={this.updateUser}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={3}>
                 <CustomInput
@@ -135,30 +146,30 @@ class UpdateUserSection extends React.Component {
               <GridItem xs={12} sm={12} md={3}>
                 <CustomInput
                   labelText="Apellido"
-                  id="lastName"
-                  error={errors.lastName}
+                  id="surname"
+                  error={errors.surname}
                   formControlProps={{
                     fullWidth: true,
                   }}
                   inputProps={{
                     required: true,
-                    defaultValue: lastName,
-                    name: 'lastName',
+                    defaultValue: surname,
+                    name: 'surname',
                   }}
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
                 <CustomInput
                   labelText="Correo"
-                  id="email-address"
-                  error={errors.username}
+                  id="email"
+                  error={errors.email}
                   formControlProps={{
                     fullWidth: true,
                   }}
                   inputProps={{
                     required: true,
                     defaultValue: email,
-                    name: 'username',
+                    name: 'email',
                   }}
                 />
               </GridItem>
@@ -178,6 +189,21 @@ class UpdateUserSection extends React.Component {
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={3}>
+                <CustomInput
+                  labelText="Confirmar contraseña"
+                  id="passwordConfirmation"
+                  error={errors.passwordConfirmation}
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: password,
+                    name: 'passwordConfirmation',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={3}>
                 <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
                   <Select
                     MenuProps={{
@@ -187,10 +213,10 @@ class UpdateUserSection extends React.Component {
                       select: classes.select,
                     }}
                     value={this.state.rolSelected}
-                    onChange={this.handleType}
+                    onChange={this.handleRol}
                     inputProps={{
                       name: 'rolSelected',
-                      id: 'type',
+                      id: 'roles',
                     }}
                   >
                     <MenuItem
@@ -199,14 +225,14 @@ class UpdateUserSection extends React.Component {
                         root: classes.selectMenuItem,
                       }}
                     >
-                      Tipo
+                      Tipo de usuario
                     </MenuItem>
                     <MenuItem
                       classes={{
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected,
                       }}
-                      value="1"
+                      value="user"
                     >
                       Cliente
                     </MenuItem>
@@ -215,7 +241,7 @@ class UpdateUserSection extends React.Component {
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected,
                       }}
-                      value="2"
+                      value="personal"
                     >
                       Personal
                     </MenuItem>
@@ -224,7 +250,7 @@ class UpdateUserSection extends React.Component {
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected,
                       }}
-                      value="3"
+                      value="admin"
                     >
                       Administrador
                     </MenuItem>
@@ -233,10 +259,10 @@ class UpdateUserSection extends React.Component {
               </GridItem>
             </GridContainer>
             <Button type="submit" color="gamsRed">
-              Crear
+              Actualizar
             </Button>
             <Button color="danger" simple onClick={this.handleClose}>
-              Close
+              Cancelar
             </Button>
           </form>
         </DialogContent>

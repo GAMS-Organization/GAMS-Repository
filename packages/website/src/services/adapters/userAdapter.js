@@ -7,18 +7,36 @@ class UserAdapter {
     if (!isError(status)) {
       return {
         type: 'CREATED_SUCCESFUL',
-        message: 'El usuario ha sido creado',
       };
     } else {
       const { code, details } = data.errors;
-
       return {
         type: 'CREATED_FAIL',
-        message: 'Ha ocurrido un error',
         error: {
           code: status,
           type: code,
-          errors: details.errors,
+          errors: details.error,
+        },
+      };
+    }
+  }
+
+  list(listResponse){
+    let {status, data} = listResponse;
+
+    if(!isError(status)){
+      return {
+        data
+      }
+    }
+    else{
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
         },
       };
     }

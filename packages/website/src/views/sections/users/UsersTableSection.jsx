@@ -9,6 +9,8 @@ import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
+import serviceUser from '../../../services/api/user';
+
 const styles = {
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
@@ -39,34 +41,60 @@ const styles = {
   },
 };
 
-function UsersTableSection(props) {
-  const { classes } = props;
-  return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-          <CardHeader color="gamsBlue">
-            <h4 className={classes.cardTitleWhite}>Usuarios</h4>
-            <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
-          </CardHeader>
-          <CardBody>
-            <UsersTable
-              tableHeaderColor="gamsBlue"
-              tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Contraseña', 'Tipo de cuenta', 'Token']}
-              tableData={[
-                ['1', 'Alejandro', 'Minacori', 'alenemo4@hotmail', '1234', 'cliente', '987asd1qw321'],
-                ['2', 'Javier', 'Sicardi', 'javinemo4@hotmail', '1234', 'cliente', '81as7891w321'],
-                ['3', 'Valentin', 'Boasso', 'valenemo4@hotmail', '1234', 'cliente', '8as79w7654wljk1'],
-                ['4', 'Franco', 'Cortesini', 'franconemo4@hotmail', '1234', 'personal', '258uytcvbc2d'],
-                ['5', 'Juan', 'Froilan', 'juannemo4@hotmail', '1234', 'admin', '789typwe789df879'],
-                ['6', 'Joel', 'Mercol', 'joelnemo4@hotmail', '1234', 'personal', '7982312xc456as3ch8'],
-              ]}
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-  );
+class UsersTableSection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+    };
+    this.listUsers = this.listUsers.bind(this);
+  }
+
+  async componentWillMount() {
+    const response = await serviceUser.list();
+    let users = [];
+    for (const user of response.data.items) {
+      let dataUser = [user.id.toString(), user.name, user.surname, user.email];
+      users.push(dataUser);
+    }
+    console.log(users);
+    this.setState({users: users});
+
+  }
+
+  async listUsers() {
+    const response = await serviceUser.list();
+    let users = [];
+    for (const user of response.data.items) {
+      let dataUser = [user.id.toString(), user.name, user.surname, user.email];
+      users.push(dataUser);
+    }
+    console.log(users);
+    return users;
+  }
+
+  render(){
+    const { classes } = this.props;
+    return (
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="gamsBlue">
+              <h4 className={classes.cardTitleWhite}>Usuarios</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
+            </CardHeader>
+            <CardBody>
+              <UsersTable
+                tableHeaderColor="gamsBlue"
+                tableHead={['ID', 'Nombre', 'Apellido', 'Correo']}
+                tableData={this.state.users}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+    );
+  }
 }
 
 export default withStyles(styles)(UsersTableSection);

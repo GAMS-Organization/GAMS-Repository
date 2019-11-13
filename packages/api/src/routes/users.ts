@@ -14,9 +14,10 @@ const router = express.Router();
 
 router.get(
   '/',
-  (req, res, next): void => {
+  /*(req, res, next): void => {
     authMiddleware(req, res, next, ['admin']);
   },
+   */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexUsersAction: IndexUsersAction = DIContainer.resolve<IndexUsersAction>(IndexUsersAction);
     await indexUsersAction.execute(request, response);

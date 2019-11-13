@@ -22,8 +22,11 @@ export default class UserRoleService {
   public async setUserRolesToUser(user: User, commandRoles: string[]): Promise<User> {
     const roles = await this.roleRepository.findAll();
     const validRoles: UserRole[] = [];
+    console.log(commandRoles);
+
     for (const role of roles) {
       const roleName = role.getName();
+      console.log(roleName);
       if (commandRoles.includes(roleName)) {
         await this.userRoleRepository.persist(new UserRole(user, role));
         validRoles.push(new UserRole(user, role));

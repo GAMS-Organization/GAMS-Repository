@@ -11,9 +11,19 @@ class User {
     } catch (err) {
       createResponse = err;
     }
-
-    console.log('respuesta dentro del userApi', createResponse);
+  console.log(createResponse);
     return userAdapter.create(createResponse);
+  }
+
+  async list(){
+    let listResponse;
+    try {
+      listResponse = await Api.get('users/');
+    } catch (err) {
+      listResponse = err;
+    }
+
+    return userAdapter.list(listResponse);
   }
 }
 

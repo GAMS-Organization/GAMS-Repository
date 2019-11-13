@@ -25,17 +25,19 @@ class UsersTable extends React.Component {
     this.handleClickUpdate = this.handleClickUpdate.bind(this);
   }
 
-  handleClickUpdate() {
-    this.child.showModal()
+  handleClickUpdate(prop) {
+
+    console.log(prop);
+    this.child.showModal({name: prop[1], surname: prop[2], email: prop[3]})
   }
 
   componentWillMount() {
     this.setState({ modal: false });
-    console.log("este se llama de table user", this.state.modal);
   }
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
+    console.log(tableData);
     const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="down" ref={ref} {...props} />;
     });
@@ -59,7 +61,7 @@ class UsersTable extends React.Component {
           <TableBody>
             {tableData.map((prop, key) => {
               return (
-                <TableRow key={key}>
+                <TableRow key={key} hover>
                   {prop.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
@@ -72,7 +74,7 @@ class UsersTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate}
+                        onClick={this.handleClickUpdate.bind(this, prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>

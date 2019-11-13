@@ -61,7 +61,7 @@ class HeaderLinks extends React.Component {
     if (logoutRequest.status === 301) {
       history.push('/auth/login-page');
     }
-  }
+  };
 
   render() {
     const { classes } = this.props;
