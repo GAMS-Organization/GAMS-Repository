@@ -47,33 +47,20 @@ class UsersTableSection extends React.Component {
     this.state = {
       users: [],
     };
-    this.listUsers = this.listUsers.bind(this);
   }
 
   async componentWillMount() {
     const response = await serviceUser.list();
+    console.log(response);
     let users = [];
     for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email];
+      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
       users.push(dataUser);
     }
-    console.log(users);
-    this.setState({users: users});
-
+    this.setState({ users: users });
   }
 
-  async listUsers() {
-    const response = await serviceUser.list();
-    let users = [];
-    for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email];
-      users.push(dataUser);
-    }
-    console.log(users);
-    return users;
-  }
-
-  render(){
+  render() {
     const { classes } = this.props;
     return (
       <GridContainer>
@@ -86,7 +73,7 @@ class UsersTableSection extends React.Component {
             <CardBody>
               <UsersTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo']}
+                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
                 tableData={this.state.users}
               />
             </CardBody>

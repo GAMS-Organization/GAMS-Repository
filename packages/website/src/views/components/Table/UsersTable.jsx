@@ -21,14 +21,14 @@ class UsersTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      user: {},
     };
     this.handleClickUpdate = this.handleClickUpdate.bind(this);
   }
 
   handleClickUpdate(prop) {
-
-    console.log(prop);
-    this.child.showModal({name: prop[1], surname: prop[2], email: prop[3]})
+    this.setState({ user: { name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
+    this.child.showModal();
   }
 
   componentWillMount() {
@@ -43,7 +43,7 @@ class UsersTable extends React.Component {
     });
     return (
       <div className={classes.tableResponsive}>
-        <UpdateUserSection onRef={ref => (this.child = ref)} Transition={Transition}/>
+        <UpdateUserSection user={this.state.user} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

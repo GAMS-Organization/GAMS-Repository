@@ -13,7 +13,7 @@ export default class User {
   public name: string;
   @Column()
   public surname: string;
-  @Column( { unique: true })
+  @Column({ unique: true })
   public email: string;
   @Column()
   public password: string;

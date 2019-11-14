@@ -11,11 +11,11 @@ class User {
     } catch (err) {
       createResponse = err;
     }
-  console.log(createResponse);
+    console.log(createResponse);
     return userAdapter.create(createResponse);
   }
 
-  async list(){
+  async list() {
     let listResponse;
     try {
       listResponse = await Api.get('users/');

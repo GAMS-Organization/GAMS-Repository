@@ -37,20 +37,23 @@ class UpdateUserSection extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onRef(this)
+    this.props.onRef(this);
   }
 
   componentWillUnmount() {
-    this.props.onRef(undefined)
+    this.props.onRef(undefined);
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
   }
 
   handleClose() {
     this.setState({ open: false });
   }
 
-  showModal(user) {
-    console.log(user);
-    this.setState({ open: true, user:user });
+  showModal() {
+    this.setState({ open: true });
   }
 
   handleRol = event => {
@@ -60,7 +63,7 @@ class UpdateUserSection extends React.Component {
   async updateUser(e) {
     e.preventDefault();
 
-    const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'roles'];
+    const fields = ['name', 'surname', 'email', 'roles'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -73,42 +76,17 @@ class UpdateUserSection extends React.Component {
     const response = await serviceUser.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({notification:true});
+      this.setState({ notification: true });
       console.log(this.state);
     } else {
-      this.setState({notification:true,
-        errors: response.error});
+      this.setState({ notification: true, errors: response.error });
     }
-    /*
-    let registerRequest;
-    try {
-      registerRequest = await axios.post(
-        `http://localhost:3001/api/users/`,
-        {
-          ...formValues,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch ({ response }) {
-      registerRequest = response;
-    }
-    const { data: registerRequestData } = registerRequest;
-
-    if (!registerRequestData.success) {
-      this.setState({
-        errors: registerRequestData.messages && registerRequestData.messages.errors,
-      });
-    }
-
-     */
-
   }
 
   render() {
-    const { classes, name, surname, email, password, roles, Transition } = this.props;
+    const { classes, user, Transition } = this.props;
     const { errors } = this.state;
+    const { name, surname, email, roles } = user;
     return (
       <Dialog
         classes={{
@@ -123,7 +101,7 @@ class UpdateUserSection extends React.Component {
         aria-describedby="classic-modal-slide-description"
       >
         <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-          <h4 className={classes.modalTitle}>Modal title</h4>
+          <h4 className={classes.modalTitle}>Actualizar usuario</h4>
         </DialogTitle>
         <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
           <form onSubmit={this.updateUser}>
@@ -158,7 +136,7 @@ class UpdateUserSection extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Correo"
                   id="email"
@@ -174,37 +152,7 @@ class UpdateUserSection extends React.Component {
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                  labelText="Contraseña"
-                  id="password"
-                  error={errors.password}
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    required: true,
-                    defaultValue: password,
-                    name: 'password',
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={3}>
-                <CustomInput
-                  labelText="Confirmar contraseña"
-                  id="passwordConfirmation"
-                  error={errors.passwordConfirmation}
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    required: true,
-                    defaultValue: password,
-                    name: 'passwordConfirmation',
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={3}>
-                <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                <FormControl fullWidth className={classes.selectFormControl}>
                   <Select
                     MenuProps={{
                       className: classes.selectMenu,

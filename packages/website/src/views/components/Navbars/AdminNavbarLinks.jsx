@@ -1,26 +1,26 @@
-import React from "react";
-import classNames from "classnames";
-import { NavLink } from "react-router-dom";
-import axios from "axios/index";
+import React from 'react';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import axios from 'axios/index';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import MenuItem from "@material-ui/core/MenuItem/index";
-import MenuList from "@material-ui/core/MenuList/index";
-import Grow from "@material-ui/core/Grow/index";
-import Paper from "@material-ui/core/Paper/index";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener/index";
-import Hidden from "@material-ui/core/Hidden/index";
-import Poppers from "@material-ui/core/Popper/index";
+import withStyles from '@material-ui/core/styles/withStyles';
+import MenuItem from '@material-ui/core/MenuItem/index';
+import MenuList from '@material-ui/core/MenuList/index';
+import Grow from '@material-ui/core/Grow/index';
+import Paper from '@material-ui/core/Paper/index';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener/index';
+import Hidden from '@material-ui/core/Hidden/index';
+import Poppers from '@material-ui/core/Popper/index';
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+import Person from '@material-ui/icons/Person';
+import Notifications from '@material-ui/icons/Notifications';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Search from '@material-ui/icons/Search';
 // core components
-import CustomInput from "../CustomInput/CustomInput.jsx";
-import Button from "../CustomButtons/Button.jsx";
+import CustomInput from '../CustomInput/CustomInput.jsx';
+import Button from '../CustomButtons/Button.jsx';
 
-import headerLinksStyle from "../../../styles/jss/material-dashboard-react/components/headerLinksStyle.jsx";
+import headerLinksStyle from '../../../styles/jss/material-dashboard-react/components/headerLinksStyle.jsx';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
@@ -50,12 +50,13 @@ class HeaderLinks extends React.Component {
     let logoutRequest;
     try {
       logoutRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/logout`, {}, {
-          withCredentials: true
-        }
+        `http://${REACT_APP_SERVER_URL}/logout`,
+        {},
+        {
+          withCredentials: true,
+        },
       );
     } catch ({ request }) {
-      
       logoutRequest = request;
     }
     if (logoutRequest.status === 301) {
@@ -71,13 +72,13 @@ class HeaderLinks extends React.Component {
         <div className={classes.searchWrapper}>
           <CustomInput
             formControlProps={{
-              className: classes.margin + " " + classes.search
+              className: classes.margin + ' ' + classes.search,
             }}
             inputProps={{
-              placeholder: "Search",
+              placeholder: 'Search',
               inputProps: {
-                "aria-label": "Search"
-              }
+                'aria-label': 'Search',
+              },
             }}
           />
           <Button color="white" aria-label="edit" justIcon round>
@@ -85,7 +86,7 @@ class HeaderLinks extends React.Component {
           </Button>
         </div>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
+          color={window.innerWidth > 959 ? 'transparent' : 'white'}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
           aria-label="Dashboard"
@@ -101,10 +102,10 @@ class HeaderLinks extends React.Component {
             buttonRef={node => {
               this.anchorEl = node;
             }}
-            color={window.innerWidth > 959 ? "transparent" : "white"}
+            color={window.innerWidth > 959 ? 'transparent' : 'white'}
             justIcon={window.innerWidth > 959}
             simple={!(window.innerWidth > 959)}
-            aria-owns={open ? "menu-list-grow" : null}
+            aria-owns={open ? 'menu-list-grow' : null}
             aria-haspopup="true"
             onClick={this.handleToggle}
             className={classes.buttonLink}
@@ -122,52 +123,32 @@ class HeaderLinks extends React.Component {
             anchorEl={this.anchorEl}
             transition
             disablePortal
-            className={
-              classNames({ [classes.popperClose]: !open }) +
-              " " +
-              classes.pooperNav
-            }
+            className={classNames({ [classes.popperClose]: !open }) + ' ' + classes.pooperNav}
           >
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
                 id="menu-list-grow"
                 style={{
-                  transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom"
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
                 }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList role="menu">
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Mike John responded to your email
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         You have 5 new tasks
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         You're now friend with Andrew
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Another Notification
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Another One
                       </MenuItem>
                     </MenuList>
@@ -179,11 +160,11 @@ class HeaderLinks extends React.Component {
         </div>
         <div className={classes.manager}>
           <Button
-            color={window.innerWidth > 959 ? "transparent" : "white"}
+            color={window.innerWidth > 959 ? 'transparent' : 'white'}
             justIcon={window.innerWidth > 959}
             simple={!(window.innerWidth > 959)}
             aria-label="Person"
-            aria-owns={profilePopupOpen ? "menu-list-grow" : null}
+            aria-owns={profilePopupOpen ? 'menu-list-grow' : null}
             aria-haspopup="true"
             onClick={this.handleToggleProfile}
             className={classes.buttonLink}
@@ -198,54 +179,34 @@ class HeaderLinks extends React.Component {
             anchorEl={this.anchorEl}
             transition
             disablePortal
-            className={
-              classNames({ [classes.popperClose]: !profilePopupOpen }) +
-              " " +
-              classes.pooperNav
-            }
+            className={classNames({ [classes.popperClose]: !profilePopupOpen }) + ' ' + classes.pooperNav}
           >
             {({ TransitionProps, placement }) => (
               <Grow
                 {...TransitionProps}
                 id="menu-list-grow"
                 style={{
-                  transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom"
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
                 }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
                     <MenuList role="menu">
                       <NavLink to="/admin/user">
-                        <MenuItem
-                          onClick={this.handleClose}
-                          className={classes.dropdownItem}
-                        >
+                        <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                           Profile
                         </MenuItem>
                       </NavLink>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Settings
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Activity
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.handleClose} className={classes.dropdownItem}>
                         Support
                       </MenuItem>
-                      <MenuItem
-                        onClick={this.logout}
-                        className={classes.dropdownItem}
-                      >
+                      <MenuItem onClick={this.logout} className={classes.dropdownItem}>
                         Logout
                       </MenuItem>
                     </MenuList>

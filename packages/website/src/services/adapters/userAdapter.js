@@ -21,15 +21,14 @@ class UserAdapter {
     }
   }
 
-  list(listResponse){
-    let {status, data} = listResponse;
+  list(listResponse) {
+    let { status, data } = listResponse;
 
-    if(!isError(status)){
+    if (!isError(status)) {
       return {
-        data
-      }
-    }
-    else{
+        data,
+      };
+    } else {
       const { code, details } = data.errors;
       return {
         type: 'LIST_FAIL',

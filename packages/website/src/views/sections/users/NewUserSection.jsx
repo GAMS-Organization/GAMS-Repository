@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios/index';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -18,10 +17,8 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
-import AddAlert from "@material-ui/icons/AddAlert";
-import Snackbar from "../../components/Snackbar/Snackbar";
-
-const { REACT_APP_SERVER_URL } = process.env;
+import AddAlert from '@material-ui/icons/AddAlert';
+import Snackbar from '../../components/Snackbar/Snackbar';
 
 class NewUserSection extends React.Component {
   constructor(props) {
@@ -39,8 +36,8 @@ class NewUserSection extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification(){
-    this.setState({notification: false});
+  closeNotification() {
+    this.setState({ notification: false });
   }
 
   async createUser(e) {
@@ -59,50 +56,28 @@ class NewUserSection extends React.Component {
     const response = await serviceUser.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({notification:true});
-      console.log(this.state);
+      this.setState({ notification: true });
     } else {
-      this.setState({notification:true,
-      errors: response.error});
+      this.setState({ notification: true, errors: response.error });
     }
-    /*
-    let registerRequest;
-    try {
-      registerRequest = await axios.post(
-        `http://localhost:3001/api/users/`,
-        {
-          ...formValues,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch ({ response }) {
-      registerRequest = response;
-    }
-    const { data: registerRequestData } = registerRequest;
-
-    if (!registerRequestData.success) {
-      this.setState({
-        errors: registerRequestData.messages && registerRequestData.messages.errors,
-      });
-    }
-
-     */
   }
   render() {
-    const { classes, name, surname, email, password, roles } = this.props;
+    const { classes, name, surname, email, password } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-user">
         <Snackbar
-            place="tr"
-            color={this.state.errors.code? "danger" : "success"}
-            icon={AddAlert}
-            message={this.state.errors.code? `Error ${this.state.errors.code}, ${this.state.errors.errors}` : "Usuario creado correctamente" }
-            open={this.state.notification}
-            closeNotification={this.closeNotification}
-            close
+          place="tr"
+          color={this.state.errors.code ? 'danger' : 'success'}
+          icon={AddAlert}
+          message={
+            this.state.errors.code
+              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
+              : 'Usuario creado correctamente'
+          }
+          open={this.state.notification}
+          closeNotification={this.closeNotification}
+          close
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
@@ -169,6 +144,7 @@ class NewUserSection extends React.Component {
                         }}
                         inputProps={{
                           required: true,
+                          type: 'password',
                           defaultValue: password,
                           name: 'password',
                         }}
@@ -184,6 +160,7 @@ class NewUserSection extends React.Component {
                         }}
                         inputProps={{
                           required: true,
+                          type: 'password',
                           defaultValue: password,
                           name: 'passwordConfirmation',
                         }}
