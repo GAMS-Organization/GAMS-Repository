@@ -40,6 +40,46 @@ class UserAdapter {
       };
     }
   }
+
+  update(updateResponse) {
+    let { status, data } = updateResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'UPDATED_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'UPDATED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  delete(deleteResponse) {
+    let { status, data } = deleteResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'DELETED_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'DELETED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
 }
 
 export default new UserAdapter();

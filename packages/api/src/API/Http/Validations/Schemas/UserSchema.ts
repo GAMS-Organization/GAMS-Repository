@@ -66,12 +66,6 @@ export const updateUserSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  username: Joi.string()
-    .min(3)
-    .max(100)
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
   userState: Joi.string()
     .min(3)
     .max(100)

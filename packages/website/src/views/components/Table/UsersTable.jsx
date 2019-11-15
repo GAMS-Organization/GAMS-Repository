@@ -7,14 +7,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import Tooltip from '@material-ui/core/Tooltip';
+import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+// @material-ui/icons components
+import AddAlert from '@material-ui/icons/AddAlert';
+import Close from '@material-ui/icons/Close';
+import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import IconButton from '@material-ui/core/IconButton';
-import Edit from '@material-ui/icons/Edit';
-import Tooltip from '@material-ui/core/Tooltip';
-import Close from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
 import UpdateUserSection from '../../sections/users/UpdateUserSection';
+import Snackbar from '../Snackbar/Snackbar';
+
+import serviceUser from '../../../services/api/user';
 
 class UsersTable extends React.Component {
   constructor(props) {
@@ -22,12 +27,30 @@ class UsersTable extends React.Component {
     this.state = {
       modal: false,
       user: {},
+      errors: {},
+      notification: false,
     };
+    this.deleteUser = this.deleteUser.bind(this);
     this.handleClickUpdate = this.handleClickUpdate.bind(this);
+    this.closeNotification = this.closeNotification.bind(this);
+  }
+
+  closeNotification() {
+    this.setState({ notification: false });
+  }
+
+  async deleteUser(prop) {
+    const response = await serviceUser.delete(prop[0]);
+
+    if (response.type === 'DELETED_SUCCESFUL') {
+      this.setState({ notification: true });
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
   }
 
   handleClickUpdate(prop) {
-    this.setState({ user: { name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
+    this.setState({ user: { id: prop[0], name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
     this.child.showModal();
   }
 
@@ -43,6 +66,19 @@ class UsersTable extends React.Component {
     });
     return (
       <div className={classes.tableResponsive}>
+        <Snackbar
+          place="tr"
+          color={this.state.errors.code ? 'danger' : 'success'}
+          icon={AddAlert}
+          message={
+            this.state.errors.code
+              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
+              : 'Usuario eliminado correctamente'
+          }
+          open={this.state.notification}
+          closeNotification={this.closeNotification}
+          close
+        />
         <UpdateUserSection user={this.state.user} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -85,7 +121,11 @@ class UsersTable extends React.Component {
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <IconButton aria-label="Close" className={classes.tableActionButton}>
+                      <IconButton
+                        aria-label="Close"
+                        className={classes.tableActionButton}
+                        onClick={this.deleteUser.bind(this, prop)}
+                      >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>

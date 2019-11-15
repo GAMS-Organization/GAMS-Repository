@@ -21,13 +21,12 @@ export default class UpdateUserAdapter {
     }
 
     return new UpdateUserCommand(
-        parseInt(request.params.id),
+      parseInt(request.params.id),
       request.body.name,
       request.body.surname,
       request.body.email,
       request.body.roles,
       request.body.userState,
-      request.body.username,
     );
   }
 }

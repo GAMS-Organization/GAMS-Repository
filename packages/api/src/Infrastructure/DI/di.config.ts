@@ -19,6 +19,9 @@ import ShowUsersAction from '../../API/Http/Actions/Users/ShowUsersAction';
 import UpdateUsersAction from '../../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../../API/Http/Actions/Users/DisableUsersAction';
 import EnableUsersAction from '../../API/Http/Actions/Users/EnableUsersAction';
+import DestroyUserAction from '../../API/Http/Actions/Users/DestroyUserAction';
+import DestroyUserAdapter from '../../API/Http/Adapters/Users/DestroyUserAdapter';
+import DestroyUserHandler from '../../Application/Handlers/Users/DestroyUserHandler';
 
 import LoginAdapter from '../../API/Http/Adapters/Auth/LoginAdapter';
 import LoginHandler from '../../Application/Handlers/Auth/LoginHandler';
@@ -106,6 +109,7 @@ DIContainer.bind<ShowUsersAction>(ShowUsersAction).toSelf();
 DIContainer.bind<UpdateUsersAction>(UpdateUsersAction).toSelf();
 DIContainer.bind<DisableUsersAction>(DisableUsersAction).toSelf();
 DIContainer.bind<EnableUsersAction>(EnableUsersAction).toSelf();
+DIContainer.bind<DestroyUserAction>(DestroyUserAction).toSelf();
 
 /**
  * Adapters
@@ -130,6 +134,7 @@ DIContainer.bind<ShowUserAdapter>(ShowUserAdapter).toSelf();
 DIContainer.bind<UpdateUserAdapter>(UpdateUserAdapter).toSelf();
 DIContainer.bind<DisableUserAdapter>(DisableUserAdapter).toSelf();
 DIContainer.bind<EnableUserAdapter>(EnableUserAdapter).toSelf();
+DIContainer.bind<DestroyUserAdapter>(DestroyUserAdapter).toSelf();
 
 /**
  * Handlers
@@ -154,6 +159,7 @@ DIContainer.bind<ShowUserHandler>(ShowUserHandler).toSelf();
 DIContainer.bind<UpdateUserHandler>(UpdateUserHandler).toSelf();
 DIContainer.bind<DisableUserHandler>(DisableUserHandler).toSelf();
 DIContainer.bind<EnableUserHandler>(EnableUserHandler).toSelf();
+DIContainer.bind<DestroyUserHandler>(DestroyUserHandler).toSelf();
 
 /*
  * Services

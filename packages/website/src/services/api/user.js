@@ -25,6 +25,31 @@ class User {
 
     return userAdapter.list(listResponse);
   }
+
+  async update(dataUser) {
+    const body = dataUser;
+
+    let updateResponse;
+    try {
+      updateResponse = await Api.put(`users/${body.id}`, body);
+    } catch (err) {
+      updateResponse = err;
+    }
+    console.log(updateResponse);
+    return userAdapter.update(updateResponse);
+  }
+
+  async delete(id) {
+    let deleteResponse;
+
+    try {
+      deleteResponse = await Api.delete(`users/${id}`);
+    } catch (err) {
+      deleteResponse = err;
+    }
+
+    return userAdapter.delete(deleteResponse);
+  }
 }
 
 export default new User();

@@ -7,24 +7,14 @@ export default class UpdateUserCommand {
   private email: string;
   private roles: string[];
   private userState: UserStates;
-  private username: string;
 
-  public constructor(
-    id: number,
-    name: string,
-    surname: string,
-    email: string,
-    roles: string[],
-    userState: UserStates,
-    username: string,
-  ) {
+  public constructor(id: number, name: string, surname: string, email: string, roles: string[], userState: UserStates) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.email = email;
     this.roles = roles;
     this.userState = userState;
-    this.username = username;
   }
 
   public getId(): number {
@@ -49,9 +39,5 @@ export default class UpdateUserCommand {
 
   public getUserState(): UserStates {
     return this.userState;
-  }
-
-  public getUsername(): string {
-    return this.username;
   }
 }

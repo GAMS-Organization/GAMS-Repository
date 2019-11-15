@@ -9,6 +9,7 @@ import StoreUsersAction from '../API/Http/Actions/Users/StoreUsersAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
+import DestroyUserAction from '../API/Http/Actions/Users/DestroyUserAction';
 
 const router = express.Router();
 
@@ -45,9 +46,12 @@ router.get(
 
 router.put(
   '/:id([0-9]+)',
+  /*
   (req, res, next): void => {
     authMiddleware(req, res, next, ['admin']);
   },
+
+   */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateUsersAction: UpdateUsersAction = DIContainer.resolve<UpdateUsersAction>(UpdateUsersAction);
     await updateUsersAction.execute(request, response);
@@ -73,6 +77,14 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const enableUsersAction: EnableUsersAction = DIContainer.resolve<EnableUsersAction>(EnableUsersAction);
     await enableUsersAction.execute(request, response);
+  }),
+);
+
+router.delete(
+  '/:id([0-9]+)',
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyUsersAction: DestroyUserAction = DIContainer.resolve<DestroyUserAction>(DestroyUserAction);
+    await destroyUsersAction.execute(request, response);
   }),
 );
 
