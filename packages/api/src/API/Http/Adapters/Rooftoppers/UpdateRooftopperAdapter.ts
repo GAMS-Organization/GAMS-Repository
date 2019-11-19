@@ -28,7 +28,7 @@ export default class UpdateRooftopperAdapter {
     }
 
     return new UpdateRooftopperCommand(
-        parseInt(request.params.id),
+      parseInt(request.params.id),
       request.body.name,
       request.body.surname,
       request.body.profileImage,

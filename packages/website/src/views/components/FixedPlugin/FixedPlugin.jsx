@@ -1,28 +1,23 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import { NavLink } from "react-router-dom";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  FacebookIcon,
-  TwitterIcon
-} from "react-share";
-import GitHubButton from "react-github-button";
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
+import GitHubButton from 'react-github-button';
 
-import imagine1 from "../../../styles/img/sidebar-1.jpg";
-import imagine2 from "../../../styles/img/sidebar-2.jpg";
-import imagine3 from "../../../styles/img/sidebar-3.jpg";
-import imagine4 from "../../../styles/img/sidebar-4.jpg";
+import imagine1 from '../../../styles/img/sidebar-1.jpg';
+import imagine2 from '../../../styles/img/sidebar-2.jpg';
+import imagine3 from '../../../styles/img/sidebar-3.jpg';
+import imagine4 from '../../../styles/img/sidebar-4.jpg';
 
-import Button from "../CustomButtons/Button.jsx";
+import Button from '../CustomButtons/Button.jsx';
 
 class FixedPlugin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classes: "dropdown show",
+      classes: 'dropdown show',
       bg_checked: true,
-      bgImage: this.props.bgImage
+      bgImage: this.props.bgImage,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -32,8 +27,8 @@ class FixedPlugin extends Component {
   render() {
     return (
       <div
-        className={classnames("fixed-plugin", {
-          "rtl-fixed-plugin": this.props.rtlActive
+        className={classnames('fixed-plugin', {
+          'rtl-fixed-plugin': this.props.rtlActive,
         })}
       >
         <div id="fixedPluginClasses" className={this.props.fixedClasses}>
@@ -47,64 +42,54 @@ class FixedPlugin extends Component {
                 <div>
                   <span
                     className={
-                      this.props.bgColor === "purple"
-                        ? "badge filter badge-purple active"
-                        : "badge filter badge-purple"
+                      this.props.bgColor === 'purple' ? 'badge filter badge-purple active' : 'badge filter badge-purple'
                     }
                     data-color="purple"
                     onClick={() => {
-                      this.props.handleColorClick("purple");
+                      this.props.handleColorClick('purple');
                     }}
                   />
                   <span
                     className={
-                      this.props.bgColor === "blue"
-                        ? "badge filter badge-blue active"
-                        : "badge filter badge-blue"
+                      this.props.bgColor === 'blue' ? 'badge filter badge-blue active' : 'badge filter badge-blue'
                     }
                     data-color="blue"
                     onClick={() => {
-                      this.props.handleColorClick("blue");
+                      this.props.handleColorClick('blue');
                     }}
                   />
                   <span
                     className={
-                      this.props.bgColor === "green"
-                        ? "badge filter badge-green active"
-                        : "badge filter badge-green"
+                      this.props.bgColor === 'green' ? 'badge filter badge-green active' : 'badge filter badge-green'
                     }
                     data-color="green"
                     onClick={() => {
-                      this.props.handleColorClick("green");
+                      this.props.handleColorClick('green');
                     }}
                   />
                   <span
                     className={
-                      this.props.bgColor === "red"
-                        ? "badge filter badge-red active"
-                        : "badge filter badge-red"
+                      this.props.bgColor === 'red' ? 'badge filter badge-red active' : 'badge filter badge-red'
                     }
                     data-color="red"
                     onClick={() => {
-                      this.props.handleColorClick("red");
+                      this.props.handleColorClick('red');
                     }}
                   />
                   <span
                     className={
-                      this.props.bgColor === "orange"
-                        ? "badge filter badge-orange active"
-                        : "badge filter badge-orange"
+                      this.props.bgColor === 'orange' ? 'badge filter badge-orange active' : 'badge filter badge-orange'
                     }
                     data-color="orange"
                     onClick={() => {
-                      this.props.handleColorClick("orange");
+                      this.props.handleColorClick('orange');
                     }}
                   />
                 </div>
               </a>
             </li>
             <li className="header-title">Images</li>
-            <li className={this.state["bgImage"] === imagine1 ? "active" : ""}>
+            <li className={this.state['bgImage'] === imagine1 ? 'active' : ''}>
               <a
                 className="img-holder switch-trigger"
                 onClick={() => {
@@ -115,7 +100,7 @@ class FixedPlugin extends Component {
                 <img src={imagine1} alt="..." />
               </a>
             </li>
-            <li className={this.state["bgImage"] === imagine2 ? "active" : ""}>
+            <li className={this.state['bgImage'] === imagine2 ? 'active' : ''}>
               <a
                 className="img-holder switch-trigger"
                 onClick={() => {
@@ -126,7 +111,7 @@ class FixedPlugin extends Component {
                 <img src={imagine2} alt="..." />
               </a>
             </li>
-            <li className={this.state["bgImage"] === imagine3 ? "active" : ""}>
+            <li className={this.state['bgImage'] === imagine3 ? 'active' : ''}>
               <a
                 className="img-holder switch-trigger"
                 onClick={() => {
@@ -137,7 +122,7 @@ class FixedPlugin extends Component {
                 <img src={imagine3} alt="..." />
               </a>
             </li>
-            <li className={this.state["bgImage"] === imagine4 ? "active" : ""}>
+            <li className={this.state['bgImage'] === imagine4 ? 'active' : ''}>
               <a
                 className="img-holder switch-trigger"
                 onClick={() => {
@@ -175,7 +160,7 @@ class FixedPlugin extends Component {
               </div>
             </li>
             <li className="button-container">
-              <NavLink to={"../documentation"} activeClassName="active">
+              <NavLink to={'../documentation'} activeClassName="active">
                 <Button color="info" fullWidth>
                   Documentation
                 </Button>
@@ -193,23 +178,15 @@ class FixedPlugin extends Component {
               <TwitterShareButton
                 url="https://creativetimofficial.github.io/material-dashboard-react"
                 title="Material Dashboard React - Free Bootstrap Admin Template"
-                hashtags={["react", "material-ui"]}
+                hashtags={['react', 'material-ui']}
                 via="creativetim"
               >
                 <TwitterIcon size={32} round={true} />
               </TwitterShareButton>
             </li>
             <li className="button-container">
-              <GitHubButton
-                type="stargazers"
-                namespace="creativetimofficial"
-                repo="material-dashboard-react-nodejs"
-              />
-              <GitHubButton
-                type="forks"
-                namespace="creativetimofficial"
-                repo="material-dashboard-react-nodejs"
-              />
+              <GitHubButton type="stargazers" namespace="creativetimofficial" repo="material-dashboard-react-nodejs" />
+              <GitHubButton type="forks" namespace="creativetimofficial" repo="material-dashboard-react-nodejs" />
             </li>
           </ul>
         </div>
