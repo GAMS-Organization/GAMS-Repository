@@ -167,7 +167,7 @@ class LoginPage extends React.Component {
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button type="submit" color="gamsRedColor" simple size="lg" block>
+                  <Button type="submit" color="gamsRed" simple size="lg" block>
                     Entrar
                   </Button>
                 </CardFooter>
