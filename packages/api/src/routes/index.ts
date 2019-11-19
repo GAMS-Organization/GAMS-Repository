@@ -1,6 +1,7 @@
 import { default as express, Router } from 'express';
 import users from './users';
 import auth from './auth';
+import products from './products';
 import rooftoppers from './rooftoppers';
 import educations from './educations';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
@@ -19,6 +20,8 @@ router.use('/auth', auth);
 router.use('/rooftopper-profiles', rooftoppers);
 
 router.use('/educations', educations);
+
+router.use('/product', products);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

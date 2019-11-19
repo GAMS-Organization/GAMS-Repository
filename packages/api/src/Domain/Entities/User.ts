@@ -3,6 +3,8 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Up
 import * as bcrypt from 'bcryptjs';
 import UserRole from './UserRole';
 import { UserStates } from '../Enums/UserStates';
+import UserWorkOrder from './UserWorkOrder';
+import WorkOrder from './WorkOrder';
 
 @Entity('users')
 // eslint-disable-next-line require-jsdoc
@@ -27,6 +29,10 @@ export default class User {
   @Column()
   @UpdateDateColumn()
   public updatedAt: Date;
+  @OneToMany(_type => UserWorkOrder, userWorkOrders => userWorkOrders.user)
+  public userWorkOrders: UserWorkOrder[];
+  @OneToMany(_type => WorkOrder, workOrder => workOrder.user)
+  public workOrders: WorkOrder[];
 
   public constructor(name: string, surname: string, email: string, state?: UserStates) {
     this.name = name;
@@ -73,6 +79,14 @@ export default class User {
 
   public getUserState(): UserStates {
     return this.state;
+  }
+
+  public getUserWorkOrder(): UserWorkOrder[] {
+    return this.userWorkOrders;
+  }
+
+  public setUserWorkOrder(value: UserWorkOrder[]): void {
+    this.userWorkOrders = value;
   }
 
   public getUserRole(): UserRole[] {

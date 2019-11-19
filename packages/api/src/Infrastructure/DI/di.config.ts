@@ -13,6 +13,12 @@ import LoginAction from '../../API/Http/Actions/Auth/LoginAction';
 
 import StoreRooftopperAction from '../../API/Http/Actions/Rooftoppers/StoreRooftopperAction';
 
+import StoreProductAction from '../../API/Http/Actions/Product/StoreProductAction';
+import StoreProductAdapter from '../../API/Http/Adapters/Product/StoreProductAdapter';
+import StoreProductHandler from '../../Application/Handlers/Product/StoreProductHandler';
+import TypeProductRepository from '../../Persistence/TypeORM/Repositories/TypeProductRepository';
+import IProductRepository from '../../Domain/Interfaces/IProductRepository';
+
 import IndexUsersAction from '../../API/Http/Actions/Users/IndexUsersAction';
 import StoreUsersAction from '../../API/Http/Actions/Users/StoreUsersAction';
 import ShowUsersAction from '../../API/Http/Actions/Users/ShowUsersAction';
@@ -111,6 +117,8 @@ DIContainer.bind<DisableUsersAction>(DisableUsersAction).toSelf();
 DIContainer.bind<EnableUsersAction>(EnableUsersAction).toSelf();
 DIContainer.bind<DestroyUserAction>(DestroyUserAction).toSelf();
 
+DIContainer.bind<StoreProductAction>(StoreProductAction).toSelf();
+
 /**
  * Adapters
  */
@@ -135,6 +143,8 @@ DIContainer.bind<UpdateUserAdapter>(UpdateUserAdapter).toSelf();
 DIContainer.bind<DisableUserAdapter>(DisableUserAdapter).toSelf();
 DIContainer.bind<EnableUserAdapter>(EnableUserAdapter).toSelf();
 DIContainer.bind<DestroyUserAdapter>(DestroyUserAdapter).toSelf();
+
+DIContainer.bind<StoreProductAdapter>(StoreProductAdapter).toSelf();
 
 /**
  * Handlers
@@ -161,6 +171,8 @@ DIContainer.bind<DisableUserHandler>(DisableUserHandler).toSelf();
 DIContainer.bind<EnableUserHandler>(EnableUserHandler).toSelf();
 DIContainer.bind<DestroyUserHandler>(DestroyUserHandler).toSelf();
 
+DIContainer.bind<StoreProductHandler>(StoreProductHandler).toSelf();
+
 /*
  * Services
  */
@@ -181,5 +193,6 @@ DIContainer.bind<IEducationRepository>(INTERFACES.IEducationRepository).to(TypeE
 DIContainer.bind<IRooftopperProfileRepository>(INTERFACES.IRooftopperProfileRepository).to(
   TypeRooftopperProfileRepository,
 );
+DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProductRepository);
 
 export default DIContainer;
