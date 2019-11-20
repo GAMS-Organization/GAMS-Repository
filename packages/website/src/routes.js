@@ -7,6 +7,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import Notifications from '@material-ui/icons/Notifications';
 import Register from '@material-ui/icons/GroupAdd';
 import Login from '@material-ui/icons/LockOpen';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 // core components/views for Admin layout
 import DashboardPage from 'views/containers/Dashboard.jsx';
 import UsersView from 'views/containers/UsersView.jsx';
@@ -15,6 +16,8 @@ import Typography from 'views/containers/Typography.jsx';
 import Icons from 'views/containers/Icons.jsx';
 import Maps from 'views/containers/Maps.jsx';
 import NotificationsPage from 'views/containers/Notifications.jsx';
+import Products from 'views/containers/Products';
+
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -33,6 +36,13 @@ const dashboardRoutes = [
     name: 'Users',
     icon: Person,
     component: UsersView,
+    layout: '/admin',
+  },
+  {
+    path: '/products',
+    name: 'Productos',
+    icon: AssignmentIcon,
+    component: Products,
     layout: '/admin',
   },
   {
