@@ -10,3 +10,12 @@ export const storeProductSchema = {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const updateProductSchema = {
+  name: Joi.string()
+    .min(3)
+    .max(100)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};

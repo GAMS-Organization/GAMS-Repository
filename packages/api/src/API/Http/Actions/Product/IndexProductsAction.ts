@@ -1,32 +1,32 @@
 import { Request, Response } from 'express';
 import { paginatedSuccess } from '../../../../utils/customResponse';
 import { inject, injectable } from 'inversify';
-import GetAllUsersPresenter from '../../Presenters/Users/GetAllUsersPresenter';
+import GetAllProductsPresenter from '../../Presenters/Product/GetAllProductsPresenter';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
-import UserService from '../../../../Domain/Services/UserService';
+import ProductService from '../../../../Domain/Services/ProductService';
 
 @injectable()
 // eslint-disable-next-line require-jsdoc
-export default class IndexUsersAction {
-  private userService: UserService;
+export default class IndexProductsAction {
+  private productService: ProductService;
 
-  public constructor(@inject(UserService) userService: UserService) {
-    this.userService = userService;
+  public constructor(@inject(ProductService) productService: ProductService) {
+    this.productService = productService;
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const usersData = await this.userService.returnAllPaginated(request.query.page, request.query.items_per_page);
+    const productsData = await this.productService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
-    const getAllPresenter = new GetAllUsersPresenter(usersData.data);
+    const getAllPresenter = new GetAllProductsPresenter(productsData.data);
 
     return response
       .status(HTTP_CODES.OK)
       .json(
         paginatedSuccess(
           getAllPresenter.getData(),
-          usersData.dataLength,
-          usersData.totalDataQuantity,
-          usersData.totalPages,
+          productsData.dataLength,
+          productsData.totalDataQuantity,
+          productsData.totalPages,
         ),
       );
   }

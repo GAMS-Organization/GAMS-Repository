@@ -1,7 +1,7 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
 import Product from '../../../../Domain/Entities/Product';
 
-export default class GetAllUsersPresenter implements IPresenter {
+export default class GetAllProductsPresenter implements IPresenter {
   private result: any;
 
   public constructor(result: Product[]) {
@@ -22,6 +22,6 @@ export default class GetAllUsersPresenter implements IPresenter {
       });
     });
 
-    return userResult;
+    return productResult;
   }
 }
