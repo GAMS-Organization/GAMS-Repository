@@ -5,7 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
 
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
@@ -17,8 +16,8 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceUser from '../../../services/api/user';
-import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
+import serviceProduct from '../../../services/api/products';
+import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 
@@ -53,7 +52,7 @@ class NewProduct extends React.Component{
           }))
           .reduce((current, next) => ({ ...current, ...next }));
           
-        const response = await serviceUser.create(formValues);
+        const response = await serviceProduct.create(formValues);
     
         if (response.type === 'CREATED_SUCCESFUL') {
           this.setState({ notification: true });
@@ -81,7 +80,7 @@ class NewProduct extends React.Component{
             />
             <GridContainer>
               <GridItem xs={12} sm={12} md={8}>
-                <form onSubmit={this.createUser}>
+                <form onSubmit={this.createProduct}>
                   <Card>
                     <CardHeader color="gamsBlue">
                       <h4 className={classes.cardTitleWhite}>Nuevo producto</h4>

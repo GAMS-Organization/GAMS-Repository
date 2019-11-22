@@ -16,7 +16,7 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateUserSection from '../../sections/users/UpdateUserSection';
+import UpdateProductSection from '../../sections/Products/UpdateProductSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceProduct from '../../../services/api/products';
@@ -79,7 +79,7 @@ class ProductTable extends React.Component {
             closeNotification={this.closeNotification}
             close
           />
-          <UpdateUserSection product={this.state.product} onRef={ref => (this.child = ref)} Transition={Transition} />
+          <UpdateProductSection product={this.state.product} onRef={ref => (this.child = ref)} Transition={Transition} />
           <Table className={classes.table}>
             {tableHead !== undefined ? (
               <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

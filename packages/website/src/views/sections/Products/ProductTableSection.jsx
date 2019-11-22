@@ -9,7 +9,7 @@ import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceProduct from '../../../services/api/user';
+import serviceProduct from '../../../services/api/products';
 
 const styles = {
     cardCategoryWhite: {
@@ -49,7 +49,7 @@ class ProductTableSection extends React.Component {
         };
     }
 
-    async componentWillMount() {
+    /*async componentWillMount() {
         const response = await serviceProduct.list();
         console.log(response);
         let products = [];
@@ -58,7 +58,7 @@ class ProductTableSection extends React.Component {
             products.push(dataProduct);
           }
           this.setState({ products: products });
-    }
+    }*/
 
     render() {
         const { classes } = this.props;

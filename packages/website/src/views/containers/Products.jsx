@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewProduct from '../sections/Products/NewProduct';
-import ProductTable from '../sections/Products/ProductTableSection';
+import ProductTableSection from '../sections/Products/ProductTableSection';
+import UpdateProductSection from '../sections/Products/UpdateProductSection';
 
 const styles = {
     cardCategoryWhite: {
@@ -39,7 +40,7 @@ const styles = {
       return (
         <div>
             <NewProduct />
-            <ProductTable />
+            <ProductTableSection />
         </div>
       );
     }
