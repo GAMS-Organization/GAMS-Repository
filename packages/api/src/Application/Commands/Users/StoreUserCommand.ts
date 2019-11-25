@@ -5,13 +5,7 @@ export default class StoreUserCommand {
   private password: string;
   private roles: string[];
 
-  public constructor(
-    name: string,
-    surname: string,
-    email: string,
-    password: string,
-    roles: string[],
-  ) {
+  public constructor(name: string, surname: string, email: string, password: string, roles: string[]) {
     this.name = name;
     this.surname = surname;
     this.email = email;

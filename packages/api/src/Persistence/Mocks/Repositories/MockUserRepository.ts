@@ -14,9 +14,9 @@ export default class MockUserRepository implements IUserRepository {
   }
 
   public findAllPaginated(_initialIndex: number, _limit: number): Promise<User[]> {
-    const sender = new User( 'Matias', 'Beltramone', 'mbeltramone@email.com');
+    const sender = new User('Matias', 'Beltramone', 'mbeltramone@email.com');
 
-    const receiver = new User( 'Matias', 'Beltramone', 'mbeltramone@email.com');
+    const receiver = new User('Matias', 'Beltramone', 'mbeltramone@email.com');
 
     return Promise.resolve([sender, receiver]);
   }
@@ -38,7 +38,7 @@ export default class MockUserRepository implements IUserRepository {
   }
 
   public async persist(_user: User): Promise<User> {
-    return new User( 'Matias', 'Beltramone', 'mbeltramone@email.com');
+    return new User('Matias', 'Beltramone', 'mbeltramone@email.com');
   }
 
   public async destroy(_user: User): Promise<boolean> {

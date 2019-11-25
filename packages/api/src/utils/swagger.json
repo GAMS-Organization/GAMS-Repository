@@ -44,9 +44,7 @@
   "paths": {
     "/v1/auth/login": {
       "post": {
-        "tags": [
-          "Login"
-        ],
+        "tags": ["Login"],
         "summary": "Login into the system",
         "requestBody": {
           "description": "Login into the system",
@@ -78,9 +76,7 @@
     },
     "/v1/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get all users",
         "security": [
           {
@@ -107,9 +103,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "auth": []
@@ -154,9 +148,7 @@
     },
     "/v1/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "auth": []
@@ -194,9 +186,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "auth": []
@@ -255,9 +245,7 @@
     },
     "/v1/users/{id}/enable": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "auth": []
@@ -297,9 +285,7 @@
     },
     "/v1/users/{id}/disable": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "auth": []
@@ -339,9 +325,7 @@
     },
     "/v1/rooftopper-profiles": {
       "get": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "summary": "Get all Rooftoppers",
         "security": [
           {
@@ -368,9 +352,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -415,9 +397,7 @@
     },
     "/v1/rooftopper-profiles/{id}": {
       "get": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -455,9 +435,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -514,9 +492,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -549,9 +525,7 @@
     },
     "/v1/rooftopper-profiles/{id}/enable": {
       "get": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -591,9 +565,7 @@
     },
     "/v1/rooftopper-profiles/{id}/disable": {
       "get": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -633,9 +605,7 @@
     },
     "/v1/rooftopper-profiles/slug/{slug}": {
       "get": {
-        "tags": [
-          "Rooftoppers"
-        ],
+        "tags": ["Rooftoppers"],
         "security": [
           {
             "auth": []
@@ -676,9 +646,7 @@
     },
     "/v1/educations": {
       "get": {
-        "tags": [
-          "Educations"
-        ],
+        "tags": ["Educations"],
         "summary": "Get all educations",
         "responses": {
           "200": {
@@ -700,9 +668,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Educations"
-        ],
+        "tags": ["Educations"],
         "summary": "Create a new education in system",
         "requestBody": {
           "description": "Create a new education in system",
@@ -742,9 +708,7 @@
     },
     "/v1/educations/{id}": {
       "get": {
-        "tags": [
-          "Educations"
-        ],
+        "tags": ["Educations"],
         "security": [
           {
             "auth": []
@@ -782,9 +746,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Educations"
-        ],
+        "tags": ["Educations"],
         "security": [
           {
             "auth": []
@@ -841,9 +803,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Educations"
-        ],
+        "tags": ["Educations"],
         "security": [
           {
             "auth": []
@@ -878,10 +838,7 @@
   "components": {
     "schemas": {
       "Login": {
-        "required": [
-          "password",
-          "username"
-        ],
+        "required": ["password", "username"],
         "type": "object",
         "properties": {
           "username": {
@@ -937,15 +894,7 @@
         }
       },
       "UserCreate": {
-        "required": [
-          "email",
-          "name",
-          "password",
-          "passwordConfirmation",
-          "roles",
-          "surname",
-          "username"
-        ],
+        "required": ["email", "name", "password", "passwordConfirmation", "roles", "surname", "username"],
         "type": "object",
         "properties": {
           "name": {
@@ -981,10 +930,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "admin",
-                "headhunter"
-              ]
+              "enum": ["admin", "headhunter"]
             }
           }
         },
@@ -995,17 +941,11 @@
           "username": "fmoreyra",
           "password": "supersecretpassword",
           "passwordConfirmation": "supersecretpassword",
-          "roles": [
-            "admin",
-            "headhunter"
-          ]
+          "roles": ["admin", "headhunter"]
         }
       },
       "UserEdit": {
-        "required": [
-          "email",
-          "roles"
-        ],
+        "required": ["email", "roles"],
         "type": "object",
         "properties": {
           "name": {
@@ -1026,10 +966,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "admin",
-                "headhunter"
-              ]
+              "enum": ["admin", "headhunter"]
             }
           },
           "username": {
@@ -1041,20 +978,14 @@
             "maxLength": 100,
             "minLength": 3,
             "type": "string",
-            "enum": [
-              "active",
-              "inactive"
-            ]
+            "enum": ["active", "inactive"]
           }
         },
         "example": {
           "name": "facundo",
           "surname": "moreyra",
           "email": "fmoreyra@gmail.com",
-          "roles": [
-            "admin",
-            "headhunter"
-          ],
+          "roles": ["admin", "headhunter"],
           "username": "fmoreyra",
           "userState": "active"
         }
@@ -1325,9 +1256,7 @@
                 "type": "string"
               },
               "rooftopperProfile": {
-                "required": [
-                  "id"
-                ],
+                "required": ["id"],
                 "properties": {
                   "id": {
                     "type": "number"
@@ -1344,14 +1273,7 @@
         }
       },
       "EducationCreate": {
-        "required": [
-          "title",
-          "grade",
-          "institution",
-          "startDate",
-          "endDate",
-          "rooftopperProfileId"
-        ],
+        "required": ["title", "grade", "institution", "startDate", "endDate", "rooftopperProfileId"],
         "properties": {
           "title": {
             "type": "string"
@@ -1399,9 +1321,7 @@
                   "type": "string"
                 },
                 "rooftopperProfile": {
-                  "required": [
-                    "id"
-                  ],
+                  "required": ["id"],
                   "properties": {
                     "id": {
                       "type": "number"
