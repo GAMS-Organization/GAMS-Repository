@@ -5,6 +5,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
+// @material-ui/icons components
+import AddAlert from '@material-ui/icons/AddAlert';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -17,7 +19,6 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
-import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 
 class NewUserSection extends React.Component {

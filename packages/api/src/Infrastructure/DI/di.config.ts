@@ -14,8 +14,19 @@ import LoginAction from '../../API/Http/Actions/Auth/LoginAction';
 import StoreRooftopperAction from '../../API/Http/Actions/Rooftoppers/StoreRooftopperAction';
 
 import StoreProductAction from '../../API/Http/Actions/Product/StoreProductAction';
+import UpdateProductAction from '../../API/Http/Actions/Product/UpdateProductAction';
+import IndexProductAction from '../../API/Http/Actions/Product/IndexProductsAction';
+import DestroyProductAction from '../../API/Http/Actions/Product/DestroyProductAction'
+import ShowProductByNameAction from '../../API/Http/Actions/Product/ShowProductByNameAction';
 import StoreProductAdapter from '../../API/Http/Adapters/Product/StoreProductAdapter';
+import UpdateProductAdapter from '../../API/Http/Adapters/Product/UpdateProductAdapter';
+import DestroyProductAdapter from '../../API/Http/Adapters/Product/DestroyProductAdapter';
+import ShowProductByNameAdapter from '../../API/Http/Adapters/Product/ShowProductByNameAdapter';
 import StoreProductHandler from '../../Application/Handlers/Product/StoreProductHandler';
+import UpdateProductHandler from '../../Application/Handlers/Product/UpdateProductHandler';
+import ShowProductHandler from '../../Application/Handlers/Product/ShowProductHandler';
+import DestroyProductHandler from '../../Application/Handlers/Product/DestroyProductHandler';
+import ShowProductByNameHandler from '../../Application/Handlers/Product/ShowProductByNameHandler';
 import TypeProductRepository from '../../Persistence/TypeORM/Repositories/TypeProductRepository';
 import IProductRepository from '../../Domain/Interfaces/IProductRepository';
 
@@ -86,6 +97,8 @@ import ShowEducationHandler from '../../Application/Handlers/Educations/ShowEduc
 import DestroyEducationAction from '../../API/Http/Actions/Educations/DestroyEducationAction';
 import DestroyEducationAdapter from '../../API/Http/Adapters/Educations/DestroyEducationAdapter';
 import DestroyEducationHandler from '../../Application/Handlers/Educations/DestroyEducationHandler';
+import ProductService from "../../Domain/Services/ProductService";
+import ShowProductAdapter from "../../API/Http/Adapters/Product/ShowProductAdapter";
 
 const DIContainer = new Container();
 
@@ -118,6 +131,11 @@ DIContainer.bind<EnableUsersAction>(EnableUsersAction).toSelf();
 DIContainer.bind<DestroyUserAction>(DestroyUserAction).toSelf();
 
 DIContainer.bind<StoreProductAction>(StoreProductAction).toSelf();
+DIContainer.bind<UpdateProductAction>(UpdateProductAction).toSelf();
+DIContainer.bind<IndexProductAction>(IndexProductAction).toSelf();
+DIContainer.bind<DestroyProductAction>(DestroyProductAction).toSelf();
+DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
+
 
 /**
  * Adapters
@@ -145,6 +163,10 @@ DIContainer.bind<EnableUserAdapter>(EnableUserAdapter).toSelf();
 DIContainer.bind<DestroyUserAdapter>(DestroyUserAdapter).toSelf();
 
 DIContainer.bind<StoreProductAdapter>(StoreProductAdapter).toSelf();
+DIContainer.bind<UpdateProductAdapter>(UpdateProductAdapter).toSelf();
+DIContainer.bind<ShowProductAdapter>(ShowProductAdapter).toSelf();
+DIContainer.bind<DestroyProductAdapter>(DestroyProductAdapter).toSelf();
+DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
 /**
  * Handlers
@@ -172,6 +194,11 @@ DIContainer.bind<EnableUserHandler>(EnableUserHandler).toSelf();
 DIContainer.bind<DestroyUserHandler>(DestroyUserHandler).toSelf();
 
 DIContainer.bind<StoreProductHandler>(StoreProductHandler).toSelf();
+DIContainer.bind<UpdateProductHandler>(UpdateProductHandler).toSelf();
+DIContainer.bind<ShowProductHandler>(ShowProductHandler).toSelf();
+DIContainer.bind<DestroyProductHandler>(DestroyProductHandler).toSelf();
+DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
+
 
 /*
  * Services
@@ -180,8 +207,10 @@ DIContainer.bind<UserService>(UserService).toSelf();
 DIContainer.bind<UserRoleService>(UserRoleService).toSelf();
 DIContainer.bind<RooftopperProfileService>(RooftopperProfileService).toSelf();
 DIContainer.bind<EducationService>(EducationService).toSelf();
+DIContainer.bind<ProductService>(ProductService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
+
 
 /**
  * Repository Interfaces

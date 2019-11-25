@@ -6,7 +6,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewUserSection from '../sections/users/NewUserSection';
 import UsersTable from '../sections/users/UsersTableSection';
-import UpdateUserSection from '../sections/users/UpdateUserSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -26,8 +25,6 @@ const styles = {
     textDecoration: 'none',
   },
 };
-
-const { REACT_APP_SERVER_URL } = process.env;
 
 class UsersView extends React.Component {
   constructor(props) {
