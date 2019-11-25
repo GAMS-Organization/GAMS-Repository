@@ -79,7 +79,7 @@ class NewProduct extends React.Component{
               close
             />
             <GridContainer>
-              <GridItem xs={12} sm={12} md={8}>
+              <GridItem xs={12} sm={12} md={6}>
                 <form onSubmit={this.createProduct}>
                   <Card>
                     <CardHeader color="gamsBlue">
@@ -88,7 +88,7 @@ class NewProduct extends React.Component{
                     </CardHeader>
                     <CardBody>
                       <GridContainer>
-                        <GridItem xs={12} sm={12} md={3}>
+                        <GridItem xs={12} sm={12} md={10}>
                           <CustomInput
                             labelText="Nombre"
                             id="name"

@@ -90,9 +90,6 @@ class UpdateProductSection extends React.Component {
         const { classes, product, Transition } = this.props;
         const { errors } = this.state;
         const { id, name } = product;
-        //if (this.state.rolSelected !== roles && roles !== undefined && !this.state.rolClicked) {
-        //  this.setState({ rolSelected: roles });
-        //}
         return (
           <div>
             <Snackbar
@@ -143,7 +140,7 @@ class UpdateProductSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={3}>
+                    <GridItem xs={12} sm={12} md={8}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"

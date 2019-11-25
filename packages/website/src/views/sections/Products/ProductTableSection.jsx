@@ -49,16 +49,16 @@ class ProductTableSection extends React.Component {
         };
     }
 
-    /*async componentWillMount() {
+    async componentWillMount() {
         const response = await serviceProduct.list();
-        console.log(response);
         let products = [];
           for (const product of response.data.items) {
             let dataProduct = [product.id.toString(), product.name];
             products.push(dataProduct);
           }
-          this.setState({ products: products });
-    }*/
+          
+          this.setState({ product: products });
+    }
 
     render() {
         const { classes } = this.props;
