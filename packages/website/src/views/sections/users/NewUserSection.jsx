@@ -62,6 +62,7 @@ class NewUserSection extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
   }
+
   render() {
     const { classes, name, surname, email, password } = this.props;
     const { errors } = this.state;
