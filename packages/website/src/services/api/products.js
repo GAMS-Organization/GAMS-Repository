@@ -24,7 +24,6 @@ class products {
     }
     console.log(listResponse);
     return productAdapter.list(listResponse);
-    
   }
 
   async update(dataProduct) {

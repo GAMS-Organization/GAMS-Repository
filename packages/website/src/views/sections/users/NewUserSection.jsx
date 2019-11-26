@@ -53,7 +53,7 @@ class NewUserSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     formValues.roles = [formValues.roles];
-    
+
     const response = await serviceUser.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
@@ -62,7 +62,7 @@ class NewUserSection extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
   }
-  
+
   render() {
     const { classes, name, surname, email, password } = this.props;
     const { errors } = this.state;

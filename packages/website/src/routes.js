@@ -18,7 +18,6 @@ import Maps from 'views/containers/Maps.jsx';
 import NotificationsPage from 'views/containers/Notifications.jsx';
 import Products from 'views/containers/Products';
 
-
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 import RegisterPage from 'views/containers/RegisterPage.jsx';
