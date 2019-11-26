@@ -21,7 +21,7 @@ class productAdapter {
     }
   }
 
-  /*list(listResponse) {
+  list(listResponse) {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
@@ -39,7 +39,7 @@ class productAdapter {
         },
       };
     }
-  }*/
+  }
 
   update(updateResponse) {
     let { status, data } = updateResponse;

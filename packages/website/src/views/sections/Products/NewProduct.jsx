@@ -15,6 +15,7 @@ import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
+  
 
 import serviceProduct from '../../../services/api/products';
 import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
@@ -79,7 +80,7 @@ class NewProduct extends React.Component{
               close
             />
             <GridContainer>
-              <GridItem xs={12} sm={12} md={8}>
+              <GridItem xs={12} sm={12} md={6}>
                 <form onSubmit={this.createProduct}>
                   <Card>
                     <CardHeader color="gamsBlue">
@@ -88,7 +89,7 @@ class NewProduct extends React.Component{
                     </CardHeader>
                     <CardBody>
                       <GridContainer>
-                        <GridItem xs={12} sm={12} md={3}>
+                        <GridItem xs={12} sm={12} md={10}>
                           <CustomInput
                             labelText="Nombre"
                             id="name"

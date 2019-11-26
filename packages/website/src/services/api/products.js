@@ -7,7 +7,7 @@ class products {
 
     let createResponse;
     try {
-      createResponse = await Api.post('products/', body);
+      createResponse = await Api.post('product/', body);
     } catch (err) {
       createResponse = err;
     }
@@ -15,23 +15,24 @@ class products {
     return productAdapter.create(createResponse);
   }
 
-  /*async list() {
+  async list() {
     let listResponse;
     try {
-      listResponse = await Api.get('products/');
+      listResponse = await Api.get('product/');
     } catch (err) {
       listResponse = err;
     }
-
+    console.log(listResponse);
     return productAdapter.list(listResponse);
-  }*/
+    
+  }
 
   async update(dataProduct) {
     const body = dataProduct;
 
     let updateResponse;
     try {
-      updateResponse = await Api.put(`products/${body.id}`, body);
+      updateResponse = await Api.put(`product/${body.id}`, body);
     } catch (err) {
       updateResponse = err;
     }
@@ -43,7 +44,7 @@ class products {
     let deleteResponse;
 
     try {
-      deleteResponse = await Api.delete(`products/${id}`);
+      deleteResponse = await Api.delete(`product/${id}`);
     } catch (err) {
       deleteResponse = err;
     }
