@@ -1,6 +1,6 @@
 import Purchase from '../Entities/Purchase';
 
-export default interface IPurchaseRepository{
+export default interface IPurchaseRepository {
   findAll(): Promise<Purchase[]>;
   findOneById(id: number): Promise<Purchase>;
   findByProductName(name: string): Promise<Purchase[]>;
@@ -8,5 +8,5 @@ export default interface IPurchaseRepository{
   findAllPaginated(initialIndex: number, limit: number): Promise<Purchase[]>;
   count(): Promise<number>;
   persist(purchase: Purchase): Promise<Purchase>;
-  destroy(purchase:Purchase): Promise<boolean>;
+  destroy(purchase: Purchase): Promise<boolean>;
 }

@@ -1,6 +1,6 @@
 import Entry from '../Entities/Entry';
 
-export default interface IEntryRepository{
+export default interface IEntryRepository {
   findAll(): Promise<Entry[]>;
   findAllPaginated(initialIndex: number, limit: number): Promise<Entry[]>;
   count(): Promise<number>;

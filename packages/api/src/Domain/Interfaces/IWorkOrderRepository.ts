@@ -1,6 +1,6 @@
 import WorkOrder from '../Entities/WorkOrder';
 
-export default interface IWorkOrderRepository{
+export default interface IWorkOrderRepository {
   findAll(): Promise<WorkOrder[]>;
   findAllPaginated(initialIndex: number, limit: number): Promise<WorkOrder[]>;
   count(): Promise<number>;
