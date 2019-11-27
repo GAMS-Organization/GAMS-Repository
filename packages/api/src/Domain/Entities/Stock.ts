@@ -73,6 +73,18 @@ export default class Stock {
     this.state = state;
   }
 
+  public setStockEntry(value: StockEntry[]): void {
+    this.stockEntries = value;
+  }
+
+  public getEntriesFromStockEntry(): number[] {
+    const entries = [];
+    for (const stockEntry of this.stockEntries) {
+      entries.push(stockEntry.getEntry().getId());
+    }
+    return entries;
+  }
+
   public setProduct(product: Product): void {
     this.product = product;
   }

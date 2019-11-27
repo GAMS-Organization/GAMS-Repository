@@ -1,12 +1,10 @@
 node_modules/
 .idea/
 *.min.*
-packages/website/node_modules/
 packages/*/build/
 packages/*/dist/
 packages/*/*.log
 packages/*/static/
-packages/api/node_modules/
 scripts/
 *.log
 .env
@@ -15,3 +13,4 @@ logs/
 *.lock
 .prettierignore
 .gitignore
+packages/dashboard-website/server/

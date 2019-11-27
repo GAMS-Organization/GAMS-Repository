@@ -4,19 +4,26 @@ import { INTERFACES } from './interfaces.types';
 import IUserRepository from '../../Domain/Interfaces/IUserRepository';
 import IUserRoleRepository from '../../Domain/Interfaces/IUserRoleRepository';
 import IRoleRepository from '../../Domain/Interfaces/IRoleRepository';
+import IStockRepository from '../../Domain/Interfaces/IStockRepository';
 
 import TypeUserRepository from '../../Persistence/TypeORM/Repositories/TypeUserRepository';
 import TypeUserRoleRepository from '../../Persistence/TypeORM/Repositories/TypeUserRoleRepository';
 import TypeRoleRepository from '../../Persistence/TypeORM/Repositories/TypeRoleRepository';
+import TypeStockEntryRepository from '../../Persistence/TypeORM/Repositories/TypeStockEntryRepository';
 
 import LoginAction from '../../API/Http/Actions/Auth/LoginAction';
 
 import StoreRooftopperAction from '../../API/Http/Actions/Rooftoppers/StoreRooftopperAction';
 
+import StoreStockAction from '../../API/Http/Actions/Stock/StoreStockAction';
+import StoreStockAdapter from '../../API/Http/Adapters/Stock/StoreStockAdapter';
+import StoreStockHandler from '../../Application/Handlers/Stock/StoreStockHandler';
+import StockEntryService from '../../Domain/Services/StockEntryService';
+
 import StoreProductAction from '../../API/Http/Actions/Product/StoreProductAction';
 import UpdateProductAction from '../../API/Http/Actions/Product/UpdateProductAction';
 import IndexProductAction from '../../API/Http/Actions/Product/IndexProductsAction';
-import DestroyProductAction from '../../API/Http/Actions/Product/DestroyProductAction'
+import DestroyProductAction from '../../API/Http/Actions/Product/DestroyProductAction';
 import ShowProductByNameAction from '../../API/Http/Actions/Product/ShowProductByNameAction';
 import StoreProductAdapter from '../../API/Http/Adapters/Product/StoreProductAdapter';
 import UpdateProductAdapter from '../../API/Http/Adapters/Product/UpdateProductAdapter';
@@ -97,8 +104,10 @@ import ShowEducationHandler from '../../Application/Handlers/Educations/ShowEduc
 import DestroyEducationAction from '../../API/Http/Actions/Educations/DestroyEducationAction';
 import DestroyEducationAdapter from '../../API/Http/Adapters/Educations/DestroyEducationAdapter';
 import DestroyEducationHandler from '../../Application/Handlers/Educations/DestroyEducationHandler';
-import ProductService from "../../Domain/Services/ProductService";
-import ShowProductAdapter from "../../API/Http/Adapters/Product/ShowProductAdapter";
+import ProductService from '../../Domain/Services/ProductService';
+import ShowProductAdapter from '../../API/Http/Adapters/Product/ShowProductAdapter';
+import TypeStockRepository from '../../Persistence/TypeORM/Repositories/TypeStockRepository';
+import IStockEntryRepository from '../../Domain/Interfaces/IStockEntryRepository';
 
 const DIContainer = new Container();
 
@@ -136,6 +145,7 @@ DIContainer.bind<IndexProductAction>(IndexProductAction).toSelf();
 DIContainer.bind<DestroyProductAction>(DestroyProductAction).toSelf();
 DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
 
+DIContainer.bind<StoreStockAction>(StoreStockAction).toSelf();
 
 /**
  * Adapters
@@ -168,6 +178,8 @@ DIContainer.bind<ShowProductAdapter>(ShowProductAdapter).toSelf();
 DIContainer.bind<DestroyProductAdapter>(DestroyProductAdapter).toSelf();
 DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
+DIContainer.bind<StoreStockAdapter>(StoreStockAdapter).toSelf();
+
 /**
  * Handlers
  */
@@ -199,6 +211,7 @@ DIContainer.bind<ShowProductHandler>(ShowProductHandler).toSelf();
 DIContainer.bind<DestroyProductHandler>(DestroyProductHandler).toSelf();
 DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
 
+DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 
 /*
  * Services
@@ -208,9 +221,9 @@ DIContainer.bind<UserRoleService>(UserRoleService).toSelf();
 DIContainer.bind<RooftopperProfileService>(RooftopperProfileService).toSelf();
 DIContainer.bind<EducationService>(EducationService).toSelf();
 DIContainer.bind<ProductService>(ProductService).toSelf();
+DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
-
 
 /**
  * Repository Interfaces
@@ -219,6 +232,8 @@ DIContainer.bind<IUserRepository>(INTERFACES.IUserRepository).to(TypeUserReposit
 DIContainer.bind<IUserRoleRepository>(INTERFACES.IUserRoleRepository).to(TypeUserRoleRepository);
 DIContainer.bind<IRoleRepository>(INTERFACES.IRoleRepository).to(TypeRoleRepository);
 DIContainer.bind<IEducationRepository>(INTERFACES.IEducationRepository).to(TypeEducationRepository);
+DIContainer.bind<IStockRepository>(INTERFACES.IStockRepository).to(TypeStockRepository);
+DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
 DIContainer.bind<IRooftopperProfileRepository>(INTERFACES.IRooftopperProfileRepository).to(
   TypeRooftopperProfileRepository,
 );

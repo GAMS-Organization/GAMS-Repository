@@ -1,6 +1,7 @@
 import { default as express, Router } from 'express';
 import users from './users';
 import auth from './auth';
+import stock from './stock';
 import products from './products';
 import rooftoppers from './rooftoppers';
 import educations from './educations';
@@ -22,6 +23,8 @@ router.use('/rooftopper-profiles', rooftoppers);
 router.use('/educations', educations);
 
 router.use('/product', products);
+
+router.use('/stock', stock);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
