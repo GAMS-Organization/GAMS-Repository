@@ -17,10 +17,12 @@ import Icons from 'views/containers/Icons.jsx';
 import Maps from 'views/containers/Maps.jsx';
 import NotificationsPage from 'views/containers/Notifications.jsx';
 import Products from 'views/containers/Products';
+import Stock from 'views/containers/Stock.jsx';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 import RegisterPage from 'views/containers/RegisterPage.jsx';
+import { setTokenSourceMapRange } from 'typescript';
 
 const dashboardRoutes = [
   {
@@ -42,6 +44,13 @@ const dashboardRoutes = [
     name: 'Productos',
     icon: AssignmentIcon,
     component: Products,
+    layout: '/admin',
+  },
+  {
+    path: '/stock',
+    name: 'Stock',
+    icon: AssignmentIcon,
+    component: Stock,
     layout: '/admin',
   },
   {
