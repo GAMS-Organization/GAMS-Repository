@@ -49,4 +49,20 @@ export default class Entry {
   public setPurchases(value: Purchase[]): void {
     this.purchases = value;
   }
+
+  public setStockEntries(value: StockEntry[]): void {
+    this.stockEntries = value;
+  }
+
+  public getProductsFromPurchases(): string[] {
+    const products = [];
+    for (const purchase of this.purchases) {
+      products.push(purchase.getProduct().getName());
+    }
+    return products;
+  }
+
+  public getStockEntries(): StockEntry[] {
+    return this.stockEntries;
+  }
 }

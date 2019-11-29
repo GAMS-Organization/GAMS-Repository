@@ -108,6 +108,12 @@ import ProductService from '../../Domain/Services/ProductService';
 import ShowProductAdapter from '../../API/Http/Adapters/Product/ShowProductAdapter';
 import TypeStockRepository from '../../Persistence/TypeORM/Repositories/TypeStockRepository';
 import IStockEntryRepository from '../../Domain/Interfaces/IStockEntryRepository';
+import StoreEntryAction from '../../API/Http/Actions/Entry/StoreEntryAction';
+import StoreEntryAdapter from '../../API/Http/Adapters/Entry/StoreEntryAdapter';
+import StoreEntryHandler from '../../Application/Handlers/Entry/StoreEntryHandler';
+import PurchaseService from '../../Domain/Services/PurchaseService';
+import IEntryRepository from '../../Domain/Interfaces/IEntryRepository';
+import TypeEntryRepository from '../../Persistence/TypeORM/Repositories/TypeEntryRepository';
 
 const DIContainer = new Container();
 
@@ -147,6 +153,8 @@ DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
 
 DIContainer.bind<StoreStockAction>(StoreStockAction).toSelf();
 
+DIContainer.bind<StoreEntryAction>(StoreEntryAction).toSelf();
+
 /**
  * Adapters
  */
@@ -179,6 +187,8 @@ DIContainer.bind<DestroyProductAdapter>(DestroyProductAdapter).toSelf();
 DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
 DIContainer.bind<StoreStockAdapter>(StoreStockAdapter).toSelf();
+
+DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 
 /**
  * Handlers
@@ -213,6 +223,8 @@ DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
 
 DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 
+DIContainer.bind<StoreEntryHandler>(StoreEntryHandler).toSelf();
+
 /*
  * Services
  */
@@ -222,6 +234,7 @@ DIContainer.bind<RooftopperProfileService>(RooftopperProfileService).toSelf();
 DIContainer.bind<EducationService>(EducationService).toSelf();
 DIContainer.bind<ProductService>(ProductService).toSelf();
 DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
+DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
@@ -233,6 +246,7 @@ DIContainer.bind<IUserRoleRepository>(INTERFACES.IUserRoleRepository).to(TypeUse
 DIContainer.bind<IRoleRepository>(INTERFACES.IRoleRepository).to(TypeRoleRepository);
 DIContainer.bind<IEducationRepository>(INTERFACES.IEducationRepository).to(TypeEducationRepository);
 DIContainer.bind<IStockRepository>(INTERFACES.IStockRepository).to(TypeStockRepository);
+DIContainer.bind<IEntryRepository>(INTERFACES.IEntryRepository).to(TypeEntryRepository);
 DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
 DIContainer.bind<IRooftopperProfileRepository>(INTERFACES.IRooftopperProfileRepository).to(
   TypeRooftopperProfileRepository,
