@@ -114,6 +114,8 @@ import StoreEntryHandler from '../../Application/Handlers/Entry/StoreEntryHandle
 import PurchaseService from '../../Domain/Services/PurchaseService';
 import IEntryRepository from '../../Domain/Interfaces/IEntryRepository';
 import TypeEntryRepository from '../../Persistence/TypeORM/Repositories/TypeEntryRepository';
+import IPurchaseRepository from '../../Domain/Interfaces/IPurchaseRepository';
+import TypePurchaseRepository from '../../Persistence/TypeORM/Repositories/TypePurchaseRepository';
 
 const DIContainer = new Container();
 
@@ -245,6 +247,8 @@ DIContainer.bind<IUserRepository>(INTERFACES.IUserRepository).to(TypeUserReposit
 DIContainer.bind<IUserRoleRepository>(INTERFACES.IUserRoleRepository).to(TypeUserRoleRepository);
 DIContainer.bind<IRoleRepository>(INTERFACES.IRoleRepository).to(TypeRoleRepository);
 DIContainer.bind<IEducationRepository>(INTERFACES.IEducationRepository).to(TypeEducationRepository);
+DIContainer.bind<IPurchaseRepository>(INTERFACES.IPurchaseRepository).to(TypePurchaseRepository);
+
 DIContainer.bind<IStockRepository>(INTERFACES.IStockRepository).to(TypeStockRepository);
 DIContainer.bind<IEntryRepository>(INTERFACES.IEntryRepository).to(TypeEntryRepository);
 DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
