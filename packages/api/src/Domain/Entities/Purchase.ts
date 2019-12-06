@@ -1,5 +1,5 @@
 // eslint-disable-next-line require-jsdoc
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Entry from './Entry';
 import Product from './Product';
 
@@ -12,8 +12,7 @@ export default class Purchase {
   public quantity: number;
   @Column()
   public provider: string;
-  @OneToOne(_type => Product)
-  @JoinColumn()
+  @ManyToOne(_type => Product, product => product.purchases)
   public product: Product;
   @ManyToOne(_type => Entry, entry => entry.purchases)
   public entry: Entry;

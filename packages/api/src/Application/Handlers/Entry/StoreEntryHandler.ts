@@ -19,6 +19,7 @@ export default class StoreEntryHandler {
 
   public async execute(command: StoreEntryCommand): Promise<Entry> {
     const entry = new Entry(command.getDate(), command.getObservations());
+
     return this.purchaseService.setPurchaseToEntry(
       await this.entryRepository.persist(entry),
       command.getProducts(),

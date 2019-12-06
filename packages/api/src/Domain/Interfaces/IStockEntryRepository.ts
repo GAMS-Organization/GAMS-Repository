@@ -5,6 +5,6 @@ export default interface IStockEntryRepository {
   findOneById(id: number): Promise<StockEntry>;
   findByEntryId(entryId: number): Promise<StockEntry[]>;
   findByStockId(stockId: number): Promise<StockEntry[]>;
-  persist(userRole: StockEntry): Promise<StockEntry>;
-  destroy(userRol: StockEntry): Promise<boolean>;
+  persist(stockEntry: StockEntry): Promise<StockEntry>;
+  destroy(stockEntry: StockEntry): Promise<boolean>;
 }

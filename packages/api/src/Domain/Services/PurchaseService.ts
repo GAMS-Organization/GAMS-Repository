@@ -4,6 +4,7 @@ import IProductRepository from '../Interfaces/IProductRepository';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import Purchase from '../Entities/Purchase';
 import Entry from '../Entities/Entry';
+import StockEntryService from './StockEntryService';
 
 // import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
@@ -11,13 +12,16 @@ import Entry from '../Entities/Entry';
 export default class PurchaseService {
   private purchaseRepository: IPurchaseRepository;
   private productRepository: IProductRepository;
+  private stockEntryService: StockEntryService;
 
   public constructor(
     @inject(INTERFACES.IProductRepository) productRepository: IProductRepository,
     @inject(INTERFACES.IPurchaseRepository) purchaseRepository: IPurchaseRepository,
+    @inject(StockEntryService) stockEntryService: StockEntryService,
   ) {
     this.productRepository = productRepository;
     this.purchaseRepository = purchaseRepository;
+    this.stockEntryService = stockEntryService;
   }
 
   public async setPurchaseToEntry(
@@ -36,9 +40,9 @@ export default class PurchaseService {
         let provider = commandProviders[index];
         await this.purchaseRepository.persist(new Purchase(quantity, provider, product, entry));
         purchases.push(new Purchase(quantity, provider, product, entry));
+        await this.stockEntryService.setStockEntry(entry, product, quantity);
       }
     });
-    //no devuelve los purchases que deberia tener
     entry.setPurchases(purchases);
     return entry;
   }

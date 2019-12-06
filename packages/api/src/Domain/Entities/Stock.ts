@@ -24,7 +24,7 @@ export default class Stock {
   @OneToMany(_type => StockDeparture, stockDepartures => stockDepartures.stock)
   public stockDepartures: StockDeparture[];
 
-  public constructor(product: Product, minimunQuantity: number, quantity: number) {
+  public constructor(product: Product, quantity: number, minimunQuantity: number = 0) {
     this.quantity = quantity;
     this.minimunQuantity = minimunQuantity;
     this.product = product;
@@ -77,10 +77,10 @@ export default class Stock {
     this.stockEntries = value;
   }
 
-  public getEntriesFromStockEntry(): number[] {
+  public getEntriesFromStockEntry(): StockEntry[] {
     const entries = [];
     for (const stockEntry of this.stockEntries) {
-      entries.push(stockEntry.getEntry().getId());
+      entries.push(stockEntry.getEntry());
     }
     return entries;
   }

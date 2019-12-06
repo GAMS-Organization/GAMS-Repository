@@ -5,7 +5,6 @@ import IndexUsersAction from '../API/Http/Actions/Users/IndexUsersAction';
 import ShowUsersAction from '../API/Http/Actions/Users/ShowUsersAction';
 import UpdateUsersAction from '../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../API/Http/Actions/Users/DisableUsersAction';
-import StoreStockAction from '../API/Http/Actions/Stock/StoreStockAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
@@ -22,14 +21,6 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexUsersAction: IndexUsersAction = DIContainer.resolve<IndexUsersAction>(IndexUsersAction);
     await indexUsersAction.execute(request, response);
-  }),
-);
-
-router.post(
-  '/',
-  asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const storeStockAction: StoreStockAction = DIContainer.resolve<StoreStockAction>(StoreStockAction);
-    await storeStockAction.execute(request, response);
   }),
 );
 

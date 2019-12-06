@@ -15,7 +15,6 @@ import LoginAction from '../../API/Http/Actions/Auth/LoginAction';
 
 import StoreRooftopperAction from '../../API/Http/Actions/Rooftoppers/StoreRooftopperAction';
 
-import StoreStockAction from '../../API/Http/Actions/Stock/StoreStockAction';
 import StoreStockAdapter from '../../API/Http/Adapters/Stock/StoreStockAdapter';
 import StoreStockHandler from '../../Application/Handlers/Stock/StoreStockHandler';
 import StockEntryService from '../../Domain/Services/StockEntryService';
@@ -152,8 +151,6 @@ DIContainer.bind<UpdateProductAction>(UpdateProductAction).toSelf();
 DIContainer.bind<IndexProductAction>(IndexProductAction).toSelf();
 DIContainer.bind<DestroyProductAction>(DestroyProductAction).toSelf();
 DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
-
-DIContainer.bind<StoreStockAction>(StoreStockAction).toSelf();
 
 DIContainer.bind<StoreEntryAction>(StoreEntryAction).toSelf();
 

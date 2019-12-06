@@ -1,35 +1,47 @@
-import IStockEntryRepository from '../Interfaces/IStockEntryRepository';
 import { inject, injectable } from 'inversify';
-import IEntryRepository from '../Interfaces/IEntryRepository';
+import IStockEntryRepository from '../Interfaces/IStockEntryRepository';
+import IStockRepository from '../Interfaces/IStockRepository';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import StockEntry from '../Entities/StockEntry';
+import Entry from '../Entities/Entry';
 import Stock from '../Entities/Stock';
+import Product from '../Entities/Product';
 // import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
 @injectable()
 export default class StockEntryService {
   private stockEntryRepository: IStockEntryRepository;
-  private entryRepository: IEntryRepository;
+  private stockRepository: IStockRepository;
 
   public constructor(
-    @inject(INTERFACES.IEntryRepository) entryRepository: IEntryRepository,
     @inject(INTERFACES.IStockEntryRepository) stockEntryRepository: IStockEntryRepository,
+    @inject(INTERFACES.IStockRepository) stockRepository: IStockRepository,
   ) {
-    this.entryRepository = entryRepository;
     this.stockEntryRepository = stockEntryRepository;
+    this.stockRepository = stockRepository;
   }
 
-  public async setStockEntryToStock(stock: Stock): Promise<Stock> {
-    const entries = await this.entryRepository.findByProductName(stock.product.getName());
-    const newEntries: StockEntry[] = [];
-    for (const entry of entries) {
-      //const entryId = entry.getId();
-      //Aca puede ser que se registren varias veces la misma entrada en un stock, comparar con UserRoleService.ts
-      await this.stockEntryRepository.persist(new StockEntry(stock, entry));
-      newEntries.push(new StockEntry(stock, entry));
+  public async setStockEntry(entry: Entry, product: Product, quantity: number): Promise<void> {
+    const stock = await this.stockRepository.findOneByStockProduct(product.getName());
+
+    //Falla al actualizar porque intenta hacer un insert en lugar de un update
+    if (stock) {
+      const actualQuantity = stock.getQuantity();
+      stock.setQuantity(actualQuantity + quantity);
+      await this.stockRepository.persist(stock);
+      const stockEntry = new StockEntry(stock, entry);
+      await this.stockEntryRepository.persist(stockEntry);
+      const stockEntries = stock.getEntriesFromStockEntry();
+      stockEntries.push(stockEntry);
+      stock.setStockEntry(stockEntries);
+    } else {
+      const stock = new Stock(product, quantity);
+      await this.stockRepository.persist(stock);
+      const stockEntry = new StockEntry(stock, entry);
+      await this.stockEntryRepository.persist(stockEntry);
+      const stockEntries = [stockEntry];
+      stock.setStockEntry(stockEntries);
     }
-    stock.setStockEntry(newEntries);
-    return stock;
   }
   /*
   public async destroyUserRolesFromUser(userId: number): Promise<void> {
