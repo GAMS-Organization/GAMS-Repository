@@ -18,7 +18,7 @@ export default class GetAllUsersPresenter implements IPresenter {
     this.result.forEach((stock: Stock): void => {
       stockResult.push({
         id: stock.getId(),
-        product: stock.getProduct(),
+        product: stock.getProduct().getName(),
         quantity: stock.getQuantity(),
         minimunQuantity: stock.getMinimunQuantity(),
         state: stock.getState(),

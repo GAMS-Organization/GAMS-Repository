@@ -6,6 +6,7 @@ import StockEntry from '../Entities/StockEntry';
 import Entry from '../Entities/Entry';
 import Stock from '../Entities/Stock';
 import Product from '../Entities/Product';
+import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 // import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
 @injectable()
@@ -36,15 +37,23 @@ export default class StockEntryService {
       await this.stockEntryRepository.persist(stockEntry);
     }
   }
-  /*
-  public async destroyUserRolesFromUser(userId: number): Promise<void> {
-    const userRoles = await this.userRoleRepository.findByUserId(userId);
-    for (const userRole of userRoles) {
+
+  public async destroyStockEntriesFromEntry(entryId: number): Promise<void> {
+    const stockEntries = await this.stockEntryRepository.findByEntryId(entryId);
+    console.log(stockEntries);
+    for (const stockEntry of stockEntries) {
       try {
-        await this.userRoleRepository.destroy(userRole);
+        await this.stockEntryRepository.destroy(stockEntry);
       } catch (e) {
-        throw new CannotDeleteEntity(`UserRole with id: ${userRole.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`StockEntry with id: ${stockEntry.getId()} could not be deleted`);
       }
     }
-  }*/
+  }
+
+  public async updateQuantityStock( product: Product, quantity: number): Promise<void>{
+    const stock = await this.stockRepository.findOneByStockProduct(product.getId());
+    const actualQuantity = stock.getQuantity();
+    stock.setQuantity(actualQuantity - quantity);
+    await this.stockRepository.persist(stock);
+  }
 }

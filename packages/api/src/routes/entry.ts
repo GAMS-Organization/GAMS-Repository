@@ -9,7 +9,7 @@ import StoreEntryAction from '../API/Http/Actions/Entry/StoreEntryAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
-import DestroyUserAction from '../API/Http/Actions/Users/DestroyUserAction';
+import DestroyEntryAction from '../API/Http/Actions/Entry/DestroyEntryAction';
 
 const router = express.Router();
 
@@ -83,8 +83,8 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const destroyUsersAction: DestroyUserAction = DIContainer.resolve<DestroyUserAction>(DestroyUserAction);
-    await destroyUsersAction.execute(request, response);
+    const destroyEntryAction: DestroyEntryAction = DIContainer.resolve<DestroyEntryAction>(DestroyEntryAction,);
+    await destroyEntryAction.execute(request, response);
   }),
 );
 

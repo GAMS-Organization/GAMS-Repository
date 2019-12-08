@@ -57,7 +57,6 @@ export default class Stock {
     return this.state;
   }
 
-  //no retorna un producto
   public getProduct(): Product {
     return this.product;
   }

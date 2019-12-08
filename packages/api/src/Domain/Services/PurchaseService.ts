@@ -5,6 +5,7 @@ import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import Purchase from '../Entities/Purchase';
 import Entry from '../Entities/Entry';
 import StockEntryService from './StockEntryService';
+import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
 // import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
@@ -44,15 +45,17 @@ export default class PurchaseService {
     }
     return entry;
   }
-  /*
-    public async destroyUserRolesFromUser(userId: number): Promise<void> {
-      const userRoles = await this.userRoleRepository.findByUserId(userId);
-      for (const userRole of userRoles) {
+
+    public async destroyPurchasesFromEntry(entryId: number): Promise<void> {
+      const purchases = await this.purchaseRepository.findByEntryId(entryId);
+      console.log(purchases);
+      for (const purchase of purchases) {
         try {
-          await this.userRoleRepository.destroy(userRole);
+          await this.stockEntryService.updateQuantityStock( purchase.getProduct(),purchase.getQuantity());
+          await this.purchaseRepository.destroy(purchase);
         } catch (e) {
-          throw new CannotDeleteEntity(`UserRole with id: ${userRole.getId()} could not be deleted`);
+          throw new CannotDeleteEntity(`Purchase with id: ${purchase.getId()} could not be deleted`);
         }
       }
-    }*/
+    }
 }

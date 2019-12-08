@@ -14,11 +14,11 @@ export default class TypeStockEntryRepository extends TypeRepository implements 
   }
 
   public async findByEntryId(id: number): Promise<StockEntry[]> {
-    return await this.repository(StockEntry).find({ where: { id: id } });
+    return await this.repository(StockEntry).find({ where: { entry: id }, relations:['stock', 'entry'] });
   }
 
   public async findByStockId(id: number): Promise<StockEntry[]> {
-    return await this.repository(StockEntry).find({ where: { id: id } });
+    return await this.repository(StockEntry).find({ where: { stock: id }, relations:['stock', 'entry']  });
   }
 
   public async persist(stockEntry: StockEntry): Promise<StockEntry> {

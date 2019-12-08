@@ -22,7 +22,7 @@ export default class TypeEntryRepository extends TypeRepository implements IEntr
   }
 
   public async findByProductName(product: string): Promise<Entry[]> {
-    return await this.repository(Entry).findOne({ where: { product: product } });
+    return await this.repository(Entry).find({ where: { product: product } });
   }
 
   public async persist(entry: Entry): Promise<Entry> {

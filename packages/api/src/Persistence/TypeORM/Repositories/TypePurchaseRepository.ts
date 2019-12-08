@@ -22,11 +22,11 @@ export default class TypePurchaseRepository extends TypeRepository implements IP
   }
 
   public async findByEntryId(id: number): Promise<Purchase[]> {
-    return await this.repository(Purchase).findOne({ where: { entry: id } });
+    return await this.repository(Purchase).find({ where: { entry: id } , relations:['entry', 'product']});
   }
 
-  public async findByProductName(product: string): Promise<Purchase[]> {
-    return await this.repository(Purchase).findOne({ where: { product: product } });
+  public async findByProductName(id: number): Promise<Purchase[]> {
+    return await this.repository(Purchase).find({ where: { product: id }, relations: ['entry','product'] });
   }
 
   public async persist(purchase: Purchase): Promise<Purchase> {

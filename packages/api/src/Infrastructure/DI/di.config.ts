@@ -117,6 +117,9 @@ import IPurchaseRepository from '../../Domain/Interfaces/IPurchaseRepository';
 import TypePurchaseRepository from '../../Persistence/TypeORM/Repositories/TypePurchaseRepository';
 import IndexStockAction from '../../API/Http/Actions/Stock/IndexStockAction';
 import StockService from '../../Domain/Services/StockService';
+import DestroyEntryAction from '../../API/Http/Actions/Entry/DestroyEntryAction';
+import DestroyEntryAdapter from '../../API/Http/Adapters/Entry/DestroyEntryAdapter';
+import DestroyEntryHandler from '../../Application/Handlers/Entry/DestroyEntryHandler';
 
 const DIContainer = new Container();
 
@@ -155,6 +158,7 @@ DIContainer.bind<DestroyProductAction>(DestroyProductAction).toSelf();
 DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
 
 DIContainer.bind<StoreEntryAction>(StoreEntryAction).toSelf();
+DIContainer.bind<DestroyEntryAction>(DestroyEntryAction).toSelf();
 
 DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
@@ -190,6 +194,7 @@ DIContainer.bind<DestroyProductAdapter>(DestroyProductAdapter).toSelf();
 DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
 DIContainer.bind<StoreStockAdapter>(StoreStockAdapter).toSelf();
+DIContainer.bind<DestroyEntryAdapter>(DestroyEntryAdapter).toSelf();
 
 DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 
@@ -225,6 +230,7 @@ DIContainer.bind<DestroyProductHandler>(DestroyProductHandler).toSelf();
 DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
 
 DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
+DIContainer.bind<DestroyEntryHandler>(DestroyEntryHandler).toSelf();
 
 DIContainer.bind<StoreEntryHandler>(StoreEntryHandler).toSelf();
 
