@@ -115,6 +115,8 @@ import IEntryRepository from '../../Domain/Interfaces/IEntryRepository';
 import TypeEntryRepository from '../../Persistence/TypeORM/Repositories/TypeEntryRepository';
 import IPurchaseRepository from '../../Domain/Interfaces/IPurchaseRepository';
 import TypePurchaseRepository from '../../Persistence/TypeORM/Repositories/TypePurchaseRepository';
+import IndexStockAction from '../../API/Http/Actions/Stock/IndexStockAction';
+import StockService from '../../Domain/Services/StockService';
 
 const DIContainer = new Container();
 
@@ -153,6 +155,8 @@ DIContainer.bind<DestroyProductAction>(DestroyProductAction).toSelf();
 DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
 
 DIContainer.bind<StoreEntryAction>(StoreEntryAction).toSelf();
+
+DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
 /**
  * Adapters
@@ -234,6 +238,7 @@ DIContainer.bind<EducationService>(EducationService).toSelf();
 DIContainer.bind<ProductService>(ProductService).toSelf();
 DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
+DIContainer.bind<StockService>(StockService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 

@@ -57,6 +57,7 @@ export default class Stock {
     return this.state;
   }
 
+  //no retorna un producto
   public getProduct(): Product {
     return this.product;
   }
@@ -73,16 +74,8 @@ export default class Stock {
     this.state = state;
   }
 
-  public setStockEntry(value: StockEntry[]): void {
-    this.stockEntries = value;
-  }
-
-  public getEntriesFromStockEntry(): StockEntry[] {
-    const entries = [];
-    for (const stockEntry of this.stockEntries) {
-      entries.push(stockEntry.getEntry());
-    }
-    return entries;
+  public getEntries(): StockEntry[] {
+    return this.stockEntries;
   }
 
   public setProduct(product: Product): void {

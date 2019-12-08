@@ -19,7 +19,7 @@ export default class StoreStockPresenter implements IPresenter {
       quantity: this.result.getQuantity(),
       minimunQuantity: this.result.getMinimunQuantity(),
       state: this.result.getState(),
-      entries: this.result.getEntriesFromStockEntry(),
+      entries: this.result.getEntries(),
     };
   }
 }

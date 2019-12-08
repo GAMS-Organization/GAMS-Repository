@@ -57,7 +57,7 @@ class UpdateUserSection extends React.Component {
   }
 
   closeNotification() {
-    this.setState({ notification: false });
+    this.setState({ notification: false , errors: {}});
   }
 
   handleRol = event => {

@@ -1,7 +1,7 @@
 import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
-import IndexUsersAction from '../API/Http/Actions/Users/IndexUsersAction';
+import IndexStockAction from '../API/Http/Actions/Stock/IndexStockAction';
 import ShowUsersAction from '../API/Http/Actions/Users/ShowUsersAction';
 import UpdateUsersAction from '../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../API/Http/Actions/Users/DisableUsersAction';
@@ -19,8 +19,8 @@ router.get(
     },
      */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexUsersAction: IndexUsersAction = DIContainer.resolve<IndexUsersAction>(IndexUsersAction);
-    await indexUsersAction.execute(request, response);
+    const indexStockAction: IndexStockAction = DIContainer.resolve<IndexStockAction>(IndexStockAction);
+    await indexStockAction.execute(request, response);
   }),
 );
 

@@ -31,19 +31,17 @@ export default class PurchaseService {
     commandProviders: string[],
   ): Promise<Entry> {
     const products = await this.productRepository.findAll();
-    const purchases: Purchase[] = [];
-    products.map(async product => {
+    for(const product of products) {
       const productName = product.getName();
       if (commandProducts.includes(productName)) {
         let index = commandProducts.indexOf(productName);
         let quantity = commandQuantities[index];
         let provider = commandProviders[index];
-        await this.purchaseRepository.persist(new Purchase(quantity, provider, product, entry));
-        purchases.push(new Purchase(quantity, provider, product, entry));
+        const purchase = new Purchase(quantity, provider, product, entry);
+        await this.purchaseRepository.persist(purchase);
         await this.stockEntryService.setStockEntry(entry, product, quantity);
       }
-    });
-    entry.setPurchases(purchases);
+    }
     return entry;
   }
   /*
