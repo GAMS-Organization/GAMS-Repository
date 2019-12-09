@@ -13,46 +13,48 @@ import Arrow_Downward from '@material-ui/icons/ArrowDownward';
 import Assignment from '@material-ui/icons/Assignment';
 
 import { bugs, website, server } from '../../../utils/variables/general.jsx';
+import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
+import CurrentStock from '../../components/Stock/CurrentStock.jsx';
 
 const styles = {
-    cardCategoryWhite: {
-        '&,& a,& a:hover,& a:focus': {
-        color: 'rgba(255,255,255,.62)',
-        margin: '0',
-        fontSize: '14px',
-        marginTop: '0',
-        marginBottom: '0',
-        },
-        '& a,& a:hover,& a:focus': {
-        color: '#FFFFFF',
-        },
+  cardCategoryWhite: {
+    '&,& a,& a:hover,& a:focus': {
+      color: 'rgba(255,255,255,.62)',
+      margin: '0',
+      fontSize: '14px',
+      marginTop: '0',
+      marginBottom: '0',
     },
-    cardTitleWhite: {
-        color: '#FFFFFF',
-        marginTop: '0px',
-        minHeight: 'auto',
-        fontWeight: '300',
-        fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-        marginBottom: '3px',
-        textDecoration: 'none',
-        '& small': {
-        color: '#777',
-        fontSize: '65%',
-        fontWeight: '400',
-        lineHeight: '1',
-        },
+    '& a,& a:hover,& a:focus': {
+      color: '#FFFFFF',
     },
+  },
+  cardTitleWhite: {
+    color: '#FFFFFF',
+    marginTop: '0px',
+    minHeight: 'auto',
+    fontWeight: '300',
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: '3px',
+    textDecoration: 'none',
+    '& small': {
+      color: '#777',
+      fontSize: '65%',
+      fontWeight: '400',
+      lineHeight: '1',
+    },
+  },
 };
 
 class TableStockSection extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        product: [],
-      };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: [],
+    };
+  }
 
-    /*async componentWillMount() {
+  /*async componentWillMount() {
         const response = await serviceProduct.list();
         let products = [];
         for (const product of response.data.items) {
@@ -63,38 +65,42 @@ class TableStockSection extends React.Component {
         this.setState({ product: products });
     }*/
 
-    render() {
-        const { classes } = this.props;
-        return(
-            <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>º
-                    <CustomTabs
-                    title=""
-                    headerColor="gamsBlue"
-                    tabs={[
-                        {
-                        tabName: 'ENTRADAS',
-                        tabIcon: Arrow_Upward,
-                        tabContent: <Tasks checkedIndexes={[0, 3]} tasksIndexes={[0, 1, 2, 3]} tasks={bugs} />,
-                        },
-                        {
-                        tabName: 'STOCK ACTUAL',
-                        tabIcon: Assignment,
-                        tabContent: <Tasks checkedIndexes={[0]} tasksIndexes={[0, 1]} tasks={website} />,
-                        },
-                        {
-                        tabName: 'SALIDAS',
-                        tabIcon: Arrow_Downward,
-                        tabContent: <Tasks checkedIndexes={[1]} tasksIndexes={[0, 1, 2]} tasks={server} />,
-                        },
-                    ]}
-                    />
-                </GridItem>
-            </GridContainer>
-        );
-    }
-
+  render() {
+    const { classes } = this.props;
+    return (
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <CustomTabs
+            title=""
+            headerColor="gamsBlue"
+            tabs={[
+              {
+                tabName: 'ENTRADAS',
+                tabIcon: Arrow_Upward,
+                tabContent: (
+                  <EntryPurchase
+                    tableHeaderColor="gamsBlue"
+                    tableHead={['ID', 'Fecha', 'Observacion']}
+                    tableData={this.state.product}
+                  />
+                ),
+              },
+              {
+                tabName: 'STOCK ACTUAL',
+                tabIcon: Assignment,
+                tabContent: <CurrentStock checkedIndexes={[0]} tasksIndexes={[0, 1]} tasks={website} />,
+              },
+              {
+                tabName: 'SALIDAS',
+                tabIcon: Arrow_Downward,
+                tabContent: <Tasks checkedIndexes={[1]} tasksIndexes={[0, 1, 2]} tasks={server} />,
+              },
+            ]}
+          />
+        </GridItem>
+      </GridContainer>
+    );
+  }
 }
 
 export default withStyles(styles)(TableStockSection);
-
