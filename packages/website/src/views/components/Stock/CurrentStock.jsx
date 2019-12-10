@@ -7,82 +7,179 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
+
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-// @material-ui/icons
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem';
+import Card from '../../components/Card/Card.jsx';
+import CardHeader from '../../components/Card/CardHeader.jsx';
+import CardBody from '../../components/Card/CardBody.jsx';
+import Slide from '@material-ui/core/Slide';
+import Snackbar from '../Snackbar/Snackbar';
+import AddAlert from '@material-ui/icons/AddAlert';
+
 import Edit from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Close';
 import Check from '@material-ui/icons/Check';
-// core components
+import Visibility from '@material-ui/icons/Visibility';
+
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
 class CurrentStock extends React.Component {
-  state = {
-    checked: this.props.checkedIndexes,
-  };
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      current: {},
+      errors: {},
+      notification: false,
+    };
+    /*this.deleteEntry = this.deleteEntry.bind(this);*/
+    this.closeNotification = this.closeNotification.bind(this);
+  }
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
+  closeNotification() {
+    this.setState({ notification: false });
+  }
+
+  /*async deleteEntry(prop) {
+    const response = await serviceUser.delete(prop[0]);
+
+    if (response.type === 'DELETED_SUCCESFUL') {
+      this.setState({ notification: true });
     } else {
-      newChecked.splice(currentIndex, 1);
+      this.setState({ notification: true, errors: response.error });
     }
+  }*/
 
+  handleClickUpdate(prop) {
     this.setState({
-      checked: newChecked,
+      user: {
+        id: prop[0],
+        producto: prop[1],
+        cantidad: prop[2],
+        Cantminima: prop[3],
+      },
     });
-  };
+    this.child.showModal();
+  }
+
+  /*async componentWillMount() {
+        const response = await serviceProduct.list();
+        let products = [];
+        for (const product of response.data.items) {
+          let dataProduct = [product.id.toString(), product.name];
+          products.push(dataProduct);
+        }
+    
+        this.setState({ product: products });
+    }*/
+
   render() {
-    const { classes, tasksIndexes, tasks, rtlActive } = this.props;
-    const tableCellClasses = classnames(classes.tableCell, {
-      [classes.tableCellRTL]: rtlActive,
+    const { classes, tableHead, tableData, tableHeaderColor } = this.props;
+    const Transition = React.forwardRef(function Transition(props, ref) {
+      return <Slide direction="down" ref={ref} {...props} />;
     });
     return (
-      <Table className={classes.table}>
-        <TableBody>
-          <TableHead>
-            <thead>
-              <th>Producto</th>
-              <th>Cantidad</th>
-            </thead>
-          </TableHead>
-          {tasksIndexes.map(value => (
-            <TableRow key={value} className={classes.tableRow}>
-              <TableCell className={tableCellClasses}>{tasks[value]}</TableCell>
-              <TableCell className={classes.tableActions}>
-                <Tooltip id="tooltip-top" title="Edit Task" placement="top" classes={{ tooltip: classes.tooltip }}>
-                  <IconButton aria-label="Edit" className={classes.tableActionButton}>
-                    <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip id="tooltip-top-start" title="Eliminar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                  <IconButton
-                    aria-label="Close"
-                    className={classes.tableActionButton}
-                    /* onClick={this.deleteProduct.bind(this, prop)}*/
-                  >
-                    <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                  </IconButton>
-                </Tooltip>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div className={classes.tableResponsive}>
+        <Snackbar
+          place="tr"
+          color={this.state.errors.code ? 'danger' : 'success'}
+          icon={AddAlert}
+          message={
+            this.state.errors.code
+              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
+              : 'Stock eliminado correctamente'
+          }
+          open={this.state.notification}
+          closeNotification={this.closeNotification}
+          close
+        />
+        <Table className={classes.table}>
+          {tableHead !== undefined ? (
+            <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
+              <TableRow>
+                {tableHead.map((prop, key) => {
+                  return (
+                    <TableCell className={classes.tableCell + ' ' + classes.tableHeadCell} key={key}>
+                      {prop}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+          ) : null}
+          <TableBody>
+            {tableData.map((prop, key) => {
+              return (
+                <TableRow key={key} hover>
+                  {prop.map((prop, key) => {
+                    return (
+                      <TableCell className={classes.tableCell} key={key}>
+                        {prop}
+                      </TableCell>
+                    );
+                  })}
+                  <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickUpdate.bind(this, prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Eliminar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Close"
+                        className={classes.tableActionButton}
+                        onClick={this.deleteUser.bind(this, prop)}
+                      >
+                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 }
 
+CurrentStock.defaultProps = {
+  tableHeaderColor: 'gamsBlue',
+};
+
 CurrentStock.propTypes = {
   classes: PropTypes.object.isRequired,
-  tasksIndexes: PropTypes.arrayOf(PropTypes.number),
-  tasks: PropTypes.arrayOf(PropTypes.node),
-  rtlActive: PropTypes.bool,
+  tableHeaderColor: PropTypes.oneOf([
+    'warning',
+    'primary',
+    'danger',
+    'success',
+    'info',
+    'rose',
+    'gray',
+    'gamsBlue',
+    'gamsBlack',
+    'gamsRed',
+    'gamsGray',
+    'gamsWhite',
+  ]),
+  tableHead: PropTypes.arrayOf(PropTypes.string),
+  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
 export default withStyles(tasksStyle)(CurrentStock);

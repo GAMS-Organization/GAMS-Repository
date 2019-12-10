@@ -56,7 +56,16 @@ class EntryPurchase extends React.Component {
   }*/
 
   handleClickUpdate(prop) {
-    this.setState({ user: { id: prop[0], fecha: prop[1], observacion: prop[2] } });
+    this.setState({
+      stock: {
+        id: prop[0],
+        fecha: prop[1],
+        producto: prop[2],
+        cantidad: prop[3],
+        proveedor: prop[4],
+        observacion: prop[5],
+      },
+    });
     this.child.showModal();
   }
 
@@ -135,7 +144,7 @@ class EntryPurchase extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteUser.bind(this, prop)}
+                        onClick={this.deleteEntry.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

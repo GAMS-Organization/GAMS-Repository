@@ -15,6 +15,7 @@ import Assignment from '@material-ui/icons/Assignment';
 import { bugs, website, server } from '../../../utils/variables/general.jsx';
 import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
+import ExitStock from '../../components/Stock/ExitStock.jsx';
 
 const styles = {
   cardCategoryWhite: {
@@ -88,12 +89,32 @@ class TableStockSection extends React.Component {
               {
                 tabName: 'STOCK ACTUAL',
                 tabIcon: Assignment,
-                tabContent: <CurrentStock checkedIndexes={[0]} tasksIndexes={[0, 1]} tasks={website} />,
+                tabContent: (
+                  <CurrentStock
+                    tableHeaderColor="gamsBlue"
+                    tableHead={[
+                      'ID',
+                      'Producto',
+                      'Cantidad',
+                      'Cant. Minima',
+                      'Estado',
+                      'Fecha ultima entrada',
+                      'Fecha ultima salida',
+                    ]}
+                    tableData={this.state.product}
+                  />
+                ),
               },
               {
                 tabName: 'SALIDAS',
                 tabIcon: Arrow_Downward,
-                tabContent: <Tasks checkedIndexes={[1]} tasksIndexes={[0, 1, 2]} tasks={server} />,
+                tabContent: (
+                  <ExitStock
+                    tableHeaderColor="gamsBlue"
+                    tableHead={['ID', 'Fecha', 'Producto', 'Cantidad', 'Observacion']}
+                    tableData={this.state.product}
+                  />
+                ),
               },
             ]}
           />
