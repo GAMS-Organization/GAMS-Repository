@@ -6,11 +6,11 @@ import Purchase from '../../../Domain/Entities/Purchase';
 @injectable()
 export default class TypePurchaseRepository extends TypeRepository implements IPurchaseRepository {
   public async findAll(): Promise<Purchase[]> {
-    return await this.repository(Purchase).find();
+    return await this.repository(Purchase).find({relations:["entry","product"] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Purchase[]> {
-    return await this.repository(Purchase).find({ skip: initialIndex, take: limit });
+    return await this.repository(Purchase).find({ skip: initialIndex, take: limit, relations:["entry","product"] });
   }
 
   public async count(): Promise<number> {

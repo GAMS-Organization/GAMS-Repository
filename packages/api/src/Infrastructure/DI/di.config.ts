@@ -120,6 +120,11 @@ import StockService from '../../Domain/Services/StockService';
 import DestroyEntryAction from '../../API/Http/Actions/Entry/DestroyEntryAction';
 import DestroyEntryAdapter from '../../API/Http/Adapters/Entry/DestroyEntryAdapter';
 import DestroyEntryHandler from '../../Application/Handlers/Entry/DestroyEntryHandler';
+import IndexEntryAction from '../../API/Http/Actions/Entry/IndexEntryAction';
+import EntryService from '../../Domain/Services/EntryService';
+import ShowEntryAction from '../../API/Http/Actions/Entry/ShowEntryAction';
+import ShowEntryAdapter from '../../API/Http/Adapters/Entry/ShowEntryAdapter';
+import ShowEntryHandler from '../../Application/Handlers/Entry/ShowEntryHandler';
 
 const DIContainer = new Container();
 
@@ -159,6 +164,8 @@ DIContainer.bind<ShowProductByNameAction>(ShowProductByNameAction).toSelf();
 
 DIContainer.bind<StoreEntryAction>(StoreEntryAction).toSelf();
 DIContainer.bind<DestroyEntryAction>(DestroyEntryAction).toSelf();
+DIContainer.bind<IndexEntryAction>(IndexEntryAction).toSelf();
+DIContainer.bind<ShowEntryAction>(ShowEntryAction).toSelf();
 
 DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
@@ -195,6 +202,7 @@ DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
 DIContainer.bind<StoreStockAdapter>(StoreStockAdapter).toSelf();
 DIContainer.bind<DestroyEntryAdapter>(DestroyEntryAdapter).toSelf();
+DIContainer.bind<ShowEntryAdapter>(ShowEntryAdapter).toSelf();
 
 DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 
@@ -231,6 +239,7 @@ DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
 
 DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 DIContainer.bind<DestroyEntryHandler>(DestroyEntryHandler).toSelf();
+DIContainer.bind<ShowEntryHandler>(ShowEntryHandler).toSelf();
 
 DIContainer.bind<StoreEntryHandler>(StoreEntryHandler).toSelf();
 
@@ -245,6 +254,7 @@ DIContainer.bind<ProductService>(ProductService).toSelf();
 DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
 DIContainer.bind<StockService>(StockService).toSelf();
+DIContainer.bind<EntryService>(EntryService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 

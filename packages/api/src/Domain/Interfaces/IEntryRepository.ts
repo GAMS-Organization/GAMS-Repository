@@ -5,7 +5,7 @@ export default interface IEntryRepository {
   findAllPaginated(initialIndex: number, limit: number): Promise<Entry[]>;
   count(): Promise<number>;
   findOneById(id: number): Promise<Entry>;
-  findByProductName(product: string): Promise<Entry[]>;
+  findByProductName(id: number): Promise<Entry[]>;
   persist(entry: Entry): Promise<Entry>;
   destroy(entry: Entry): Promise<boolean>;
 }

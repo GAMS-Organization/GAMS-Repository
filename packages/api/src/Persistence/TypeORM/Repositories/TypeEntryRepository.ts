@@ -6,11 +6,11 @@ import IEntryRepository from '../../../Domain/Interfaces/IEntryRepository';
 @injectable()
 export default class TypeEntryRepository extends TypeRepository implements IEntryRepository {
   public async findAll(): Promise<Entry[]> {
-    return await this.repository(Entry).find();
+    return await this.repository(Entry).find({ relations: ["purchases"]});
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Entry[]> {
-    return await this.repository(Entry).find({ skip: initialIndex, take: limit });
+    return await this.repository(Entry).find({ skip: initialIndex, take: limit , relations: ["purchases"]});
   }
 
   public async count(): Promise<number> {
@@ -18,11 +18,11 @@ export default class TypeEntryRepository extends TypeRepository implements IEntr
   }
 
   public async findOneById(id: number): Promise<Entry> {
-    return await this.repository(Entry).findOne(id);
+    return await this.repository(Entry).findOne({where: {id:id} ,  relations:['purchases']});
   }
 
-  public async findByProductName(product: string): Promise<Entry[]> {
-    return await this.repository(Entry).find({ where: { product: product } });
+  public async findByProductName(id: number): Promise<Entry[]> {
+    return await this.repository(Entry).find({ where: { product: id } });
   }
 
   public async persist(entry: Entry): Promise<Entry> {

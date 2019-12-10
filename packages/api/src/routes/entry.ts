@@ -1,8 +1,7 @@
 import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
-import IndexUsersAction from '../API/Http/Actions/Users/IndexUsersAction';
-import ShowUsersAction from '../API/Http/Actions/Users/ShowUsersAction';
+import IndexEntryAction from '../API/Http/Actions/Entry/IndexEntryAction';
 import UpdateUsersAction from '../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../API/Http/Actions/Users/DisableUsersAction';
 import StoreEntryAction from '../API/Http/Actions/Entry/StoreEntryAction';
@@ -10,6 +9,7 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
 import DestroyEntryAction from '../API/Http/Actions/Entry/DestroyEntryAction';
+import ShowEntryAction from '../API/Http/Actions/Entry/ShowEntryAction';
 
 const router = express.Router();
 
@@ -20,8 +20,8 @@ router.get(
       },
        */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexUsersAction: IndexUsersAction = DIContainer.resolve<IndexUsersAction>(IndexUsersAction);
-    await indexUsersAction.execute(request, response);
+    const indexEntryAction: IndexEntryAction = DIContainer.resolve<IndexEntryAction>(IndexEntryAction);
+    await indexEntryAction.execute(request, response);
   }),
 );
 
@@ -35,12 +35,13 @@ router.post(
 
 router.get(
   '/:id([0-9]+)',
-  (req, res, next): void => {
+  /*(req, res, next): void => {
     authMiddleware(req, res, next, ['admin']);
   },
+   */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showUsersAction: ShowUsersAction = DIContainer.resolve<ShowUsersAction>(ShowUsersAction);
-    await showUsersAction.execute(request, response);
+    const showEntryAction: ShowEntryAction = DIContainer.resolve<ShowEntryAction>(ShowEntryAction);
+    await showEntryAction.execute(request, response);
   }),
 );
 
