@@ -3,12 +3,12 @@ import DIContainer from '../Infrastructure/DI/di.config';
 
 import IndexStockAction from '../API/Http/Actions/Stock/IndexStockAction';
 import ShowUsersAction from '../API/Http/Actions/Users/ShowUsersAction';
-import UpdateUsersAction from '../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../API/Http/Actions/Users/DisableUsersAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
 import DestroyUserAction from '../API/Http/Actions/Users/DestroyUserAction';
+import UpdateStockAction from '../API/Http/Actions/Stock/UpdateStockAction';
 
 const router = express.Router();
 
@@ -44,8 +44,8 @@ router.put(
 
      */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateUsersAction: UpdateUsersAction = DIContainer.resolve<UpdateUsersAction>(UpdateUsersAction);
-    await updateUsersAction.execute(request, response);
+    const updateStockAction: UpdateStockAction = DIContainer.resolve<UpdateStockAction>(UpdateStockAction);
+    await updateStockAction.execute(request, response);
   }),
 );
 

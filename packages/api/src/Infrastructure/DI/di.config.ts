@@ -125,6 +125,9 @@ import EntryService from '../../Domain/Services/EntryService';
 import ShowEntryAction from '../../API/Http/Actions/Entry/ShowEntryAction';
 import ShowEntryAdapter from '../../API/Http/Adapters/Entry/ShowEntryAdapter';
 import ShowEntryHandler from '../../Application/Handlers/Entry/ShowEntryHandler';
+import UpdateStockAction from '../../API/Http/Actions/Stock/UpdateStockAction';
+import UpdateStockAdapter from '../../API/Http/Adapters/Stock/UpdateStockAdapter';
+import UpdateStockHandler from '../../Application/Handlers/Stock/UpdateStockHandler';
 
 const DIContainer = new Container();
 
@@ -167,7 +170,9 @@ DIContainer.bind<DestroyEntryAction>(DestroyEntryAction).toSelf();
 DIContainer.bind<IndexEntryAction>(IndexEntryAction).toSelf();
 DIContainer.bind<ShowEntryAction>(ShowEntryAction).toSelf();
 
+DIContainer.bind<UpdateStockAction>(UpdateStockAction).toSelf();
 DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
+
 
 /**
  * Adapters
@@ -201,10 +206,13 @@ DIContainer.bind<DestroyProductAdapter>(DestroyProductAdapter).toSelf();
 DIContainer.bind<ShowProductByNameAdapter>(ShowProductByNameAdapter).toSelf();
 
 DIContainer.bind<StoreStockAdapter>(StoreStockAdapter).toSelf();
+DIContainer.bind<UpdateStockAdapter>(UpdateStockAdapter).toSelf();
+
 DIContainer.bind<DestroyEntryAdapter>(DestroyEntryAdapter).toSelf();
 DIContainer.bind<ShowEntryAdapter>(ShowEntryAdapter).toSelf();
-
 DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
+
+
 
 /**
  * Handlers
@@ -237,11 +245,13 @@ DIContainer.bind<ShowProductHandler>(ShowProductHandler).toSelf();
 DIContainer.bind<DestroyProductHandler>(DestroyProductHandler).toSelf();
 DIContainer.bind<ShowProductByNameHandler>(ShowProductByNameHandler).toSelf();
 
-DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
+DIContainer.bind<StoreEntryHandler>(StoreEntryHandler).toSelf();
 DIContainer.bind<DestroyEntryHandler>(DestroyEntryHandler).toSelf();
 DIContainer.bind<ShowEntryHandler>(ShowEntryHandler).toSelf();
 
-DIContainer.bind<StoreEntryHandler>(StoreEntryHandler).toSelf();
+DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
+DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
+
 
 /*
  * Services

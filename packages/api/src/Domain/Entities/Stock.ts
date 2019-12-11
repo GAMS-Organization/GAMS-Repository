@@ -28,10 +28,13 @@ export default class Stock {
     this.quantity = quantity;
     this.minimunQuantity = minimunQuantity;
     this.product = product;
+    this.setState(quantity);
+  }
 
-    let limit = this.minimunQuantity * 1.25;
-    if (this.quantity <= limit) {
-      if (this.quantity <= this.minimunQuantity) {
+  private setState(quantity =this.quantity, minimunQuantity = this.minimunQuantity){
+    let limit = minimunQuantity * 1.25;
+    if (quantity <= limit) {
+      if (quantity <= minimunQuantity) {
         this.state = StockStates.stock_insufficient;
       } else {
         this.state = StockStates.stock_critical;
@@ -62,15 +65,13 @@ export default class Stock {
   }
 
   public setQuantity(quantity: number): void {
+    this.setState(quantity);
     this.quantity = quantity;
   }
 
   public setMinimunQuantity(minimunQuantity: number): void {
+    this.setState(this.quantity, minimunQuantity);
     this.minimunQuantity = minimunQuantity;
-  }
-
-  public setState(state: string): void {
-    this.state = state;
   }
 
   public getEntries(): StockEntry[] {

@@ -48,7 +48,6 @@ export default class PurchaseService {
 
     public async destroyPurchasesFromEntry(entryId: number): Promise<void> {
       const purchases = await this.purchaseRepository.findByEntryId(entryId);
-      console.log(purchases);
       for (const purchase of purchases) {
         try {
           await this.stockEntryService.updateQuantityStock( purchase.getProduct(),purchase.getQuantity());

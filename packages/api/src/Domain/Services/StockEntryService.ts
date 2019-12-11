@@ -40,7 +40,6 @@ export default class StockEntryService {
 
   public async destroyStockEntriesFromEntry(entryId: number): Promise<void> {
     const stockEntries = await this.stockEntryRepository.findByEntryId(entryId);
-    console.log(stockEntries);
     for (const stockEntry of stockEntries) {
       try {
         await this.stockEntryRepository.destroy(stockEntry);
@@ -55,5 +54,9 @@ export default class StockEntryService {
     const actualQuantity = stock.getQuantity();
     stock.setQuantity(actualQuantity - quantity);
     await this.stockRepository.persist(stock);
+  }
+
+  public async newStockEntry(entry: Entry, stock: Stock): Promise<void>{
+    await this.stockEntryRepository.persist(new StockEntry(stock, entry));
   }
 }
