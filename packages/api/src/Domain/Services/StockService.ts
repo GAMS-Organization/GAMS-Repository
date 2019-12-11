@@ -7,7 +7,6 @@ import UpdateStockCommand from '../../Application/Commands/Stock/UpdateStockComm
 import Entry from '../Entities/Entry';
 import StockEntryService from './StockEntryService';
 
-
 @injectable()
 export default class StockService {
   private stockRepository: IStockRepository;
@@ -38,19 +37,18 @@ export default class StockService {
     };
   }
 
-  public async updateStock(stock: Stock, command: UpdateStockCommand): Promise<Stock>{
-    if(stock.getQuantity() !== command.getQuantity()){
-      if(stock.getQuantity() < command.getQuantity()){
+  public async updateStock(stock: Stock, command: UpdateStockCommand): Promise<Stock> {
+    if (stock.getQuantity() !== command.getQuantity()) {
+      if (stock.getQuantity() < command.getQuantity()) {
         const date = Date.now();
-        const entry = new Entry(date.toString(),`Ajuste de stock, producto: ${stock.getProduct()}`);
+        const entry = new Entry(date.toString(), `Ajuste de stock, producto: ${stock.getProduct()}`);
         stock.setQuantity(command.getQuantity());
         stock.setMinimunQuantity(command.getMinimunQuantity());
         await this.entryRepository.persist(entry);
         await this.stockRepository.persist(stock);
         await this.stockEntryService.newStockEntry(entry, stock);
       }
-    }
-    else{
+    } else {
       stock.setMinimunQuantity(command.getMinimunQuantity());
       await this.stockRepository.persist(stock);
     }

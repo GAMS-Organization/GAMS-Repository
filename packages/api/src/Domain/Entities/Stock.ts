@@ -31,7 +31,7 @@ export default class Stock {
     this.setState(quantity);
   }
 
-  private setState(quantity =this.quantity, minimunQuantity = this.minimunQuantity){
+  private setState(quantity = this.quantity, minimunQuantity = this.minimunQuantity) {
     let limit = minimunQuantity * 1.25;
     if (quantity <= limit) {
       if (quantity <= minimunQuantity) {

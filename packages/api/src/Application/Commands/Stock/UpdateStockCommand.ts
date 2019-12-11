@@ -1,4 +1,3 @@
-
 export default class UpdateStockCommand {
   private id: number;
   private quantity: number;
@@ -10,7 +9,7 @@ export default class UpdateStockCommand {
     this.minimunQuantity = minimunQuantity;
   }
 
-  public getId(): number{
+  public getId(): number {
     return this.id;
   }
 
@@ -21,5 +20,4 @@ export default class UpdateStockCommand {
   public getMinimunQuantity(): number {
     return this.minimunQuantity;
   }
-
 }

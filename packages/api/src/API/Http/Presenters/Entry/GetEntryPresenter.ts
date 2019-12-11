@@ -17,7 +17,7 @@ export default class GetEntryPresenter implements IPresenter {
       id: this.result.getId(),
       date: this.result.getDate(),
       observations: this.result.getObservations(),
-      purchases:this.result.getPurchases(),
+      purchases: this.result.getPurchases(),
     };
   }
 }

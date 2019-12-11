@@ -84,7 +84,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const destroyEntryAction: DestroyEntryAction = DIContainer.resolve<DestroyEntryAction>(DestroyEntryAction,);
+    const destroyEntryAction: DestroyEntryAction = DIContainer.resolve<DestroyEntryAction>(DestroyEntryAction);
     await destroyEntryAction.execute(request, response);
   }),
 );

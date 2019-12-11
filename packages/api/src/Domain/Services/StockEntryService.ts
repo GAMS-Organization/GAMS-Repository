@@ -49,14 +49,14 @@ export default class StockEntryService {
     }
   }
 
-  public async updateQuantityStock( product: Product, quantity: number): Promise<void>{
+  public async updateQuantityStock(product: Product, quantity: number): Promise<void> {
     const stock = await this.stockRepository.findOneByStockProduct(product.getId());
     const actualQuantity = stock.getQuantity();
     stock.setQuantity(actualQuantity - quantity);
     await this.stockRepository.persist(stock);
   }
 
-  public async newStockEntry(entry: Entry, stock: Stock): Promise<void>{
+  public async newStockEntry(entry: Entry, stock: Stock): Promise<void> {
     await this.stockEntryRepository.persist(new StockEntry(stock, entry));
   }
 }

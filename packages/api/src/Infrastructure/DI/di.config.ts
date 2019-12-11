@@ -173,7 +173,6 @@ DIContainer.bind<ShowEntryAction>(ShowEntryAction).toSelf();
 DIContainer.bind<UpdateStockAction>(UpdateStockAction).toSelf();
 DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
-
 /**
  * Adapters
  */
@@ -212,8 +211,6 @@ DIContainer.bind<DestroyEntryAdapter>(DestroyEntryAdapter).toSelf();
 DIContainer.bind<ShowEntryAdapter>(ShowEntryAdapter).toSelf();
 DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 
-
-
 /**
  * Handlers
  */
@@ -251,7 +248,6 @@ DIContainer.bind<ShowEntryHandler>(ShowEntryHandler).toSelf();
 
 DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
-
 
 /*
  * Services

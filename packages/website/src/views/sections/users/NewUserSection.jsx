@@ -38,7 +38,7 @@ class NewUserSection extends React.Component {
   };
 
   closeNotification() {
-    this.setState({ notification: false , errors: {}});
+    this.setState({ notification: false, errors: {} });
   }
 
   async createUser(e) {

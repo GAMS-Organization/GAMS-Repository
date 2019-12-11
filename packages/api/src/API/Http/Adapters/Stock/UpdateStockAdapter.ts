@@ -20,10 +20,6 @@ export default class UpdateStockAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new UpdateStockCommand(
-      parseInt(request.params.id),
-      request.body.quantity,
-      request.body.minimunQuantity,
-    );
+    return new UpdateStockCommand(parseInt(request.params.id), request.body.quantity, request.body.minimunQuantity);
   }
 }

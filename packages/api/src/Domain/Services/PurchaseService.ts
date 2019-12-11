@@ -32,7 +32,7 @@ export default class PurchaseService {
     commandProviders: string[],
   ): Promise<Entry> {
     const products = await this.productRepository.findAll();
-    for(const product of products) {
+    for (const product of products) {
       const productName = product.getName();
       if (commandProducts.includes(productName)) {
         let index = commandProducts.indexOf(productName);
@@ -46,15 +46,15 @@ export default class PurchaseService {
     return entry;
   }
 
-    public async destroyPurchasesFromEntry(entryId: number): Promise<void> {
-      const purchases = await this.purchaseRepository.findByEntryId(entryId);
-      for (const purchase of purchases) {
-        try {
-          await this.stockEntryService.updateQuantityStock( purchase.getProduct(),purchase.getQuantity());
-          await this.purchaseRepository.destroy(purchase);
-        } catch (e) {
-          throw new CannotDeleteEntity(`Purchase with id: ${purchase.getId()} could not be deleted`);
-        }
+  public async destroyPurchasesFromEntry(entryId: number): Promise<void> {
+    const purchases = await this.purchaseRepository.findByEntryId(entryId);
+    for (const purchase of purchases) {
+      try {
+        await this.stockEntryService.updateQuantityStock(purchase.getProduct(), purchase.getQuantity());
+        await this.purchaseRepository.destroy(purchase);
+      } catch (e) {
+        throw new CannotDeleteEntity(`Purchase with id: ${purchase.getId()} could not be deleted`);
       }
     }
+  }
 }
