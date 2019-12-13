@@ -33,7 +33,7 @@ export default class GetAllEntriesPresenter implements IPresenter {
         id: entry.getId(),
         date: entry.getDate(),
         observations: entry.getObservations(),
-        purchases
+        purchases,
       });
     });
 

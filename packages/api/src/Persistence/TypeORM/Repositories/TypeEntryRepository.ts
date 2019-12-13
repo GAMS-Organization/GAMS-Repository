@@ -10,7 +10,11 @@ export default class TypeEntryRepository extends TypeRepository implements IEntr
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Entry[]> {
-    return await this.repository(Entry).find({ skip: initialIndex, take: limit, relations: ['purchases', 'purchases.product'] });
+    return await this.repository(Entry).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['purchases', 'purchases.product'],
+    });
   }
 
   public async count(): Promise<number> {
