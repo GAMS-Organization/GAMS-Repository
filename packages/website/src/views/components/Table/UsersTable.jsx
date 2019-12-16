@@ -36,7 +36,7 @@ class UsersTable extends React.Component {
   }
 
   closeNotification() {
-    this.setState({ notification: false });
+    this.setState({ notification: false, errors: {} });
   }
 
   async deleteUser(prop) {

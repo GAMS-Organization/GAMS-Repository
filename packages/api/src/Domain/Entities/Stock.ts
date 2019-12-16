@@ -24,14 +24,17 @@ export default class Stock {
   @OneToMany(_type => StockDeparture, stockDepartures => stockDepartures.stock)
   public stockDepartures: StockDeparture[];
 
-  public constructor(product: Product, minimunQuantity: number, quantity: number) {
+  public constructor(product: Product, quantity: number, minimunQuantity: number = 0) {
     this.quantity = quantity;
     this.minimunQuantity = minimunQuantity;
     this.product = product;
+    this.setState(quantity);
+  }
 
-    let limit = this.minimunQuantity * 1.25;
-    if (this.quantity <= limit) {
-      if (this.quantity <= this.minimunQuantity) {
+  private setState(quantity = this.quantity, minimunQuantity = this.minimunQuantity) {
+    let limit = minimunQuantity * 1.25;
+    if (quantity <= limit) {
+      if (quantity <= minimunQuantity) {
         this.state = StockStates.stock_insufficient;
       } else {
         this.state = StockStates.stock_critical;
@@ -62,15 +65,17 @@ export default class Stock {
   }
 
   public setQuantity(quantity: number): void {
+    this.setState(quantity);
     this.quantity = quantity;
   }
 
   public setMinimunQuantity(minimunQuantity: number): void {
+    this.setState(this.quantity, minimunQuantity);
     this.minimunQuantity = minimunQuantity;
   }
 
-  public setState(state: string): void {
-    this.state = state;
+  public getEntries(): StockEntry[] {
+    return this.stockEntries;
   }
 
   public setProduct(product: Product): void {
