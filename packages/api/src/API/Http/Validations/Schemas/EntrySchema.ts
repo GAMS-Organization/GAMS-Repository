@@ -1,36 +1,34 @@
 import * as Joi from 'joi';
 import * as customErrorMessages from '../Utils/BaseErrorSchema';
 
-export const storeStockSchema = {
-  product: Joi.object()
+export const storeEntrySchema = {
+  observations: Joi.string()
+    .min(3)
+    .max(100)
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  quantity: Joi.number()
+  date: Joi.string()
     .required()
-    .positive()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  minimunQuantity: Joi.number()
+  products: Joi.array()
+    .items(Joi.string())
     .required()
-    .positive()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-};
-
-export const updateStockSchema = {
-  quantity: Joi.number()
+  quantities: Joi.array()
+    .items(Joi.number().positive())
     .required()
-    .positive()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  minimunQuantity: Joi.number()
+  providers: Joi.array()
+    .items(Joi.string())
     .required()
-    .positive()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),

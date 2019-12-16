@@ -13,3 +13,4 @@ logs/
 *.lock
 .prettierignore
 .gitignore
+packages/dashboard-website/server/

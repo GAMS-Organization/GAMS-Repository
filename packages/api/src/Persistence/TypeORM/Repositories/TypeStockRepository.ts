@@ -10,7 +10,7 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Stock[]> {
-    return await this.repository(Stock).find({ skip: initialIndex, take: limit });
+    return await this.repository(Stock).find({ skip: initialIndex, take: limit, relations: ['product'] });
   }
 
   public async count(): Promise<number> {
@@ -21,8 +21,8 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
     return await this.repository(Stock).findOne(id);
   }
 
-  public async findOneByStockProduct(product: string): Promise<Stock> {
-    return await this.repository(Stock).findOne({ where: { product: product } });
+  public async findOneByStockProduct(id: number): Promise<Stock> {
+    return await this.repository(Stock).findOne({ where: { product: id }, relations: ['product'] });
   }
 
   public async persist(stock: Stock): Promise<Stock> {

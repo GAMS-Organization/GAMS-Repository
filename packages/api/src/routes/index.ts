@@ -1,9 +1,11 @@
 import { default as express, Router } from 'express';
 import users from './users';
 import auth from './auth';
+import stock from './stock';
 import products from './products';
 import rooftoppers from './rooftoppers';
 import educations from './educations';
+import entry from './entry';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import DIContainer from '../Infrastructure/DI/di.config';
 import TrialAction from '../API/Http/Actions/TrialAction';
@@ -22,6 +24,10 @@ router.use('/rooftopper-profiles', rooftoppers);
 router.use('/educations', educations);
 
 router.use('/product', products);
+
+router.use('/stock', stock);
+
+router.use('/entry', entry);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

@@ -1,25 +1,25 @@
 import { Request } from 'express';
 import { injectable } from 'inversify';
-import StoreStockCommand from '../../../../Application/Commands/Stock/StoreStockCommand';
+import UpdateStockCommand from '../../../../Application/Commands/Stock/UpdateStockCommand';
 import Validator from '../../Validations/Utils/Validator';
-import { storeStockSchema } from '../../Validations/Schemas/StockSchema';
+import { updateStockSchema } from '../../Validations/Schemas/StockSchema';
 import ValidationException from '../../../../Application/Exceptions/ValidationException';
 
 @injectable()
-export default class StoreUserAdapter {
+export default class UpdateStockAdapter {
   private validator: Validator;
 
   public constructor() {
     this.validator = new Validator();
   }
 
-  public from(request: Request): StoreStockCommand {
-    const error = this.validator.validate(request.body, storeStockSchema);
+  public from(request: Request): UpdateStockCommand {
+    const error = this.validator.validate(request.body, updateStockSchema);
 
     if (error) {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreStockCommand(request.body.product, request.body.quantity, request.body.minimunQuantity);
+    return new UpdateStockCommand(parseInt(request.params.id), request.body.quantity, request.body.minimunQuantity);
   }
 }
