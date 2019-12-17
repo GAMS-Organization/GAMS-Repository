@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import User from './User';
-import Asset from './Asset';
+import Asset from './Element';
 import UserWorkOrder from './UserWorkOrder';
 
 @Entity('work_order')

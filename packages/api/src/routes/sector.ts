@@ -1,7 +1,7 @@
 import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
-import StoreProductAction from '../API/Http/Actions/Product/StoreProductAction';
+import StoreSectorAction from '../API/Http/Actions/Sector/StoreSectorAction';
 import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
@@ -15,9 +15,9 @@ const router = express.Router();
 router.get(
   '/',
   /*(req, res, next): void => {
-      authMiddleware(req, res, next, ['admin']);
-    },
-     */
+        authMiddleware(req, res, next, ['admin']);
+      },
+       */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
     await indexProductAction.execute(request, response);
@@ -27,8 +27,8 @@ router.get(
 router.post(
   '/',
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const storeProductAction: StoreProductAction = DIContainer.resolve<StoreProductAction>(StoreProductAction);
-    await storeProductAction.execute(request, response);
+    const storeSectorAction: StoreSectorAction = DIContainer.resolve<StoreSectorAction>(StoreSectorAction);
+    await storeSectorAction.execute(request, response);
   }),
 );
 
@@ -47,11 +47,11 @@ router.get(
 router.put(
   '/:id([0-9]+)',
   /*
-    (req, res, next): void => {
-      authMiddleware(req, res, next, ['admin']);
-    },
+      (req, res, next): void => {
+        authMiddleware(req, res, next, ['admin']);
+      },
 
-     */
+       */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
     await updateProductAction.execute(request, response);

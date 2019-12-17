@@ -1,10 +1,10 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
-import Product from '../../../../Domain/Entities/Product';
+import Sector from '../../../../Domain/Entities/Sector';
 
-export default class GetProductPresenter implements IPresenter {
-  private result: Product;
+export default class StoreSectorPresenter implements IPresenter {
+  private result: Sector;
 
-  public constructor(result: Product) {
+  public constructor(result: Sector) {
     this.result = result;
   }
 

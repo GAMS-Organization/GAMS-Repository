@@ -4,6 +4,7 @@ import auth from './auth';
 import stock from './stock';
 import products from './products';
 import rooftoppers from './rooftoppers';
+import sector from './sector';
 import educations from './educations';
 import entry from './entry';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
@@ -28,6 +29,8 @@ router.use('/product', products);
 router.use('/stock', stock);
 
 router.use('/entry', entry);
+
+router.use('/sector', sector);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

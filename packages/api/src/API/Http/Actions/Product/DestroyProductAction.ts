@@ -6,19 +6,19 @@ import DestroyProductHandler from '../../../../Application/Handlers/Product/Dest
 
 @injectable()
 export default class DestroyProductAction {
-    private adapter: DestroyProductAdapter;
-    private handler: DestroyProductHandler;
+  private adapter: DestroyProductAdapter;
+  private handler: DestroyProductHandler;
 
-    public constructor(adapter: DestroyProductAdapter, handler: DestroyProductHandler) {
-        this.adapter = adapter;
-        this.handler = handler;
-    }
+  public constructor(adapter: DestroyProductAdapter, handler: DestroyProductHandler) {
+    this.adapter = adapter;
+    this.handler = handler;
+  }
 
-    public async execute(request: Request, response: Response): Promise<void> {
-        const command = this.adapter.from(request);
+  public async execute(request: Request, response: Response): Promise<void> {
+    const command = this.adapter.from(request);
 
-        await this.handler.execute(command);
+    await this.handler.execute(command);
 
-        return response.status(HTTP_CODES.NO_CONTENT).end();
-    }
+    return response.status(HTTP_CODES.NO_CONTENT).end();
+  }
 }

@@ -6,20 +6,20 @@ import ShowProductByNameCommand from '../../Commands/Product/ShowProductByNameCo
 import Product from '../../../Domain/Entities/Product';
 
 @injectable()
-export default class ShowProductByNameHandler{
-    private productRepository: IProductRepository;
+export default class ShowProductByNameHandler {
+  private productRepository: IProductRepository;
 
-    public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
-        this.productRepository = productRepository;
+  public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
+    this.productRepository = productRepository;
+  }
+
+  public async execute(command: ShowProductByNameCommand): Promise<Product> {
+    const product = await this.productRepository.findOneByProductName(command.getName());
+
+    if (!product) {
+      throw new EntityNotFoundException(`Product with slug: ${command.getName()} not found`);
     }
 
-    public async execute(command: ShowProductByNameCommand): Promise<Product> {
-        const product = await this.productRepository.findOneByProductName(command.getName());
-
-        if (!product) {
-            throw new EntityNotFoundException(`Product with slug: ${command.getName()} not found`);
-        }
-
-        return product;
-    }
+    return product;
+  }
 }
