@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -23,10 +22,10 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import Edit from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Close';
-import Check from '@material-ui/icons/Check';
-import Visibility from '@material-ui/icons/Visibility';
 
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
+
+import serviceCurrentStock from '../../../services/api/currentStock';
 
 class CurrentStock extends React.Component {
   constructor(props) {
@@ -37,7 +36,7 @@ class CurrentStock extends React.Component {
       errors: {},
       notification: false,
     };
-    /*this.deleteEntry = this.deleteEntry.bind(this);*/
+    this.deleteStock = this.deleteStock.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -45,15 +44,15 @@ class CurrentStock extends React.Component {
     this.setState({ notification: false });
   }
 
-  /*async deleteEntry(prop) {
-    const response = await serviceUser.delete(prop[0]);
+  async deleteStock(prop) {
+    const response = await serviceCurrentStock.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }*/
+  }
 
   handleClickUpdate(prop) {
     this.setState({
@@ -66,17 +65,6 @@ class CurrentStock extends React.Component {
     });
     this.child.showModal();
   }
-
-  /*async componentWillMount() {
-        const response = await serviceProduct.list();
-        let products = [];
-        for (const product of response.data.items) {
-          let dataProduct = [product.id.toString(), product.name];
-          products.push(dataProduct);
-        }
-    
-        this.setState({ product: products });
-    }*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

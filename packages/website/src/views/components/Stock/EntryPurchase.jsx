@@ -26,6 +26,8 @@ import Close from '@material-ui/icons/Close';
 import Check from '@material-ui/icons/Check';
 import Visibility from '@material-ui/icons/Visibility';
 
+import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
+
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
 class EntryPurchase extends React.Component {
@@ -37,7 +39,7 @@ class EntryPurchase extends React.Component {
       errors: {},
       notification: false,
     };
-    /*this.deleteEntry = this.deleteEntry.bind(this);*/
+    this.deleteEntry = this.deleteEntry.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -45,15 +47,15 @@ class EntryPurchase extends React.Component {
     this.setState({ notification: false });
   }
 
-  /*async deleteEntry(prop) {
-    const response = await serviceUser.delete(prop[0]);
+  async deleteEntry(prop) {
+    const response = await serviceEntryPurchaseStock.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }*/
+  }
 
   handleClickUpdate(prop) {
     this.setState({
@@ -68,17 +70,6 @@ class EntryPurchase extends React.Component {
     });
     this.child.showModal();
   }
-
-  /*async componentWillMount() {
-        const response = await serviceProduct.list();
-        let products = [];
-        for (const product of response.data.items) {
-          let dataProduct = [product.id.toString(), product.name];
-          products.push(dataProduct);
-        }
-    
-        this.setState({ product: products });
-    }*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -132,7 +123,7 @@ class EntryPurchase extends React.Component {
                         className={classes.tableActionButton}
                         onClick={this.handleClickUpdate.bind(this, prop)}
                       >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip

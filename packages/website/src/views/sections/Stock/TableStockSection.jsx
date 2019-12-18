@@ -12,10 +12,13 @@ import Arrow_Upward from '@material-ui/icons/ArrowUpward';
 import Arrow_Downward from '@material-ui/icons/ArrowDownward';
 import Assignment from '@material-ui/icons/Assignment';
 
-import { bugs, website, server } from '../../../utils/variables/general.jsx';
 import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
 import ExitStock from '../../components/Stock/ExitStock.jsx';
+
+import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
+import serviceCurrentStock from '../../../services/api/currentStock';
+import serviceExitStock from '../../../services/api/exitStock';
 
 const styles = {
   cardCategoryWhite: {
@@ -51,20 +54,31 @@ class TableStockSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: [],
+      entry: [],
+      stock: [],
+      exit: [],
     };
   }
 
-  /*async componentWillMount() {
-        const response = await serviceProduct.list();
-        let products = [];
-        for (const product of response.data.items) {
-          let dataProduct = [product.id.toString(), product.name];
-          products.push(dataProduct);
-        }
-    
-        this.setState({ product: products });
-    }*/
+  async componentWillMount() {
+    const responseEntry = await serviceEntryPurchaseStock.list();
+    const responseCurrentStock = await serviceCurrentStock.list();
+    /*const responseExit = await serviceExitStock.list();*/
+    let entries = [];
+    let stocks = [];
+    let exits = [];
+    for (const entry of responseEntry.data.items) {
+      let dataEntry = [entry.id.toString(), entry.date, entry.observations];
+      entries.push(dataEntry);
+    }
+
+    for (const stock of responseCurrentStock.data.items) {
+      let dataStock = [stock.id.toString(), stock.product, stock.quantity, stock.minimunQuantity, stock.state];
+      stocks.push(dataStock);
+    }
+
+    this.setState({ entry: entries, stock: stocks });
+  }
 
   render() {
     const { classes } = this.props;
@@ -82,7 +96,7 @@ class TableStockSection extends React.Component {
                   <EntryPurchase
                     tableHeaderColor="gamsBlue"
                     tableHead={['ID', 'Fecha', 'Observacion']}
-                    tableData={this.state.product}
+                    tableData={this.state.entry}
                   />
                 ),
               },
@@ -101,7 +115,7 @@ class TableStockSection extends React.Component {
                       'Fecha ultima entrada',
                       'Fecha ultima salida',
                     ]}
-                    tableData={this.state.product}
+                    tableData={this.state.stock}
                   />
                 ),
               },
@@ -112,7 +126,7 @@ class TableStockSection extends React.Component {
                   <ExitStock
                     tableHeaderColor="gamsBlue"
                     tableHead={['ID', 'Fecha', 'Producto', 'Cantidad', 'Observacion']}
-                    tableData={this.state.product}
+                    tableData={this.state.entry}
                   />
                 ),
               },
