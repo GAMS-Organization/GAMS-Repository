@@ -141,6 +141,9 @@ import TypeAssetRepository from '../../Persistence/TypeORM/Repositories/TypeAsse
 import StoreSectorAction from '../../API/Http/Actions/Sector/StoreSectorAction';
 import StoreSectorAdapter from '../../API/Http/Adapters/Sector/StoreSectorAdapter';
 import StoreSectorHandler from '../../Application/Handlers/Sector/StoreSectorHandler';
+import StoreAreaHandler from '../../Application/Handlers/Area/StoreAreaHandler';
+import StoreAreaAdapter from '../../API/Http/Adapters/Area/StoreAreaAdapter';
+import StoreAreaAction from '../../API/Http/Actions/Area/StoreAreaAction';
 
 const DIContainer = new Container();
 
@@ -188,6 +191,8 @@ DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
 DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
 
+DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
+
 /**
  * Adapters
  */
@@ -228,6 +233,8 @@ DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 
 DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
 
+DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
+
 /**
  * Handlers
  */
@@ -267,6 +274,8 @@ DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
 
 DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
+
+DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
 
 /*
  * Services

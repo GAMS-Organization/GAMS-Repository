@@ -6,6 +6,7 @@ export default interface IAreaRepository {
   findAllPaginated(initialIndex: number, limit: number): Promise<Area[]>;
   count(): Promise<number>;
   findByAssetId(id: number): Promise<Area[]>;
+  findOneByAreaName(name: string): Promise<Area>;
   persist(area: Area): Promise<Area>;
   destroy(area: Area): Promise<boolean>;
 }

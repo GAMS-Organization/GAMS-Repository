@@ -25,6 +25,10 @@ export default class TypeSectorRepository extends TypeRepository implements ISec
     return await this.repository(Sector).findOne({ where: { asset: id }, relations: ['asset'] });
   }
 
+  public async findOneBySectorName(name: string): Promise<Sector> {
+    return await this.repository(Sector).findOne({ where: { name: name } });
+  }
+
   public async persist(sector: Sector): Promise<Sector> {
     return await this.repository(Sector).save(sector);
   }

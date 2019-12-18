@@ -18,8 +18,9 @@ export default class Area {
   @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
 
-  public constructor(name: string) {
+  public constructor(name: string, sector: Sector) {
     this.name = name;
+    this.sector = sector;
   }
 
   public getId(): number {
@@ -28,6 +29,10 @@ export default class Area {
 
   public getName(): string {
     return this.name;
+  }
+
+  public getSector(): Sector {
+    return this.sector;
   }
 
   public setName(name: string): void {

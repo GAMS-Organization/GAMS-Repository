@@ -6,6 +6,7 @@ export default interface IElementRepository {
   findAllPaginated(initialIndex: number, limit: number): Promise<Element[]>;
   count(): Promise<number>;
   findByAssetId(id: number): Promise<Element[]>;
+  findOneByElementName(name: string): Promise<Element>;
   persist(element: Element): Promise<Element>;
   destroy(element: Element): Promise<boolean>;
 }
