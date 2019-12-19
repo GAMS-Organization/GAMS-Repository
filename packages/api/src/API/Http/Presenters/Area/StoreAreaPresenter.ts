@@ -16,6 +16,7 @@ export default class StoreAreaPresenter implements IPresenter {
     return {
       id: this.result.getId(),
       name: this.result.getName(),
+      code: this.result.getCode(),
       sector: this.result.getSector(),
     };
   }

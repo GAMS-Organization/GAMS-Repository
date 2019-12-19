@@ -11,6 +11,8 @@ export default class Area {
   public id: number;
   @Column({ unique: true })
   public name: string;
+  @Column()
+  public code: string;
   @OneToMany(_type => Service, service => service.area)
   public services: Service[];
   @ManyToOne(_type => Sector, sector => sector.areas)
@@ -18,9 +20,10 @@ export default class Area {
   @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
 
-  public constructor(name: string, sector: Sector) {
+  public constructor(name: string, code: string, sector: Sector) {
     this.name = name;
     this.sector = sector;
+    this.code = code;
   }
 
   public getId(): number {
@@ -31,11 +34,19 @@ export default class Area {
     return this.name;
   }
 
+  public getCode(): string {
+    return this.code;
+  }
+
   public getSector(): Sector {
     return this.sector;
   }
 
   public setName(name: string): void {
     this.name = name;
+  }
+
+  public setCode(code: string): void {
+    this.code = code;
   }
 }

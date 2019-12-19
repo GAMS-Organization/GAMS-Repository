@@ -10,13 +10,16 @@ export default class Sector {
   public id: number;
   @Column({ unique: true })
   public name: string;
+  @Column()
+  public code: string;
   @OneToMany(_type => Area, area => area.sector)
   public areas: Area[];
   @OneToMany(_type => Asset, asset => asset.sector)
   public assets: Asset[];
 
-  public constructor(name: string) {
+  public constructor(name: string, code: string) {
     this.name = name;
+    this.code = code;
   }
 
   public getId(): number {
@@ -27,7 +30,15 @@ export default class Sector {
     return this.name;
   }
 
+  public getCode(): string {
+    return this.code;
+  }
+
   public setName(name: string): void {
     this.name = name;
+  }
+
+  public setCode(code: string): void {
+    this.code = code;
   }
 }

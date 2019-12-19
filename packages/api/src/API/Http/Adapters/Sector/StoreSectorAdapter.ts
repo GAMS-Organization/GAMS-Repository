@@ -20,6 +20,6 @@ export default class StoreSectorAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreSectorCommand(request.body.name);
+    return new StoreSectorCommand(request.body.name, request.body.code);
   }
 }

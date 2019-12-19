@@ -12,7 +12,7 @@ export default class StoreSectorHandler {
   }
 
   public async execute(command: StoreSectorCommand): Promise<Sector> {
-    const sector = new Sector(command.getName());
+    const sector = new Sector(command.getName(), command.getCode());
     return await this.sectorRepository.persist(sector);
   }
 }

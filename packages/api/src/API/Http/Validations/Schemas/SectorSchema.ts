@@ -9,4 +9,11 @@ export const storeSectorSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
+  code: Joi.string()
+    .min(2)
+    .max(5)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
 };

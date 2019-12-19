@@ -25,7 +25,7 @@ export default class StoreAreaHandler {
     if (!sector) {
       throw new EntityNotFoundException(`Sector with name: ${command.getSector()} not found`);
     }
-    const area = new Area(command.getName(), sector);
+    const area = new Area(command.getName(), command.getCode(), sector);
     return await this.areaRepository.persist(area);
   }
 }
