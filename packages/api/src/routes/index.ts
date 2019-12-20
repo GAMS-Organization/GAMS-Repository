@@ -8,6 +8,7 @@ import sector from './sector';
 import educations from './educations';
 import area from './area';
 import entry from './entry';
+import service from './service';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import DIContainer from '../Infrastructure/DI/di.config';
 import TrialAction from '../API/Http/Actions/TrialAction';
@@ -34,6 +35,8 @@ router.use('/entry', entry);
 router.use('/sector', sector);
 
 router.use('/area', area);
+
+router.use('/service', service);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

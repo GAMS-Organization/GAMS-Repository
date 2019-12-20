@@ -1,8 +1,8 @@
 /* eslint-disable new-cap */
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import Service from './Service';
 import Sector from './Sector';
 import Asset from './Asset';
+import AreaService from './AreaService';
 
 @Entity('area')
 // eslint-disable-next-line require-jsdoc
@@ -13,10 +13,10 @@ export default class Area {
   public name: string;
   @Column()
   public code: string;
-  @OneToMany(_type => Service, service => service.area)
-  public services: Service[];
   @ManyToOne(_type => Sector, sector => sector.areas)
   public sector: Sector;
+  @OneToMany(_type => AreaService, areaServices => areaServices.area)
+  public areaServices: AreaService[];
   @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
 

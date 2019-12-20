@@ -144,6 +144,12 @@ import StoreSectorHandler from '../../Application/Handlers/Sector/StoreSectorHan
 import StoreAreaHandler from '../../Application/Handlers/Area/StoreAreaHandler';
 import StoreAreaAdapter from '../../API/Http/Adapters/Area/StoreAreaAdapter';
 import StoreAreaAction from '../../API/Http/Actions/Area/StoreAreaAction';
+import StoreServiceAction from '../../API/Http/Actions/Service/StoreServiceAction';
+import StoreServiceAdapter from '../../API/Http/Adapters/Service/StoreServiceAdapter';
+import StoreServiceHandler from '../../Application/Handlers/Service/StoreServiceHandler';
+import AreaServiceService from '../../Domain/Services/AreaServiceService';
+import IAreaServiceRepository from '../../Domain/Interfaces/IAreaServiceRepository';
+import TypeAreaServiceRepository from '../../Persistence/TypeORM/Repositories/TypeAreaServiceRepository';
 
 const DIContainer = new Container();
 
@@ -193,6 +199,8 @@ DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 
+DIContainer.bind<StoreServiceAction>(StoreServiceAction).toSelf();
+
 /**
  * Adapters
  */
@@ -234,6 +242,8 @@ DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
 DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
+
+DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
 
 /**
  * Handlers
@@ -277,6 +287,8 @@ DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
 
+DIContainer.bind<StoreServiceHandler>(StoreServiceHandler).toSelf();
+
 /*
  * Services
  */
@@ -289,6 +301,7 @@ DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
 DIContainer.bind<StockService>(StockService).toSelf();
 DIContainer.bind<EntryService>(EntryService).toSelf();
+DIContainer.bind<AreaServiceService>(AreaServiceService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
@@ -310,6 +323,7 @@ DIContainer.bind<IRooftopperProfileRepository>(INTERFACES.IRooftopperProfileRepo
 DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProductRepository);
 DIContainer.bind<ISectorRepository>(INTERFACES.ISectorRepository).to(TypeSectorRepository);
 DIContainer.bind<IAreaRepository>(INTERFACES.IAreaRepository).to(TypeAreaRepository);
+DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(TypeAreaServiceRepository);
 DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServiceRepository);
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);

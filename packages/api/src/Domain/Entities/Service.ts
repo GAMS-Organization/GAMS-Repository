@@ -1,8 +1,8 @@
 /* eslint-disable new-cap */
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import Element from './Element';
-import Area from './Area';
 import Asset from './Asset';
+import AreaService from './AreaService';
 
 @Entity('service')
 // eslint-disable-next-line require-jsdoc
@@ -11,15 +11,18 @@ export default class Service {
   public id: number;
   @Column({ unique: true })
   public name: string;
+  @Column()
+  public code: string;
   @OneToMany(_type => Element, element => element.service)
   public elements: Element[];
-  @ManyToOne(_type => Area, area => area.services)
-  public area: Area;
+  @OneToMany(_type => AreaService, areaServices => areaServices.service)
+  public areaServices: AreaService[];
   @OneToMany(_type => Asset, asset => asset.service)
   public assets: Asset[];
 
-  public constructor(name: string) {
+  public constructor(name: string, code: string) {
     this.name = name;
+    this.code = code;
   }
 
   public getId(): number {
@@ -30,7 +33,19 @@ export default class Service {
     return this.name;
   }
 
+  public getCode(): string {
+    return this.code;
+  }
+
   public setName(name: string): void {
     this.name = name;
+  }
+
+  public setCode(code: string): void {
+    this.code = code;
+  }
+
+  public getAreaService(): AreaService[] {
+    return this.areaServices;
   }
 }
