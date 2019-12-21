@@ -29,6 +29,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
+import ViewEntryPurchase from './ViewEntryPurchase.jsx';
 
 class EntryPurchase extends React.Component {
   constructor(props) {
@@ -59,13 +60,11 @@ class EntryPurchase extends React.Component {
 
   handleClickUpdate(prop) {
     this.setState({
-      stock: {
-        id: prop[0],
-        fecha: prop[1],
-        producto: prop[2],
-        cantidad: prop[3],
-        proveedor: prop[4],
-        observacion: prop[5],
+      entry: {
+        id: prop[5],
+        quantity: prop[6],
+        provider: prop[7],
+        product: prop[8],
       },
     });
     this.child.showModal();
@@ -91,6 +90,7 @@ class EntryPurchase extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <ViewEntryPurchase entry={this.state.entry} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
