@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import TypeRepository from './TypeRepository';
 import IAssetRepository from '../../../Domain/Interfaces/IAssetRepository';
-import Asset from '../../../Domain/Entities/Element';
+import Asset from '../../../Domain/Entities/Asset';
 
 @injectable()
 export default class TypeAssetRepository extends TypeRepository implements IAssetRepository {
@@ -19,6 +19,10 @@ export default class TypeAssetRepository extends TypeRepository implements IAsse
 
   public async findOneById(id: number): Promise<Asset> {
     return await this.repository(Asset).findOne(id);
+  }
+
+  public async findOneByCode(code: string): Promise<Asset> {
+    return await this.repository(Asset).findOne({where: {code}});
   }
 
   public async findByWorkOrderId(id: number): Promise<Asset> {

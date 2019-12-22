@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import * as customErrorMessages from '../Utils/BaseErrorSchema';
 
-export const storeAreaSchema = {
+export const storeElementSchema = {
   name: Joi.string()
     .min(3)
     .max(100)
@@ -16,15 +16,16 @@ export const storeAreaSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  sector: Joi.string()
+  service: Joi.string()
     .min(3)
     .max(100)
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  services: Joi.array()
-    .items(Joi.string())
+  description: Joi.string()
+    .min(0)
+    .max(100)
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);

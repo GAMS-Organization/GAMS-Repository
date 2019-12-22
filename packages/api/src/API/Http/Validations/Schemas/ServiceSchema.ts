@@ -16,11 +16,4 @@ export const storeServiceSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  area: Joi.string()
-    .min(3)
-    .max(100)
-    .required()
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
 };

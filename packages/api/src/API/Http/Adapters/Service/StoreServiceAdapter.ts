@@ -20,6 +20,6 @@ export default class StoreServiceAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreServiceCommand(request.body.name, request.body.code, request.body.area);
+    return new StoreServiceCommand(request.body.name, request.body.code);
   }
 }
