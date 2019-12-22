@@ -5,10 +5,10 @@ import StoreAssetAction from '../API/Http/Actions/Asset/StoreAssetAction';
 import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
-import IndexProductsAction from '../API/Http/Actions/Product/IndexProductsAction';
 import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
-import DestroyProductAction from '../API/Http/Actions/Product/DestroyProductAction';
 import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
+import IndexAssetsAction from '../API/Http/Actions/Asset/IndexAssetsAction';
+import DestroyAssetAction from '../API/Http/Actions/Asset/DestroyAssetAction';
 
 const router = express.Router();
 
@@ -19,8 +19,8 @@ router.get(
         },
          */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
-    await indexProductAction.execute(request, response);
+    const indexAssetsAction: IndexAssetsAction = DIContainer.resolve<IndexAssetsAction>(IndexAssetsAction);
+    await indexAssetsAction.execute(request, response);
   }),
 );
 
@@ -71,8 +71,8 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
-    await destroyProductAction.execute(request, response);
+    const destroyAssetAction: DestroyAssetAction = DIContainer.resolve<DestroyAssetAction>(DestroyAssetAction);
+    await destroyAssetAction.execute(request, response);
   }),
 );
 

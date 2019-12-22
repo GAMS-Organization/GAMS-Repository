@@ -37,6 +37,20 @@ export default class AssetService {
     this.assetRepository = assetRepository;
   }
 
+  public async returnAllPaginated(
+    page: number = 1,
+    itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
+  ): Promise<PaginatedSuccessData> {
+    const assetQuantity = await this.assetRepository.count();
+    const assets = await this.assetRepository.findAllPaginated(itemsPerPage * page - itemsPerPage, itemsPerPage);
+    return {
+      data: assets,
+      dataLength: assets.length,
+      totalDataQuantity: assetQuantity,
+      totalPages: Math.ceil(assetQuantity / itemsPerPage),
+    };
+  }
+
   public async setRelationsToAsset(commandSector: string, commandArea: string, commandService: string, commandElement: string ): Promise<Asset> {
     const sector = await this.sectorRepository.findOneBySectorName(commandSector);
     if (!sector) {

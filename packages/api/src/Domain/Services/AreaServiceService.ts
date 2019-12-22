@@ -4,6 +4,7 @@ import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import AreaService from '../Entities/AreaService';
 import Area from '../Entities/Area';
 import IServiceRepository from '../Interfaces/IServiceRepository';
+import Service from '../Entities/Service';
 
 @injectable()
 export default class AreaServiceService {
@@ -32,5 +33,31 @@ export default class AreaServiceService {
     }
 
     return area
+  }
+
+  public async destroyRelationsByArea(area: Area){
+    const relations = await this.areaServiceRepository.findByAreaName(area.getId());
+    let error = false;
+    for(const relation of relations){
+      let result = await this.areaServiceRepository.destroy(relation);
+      if(!result){
+        error = true;
+      }
+    }
+
+    return !error;
+  }
+
+  public async destroyRelationsByService(service: Service){
+    const relations = await this.areaServiceRepository.findByServiceName(service.getId());
+    let error = false;
+    for(const relation of relations){
+      let result = await this.areaServiceRepository.destroy(relation);
+      if(!result){
+        error = true;
+      }
+    }
+
+    return !error;
   }
 }

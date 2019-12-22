@@ -5,7 +5,7 @@ export default interface ISectorRepository {
   findOneById(id: number): Promise<Sector>;
   findAllPaginated(initialIndex: number, limit: number): Promise<Sector[]>;
   count(): Promise<number>;
-  findByAssetId(id: number): Promise<Sector[]>;
+  findByAssetId(id: number): Promise<Sector>;
   findOneBySectorName(name: string): Promise<Sector>;
   persist(sector: Sector): Promise<Sector>;
   destroy(sector: Sector): Promise<boolean>;

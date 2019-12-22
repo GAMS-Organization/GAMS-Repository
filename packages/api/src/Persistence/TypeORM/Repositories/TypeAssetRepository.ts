@@ -10,7 +10,7 @@ export default class TypeAssetRepository extends TypeRepository implements IAsse
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Asset[]> {
-    return await this.repository(Asset).find({ skip: initialIndex, take: limit });
+    return await this.repository(Asset).find({ skip: initialIndex, take: limit, relations: ['sector', 'area', 'service', 'element']});
   }
 
   public async count(): Promise<number> {

@@ -4,11 +4,11 @@ import DIContainer from '../Infrastructure/DI/di.config';
 import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
-import IndexProductsAction from '../API/Http/Actions/Product/IndexProductsAction';
 import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
-import DestroyProductAction from '../API/Http/Actions/Product/DestroyProductAction';
 import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 import StoreElementAction from '../API/Http/Actions/Element/StoreElementAction';
+import IndexElementsAction from '../API/Http/Actions/Element/IndexElementsAction';
+import DestroyElementAction from '../API/Http/Actions/Element/DestroyElementAction';
 
 const router = express.Router();
 
@@ -19,8 +19,8 @@ router.get(
         },
          */
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
-    await indexProductAction.execute(request, response);
+    const indexElementsAction: IndexElementsAction = DIContainer.resolve<IndexElementsAction>(IndexElementsAction);
+    await indexElementsAction.execute(request, response);
   }),
 );
 
@@ -71,8 +71,8 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
-    await destroyProductAction.execute(request, response);
+    const destroyElementAction: DestroyElementAction = DIContainer.resolve<DestroyElementAction>(DestroyElementAction);
+    await destroyElementAction.execute(request, response);
   }),
 );
 

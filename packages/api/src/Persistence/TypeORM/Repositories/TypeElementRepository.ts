@@ -21,8 +21,12 @@ export default class TypeElementRepository extends TypeRepository implements IEl
     return await this.repository(Element).findOne(id);
   }
 
-  public async findByAssetId(id: number): Promise<Element[]> {
+  public async findByAssetId(id: number): Promise<Element> {
     return await this.repository(Element).findOne({ where: { asset: id }, relations: ['asset'] });
+  }
+
+  public async findByServiceId(id: number): Promise<Element[]> {
+    return await this.repository(Element).find({ where: { service: id }, relations: ['service'] });
   }
 
   public async findOneByElementName(name: string): Promise<Element> {
