@@ -34,6 +34,8 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into sector values (16, 'Parque sur', 'P03');`);
     await queryRunner.query(`insert into sector values (18, 'Parque playon', 'P04');`);
     await queryRunner.query(`insert into sector values (19, 'Parque lab. exteriores', 'Plab');`);
+    await queryRunner.query(`insert into sector values (20, 'Parque estacionamiento', 'P05');`);
+
     //Create Service
     await queryRunner.query(`insert into service values (1, 'Agua potable', 'Ag');`);
     await queryRunner.query(`insert into service values (2, 'Aire acondicionado', 'AA');`);
