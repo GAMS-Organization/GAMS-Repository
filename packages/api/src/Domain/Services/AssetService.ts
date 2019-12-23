@@ -96,4 +96,40 @@ export default class AssetService {
 
     return assetCode;
   }
+
+  public async deleteFromSector(sector: Sector){
+    const assets = await this.assetRepository.findBySectorId(sector.getId());
+    if(assets){
+      for(const asset of assets){
+        await this.assetRepository.destroy(asset);
+      }
+    }
+  }
+
+  public async deleteFromArea(area: Area){
+    const assets = await this.assetRepository.findByAreaId(area.getId());
+    if(assets){
+      for(const asset of assets){
+        await this.assetRepository.destroy(asset);
+      }
+    }
+  }
+
+  public async deleteFromService(service: Service){
+    const assets = await this.assetRepository.findByServiceId(service.getId());
+    if(assets){
+      for(const asset of assets){
+        await this.assetRepository.destroy(asset);
+      }
+    }
+  }
+
+  public async deleteFromElement(element: Element){
+    const assets = await this.assetRepository.findByElementId(element.getId());
+    if(assets){
+      for(const asset of assets){
+        await this.assetRepository.destroy(asset);
+      }
+    }
+  }
 }
