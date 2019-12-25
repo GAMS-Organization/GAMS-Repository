@@ -1,14 +1,14 @@
 export default class StoreEntryCommand {
   private date: string;
   private observations: string;
-  private products: string[];
+  private products: number[];
   private quantities: number[];
   private providers: string[];
 
   public constructor(
     date: string,
     observations: string,
-    products: string[],
+    products: number[],
     quantities: number[],
     providers: string[],
   ) {
@@ -27,7 +27,7 @@ export default class StoreEntryCommand {
     return this.observations;
   }
 
-  public getProducts(): string[] {
+  public getProducts(): number[] {
     return this.products;
   }
 

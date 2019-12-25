@@ -18,7 +18,7 @@ class entryPurchaseStock {
   async list() {
     let listResponse;
     try {
-      listResponse = await Api.get('entry/');
+      listResponse = await Api.get(`entry/`);
     } catch (err) {
       listResponse = err;
     }

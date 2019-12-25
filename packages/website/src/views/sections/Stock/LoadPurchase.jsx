@@ -1,23 +1,67 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import serviceProduct from '../../../services/api/products';
+import serviceEntry from '../../../services/api/entryPurchaseStock';
 import Button from '../../components/CustomButtons/Button';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
+import Snackbar from '../../components/Snackbar/Snackbar';
+import AddAlert from '@material-ui/icons/AddAlert';
+import CustomInput from '../../components/CustomInput/CustomInput';
+import CardBody from '../../components/Card/CardBody';
+import Card from '../../components/Card/Card';
 
 class LoadPurchase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       columns: [],
-      data: [
-        { product: 1, quantity: 2, provider: "Electro Panta"},
-      ],
+      data: [],
+      errors: {},
+      notification: false,
     };
   }
 
+  closeNotification = () => {
+    this.setState({ notification: false, errors: {} });
+  };
+
+  handleConfirmPurchaseClick = async (e) => {
+    const products = [];
+    const quantities = [];
+    const providers = [];
+    for(const purchase of this.state.data){
+      products.push(parseInt(purchase.product));
+      quantities.push(parseInt(purchase.quantity));
+      providers.push(purchase.provider);
+    }
+
+    const date = e.target.elements.namedItem("date").value;
+    const observations = e.target.elements.namedItem("observations").value;
+
+    const request = {
+      date: date,
+      observations: observations,
+      products: products,
+      quantities: quantities,
+      providers: providers,
+    };
+
+    console.log(request);
+
+    const response = await serviceEntry.create(request);
+
+    if (response.type === 'CREATED_SUCCESFUL') {
+      this.setState({ notification: true });
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
+  };
+
   async componentWillMount() {
-    const response = await serviceProduct.list();
+    const page = 1;
+    const itemsPerPage = 30;
+    const response = await serviceProduct.list(page, itemsPerPage);
     let dataProduct = {};
     for (const product of response.data.items) {
       dataProduct[product.id] = product.name;
@@ -31,8 +75,22 @@ class LoadPurchase extends React.Component {
   }
 
   render() {
+
     return (
       <GridContainer>
+        <Snackbar
+          place="tr"
+          color={this.state.errors.code ? 'danger' : 'success'}
+          icon={AddAlert}
+          message={
+            this.state.errors.code
+              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
+              : 'Entrada registrada correctamente'
+          }
+          open={this.state.notification}
+          closeNotification={this.closeNotification}
+          close
+        />
         <GridItem xs={12} sm={12} md={6}>
       <MaterialTable
         title="Nueva entrada"
@@ -86,9 +144,47 @@ class LoadPurchase extends React.Component {
             }),
         }}
       />
-      <Button>
-        hola
-      </Button>
+      <Card>
+      <CardBody>
+          <form onSubmit={this.handleConfirmPurchaseClick}>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={4}>
+                <CustomInput
+                  labelText="date"
+                  id="date"
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: "",
+                    name: 'date',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <CustomInput
+                  labelText="observations"
+                  id="observations"
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    required: true,
+                    defaultValue: "",
+                    name: 'observations',
+                  }}
+                />
+              </GridItem>
+              <GridItem xs={12} sm={12} md={4}>
+                <Button type="submit" color="gamsRed">
+                  Confirmar compra
+                </Button>
+              </GridItem>
+            </GridContainer>
+          </form>
+      </CardBody>
+      </Card>
         </GridItem>
       </GridContainer>
     );

@@ -28,3 +28,5 @@ export default class ShowProductByNameAction {
             .json(success(presenter.getData(), 'ShowProductAction: Product profile has been retrieved'));
     }
 }
+
+
