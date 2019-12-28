@@ -10,6 +10,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
+import CardFooter from '../../components/Card/CardFooter';
 
 class LoadPurchase extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class LoadPurchase extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  handleConfirmPurchaseClick = async (e) => {
+  handleConfirmPurchaseClick = async () => {
     const products = [];
     const quantities = [];
     const providers = [];
@@ -36,12 +37,10 @@ class LoadPurchase extends React.Component {
       providers.push(purchase.provider);
     }
 
-    const date = e.target.elements.namedItem("date").value;
-    const observations = e.target.elements.namedItem("observations").value;
 
     const request = {
-      date: date,
-      observations: observations,
+      date: "date",
+      observations: "observations",
       products: products,
       quantities: quantities,
       providers: providers,
@@ -51,6 +50,8 @@ class LoadPurchase extends React.Component {
 
     const response = await serviceEntry.create(request);
 
+
+    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
@@ -177,7 +178,7 @@ class LoadPurchase extends React.Component {
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <Button type="submit" color="gamsRed">
+                <Button onClick={this.handleConfirmPurchaseClick} color="gamsRed">
                   Confirmar compra
                 </Button>
               </GridItem>
