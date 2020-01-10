@@ -25,7 +25,6 @@ class UpdateProductSection extends React.Component {
     super(props);
     this.state = {
       product: {},
-      //rolSelected: 'user',
       errors: {},
       open: false,
       notification: false,

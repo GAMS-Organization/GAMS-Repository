@@ -25,7 +25,6 @@ class ViewEntryPurchase extends React.Component {
     super(props);
     this.state = {
       entry: {},
-      //rolSelected: 'user',
       errors: {},
       open: false,
       notification: false,
