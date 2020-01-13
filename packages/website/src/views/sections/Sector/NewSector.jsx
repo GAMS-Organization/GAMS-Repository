@@ -16,7 +16,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceProduct from '../../../services/api/products';
+import serviceSector from '../../../services/api/sector';
 import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
@@ -28,7 +28,7 @@ class NewSector extends React.Component {
       errors: {},
       notification: false,
     };
-    //this.createSector = this.createSector.bind(this);
+    this.createSector = this.createSector.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -40,10 +40,10 @@ class NewSector extends React.Component {
     this.setState({ notification: false, errors: {} });
   }
 
-  /*async createSector(e) {
+  async createSector(e) {
     e.preventDefault();
 
-    const fields = ['name'];
+    const fields = ['name, code'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -51,17 +51,17 @@ class NewSector extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    const response = await serviceProduct.create(formValues);
+    const response = await serviceSector.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }*/
+  }
 
   render() {
-    const { classes, name, codigo } = this.props;
+    const { classes, name, code } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-sector">
@@ -106,15 +106,15 @@ class NewSector extends React.Component {
                     <GridItem xs={12} sm={12} md={10}>
                       <CustomInput
                         labelText="Codigo"
-                        id="codigo"
-                        error={errors.codigo}
+                        id="code"
+                        error={errors.code}
                         formControlProps={{
                           fullWidth: true,
                         }}
                         inputProps={{
                           required: true,
-                          defaultValue: codigo,
-                          name: 'codigo',
+                          defaultValue: code,
+                          name: 'code',
                         }}
                       />
                     </GridItem>

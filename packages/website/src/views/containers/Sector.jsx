@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewSector from '../sections/Sector/NewSector';
-import SectorTable from '../sections/Sector/SectorTable';
+import SectorTableSection from '../sections/Sector/SectorTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -39,7 +39,7 @@ class Sector extends React.Component {
     return (
       <div>
         <NewSector />
-        <SectorTable />
+        <SectorTableSection />
       </div>
     );
   }

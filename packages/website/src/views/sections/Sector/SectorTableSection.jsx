@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ProductTable from '../../components/Table/ProductTable.jsx';
+import SectorTable from '../../components/Table/SectorTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceProduct from '../../../services/api/products';
+import serviceSector from '../../../services/api/sector';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,7 +41,7 @@ const styles = {
   },
 };
 
-class SectorTable extends React.Component {
+class SectorTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,14 +50,14 @@ class SectorTable extends React.Component {
   }
 
   /*async componentWillMount() {
-    const response = await serviceProduct.list();
-    let products = [];
-    for (const product of response.data.items) {
-      let dataProduct = [product.id.toString(), product.name];
-      products.push(dataProduct);
+    const response = await serviceSector.list();
+    let sectors = [];
+    for (const sector of response.data.items) {
+      let dataSector = [sector.id.toString(), sector.name, sector.code];
+      sectors.push(dataSector);
     }
 
-    this.setState({ product: products });
+    this.setState({ sector: sectors });
   }*/
 
   render() {
@@ -71,7 +71,7 @@ class SectorTable extends React.Component {
               <p className={classes.cardCategoryWhite}>Aquí se listan todos los sectores</p>
             </CardHeader>
             <CardBody>
-              <ProductTable
+              <SectorTable
                 tableHeaderColor="gamsBlue"
                 tableHead={['ID', 'Nombre', 'Codigo']}
                 tableData={this.state.sector}
@@ -84,4 +84,4 @@ class SectorTable extends React.Component {
   }
 }
 
-export default withStyles(styles)(SectorTable);
+export default withStyles(styles)(SectorTableSection);
