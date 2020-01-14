@@ -137,6 +137,7 @@ class NewSector extends React.Component {
 NewSector.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
+  code: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
