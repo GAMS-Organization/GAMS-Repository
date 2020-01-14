@@ -8,6 +8,7 @@ import Notifications from '@material-ui/icons/Notifications';
 import Register from '@material-ui/icons/GroupAdd';
 import Login from '@material-ui/icons/LockOpen';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import Build from '@material-ui/icons/Build';
 // core components/views for Admin layout
 import DashboardPage from 'views/containers/Dashboard.jsx';
 import UsersView from 'views/containers/UsersView.jsx';
@@ -19,6 +20,7 @@ import NotificationsPage from 'views/containers/Notifications.jsx';
 import Products from 'views/containers/Products';
 import Stock from 'views/containers/Stock.jsx';
 import Sector from 'views/containers/Sector.jsx';
+import Service from 'views/containers/Service.jsx';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -59,6 +61,13 @@ const dashboardRoutes = [
     name: 'Sector',
     icon: LocationOn,
     component: Sector,
+    layout: '/admin',
+  },
+  {
+    path: '/Service',
+    name: 'Servicio',
+    icon: Build,
+    component: Service,
     layout: '/admin',
   },
   {
