@@ -48,6 +48,7 @@ class Sector extends React.Component {
 Sector.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
+  code: PropTypes.string,
   email: PropTypes.string,
 };
 
