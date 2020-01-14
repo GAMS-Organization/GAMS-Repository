@@ -80,10 +80,10 @@ class NewServiceSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createProduct}>
+            <form onSubmit={this.createService}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo sector</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Servicio</h4>
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
                 <CardBody>
@@ -134,7 +134,7 @@ class NewServiceSection extends React.Component {
   }
 }
 
-NewSector.propTypes = {
+NewServiceSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
