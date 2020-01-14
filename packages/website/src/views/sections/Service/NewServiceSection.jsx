@@ -137,6 +137,7 @@ class NewServiceSection extends React.Component {
 NewServiceSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
+  code: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
