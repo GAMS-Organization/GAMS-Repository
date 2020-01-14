@@ -17,7 +17,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceSector from '../../../services/api/sector';
-import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
+import newSectorStyle from '../../../styles/jss/material-dashboard-react/sections/newSectorStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 
@@ -80,7 +80,7 @@ class NewSector extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createProduct}>
+            <form onSubmit={this.createSector}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo sector</h4>
@@ -143,4 +143,4 @@ NewSector.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(newProductStyle)(NewSector);
+export default withStyles(newSectorStyle)(NewSector);
