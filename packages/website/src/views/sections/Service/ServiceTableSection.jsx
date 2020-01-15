@@ -49,7 +49,7 @@ class ServiceTableSection extends React.Component {
     };
   }
 
-  async componentWillMount() {
+  /*async componentWillMount() {
     const response = await serviceService.list();
     let services = [];
     for (const service of response.data.items) {
@@ -58,7 +58,7 @@ class ServiceTableSection extends React.Component {
     }
 
     this.setState({ service: services });
-  }
+  }*/
 
   render() {
     const { classes } = this.props;
