@@ -16,8 +16,8 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceSector from '../../../services/api/sector';
-import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
+import serviceService from '../../../services/api/service';
+import newServiceStyle from '../../../styles/jss/material-dashboard-react/sections/newServiceStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 
@@ -40,7 +40,7 @@ class NewServiceSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   }
 
-  /*async createService(e) {
+  async createService(e) {
     e.preventDefault();
 
     const fields = ['name, code'];
@@ -51,14 +51,14 @@ class NewServiceSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    const response = await serviceSector.create(formValues);
+    const response = await serviceService.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }*/
+  }
 
   render() {
     const { classes, name, code } = this.props;
@@ -144,4 +144,4 @@ NewServiceSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(newProductStyle)(NewServiceSection);
+export default withStyles(newServiceStyle)(NewServiceSection);

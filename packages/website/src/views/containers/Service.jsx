@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import NewSector from '../sections/Sector/NewSector';
-import SectorTableSection from '../sections/Sector/SectorTableSection';
+import NewServiceSection from '../sections/Service/NewServiceSection';
+import ServiceTableSection from '../sections/Service/ServiceTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -36,13 +36,19 @@ class Service extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <NewServiceSection />
+        <ServiceTableSection />
+      </div>
+    );
   }
 }
 
 Service.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
+  code: PropTypes.string,
   email: PropTypes.string,
 };
 
