@@ -12,7 +12,7 @@ import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
 import CardFooter from '../../components/Card/CardFooter';
 
-class LoadPurchase extends React.Component {
+class PurchaseTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,9 @@ class LoadPurchase extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  handleConfirmPurchaseClick = async () => {
+  handleConfirmPurchaseClick = async e => {
+    e.preventDefault();
+
     const products = [];
     const quantities = [];
     const providers = [];
@@ -37,10 +39,15 @@ class LoadPurchase extends React.Component {
       providers.push(purchase.provider);
     }
 
+    const formElements = e.target.elements;
+
+
+    const date = formElements.namedItem('date').value;
+    const observations = formElements.namedItem('observations').value;
 
     const request = {
-      date: "date",
-      observations: "observations",
+      date: date,
+      observations: observations,
       products: products,
       quantities: quantities,
       providers: providers,
@@ -151,12 +158,13 @@ class LoadPurchase extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={4}>
                 <CustomInput
-                  labelText="date"
+                  labelText="Fecha"
                   id="date"
                   formControlProps={{
                     fullWidth: true,
                   }}
                   inputProps={{
+                    type: 'date',
                     required: true,
                     defaultValue: "",
                     name: 'date',
@@ -165,7 +173,7 @@ class LoadPurchase extends React.Component {
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
                 <CustomInput
-                  labelText="observations"
+                  labelText="Observaciones"
                   id="observations"
                   formControlProps={{
                     fullWidth: true,
@@ -178,7 +186,7 @@ class LoadPurchase extends React.Component {
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={4}>
-                <Button onClick={this.handleConfirmPurchaseClick} color="gamsRed">
+                <Button type='submit' color="gamsRed">
                   Confirmar compra
                 </Button>
               </GridItem>
@@ -192,6 +200,6 @@ class LoadPurchase extends React.Component {
   }
 }
 
-export default LoadPurchase;
+export default PurchaseTable;
 
 
