@@ -5,23 +5,23 @@ import StoreProductAction from '../API/Http/Actions/Product/StoreProductAction';
 import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
-import IndexProductsAction from "../API/Http/Actions/Product/IndexProductsAction";
-import ShowProductAction from "../API/Http/Actions/Product/ShowProductAction";
-import DestroyProductAction from "../API/Http/Actions/Product/DestroyProductAction";
-import ShowProductByNameAction from "../API/Http/Actions/Product/ShowProductByNameAction";
+import IndexProductsAction from '../API/Http/Actions/Product/IndexProductsAction';
+import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
+import DestroyProductAction from '../API/Http/Actions/Product/DestroyProductAction';
+import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 
 const router = express.Router();
 
 router.get(
-    '/',
-    /*(req, res, next): void => {
+  '/',
+  /*(req, res, next): void => {
       authMiddleware(req, res, next, ['admin']);
     },
      */
-    asyncMiddleware(async (request: express.Request, response: express.Response) => {
-        const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
-        await indexProductAction.execute(request, response);
-    }),
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
+    await indexProductAction.execute(request, response);
+  }),
 );
 
 router.post(
@@ -33,15 +33,15 @@ router.post(
 );
 
 router.get(
-    '/:id([0-9]+)',/*
+  '/:id([0-9]+)' /*
     (req, res, next): void => {
         authMiddleware(req, res, next, ['admin']);
     },
-    */
-    asyncMiddleware(async (request: express.Request, response: express.Response) => {
-        const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
-        await showProductAction.execute(request, response);
-    }),
+    */,
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
+    await showProductAction.execute(request, response);
+  }),
 );
 
 router.put(
@@ -59,23 +59,21 @@ router.put(
 );
 
 router.get(
-    '/name/:name([a-z0-9-]+)',
-    asyncMiddleware(async (request: express.Request, response: express.Response) => {
-        const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
-            ShowProductByNameAction,
-        );
-        await showProductByNameAction.execute(request, response);
-    }),
+  '/name/:name([a-z0-9-]+)',
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
+      ShowProductByNameAction,
+    );
+    await showProductByNameAction.execute(request, response);
+  }),
 );
 
 router.delete(
-    '/:id([0-9]+)',
-    asyncMiddleware(async (request: express.Request, response: express.Response) => {
-        const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(
-            DestroyProductAction,
-        );
-        await destroyProductAction.execute(request, response);
-    }),
+  '/:id([0-9]+)',
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
+    await destroyProductAction.execute(request, response);
+  }),
 );
 
 export default router;

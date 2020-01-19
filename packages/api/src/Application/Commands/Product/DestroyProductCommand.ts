@@ -1,11 +1,11 @@
 export default class DestroyProductCommand {
-    private id: number;
+  private id: number;
 
-    public constructor(id: number) {
-        this.id = id;
-    }
+  public constructor(id: number) {
+    this.id = id;
+  }
 
-    public getId(): number {
-        return this.id;
-    }
+  public getId(): number {
+    return this.id;
+  }
 }
