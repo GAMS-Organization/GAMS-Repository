@@ -7,7 +7,7 @@ import { injectable } from 'inversify';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
 
 @injectable()
-export default class StoreUsersAction {
+export default class StoreProductAction {
   private adapter: StoreProductAdapter;
   private handler: StoreProductHandler;
 

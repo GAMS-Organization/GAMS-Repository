@@ -1,11 +1,11 @@
 export default class ShowProductByNameCommand {
-    private name: string;
+  private name: string;
 
-    public constructor(name: string) {
-        this.name = name;
-    }
+  public constructor(name: string) {
+    this.name = name;
+  }
 
-    public getName(): string {
-        return this.name;
-    }
+  public getName(): string {
+    return this.name;
+  }
 }

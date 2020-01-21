@@ -4,8 +4,12 @@ import auth from './auth';
 import stock from './stock';
 import products from './products';
 import rooftoppers from './rooftoppers';
-import educations from './educations';
+import sector from './sector';
+import area from './area';
+import element from './element';
+import asset from './asset';
 import entry from './entry';
+import service from './service';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import DIContainer from '../Infrastructure/DI/di.config';
 import TrialAction from '../API/Http/Actions/TrialAction';
@@ -21,13 +25,21 @@ router.use('/auth', auth);
 
 router.use('/rooftopper-profiles', rooftoppers);
 
-router.use('/educations', educations);
-
 router.use('/product', products);
 
 router.use('/stock', stock);
 
 router.use('/entry', entry);
+
+router.use('/sector', sector);
+
+router.use('/area', area);
+
+router.use('/element', element);
+
+router.use('/asset', asset);
+
+router.use('/service', service);
 
 router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
