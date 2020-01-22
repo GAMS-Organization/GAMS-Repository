@@ -17,7 +17,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceUser from '../../../services/api/user';
+import serviceArea from '../../../services/api/area';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import { InputLabel, Input } from '@material-ui/core';
@@ -36,7 +36,7 @@ class NewAreaSection extends React.Component {
       sector: [],
       selectedSector: [],
     };
-    //this.createArea = this.createArea.bind(this);
+    this.createArea = this.createArea.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -54,7 +54,7 @@ class NewAreaSection extends React.Component {
     const responseSector = await serviceSector.list();
     let sectors = [];
     for (const sector of responseSector.data.items) {
-      let dataSector = [sector.id.toString(), sector.name, sector.code];
+      let dataSector = sector.name;
       sectors.push(dataSector);
     }
 
@@ -73,7 +73,7 @@ class NewAreaSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   }
 
-  /*async createArea(e) {
+  async createArea(e) {
     e.preventDefault();
 
     const fields = ['name', 'code', 'sector', 'services'];
@@ -84,16 +84,18 @@ class NewAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.roles = [formValues.roles];
+    formValues.services = formValues.services.split(',');
+    console.log(formValues);
 
     const response = await serviceArea.create(formValues);
+    console.log(response);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }*/
+  }
 
   render() {
     const { classes, name, code, sector, services } = this.props;
@@ -168,6 +170,10 @@ class NewAreaSection extends React.Component {
                           value={this.state.selectedServices}
                           onChange={this.handleChangeServices}
                           input={<Input />}
+                          inputProps={{
+                            name: 'services',
+                            id: 'services',
+                          }}
                         >
                           {this.state.service.map(service => (
                             <MenuItem key={service} value={service}>
@@ -191,6 +197,10 @@ class NewAreaSection extends React.Component {
                           value={this.state.selectedSector}
                           onChange={this.handleChangeSectors}
                           input={<Input />}
+                          inputProps={{
+                            name: 'sector',
+                            id: 'sector',
+                          }}
                         >
                           {this.state.sector.map(sector => (
                             <MenuItem key={sector} value={sector}>
