@@ -11,7 +11,6 @@ class products {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return productAdapter.create(createResponse);
   }
 
@@ -27,7 +26,6 @@ class products {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
     return productAdapter.list(listResponse);
   }
 
@@ -40,7 +38,6 @@ class products {
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return productAdapter.update(updateResponse);
   }
 

@@ -40,8 +40,8 @@ export default class StockService {
   public async updateStock(stock: Stock, command: UpdateStockCommand): Promise<Stock> {
     if (stock.getQuantity() !== command.getQuantity()) {
       if (stock.getQuantity() < command.getQuantity()) {
-        const date = Date.now();
-        const entry = new Entry(date.toString(), `Ajuste de stock, producto: ${stock.getProduct()}`);
+        const date : Date = new Date(Date.now());
+        const entry = new Entry(date.toISOString(), `Ajuste de stock, producto: ${stock.getProduct().getName()}`);
         stock.setQuantity(command.getQuantity());
         stock.setMinimunQuantity(command.getMinimunQuantity());
         await this.entryRepository.persist(entry);

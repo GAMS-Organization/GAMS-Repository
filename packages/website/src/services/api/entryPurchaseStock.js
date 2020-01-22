@@ -11,7 +11,6 @@ class entryPurchaseStock {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return entryPurchaseStockAdapter.create(createResponse);
   }
 
@@ -44,7 +43,6 @@ class entryPurchaseStock {
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return entryPurchaseStockAdapter.update(updateResponse);
   }
 

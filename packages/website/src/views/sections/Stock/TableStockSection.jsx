@@ -68,7 +68,7 @@ class TableStockSection extends React.Component {
     let stocks = [];
     let exits = [];
     for (const entry of responseEntry.data.items) {
-      let dataEntry = [entry.id.toString(), entry.date, entry.observations];
+      let dataEntry = [entry.id.toString(), entry.date.slice(0,10), entry.observations];
       entries.push(dataEntry);
     }
 
@@ -83,7 +83,6 @@ class TableStockSection extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
@@ -113,8 +112,6 @@ class TableStockSection extends React.Component {
                       'Cantidad',
                       'Cant. Minima',
                       'Estado',
-                      'Fecha ultima entrada',
-                      'Fecha ultima salida',
                     ]}
                     tableData={this.state.stock}
                   />

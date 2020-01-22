@@ -11,7 +11,6 @@ class currentStock {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return currentStockAdapter.create(createResponse);
   }
 
@@ -22,20 +21,23 @@ class currentStock {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
     return currentStockAdapter.list(listResponse);
   }
 
   async update(dataCurrentStock) {
-    const body = dataCurrentStock;
-
+    const quantity = parseInt(dataCurrentStock.quantity);
+    const minimunQuantity = parseInt(dataCurrentStock.minimunQuantity);
+    const body = {
+      quantity,
+      minimunQuantity
+    };
+    console.log(body, "--------------------");
     let updateResponse;
     try {
-      updateResponse = await Api.put(`stock/${body.id}`, body);
+      updateResponse = await Api.put(`stock/${dataCurrentStock.id}`, body);
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return currentStockAdapter.update(updateResponse);
   }
 
