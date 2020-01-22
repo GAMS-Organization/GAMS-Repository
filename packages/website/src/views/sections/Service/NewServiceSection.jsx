@@ -43,7 +43,7 @@ class NewServiceSection extends React.Component {
   async createService(e) {
     e.preventDefault();
 
-    const fields = ['name, code'];
+    const fields = ['name', 'code'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
