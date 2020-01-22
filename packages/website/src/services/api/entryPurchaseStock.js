@@ -25,6 +25,16 @@ class entryPurchaseStock {
     return entryPurchaseStockAdapter.list(listResponse);
   }
 
+  async getById(idEntry) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`entry/${idEntry}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return entryPurchaseStockAdapter.list(listResponse);
+  }
+
   async update(dataEntryStock) {
     const body = dataEntryStock;
 

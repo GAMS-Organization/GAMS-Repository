@@ -32,7 +32,6 @@ class ViewEntryPurchase extends React.Component {
       rolClicked: false,
     };
     this.handleClose = this.handleClose.bind(this);
-    this.viewEntry = this.viewEntry.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -42,10 +41,6 @@ class ViewEntryPurchase extends React.Component {
 
   componentWillUnmount() {
     this.props.onRef(undefined);
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
   }
 
   handleClose() {
@@ -60,36 +55,58 @@ class ViewEntryPurchase extends React.Component {
     this.setState({ notification: false, errors: {} });
   }
 
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value, rolClicked: true });
+  showProducts = purchases => {
+    return purchases.map(purchase => {
+      return (
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText="Producto"
+              id="product"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                disabled: true,
+                defaultValue: purchase.product.name,
+                name: 'product',
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <CustomInput
+              labelText="Proveedor"
+              id="provider"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                disabled: true,
+                defaultValue: purchase.provider,
+                name: 'provider',
+              }}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={2}>
+            <CustomInput
+              labelText="Cantidad"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                disabled: true,
+                defaultValue: purchase.quantity,
+                name: 'quantity',
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+      );
+    });
   };
-
-  async viewEntry(e) {
-    e.preventDefault();
-
-    const fields = ['id', 'quantity', 'provider', 'product'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
-    formValues.roles = [formValues.roles];
-
-    const response = await serviceEntryPurchaseStock.update(formValues);
-
-    if (response.type === 'UPDATED_SUCCESFUL') {
-      this.setState({ notification: true, open: false, rolClicked: false });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  }
 
   render() {
     const { classes, entry, Transition } = this.props;
-    const { errors } = this.state;
-    const { id, quantity, provider, product } = entry;
     return (
       <div>
         <Snackbar
@@ -119,80 +136,47 @@ class ViewEntryPurchase extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar producto</h4>
+            <h4 className={classes.modalTitle}>Detalles de la entrada</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.viewEntry}>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
-                  <CustomInput
-                    labelText="Cantidad"
-                    id="quantity"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: quantity,
-                      name: 'quantity',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
-                  <CustomInput
-                    labelText="Proveedor"
-                    id="provider"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: provider,
-                      name: 'provider',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
-                  <CustomInput
-                    labelText="Producto"
-                    id="product"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: product,
-                      name: 'product',
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
-            </form>
+            {entry.purchases ? (
+              <>
+                {this.showProducts(entry.purchases)}
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={9}>
+                    <CustomInput
+                      labelText="Observaciones"
+                      id="observations"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        defaultValue: entry.observations,
+                        name: 'observations',
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                    <CustomInput
+                      labelText="Fecha"
+                      id="date"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        defaultValue: entry.date,
+                        name: 'date',
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </>
+            ) : null}
+            <Button color="gamsRed" onClick={this.handleClose}>
+              Cerrar
+            </Button>
           </DialogContent>
         </Dialog>
       </div>
