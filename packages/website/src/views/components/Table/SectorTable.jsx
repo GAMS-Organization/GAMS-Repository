@@ -123,7 +123,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteProduct.bind(this, prop)}
+                        onClick={this.deleteSector.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
