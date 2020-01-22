@@ -22,6 +22,7 @@ import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/se
 import Snackbar from '../../components/Snackbar/Snackbar';
 import { InputLabel, Input } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
+import serviceSector from '../../../services/api/sector';
 
 class NewAreaSection extends React.Component {
   constructor(props) {
@@ -32,13 +33,15 @@ class NewAreaSection extends React.Component {
       notification: false,
       service: [],
       selectedServices: [],
+      sector: [],
+      selectedSector: [],
     };
     //this.createArea = this.createArea.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
   async componentWillMount() {
+    //Llamada a servicios
     const response = await serviceService.list();
     let services = [];
     for (const service of response.data.items) {
@@ -46,15 +49,24 @@ class NewAreaSection extends React.Component {
       services.push(dataService);
     }
     this.setState({ service: services });
+
+    //Llamada a sectores
+    const responseSector = await serviceSector.list();
+    let sectors = [];
+    for (const sector of responseSector.data.items) {
+      let dataSector = [sector.id.toString(), sector.name, sector.code];
+      sectors.push(dataSector);
+    }
+
+    this.setState({ sector: sectors });
   }
 
-  handleChange = event => {
+  handleChangeServices = event => {
     this.setState({ selectedServices: event.target.value });
-    //this.state.selectedServices(event.target.value);
   };
 
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  handleChangeSectors = event => {
+    this.setState({ selectedSector: event.target.value });
   };
 
   closeNotification() {
@@ -86,7 +98,6 @@ class NewAreaSection extends React.Component {
   render() {
     const { classes, name, code, sector, services } = this.props;
     const { errors } = this.state;
-    console.log(this.handleChange);
     return (
       <div id="section-new-area">
         <Snackbar
@@ -142,7 +153,7 @@ class NewAreaSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
+                    <GridItem xs={12} sm={12} md={10}>
                       <InputLabel id="demo-mutiple-name-label">Servicios</InputLabel>
                       <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
                         <Select
@@ -155,16 +166,35 @@ class NewAreaSection extends React.Component {
                           }}
                           multiple
                           value={this.state.selectedServices}
-                          onChange={this.handleChange}
+                          onChange={this.handleChangeServices}
                           input={<Input />}
-                          /*inputProps={{
-                            name: 'rolSelected',
-                            id: 'roles',
-                          }}*/
                         >
                           {this.state.service.map(service => (
                             <MenuItem key={service} value={service}>
                               {service}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={10}>
+                      <InputLabel id="demo-mutiple-name-label-Sector">Sectores</InputLabel>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                        <Select
+                          labelId="demo-mutiple-name-label-Sector"
+                          MenuProps={{
+                            className: classes.selectMenu,
+                          }}
+                          classes={{
+                            select: classes.select,
+                          }}
+                          value={this.state.selectedSector}
+                          onChange={this.handleChangeSectors}
+                          input={<Input />}
+                        >
+                          {this.state.sector.map(sector => (
+                            <MenuItem key={sector} value={sector}>
+                              {sector}
                             </MenuItem>
                           ))}
                         </Select>
