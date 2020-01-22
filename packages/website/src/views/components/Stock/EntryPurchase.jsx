@@ -62,7 +62,7 @@ class EntryPurchase extends React.Component {
     const id = prop[0];
     const entryDetails = await serviceEntryPurchaseStock.getById(id);
     this.setState({
-      entry:  entryDetails.data.data,
+      entry: entryDetails.data.data,
     });
     this.child.showModal();
   }
@@ -89,7 +89,7 @@ class EntryPurchase extends React.Component {
         />
         <ViewEntryPurchase entry={this.state.entry} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
-          {tableHead !== undefined ? (2468
+          {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
               <TableRow>
                 {tableHead.map((prop, key) => {
