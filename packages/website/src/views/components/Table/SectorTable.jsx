@@ -105,15 +105,6 @@ class SectorTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                      <IconButton
-                        aria-label="Edit"
-                        className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
-                      >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
@@ -123,7 +114,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteProduct.bind(this, prop)}
+                        onClick={this.deleteSector.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
