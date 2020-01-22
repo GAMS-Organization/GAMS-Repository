@@ -21,6 +21,7 @@ import Products from 'views/containers/Products';
 import Stock from 'views/containers/Stock.jsx';
 import Sector from 'views/containers/Sector.jsx';
 import Service from 'views/containers/Service.jsx';
+import Area from 'views/containers/Area.jsx';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -57,17 +58,24 @@ const dashboardRoutes = [
     layout: '/admin',
   },
   {
-    path: '/Sector',
+    path: '/sector',
     name: 'Sector',
     icon: LocationOn,
     component: Sector,
     layout: '/admin',
   },
   {
-    path: '/Service',
+    path: '/service',
     name: 'Servicio',
     icon: Build,
     component: Service,
+    layout: '/admin',
+  },
+  {
+    path: '/area',
+    name: 'Area',
+    icon: LocationOn,
+    component: Area,
     layout: '/admin',
   },
   {
