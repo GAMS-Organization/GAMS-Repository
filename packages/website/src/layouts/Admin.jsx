@@ -74,32 +74,7 @@ class Dashboard extends React.Component {
       this.setState({ mobileOpen: false });
     }
   };
-  /*
-  async componentDidMount() {
-    const { history } = this.props;
 
-    if (navigator.platform.indexOf("Win") > -1) {
-      const ps = new PerfectScrollbar(this.refs.mainPanel);
-    }
-    window.addEventListener("resize", this.resizeFunction);
-
-    let getSessionRequest;
-    try {
-      getSessionRequest = await axios.get(
-        `http://${REACT_APP_SERVER_URL}/get-session`,
-        {
-          withCredentials: true
-        }
-      );
-    } catch ({ response }) {
-      getSessionRequest = response;
-    }
-    const { data: getSessionRequestData } = getSessionRequest;
-    if (getSessionRequestData.success) {
-      return userInfo = getSessionRequestData.userInfo;
-    }
-    return history.push("/auth/login-page");
-  }*/
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;

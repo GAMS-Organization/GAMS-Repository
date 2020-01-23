@@ -90,7 +90,7 @@ const dashboardRoutes = [
   },
   {
     path: '/login-page',
-    name: 'Login Page',
+    name: 'Logout',
     icon: Login,
     component: LoginPage,
     layout: '/auth',
