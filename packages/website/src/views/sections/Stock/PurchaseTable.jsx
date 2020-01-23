@@ -53,12 +53,8 @@ class PurchaseTable extends React.Component {
       providers: providers,
     };
 
-    console.log(request);
-
     const response = await serviceEntry.create(request);
 
-
-    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {

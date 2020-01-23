@@ -24,6 +24,7 @@ import CardHeader from '../components/Card/CardHeader.jsx';
 import CardFooter from '../components/Card/CardFooter.jsx';
 
 import loginPageStyle from '../../styles/jss/material-dashboard-react/views/loginPageStyle.jsx';
+import loginService from '../../services/api/auth';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
@@ -35,58 +36,30 @@ class LoginPage extends React.Component {
       errors: {},
     };
   }
+
+  componentWillMount = async () => {
+    await loginService.logOut();
+  };
+
   login = async e => {
     e.preventDefault();
 
     const { history } = this.props;
 
-    const fields = ['username', 'password'];
-    const formElements = e.target.elements;
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
 
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
+    const response = await loginService.logIn(email, password);
 
-    let loginRequest;
-    try {
-      loginRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/login`,
-        {
-          ...formValues,
-        },
-        {
-          withCredentials: true,
-        },
-      );
-    } catch ({ response }) {
-      loginRequest = response;
-    }
-    const { data: loginRequestData } = loginRequest;
-    if (loginRequestData.success) {
+    if (response.user) {
       return history.push('/dashboard');
     }
 
     this.setState({
-      errors: loginRequestData.messages && loginRequestData.messages.errors,
+      errors: response.type,
     });
   };
-  handleToggle = value => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked,
-    });
-  };
   render() {
     const { classes } = this.props;
     const { errors } = this.state;
@@ -113,14 +86,14 @@ class LoginPage extends React.Component {
                   <CustomInput
                     labelText="Email..."
                     id="email"
-                    error={errors.username || errors.invalidEmailOrPassword}
+                    error={errors.email || errors.invalidEmailOrPassword}
                     formControlProps={{
                       fullWidth: true,
                       className: classes.formControlClassName,
                     }}
                     inputProps={{
                       required: true,
-                      name: 'username',
+                      name: 'email',
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
@@ -145,25 +118,6 @@ class LoginPage extends React.Component {
                         </InputAdornment>
                       ),
                     }}
-                  />
-                  <FormControlLabel
-                    classes={{
-                      root: classes.checkboxLabelControl + ' ' + classes.checkboxLabelControlClassName,
-                      label: classes.checkboxLabel,
-                    }}
-                    control={
-                      <Checkbox
-                        tabIndex={-1}
-                        onClick={() => this.handleToggle(1)}
-                        checkedIcon={<Check className={classes.checkedIcon} />}
-                        icon={<Check className={classes.uncheckedIcon} />}
-                        classes={{
-                          checked: classes.checked,
-                          root: classes.checkRoot,
-                        }}
-                      />
-                    }
-                    label={<span>Recordarme</span>}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>

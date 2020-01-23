@@ -31,7 +31,6 @@ class currentStock {
       quantity,
       minimunQuantity
     };
-    console.log(body, "--------------------");
     let updateResponse;
     try {
       updateResponse = await Api.put(`stock/${dataCurrentStock.id}`, body);

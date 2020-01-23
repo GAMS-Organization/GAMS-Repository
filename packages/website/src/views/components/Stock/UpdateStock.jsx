@@ -42,10 +42,6 @@ class UpdateStock extends React.Component {
         this.props.onRef(undefined);
     }
 
-    componentDidUpdate() {
-        console.log(this.state);
-    }
-
     handleClose() {
         this.setState({ open: false});
     }
