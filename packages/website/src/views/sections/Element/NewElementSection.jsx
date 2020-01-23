@@ -17,14 +17,13 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceArea from '../../../services/api/area';
+import serviceElement from '../../../services/api/element';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import { InputLabel, Input } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
-import serviceSector from '../../../services/api/sector';
 
-class NewAreaSection extends React.Component {
+class NewElementSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,51 +31,34 @@ class NewAreaSection extends React.Component {
       errors: {},
       notification: false,
       service: [],
-      selectedServices: [],
-      sector: [],
-      selectedSector: [],
+      selectedService: [],
     };
-    this.createArea = this.createArea.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   async componentWillMount() {
     //Llamada a servicios
-    const response = await serviceService.list();
+    const responseService = await serviceService.list();
     let services = [];
-    for (const service of response.data.items) {
+    for (const service of responseService.data.items) {
       let dataService = service.name;
       services.push(dataService);
     }
+
     this.setState({ service: services });
-
-    //Llamada a sectores
-    const responseSector = await serviceSector.list();
-    let sectors = [];
-    for (const sector of responseSector.data.items) {
-      let dataSector = sector.name;
-      sectors.push(dataSector);
-    }
-
-    this.setState({ sector: sectors });
   }
 
-  handleChangeServices = event => {
-    this.setState({ selectedServices: event.target.value });
+  handleChangeService = event => {
+    this.setState({ selectedService: event.target.value });
   };
 
-  handleChangeSectors = event => {
-    this.setState({ selectedSector: event.target.value });
-  };
-
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createArea(e) {
+  createElement = async e => {
     e.preventDefault();
 
-    const fields = ['name', 'code', 'sector', 'services'];
+    const fields = ['name', 'code', 'service', 'description'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -84,23 +66,20 @@ class NewAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.services = formValues.services.split(',');
-
-    const response = await serviceArea.create(formValues);
-    console.log(response);
+    const response = await serviceElement.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
-    const { classes, name, code, sector, services } = this.props;
+    const { classes, name, code, service, description } = this.props;
     const { errors } = this.state;
     return (
-      <div id="section-new-area">
+      <div id="section-new-element">
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -108,7 +87,7 @@ class NewAreaSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Area creada correctamente'
+              : 'Elemento creado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -116,10 +95,10 @@ class NewAreaSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.createArea}>
+            <form onSubmit={this.createElement}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nueva Area</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo elemento</h4>
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
                 <CardBody>
@@ -155,23 +134,22 @@ class NewAreaSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label">Servicios</InputLabel>
+                      <InputLabel id="demo-mutiple-name-label-Servicio">Servicios</InputLabel>
                       <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
                         <Select
-                          labelId="demo-mutiple-name-label"
+                          labelId="demo-mutiple-name-label-Servicio"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
                           classes={{
                             select: classes.select,
                           }}
-                          multiple
-                          value={this.state.selectedServices}
-                          onChange={this.handleChangeServices}
+                          value={this.state.selectedService}
+                          onChange={this.handleChangeService}
                           input={<Input />}
                           inputProps={{
-                            name: 'services',
-                            id: 'services',
+                            name: 'service',
+                            id: 'service',
                           }}
                         >
                           {this.state.service.map(service => (
@@ -183,31 +161,19 @@ class NewAreaSection extends React.Component {
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-Sector">Sectores</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
-                        <Select
-                          labelId="demo-mutiple-name-label-Sector"
-                          MenuProps={{
-                            className: classes.selectMenu,
-                          }}
-                          classes={{
-                            select: classes.select,
-                          }}
-                          value={this.state.selectedSector}
-                          onChange={this.handleChangeSectors}
-                          input={<Input />}
-                          inputProps={{
-                            name: 'sector',
-                            id: 'sector',
-                          }}
-                        >
-                          {this.state.sector.map(sector => (
-                            <MenuItem key={sector} value={sector}>
-                              {sector}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <CustomInput
+                        labelText="Descripcion"
+                        id="description"
+                        error={errors.description}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: true,
+                          defaultValue: description,
+                          name: 'description',
+                        }}
+                      />
                     </GridItem>
                   </GridContainer>
                 </CardBody>
@@ -225,7 +191,7 @@ class NewAreaSection extends React.Component {
   }
 }
 
-NewAreaSection.propTypes = {
+NewElementSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
@@ -234,4 +200,4 @@ NewAreaSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(newAreaSectionStyle)(NewAreaSection);
+export default withStyles(newAreaSectionStyle)(NewElementSection);

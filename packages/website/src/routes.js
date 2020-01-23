@@ -22,11 +22,13 @@ import Stock from 'views/containers/Stock.jsx';
 import Sector from 'views/containers/Sector.jsx';
 import Service from 'views/containers/Service.jsx';
 import Area from 'views/containers/Area.jsx';
+import Element from 'views/containers/Element.jsx';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 import RegisterPage from 'views/containers/RegisterPage.jsx';
 import { setTokenSourceMapRange } from 'typescript';
+import { element } from 'prop-types';
 
 const dashboardRoutes = [
   {
@@ -76,6 +78,13 @@ const dashboardRoutes = [
     name: 'Area',
     icon: LocationOn,
     component: Area,
+    layout: '/admin',
+  },
+  {
+    path: '/element',
+    name: 'Elementos',
+    icon: Build,
+    component: Element,
     layout: '/admin',
   },
   {

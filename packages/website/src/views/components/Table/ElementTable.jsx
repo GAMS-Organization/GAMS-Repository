@@ -18,14 +18,14 @@ import Edit from '@material-ui/icons/Edit';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceArea from '../../../services/api/area';
+import serviceElement from '../../../services/api/element';
 
-class AreasTable extends React.Component {
+class ElementTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      area: {},
+      element: {},
       errors: {},
       notification: false,
     };
@@ -35,8 +35,8 @@ class AreasTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteArea = async prop => {
-    const response = await serviceArea.delete(prop[0]);
+  deleteElement = async prop => {
+    const response = await serviceElement.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -64,7 +64,7 @@ class AreasTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Area eliminada correctamente'
+              : 'Elemento eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -105,7 +105,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteArea.bind(this, prop)}
+                        onClick={this.deleteElement.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -121,11 +121,11 @@ class AreasTable extends React.Component {
   }
 }
 
-AreasTable.defaultProps = {
+ElementTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-AreasTable.propTypes = {
+ElementTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -145,4 +145,4 @@ AreasTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(AreasTable);
+export default withStyles(tableStyle)(ElementTable);
