@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewAreaSection from '../sections/Area/NewAreaSection';
+import AreaTableSection from '../sections/Area/AreaTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -38,6 +39,7 @@ class Area extends React.Component {
     return (
       <div>
         <NewAreaSection />
+        <AreaTableSection />
       </div>
     );
   }

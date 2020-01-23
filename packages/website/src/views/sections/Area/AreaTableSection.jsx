@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ServiceTable from '../../components/Table/ServiceTable.jsx';
+import AreasTable from '../../components/Table/AreasTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceService from '../../../services/api/service';
+import serviceArea from '../../../services/api/area';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,23 +41,23 @@ const styles = {
   },
 };
 
-class ServiceTableSection extends React.Component {
+class AreaTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      service: [],
+      area: [],
     };
   }
 
   async componentWillMount() {
-    const response = await serviceService.list();
-    let services = [];
-    for (const service of response.data.items) {
-      let dataService = [service.id.toString(), service.name, service.code];
-      services.push(dataService);
+    const response = await serviceArea.list();
+    console.log(response);
+    let areas = [];
+    for (const area of response.data.items) {
+      let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services];
+      areas.push(dataArea);
     }
-
-    this.setState({ service: services });
+    this.setState({ area: areas });
   }
 
   render() {
@@ -67,14 +67,14 @@ class ServiceTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>servicios</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los servicios</p>
+              <h4 className={classes.cardTitleWhite}>Areas</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las areas</p>
             </CardHeader>
             <CardBody>
-              <ServiceTable
+              <AreasTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Codigo']}
-                tableData={this.state.service}
+                tableHead={['ID', 'Nombre', 'Codigo', 'Sector', 'Servicios']}
+                tableData={this.state.area}
               />
             </CardBody>
           </Card>
@@ -84,4 +84,4 @@ class ServiceTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(ServiceTableSection);
+export default withStyles(styles)(AreaTableSection);
