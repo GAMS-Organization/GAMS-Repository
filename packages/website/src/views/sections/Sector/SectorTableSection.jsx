@@ -49,7 +49,7 @@ class SectorTableSection extends React.Component {
     };
   }
 
-  async componentWillMount() {
+  componentWillMount = async () => {
     const response = await serviceSector.list();
     let sectors = [];
     for (const sector of response.data.items) {
@@ -58,7 +58,7 @@ class SectorTableSection extends React.Component {
     }
 
     this.setState({ sector: sectors });
-  }
+  };
 
   render() {
     const { classes } = this.props;

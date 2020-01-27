@@ -30,16 +30,13 @@ class SectorTable extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteSector = this.deleteSector.bind(this);
-    this.handleClickUpdate = this.handleClickUpdate.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async deleteSector(prop) {
+  deleteSector = async prop => {
     const response = await serviceSector.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -47,16 +44,16 @@ class SectorTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
-  handleClickUpdate(prop) {
+  handleClickUpdate = async prop => {
     this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();
-  }
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.setState({ modal: false });
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

@@ -5,9 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -30,40 +27,37 @@ class UpdateSectorSection extends React.Component {
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateSector = this.updateSector.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onRef(this);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onRef(undefined);
-  }
+  };
 
-  componentDidUpdate() {
+  componentDidUpdate = () => {
     console.log(this.state);
-  }
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false, rolClicked: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value, rolClicked: true });
   };
 
-  async updateSector(e) {
+  updateSector = async e => {
     e.preventDefault();
 
     const fields = ['id', 'name', 'code'];
@@ -83,7 +77,7 @@ class UpdateSectorSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, sector, Transition } = this.props;

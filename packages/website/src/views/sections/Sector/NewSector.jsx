@@ -28,19 +28,17 @@ class NewSector extends React.Component {
       errors: {},
       notification: false,
     };
-    this.createSector = this.createSector.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createSector(e) {
+  createSector = async e => {
     e.preventDefault();
 
     const fields = ['name', 'code'];
@@ -58,7 +56,7 @@ class NewSector extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, name, code } = this.props;
