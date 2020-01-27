@@ -12,6 +12,9 @@ jobs:
           command: |
             sudo npm install --global lerna
             lerna bootstrap
+            cd packages/website
+            cp .env.example .env
+            cd ../api
             cp .env.example .env
       - run:
           name: Tests Suites
