@@ -30,40 +30,37 @@ class UpdateServiceSection extends React.Component {
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateService = this.updateService.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onRef(this);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onRef(undefined);
-  }
+  };
 
-  componentDidUpdate() {
+  componentDidUpdate = () => {
     console.log(this.state);
-  }
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false, rolClicked: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value, rolClicked: true });
   };
 
-  async updateService(e) {
+  updateService = async e => {
     e.preventDefault();
 
     const fields = ['id', 'name', 'code'];
@@ -83,7 +80,7 @@ class UpdateServiceSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, service, Transition } = this.props;
