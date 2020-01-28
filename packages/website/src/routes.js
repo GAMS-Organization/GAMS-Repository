@@ -14,7 +14,6 @@ import UsersView from 'views/containers/UsersView.jsx';
 import TableList from 'views/containers/TableList.jsx';
 import Typography from 'views/containers/Typography.jsx';
 import Icons from 'views/containers/Icons.jsx';
-import Maps from 'views/containers/Maps.jsx';
 import NotificationsPage from 'views/containers/Notifications.jsx';
 import Products from 'views/containers/Products';
 import Stock from 'views/containers/Stock.jsx';
@@ -72,13 +71,6 @@ const dashboardRoutes = [
     name: 'Icons',
     icon: BubbleChart,
     component: Icons,
-    layout: '/admin',
-  },
-  {
-    path: '/maps',
-    name: 'Maps',
-    icon: LocationOn,
-    component: Maps,
     layout: '/admin',
   },
   {

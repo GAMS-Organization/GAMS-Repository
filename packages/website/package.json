@@ -1,7 +1,7 @@
 {
-  "name": "material-dashboard-react",
+  "name": "website",
   "version": "1.6.0",
-  "description": "Material Dashboard React. Coded by Creative Tim",
+  "description": "React app for GAMS",
   "private": false,
   "main": "dist/index.js",
   "dependencies": {
@@ -25,7 +25,6 @@
     "react-chartist": "0.13.3",
     "react-dom": "16.8.1",
     "react-github-button": "^0.1.11",
-    "react-google-maps": "9.4.5",
     "react-router-dom": "4.3.1",
     "react-scripts": "3.2",
     "react-share": "^2.4.0",
