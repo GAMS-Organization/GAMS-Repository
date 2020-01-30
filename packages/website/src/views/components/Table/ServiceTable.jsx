@@ -44,6 +44,7 @@ class ServiceTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
+    window.location.reload();
   };
 
   handleClickUpdate = prop => {
