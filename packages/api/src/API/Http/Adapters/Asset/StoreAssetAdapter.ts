@@ -1,25 +1,25 @@
 import { Request } from 'express';
 import { injectable } from 'inversify';
-import StoreProductCommand from '../../../../Application/Commands/Product/StoreProductCommand';
+import StoreAssetCommand from '../../../../Application/Commands/Asset/StoreAssetCommand';
 import Validator from '../../Validations/Utils/Validator';
-import { storeProductSchema } from '../../Validations/Schemas/ProductSchema';
+import { storeAssetSchema } from '../../Validations/Schemas/AssetSchema';
 import ValidationException from '../../../../Application/Exceptions/ValidationException';
 
 @injectable()
-export default class StoreProductAdapter {
+export default class StoreAreaAdapter {
   private validator: Validator;
 
   public constructor() {
     this.validator = new Validator();
   }
 
-  public from(request: Request): StoreProductCommand {
-    const error = this.validator.validate(request.body, storeProductSchema);
+  public from(request: Request): StoreAssetCommand {
+    const error = this.validator.validate(request.body, storeAssetSchema);
 
     if (error) {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreProductCommand(request.body.name);
+    return new StoreAssetCommand(request.body.sector, request.body.area, request.body.service, request.body.element);
   }
 }

@@ -1,69 +1,81 @@
 /* eslint-disable new-cap */
-import { Column, Entity, PrimaryColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import WorkOrder from './WorkOrder';
+import Service from './Service';
+import Sector from './Sector';
+import Area from './Area';
+import Element from './Element';
 
 @Entity('asset')
 // eslint-disable-next-line require-jsdoc
 export default class Asset {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   public id: string;
-  @Column()
-  public sector: string;
-  @Column()
-  public area: string;
-  @Column()
-  public servicio: string;
-  @Column()
-  public elemento: string;
+  @Column({ unique: true })
+  public code: string;
+  @ManyToOne(_type => Sector, sector => sector.assets)
+  public sector: Sector;
+  @ManyToOne(_type => Area, area => area.assets)
+  public area: Area;
+  @ManyToOne(_type => Service, service => service.assets)
+  public service: Service;
+  @ManyToOne(_type => Element, element => element.assets)
+  public element: Element;
   @OneToMany(_type => WorkOrder, workOrder => workOrder.asset)
   public workOrders: WorkOrder[];
 
-  public constructor(sector: string, area: string, servicio: string, elemento: string) {
+  public constructor(sector: Sector, area: Area, service: Service, element: Element, code: string) {
     this.sector = sector;
     this.area = area;
-    this.servicio = servicio;
-    this.elemento = elemento;
-
-    //hay que generar el codigo unico para utilizar como id
-    this.id = '';
+    this.service = service;
+    this.element = element;
+    this.code = code;
   }
 
   public getId(): string {
     return this.id;
   }
 
-  public getSector(): string {
+  public getCode(): string{
+    return this.code;
+  }
+
+  public getSector(): Sector {
     return this.sector;
   }
 
-  public getArea(): string {
+  public getArea(): Area {
     return this.area;
   }
 
-  public getServicio(): string {
-    return this.servicio;
+  public getService(): Service {
+    return this.service;
   }
 
-  public getElemento(): string {
-    return this.elemento;
+  public getElement(): Element {
+    return this.element;
   }
 
   public getWorkOrder(): WorkOrder[] {
     return this.workOrders;
   }
 
-  public setSector(sector: string): void {
+  public setCode(code: string): void {
+    this.code = code;
+  }
+
+  public setSector(sector: Sector): void {
     this.sector = sector;
   }
 
-  public setArea(area: string): void {
+  public setArea(area: Area): void {
     this.area = area;
   }
-  public setServicio(servicio: string): void {
-    this.servicio = servicio;
+  public setService(service: Service): void {
+    this.service = service;
   }
-  public setElemento(elemento: string): void {
-    this.elemento = elemento;
+  public setElement(element: Element): void {
+    this.element = element;
   }
 
   public setWorkOrder(value: WorkOrder[]): void {
