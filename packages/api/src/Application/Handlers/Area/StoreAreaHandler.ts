@@ -13,7 +13,6 @@ export default class StoreAreaHandler {
   private sectorRepository: ISectorRepository;
   private areaServiceService: AreaServiceService;
 
-
   public constructor(
     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
     @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
@@ -31,6 +30,9 @@ export default class StoreAreaHandler {
       throw new EntityNotFoundException(`Sector with name: ${command.getSector()} not found`);
     }
     const area = new Area(command.getName(), command.getCode(), sector);
-    return await this.areaServiceService.setServiceToArea( command.getServices(), await this.areaRepository.persist(area));
+    return await this.areaServiceService.setServiceToArea(
+      command.getServices(),
+      await this.areaRepository.persist(area),
+    );
   }
 }

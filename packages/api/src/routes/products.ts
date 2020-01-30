@@ -9,15 +9,15 @@ import IndexProductsAction from '../API/Http/Actions/Product/IndexProductsAction
 import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 import DestroyProductAction from '../API/Http/Actions/Product/DestroyProductAction';
 import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
+import { authMiddleware } from '../config/authMiddleware';
 
 const router = express.Router();
 
 router.get(
   '/',
-  /*(req, res, next): void => {
-      authMiddleware(req, res, next, ['admin']);
-    },
-     */
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
     await indexProductAction.execute(request, response);
@@ -26,6 +26,9 @@ router.get(
 
 router.post(
   '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeProductAction: StoreProductAction = DIContainer.resolve<StoreProductAction>(StoreProductAction);
     await storeProductAction.execute(request, response);
@@ -33,11 +36,10 @@ router.post(
 );
 
 router.get(
-  '/:id([0-9]+)' /*
-    (req, res, next): void => {
-        authMiddleware(req, res, next, ['admin']);
-    },
-    */,
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
     await showProductAction.execute(request, response);
@@ -46,12 +48,9 @@ router.get(
 
 router.put(
   '/:id([0-9]+)',
-  /*
-    (req, res, next): void => {
-      authMiddleware(req, res, next, ['admin']);
-    },
-
-     */
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
     await updateProductAction.execute(request, response);
@@ -60,6 +59,9 @@ router.put(
 
 router.get(
   '/name/:name([a-z0-9-]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
       ShowProductByNameAction,
@@ -70,6 +72,9 @@ router.get(
 
 router.delete(
   '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
     await destroyProductAction.execute(request, response);

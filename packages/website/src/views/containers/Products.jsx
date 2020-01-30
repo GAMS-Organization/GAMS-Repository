@@ -5,7 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import NewProduct from '../sections/Products/NewProduct';
 import ProductTableSection from '../sections/Products/ProductTableSection';
-import UpdateProductSection from '../sections/Products/UpdateProductSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -25,8 +24,6 @@ const styles = {
     textDecoration: 'none',
   },
 };
-
-const { REACT_APP_SERVER_URL } = process.env;
 
 class Products extends React.Component {
   constructor(props) {

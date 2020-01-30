@@ -20,15 +20,12 @@ export default class AssetService {
   private elementRepository: IElementRepository;
   private assetRepository: IAssetRepository;
 
-
   public constructor(
     @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
     @inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
     @inject(INTERFACES.IElementRepository) elementRepository: IElementRepository,
     @inject(INTERFACES.IAssetRepository) assetRepository: IAssetRepository,
-
-
   ) {
     this.serviceRepository = serviceRepository;
     this.sectorRepository = sectorRepository;
@@ -51,7 +48,12 @@ export default class AssetService {
     };
   }
 
-  public async setRelationsToAsset(commandSector: string, commandArea: string, commandService: string, commandElement: string ): Promise<Asset> {
+  public async setRelationsToAsset(
+    commandSector: string,
+    commandArea: string,
+    commandService: string,
+    commandElement: string,
+  ): Promise<Asset> {
     const sector = await this.sectorRepository.findOneBySectorName(commandSector);
     if (!sector) {
       throw new EntityNotFoundException(`Sector with name: ${commandSector} not found`);
@@ -76,7 +78,7 @@ export default class AssetService {
     return await this.assetRepository.persist(asset);
   }
 
-  public async createAssetCode(sector: Sector, area: Area, service: Service, element: Element): Promise<string>{
+  public async createAssetCode(sector: Sector, area: Area, service: Service, element: Element): Promise<string> {
     const sectorCode = sector.getCode();
     const areaCode = area.getCode();
     const serviceCode = service.getCode();
@@ -88,46 +90,46 @@ export default class AssetService {
 
     let asset = await this.assetRepository.findOneByCode(assetCode);
 
-    while(asset){
+    while (asset) {
       numero++;
       assetCode = sectorCode + '-' + areaCode + '-' + serviceCode + '-' + elementCode + numero;
-      asset = await this.assetRepository.findOneByCode(assetCode)
+      asset = await this.assetRepository.findOneByCode(assetCode);
     }
 
     return assetCode;
   }
 
-  public async deleteFromSector(sector: Sector){
+  public async deleteFromSector(sector: Sector) {
     const assets = await this.assetRepository.findBySectorId(sector.getId());
-    if(assets){
-      for(const asset of assets){
+    if (assets) {
+      for (const asset of assets) {
         await this.assetRepository.destroy(asset);
       }
     }
   }
 
-  public async deleteFromArea(area: Area){
+  public async deleteFromArea(area: Area) {
     const assets = await this.assetRepository.findByAreaId(area.getId());
-    if(assets){
-      for(const asset of assets){
+    if (assets) {
+      for (const asset of assets) {
         await this.assetRepository.destroy(asset);
       }
     }
   }
 
-  public async deleteFromService(service: Service){
+  public async deleteFromService(service: Service) {
     const assets = await this.assetRepository.findByServiceId(service.getId());
-    if(assets){
-      for(const asset of assets){
+    if (assets) {
+      for (const asset of assets) {
         await this.assetRepository.destroy(asset);
       }
     }
   }
 
-  public async deleteFromElement(element: Element){
+  public async deleteFromElement(element: Element) {
     const assets = await this.assetRepository.findByElementId(element.getId());
-    if(assets){
-      for(const asset of assets){
+    if (assets) {
+      for (const asset of assets) {
         await this.assetRepository.destroy(asset);
       }
     }

@@ -23,7 +23,7 @@ export default class StoreAssetCommand {
     return this.sector;
   }
 
-  public getService(): string{
+  public getService(): string {
     return this.service;
   }
 }

@@ -34,18 +34,7 @@
     "@typescript-eslint/indent": "off",
     "camelcase": "off",
     "@typescript-eslint/camelcase": ["warn"],
-    "require-jsdoc": [
-      "error",
-      {
-        "require": {
-          "FunctionDeclaration": false,
-          "MethodDefinition": false,
-          "ClassDeclaration": true,
-          "ArrowFunctionExpression": false,
-          "FunctionExpression": false
-        }
-      }
-    ],
+    "require-jsdoc": 0,
     "no-invalid-this": "off",
     "valid-jsdoc": [
       1,

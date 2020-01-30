@@ -19,7 +19,7 @@ export default class StoreElementCommand {
     return this.code;
   }
 
-  public getDescription(): string{
+  public getDescription(): string {
     return this.description;
   }
 
