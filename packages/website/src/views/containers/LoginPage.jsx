@@ -52,7 +52,7 @@ class LoginPage extends React.Component {
     const response = await loginService.logIn(email, password);
 
     if (response.user) {
-      return history.push('/dashboard');
+      return history.push('/admin/');
     }
 
     this.setState({

@@ -33,14 +33,13 @@ class PurchaseTable extends React.Component {
     const products = [];
     const quantities = [];
     const providers = [];
-    for(const purchase of this.state.data){
+    for (const purchase of this.state.data) {
       products.push(parseInt(purchase.product));
       quantities.push(parseInt(purchase.quantity));
       providers.push(purchase.provider);
     }
 
     const formElements = e.target.elements;
-
 
     const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
@@ -71,15 +70,16 @@ class PurchaseTable extends React.Component {
       dataProduct[product.id] = product.name;
     }
 
-    this.setState({ columns: [
-        { title: 'Producto', field: 'product', lookup:  dataProduct },
-        { title: 'Proveedor', field: 'provider'},
+    this.setState({
+      columns: [
+        { title: 'Producto', field: 'product', lookup: dataProduct },
+        { title: 'Proveedor', field: 'provider' },
         { title: 'Cantidad', field: 'quantity' },
-      ]});
+      ],
+    });
   }
 
   render() {
-
     return (
       <GridContainer>
         <Snackbar
@@ -96,100 +96,105 @@ class PurchaseTable extends React.Component {
           close
         />
         <GridItem xs={12} sm={12} md={6}>
-      <MaterialTable
-        title="Nueva entrada"
-        columns={this.state.columns}
-        data={this.state.data}
-        options={{paging: false, search: false, draggable: false, actionsColumnIndex: 3}}
-        localization={{header:{actions: "Acciones"},body:{addTooltip: "Nuevo",
-            deleteTooltip: "Eliminar",
-            editTooltip: "Editar",
-            emptyDataSourceMessage: "Ningun producto añadido",
-            editRow : {
-          saveTooltip: "Guardar",
-              cancelTooltip: "Cancelar",
-              deleteText: "¿Estás seguro de querer eliminar este registro?"
-            }},}}
-        editable={{
-          onRowAdd: newData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                this.setState(prevState => {
-                  const data = [...prevState.data];
-                  data.push(newData);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            }),
-          onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                if (oldData) {
-                  this.setState(prevState => {
-                    const data = [...prevState.data];
-                    data[data.indexOf(oldData)] = newData;
-                    return { ...prevState, data };
-                  });
-                }
-              }, 600);
-            }),
-          onRowDelete: oldData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve();
-                this.setState(prevState => {
-                  const data = [...prevState.data];
-                  data.splice(data.indexOf(oldData), 1);
-                  return { ...prevState, data };
-                });
-              }, 600);
-            }),
-        }}
-      />
-      <Card>
-      <CardBody>
-          <form onSubmit={this.handleConfirmPurchaseClick}>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={4}>
-                <CustomInput
-                  labelText="Fecha"
-                  id="date"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    type: 'date',
-                    required: true,
-                    defaultValue: "",
-                    name: 'date',
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={4}>
-                <CustomInput
-                  labelText="Observaciones"
-                  id="observations"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    required: true,
-                    defaultValue: "",
-                    name: 'observations',
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={4}>
-                <Button type='submit' color="gamsRed">
-                  Confirmar compra
-                </Button>
-              </GridItem>
-            </GridContainer>
-          </form>
-      </CardBody>
-      </Card>
+          <MaterialTable
+            title="Nueva entrada"
+            columns={this.state.columns}
+            data={this.state.data}
+            options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
+            localization={{
+              header: { actions: 'Acciones' },
+              body: {
+                addTooltip: 'Nuevo',
+                deleteTooltip: 'Eliminar',
+                editTooltip: 'Editar',
+                emptyDataSourceMessage: 'Ningun producto añadido',
+                editRow: {
+                  saveTooltip: 'Guardar',
+                  cancelTooltip: 'Cancelar',
+                  deleteText: '¿Estás seguro de querer eliminar este registro?',
+                },
+              },
+            }}
+            editable={{
+              onRowAdd: newData =>
+                new Promise(resolve => {
+                  setTimeout(() => {
+                    resolve();
+                    this.setState(prevState => {
+                      const data = [...prevState.data];
+                      data.push(newData);
+                      return { ...prevState, data };
+                    });
+                  }, 600);
+                }),
+              onRowUpdate: (newData, oldData) =>
+                new Promise(resolve => {
+                  setTimeout(() => {
+                    resolve();
+                    if (oldData) {
+                      this.setState(prevState => {
+                        const data = [...prevState.data];
+                        data[data.indexOf(oldData)] = newData;
+                        return { ...prevState, data };
+                      });
+                    }
+                  }, 600);
+                }),
+              onRowDelete: oldData =>
+                new Promise(resolve => {
+                  setTimeout(() => {
+                    resolve();
+                    this.setState(prevState => {
+                      const data = [...prevState.data];
+                      data.splice(data.indexOf(oldData), 1);
+                      return { ...prevState, data };
+                    });
+                  }, 600);
+                }),
+            }}
+          />
+          <Card>
+            <CardBody>
+              <form onSubmit={this.handleConfirmPurchaseClick}>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText=""
+                      id="date"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        type: 'date',
+                        required: true,
+                        defaultValue: '',
+                        name: 'date',
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <CustomInput
+                      labelText="Observaciones"
+                      id="observations"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        required: true,
+                        defaultValue: '',
+                        name: 'observations',
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    <Button type="submit" color="gamsRed">
+                      Confirmar compra
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </form>
+            </CardBody>
+          </Card>
         </GridItem>
       </GridContainer>
     );
@@ -197,5 +202,3 @@ class PurchaseTable extends React.Component {
 }
 
 export default PurchaseTable;
-
-
