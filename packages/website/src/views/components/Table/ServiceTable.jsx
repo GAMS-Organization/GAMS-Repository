@@ -16,17 +16,17 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
+import UpdateServiceSection from '../../sections/Service/UpdateServiceSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceSector from '../../../services/api/sector';
+import serviceService from '../../../services/api/service';
 
-class SectorTable extends React.Component {
+class ServiceTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      sector: {},
+      service: {},
       errors: {},
       notification: false,
     };
@@ -36,8 +36,8 @@ class SectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteSector = async prop => {
-    const response = await serviceSector.delete(prop[0]);
+  deleteService = async prop => {
+    const response = await serviceService.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -47,8 +47,8 @@ class SectorTable extends React.Component {
     window.location.reload();
   };
 
-  handleClickUpdate = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
+  handleClickUpdate = prop => {
+    this.setState({ service: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();
   };
 
@@ -70,13 +70,13 @@ class SectorTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Sector eliminado correctamente'
+              : 'Servicio eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <UpdateServiceSection service={this.state.service} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -112,7 +112,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteSector.bind(this, prop)}
+                        onClick={this.deleteService.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -128,11 +128,11 @@ class SectorTable extends React.Component {
   }
 }
 
-SectorTable.defaultProps = {
+ServiceTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-SectorTable.propTypes = {
+ServiceTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -152,4 +152,4 @@ SectorTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(SectorTable);
+export default withStyles(tableStyle)(ServiceTable);
