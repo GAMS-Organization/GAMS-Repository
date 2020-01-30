@@ -3,7 +3,12 @@ import users from './users';
 import auth from './auth';
 import stock from './stock';
 import products from './products';
+import sector from './sector';
+import area from './area';
+import element from './element';
+import asset from './asset';
 import entry from './entry';
+import service from './service';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = Router();
@@ -18,6 +23,16 @@ router.use('/product', products);
 router.use('/stock', stock);
 
 router.use('/entry', entry);
+
+router.use('/sector', sector);
+
+router.use('/area', area);
+
+router.use('/element', element);
+
+router.use('/asset', asset);
+
+router.use('/service', service);
 
 router.get(
   '/',

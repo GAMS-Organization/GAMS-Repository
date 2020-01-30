@@ -86,6 +86,59 @@ import ShowEntryHandler from '../../Application/Handlers/Entry/ShowEntryHandler'
 import UpdateStockAction from '../../API/Http/Actions/Stock/UpdateStockAction';
 import UpdateStockAdapter from '../../API/Http/Adapters/Stock/UpdateStockAdapter';
 import UpdateStockHandler from '../../Application/Handlers/Stock/UpdateStockHandler';
+import ISectorRepository from '../../Domain/Interfaces/ISectorRepository';
+import TypeSectorRepository from '../../Persistence/TypeORM/Repositories/TypeSectorRepository';
+import IAreaRepository from '../../Domain/Interfaces/IAreaRepository';
+import IServiceRepository from '../../Domain/Interfaces/IServiceRepository';
+import IElementRepository from '../../Domain/Interfaces/IElementRepository';
+import IAssetRepository from '../../Domain/Interfaces/IAssetRepository';
+import TypeAreaRepository from '../../Persistence/TypeORM/Repositories/TypeAreaRepository';
+import TypeServiceRepository from '../../Persistence/TypeORM/Repositories/TypeServiceRepository';
+import TypeElementRepository from '../../Persistence/TypeORM/Repositories/TypeElementRepository';
+import TypeAssetRepository from '../../Persistence/TypeORM/Repositories/TypeAssetRepository';
+import StoreSectorAction from '../../API/Http/Actions/Sector/StoreSectorAction';
+import StoreSectorAdapter from '../../API/Http/Adapters/Sector/StoreSectorAdapter';
+import StoreSectorHandler from '../../Application/Handlers/Sector/StoreSectorHandler';
+import StoreAreaHandler from '../../Application/Handlers/Area/StoreAreaHandler';
+import StoreAreaAdapter from '../../API/Http/Adapters/Area/StoreAreaAdapter';
+import StoreAreaAction from '../../API/Http/Actions/Area/StoreAreaAction';
+import StoreServiceAction from '../../API/Http/Actions/Service/StoreServiceAction';
+import StoreServiceAdapter from '../../API/Http/Adapters/Service/StoreServiceAdapter';
+import StoreServiceHandler from '../../Application/Handlers/Service/StoreServiceHandler';
+import AreaServiceService from '../../Domain/Services/AreaServiceService';
+import IAreaServiceRepository from '../../Domain/Interfaces/IAreaServiceRepository';
+import TypeAreaServiceRepository from '../../Persistence/TypeORM/Repositories/TypeAreaServiceRepository';
+import StoreElementAction from '../../API/Http/Actions/Element/StoreElementAction';
+import StoreElementAdapter from '../../API/Http/Adapters/Element/StoreElementAdapter';
+import StoreElementHandler from '../../Application/Handlers/Element/StoreElementHandler';
+import StoreAssetAction from '../../API/Http/Actions/Asset/StoreAssetAction';
+import StoreAssetAdapter from '../../API/Http/Adapters/Asset/StoreAssetAdapter';
+import StoreAssetHandler from '../../Application/Handlers/Asset/StoreAssetHandler';
+import AssetService from '../../Domain/Services/AssetService';
+import IndexSectorsAction from '../../API/Http/Actions/Sector/IndexSectorsAction';
+import IndexAreasAction from '../../API/Http/Actions/Area/IndexAreasAction';
+import IndexServicesAction from '../../API/Http/Actions/Service/IndexServicesAction';
+import IndexElementsAction from '../../API/Http/Actions/Element/IndexElementsAction';
+import SectorService from '../../Domain/Services/SectorService';
+import ServiceService from '../../Domain/Services/ServiceService';
+import AreaService from '../../Domain/Services/AreaService';
+import ElementService from '../../Domain/Services/ElementService';
+import DestroySectorAction from '../../API/Http/Actions/Sector/DestroySectorAction';
+import DestroyAreaAction from '../../API/Http/Actions/Area/DestroyAreaAction';
+import DestroyServiceAction from '../../API/Http/Actions/Service/DestroyServiceAction';
+import DestroyElementAction from '../../API/Http/Actions/Element/DestroyElementAction';
+import DestroySectorAdapter from '../../API/Http/Adapters/Sector/DestroySectorAdapter';
+import DestroyAreaAdapter from '../../API/Http/Adapters/Area/DestroyAreaAdapter';
+import DestroyServiceAdapter from '../../API/Http/Adapters/Service/DestroyServiceAdapter';
+import DestroyElementAdapter from '../../API/Http/Adapters/Element/DestroyElementAdapter';
+import DestroySectorHandler from '../../Application/Handlers/Sector/DestroySectorHandler';
+import DestroyAreaHandler from '../../Application/Handlers/Area/DestroyAreaHandler';
+import DestroyServiceHandler from '../../Application/Handlers/Service/DestroyServiceHandler';
+import DestroyElementHandler from '../../Application/Handlers/Element/DestroyElementHandler';
+import IndexAssetsAction from '../../API/Http/Actions/Asset/IndexAssetsAction';
+import DestroyAssetAction from '../../API/Http/Actions/Asset/DestroyAssetAction';
+import DestroyAssetAdapter from '../../API/Http/Adapters/Asset/DestroyAssetAdapter';
+import DestroyAssetHandler from '../../Application/Handlers/Asset/DestroyAssetHandler';
 
 const DIContainer = new Container();
 
@@ -116,6 +169,26 @@ DIContainer.bind<ShowEntryAction>(ShowEntryAction).toSelf();
 DIContainer.bind<UpdateStockAction>(UpdateStockAction).toSelf();
 DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
+DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
+DIContainer.bind<IndexSectorsAction>(IndexSectorsAction).toSelf();
+DIContainer.bind<DestroySectorAction>(DestroySectorAction).toSelf();
+
+DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
+DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
+DIContainer.bind<DestroyAreaAction>(DestroyAreaAction).toSelf();
+
+DIContainer.bind<StoreServiceAction>(StoreServiceAction).toSelf();
+DIContainer.bind<IndexServicesAction>(IndexServicesAction).toSelf();
+DIContainer.bind<DestroyServiceAction>(DestroyServiceAction).toSelf();
+
+DIContainer.bind<StoreElementAction>(StoreElementAction).toSelf();
+DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
+DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
+
+DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
+DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
+DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
+
 /**
  * Adapters
  */
@@ -140,6 +213,22 @@ DIContainer.bind<UpdateStockAdapter>(UpdateStockAdapter).toSelf();
 DIContainer.bind<DestroyEntryAdapter>(DestroyEntryAdapter).toSelf();
 DIContainer.bind<ShowEntryAdapter>(ShowEntryAdapter).toSelf();
 DIContainer.bind<StoreEntryAdapter>(StoreEntryAdapter).toSelf();
+
+DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
+DIContainer.bind<DestroySectorAdapter>(DestroySectorAdapter).toSelf();
+
+DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
+DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
+
+DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
+DIContainer.bind<DestroyServiceAdapter>(DestroyServiceAdapter).toSelf();
+
+DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
+DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
+
+DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
+DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
+
 
 /**
  * Handlers
@@ -166,6 +255,21 @@ DIContainer.bind<ShowEntryHandler>(ShowEntryHandler).toSelf();
 DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
 
+DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
+DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
+
+DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
+DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
+
+DIContainer.bind<StoreServiceHandler>(StoreServiceHandler).toSelf();
+DIContainer.bind<DestroyServiceHandler>(DestroyServiceHandler).toSelf();
+
+DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
+DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
+
+DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
+DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
+
 /*
  * Services
  */
@@ -176,6 +280,15 @@ DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
 DIContainer.bind<StockService>(StockService).toSelf();
 DIContainer.bind<EntryService>(EntryService).toSelf();
+DIContainer.bind<AreaServiceService>(AreaServiceService).toSelf();
+DIContainer.bind<AssetService>(AssetService).toSelf();
+DIContainer.bind<SectorService>(SectorService).toSelf();
+DIContainer.bind<AreaService>(AreaService).toSelf();
+DIContainer.bind<ServiceService>(ServiceService).toSelf();
+DIContainer.bind<ElementService>(ElementService).toSelf();
+
+
+
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
 /**
@@ -189,5 +302,11 @@ DIContainer.bind<IStockRepository>(INTERFACES.IStockRepository).to(TypeStockRepo
 DIContainer.bind<IEntryRepository>(INTERFACES.IEntryRepository).to(TypeEntryRepository);
 DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
 DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProductRepository);
+DIContainer.bind<ISectorRepository>(INTERFACES.ISectorRepository).to(TypeSectorRepository);
+DIContainer.bind<IAreaRepository>(INTERFACES.IAreaRepository).to(TypeAreaRepository);
+DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(TypeAreaServiceRepository);
+DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServiceRepository);
+DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
+DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
 
 export default DIContainer;
