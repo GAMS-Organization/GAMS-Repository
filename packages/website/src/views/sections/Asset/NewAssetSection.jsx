@@ -118,6 +118,7 @@ class NewAssetSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
+    window.location.reload();
   };
 
   render() {
