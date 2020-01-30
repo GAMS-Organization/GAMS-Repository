@@ -36,7 +36,7 @@ export default class Asset {
     return this.id;
   }
 
-  public getCode(): string{
+  public getCode(): string {
     return this.code;
   }
 

@@ -20,6 +20,11 @@ export default class StoreElementAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreElementCommand(request.body.name, request.body.code, request.body.service, request.body.description);
+    return new StoreElementCommand(
+      request.body.name,
+      request.body.code,
+      request.body.service,
+      request.body.description,
+    );
   }
 }

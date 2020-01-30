@@ -11,14 +11,12 @@ export default class AreaServiceService {
   private areaServiceRepository: IAreaServiceRepository;
   private serviceRepository: IServiceRepository;
 
-
   public constructor(
     @inject(INTERFACES.IAreaServiceRepository) areaServiceRepository: IAreaServiceRepository,
     @inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
   ) {
     this.areaServiceRepository = areaServiceRepository;
     this.serviceRepository = serviceRepository;
-
   }
 
   public async setServiceToArea(commandServices: string[], area: Area): Promise<Area> {
@@ -32,15 +30,15 @@ export default class AreaServiceService {
       }
     }
 
-    return area
+    return area;
   }
 
-  public async destroyRelationsByArea(area: Area){
+  public async destroyRelationsByArea(area: Area) {
     const relations = await this.areaServiceRepository.findByAreaName(area.getId());
     let error = false;
-    for(const relation of relations){
+    for (const relation of relations) {
       let result = await this.areaServiceRepository.destroy(relation);
-      if(!result){
+      if (!result) {
         error = true;
       }
     }
@@ -48,12 +46,12 @@ export default class AreaServiceService {
     return !error;
   }
 
-  public async destroyRelationsByService(service: Service){
+  public async destroyRelationsByService(service: Service) {
     const relations = await this.areaServiceRepository.findByServiceName(service.getId());
     let error = false;
-    for(const relation of relations){
+    for (const relation of relations) {
       let result = await this.areaServiceRepository.destroy(relation);
-      if(!result){
+      if (!result) {
         error = true;
       }
     }

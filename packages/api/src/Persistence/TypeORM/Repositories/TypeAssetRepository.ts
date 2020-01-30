@@ -10,7 +10,11 @@ export default class TypeAssetRepository extends TypeRepository implements IAsse
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Asset[]> {
-    return await this.repository(Asset).find({ skip: initialIndex, take: limit, relations: ['sector', 'area', 'service', 'element']});
+    return await this.repository(Asset).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['sector', 'area', 'service', 'element'],
+    });
   }
 
   public async count(): Promise<number> {
@@ -22,23 +26,23 @@ export default class TypeAssetRepository extends TypeRepository implements IAsse
   }
 
   public async findOneByCode(code: string): Promise<Asset> {
-    return await this.repository(Asset).findOne({where: {code}});
+    return await this.repository(Asset).findOne({ where: { code } });
   }
 
-  public async findBySectorId(id: number): Promise<Asset[]>{
-    return await this.repository(Asset).find({where:{sector:id}, relations:['sector']});
+  public async findBySectorId(id: number): Promise<Asset[]> {
+    return await this.repository(Asset).find({ where: { sector: id }, relations: ['sector'] });
   }
 
-  public async findByAreaId(id: number): Promise<Asset[]>{
-    return await this.repository(Asset).find({where:{area:id}, relations:['area']});
+  public async findByAreaId(id: number): Promise<Asset[]> {
+    return await this.repository(Asset).find({ where: { area: id }, relations: ['area'] });
   }
 
-  public async findByServiceId(id: number): Promise<Asset[]>{
-    return await this.repository(Asset).find({where:{service:id}, relations:['service']});
+  public async findByServiceId(id: number): Promise<Asset[]> {
+    return await this.repository(Asset).find({ where: { service: id }, relations: ['service'] });
   }
 
-  public async findByElementId(id: number): Promise<Asset[]>{
-    return await this.repository(Asset).find({where:{element:id}, relations:['element']});
+  public async findByElementId(id: number): Promise<Asset[]> {
+    return await this.repository(Asset).find({ where: { element: id }, relations: ['element'] });
   }
 
   public async findByWorkOrderId(id: number): Promise<Asset> {

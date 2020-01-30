@@ -8,13 +8,13 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into roles values (3, 'user');`);
     //Create users
     await queryRunner.query(
-      `insert into users (id, name, surname, email, password, state) values (1, 'ale', 'minacori', 'alejandrominacori@gmail.com', '$2y$12$CYCk2ARJtF8JL9lYiHl2EuMeT7g90C/NwIed/Gf/L8mQqZMI2sjo6', 'active');`,
+      `insert into users (id, name, surname, email, password, state) values (1, 'admin', 'admin', 'admin@gams.com', '$2a$08$4dFb7Jq.o4bbpp.oohEFFOWUOhDKntZI2DEMC2yXIKe.BuhS.HKvu', 'active');`,
     );
     //Create user_roles
     await queryRunner.query(`insert into user_roles values (1, 1, 1);`);
     await queryRunner.query(`insert into user_roles values (2, 1, 2);`);
     await queryRunner.query(`insert into user_roles values (3, 1, 3);`);
-    //Create sector
+    //Create sectors
     await queryRunner.query(`insert into sector values (1, 'Campus deportes', 'CD');`);
     await queryRunner.query(`insert into sector values (2, 'Edificio principal', 'E01');`);
     await queryRunner.query(`insert into sector values (3, 'Cuarto nivel', 'E02');`);
@@ -36,7 +36,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into sector values (19, 'Parque lab. exteriores', 'Plab');`);
     await queryRunner.query(`insert into sector values (20, 'Parque estacionamiento', 'P05');`);
 
-    //Create Service
+    //Create Services
     await queryRunner.query(`insert into service values (1, 'Agua potable', 'Ag');`);
     await queryRunner.query(`insert into service values (2, 'Aire acondicionado', 'AA');`);
     await queryRunner.query(`insert into service values (3, 'Ascensor', 'Asc');`);

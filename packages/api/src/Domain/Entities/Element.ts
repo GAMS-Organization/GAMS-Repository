@@ -42,7 +42,7 @@ export default class Element {
     return this.description;
   }
 
-  public getService(): Service{
+  public getService(): Service {
     return this.service;
   }
 
@@ -57,5 +57,4 @@ export default class Element {
   public setDescription(description: string): void {
     this.description = description;
   }
-
 }

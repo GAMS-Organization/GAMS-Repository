@@ -9,8 +9,10 @@ export default class ServiceService {
   private serviceRepository: IServiceRepository;
   private elementRepository: IElementRepository;
 
-  public constructor(@inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
-                     @inject(INTERFACES.IElementRepository) elementRepository: IElementRepository) {
+  public constructor(
+    @inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
+    @inject(INTERFACES.IElementRepository) elementRepository: IElementRepository,
+  ) {
     this.serviceRepository = serviceRepository;
     this.elementRepository = elementRepository;
   }
@@ -29,12 +31,12 @@ export default class ServiceService {
     };
   }
 
-  public async deleteRelatedElements(service: Service){
+  public async deleteRelatedElements(service: Service) {
     const elements = await this.elementRepository.findByServiceId(service.getId());
     let error = false;
-    for(const element of elements){
+    for (const element of elements) {
       let result = await this.elementRepository.destroy(element);
-      if(!result){
+      if (!result) {
         error = true;
       }
     }

@@ -15,17 +15,16 @@ export default class DestroyServiceHandler {
   private serviceService: ServiceService;
   private assetService: AssetService;
 
-
   public constructor(
     @inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
     @inject(AreaServiceService) areaServiceService: AreaServiceService,
-    @inject(ServiceService)serviceService: ServiceService,
-    @inject(AssetService)assetService: AssetService)
-  {
+    @inject(ServiceService) serviceService: ServiceService,
+    @inject(AssetService) assetService: AssetService,
+  ) {
     this.serviceRepository = serviceRepository;
     this.areaServiceService = areaServiceService;
     this.serviceService = serviceService;
-    this.assetService= assetService;
+    this.assetService = assetService;
   }
 
   public async execute(command: DestroyServiceCommand): Promise<boolean> {
@@ -37,7 +36,7 @@ export default class DestroyServiceHandler {
 
     const relationsWAsDestroyed = await this.areaServiceService.destroyRelationsByService(service);
 
-    if(!relationsWAsDestroyed){
+    if (!relationsWAsDestroyed) {
       throw new CannotDeleteEntity(`Areas relationed with the service id: ${command.getId()} could not be deleted`);
     }
 
@@ -45,7 +44,7 @@ export default class DestroyServiceHandler {
 
     const relationedElementWasDestroyed = await this.serviceService.deleteRelatedElements(service);
 
-    if(!relationedElementWasDestroyed){
+    if (!relationedElementWasDestroyed) {
       throw new CannotDeleteEntity(`Elements relationed with the service id: ${command.getId()} could not be deleted`);
     }
 

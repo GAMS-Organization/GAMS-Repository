@@ -13,9 +13,11 @@ export default class DestroySectorHandler {
   private sectorService: SectorService;
   private assetService: AssetService;
 
-  public constructor(@inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
-                     @inject(SectorService) sectorService: SectorService,
-                     @inject(AssetService)assetService: AssetService) {
+  public constructor(
+    @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
+    @inject(SectorService) sectorService: SectorService,
+    @inject(AssetService) assetService: AssetService,
+  ) {
     this.sectorRepository = sectorRepository;
     this.sectorService = sectorService;
     this.assetService = assetService;
@@ -32,7 +34,7 @@ export default class DestroySectorHandler {
 
     const relationsWAsDestroyed = await this.sectorService.deleteRelatedAreas(sector);
 
-    if(!relationsWAsDestroyed){
+    if (!relationsWAsDestroyed) {
       throw new CannotDeleteEntity(`Areas relationed with the sector id: ${command.getId()} could not be deleted`);
     }
 

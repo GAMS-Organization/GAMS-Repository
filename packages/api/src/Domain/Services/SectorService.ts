@@ -11,12 +11,14 @@ export default class SectorService {
   private areaRepository: IAreaRepository;
   private areaServiceService: AreaServiceService;
 
-  public constructor(@inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
-                     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
-                     @inject(AreaServiceService) areaServiceService: AreaServiceService) {
+  public constructor(
+    @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
+    @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
+    @inject(AreaServiceService) areaServiceService: AreaServiceService,
+  ) {
     this.sectorRepository = sectorRepository;
     this.areaRepository = areaRepository;
-    this.areaServiceService = areaServiceService
+    this.areaServiceService = areaServiceService;
   }
 
   public async returnAllPaginated(
@@ -33,15 +35,14 @@ export default class SectorService {
     };
   }
 
-  public async deleteRelatedAreas(sector: Sector){
+  public async deleteRelatedAreas(sector: Sector) {
     const areas = await this.areaRepository.findBySectorId(sector.getId());
     let error = false;
-    for(const area of areas){
+    for (const area of areas) {
       let result = await this.areaServiceService.destroyRelationsByArea(area);
-      if(!result){
+      if (!result) {
         error = true;
-      }
-      else{
+      } else {
         await this.areaRepository.destroy(area);
       }
     }

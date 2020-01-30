@@ -229,7 +229,6 @@ DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
 
-
 /**
  * Handlers
  */
@@ -286,8 +285,6 @@ DIContainer.bind<SectorService>(SectorService).toSelf();
 DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
-
-
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
