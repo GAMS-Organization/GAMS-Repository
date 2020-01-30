@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authStorage from "../localStorage/authStorage";
 
 class ApiFetch {
   constructor() {
@@ -70,13 +71,11 @@ class ApiFetch {
 
   makeRequest(requestData, headers = null) {
     return new Promise(async (resolve, reject) => {
-      let response;
-
-      response = await axios({
+      const response = await axios({
         method: requestData.method,
         url: `${this.apiUrl}${requestData.endpoint}`,
         data: requestData.body ? requestData.body : null,
-        headers: headers,
+        headers: { authorization: authStorage.getSession() },
       }).catch(error => {
         reject(error.response);
       });

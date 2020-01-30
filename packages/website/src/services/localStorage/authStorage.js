@@ -6,7 +6,7 @@ class AuthStorage {
   }
 
   getSession() {
-    localStorageService.get('auth-token');
+    return localStorageService.get('auth-token');
   }
 
   deleteSession() {

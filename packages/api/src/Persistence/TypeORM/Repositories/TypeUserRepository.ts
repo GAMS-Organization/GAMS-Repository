@@ -27,10 +27,10 @@ export default class TypeUserRepository extends TypeRepository implements IUserR
     return await this.repository(User).findOne(id, { relations: ['userRoles', 'userRoles.role'] });
   }
 
-  public async findOneByUsername(username: string): Promise<User> {
+  public async findOneByUsername(email: string): Promise<User> {
     return await this.repository(User).findOne({
       relations: ['userRoles', 'userRoles.role'],
-      where: { username: username },
+      where: { email: email },
     });
   }
 

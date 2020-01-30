@@ -8,23 +8,23 @@ import { HTTP_CODES } from '../../Enums/HttpStatuses';
 
 @injectable()
 export default class ShowProductAction {
-    private adapter: ShowProductAdapter;
-    private handler: ShowProductHandler;
+  private adapter: ShowProductAdapter;
+  private handler: ShowProductHandler;
 
-    public constructor(adapter: ShowProductAdapter, handler: ShowProductHandler) {
-        this.adapter = adapter;
-        this.handler = handler;
-    }
+  public constructor(adapter: ShowProductAdapter, handler: ShowProductHandler) {
+    this.adapter = adapter;
+    this.handler = handler;
+  }
 
-    public async execute(request: Request, response: Response): Promise<Response> {
-        const command = this.adapter.from(request);
+  public async execute(request: Request, response: Response): Promise<Response> {
+    const command = this.adapter.from(request);
 
-        const result = await this.handler.execute(command);
+    const result = await this.handler.execute(command);
 
-        const presenter = new GetProductPresenter(result);
+    const presenter = new GetProductPresenter(result);
 
-        return response
-            .status(HTTP_CODES.OK)
-            .json(success(presenter.getData(), 'ShowProductAction: Product has been retrieved'));
-    }
+    return response
+      .status(HTTP_CODES.OK)
+      .json(success(presenter.getData(), 'ShowProductAction: Product has been retrieved'));
+  }
 }

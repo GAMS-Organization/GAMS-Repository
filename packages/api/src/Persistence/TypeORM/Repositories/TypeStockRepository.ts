@@ -18,7 +18,7 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
   }
 
   public async findOneById(id: number): Promise<Stock> {
-    return await this.repository(Stock).findOne(id);
+    return await this.repository(Stock).findOne({ where: { id: id }, relations: ['product'] });
   }
 
   public async findOneByStockProduct(id: number): Promise<Stock> {

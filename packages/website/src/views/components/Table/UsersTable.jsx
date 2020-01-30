@@ -60,7 +60,6 @@ class UsersTable extends React.Component {
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    console.log(tableData);
     const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="down" ref={ref} {...props} />;
     });

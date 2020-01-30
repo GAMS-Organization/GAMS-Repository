@@ -44,12 +44,8 @@ class UpdateProductSection extends React.Component {
     this.props.onRef(undefined);
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
   handleClose() {
-    this.setState({ open: false, rolClicked: false });
+    this.setState({ open: false });
   }
 
   showModal() {
@@ -59,10 +55,6 @@ class UpdateProductSection extends React.Component {
   closeNotification() {
     this.setState({ notification: false, errors: {} });
   }
-
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value, rolClicked: true });
-  };
 
   async updateProduct(e) {
     e.preventDefault();

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import TableStockSection from '../sections/Stock/TableStockSection';
-import LoadPurchase from '../sections/Stock/LoadPurchase';
+import PurchaseTable from '../sections/Stock/PurchaseTable';
 
 const styles = {
   cardCategoryWhite: {
@@ -38,7 +38,7 @@ class Stock extends React.Component {
   render() {
     return (
       <div>
-        <LoadPurchase />
+        <PurchaseTable />
         <TableStockSection />
       </div>
     );

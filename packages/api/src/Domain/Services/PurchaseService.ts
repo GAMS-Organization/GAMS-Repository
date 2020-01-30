@@ -27,15 +27,15 @@ export default class PurchaseService {
 
   public async setPurchaseToEntry(
     entry: Entry,
-    commandProducts: string[],
+    commandProducts: number[],
     commandQuantities: number[],
     commandProviders: string[],
   ): Promise<Entry> {
     const products = await this.productRepository.findAll();
     for (const product of products) {
-      const productName = product.getName();
-      if (commandProducts.includes(productName)) {
-        let index = commandProducts.indexOf(productName);
+      const productId = product.getId();
+      if (commandProducts.includes(productId)) {
+        let index = commandProducts.indexOf(productId);
         let quantity = commandQuantities[index];
         let provider = commandProviders[index];
         const purchase = new Purchase(quantity, provider, product, entry);

@@ -66,40 +66,12 @@ class Dashboard extends React.Component {
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
-  getRoute() {
-    return this.props.location.pathname !== '/admin/maps';
-  }
   resizeFunction = () => {
     if (window.innerWidth >= 960) {
       this.setState({ mobileOpen: false });
     }
   };
-  /*
-  async componentDidMount() {
-    const { history } = this.props;
 
-    if (navigator.platform.indexOf("Win") > -1) {
-      const ps = new PerfectScrollbar(this.refs.mainPanel);
-    }
-    window.addEventListener("resize", this.resizeFunction);
-
-    let getSessionRequest;
-    try {
-      getSessionRequest = await axios.get(
-        `http://${REACT_APP_SERVER_URL}/get-session`,
-        {
-          withCredentials: true
-        }
-      );
-    } catch ({ response }) {
-      getSessionRequest = response;
-    }
-    const { data: getSessionRequestData } = getSessionRequest;
-    if (getSessionRequestData.success) {
-      return userInfo = getSessionRequestData.userInfo;
-    }
-    return history.push("/auth/login-page");
-  }*/
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
@@ -127,15 +99,10 @@ class Dashboard extends React.Component {
         />
         <div className={classes.mainPanel} ref="mainPanel">
           <Navbar routes={routes} handleDrawerToggle={this.handleDrawerToggle} color="gamsBlue" {...rest} />
-          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-          {this.getRoute() ? (
-            <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
-            </div>
-          ) : (
-            <div className={classes.map}>{switchRoutes}</div>
-          )}
-          {this.getRoute() ? <Footer /> : null}
+          <div className={classes.content}>
+            <div className={classes.container}>{switchRoutes}</div>
+          </div>
+          <Footer />
         </div>
       </div>
     );

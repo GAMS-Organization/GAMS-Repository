@@ -7,17 +7,17 @@ import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 
 @injectable()
 export default class ShowUserHandler {
-    private productRepository: IProductRepository;
+  private productRepository: IProductRepository;
 
-    public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
-        this.productRepository = productRepository;
-    }
+  public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
+    this.productRepository = productRepository;
+  }
 
-    public async execute(command: ShowProductCommand): Promise<Product> {
-        const product = await this.productRepository.findOneById(command.getId());
-        if (!product) {
-            throw new EntityNotFoundException(`Product with id: ${command.getId()} not found`);
-        }
-        return product;
+  public async execute(command: ShowProductCommand): Promise<Product> {
+    const product = await this.productRepository.findOneById(command.getId());
+    if (!product) {
+      throw new EntityNotFoundException(`Product with id: ${command.getId()} not found`);
     }
+    return product;
+  }
 }

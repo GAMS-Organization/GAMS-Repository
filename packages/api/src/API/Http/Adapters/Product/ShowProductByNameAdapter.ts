@@ -5,13 +5,13 @@ import ShowProductByNameCommand from '../../../../Application/Commands/Product/S
 
 @injectable()
 export default class ShowProductByNameAdapter {
-    public from(request: Request): ShowProductByNameCommand {
-        const name = request.params.name;
+  public from(request: Request): ShowProductByNameCommand {
+    const name = request.params.name;
 
-        if (!name) {
-            throw new ValidationException('Product name is required');
-        }
-
-        return new ShowProductByNameCommand(name);
+    if (!name) {
+      throw new ValidationException('Product name is required');
     }
+
+    return new ShowProductByNameCommand(name);
+  }
 }

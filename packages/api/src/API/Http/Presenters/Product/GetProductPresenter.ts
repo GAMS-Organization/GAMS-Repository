@@ -2,20 +2,20 @@ import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresent
 import Product from '../../../../Domain/Entities/Product';
 
 export default class GetProductPresenter implements IPresenter {
-    private result: Product;
+  private result: Product;
 
-    public constructor(result: Product) {
-        this.result = result;
-    }
+  public constructor(result: Product) {
+    this.result = result;
+  }
 
-    public toJson(): string {
-        return JSON.stringify(this.getData());
-    }
+  public toJson(): string {
+    return JSON.stringify(this.getData());
+  }
 
-    public getData(): object {
-        return {
-            id: this.result.getId(),
-            name: this.result.getName(),
-        };
-    }
+  public getData(): object {
+    return {
+      id: this.result.getId(),
+      name: this.result.getName(),
+    };
+  }
 }

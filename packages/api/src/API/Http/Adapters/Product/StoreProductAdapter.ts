@@ -6,7 +6,7 @@ import { storeProductSchema } from '../../Validations/Schemas/ProductSchema';
 import ValidationException from '../../../../Application/Exceptions/ValidationException';
 
 @injectable()
-export default class StoreUserAdapter {
+export default class StoreProductAdapter {
   private validator: Validator;
 
   public constructor() {

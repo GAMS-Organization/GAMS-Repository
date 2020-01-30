@@ -11,7 +11,6 @@ class exitStock {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return exitStockAdapter.create(createResponse);
   }
 
@@ -22,7 +21,6 @@ class exitStock {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
     return exitStockAdapter.list(listResponse);
   }
 
@@ -35,7 +33,6 @@ class exitStock {
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return exitStockAdapter.update(updateResponse);
   }
 

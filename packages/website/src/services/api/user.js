@@ -11,7 +11,6 @@ class User {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return userAdapter.create(createResponse);
   }
 
@@ -35,7 +34,6 @@ class User {
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return userAdapter.update(updateResponse);
   }
 
