@@ -17,7 +17,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceSector from '../../../services/api/sector';
-import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
+import newSectorStyle from '../../../styles/jss/material-dashboard-react/sections/newSectorStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 
@@ -28,22 +28,20 @@ class NewSector extends React.Component {
       errors: {},
       notification: false,
     };
-    this.createSector = this.createSector.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createSector(e) {
+  createSector = async e => {
     e.preventDefault();
 
-    const fields = ['name, code'];
+    const fields = ['name', 'code'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -58,7 +56,8 @@ class NewSector extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
 
   render() {
     const { classes, name, code } = this.props;
@@ -80,7 +79,7 @@ class NewSector extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createProduct}>
+            <form onSubmit={this.createSector}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo sector</h4>
@@ -137,10 +136,11 @@ class NewSector extends React.Component {
 NewSector.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
+  code: PropTypes.string,
   surname: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
   type: PropTypes.string,
 };
 
-export default withStyles(newProductStyle)(NewSector);
+export default withStyles(newSectorStyle)(NewSector);
