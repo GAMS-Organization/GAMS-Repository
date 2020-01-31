@@ -28,19 +28,17 @@ class NewServiceSection extends React.Component {
       errors: {},
       notification: false,
     };
-    this.createService = this.createService.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createService(e) {
+  createService = async e => {
     e.preventDefault();
 
     const fields = ['name', 'code'];
@@ -58,7 +56,8 @@ class NewServiceSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
 
   render() {
     const { classes, name, code } = this.props;
