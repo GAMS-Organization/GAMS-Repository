@@ -11,7 +11,6 @@ class asset {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
 
     return assetAdapter.create(createResponse);
   }

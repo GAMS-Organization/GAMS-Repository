@@ -51,7 +51,7 @@ class AreaTableSection extends React.Component {
 
   async componentWillMount() {
     const response = await serviceArea.list();
-    console.log(response);
+
     let areas = [];
     for (const area of response.data.items) {
       let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services];

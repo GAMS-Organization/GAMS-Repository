@@ -37,10 +37,6 @@ class UpdateSectorSection extends React.Component {
     this.props.onRef(undefined);
   };
 
-  componentDidUpdate = () => {
-    console.log(this.state);
-  };
-
   handleClose = () => {
     this.setState({ open: false, rolClicked: false });
   };
@@ -51,10 +47,6 @@ class UpdateSectorSection extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  };
-
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value, rolClicked: true });
   };
 
   updateSector = async e => {

@@ -85,7 +85,6 @@ class NewAreaSection extends React.Component {
     formValues.services = formValues.services.split(',');
 
     const response = await serviceArea.create(formValues);
-    console.log(response);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });

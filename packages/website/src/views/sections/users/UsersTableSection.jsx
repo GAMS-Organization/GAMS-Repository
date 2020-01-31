@@ -51,6 +51,7 @@ class UsersTableSection extends React.Component {
 
   async componentWillMount() {
     const response = await serviceUser.list();
+
     let users = [];
     for (const user of response.data.items) {
       let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];

@@ -21,7 +21,7 @@ class service {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
+
     return serviceAdapter.list(listResponse);
   }
 

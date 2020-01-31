@@ -108,10 +108,7 @@ class NewAssetSection extends React.Component {
       element: this.state.selectedElement,
     };
 
-    console.log(formValues);
-
     const response = await serviceAsset.create(formValues);
-    console.log(response);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
