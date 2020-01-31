@@ -36,8 +36,6 @@ class NewAreaSection extends React.Component {
       sector: [],
       selectedSector: [],
     };
-    this.createArea = this.createArea.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   async componentWillMount() {
@@ -69,11 +67,11 @@ class NewAreaSection extends React.Component {
     this.setState({ selectedSector: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createArea(e) {
+  createArea = async e => {
     e.preventDefault();
 
     const fields = ['name', 'code', 'sector', 'services'];
@@ -94,7 +92,8 @@ class NewAreaSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
 
   render() {
     const { classes, name, code, sector, services } = this.props;
