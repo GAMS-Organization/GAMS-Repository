@@ -11,21 +11,16 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import GridItem from '../../components/Grid/GridItem';
-import Card from '../../components/Card/Card.jsx';
-import CardHeader from '../../components/Card/CardHeader.jsx';
-import CardBody from '../../components/Card/CardBody.jsx';
 import Slide from '@material-ui/core/Slide';
 import Snackbar from '../Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
 
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
 import serviceCurrentStock from '../../../services/api/currentStock';
+import UpdateStock from "./UpdateStock";
 
 class CurrentStock extends React.Component {
   constructor(props) {
@@ -56,11 +51,12 @@ class CurrentStock extends React.Component {
 
   handleClickUpdate(prop) {
     this.setState({
-      user: {
+      current: {
         id: prop[0],
-        producto: prop[1],
-        cantidad: prop[2],
-        Cantminima: prop[3],
+        product: prop[1],
+        quantity: prop[2],
+        minimunQuantity: prop[3],
+        state: prop[4],
       },
     });
     this.child.showModal();
@@ -86,6 +82,7 @@ class CurrentStock extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <UpdateStock current={this.state.current} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -119,20 +116,6 @@ class CurrentStock extends React.Component {
                         onClick={this.handleClickUpdate.bind(this, prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={this.deleteUser.bind(this, prop)}
-                      >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

@@ -13,15 +13,14 @@ export default class DestroyAreaHandler {
   private areaServiceService: AreaServiceService;
   private assetService: AssetService;
 
-
   public constructor(
-      @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
-      @inject(AreaServiceService) areaServiceService: AreaServiceService,
-      @inject(AssetService)assetService: AssetService)
-  {
+    @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
+    @inject(AreaServiceService) areaServiceService: AreaServiceService,
+    @inject(AssetService) assetService: AssetService,
+  ) {
     this.areaRepository = areaRepository;
     this.areaServiceService = areaServiceService;
-    this.assetService= assetService;
+    this.assetService = assetService;
   }
 
   public async execute(command: DestroyAreaCommand): Promise<boolean> {
@@ -35,7 +34,7 @@ export default class DestroyAreaHandler {
 
     const relationsWAsDestroyed = await this.areaServiceService.destroyRelationsByArea(area);
 
-    if(!relationsWAsDestroyed){
+    if (!relationsWAsDestroyed) {
       throw new CannotDeleteEntity(`Services relationed with the area id: ${command.getId()} could not be deleted`);
     }
 

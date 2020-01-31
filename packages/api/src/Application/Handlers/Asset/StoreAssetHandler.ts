@@ -7,15 +7,16 @@ import AssetService from '../../../Domain/Services/AssetService';
 export default class StoreAssetHandler {
   private assetService: AssetService;
 
-
-  public constructor(
-    @inject(AssetService) assetService: AssetService,
-  ) {
+  public constructor(@inject(AssetService) assetService: AssetService) {
     this.assetService = assetService;
   }
 
   public async execute(command: StoreAssetCommand): Promise<Asset> {
-
-    return await this.assetService.setRelationsToAsset(command.getSector(), command.getArea(), command.getService(), command.getElement());
+    return await this.assetService.setRelationsToAsset(
+      command.getSector(),
+      command.getArea(),
+      command.getService(),
+      command.getElement(),
+    );
   }
 }

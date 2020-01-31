@@ -11,14 +11,23 @@ class entryPurchaseStock {
     } catch (err) {
       createResponse = err;
     }
-    console.log(createResponse);
     return entryPurchaseStockAdapter.create(createResponse);
   }
 
   async list() {
     let listResponse;
     try {
-      listResponse = await Api.get('entry/');
+      listResponse = await Api.get(`entry/`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return entryPurchaseStockAdapter.list(listResponse);
+  }
+
+  async getById(idEntry) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`entry/${idEntry}`);
     } catch (err) {
       listResponse = err;
     }
@@ -34,7 +43,6 @@ class entryPurchaseStock {
     } catch (err) {
       updateResponse = err;
     }
-    console.log(updateResponse);
     return entryPurchaseStockAdapter.update(updateResponse);
   }
 

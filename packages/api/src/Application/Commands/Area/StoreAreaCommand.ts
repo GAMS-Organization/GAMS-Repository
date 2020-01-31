@@ -23,7 +23,7 @@ export default class StoreAreaCommand {
     return this.sector;
   }
 
-  public getServices(): string[]{
+  public getServices(): string[] {
     return this.services;
   }
 }

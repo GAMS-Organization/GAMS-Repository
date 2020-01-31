@@ -8,14 +8,11 @@ import StoreServiceCommand from '../../Commands/Service/StoreServiceCommand';
 export default class StoreServiceHandler {
   private serviceRepository: IServiceRepository;
 
-  public constructor(
-    @inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository,
-  ) {
+  public constructor(@inject(INTERFACES.IServiceRepository) serviceRepository: IServiceRepository) {
     this.serviceRepository = serviceRepository;
   }
 
   public async execute(command: StoreServiceCommand): Promise<Service> {
-
     const service = new Service(command.getName(), command.getCode());
     return await this.serviceRepository.persist(service);
   }

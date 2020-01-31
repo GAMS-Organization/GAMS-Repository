@@ -13,8 +13,6 @@ import TypeStockEntryRepository from '../../Persistence/TypeORM/Repositories/Typ
 
 import LoginAction from '../../API/Http/Actions/Auth/LoginAction';
 
-import StoreRooftopperAction from '../../API/Http/Actions/Rooftoppers/StoreRooftopperAction';
-
 import StoreStockAdapter from '../../API/Http/Adapters/Stock/StoreStockAdapter';
 import StoreStockHandler from '../../Application/Handlers/Stock/StoreStockHandler';
 import StockEntryService from '../../Domain/Services/StockEntryService';
@@ -60,30 +58,6 @@ import EnableUserAdapter from '../../API/Http/Adapters/Users/EnableUserAdapter';
 import EnableUserHandler from '../../Application/Handlers/Users/EnableUserHandler';
 
 import UserRoleService from '../../Domain/Services/UserRoleService';
-import IRooftopperProfileRepository from '../../Domain/Interfaces/IRooftopperProfileRepository';
-import TypeRooftopperProfileRepository from '../../Persistence/TypeORM/Repositories/TypeRooftopperProfileRepository';
-import StoreRooftopperAdapter from '../../API/Http/Adapters/Rooftoppers/StoreRooftopperAdapter';
-import StoreRooftopperHandler from '../../Application/Handlers/Rooftoppers/StoreRooftopperHandler';
-import ShowRooftoppersByIdHandler from '../../Application/Handlers/Rooftoppers/ShowRooftoppersByIdHandler';
-import ShowRooftoppersByIdAdapter from '../../API/Http/Adapters/Rooftoppers/ShowRooftoppersByIdAdapter';
-import ShowRooftopperByIdAction from '../../API/Http/Actions/Rooftoppers/showRooftopperByIdAction';
-import ShowRooftopperBySlugAction from '../../API/Http/Actions/Rooftoppers/showRooftopperBySlugAction';
-import ShowRooftopperBySlugAdapter from '../../API/Http/Adapters/Rooftoppers/showRooftopperBySlugAdapter';
-import ShowRooftopperBySlugHandler from '../../Application/Handlers/Rooftoppers/showRooftopperBySlugHandler';
-import IndexRooftoppersAction from '../../API/Http/Actions/Rooftoppers/IndexRooftoppersAction';
-import RooftopperProfileService from '../../Domain/Services/RooftopperProfileService';
-import UpdateRooftopperAction from '../../API/Http/Actions/Rooftoppers/UpdateRooftopperAction';
-import UpdateRooftopperAdapter from '../../API/Http/Adapters/Rooftoppers/UpdateRooftopperAdapter';
-import UpdateRooftopperHandler from '../../Application/Handlers/Rooftoppers/UpdateRooftopperHandler';
-import EnableRooftopperByIdAction from '../../API/Http/Actions/Rooftoppers/EnableRooftopperByIdAction';
-import DisableRooftopperByIdAction from '../../API/Http/Actions/Rooftoppers/DisableRooftopperByIdAction';
-import EnableRooftopperByIdAdapter from '../../API/Http/Adapters/Rooftoppers/EnableRooftopperByIdAdapter';
-import DisableRooftopperByIdAdapter from '../../API/Http/Adapters/Rooftoppers/DisableRooftopperByIdAdapter';
-import DisableRooftopperByIdHandler from '../../Application/Handlers/Rooftoppers/DisableRooftopperByIdHandler';
-import EnableRooftopperByIdHandler from '../../Application/Handlers/Rooftoppers/EnableRooftopperByIdHandler';
-import DestroyRooftopperAction from '../../API/Http/Actions/Rooftoppers/DestroyRooftopperAction';
-import DestroyRooftopperAdapter from '../../API/Http/Adapters/Rooftoppers/DestroyRooftopperAdapter';
-import DestroyRooftopperHandler from '../../Application/Handlers/Rooftoppers/DestroyRooftopperHandler';
 import UserService from '../../Domain/Services/UserService';
 import { ILoggerService } from '../../Domain/Services/Logger/ILoggerService';
 import { WinstonLogger } from '../../Domain/Services/Logger/WinstonLogger';
@@ -173,15 +147,6 @@ const DIContainer = new Container();
  */
 DIContainer.bind<LoginAction>(LoginAction).toSelf();
 
-DIContainer.bind<StoreRooftopperAction>(StoreRooftopperAction).toSelf();
-DIContainer.bind<ShowRooftopperByIdAction>(ShowRooftopperByIdAction).toSelf();
-DIContainer.bind<ShowRooftopperBySlugAction>(ShowRooftopperBySlugAction).toSelf();
-DIContainer.bind<IndexRooftoppersAction>(IndexRooftoppersAction).toSelf();
-DIContainer.bind<UpdateRooftopperAction>(UpdateRooftopperAction).toSelf();
-DIContainer.bind<EnableRooftopperByIdAction>(EnableRooftopperByIdAction).toSelf();
-DIContainer.bind<DisableRooftopperByIdAction>(DisableRooftopperByIdAction).toSelf();
-DIContainer.bind<DestroyRooftopperAction>(DestroyRooftopperAction).toSelf();
-
 DIContainer.bind<IndexUsersAction>(IndexUsersAction).toSelf();
 DIContainer.bind<StoreUsersAction>(StoreUsersAction).toSelf();
 DIContainer.bind<ShowUsersAction>(ShowUsersAction).toSelf();
@@ -229,14 +194,6 @@ DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
  */
 DIContainer.bind<LoginAdapter>(LoginAdapter).toSelf();
 
-DIContainer.bind<StoreRooftopperAdapter>(StoreRooftopperAdapter).toSelf();
-DIContainer.bind<ShowRooftoppersByIdAdapter>(ShowRooftoppersByIdAdapter).toSelf();
-DIContainer.bind<ShowRooftopperBySlugAdapter>(ShowRooftopperBySlugAdapter).toSelf();
-DIContainer.bind<UpdateRooftopperAdapter>(UpdateRooftopperAdapter).toSelf();
-DIContainer.bind<EnableRooftopperByIdAdapter>(EnableRooftopperByIdAdapter).toSelf();
-DIContainer.bind<DisableRooftopperByIdAdapter>(DisableRooftopperByIdAdapter).toSelf();
-DIContainer.bind<DestroyRooftopperAdapter>(DestroyRooftopperAdapter).toSelf();
-
 DIContainer.bind<StoreUserAdapter>(StoreUserAdapter).toSelf();
 DIContainer.bind<ShowUserAdapter>(ShowUserAdapter).toSelf();
 DIContainer.bind<UpdateUserAdapter>(UpdateUserAdapter).toSelf();
@@ -272,19 +229,10 @@ DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
 
-
 /**
  * Handlers
  */
 DIContainer.bind<LoginHandler>(LoginHandler).toSelf();
-
-DIContainer.bind<StoreRooftopperHandler>(StoreRooftopperHandler).toSelf();
-DIContainer.bind<ShowRooftoppersByIdHandler>(ShowRooftoppersByIdHandler).toSelf();
-DIContainer.bind<ShowRooftopperBySlugHandler>(ShowRooftopperBySlugHandler).toSelf();
-DIContainer.bind<UpdateRooftopperHandler>(UpdateRooftopperHandler).toSelf();
-DIContainer.bind<EnableRooftopperByIdHandler>(EnableRooftopperByIdHandler).toSelf();
-DIContainer.bind<DisableRooftopperByIdHandler>(DisableRooftopperByIdHandler).toSelf();
-DIContainer.bind<DestroyRooftopperHandler>(DestroyRooftopperHandler).toSelf();
 
 DIContainer.bind<StoreUserHandler>(StoreUserHandler).toSelf();
 DIContainer.bind<ShowUserHandler>(ShowUserHandler).toSelf();
@@ -326,7 +274,6 @@ DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
  */
 DIContainer.bind<UserService>(UserService).toSelf();
 DIContainer.bind<UserRoleService>(UserRoleService).toSelf();
-DIContainer.bind<RooftopperProfileService>(RooftopperProfileService).toSelf();
 DIContainer.bind<ProductService>(ProductService).toSelf();
 DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
@@ -339,8 +286,6 @@ DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 
-
-
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
 /**
@@ -350,13 +295,9 @@ DIContainer.bind<IUserRepository>(INTERFACES.IUserRepository).to(TypeUserReposit
 DIContainer.bind<IUserRoleRepository>(INTERFACES.IUserRoleRepository).to(TypeUserRoleRepository);
 DIContainer.bind<IRoleRepository>(INTERFACES.IRoleRepository).to(TypeRoleRepository);
 DIContainer.bind<IPurchaseRepository>(INTERFACES.IPurchaseRepository).to(TypePurchaseRepository);
-
 DIContainer.bind<IStockRepository>(INTERFACES.IStockRepository).to(TypeStockRepository);
 DIContainer.bind<IEntryRepository>(INTERFACES.IEntryRepository).to(TypeEntryRepository);
 DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
-DIContainer.bind<IRooftopperProfileRepository>(INTERFACES.IRooftopperProfileRepository).to(
-  TypeRooftopperProfileRepository,
-);
 DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProductRepository);
 DIContainer.bind<ISectorRepository>(INTERFACES.ISectorRepository).to(TypeSectorRepository);
 DIContainer.bind<IAreaRepository>(INTERFACES.IAreaRepository).to(TypeAreaRepository);

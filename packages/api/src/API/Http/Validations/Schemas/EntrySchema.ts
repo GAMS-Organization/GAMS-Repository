@@ -15,7 +15,7 @@ export const storeEntrySchema = {
       return customErrorMessages.default(errors);
     }),
   products: Joi.array()
-    .items(Joi.string())
+    .items(Joi.number())
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);

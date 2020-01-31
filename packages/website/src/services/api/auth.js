@@ -1,9 +1,10 @@
 import Api from './api';
 import authAdapter from '../adapters/authAdapter';
+import authStorage from "../localStorage/authStorage";
 
 class Auth {
-  async logIn(username, password) {
-    const body = { username, password };
+  async logIn(email, password) {
+    const body = { email, password };
 
     let loginResponse;
     try {
@@ -12,7 +13,16 @@ class Auth {
       loginResponse = err;
     }
 
+    const responseAdapted = authAdapter.login(loginResponse);
+
+    if(responseAdapted.token){
+      authStorage.setSession(responseAdapted.token);
+    }
     return authAdapter.login(loginResponse);
+  }
+
+  async logOut() {
+      authStorage.deleteSession();
   }
 }
 

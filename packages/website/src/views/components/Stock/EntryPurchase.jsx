@@ -58,14 +58,11 @@ class EntryPurchase extends React.Component {
     }
   }
 
-  handleClickUpdate(prop) {
+  async handleClickSeeDetails(prop) {
+    const id = prop[0];
+    const entryDetails = await serviceEntryPurchaseStock.getById(id);
     this.setState({
-      entry: {
-        id: prop[5],
-        quantity: prop[6],
-        provider: prop[7],
-        product: prop[8],
-      },
+      entry: entryDetails.data.data,
     });
     this.child.showModal();
   }
@@ -121,7 +118,7 @@ class EntryPurchase extends React.Component {
                       <IconButton
                         aria-label="Visibility"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={this.handleClickSeeDetails.bind(this, prop)}
                       >
                         <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
                       </IconButton>
