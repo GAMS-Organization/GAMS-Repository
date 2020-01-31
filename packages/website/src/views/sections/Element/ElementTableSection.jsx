@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import UsersTable from '../../components/Table/UsersTable.jsx';
+import ElementTable from '../../components/Table/ElementTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceUser from '../../../services/api/user';
+import serviceElement from '../../../services/api/element';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,23 +41,22 @@ const styles = {
   },
 };
 
-class UsersTableSection extends React.Component {
+class ElementTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      element: [],
     };
   }
 
   async componentWillMount() {
-    const response = await serviceUser.list();
-
-    let users = [];
-    for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
-      users.push(dataUser);
+    const response = await serviceElement.list();
+    let elements = [];
+    for (const element of response.data.items) {
+      let dataElement = [element.id.toString(), element.name, element.code, element.service, element.description];
+      elements.push(dataElement);
     }
-    this.setState({ users: users });
+    this.setState({ element: elements });
   }
 
   render() {
@@ -67,14 +66,14 @@ class UsersTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Usuarios</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
+              <h4 className={classes.cardTitleWhite}>Elementos</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todos los Elementos</p>
             </CardHeader>
             <CardBody>
-              <UsersTable
+              <ElementTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
-                tableData={this.state.users}
+                tableHead={['ID', 'Nombre', 'Codigo', 'Servicio', 'Descripcion']}
+                tableData={this.state.element}
               />
             </CardBody>
           </Card>
@@ -84,4 +83,4 @@ class UsersTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(UsersTableSection);
+export default withStyles(styles)(ElementTableSection);

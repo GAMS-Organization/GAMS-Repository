@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import UsersTable from '../../components/Table/UsersTable.jsx';
+import AreasTable from '../../components/Table/AreasTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceUser from '../../../services/api/user';
+import serviceArea from '../../../services/api/area';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,23 +41,23 @@ const styles = {
   },
 };
 
-class UsersTableSection extends React.Component {
+class AreaTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      area: [],
     };
   }
 
   async componentWillMount() {
-    const response = await serviceUser.list();
+    const response = await serviceArea.list();
 
-    let users = [];
-    for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
-      users.push(dataUser);
+    let areas = [];
+    for (const area of response.data.items) {
+      let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services];
+      areas.push(dataArea);
     }
-    this.setState({ users: users });
+    this.setState({ area: areas });
   }
 
   render() {
@@ -67,14 +67,14 @@ class UsersTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Usuarios</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
+              <h4 className={classes.cardTitleWhite}>Areas</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las areas</p>
             </CardHeader>
             <CardBody>
-              <UsersTable
+              <AreasTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
-                tableData={this.state.users}
+                tableHead={['ID', 'Nombre', 'Codigo', 'Sector', 'Servicios']}
+                tableData={this.state.area}
               />
             </CardBody>
           </Card>
@@ -84,4 +84,4 @@ class UsersTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(UsersTableSection);
+export default withStyles(styles)(AreaTableSection);

@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import UsersTable from '../../components/Table/UsersTable.jsx';
+import SectorTable from '../../components/Table/SectorTable.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceUser from '../../../services/api/user';
+import serviceSector from '../../../services/api/sector';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,24 +41,24 @@ const styles = {
   },
 };
 
-class UsersTableSection extends React.Component {
+class SectorTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      sector: [],
     };
   }
 
-  async componentWillMount() {
-    const response = await serviceUser.list();
-
-    let users = [];
-    for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
-      users.push(dataUser);
+  componentWillMount = async () => {
+    const response = await serviceSector.list();
+    let sectors = [];
+    for (const sector of response.data.items) {
+      let dataSector = [sector.id.toString(), sector.name, sector.code];
+      sectors.push(dataSector);
     }
-    this.setState({ users: users });
-  }
+
+    this.setState({ sector: sectors });
+  };
 
   render() {
     const { classes } = this.props;
@@ -67,14 +67,14 @@ class UsersTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Usuarios</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
+              <h4 className={classes.cardTitleWhite}>Sectores</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todos los sectores</p>
             </CardHeader>
             <CardBody>
-              <UsersTable
+              <SectorTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
-                tableData={this.state.users}
+                tableHead={['ID', 'Nombre', 'Codigo']}
+                tableData={this.state.sector}
               />
             </CardBody>
           </Card>
@@ -84,4 +84,4 @@ class UsersTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(UsersTableSection);
+export default withStyles(styles)(SectorTableSection);

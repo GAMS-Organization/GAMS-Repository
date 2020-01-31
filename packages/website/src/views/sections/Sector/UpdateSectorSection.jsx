@@ -5,9 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -17,48 +14,45 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceProduct from '../../../services/api/products';
+import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
-class UpdateProductSection extends React.Component {
+class UpdateSectorSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
+      sector: {},
       errors: {},
       open: false,
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateProduct = this.updateProduct.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onRef(this);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onRef(undefined);
-  }
+  };
 
-  handleClose() {
-    this.setState({ open: false });
-  }
+  handleClose = () => {
+    this.setState({ open: false, rolClicked: false });
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async updateProduct(e) {
+  updateSector = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'name'];
+    const fields = ['id', 'name', 'code'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -68,19 +62,19 @@ class UpdateProductSection extends React.Component {
 
     formValues.roles = [formValues.roles];
 
-    const response = await serviceProduct.update(formValues);
+    const response = await serviceSector.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
-    const { classes, product, Transition } = this.props;
+    const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
-    const { id, name } = product;
+    const { id, name, code } = sector;
     return (
       <div>
         <Snackbar
@@ -90,7 +84,7 @@ class UpdateProductSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Producto actualizado correctamente'
+              : 'Sector actualizado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -110,10 +104,10 @@ class UpdateProductSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar producto</h4>
+            <h4 className={classes.modalTitle}>Actualizar sector</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.updateProduct}>
+            <form onSubmit={this.updateSector}>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={1}>
                   <CustomInput
@@ -146,6 +140,21 @@ class UpdateProductSection extends React.Component {
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={8}>
+                  <CustomInput
+                    labelText="Codigo"
+                    id="code"
+                    error={errors.code}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: code,
+                      name: 'code',
+                    }}
+                  />
+                </GridItem>
               </GridContainer>
               <Button type="submit" color="gamsRed">
                 Actualizar
@@ -161,7 +170,7 @@ class UpdateProductSection extends React.Component {
   }
 }
 
-UpdateProductSection.propTypes = {
+UpdateSectorSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   lastName: PropTypes.string,
@@ -170,4 +179,4 @@ UpdateProductSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(modalStyle)(UpdateProductSection);
+export default withStyles(modalStyle)(UpdateSectorSection);

@@ -4,12 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import UsersTable from '../../components/Table/UsersTable.jsx';
+import AssetTable from '../../components/Table/AssetTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
-import serviceUser from '../../../services/api/user';
+import serviceAsset from '../../../services/api/asset';
 
 const styles = {
   cardCategoryWhite: {
@@ -41,23 +41,22 @@ const styles = {
   },
 };
 
-class UsersTableSection extends React.Component {
+class AssetTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      asset: [],
     };
   }
 
   async componentWillMount() {
-    const response = await serviceUser.list();
-
-    let users = [];
-    for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
-      users.push(dataUser);
+    const response = await serviceAsset.list();
+    let assets = [];
+    for (const asset of response.data.items) {
+      let dataAsset = [asset.id.toString(), asset.sector.name, asset.area.name, asset.service.name, asset.element.name];
+      assets.push(dataAsset);
     }
-    this.setState({ users: users });
+    this.setState({ asset: assets });
   }
 
   render() {
@@ -67,14 +66,14 @@ class UsersTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Usuarios</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los usuarios</p>
+              <h4 className={classes.cardTitleWhite}>Activos</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todos los Activos</p>
             </CardHeader>
             <CardBody>
-              <UsersTable
+              <AssetTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
-                tableData={this.state.users}
+                tableHead={['ID', 'Sector', 'Area', 'Servicio', 'Elemento']}
+                tableData={this.state.asset}
               />
             </CardBody>
           </Card>
@@ -84,4 +83,4 @@ class UsersTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(UsersTableSection);
+export default withStyles(styles)(AssetTableSection);
