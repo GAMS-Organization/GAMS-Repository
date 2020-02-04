@@ -6,11 +6,11 @@ import Area from '../../../Domain/Entities/Area';
 @injectable()
 export default class TypeAreaRepository extends TypeRepository implements IAreaRepository {
   public async findAll(): Promise<Area[]> {
-    return await this.repository(Area).find();
+    return await this.repository(Area).find({ relations: ['sector'] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Area[]> {
-    return await this.repository(Area).find({ skip: initialIndex, take: limit });
+    return await this.repository(Area).find({ skip: initialIndex, take: limit , relations:['sector']});
   }
 
   public async count(): Promise<number> {

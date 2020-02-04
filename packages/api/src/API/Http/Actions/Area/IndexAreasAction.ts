@@ -16,7 +16,6 @@ export default class IndexAreasAction {
 
   public async execute(request: Request, response: Response): Promise<Response> {
     const areasData = await this.areaService.returnAllPaginated(request.query.page, request.query.items_per_page);
-
     const getAllPresenter = new GetAllAreasPresenter(areasData.data);
 
     return response
