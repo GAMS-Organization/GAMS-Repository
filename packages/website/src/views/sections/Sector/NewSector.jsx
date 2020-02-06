@@ -38,6 +38,7 @@ class NewSector extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea el sector
   createSector = async e => {
     e.preventDefault();
 

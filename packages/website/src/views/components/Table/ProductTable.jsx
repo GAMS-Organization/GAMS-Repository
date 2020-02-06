@@ -35,11 +35,12 @@ class ProductTable extends React.Component {
     this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async deleteProduct(prop) {
+  //se elimina el producto
+  deleteProduct = async prop => {
     const response = await serviceProduct.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -47,16 +48,18 @@ class ProductTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
 
-  handleClickUpdate(prop) {
+  //se crea la ventana emergente en donde se editaran los productos
+  handleClickUpdate = prop => {
     this.setState({ product: { id: prop[0], name: prop[1] } });
     this.child.showModal();
-  }
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.setState({ modal: false });
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

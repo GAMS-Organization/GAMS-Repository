@@ -49,6 +49,7 @@ class AssetTableSection extends React.Component {
     };
   }
 
+  //se obtienen los activos
   async componentWillMount() {
     const response = await serviceAsset.list();
     let assets = [];

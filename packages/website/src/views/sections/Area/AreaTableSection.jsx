@@ -49,6 +49,7 @@ class AreaTableSection extends React.Component {
     };
   }
 
+  //se obtienen los areas
   async componentWillMount() {
     const response = await serviceArea.list();
 

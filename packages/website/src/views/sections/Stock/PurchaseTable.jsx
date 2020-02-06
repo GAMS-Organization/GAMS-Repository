@@ -27,6 +27,7 @@ class PurchaseTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea la compra
   handleConfirmPurchaseClick = async e => {
     e.preventDefault();
 

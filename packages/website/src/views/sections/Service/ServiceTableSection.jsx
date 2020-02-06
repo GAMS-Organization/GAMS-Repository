@@ -49,6 +49,7 @@ class ServiceTableSection extends React.Component {
     };
   }
 
+  //obtiene los servicios
   async componentWillMount() {
     const response = await serviceService.list();
     let services = [];

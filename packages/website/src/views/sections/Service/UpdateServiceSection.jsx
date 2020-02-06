@@ -52,6 +52,7 @@ class UpdateServiceSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //actualiza los servicios luego de ser editado
   updateService = async e => {
     e.preventDefault();
 

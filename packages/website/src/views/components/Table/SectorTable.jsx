@@ -36,6 +36,7 @@ class SectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se eliminan los sectores
   deleteSector = async prop => {
     const response = await serviceSector.delete(prop[0]);
 
@@ -47,6 +48,7 @@ class SectorTable extends React.Component {
     window.location.reload();
   };
 
+  //se crea la ventana emergente en donde se editaran los sectores
   handleClickUpdate = async prop => {
     this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();

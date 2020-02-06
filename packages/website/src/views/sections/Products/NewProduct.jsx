@@ -28,19 +28,18 @@ class NewProduct extends React.Component {
       errors: {},
       notification: false,
     };
-    this.createProduct = this.createProduct.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createProduct(e) {
+  //se crea el producto
+  createProduct = async e => {
     e.preventDefault();
 
     const fields = ['name'];
@@ -58,7 +57,9 @@ class NewProduct extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
+
   render() {
     const { classes, name } = this.props;
     const { errors } = this.state;
