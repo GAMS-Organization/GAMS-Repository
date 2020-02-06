@@ -30,7 +30,6 @@ class UsersTable extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteUser = this.deleteUser.bind(this);
     this.handleClickUpdate = this.handleClickUpdate.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
@@ -39,7 +38,8 @@ class UsersTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   }
 
-  async deleteUser(prop) {
+  //se eliminan el usuario
+  deleteUser = async prop => {
     const response = await serviceUser.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -47,8 +47,10 @@ class UsersTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+    window.location.reload();
+  };
 
+  //se crea la ventana emergente en donde se editaran los usuarios
   handleClickUpdate(prop) {
     this.setState({ user: { id: prop[0], name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
     this.child.showModal();

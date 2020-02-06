@@ -38,6 +38,7 @@ class NewServiceSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea el servicio
   createService = async e => {
     e.preventDefault();
 

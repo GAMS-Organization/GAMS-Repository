@@ -35,6 +35,7 @@ class AreasTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se elimina el area
   deleteArea = async prop => {
     const response = await serviceArea.delete(prop[0]);
 

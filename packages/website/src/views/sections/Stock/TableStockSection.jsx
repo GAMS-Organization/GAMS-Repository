@@ -60,6 +60,7 @@ class TableStockSection extends React.Component {
     };
   }
 
+  //se obtienen las entradas, el stock actual y las salidas
   async componentWillMount() {
     const responseEntry = await serviceEntryPurchaseStock.list();
     const responseCurrentStock = await serviceCurrentStock.list();
@@ -68,7 +69,7 @@ class TableStockSection extends React.Component {
     let stocks = [];
     let exits = [];
     for (const entry of responseEntry.data.items) {
-      let dataEntry = [entry.id.toString(), entry.date.slice(0,10), entry.observations];
+      let dataEntry = [entry.id.toString(), entry.date.slice(0, 10), entry.observations];
       entries.push(dataEntry);
     }
 
@@ -106,13 +107,7 @@ class TableStockSection extends React.Component {
                 tabContent: (
                   <CurrentStock
                     tableHeaderColor="gamsBlue"
-                    tableHead={[
-                      'ID',
-                      'Producto',
-                      'Cantidad',
-                      'Cant. Minima',
-                      'Estado',
-                    ]}
+                    tableHead={['ID', 'Producto', 'Cantidad', 'Cant. Minima', 'Estado']}
                     tableData={this.state.stock}
                   />
                 ),

@@ -49,6 +49,7 @@ class ElementTableSection extends React.Component {
     };
   }
 
+  //se obtienen los elementos
   async componentWillMount() {
     const response = await serviceElement.list();
     let elements = [];

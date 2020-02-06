@@ -49,7 +49,8 @@ class UsersTableSection extends React.Component {
     };
   }
 
-  async componentWillMount() {
+  //se obtienen los usuarios
+  componentWillMount = async () => {
     const response = await serviceUser.list();
 
     let users = [];
@@ -58,7 +59,7 @@ class UsersTableSection extends React.Component {
       users.push(dataUser);
     }
     this.setState({ users: users });
-  }
+  };
 
   render() {
     const { classes } = this.props;

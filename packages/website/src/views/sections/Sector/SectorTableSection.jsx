@@ -49,6 +49,7 @@ class SectorTableSection extends React.Component {
     };
   }
 
+  //obtiene los sectores
   componentWillMount = async () => {
     const response = await serviceSector.list();
     let sectors = [];

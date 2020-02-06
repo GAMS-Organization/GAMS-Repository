@@ -35,6 +35,7 @@ class AssetTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se elimina el activo
   deleteAsset = async prop => {
     const response = await serviceAsset.delete(prop[0]);
 

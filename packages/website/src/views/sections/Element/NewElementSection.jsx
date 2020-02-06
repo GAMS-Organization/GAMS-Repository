@@ -35,8 +35,8 @@ class NewElementSection extends React.Component {
     };
   }
 
+  //se obtienen los servicios
   async componentWillMount() {
-    //Llamada a servicios
     const responseService = await serviceService.list();
     let services = [];
     for (const service of responseService.data.items) {
@@ -55,6 +55,7 @@ class NewElementSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea el elemento
   createElement = async e => {
     e.preventDefault();
 

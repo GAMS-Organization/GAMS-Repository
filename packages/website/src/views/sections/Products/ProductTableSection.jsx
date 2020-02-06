@@ -49,6 +49,7 @@ class ProductTableSection extends React.Component {
     };
   }
 
+  //se obtienen los productos
   async componentWillMount() {
     const response = await serviceProduct.list();
     let products = [];
