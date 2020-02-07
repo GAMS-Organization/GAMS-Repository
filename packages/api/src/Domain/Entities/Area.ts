@@ -50,11 +50,11 @@ export default class Area {
     this.code = code;
   }
 
-  public getServices(): AreaService[]{
+  public getServices(): AreaService[] {
     return this.areaServices;
   }
 
-  public getServicesNames(): string[]{
+  public getServicesNames(): string[] {
     const servicesNames = [];
     this.areaServices.map(service => {
       servicesNames.push(service.getService().getName());

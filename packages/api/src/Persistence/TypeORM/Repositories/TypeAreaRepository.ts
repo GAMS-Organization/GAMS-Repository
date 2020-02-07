@@ -10,7 +10,11 @@ export default class TypeAreaRepository extends TypeRepository implements IAreaR
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Area[]> {
-    return await this.repository(Area).find({ skip: initialIndex, take: limit , relations:['sector', 'areaServices', 'areaServices.service']});
+    return await this.repository(Area).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['sector', 'areaServices', 'areaServices.service'],
+    });
   }
 
   public async count(): Promise<number> {
