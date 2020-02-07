@@ -55,9 +55,10 @@ class AreaTableSection extends React.Component {
 
     let areas = [];
     for (const area of response.data.items) {
-      let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services];
+      let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services.toString().replace(/,/gi, ' - ', )];
       areas.push(dataArea);
     }
+    console.log(areas);
     this.setState({ area: areas });
   }
 

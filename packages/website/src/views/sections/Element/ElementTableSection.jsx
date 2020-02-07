@@ -54,7 +54,7 @@ class ElementTableSection extends React.Component {
     const response = await serviceElement.list();
     let elements = [];
     for (const element of response.data.items) {
-      let dataElement = [element.id.toString(), element.name, element.code, element.service, element.description];
+      let dataElement = [element.id.toString(), element.name, element.code, element.service.name, element.description];
       elements.push(dataElement);
     }
     this.setState({ element: elements });

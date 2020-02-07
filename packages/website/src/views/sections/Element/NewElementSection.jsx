@@ -71,10 +71,10 @@ class NewElementSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {
@@ -105,7 +105,7 @@ class NewElementSection extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={3}>
+                    <GridItem xs={12} sm={12} md={8}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
@@ -120,7 +120,7 @@ class NewElementSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Codigo"
                         id="code"

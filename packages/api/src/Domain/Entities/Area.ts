@@ -49,4 +49,16 @@ export default class Area {
   public setCode(code: string): void {
     this.code = code;
   }
+
+  public getServices(): AreaService[]{
+    return this.areaServices;
+  }
+
+  public getServicesNames(): string[]{
+    const servicesNames = [];
+    this.areaServices.map(service => {
+      servicesNames.push(service.getService().getName());
+    });
+    return servicesNames;
+  }
 }

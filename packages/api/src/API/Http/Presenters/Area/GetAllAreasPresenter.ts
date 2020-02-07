@@ -21,6 +21,7 @@ export default class GetAllAreasPresenter implements IPresenter {
         name: area.getName(),
         code: area.getCode(),
         sector: area.getSector().getName(),
+        services: area.getServicesNames(),
       });
     });
 

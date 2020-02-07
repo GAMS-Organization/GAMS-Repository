@@ -4,3 +4,7 @@ export const isError = code => {
 
   return digit === 4 || digit === 5;
 };
+
+export const unauthorized = code =>{
+  return code === 401 || code === 403;
+};
