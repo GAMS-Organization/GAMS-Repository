@@ -7,7 +7,7 @@ export default interface IAreaRepository {
   count(): Promise<number>;
   findByAssetId(id: number): Promise<Area>;
   findBySectorId(id: number): Promise<Area[]>;
-  findOneByAreaName(name: string): Promise<Area>;
+  findOneByAreaName(name: string, sector: number): Promise<Area>;
   persist(area: Area): Promise<Area>;
   destroy(area: Area): Promise<boolean>;
 }

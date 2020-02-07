@@ -5,6 +5,10 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import Login from '@material-ui/icons/LockOpen';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import Build from '@material-ui/icons/Build';
+import House from '@material-ui/icons/Home';
+import Toys from '@material-ui/icons/Toys';
+import AllInclusive from '@material-ui/icons/AllInclusive';
+import Category from '@material-ui/icons/Category';
 // core components/views for Admin layout
 import UsersView from 'views/containers/UsersView.jsx';
 import Products from 'views/containers/Products';
@@ -21,7 +25,7 @@ import LoginPage from 'views/containers/LoginPage.jsx';
 const dashboardRoutes = [
   {
     path: '/users',
-    name: 'Users',
+    name: 'Usuarios',
     icon: Person,
     component: UsersView,
     layout: '/admin',
@@ -29,7 +33,7 @@ const dashboardRoutes = [
   {
     path: '/products',
     name: 'Productos',
-    icon: AssignmentIcon,
+    icon: Toys,
     component: Products,
     layout: '/admin',
   },
@@ -43,7 +47,7 @@ const dashboardRoutes = [
   {
     path: '/sector',
     name: 'Sector',
-    icon: LocationOn,
+    icon: House,
     component: Sector,
     layout: '/admin',
   },
@@ -56,7 +60,7 @@ const dashboardRoutes = [
   },
   {
     path: '/area',
-    name: 'Area',
+    name: 'Área',
     icon: LocationOn,
     component: Area,
     layout: '/admin',
@@ -64,20 +68,20 @@ const dashboardRoutes = [
   {
     path: '/element',
     name: 'Elementos',
-    icon: Build,
+    icon: Category,
     component: Element,
     layout: '/admin',
   },
   {
     path: '/asset',
     name: 'Activos',
-    icon: Build,
+    icon: AllInclusive,
     component: Asset,
     layout: '/admin',
   },
   {
     path: '/login-page',
-    name: 'Logout',
+    name: 'Salir',
     icon: Login,
     component: LoginPage,
     layout: '/auth',

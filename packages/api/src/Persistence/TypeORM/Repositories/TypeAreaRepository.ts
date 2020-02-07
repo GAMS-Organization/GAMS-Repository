@@ -29,8 +29,8 @@ export default class TypeAreaRepository extends TypeRepository implements IAreaR
     return await this.repository(Area).find({ where: { sector: id }, relations: ['sector'] });
   }
 
-  public async findOneByAreaName(name: string): Promise<Area> {
-    return await this.repository(Area).findOne({ where: { name: name } });
+  public async findOneByAreaName(name: string, sector: number): Promise<Area> {
+    return await this.repository(Area).findOne({ where: { name: name, sector: sector } });
   }
 
   public async persist(area: Area): Promise<Area> {

@@ -9,7 +9,7 @@ import AreaService from './AreaService';
 export default class Area {
   @PrimaryGeneratedColumn()
   public id: number;
-  @Column({ unique: true })
+  @Column()
   public name: string;
   @Column()
   public code: string;

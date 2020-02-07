@@ -18,7 +18,6 @@ import dashboardStyle from '../styles/jss/material-dashboard-react/layouts/dashb
 
 import logo from '../styles/img/UTN.png';
 
-const { REACT_APP_SERVER_URL } = process.env;
 let userInfo = {};
 
 const switchRoutes = (

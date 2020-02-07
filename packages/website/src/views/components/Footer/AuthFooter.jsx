@@ -12,16 +12,7 @@ function Footer({ ...props }) {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
-        <div className={classes.left}>
-          <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={classes.block}>
-                Home
-              </a>
-            </ListItem>
-          </List>
-        </div>
-        <p className={classes.right}>
+        <p className={classes.center}>
           <span>
             &copy; {1900 + new Date().getYear()} , Desarrollado por{' '}
             <a href="https://www.facebook.com/ale.minacori" target="_blank" className={classes.a}>

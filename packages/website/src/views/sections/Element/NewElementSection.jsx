@@ -171,7 +171,7 @@ class NewElementSection extends React.Component {
                           fullWidth: true,
                         }}
                         inputProps={{
-                          required: true,
+                          required: false,
                           defaultValue: description,
                           name: 'description',
                         }}

@@ -17,7 +17,7 @@ class element {
   async list() {
     let listResponse;
     try {
-      listResponse = await Api.get('element/');
+      listResponse = await Api.get('element/?page=1&items_per_page=50');
     } catch (err) {
       listResponse = err;
     }

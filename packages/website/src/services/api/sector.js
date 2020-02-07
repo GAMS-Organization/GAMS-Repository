@@ -17,7 +17,7 @@ class sector {
   async list() {
     let listResponse;
     try {
-      listResponse = await Api.get('sector/');
+      listResponse = await Api.get('sector/?page=1&items_per_page=50');
     } catch (err) {
       listResponse = err;
     }
