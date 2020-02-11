@@ -46,6 +46,7 @@ class ServiceTableSection extends React.Component {
     super(props);
     this.state = {
       service: [],
+      totalPages: 1,
     };
   }
 
@@ -58,7 +59,7 @@ class ServiceTableSection extends React.Component {
       services.push(dataService);
     }
 
-    this.setState({ service: services });
+    this.setState({ service: services, totalPages: response.data.pageCount  });
   }
 
   render() {

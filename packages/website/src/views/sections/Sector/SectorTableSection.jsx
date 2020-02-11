@@ -46,6 +46,7 @@ class SectorTableSection extends React.Component {
     super(props);
     this.state = {
       sector: [],
+      totalPages: 1,
     };
   }
 
@@ -58,7 +59,7 @@ class SectorTableSection extends React.Component {
       sectors.push(dataSector);
     }
 
-    this.setState({ sector: sectors });
+    this.setState({ sector: sectors, totalPages: response.data.pageCount  });
   };
 
   render() {

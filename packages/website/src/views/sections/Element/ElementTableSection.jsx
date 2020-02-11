@@ -46,6 +46,7 @@ class ElementTableSection extends React.Component {
     super(props);
     this.state = {
       element: [],
+      totalPages: 1,
     };
   }
 
@@ -57,7 +58,7 @@ class ElementTableSection extends React.Component {
       let dataElement = [element.id.toString(), element.name, element.code, element.service.name, element.description];
       elements.push(dataElement);
     }
-    this.setState({ element: elements });
+    this.setState({ element: elements, totalPages: response.data.pageCount  });
   }
 
   render() {

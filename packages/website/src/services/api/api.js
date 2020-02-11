@@ -83,6 +83,7 @@ class ApiFetch {
         }
         reject(error.response);
       });
+      console.log(response);
       resolve(response);
     });
   }

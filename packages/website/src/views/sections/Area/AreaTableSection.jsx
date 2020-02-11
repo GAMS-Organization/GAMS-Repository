@@ -10,6 +10,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceArea from '../../../services/api/area';
+import Pagination from '../../components/Pagination/Pagination';
 
 const styles = {
   cardCategoryWhite: {
@@ -46,6 +47,8 @@ class AreaTableSection extends React.Component {
     super(props);
     this.state = {
       area: [],
+      totalPages: 1,
+      page: 1,
     };
   }
 
@@ -59,13 +62,43 @@ class AreaTableSection extends React.Component {
       areas.push(dataArea);
     }
     console.log(areas);
-    this.setState({ area: areas });
+    this.setState({ area: areas, totalPages: response.data.pageCount  });
   }
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          console.log("PREV");
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: () => {
+            console.log(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        console.log("NEXT");
+      },
+    });
+    return pages;
+  };
 
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer justify={"center"}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
@@ -79,6 +112,11 @@ class AreaTableSection extends React.Component {
                 tableData={this.state.area}
               />
             </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card>
+            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>

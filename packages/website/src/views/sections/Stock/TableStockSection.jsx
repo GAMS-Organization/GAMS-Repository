@@ -1,24 +1,20 @@
 import React from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-
-import GridItem from '../../components/Grid/GridItem.jsx';
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import Tasks from '../../components/Tasks/Tasks.jsx';
-import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx';
-
 // @material-ui/icons
 import Arrow_Upward from '@material-ui/icons/ArrowUpward';
 import Arrow_Downward from '@material-ui/icons/ArrowDownward';
 import Assignment from '@material-ui/icons/Assignment';
-
+// components
+import GridItem from '../../components/Grid/GridItem.jsx';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx';
 import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
-import ExitStock from '../../components/Stock/ExitStock.jsx';
+import DepartureConsumption from '../../components/Stock/DepartureConsumption';
 
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import serviceCurrentStock from '../../../services/api/currentStock';
-import serviceExitStock from '../../../services/api/exitStock';
 
 const styles = {
   cardCategoryWhite: {
@@ -56,7 +52,7 @@ class TableStockSection extends React.Component {
     this.state = {
       entry: [],
       stock: [],
-      exit: [],
+      departure: [],
     };
   }
 
@@ -116,10 +112,10 @@ class TableStockSection extends React.Component {
                 tabName: 'SALIDAS',
                 tabIcon: Arrow_Downward,
                 tabContent: (
-                  <ExitStock
+                  <DepartureConsumption
                     tableHeaderColor="gamsBlue"
                     tableHead={['ID', 'Fecha', 'Producto', 'Cantidad', 'Observacion']}
-                    tableData={this.state.entry}
+                    tableData={this.state.departure}
                   />
                 ),
               },

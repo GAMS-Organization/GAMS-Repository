@@ -46,6 +46,7 @@ class AssetTableSection extends React.Component {
     super(props);
     this.state = {
       asset: [],
+      totalPages: 1,
     };
   }
 
@@ -57,7 +58,7 @@ class AssetTableSection extends React.Component {
       let dataAsset = [asset.id.toString(), asset.sector.name, asset.area.name, asset.service.name, asset.element.name];
       assets.push(dataAsset);
     }
-    this.setState({ asset: assets });
+    this.setState({ asset: assets, totalPages: response.data.pageCount  });
   }
 
   render() {

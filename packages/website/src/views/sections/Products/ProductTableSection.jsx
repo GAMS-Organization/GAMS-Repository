@@ -10,6 +10,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceProduct from '../../../services/api/products';
+import Pagination from '../../components/Pagination/Pagination';
 
 const styles = {
   cardCategoryWhite: {
@@ -39,6 +40,10 @@ const styles = {
       lineHeight: '1',
     },
   },
+  cardCenter:{
+    alignItems: "center",
+    maxWidth: "max-content",
+  },
 };
 
 class ProductTableSection extends React.Component {
@@ -46,6 +51,8 @@ class ProductTableSection extends React.Component {
     super(props);
     this.state = {
       product: [],
+      totalPages: 10,
+      page: 1,
     };
   }
 
@@ -58,13 +65,43 @@ class ProductTableSection extends React.Component {
       products.push(dataProduct);
     }
 
-    this.setState({ product: products });
+    this.setState({ product: products, totalPages: response.data.pageCount });
   }
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          console.log("PREV");
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: () => {
+            console.log(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        console.log("NEXT");
+      },
+    });
+    return pages;
+  };
 
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer justify={"center"}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
@@ -74,6 +111,11 @@ class ProductTableSection extends React.Component {
             <CardBody>
               <ProductTable tableHeaderColor="gamsBlue" tableHead={['ID', 'Nombre']} tableData={this.state.product} />
             </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card className={classes.cardCenter}>
+            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>

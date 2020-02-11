@@ -10,6 +10,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceUser from '../../../services/api/user';
+import Pagination from '../../components/Pagination/Pagination';
 
 const styles = {
   cardCategoryWhite: {
@@ -46,6 +47,8 @@ class UsersTableSection extends React.Component {
     super(props);
     this.state = {
       users: [],
+      totalPages: 1,
+      page: 1,
     };
   }
 
@@ -58,13 +61,43 @@ class UsersTableSection extends React.Component {
       let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
       users.push(dataUser);
     }
-    this.setState({ users: users });
+    this.setState({ users: users, totalPages: response.data.pageCount  });
+  };
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          console.log("PREV");
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: () => {
+            console.log(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        console.log("NEXT");
+      },
+    });
+    return pages;
   };
 
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer justify={"center"}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
@@ -78,6 +111,11 @@ class UsersTableSection extends React.Component {
                 tableData={this.state.users}
               />
             </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card>
+            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>

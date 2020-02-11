@@ -27,7 +27,7 @@ import Visibility from '@material-ui/icons/Visibility';
 
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
-class ExitStock extends React.Component {
+class DepartureConsumption extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class ExitStock extends React.Component {
       errors: {},
       notification: false,
     };
-    /*this.deleteEntry = this.deleteEntry.bind(this);*/
+    this.deleteDeparture = this.deleteDeparture.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
@@ -44,15 +44,15 @@ class ExitStock extends React.Component {
     this.setState({ notification: false });
   }
 
-  /*async deleteEntry(prop) {
-    const response = await serviceUser.delete(prop[0]);
+  async deleteDeparture(prop) {
+  //  const response = await serviceUser.delete(prop[0]);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  }*/
+  //  if (response.type === 'DELETED_SUCCESFUL') {
+  //    this.setState({ notification: true });
+  //  } else {
+  //    this.setState({ notification: true, errors: response.error });
+  //  }
+  }
 
   handleClickUpdate(prop) {
     this.setState({
@@ -133,7 +133,7 @@ class ExitStock extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteEntry.bind(this, prop)}
+                        onClick={this.deleteDeparture.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -149,11 +149,11 @@ class ExitStock extends React.Component {
   }
 }
 
-ExitStock.defaultProps = {
+DepartureConsumption.defaultProps = {
   tableHeaderColor: 'gamsBlue',
 };
 
-ExitStock.propTypes = {
+DepartureConsumption.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -173,4 +173,4 @@ ExitStock.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tasksStyle)(ExitStock);
+export default withStyles(tasksStyle)(DepartureConsumption);
