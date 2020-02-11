@@ -11,36 +11,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceUser from '../../../services/api/user';
 import Pagination from '../../components/Pagination/Pagination';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
+import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
 class UsersTableSection extends React.Component {
   constructor(props) {
@@ -54,14 +25,18 @@ class UsersTableSection extends React.Component {
 
   //se obtienen los usuarios
   componentWillMount = async () => {
-    const response = await serviceUser.list();
+    await this.listUsers();
+  };
+
+  listUsers = async (page = 1, itemsPerPage= 15) => {
+    const response = await serviceUser.list(page, itemsPerPage);
 
     let users = [];
     for (const user of response.data.items) {
       let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
       users.push(dataUser);
     }
-    this.setState({ users: users, totalPages: response.data.pageCount  });
+    this.setState({ users: users, totalPages: response.data.pageCount, page: page  });
   };
 
   pagination = () => {
@@ -69,7 +44,7 @@ class UsersTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          console.log("PREV");
+          this.state.page === 1? this.listUsers(1) : this.listUsers(this.state.page-1);
         },
       },
     ];
@@ -79,8 +54,8 @@ class UsersTableSection extends React.Component {
       } else {
         pages.push({
           text: index,
-          onClick: () => {
-            console.log(index);
+          onClick: async () => {
+            this.listUsers(index);
           },
         });
       }
@@ -88,7 +63,7 @@ class UsersTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        console.log("NEXT");
+        this.state.page === this.state.totalPages? this.listUsers(this.state.totalPages) : this.listUsers(this.state.page + 1);
       },
     });
     return pages;
@@ -114,7 +89,7 @@ class UsersTableSection extends React.Component {
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Card>
+          <Card className={classes.cardCenter}>
             <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
@@ -123,4 +98,4 @@ class UsersTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(UsersTableSection);
+export default withStyles(tablesSectionsstyle)(UsersTableSection);

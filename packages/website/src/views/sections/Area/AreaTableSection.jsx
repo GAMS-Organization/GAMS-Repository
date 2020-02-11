@@ -11,36 +11,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceArea from '../../../services/api/area';
 import Pagination from '../../components/Pagination/Pagination';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
+import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
 class AreaTableSection extends React.Component {
   constructor(props) {
@@ -54,6 +25,10 @@ class AreaTableSection extends React.Component {
 
   //se obtienen los areas
   async componentWillMount() {
+    await this.listAreas();
+  }
+
+  listAreas = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceArea.list();
 
     let areas = [];
@@ -62,15 +37,15 @@ class AreaTableSection extends React.Component {
       areas.push(dataArea);
     }
     console.log(areas);
-    this.setState({ area: areas, totalPages: response.data.pageCount  });
-  }
+    this.setState({ area: areas, totalPages: response.data.pageCount, page: page  });
+  };
 
   pagination = () => {
     const pages = [
       {
         text: 'PREV',
         onClick: () => {
-          console.log("PREV");
+          this.state.page === 1? this.listAreas(1) : this.listAreas(this.state.page-1);
         },
       },
     ];
@@ -80,8 +55,8 @@ class AreaTableSection extends React.Component {
       } else {
         pages.push({
           text: index,
-          onClick: () => {
-            console.log(index);
+          onClick: async () => {
+            this.listAreas(index);
           },
         });
       }
@@ -89,11 +64,12 @@ class AreaTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        console.log("NEXT");
+        this.state.page === this.state.totalPages? this.listAreas(this.state.totalPages) : this.listAreas(this.state.page + 1);
       },
     });
     return pages;
   };
+
 
   render() {
     const { classes } = this.props;
@@ -115,7 +91,7 @@ class AreaTableSection extends React.Component {
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Card>
+          <Card className={classes.cardCenter}>
             <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
@@ -124,4 +100,4 @@ class AreaTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(AreaTableSection);
+export default withStyles(tablesSectionsstyle)(AreaTableSection);

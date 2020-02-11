@@ -11,40 +11,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceProduct from '../../../services/api/products';
 import Pagination from '../../components/Pagination/Pagination';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-  cardCenter:{
-    alignItems: "center",
-    maxWidth: "max-content",
-  },
-};
+import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
 class ProductTableSection extends React.Component {
   constructor(props) {
@@ -58,22 +25,27 @@ class ProductTableSection extends React.Component {
 
   //se obtienen los productos
   async componentWillMount() {
-    const response = await serviceProduct.list();
+    await this.listProducts();
+  }
+
+  listProducts = async (page = 1, itemsPerPage = 15)=> {
+    const response = await serviceProduct.list(page, itemsPerPage);
     let products = [];
     for (const product of response.data.items) {
       let dataProduct = [product.id.toString(), product.name];
       products.push(dataProduct);
     }
 
-    this.setState({ product: products, totalPages: response.data.pageCount });
-  }
+    this.setState({ product: products, totalPages: response.data.pageCount, page: page });
+  };
+
 
   pagination = () => {
     const pages = [
       {
         text: 'PREV',
         onClick: () => {
-          console.log("PREV");
+          this.state.page === 1? this.listProducts(1) : this.listProducts(this.state.page-1);
         },
       },
     ];
@@ -83,8 +55,8 @@ class ProductTableSection extends React.Component {
       } else {
         pages.push({
           text: index,
-          onClick: () => {
-            console.log(index);
+          onClick: async () => {
+            this.listProducts(index);
           },
         });
       }
@@ -92,7 +64,7 @@ class ProductTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        console.log("NEXT");
+        this.state.page === this.state.totalPages? this.listProducts(this.state.totalPages) : this.listProducts(this.state.page + 1);
       },
     });
     return pages;
@@ -123,4 +95,4 @@ class ProductTableSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(ProductTableSection);
+export default withStyles(tablesSectionsstyle)(ProductTableSection);
