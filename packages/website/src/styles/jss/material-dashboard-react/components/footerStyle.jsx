@@ -1,4 +1,4 @@
-import { defaultFont, container, grayColor, rooftopOrangeColor } from '../../material-dashboard-react.jsx';
+import { defaultFont, container, grayColor, gamsRedColor } from '../../material-dashboard-react.jsx';
 
 const footerStyle = {
   block: {
@@ -31,9 +31,12 @@ const footerStyle = {
   },
   container,
   a: {
-    color: rooftopOrangeColor[0],
+    color: gamsRedColor[0],
     textDecoration: 'none',
     backgroundColor: 'transparent',
+    '&:hover':{
+      color: gamsRedColor[2],
+    }
   },
   list: {
     marginBottom: '0',

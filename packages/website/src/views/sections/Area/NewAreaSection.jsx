@@ -38,8 +38,9 @@ class NewAreaSection extends React.Component {
     };
   }
 
+  //Se obtienen los servicios y sectores
   async componentWillMount() {
-    //Llamada a servicios
+    //servicios
     const response = await serviceService.list();
     let services = [];
     for (const service of response.data.items) {
@@ -48,7 +49,7 @@ class NewAreaSection extends React.Component {
     }
     this.setState({ service: services });
 
-    //Llamada a sectores
+    //sectores
     const responseSector = await serviceSector.list();
     let sectors = [];
     for (const sector of responseSector.data.items) {
@@ -71,6 +72,7 @@ class NewAreaSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //Se crea el area
   createArea = async e => {
     e.preventDefault();
 
@@ -88,10 +90,10 @@ class NewAreaSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {

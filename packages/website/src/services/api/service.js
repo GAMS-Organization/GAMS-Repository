@@ -14,14 +14,13 @@ class service {
     return serviceAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get('service/');
+      listResponse = await Api.get(`service/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
-
     return serviceAdapter.list(listResponse);
   }
 

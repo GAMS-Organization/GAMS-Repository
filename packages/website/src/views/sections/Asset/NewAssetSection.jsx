@@ -43,8 +43,9 @@ class NewAssetSection extends React.Component {
     };
   }
 
+  //se obtienen los servicios, sectores, areas y elementos
   async componentWillMount() {
-    //Llamada a servicios
+    //servicios
     const responseService = await serviceService.list();
     let services = [];
     for (const service of responseService.data.items) {
@@ -52,7 +53,7 @@ class NewAssetSection extends React.Component {
       services.push(dataService);
     }
 
-    //Llamada a sectores
+    //sectores
     const responseSector = await serviceSector.list();
     let sectores = [];
     for (const sector of responseSector.data.items) {
@@ -60,7 +61,7 @@ class NewAssetSection extends React.Component {
       sectores.push(dataSector);
     }
 
-    //Llamada a areas
+    //areas
     const responseArea = await serviceArea.list();
     let areas = [];
     for (const area of responseArea.data.items) {
@@ -68,7 +69,7 @@ class NewAssetSection extends React.Component {
       areas.push(dataArea);
     }
 
-    //Llamada a elementos
+    //elementos
     const responseElement = await serviceElement.list();
     let elements = [];
     for (const element of responseElement.data.items) {
@@ -78,18 +79,22 @@ class NewAssetSection extends React.Component {
     this.setState({ service: services, sector: sectores, area: areas, element: elements });
   }
 
+  //Controlador para seleccionar un servicio
   handleChangeService = event => {
     this.setState({ selectedService: event.target.value });
   };
 
+  //Controlador para seleccionar un sector
   handleChangeSector = event => {
     this.setState({ selectedSector: event.target.value });
   };
 
+  //Controlador para seleccionar un area
   handleChangeArea = event => {
     this.setState({ selectedArea: event.target.value });
   };
 
+  //Controlador para seleccionar un elemento
   handleChangeElement = event => {
     this.setState({ selectedElement: event.target.value });
   };
@@ -98,6 +103,7 @@ class NewAssetSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //Se crea la seccion
   createAsset = async e => {
     e.preventDefault();
 
@@ -112,10 +118,10 @@ class NewAssetSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {

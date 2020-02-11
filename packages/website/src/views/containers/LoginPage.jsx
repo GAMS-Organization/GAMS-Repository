@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
     super(props);
     this.state = {
       checked: [],
-      errors: {},
+      errors: {error:{}},
     };
   }
 
@@ -56,13 +56,12 @@ class LoginPage extends React.Component {
     }
 
     this.setState({
-      errors: response.type,
+      errors: response,
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { errors } = this.state;
     return (
       <div className={classes.container}>
         <GridContainer justify="center">
@@ -86,7 +85,7 @@ class LoginPage extends React.Component {
                   <CustomInput
                     labelText="Email..."
                     id="email"
-                    error={errors.email || errors.invalidEmailOrPassword}
+                    error={this.state.errors.error.status === 404}
                     formControlProps={{
                       fullWidth: true,
                       className: classes.formControlClassName,
@@ -104,7 +103,7 @@ class LoginPage extends React.Component {
                   <CustomInput
                     labelText="Contraseña..."
                     id="password"
-                    error={errors.password || errors.invalidEmailOrPassword}
+                    error={this.state.errors.error.status === 401}
                     formControlProps={{
                       fullWidth: true,
                       className: classes.formControlClassName,

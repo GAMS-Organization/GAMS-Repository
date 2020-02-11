@@ -14,10 +14,10 @@ class entryPurchaseStock {
     return entryPurchaseStockAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get(`entry/`);
+      listResponse = await Api.get(`entry/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }

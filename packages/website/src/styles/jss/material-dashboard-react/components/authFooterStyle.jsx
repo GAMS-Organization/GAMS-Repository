@@ -17,6 +17,11 @@ const footerStyle = {
     float: 'left!important',
     display: 'block',
   },
+  center: {
+    float: 'center!important',
+    display: 'block',
+    textAlign: 'center',
+  },
   right: {
     padding: '15px 0',
     margin: '0',
@@ -53,7 +58,7 @@ const footerStyle = {
     },
   },
   a: {
-    color: gamsBlueColor,
+    color: gamsRedColor[1] + '!important',
     textDecoration: 'none',
     backgroundColor: 'transparent',
   },

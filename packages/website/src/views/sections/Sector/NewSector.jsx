@@ -38,6 +38,7 @@ class NewSector extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea el sector
   createSector = async e => {
     e.preventDefault();
 
@@ -53,10 +54,10 @@ class NewSector extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {

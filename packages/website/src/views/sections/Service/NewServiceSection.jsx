@@ -38,6 +38,7 @@ class NewServiceSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea el servicio
   createService = async e => {
     e.preventDefault();
 
@@ -53,10 +54,10 @@ class NewServiceSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {

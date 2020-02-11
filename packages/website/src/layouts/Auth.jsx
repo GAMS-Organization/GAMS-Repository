@@ -51,7 +51,7 @@ class Pages extends React.Component {
     const { classes, ...rest } = this.props;
     return (
       <div>
-        <AuthNavbar brandText={this.getActiveRoute(routes)} {...rest} />
+        {/*<AuthNavbar brandText={this.getActiveRoute(routes)} {...rest} />*/}
         <div className={classes.wrapper}>
           <div className={classes.fullPage} style={{ backgroundImage: 'url(' + this.getBgImage() + ')' }}>
             {switchRoutes}

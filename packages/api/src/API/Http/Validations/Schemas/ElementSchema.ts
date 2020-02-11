@@ -10,8 +10,8 @@ export const storeElementSchema = {
       return customErrorMessages.default(errors);
     }),
   code: Joi.string()
-    .min(2)
-    .max(5)
+    .min(1)
+    .max(8)
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);
@@ -26,7 +26,6 @@ export const storeElementSchema = {
   description: Joi.string()
     .min(0)
     .max(100)
-    .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),

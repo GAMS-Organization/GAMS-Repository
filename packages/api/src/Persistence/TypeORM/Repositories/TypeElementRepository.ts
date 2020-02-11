@@ -10,7 +10,7 @@ export default class TypeElementRepository extends TypeRepository implements IEl
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Element[]> {
-    return await this.repository(Element).find({ skip: initialIndex, take: limit });
+    return await this.repository(Element).find({ skip: initialIndex, take: limit, relations: ['service'] });
   }
 
   public async count(): Promise<number> {

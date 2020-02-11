@@ -15,10 +15,10 @@ class asset {
     return assetAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get('asset/');
+      listResponse = await Api.get(`asset/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }

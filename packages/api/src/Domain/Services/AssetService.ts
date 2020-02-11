@@ -58,7 +58,7 @@ export default class AssetService {
     if (!sector) {
       throw new EntityNotFoundException(`Sector with name: ${commandSector} not found`);
     }
-    const area = await this.areaRepository.findOneByAreaName(commandArea);
+    const area = await this.areaRepository.findOneByAreaName(commandArea, sector.getId());
     if (!area) {
       throw new EntityNotFoundException(`Area with name: ${commandArea} not found`);
     }

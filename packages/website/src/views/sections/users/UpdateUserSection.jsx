@@ -31,36 +31,34 @@ class UpdateUserSection extends React.Component {
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onRef(this);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onRef(undefined);
-  }
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false, rolClicked: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value, rolClicked: true });
   };
 
-  async updateUser(e) {
+  //se actualiza el usuario luego de ser editado
+  updateUser = async e => {
     e.preventDefault();
 
     const fields = ['id', 'name', 'surname', 'email', 'roles'];
@@ -77,10 +75,11 @@ class UpdateUserSection extends React.Component {
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, user, Transition } = this.props;

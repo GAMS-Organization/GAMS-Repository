@@ -36,6 +36,7 @@ class ServiceTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se eliminan los servicios
   deleteService = async prop => {
     const response = await serviceService.delete(prop[0]);
 
@@ -47,6 +48,7 @@ class ServiceTable extends React.Component {
     window.location.reload();
   };
 
+  //se crea la ventana emergente en donde se editaran los servicios
   handleClickUpdate = prop => {
     this.setState({ service: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();

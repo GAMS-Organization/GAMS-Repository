@@ -29,19 +29,18 @@ class NewUserSection extends React.Component {
       errors: {},
       notification: false,
     };
-    this.createUser = this.createUser.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createUser(e) {
+  //se crea el usuario
+  createUser = async e => {
     e.preventDefault();
 
     const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'roles'];
@@ -58,10 +57,11 @@ class NewUserSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, name, surname, email, password } = this.props;

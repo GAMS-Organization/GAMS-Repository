@@ -6,11 +6,15 @@ import Area from '../../../Domain/Entities/Area';
 @injectable()
 export default class TypeAreaRepository extends TypeRepository implements IAreaRepository {
   public async findAll(): Promise<Area[]> {
-    return await this.repository(Area).find();
+    return await this.repository(Area).find({ relations: ['sector'] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Area[]> {
-    return await this.repository(Area).find({ skip: initialIndex, take: limit });
+    return await this.repository(Area).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['sector', 'areaServices', 'areaServices.service'],
+    });
   }
 
   public async count(): Promise<number> {
@@ -29,8 +33,8 @@ export default class TypeAreaRepository extends TypeRepository implements IAreaR
     return await this.repository(Area).find({ where: { sector: id }, relations: ['sector'] });
   }
 
-  public async findOneByAreaName(name: string): Promise<Area> {
-    return await this.repository(Area).findOne({ where: { name: name } });
+  public async findOneByAreaName(name: string, sector: number): Promise<Area> {
+    return await this.repository(Area).findOne({ where: { name: name, sector: sector } });
   }
 
   public async persist(area: Area): Promise<Area> {
