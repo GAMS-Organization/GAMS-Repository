@@ -132,8 +132,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
       (81, 'Velas 36 W'),
       (82, 'Zapatillas 5 bocas'),
       (83, 'Zócalo tubo 105 W'),
-      (84, 'Zocalo tubo 36 W');`
-    );
+      (84, 'Zocalo tubo 36 W');`);
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
