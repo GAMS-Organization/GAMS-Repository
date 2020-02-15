@@ -14,10 +14,10 @@ class element {
     return elementAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get('element/');
+      listResponse = await Api.get(`element/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }

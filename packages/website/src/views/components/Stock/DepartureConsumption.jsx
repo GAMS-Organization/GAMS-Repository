@@ -1,64 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
+
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import Tooltip from '@material-ui/core/Tooltip';
+import TableHead from '@material-ui/core/TableHead';
+import GridContainer from '../../components/Grid/GridContainer.jsx';
+import GridItem from '../../components/Grid/GridItem';
+import Card from '../../components/Card/Card.jsx';
+import CardHeader from '../../components/Card/CardHeader.jsx';
+import CardBody from '../../components/Card/CardBody.jsx';
 import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-// @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
-import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
-// core components
-import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateUserSection from '../../sections/users/UpdateUserSection';
 import Snackbar from '../Snackbar/Snackbar';
+import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceUser from '../../../services/api/user';
+import Edit from '@material-ui/icons/Edit';
+import Close from '@material-ui/icons/Close';
+import Check from '@material-ui/icons/Check';
+import Visibility from '@material-ui/icons/Visibility';
 
-class UsersTable extends React.Component {
+import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
+
+class DepartureConsumption extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      user: {},
+      entry: {},
       errors: {},
       notification: false,
     };
-    this.handleClickUpdate = this.handleClickUpdate.bind(this);
+    this.deleteDeparture = this.deleteDeparture.bind(this);
     this.closeNotification = this.closeNotification.bind(this);
   }
 
   closeNotification() {
-    this.setState({ notification: false, errors: {} });
+    this.setState({ notification: false });
   }
 
-  //se eliminan el usuario
-  deleteUser = async prop => {
-    const response = await serviceUser.delete(prop[0]);
+  async deleteDeparture(prop) {
+    //  const response = await serviceUser.delete(prop[0]);
+    //  if (response.type === 'DELETED_SUCCESFUL') {
+    //    this.setState({ notification: true });
+    //  } else {
+    //    this.setState({ notification: true, errors: response.error });
+    //  }
+  }
 
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    window.location.reload();
-  };
-
-  //se crea la ventana emergente en donde se editaran los usuarios
   handleClickUpdate(prop) {
-    this.setState({ user: { id: prop[0], name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
+    this.setState({
+      stock: {
+        id: prop[0],
+        fecha: prop[1],
+        producto: prop[2],
+        cantidad: prop[3],
+        observacion: prop[5],
+      },
+    });
     this.child.showModal();
   }
 
-  componentWillMount() {
-    this.setState({ modal: false });
-  }
+  /*async componentWillMount() {
+        const response = await serviceProduct.list();
+        let products = [];
+        for (const product of response.data.items) {
+          let dataProduct = [product.id.toString(), product.name];
+          products.push(dataProduct);
+        }
+    
+        this.setState({ product: products });
+    }*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -74,13 +91,12 @@ class UsersTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Usuario eliminado correctamente'
+              : 'Salida eliminada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateUserSection user={this.state.user} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -107,15 +123,6 @@ class UsersTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                      <IconButton
-                        aria-label="Edit"
-                        className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
-                      >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
@@ -125,7 +132,7 @@ class UsersTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteUser.bind(this, prop)}
+                        onClick={this.deleteDeparture.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -141,11 +148,11 @@ class UsersTable extends React.Component {
   }
 }
 
-UsersTable.defaultProps = {
-  tableHeaderColor: 'gray',
+DepartureConsumption.defaultProps = {
+  tableHeaderColor: 'gamsBlue',
 };
 
-UsersTable.propTypes = {
+DepartureConsumption.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -165,4 +172,4 @@ UsersTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(UsersTable);
+export default withStyles(tasksStyle)(DepartureConsumption);

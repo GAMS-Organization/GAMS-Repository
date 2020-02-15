@@ -14,15 +14,10 @@ class products {
     return productAdapter.create(createResponse);
   }
 
-  async list(page, itemsPerPage) {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      if(page && itemsPerPage){
-        listResponse = await Api.get(`product/?page=${page}&items_per_page=${itemsPerPage}`);
-      }
-      else{
-        listResponse = await Api.get(`product/`);
-      }
+      listResponse = await Api.get(`product/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }

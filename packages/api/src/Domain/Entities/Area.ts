@@ -9,7 +9,7 @@ import AreaService from './AreaService';
 export default class Area {
   @PrimaryGeneratedColumn()
   public id: number;
-  @Column({ unique: true })
+  @Column()
   public name: string;
   @Column()
   public code: string;
@@ -48,5 +48,17 @@ export default class Area {
 
   public setCode(code: string): void {
     this.code = code;
+  }
+
+  public getServices(): AreaService[] {
+    return this.areaServices;
+  }
+
+  public getServicesNames(): string[] {
+    const servicesNames = [];
+    this.areaServices.map(service => {
+      servicesNames.push(service.getService().getName());
+    });
+    return servicesNames;
   }
 }

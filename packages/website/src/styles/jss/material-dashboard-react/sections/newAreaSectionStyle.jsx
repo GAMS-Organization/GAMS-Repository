@@ -17,11 +17,6 @@ const newAreaSectionStyle = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
-  selectUnderlineRoot: {
-    '& > div': {
-      marginTop: '13px',
-    },
-  },
   ...customSelect,
 };
 

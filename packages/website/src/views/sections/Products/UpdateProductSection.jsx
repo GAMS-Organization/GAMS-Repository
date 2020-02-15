@@ -5,9 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -30,32 +27,30 @@ class UpdateProductSection extends React.Component {
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateProduct = this.updateProduct.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onRef(this);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onRef(undefined);
-  }
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async updateProduct(e) {
+  //se actualiza el producto luego de ser editado
+  updateProduct = async e => {
     e.preventDefault();
 
     const fields = ['id', 'name'];
@@ -72,10 +67,11 @@ class UpdateProductSection extends React.Component {
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, product, Transition } = this.props;

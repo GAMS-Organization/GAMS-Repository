@@ -1,5 +1,6 @@
 import Api from './api';
 import currentStockAdapter from '../adapters/currentStockAdapter';
+import serviceAdapter from '../adapters/serviceAdapter';
 
 class currentStock {
   async create(dataCurrentStock) {
@@ -14,10 +15,10 @@ class currentStock {
     return currentStockAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get('stock/');
+      listResponse = await Api.get(`stock/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
@@ -29,7 +30,7 @@ class currentStock {
     const minimunQuantity = parseInt(dataCurrentStock.minimunQuantity);
     const body = {
       quantity,
-      minimunQuantity
+      minimunQuantity,
     };
     let updateResponse;
     try {

@@ -19,7 +19,6 @@
     "material-table": "1.36.6",
     "nodemon": "^1.19.4",
     "perfect-scrollbar": "1.4.0",
-    "prettier": "^1.18.2",
     "prop-types": "15.7.1",
     "react": "16.8.1",
     "react-chartist": "0.13.3",
@@ -46,7 +45,9 @@
     "build-package": "npm run build-package-css && babel src --out-dir dist",
     "serve": "serve",
     "pm2": "pm2",
-    "format": "prettier -c './**/*.jsx'"
+    "prettier:run": "yarn run prettier:runJS && yarn run prettier:runJSX",
+    "prettier:runJS": "prettier --write 'src/**/*.js'",
+    "prettier:runJSX": "prettier --write 'src/**/*.jsx'"
   },
   "repository": {
     "type": "git",
@@ -73,7 +74,7 @@
   "devDependencies": {
     "@typescript-eslint/parser": "^2.6.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.16.4",
+    "prettier": "^1.18.2",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   }

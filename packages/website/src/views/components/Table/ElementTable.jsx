@@ -35,6 +35,7 @@ class ElementTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se elimina el elemento
   deleteElement = async prop => {
     const response = await serviceElement.delete(prop[0]);
 

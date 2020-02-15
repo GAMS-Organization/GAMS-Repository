@@ -10,60 +10,71 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceService from '../../../services/api/service';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
+import Pagination from '../../components/Pagination/Pagination';
+import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
 class ServiceTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       service: [],
+      totalPages: 1,
+      page: 1,
     };
   }
 
+  //obtiene los servicios
   async componentWillMount() {
-    const response = await serviceService.list();
+    await this.listServices();
+  }
+
+  listServices = async (page = 1, itemsPerPage = 15) => {
+    const response = await serviceService.list(page, itemsPerPage);
     let services = [];
     for (const service of response.data.items) {
       let dataService = [service.id.toString(), service.name, service.code];
       services.push(dataService);
     }
 
-    this.setState({ service: services });
-  }
+    this.setState({ service: services, totalPages: response.data.pageCount, page: page });
+  };
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          this.state.page === 1 ? this.listServices(1) : this.listServices(this.state.page - 1);
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: async () => {
+            this.listServices(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        this.state.page === this.state.totalPages
+          ? this.listServices(this.state.totalPages)
+          : this.listServices(this.state.page + 1);
+      },
+    });
+    return pages;
+  };
 
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
@@ -79,9 +90,14 @@ class ServiceTableSection extends React.Component {
             </CardBody>
           </Card>
         </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card className={classes.cardCenter}>
+            <Pagination pages={this.pagination()} color="gamsRed" />
+          </Card>
+        </GridItem>
       </GridContainer>
     );
   }
 }
 
-export default withStyles(styles)(ServiceTableSection);
+export default withStyles(tablesSectionsstyle)(ServiceTableSection);

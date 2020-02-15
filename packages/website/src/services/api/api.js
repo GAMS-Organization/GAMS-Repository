@@ -1,9 +1,10 @@
 import axios from 'axios';
-import authStorage from "../localStorage/authStorage";
+import authStorage from '../localStorage/authStorage';
+import { unauthorized } from '../../utils/helpers/isError';
 
 class ApiFetch {
   constructor() {
-    this.apiUrl = 'http://localhost:3001/api/';
+    this.apiUrl = process.env.API_URL ? process.env.API_URL : 'http://localhost/api/api/';
   }
 
   get(endpoint) {
@@ -77,9 +78,11 @@ class ApiFetch {
         data: requestData.body ? requestData.body : null,
         headers: { authorization: authStorage.getSession() },
       }).catch(error => {
+        if (unauthorized(error.response.status)) {
+          window.location.replace('/');
+        }
         reject(error.response);
       });
-
       resolve(response);
     });
   }

@@ -41,7 +41,7 @@ function Header({ ...props }) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          <AdminNavbarLinks {...classes} />
+          {/*<AdminNavbarLinks {...classes} />*/}
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton color="inherit" aria-label="open drawer" onClick={props.handleDrawerToggle}>

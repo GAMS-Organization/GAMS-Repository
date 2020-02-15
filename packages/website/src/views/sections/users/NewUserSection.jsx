@@ -20,28 +20,28 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
+import { InputLabel } from '@material-ui/core';
 
 class NewUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rolSelected: 'user',
+      rolSelected: '',
       errors: {},
       notification: false,
     };
-    this.createUser = this.createUser.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   handleRol = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async createUser(e) {
+  //se crea el usuario
+  createUser = async e => {
     e.preventDefault();
 
     const fields = ['name', 'surname', 'email', 'password', 'passwordConfirmation', 'roles'];
@@ -58,10 +58,11 @@ class NewUserSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, name, surname, email, password } = this.props;
@@ -169,7 +170,10 @@ class NewUserSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Tipo de usuario
+                        </InputLabel>
                         <Select
                           MenuProps={{
                             className: classes.selectMenu,

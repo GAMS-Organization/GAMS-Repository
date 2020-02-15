@@ -1,5 +1,6 @@
 import Api from './api';
 import exitStockAdapter from '../adapters/exitStockAdapter';
+import serviceAdapter from '../adapters/serviceAdapter';
 
 class exitStock {
   async create(dataExitStock) {
@@ -14,10 +15,10 @@ class exitStock {
     return exitStockAdapter.create(createResponse);
   }
 
-  async list() {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get('exitStock/');
+      listResponse = await Api.get(`departure/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }

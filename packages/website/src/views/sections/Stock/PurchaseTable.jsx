@@ -27,6 +27,7 @@ class PurchaseTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea la compra
   handleConfirmPurchaseClick = async e => {
     e.preventDefault();
 
@@ -56,6 +57,7 @@ class PurchaseTable extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -95,7 +97,7 @@ class PurchaseTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={8}>
           <MaterialTable
             title="Nueva entrada"
             columns={this.state.columns}
@@ -156,7 +158,7 @@ class PurchaseTable extends React.Component {
           <Card>
             <CardBody>
               <form onSubmit={this.handleConfirmPurchaseClick}>
-                <GridContainer>
+                <GridContainer alignItems={'center'}>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText=""

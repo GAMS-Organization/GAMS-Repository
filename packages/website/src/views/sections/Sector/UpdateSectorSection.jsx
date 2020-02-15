@@ -49,6 +49,7 @@ class UpdateSectorSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se actualiza la section luego de ser editado
   updateSector = async e => {
     e.preventDefault();
 
