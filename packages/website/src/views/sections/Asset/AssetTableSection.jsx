@@ -32,7 +32,7 @@ class AssetTableSection extends React.Component {
     const response = await serviceAsset.list(page, itemsPerPage);
     let assets = [];
     for (const asset of response.data.items) {
-      let dataAsset = [asset.id.toString(), asset.sector.name, asset.area.name, asset.service.name, asset.element.name];
+      let dataAsset = [asset.id.toString(), asset.code, asset.sector.name, asset.area.name, asset.service.name, asset.element.name];
       assets.push(dataAsset);
     }
     this.setState({ asset: assets, totalPages: response.data.pageCount, page: page  });
@@ -82,7 +82,7 @@ class AssetTableSection extends React.Component {
             <CardBody>
               <AssetTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Sector', 'Area', 'Servicio', 'Elemento']}
+                tableHead={['ID', 'Código', 'Sector', 'Área', 'Servicio', 'Elemento']}
                 tableData={this.state.asset}
               />
             </CardBody>

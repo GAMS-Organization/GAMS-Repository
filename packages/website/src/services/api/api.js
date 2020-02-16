@@ -4,7 +4,7 @@ import {unauthorized} from '../../utils/helpers/isError';
 
 class ApiFetch {
   constructor() {
-    this.apiUrl = 'http://localhost:3001/api/';
+    this.apiUrl = process.env.API_URL ? process.env.API_URL : 'http://localhost/api/api/';
   }
 
   get(endpoint) {
@@ -79,11 +79,10 @@ class ApiFetch {
         headers: { authorization: authStorage.getSession() },
       }).catch(error => {
         if(unauthorized(error.response.status)){
-          window.location.replace("http://localhost/");
+          window.location.replace("/");
         }
         reject(error.response);
       });
-      console.log(response);
       resolve(response);
     });
   }
