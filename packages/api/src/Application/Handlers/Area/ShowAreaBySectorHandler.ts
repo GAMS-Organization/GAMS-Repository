@@ -1,25 +1,32 @@
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
-import IProductRepository from '../../../Domain/Interfaces/IProductRepository';
-import ShowProductByNameCommand from '../../Commands/Product/ShowProductByNameCommand';
-import Product from '../../../Domain/Entities/Product';
+import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
+import Area from '../../../Domain/Entities/Area';
+import ShowAreaBySectorCommand from '../../Commands/Area/ShowAreaBySectorCommand';
+import ISectorRepository from '../../../Domain/Interfaces/ISectorRepository';
 
 @injectable()
-export default class ShowProductByNameHandler {
-  private productRepository: IProductRepository;
+export default class ShowAreaBySectorHandler {
+  private areaRepository: IAreaRepository;
+  private sectorRepository: ISectorRepository;
 
-  public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
-    this.productRepository = productRepository;
+  public constructor(@inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
+                     @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository) {
+    this.areaRepository = areaRepository;
+    this.sectorRepository = sectorRepository;
   }
 
-  public async execute(command: ShowProductByNameCommand): Promise<Product> {
-    const product = await this.productRepository.findOneByProductName(command.getName());
+  public async execute(command: ShowAreaBySectorCommand): Promise<Area[]> {
+    const sector = await this.sectorRepository.findOneBySectorName(command.getName());
 
-    if (!product) {
-      throw new EntityNotFoundException(`Product with slug: ${command.getName()} not found`);
+    if (!sector) {
+      throw new EntityNotFoundException(`Sector with slug: ${command.getName()} not found`);
     }
 
-    return product;
+    const areas = await this.areaRepository.findBySectorId(sector.id);
+
+
+    return areas;
   }
 }

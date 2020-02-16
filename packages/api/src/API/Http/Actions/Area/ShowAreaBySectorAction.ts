@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import { success } from '../../../../utils/customResponse';
-import ShowProductByNameAdapter from '../../Adapters/Product/ShowProductByNameAdapter';
-import ShowProductByNameHandler from '../../../../Application/Handlers/Product/ShowProductByNameHandler';
-import StoreProductPresenter from '../../Presenters/Product/StoreProductPresenter';
+import ShowAreaBySectorAdapter from '../../Adapters/Area/ShowAreaBySectorAdapter';
 import { injectable } from 'inversify';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
+import ShowAreaBySectorHandler from '../../../../Application/Handlers/Area/ShowAreaBySectorHandler';
+import GetAllAreasPresenter from '../../Presenters/Area/GetAllAreasPresenter';
 
 @injectable()
-export default class ShowProductByNameAction {
-  private adapter: ShowProductByNameAdapter;
-  private handler: ShowProductByNameHandler;
+export default class ShowAreaBySectorAction {
+  private adapter: ShowAreaBySectorAdapter;
+  private handler: ShowAreaBySectorHandler;
 
-  public constructor(adapter: ShowProductByNameAdapter, handler: ShowProductByNameHandler) {
+  public constructor(adapter: ShowAreaBySectorAdapter, handler: ShowAreaBySectorHandler) {
     this.adapter = adapter;
     this.handler = handler;
   }
@@ -21,10 +21,10 @@ export default class ShowProductByNameAction {
 
     const result = await this.handler.execute(command);
 
-    const presenter = new StoreProductPresenter(result);
+    const presenter = new GetAllAreasPresenter(result);
 
     return response
       .status(HTTP_CODES.OK)
-      .json(success(presenter.getData(), 'ShowProductAction: Product profile has been retrieved'));
+      .json(success(presenter.getData(), 'ShowAreaAction: Area profile has been retrieved'));
   }
 }

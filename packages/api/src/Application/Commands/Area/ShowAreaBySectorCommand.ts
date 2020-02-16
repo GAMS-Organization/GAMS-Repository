@@ -1,4 +1,4 @@
-export default class ShowProductByNameCommand {
+export default class ShowAreaBySectorCommand {
   private name: string;
 
   public constructor(name: string) {

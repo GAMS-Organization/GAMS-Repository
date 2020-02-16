@@ -139,6 +139,9 @@ import IndexAssetsAction from '../../API/Http/Actions/Asset/IndexAssetsAction';
 import DestroyAssetAction from '../../API/Http/Actions/Asset/DestroyAssetAction';
 import DestroyAssetAdapter from '../../API/Http/Adapters/Asset/DestroyAssetAdapter';
 import DestroyAssetHandler from '../../Application/Handlers/Asset/DestroyAssetHandler';
+import ShowAreaBySectorAction from '../../API/Http/Actions/Area/ShowAreaBySectorAction';
+import ShowAreaBySectorAdapter from '../../API/Http/Adapters/Area/ShowAreaBySectorAdapter';
+import ShowAreaBySectorHandler from '../../Application/Handlers/Area/ShowAreaBySectorHandler';
 
 const DIContainer = new Container();
 
@@ -176,6 +179,7 @@ DIContainer.bind<DestroySectorAction>(DestroySectorAction).toSelf();
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
 DIContainer.bind<DestroyAreaAction>(DestroyAreaAction).toSelf();
+DIContainer.bind<ShowAreaBySectorAction>(ShowAreaBySectorAction).toSelf();
 
 DIContainer.bind<StoreServiceAction>(StoreServiceAction).toSelf();
 DIContainer.bind<IndexServicesAction>(IndexServicesAction).toSelf();
@@ -219,6 +223,7 @@ DIContainer.bind<DestroySectorAdapter>(DestroySectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
+DIContainer.bind<ShowAreaBySectorAdapter>(ShowAreaBySectorAdapter).toSelf();
 
 DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
 DIContainer.bind<DestroyServiceAdapter>(DestroyServiceAdapter).toSelf();
@@ -259,6 +264,7 @@ DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
+DIContainer.bind<ShowAreaBySectorHandler>(ShowAreaBySectorHandler).toSelf();
 
 DIContainer.bind<StoreServiceHandler>(StoreServiceHandler).toSelf();
 DIContainer.bind<DestroyServiceHandler>(DestroyServiceHandler).toSelf();
