@@ -18,12 +18,12 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into sector values (1, 'Campus deportes', 'CD');`);
     await queryRunner.query(`insert into sector values (2, 'Edificio principal', 'E01');`);
     await queryRunner.query(`insert into sector values (3, 'Cuarto nivel', 'E02');`);
-    await queryRunner.query(`insert into sector values (4, 'Biblioteca - Cooperadora', 'E03');`);
-    await queryRunner.query(`insert into sector values (5, 'Lab. Quimica', 'E04');`);
-    await queryRunner.query(`insert into sector values (6, 'Lab. Electromecanica', 'E05');`);
-    await queryRunner.query(`insert into sector values (7, 'Lab. Fis. Lar. Sistemas', 'E06');`);
-    await queryRunner.query(`insert into sector values (8, 'Lab. Electronica', 'E07');`);
-    await queryRunner.query(`insert into sector values (9, 'Taller Mant. y Servicios Grales.', 'E08');`);
+    await queryRunner.query(`insert into sector values (4, 'Biblioteca y Cooperadora', 'E03');`);
+    await queryRunner.query(`insert into sector values (5, 'Laboratorio Quimica', 'E04');`);
+    await queryRunner.query(`insert into sector values (6, 'Laboratorio Electromecanica', 'E05');`);
+    await queryRunner.query(`insert into sector values (7, 'Laboratorio Fisica Lar Sistemas', 'E06');`);
+    await queryRunner.query(`insert into sector values (8, 'Laboratorio Electronica', 'E07');`);
+    await queryRunner.query(`insert into sector values (9, 'Taller Mantenimiento y Servicios Generales', 'E08');`);
     await queryRunner.query(`insert into sector values (10, 'Dasuten', 'E09');`);
     await queryRunner.query(`insert into sector values (11, 'Comedor universitario', 'E10');`);
     await queryRunner.query(`insert into sector values (12, 'Secyt', 'E11');`);
@@ -33,7 +33,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into sector values (15, 'Parque frente', 'P02');`);
     await queryRunner.query(`insert into sector values (16, 'Parque sur', 'P03');`);
     await queryRunner.query(`insert into sector values (18, 'Parque playon', 'P04');`);
-    await queryRunner.query(`insert into sector values (19, 'Parque lab. exteriores', 'Plab');`);
+    await queryRunner.query(`insert into sector values (19, 'Parque laboratorios exteriores', 'Plab');`);
     await queryRunner.query(`insert into sector values (20, 'Parque estacionamiento', 'P05');`);
 
     //Create Services

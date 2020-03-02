@@ -6,9 +6,7 @@ import ShowAreaBySectorCommand from '../../../../Application/Commands/Area/ShowA
 @injectable()
 export default class ShowAreaBySectorAdapter {
   public from(request: Request): ShowAreaBySectorCommand {
-    const name = request.params.name.replace(/_/gi, ' ', );
-
-    console.log("-----------------------------------------------------------------------------", name);
+    const name = request.params.name.replace(/-/gi, ' ');
     if (!name) {
       throw new ValidationException('Sector name is required');
     }

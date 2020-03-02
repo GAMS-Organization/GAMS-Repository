@@ -24,6 +24,16 @@ class area {
     return areaAdapter.list(listResponse);
   }
 
+  async listBySector(sector){
+    let listBySectorResponse;
+    try{
+      listBySectorResponse = await Api.get(`area/sector/${sector}`)
+    } catch (err) {
+      listBySectorResponse = err;
+    }
+    return areaAdapter.listBySector(listBySectorResponse);
+  }
+
   async update(dataArea) {
     const body = dataArea;
 

@@ -61,14 +61,6 @@ class NewAssetSection extends React.Component {
       sectores.push(dataSector);
     }
 
-    //areas
-    const responseArea = await serviceArea.list();
-    let areas = [];
-    for (const area of responseArea.data.items) {
-      let dataArea = area.name;
-      areas.push(dataArea);
-    }
-
     //elementos
     const responseElement = await serviceElement.list();
     let elements = [];
@@ -76,7 +68,7 @@ class NewAssetSection extends React.Component {
       let dataElement = element.name;
       elements.push(dataElement);
     }
-    this.setState({ service: services, sector: sectores, area: areas, element: elements });
+    this.setState({ service: services, sector: sectores,  element: elements });
   }
 
   //Controlador para seleccionar un servicio
@@ -85,8 +77,18 @@ class NewAssetSection extends React.Component {
   };
 
   //Controlador para seleccionar un sector
-  handleChangeSector = event => {
-    this.setState({ selectedSector: event.target.value });
+  handleChangeSector = async event => {
+    const sector = event.target.value;
+    //areas
+    const responseArea = await serviceArea.listBySector(sector.replace(/\s/gi, '-'));
+    let areas = [];
+    console.log(responseArea);
+    for (const area of responseArea.areas) {
+      let dataArea = area.name;
+      areas.push(dataArea);
+    }
+
+    this.setState({ selectedSector: sector, area: areas,});
   };
 
   //Controlador para seleccionar un area

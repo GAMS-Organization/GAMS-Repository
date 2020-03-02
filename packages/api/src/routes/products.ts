@@ -10,7 +10,6 @@ import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNa
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
-
 const router = express.Router();
 
 router.get(

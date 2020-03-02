@@ -11,8 +11,10 @@ export default class ShowAreaBySectorHandler {
   private areaRepository: IAreaRepository;
   private sectorRepository: ISectorRepository;
 
-  public constructor(@inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
-                     @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository) {
+  public constructor(
+    @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
+    @inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository,
+  ) {
     this.areaRepository = areaRepository;
     this.sectorRepository = sectorRepository;
   }
@@ -25,7 +27,6 @@ export default class ShowAreaBySectorHandler {
     }
 
     const areas = await this.areaRepository.findBySectorId(sector.id);
-
 
     return areas;
   }
