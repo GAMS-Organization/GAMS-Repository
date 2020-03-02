@@ -88,7 +88,7 @@ class NewAssetSection extends React.Component {
       areas.push(dataArea);
     }
 
-    this.setState({ selectedSector: sector, area: areas,});
+    this.setState({ selectedSector: sector, area: areas, service: [], element: []});
   };
 
   //Controlador para seleccionar un area
