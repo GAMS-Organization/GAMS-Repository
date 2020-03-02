@@ -82,7 +82,6 @@ class NewAssetSection extends React.Component {
     //areas
     const responseArea = await serviceArea.listBySector(sector.replace(/\s/gi, '-'));
     let areas = [];
-    console.log(responseArea);
     for (const area of responseArea.areas) {
       let dataArea = area.name;
       areas.push(dataArea);
