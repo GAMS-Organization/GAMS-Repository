@@ -20,7 +20,7 @@ import Edit from '@material-ui/icons/Edit';
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
 import serviceCurrentStock from '../../../services/api/currentStock';
-import UpdateStock from "./UpdateStock";
+import UpdateStock from './UpdateStock';
 
 class CurrentStock extends React.Component {
   constructor(props) {

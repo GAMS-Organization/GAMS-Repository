@@ -30,7 +30,7 @@ class currentStock {
     const minimunQuantity = parseInt(dataCurrentStock.minimunQuantity);
     const body = {
       quantity,
-      minimunQuantity
+      minimunQuantity,
     };
     let updateResponse;
     try {

@@ -34,9 +34,9 @@ const footerStyle = {
     color: gamsRedColor[0],
     textDecoration: 'none',
     backgroundColor: 'transparent',
-    '&:hover':{
+    '&:hover': {
       color: gamsRedColor[2],
-    }
+    },
   },
   list: {
     marginBottom: '0',

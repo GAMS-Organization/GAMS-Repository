@@ -48,7 +48,18 @@ Pagination.propTypes = {
       onClick: PropTypes.func,
     }),
   ).isRequired,
-  color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger', 'gamsRed', 'gamsBlue', 'gamsBlack', 'gamsGray', 'gamsWhite']),
+  color: PropTypes.oneOf([
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'danger',
+    'gamsRed',
+    'gamsBlue',
+    'gamsBlack',
+    'gamsGray',
+    'gamsWhite',
+  ]),
   className: PropTypes.string,
 };
 
