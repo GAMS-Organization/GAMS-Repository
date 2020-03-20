@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import NewMapSection from '../sections/Maps/NewMapSection';
+import MapsSection from '../sections/Maps/MapsSection.jsx';
 
 const styles = {
   cardCategoryWhite: {
@@ -32,7 +32,11 @@ class Maps extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <MapsSection />
+      </div>
+    );
   }
 }
 
