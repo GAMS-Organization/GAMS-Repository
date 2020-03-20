@@ -32,11 +32,7 @@ class Maps extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <NewMapSection />
-      </div>
-    );
+    return <div></div>;
   }
 }
 
