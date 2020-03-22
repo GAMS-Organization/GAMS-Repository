@@ -33,13 +33,13 @@ class NewAssetSection extends React.Component {
       errors: {},
       notification: false,
       service: [],
-      selectedService: [],
+      selectedService: "",
       sector: [],
-      selectedSector: [],
+      selectedSector: "",
       area: [],
-      selectedArea: [],
+      selectedArea: "",
       element: [],
-      selectedElement: [],
+      selectedElement: "",
     };
   }
 
@@ -68,13 +68,8 @@ class NewAssetSection extends React.Component {
       let dataElement = element.name;
       elements.push(dataElement);
     }
-    this.setState({ service: services, sector: sectores,  element: elements });
+    this.setState({ service: services, sector: sectores,  element: elements});
   }
-
-  //Controlador para seleccionar un servicio
-  handleChangeService = event => {
-    this.setState({ selectedService: event.target.value });
-  };
 
   //Controlador para seleccionar un sector
   handleChangeSector = async event => {
@@ -83,16 +78,25 @@ class NewAssetSection extends React.Component {
     const responseArea = await serviceArea.listBySector(sector.replace(/\s/gi, '-'));
     let areas = [];
     for (const area of responseArea.areas) {
-      let dataArea = area.name;
-      areas.push(dataArea);
+      areas.push(area);
     }
 
-    this.setState({ selectedSector: sector, area: areas, service: [], element: []});
+    this.setState({ selectedSector: sector, area: areas, service: [], element: [], selectedArea: "", selectedService: "", selectedElement:"" });
   };
 
   //Controlador para seleccionar un area
-  handleChangeArea = event => {
-    this.setState({ selectedArea: event.target.value });
+  handleChangeArea = async event => {
+    const selectedArea = this.state.area.find(area => area.name === event.target.value);
+    this.setState({ selectedArea: event.target.value, service: selectedArea.services, element: [], selectedService: "", selectedElement:"" });
+  };
+
+  //Controlador para seleccionar un servicio
+  handleChangeService = async event => {
+    const {service} = await serviceService.getByName(event.target.value);
+    const elements = service.elements.map(element => {
+      return element.name;
+    });
+    this.setState({ selectedService: event.target.value, selectedElement: "", element: elements });
   };
 
   //Controlador para seleccionar un elemento
@@ -128,6 +132,7 @@ class NewAssetSection extends React.Component {
   render() {
     const { classes, sector, area, service, element } = this.props;
     const { errors } = this.state;
+    console.log(this.state);
     return (
       <div id="section-new-asset">
         <Snackbar
@@ -209,14 +214,14 @@ class NewAssetSection extends React.Component {
                         >
                           {this.state.area.map(area => (
                             <MenuItem
-                              key={area}
-                              value={area}
+                              key={area.name}
+                              value={area.name}
                               classes={{
                                 root: classes.selectMenuItem,
                                 selected: classes.selectMenuItemSelected,
                               }}
                             >
-                              {area}
+                              {area.name}
                             </MenuItem>
                           ))}
                         </Select>

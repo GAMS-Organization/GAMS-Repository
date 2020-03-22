@@ -6,6 +6,7 @@ import IndexServicesAction from '../API/Http/Actions/Service/IndexServicesAction
 import DestroyServiceAction from '../API/Http/Actions/Service/DestroyServiceAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
+import ShowServiceAction from '../API/Http/Actions/Service/ShowServiceAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 // import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
@@ -56,20 +57,20 @@ router.put(
     await updateProductAction.execute(request, response);
   }),
 );
-
+*/
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {
     authMiddleware(req, res, next);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
-      ShowProductByNameAction,
+    const showServiceAction: ShowServiceAction = DIContainer.resolve<ShowServiceAction>(
+      ShowServiceAction,
     );
-    await showProductByNameAction.execute(request, response);
+    await showServiceAction.execute(request, response);
   }),
 );
-*/
+
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {

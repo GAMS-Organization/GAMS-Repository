@@ -142,6 +142,9 @@ import DestroyAssetHandler from '../../Application/Handlers/Asset/DestroyAssetHa
 import ShowAreaBySectorAction from '../../API/Http/Actions/Area/ShowAreaBySectorAction';
 import ShowAreaBySectorAdapter from '../../API/Http/Adapters/Area/ShowAreaBySectorAdapter';
 import ShowAreaBySectorHandler from '../../Application/Handlers/Area/ShowAreaBySectorHandler';
+import ShowServiceAction from '../../API/Http/Actions/Service/ShowServiceAction';
+import ShowServiceAdapter from '../../API/Http/Adapters/Service/ShowServiceAdapter';
+import ShowServiceHandler from '../../Application/Handlers/Service/ShowServiceHandler';
 
 const DIContainer = new Container();
 
@@ -184,6 +187,7 @@ DIContainer.bind<ShowAreaBySectorAction>(ShowAreaBySectorAction).toSelf();
 DIContainer.bind<StoreServiceAction>(StoreServiceAction).toSelf();
 DIContainer.bind<IndexServicesAction>(IndexServicesAction).toSelf();
 DIContainer.bind<DestroyServiceAction>(DestroyServiceAction).toSelf();
+DIContainer.bind<ShowServiceAction>(ShowServiceAction).toSelf();
 
 DIContainer.bind<StoreElementAction>(StoreElementAction).toSelf();
 DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
@@ -227,6 +231,7 @@ DIContainer.bind<ShowAreaBySectorAdapter>(ShowAreaBySectorAdapter).toSelf();
 
 DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
 DIContainer.bind<DestroyServiceAdapter>(DestroyServiceAdapter).toSelf();
+DIContainer.bind<ShowServiceAdapter>(ShowServiceAdapter).toSelf();
 
 DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
 DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
@@ -268,6 +273,7 @@ DIContainer.bind<ShowAreaBySectorHandler>(ShowAreaBySectorHandler).toSelf();
 
 DIContainer.bind<StoreServiceHandler>(StoreServiceHandler).toSelf();
 DIContainer.bind<DestroyServiceHandler>(DestroyServiceHandler).toSelf();
+DIContainer.bind<ShowServiceHandler>(ShowServiceHandler).toSelf();
 
 DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
 DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
