@@ -64,9 +64,7 @@ router.get(
     authMiddleware(req, res, next);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showServiceAction: ShowServiceAction = DIContainer.resolve<ShowServiceAction>(
-      ShowServiceAction,
-    );
+    const showServiceAction: ShowServiceAction = DIContainer.resolve<ShowServiceAction>(ShowServiceAction);
     await showServiceAction.execute(request, response);
   }),
 );

@@ -49,7 +49,7 @@ export default class Service {
     return this.areaServices;
   }
 
-  public getElements(): Element[]{
+  public getElements(): Element[] {
     return this.elements;
   }
 }

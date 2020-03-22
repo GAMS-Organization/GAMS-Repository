@@ -33,13 +33,13 @@ class NewAssetSection extends React.Component {
       errors: {},
       notification: false,
       service: [],
-      selectedService: "",
+      selectedService: '',
       sector: [],
-      selectedSector: "",
+      selectedSector: '',
       area: [],
-      selectedArea: "",
+      selectedArea: '',
       element: [],
-      selectedElement: "",
+      selectedElement: '',
     };
   }
 
@@ -68,7 +68,7 @@ class NewAssetSection extends React.Component {
       let dataElement = element.name;
       elements.push(dataElement);
     }
-    this.setState({ service: services, sector: sectores,  element: elements});
+    this.setState({ service: services, sector: sectores, element: elements });
   }
 
   //Controlador para seleccionar un sector
@@ -81,22 +81,36 @@ class NewAssetSection extends React.Component {
       areas.push(area);
     }
 
-    this.setState({ selectedSector: sector, area: areas, service: [], element: [], selectedArea: "", selectedService: "", selectedElement:"" });
+    this.setState({
+      selectedSector: sector,
+      area: areas,
+      service: [],
+      element: [],
+      selectedArea: '',
+      selectedService: '',
+      selectedElement: '',
+    });
   };
 
   //Controlador para seleccionar un area
   handleChangeArea = async event => {
     const selectedArea = this.state.area.find(area => area.name === event.target.value);
-    this.setState({ selectedArea: event.target.value, service: selectedArea.services, element: [], selectedService: "", selectedElement:"" });
+    this.setState({
+      selectedArea: event.target.value,
+      service: selectedArea.services,
+      element: [],
+      selectedService: '',
+      selectedElement: '',
+    });
   };
 
   //Controlador para seleccionar un servicio
   handleChangeService = async event => {
-    const {service} = await serviceService.getByName(event.target.value);
+    const { service } = await serviceService.getByName(event.target.value);
     const elements = service.elements.map(element => {
       return element.name;
     });
-    this.setState({ selectedService: event.target.value, selectedElement: "", element: elements });
+    this.setState({ selectedService: event.target.value, selectedElement: '', element: elements });
   };
 
   //Controlador para seleccionar un elemento

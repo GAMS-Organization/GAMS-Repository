@@ -66,7 +66,7 @@ class serviceAdapter {
 
     if (!isError(status)) {
       return {
-        service : data.data
+        service: data.data,
       };
     } else {
       const { code, details } = data.errors;
@@ -80,7 +80,6 @@ class serviceAdapter {
       };
     }
   }
-
 
   delete(deleteResponse) {
     let { status, data } = deleteResponse;

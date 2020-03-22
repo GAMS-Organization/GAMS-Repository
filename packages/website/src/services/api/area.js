@@ -24,10 +24,10 @@ class area {
     return areaAdapter.list(listResponse);
   }
 
-  async listBySector(sector){
+  async listBySector(sector) {
     let listBySectorResponse;
-    try{
-      listBySectorResponse = await Api.get(`area/sector/${sector}`)
+    try {
+      listBySectorResponse = await Api.get(`area/sector/${sector}`);
     } catch (err) {
       listBySectorResponse = err;
     }
