@@ -12,6 +12,10 @@ import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx';
 import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
 import DepartureConsumption from '../../components/Stock/DepartureConsumption';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import { InputLabel, Input } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
 
 import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
@@ -22,6 +26,7 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import serviceCurrentStock from '../../../services/api/currentStock';
+import serviceSector from '../../../services/api/sector';
 
 const styles = {
   cardCategoryWhite: {
@@ -53,36 +58,53 @@ const styles = {
   },
 };
 
-class TableStockSection extends React.Component {
+class MapsSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       entry: [],
       stock: [],
       departure: [],
+      sector: [],
     };
   }
 
-  //se obtienen las entradas, el stock actual y las salidas
-  /*async componentWillMount() {
-    const responseEntry = await serviceEntryPurchaseStock.list();
-    const responseCurrentStock = await serviceCurrentStock.list();*/
-  /*const responseExit = await serviceExitStock.list();*/
-  /*let entries = [];
-    let stocks = [];
-    let exits = [];
-    for (const entry of responseEntry.data.items) {
-      let dataEntry = [entry.id.toString(), entry.date.slice(0, 10), entry.observations];
-      entries.push(dataEntry);
+  async componentWillMount() {
+    //servicios
+    /*const responseService = await serviceService.list();
+    let services = [];
+    for (const service of responseService.data.items) {
+      let dataService = service.name;
+      services.push(dataService);
+    }*/
+
+    //sectores
+    const responseSector = await serviceSector.list();
+    let sectores = [];
+    for (const sector of responseSector.data.items) {
+      let dataSector = sector.name;
+      sectores.push(dataSector);
     }
 
-    for (const stock of responseCurrentStock.data.items) {
-      let dataStock = [stock.id.toString(), stock.product, stock.quantity, stock.minimunQuantity, stock.state];
-      stocks.push(dataStock);
-    }
+    //areas
+    /*const responseArea = await serviceArea.list();
+    let areas = [];
+    for (const area of responseArea.data.items) {
+      let dataArea = area.name;
+      areas.push(dataArea);
+    }*/
 
-    this.setState({ entry: entries, stock: stocks });
-  }*/
+    this.setState({ sector: sectores });
+  }
+
+  //Controlador para seleccionar un sector
+  handleChangeSector = event => {
+    this.setState({ selectedSector: event.target.value });
+  };
+
+  closeNotification = () => {
+    this.setState({ notification: false, errors: {} });
+  };
 
   render() {
     const { classes } = this.props;
@@ -97,6 +119,7 @@ class TableStockSection extends React.Component {
                 tabName: 'SECTOR',
                 tabIcon: Arrow_Upward,
                 tabContent: (
+                  //<NewMapSector />
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
                       <form onSubmit={this.createProduct}>
@@ -105,7 +128,42 @@ class TableStockSection extends React.Component {
                             <h4 className={classes.cardTitleWhite}>Nuevo mapa</h4>
                             <p className={classes.cardCategoryWhite}>Complete los datos</p>
                           </CardHeader>
-                          <CardBody></CardBody>
+                          <CardBody>
+                            <GridItem xs={12} sm={12} md={6}>
+                              <InputLabel id="demo-mutiple-name-label-Sector">Sector</InputLabel>
+                              <FormControl
+                                fullWidth
+                                className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}
+                              >
+                                <Select
+                                  labelId="demo-mutiple-name-label-Sector"
+                                  MenuProps={{
+                                    className: classes.selectMenu,
+                                  }}
+                                  classes={{
+                                    select: classes.select,
+                                  }}
+                                  value={this.state.selectedSector}
+                                  onChange={this.handleChangeSector}
+                                  input={<Input />}
+                                  inputProps={{
+                                    name: 'sector',
+                                    id: 'sector',
+                                  }}
+                                >
+                                  {this.state.sector.map(sector => (
+                                    <MenuItem key={sector} value={sector}>
+                                      {sector}
+                                    </MenuItem>
+                                  ))}
+                                </Select>
+                              </FormControl>
+                              <br />
+                              <Button type="" color="gamsRed" xs={12} sm={12} md={3}>
+                                Cargar imagen
+                              </Button>
+                            </GridItem>
+                          </CardBody>
                           <CardFooter>
                             <Button type="submit" color="gamsRed">
                               Crear
@@ -119,7 +177,7 @@ class TableStockSection extends React.Component {
               },
               {
                 tabName: 'AREA',
-                tabIcon: Assignment,
+                tabIcon: Arrow_Upward,
                 tabContent: (
                   <CurrentStock
                     tableHeaderColor="gamsBlue"
@@ -136,4 +194,4 @@ class TableStockSection extends React.Component {
   }
 }
 
-export default withStyles(styles)(TableStockSection);
+export default withStyles(styles)(MapsSection);
