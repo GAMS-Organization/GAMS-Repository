@@ -28,7 +28,7 @@ class UsersTableSection extends React.Component {
     await this.listUsers();
   };
 
-  listUsers = async (page = 1, itemsPerPage= 15) => {
+  listUsers = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceUser.list(page, itemsPerPage);
 
     let users = [];
@@ -36,7 +36,7 @@ class UsersTableSection extends React.Component {
       let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
       users.push(dataUser);
     }
-    this.setState({ users: users, totalPages: response.data.pageCount, page: page  });
+    this.setState({ users: users, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -44,7 +44,7 @@ class UsersTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listUsers(1) : this.listUsers(this.state.page-1);
+          this.state.page === 1 ? this.listUsers(1) : this.listUsers(this.state.page - 1);
         },
       },
     ];
@@ -63,7 +63,9 @@ class UsersTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listUsers(this.state.totalPages) : this.listUsers(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listUsers(this.state.totalPages)
+          : this.listUsers(this.state.page + 1);
       },
     });
     return pages;
@@ -72,7 +74,7 @@ class UsersTableSection extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

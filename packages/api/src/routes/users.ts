@@ -6,10 +6,10 @@ import ShowUsersAction from '../API/Http/Actions/Users/ShowUsersAction';
 import UpdateUsersAction from '../API/Http/Actions/Users/UpdateUsersAction';
 import DisableUsersAction from '../API/Http/Actions/Users/DisableUsersAction';
 import StoreUsersAction from '../API/Http/Actions/Users/StoreUsersAction';
-import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
-import { authMiddleware } from '../config/authMiddleware';
 import EnableUsersAction from '../API/Http/Actions/Users/EnableUsersAction';
 import DestroyUserAction from '../API/Http/Actions/Users/DestroyUserAction';
+import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import { authMiddleware } from '../config/authMiddleware';
 
 const router = express.Router();
 

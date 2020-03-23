@@ -33,10 +33,16 @@ class AreaTableSection extends React.Component {
 
     let areas = [];
     for (const area of response.data.items) {
-      let dataArea = [area.id.toString(), area.name, area.code, area.sector, area.services.toString().replace(/,/gi, ' - ', )];
+      let dataArea = [
+        area.id.toString(),
+        area.name,
+        area.code,
+        area.sector,
+        area.services.toString().replace(/,/gi, ' - '),
+      ];
       areas.push(dataArea);
     }
-    this.setState({ area: areas, totalPages: response.data.pageCount, page: page  });
+    this.setState({ area: areas, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -44,7 +50,7 @@ class AreaTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listAreas(1) : this.listAreas(this.state.page-1);
+          this.state.page === 1 ? this.listAreas(1) : this.listAreas(this.state.page - 1);
         },
       },
     ];
@@ -63,17 +69,18 @@ class AreaTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listAreas(this.state.totalPages) : this.listAreas(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listAreas(this.state.totalPages)
+          : this.listAreas(this.state.page + 1);
       },
     });
     return pages;
   };
 
-
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

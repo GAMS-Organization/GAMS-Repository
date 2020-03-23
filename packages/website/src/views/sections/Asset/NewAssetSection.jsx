@@ -33,13 +33,13 @@ class NewAssetSection extends React.Component {
       errors: {},
       notification: false,
       service: [],
-      selectedService: [],
+      selectedService: '',
       sector: [],
-      selectedSector: [],
+      selectedSector: '',
       area: [],
-      selectedArea: [],
+      selectedArea: '',
       element: [],
-      selectedElement: [],
+      selectedElement: '',
     };
   }
 
@@ -61,14 +61,6 @@ class NewAssetSection extends React.Component {
       sectores.push(dataSector);
     }
 
-    //areas
-    const responseArea = await serviceArea.list();
-    let areas = [];
-    for (const area of responseArea.data.items) {
-      let dataArea = area.name;
-      areas.push(dataArea);
-    }
-
     //elementos
     const responseElement = await serviceElement.list();
     let elements = [];
@@ -76,22 +68,49 @@ class NewAssetSection extends React.Component {
       let dataElement = element.name;
       elements.push(dataElement);
     }
-    this.setState({ service: services, sector: sectores, area: areas, element: elements });
+    this.setState({ service: services, sector: sectores, element: elements });
   }
 
-  //Controlador para seleccionar un servicio
-  handleChangeService = event => {
-    this.setState({ selectedService: event.target.value });
-  };
-
   //Controlador para seleccionar un sector
-  handleChangeSector = event => {
-    this.setState({ selectedSector: event.target.value });
+  handleChangeSector = async event => {
+    const sector = event.target.value;
+    //areas
+    const responseArea = await serviceArea.listBySector(sector.replace(/\s/gi, '-'));
+    let areas = [];
+    for (const area of responseArea.areas) {
+      areas.push(area);
+    }
+
+    this.setState({
+      selectedSector: sector,
+      area: areas,
+      service: [],
+      element: [],
+      selectedArea: '',
+      selectedService: '',
+      selectedElement: '',
+    });
   };
 
   //Controlador para seleccionar un area
-  handleChangeArea = event => {
-    this.setState({ selectedArea: event.target.value });
+  handleChangeArea = async event => {
+    const selectedArea = this.state.area.find(area => area.name === event.target.value);
+    this.setState({
+      selectedArea: event.target.value,
+      service: selectedArea.services,
+      element: [],
+      selectedService: '',
+      selectedElement: '',
+    });
+  };
+
+  //Controlador para seleccionar un servicio
+  handleChangeService = async event => {
+    const { service } = await serviceService.getByName(event.target.value);
+    const elements = service.elements.map(element => {
+      return element.name;
+    });
+    this.setState({ selectedService: event.target.value, selectedElement: '', element: elements });
   };
 
   //Controlador para seleccionar un elemento
@@ -127,6 +146,7 @@ class NewAssetSection extends React.Component {
   render() {
     const { classes, sector, area, service, element } = this.props;
     const { errors } = this.state;
+    console.log(this.state);
     return (
       <div id="section-new-asset">
         <Snackbar
@@ -153,10 +173,11 @@ class NewAssetSection extends React.Component {
                 <CardBody>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-Sector">Sector</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Sector
+                        </InputLabel>
                         <Select
-                          labelId="demo-mutiple-name-label-Sector"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
@@ -172,7 +193,14 @@ class NewAssetSection extends React.Component {
                           }}
                         >
                           {this.state.sector.map(sector => (
-                            <MenuItem key={sector} value={sector}>
+                            <MenuItem
+                              key={sector}
+                              value={sector}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
                               {sector}
                             </MenuItem>
                           ))}
@@ -180,10 +208,11 @@ class NewAssetSection extends React.Component {
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-Area">Area</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Área
+                        </InputLabel>
                         <Select
-                          labelId="demo-mutiple-name-label-Area"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
@@ -192,25 +221,32 @@ class NewAssetSection extends React.Component {
                           }}
                           value={this.state.selectedArea}
                           onChange={this.handleChangeArea}
-                          input={<Input />}
                           inputProps={{
                             name: 'area',
                             id: 'area',
                           }}
                         >
                           {this.state.area.map(area => (
-                            <MenuItem key={area} value={area}>
-                              {area}
+                            <MenuItem
+                              key={area.name}
+                              value={area.name}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
+                              {area.name}
                             </MenuItem>
                           ))}
                         </Select>
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-Servicio">Servicios</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Servicio
+                        </InputLabel>
                         <Select
-                          labelId="demo-mutiple-name-label-Servicio"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
@@ -219,14 +255,20 @@ class NewAssetSection extends React.Component {
                           }}
                           value={this.state.selectedService}
                           onChange={this.handleChangeService}
-                          input={<Input />}
                           inputProps={{
                             name: 'service',
                             id: 'service',
                           }}
                         >
                           {this.state.service.map(service => (
-                            <MenuItem key={service} value={service}>
+                            <MenuItem
+                              key={service}
+                              value={service}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
                               {service}
                             </MenuItem>
                           ))}
@@ -234,10 +276,11 @@ class NewAssetSection extends React.Component {
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-elementos">Elementos</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Elemento
+                        </InputLabel>
                         <Select
-                          labelId="demo-mutiple-name-label-elementos"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
@@ -246,14 +289,20 @@ class NewAssetSection extends React.Component {
                           }}
                           value={this.state.selectedElement}
                           onChange={this.handleChangeElement}
-                          input={<Input />}
                           inputProps={{
                             name: 'element',
                             id: 'element',
                           }}
                         >
                           {this.state.element.map(element => (
-                            <MenuItem key={element} value={element}>
+                            <MenuItem
+                              key={element}
+                              value={element}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
                               {element}
                             </MenuItem>
                           ))}

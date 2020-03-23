@@ -41,6 +41,26 @@ class areaAdapter {
     }
   }
 
+  listBySector(listBySectorResponse) {
+    let { status, data } = listBySectorResponse;
+
+    if (!isError(status)) {
+      return {
+        areas: data.data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_BY_SECTOR_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
+
   update(updateResponse) {
     let { status, data } = updateResponse;
 

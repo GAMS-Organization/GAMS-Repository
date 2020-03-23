@@ -36,7 +36,7 @@ class ServiceTableSection extends React.Component {
       services.push(dataService);
     }
 
-    this.setState({ service: services, totalPages: response.data.pageCount, page: page  });
+    this.setState({ service: services, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -44,7 +44,7 @@ class ServiceTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listServices(1) : this.listServices(this.state.page-1);
+          this.state.page === 1 ? this.listServices(1) : this.listServices(this.state.page - 1);
         },
       },
     ];
@@ -63,7 +63,9 @@ class ServiceTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listServices(this.state.totalPages) : this.listServices(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listServices(this.state.totalPages)
+          : this.listServices(this.state.page + 1);
       },
     });
     return pages;
@@ -72,7 +74,7 @@ class ServiceTableSection extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

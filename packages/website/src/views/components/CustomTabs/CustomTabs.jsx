@@ -82,7 +82,7 @@ class CustomTabs extends React.Component {
 
 CustomTabs.propTypes = {
   classes: PropTypes.object.isRequired,
-  headerColor: PropTypes.oneOf([ 'primary', 'gamsWhite', 'gamsRed', 'gamsBlue', 'gamsGray', 'gamsBlack']),
+  headerColor: PropTypes.oneOf(['primary', 'gamsWhite', 'gamsRed', 'gamsBlue', 'gamsGray', 'gamsBlack']),
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({

@@ -23,13 +23,12 @@ class SectorTableSection extends React.Component {
     };
   }
 
-
   componentWillMount = async () => {
-    await this.listSectors()
+    await this.listSectors();
   };
 
   //obtiene los sectores
-  listSectors = async (page = 1, itemsPerPage = 15) =>{
+  listSectors = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceSector.list(page, itemsPerPage);
     let sectors = [];
     for (const sector of response.data.items) {
@@ -37,7 +36,7 @@ class SectorTableSection extends React.Component {
       sectors.push(dataSector);
     }
 
-    this.setState({ sector: sectors, totalPages: response.data.pageCount, page: page  });
+    this.setState({ sector: sectors, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -45,7 +44,7 @@ class SectorTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listSectors(1) : this.listSectors(this.state.page-1);
+          this.state.page === 1 ? this.listSectors(1) : this.listSectors(this.state.page - 1);
         },
       },
     ];
@@ -64,7 +63,9 @@ class SectorTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listSectors(this.state.totalPages) : this.listSectors(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listSectors(this.state.totalPages)
+          : this.listSectors(this.state.page + 1);
       },
     });
     return pages;
@@ -73,7 +74,7 @@ class SectorTableSection extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

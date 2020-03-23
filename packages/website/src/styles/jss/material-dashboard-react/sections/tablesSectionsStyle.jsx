@@ -26,8 +26,8 @@ const tablesSectionsstyle = {
       lineHeight: '1',
     },
   },
-  cardCenter:{
-    alignItems: "center",
+  cardCenter: {
+    alignItems: 'center',
   },
 };
 

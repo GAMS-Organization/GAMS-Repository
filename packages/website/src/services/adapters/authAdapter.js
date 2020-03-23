@@ -16,22 +16,22 @@ class AuthAdapter {
 
     const { code, details } = data.errors;
 
-    if(code === "NOT_FOUND") {
+    if (code === 'NOT_FOUND') {
       return {
         error: {
           status: 404,
-          code: "User not found",
-          details: "El usuario no existe",
-        }
-      }
+          code: 'User not found',
+          details: 'El usuario no existe',
+        },
+      };
     } else {
       return {
         error: {
           status: 401,
-          code: "Unhautorized",
-          details: "Contraseña incorrecta",
-        }
-      }
+          code: 'Unhautorized',
+          details: 'Contraseña incorrecta',
+        },
+      };
     }
   }
 }

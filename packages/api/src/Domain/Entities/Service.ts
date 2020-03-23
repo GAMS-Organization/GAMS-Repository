@@ -48,4 +48,8 @@ export default class Service {
   public getAreaService(): AreaService[] {
     return this.areaServices;
   }
+
+  public getElements(): Element[] {
+    return this.elements;
+  }
 }
