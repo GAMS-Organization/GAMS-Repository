@@ -8,6 +8,7 @@ import area from './area';
 import element from './element';
 import asset from './asset';
 import entry from './entry';
+import departure from './departure';
 import service from './service';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
@@ -23,6 +24,8 @@ router.use('/product', products);
 router.use('/stock', stock);
 
 router.use('/entry', entry);
+
+router.use('/departure', departure);
 
 router.use('/sector', sector);
 
