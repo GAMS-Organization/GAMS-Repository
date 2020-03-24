@@ -24,6 +24,16 @@ class service {
     return serviceAdapter.list(listResponse);
   }
 
+  async getByName(name) {
+    let getByNameResponse;
+    try {
+      getByNameResponse = await Api.get(`service/name/${name}`);
+    } catch (err) {
+      getByNameResponse = err;
+    }
+    return serviceAdapter.getByName(getByNameResponse);
+  }
+
   async update(dataService) {
     const body = dataService;
 

@@ -35,7 +35,7 @@ class ElementTableSection extends React.Component {
       let dataElement = [element.id.toString(), element.name, element.code, element.service.name, element.description];
       elements.push(dataElement);
     }
-    this.setState({ element: elements, totalPages: response.data.pageCount, page: page  });
+    this.setState({ element: elements, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -43,7 +43,7 @@ class ElementTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listElements(1) : this.listElements(this.state.page-1);
+          this.state.page === 1 ? this.listElements(1) : this.listElements(this.state.page - 1);
         },
       },
     ];
@@ -62,17 +62,18 @@ class ElementTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listElements(this.state.totalPages) : this.listElements(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listElements(this.state.totalPages)
+          : this.listElements(this.state.page + 1);
       },
     });
     return pages;
   };
 
-
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

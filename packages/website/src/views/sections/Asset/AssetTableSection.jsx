@@ -32,10 +32,17 @@ class AssetTableSection extends React.Component {
     const response = await serviceAsset.list(page, itemsPerPage);
     let assets = [];
     for (const asset of response.data.items) {
-      let dataAsset = [asset.id.toString(), asset.code, asset.sector.name, asset.area.name, asset.service.name, asset.element.name];
+      let dataAsset = [
+        asset.id.toString(),
+        asset.code,
+        asset.sector.name,
+        asset.area.name,
+        asset.service.name,
+        asset.element.name,
+      ];
       assets.push(dataAsset);
     }
-    this.setState({ asset: assets, totalPages: response.data.pageCount, page: page  });
+    this.setState({ asset: assets, totalPages: response.data.pageCount, page: page });
   };
 
   pagination = () => {
@@ -43,7 +50,7 @@ class AssetTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listAssets(1) : this.listAssets(this.state.page-1);
+          this.state.page === 1 ? this.listAssets(1) : this.listAssets(this.state.page - 1);
         },
       },
     ];
@@ -62,17 +69,18 @@ class AssetTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listAssets(this.state.totalPages) : this.listAssets(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listAssets(this.state.totalPages)
+          : this.listAssets(this.state.page + 1);
       },
     });
     return pages;
   };
 
-
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

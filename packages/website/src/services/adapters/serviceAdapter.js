@@ -61,6 +61,26 @@ class serviceAdapter {
     }
   }
 
+  getByName(getByNameResponse) {
+    let { status, data } = getByNameResponse;
+
+    if (!isError(status)) {
+      return {
+        service: data.data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'GET_BY_NAME_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
   delete(deleteResponse) {
     let { status, data } = deleteResponse;
 

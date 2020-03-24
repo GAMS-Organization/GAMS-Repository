@@ -26,7 +26,7 @@ export default class TypeServiceRepository extends TypeRepository implements ISe
   }
 
   public async findOneByServiceName(name: string): Promise<Service> {
-    return await this.repository(Service).findOne({ where: { name: name } });
+    return await this.repository(Service).findOne({ where: { name: name }, relations: ['elements'] });
   }
 
   public async persist(service: Service): Promise<Service> {

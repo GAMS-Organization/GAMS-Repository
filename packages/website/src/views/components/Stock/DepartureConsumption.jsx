@@ -45,13 +45,12 @@ class DepartureConsumption extends React.Component {
   }
 
   async deleteDeparture(prop) {
-  //  const response = await serviceUser.delete(prop[0]);
-
-  //  if (response.type === 'DELETED_SUCCESFUL') {
-  //    this.setState({ notification: true });
-  //  } else {
-  //    this.setState({ notification: true, errors: response.error });
-  //  }
+    //  const response = await serviceUser.delete(prop[0]);
+    //  if (response.type === 'DELETED_SUCCESFUL') {
+    //    this.setState({ notification: true });
+    //  } else {
+    //    this.setState({ notification: true, errors: response.error });
+    //  }
   }
 
   handleClickUpdate(prop) {
