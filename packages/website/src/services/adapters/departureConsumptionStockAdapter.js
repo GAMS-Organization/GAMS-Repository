@@ -15,7 +15,7 @@ class departureStockAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: details,
         },
       };
     }

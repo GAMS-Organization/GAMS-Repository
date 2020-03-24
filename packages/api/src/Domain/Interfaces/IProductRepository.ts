@@ -1,6 +1,6 @@
 import Product from '../Entities/Product';
 
-export default interface IStockRepository {
+export default interface IProductRepository {
   findAll(): Promise<Product[]>;
   findAllPaginated(initialIndex: number, limit: number): Promise<Product[]>;
   count(): Promise<number>;

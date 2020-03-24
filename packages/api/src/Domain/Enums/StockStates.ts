@@ -1,5 +1,5 @@
 export enum StockStates {
-  stock_insufficient = 'insufficient',
-  stock_critical = 'critical',
-  stock_sufficient = 'sufficient',
+  stock_insufficient = 'insuficiente',
+  stock_critical = 'crítico',
+  stock_sufficient = 'suficiente',
 }

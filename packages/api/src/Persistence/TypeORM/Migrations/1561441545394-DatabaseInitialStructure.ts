@@ -77,7 +77,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `consumption` (`id` int NOT NULL AUTO_INCREMENT, `quantity` int NOT NULL, `productId` int NULL, `departureId` int NULL, `workOrderId` int NULL, UNIQUE INDEX `REL_461bbf4235654cac96842e8f5f` (`productId`), UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `consumption` (`id` int NOT NULL AUTO_INCREMENT, `quantity` int NOT NULL, `productId` int NULL, `departureId` int NULL, `workOrderId` int NULL, UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(

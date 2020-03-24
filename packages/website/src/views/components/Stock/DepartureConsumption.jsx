@@ -1,39 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
-
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import GridContainer from '../../components/Grid/GridContainer.jsx';
-import GridItem from '../../components/Grid/GridItem';
-import Card from '../../components/Card/Card.jsx';
-import CardHeader from '../../components/Card/CardHeader.jsx';
-import CardBody from '../../components/Card/CardBody.jsx';
 import Slide from '@material-ui/core/Slide';
-import Snackbar from '../Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
-
-import Edit from '@material-ui/icons/Edit';
+// @material-ui/icons components
 import Close from '@material-ui/icons/Close';
-import Check from '@material-ui/icons/Check';
 import Visibility from '@material-ui/icons/Visibility';
-
+// components
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
+import Snackbar from '../Snackbar/Snackbar';
 import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
+import ViewDepartureConsumption from './ViewDepartureConsumption';
 
 class DepartureConsumption extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      entry: {},
+      departure: {},
       errors: {},
       notification: false,
     };
@@ -55,6 +47,15 @@ class DepartureConsumption extends React.Component {
     }
   }
 
+  async handleClickSeeDetails(prop) {
+    const id = prop[0];
+    const departureDetails = await serviceDepartureConsumptionStock.getById(id);
+    this.setState({
+      departure: departureDetails.data.data,
+    });
+    this.child.showModal();
+  }
+
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     const Transition = React.forwardRef(function Transition(props, ref) {
@@ -74,6 +75,11 @@ class DepartureConsumption extends React.Component {
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
+        />
+        <ViewDepartureConsumption
+          departure={this.state.departure}
+          onRef={ref => (this.child = ref)}
+          Transition={Transition}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -101,6 +107,15 @@ class DepartureConsumption extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Ver" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Visibility"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickSeeDetails.bind(this, prop)}
+                      >
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
