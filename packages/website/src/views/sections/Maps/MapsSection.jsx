@@ -3,8 +3,6 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 // @material-ui/icons
 import Arrow_Upward from '@material-ui/icons/ArrowUpward';
-import Arrow_Downward from '@material-ui/icons/ArrowDownward';
-import Assignment from '@material-ui/icons/Assignment';
 // components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -12,21 +10,11 @@ import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx';
 import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
 import DepartureConsumption from '../../components/Stock/DepartureConsumption';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-import { InputLabel, Input } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
-import Button from '../../components/CustomButtons/Button.jsx';
-import Card from '../../components/Card/Card.jsx';
-import CardHeader from '../../components/Card/CardHeader.jsx';
-import CardBody from '../../components/Card/CardBody.jsx';
-import CardFooter from '../../components/Card/CardFooter.jsx';
+import MapsSectorTable from '../../components/Maps/MapsSectorTable';
+import serviceSector from '../../../services/api/sector';
 
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import serviceCurrentStock from '../../../services/api/currentStock';
-import serviceSector from '../../../services/api/sector';
 
 const styles = {
   cardCategoryWhite: {
@@ -62,49 +50,24 @@ class MapsSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      sector: [],
       entry: [],
       stock: [],
       departure: [],
-      sector: [],
     };
   }
 
   async componentWillMount() {
-    //servicios
-    /*const responseService = await serviceService.list();
-    let services = [];
-    for (const service of responseService.data.items) {
-      let dataService = service.name;
-      services.push(dataService);
-    }*/
-
-    //sectores
+    //obtiene los sectores
     const responseSector = await serviceSector.list();
-    let sectores = [];
+    let sectors = [];
     for (const sector of responseSector.data.items) {
-      let dataSector = sector.name;
-      sectores.push(dataSector);
+      let dataSector = [sector.id.toString(), sector.name, sector.code];
+      sectors.push(dataSector);
     }
 
-    //areas
-    /*const responseArea = await serviceArea.list();
-    let areas = [];
-    for (const area of responseArea.data.items) {
-      let dataArea = area.name;
-      areas.push(dataArea);
-    }*/
-
-    this.setState({ sector: sectores });
+    this.setState({ sector: sectors });
   }
-
-  //Controlador para seleccionar un sector
-  handleChangeSector = event => {
-    this.setState({ selectedSector: event.target.value });
-  };
-
-  closeNotification = () => {
-    this.setState({ notification: false, errors: {} });
-  };
 
   render() {
     const { classes } = this.props;
@@ -119,70 +82,32 @@ class MapsSection extends React.Component {
                 tabName: 'SECTOR',
                 tabIcon: Arrow_Upward,
                 tabContent: (
-                  //<NewMapSector />
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
-                      <form onSubmit={this.createProduct}>
-                        <Card>
-                          <CardHeader color="gamsBlue">
-                            <h4 className={classes.cardTitleWhite}>Nuevo mapa</h4>
-                            <p className={classes.cardCategoryWhite}>Complete los datos</p>
-                          </CardHeader>
-                          <CardBody>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <InputLabel id="demo-mutiple-name-label-Sector">Sector</InputLabel>
-                              <FormControl
-                                fullWidth
-                                className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}
-                              >
-                                <Select
-                                  labelId="demo-mutiple-name-label-Sector"
-                                  MenuProps={{
-                                    className: classes.selectMenu,
-                                  }}
-                                  classes={{
-                                    select: classes.select,
-                                  }}
-                                  value={this.state.selectedSector}
-                                  onChange={this.handleChangeSector}
-                                  input={<Input />}
-                                  inputProps={{
-                                    name: 'sector',
-                                    id: 'sector',
-                                  }}
-                                >
-                                  {this.state.sector.map(sector => (
-                                    <MenuItem key={sector} value={sector}>
-                                      {sector}
-                                    </MenuItem>
-                                  ))}
-                                </Select>
-                              </FormControl>
-                              <br />
-                              <Button type="" color="gamsRed" xs={12} sm={12} md={3}>
-                                Cargar imagen
-                              </Button>
-                            </GridItem>
-                          </CardBody>
-                          <CardFooter>
-                            <Button type="submit" color="gamsRed">
-                              Crear
-                            </Button>
-                          </CardFooter>
-                        </Card>
-                      </form>
-                    </GridItem>
-                  </GridContainer>
+                  <MapsSectorTable
+                    tableHeaderColor="gamsBlue"
+                    tableHead={['ID', 'Nombre', 'Codigo']}
+                    tableData={this.state.sector}
+                  />
                 ),
               },
               {
-                tabName: 'AREA',
+                tabName: 'STOCK ACTUAL',
                 tabIcon: Arrow_Upward,
                 tabContent: (
                   <CurrentStock
                     tableHeaderColor="gamsBlue"
                     tableHead={['ID', 'Producto', 'Cantidad', 'Cant. Minima', 'Estado']}
                     tableData={this.state.stock}
+                  />
+                ),
+              },
+              {
+                tabName: 'SALIDAS',
+                tabIcon: Arrow_Upward,
+                tabContent: (
+                  <DepartureConsumption
+                    tableHeaderColor="gamsBlue"
+                    tableHead={['ID', 'Fecha', 'Producto', 'Cantidad', 'Observacion']}
+                    tableData={this.state.departure}
                   />
                 ),
               },
