@@ -22,7 +22,6 @@ export default class GetAllDeparturePresenter implements IPresenter {
         consumptions.push({
           id: consumption.getId(),
           quantity: consumption.getQuantity(),
-          provider: consumption.getProvider(),
           product: {
             id: consumption.getProduct().getId(),
             name: consumption.getProduct().getName(),

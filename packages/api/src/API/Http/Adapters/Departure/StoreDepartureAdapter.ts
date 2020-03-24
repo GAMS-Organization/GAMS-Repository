@@ -25,7 +25,6 @@ export default class StoreDepartureAdapter {
       request.body.observations,
       request.body.products,
       request.body.quantities,
-      request.body.providers,
     );
   }
 }

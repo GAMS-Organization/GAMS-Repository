@@ -22,7 +22,10 @@ export default class TypeDepartureRepository extends TypeRepository implements I
   }
 
   public async findOneById(id: number): Promise<Departure> {
-    return await this.repository(Departure).findOne({ where: { id: id }, relations: ['consumptions', 'consumptions.product'] });
+    return await this.repository(Departure).findOne({
+      where: { id: id },
+      relations: ['consumptions', 'consumptions.product'],
+    });
   }
 
   public async findByProductName(id: number): Promise<Departure[]> {

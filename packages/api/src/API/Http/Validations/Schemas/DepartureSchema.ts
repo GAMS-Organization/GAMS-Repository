@@ -26,10 +26,4 @@ export const storeDepartureSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  providers: Joi.array()
-    .items(Joi.string())
-    .required()
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
 };

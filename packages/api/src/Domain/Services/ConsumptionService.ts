@@ -29,7 +29,6 @@ export default class ConsumptionService {
     departure: Departure,
     commandProducts: number[],
     commandQuantities: number[],
-    commandProviders: string[],
   ): Promise<Departure> {
     const products = await this.productRepository.findAll();
     for (const product of products) {
@@ -37,8 +36,7 @@ export default class ConsumptionService {
       if (commandProducts.includes(productId)) {
         let index = commandProducts.indexOf(productId);
         let quantity = commandQuantities[index];
-        let provider = commandProviders[index];
-        const consumption = new Consumption(quantity, provider, product, departure);
+        const consumption = new Consumption(quantity, product, departure);
         await this.consumptionRepository.persist(consumption);
         await this.stockDepartureService.setStockDeparture(departure, product, quantity);
       }

@@ -10,7 +10,11 @@ export default class TypeConsumptionRepository extends TypeRepository implements
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Consumption[]> {
-    return await this.repository(Consumption).find({ skip: initialIndex, take: limit, relations: ['departure', 'product'] });
+    return await this.repository(Consumption).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['departure', 'product'],
+    });
   }
 
   public async count(): Promise<number> {

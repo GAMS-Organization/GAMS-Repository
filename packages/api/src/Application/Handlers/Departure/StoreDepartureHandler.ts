@@ -24,7 +24,6 @@ export default class StoreDepartureHandler {
       await this.departureRepository.persist(departure),
       command.getProducts(),
       command.getQuantities(),
-      command.getProviders(),
     );
   }
 }

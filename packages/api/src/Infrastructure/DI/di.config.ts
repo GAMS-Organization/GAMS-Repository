@@ -161,6 +161,9 @@ import IStockDepartureRepository from '../../Domain/Interfaces/IStockDepartureRe
 import TypeConsumptionRepository from '../../Persistence/TypeORM/Repositories/TypeConsumptionRepository';
 import TypeDepartureRepository from '../../Persistence/TypeORM/Repositories/TypeDepartureRepository';
 import TypeStockDepartureRepository from '../../Persistence/TypeORM/Repositories/TypeStockDepartureRepository';
+import ConsumptionService from '../../Domain/Services/ConsumptionService';
+import DepartureService from '../../Domain/Services/DepartureService';
+import StockDepartureService from '../../Domain/Services/StockDepartureService';
 
 const DIContainer = new Container();
 
@@ -317,16 +320,18 @@ DIContainer.bind<UserService>(UserService).toSelf();
 DIContainer.bind<UserRoleService>(UserRoleService).toSelf();
 DIContainer.bind<ProductService>(ProductService).toSelf();
 DIContainer.bind<StockEntryService>(StockEntryService).toSelf();
+DIContainer.bind<StockDepartureService>(StockDepartureService).toSelf();
 DIContainer.bind<PurchaseService>(PurchaseService).toSelf();
+DIContainer.bind<ConsumptionService>(ConsumptionService).toSelf();
 DIContainer.bind<StockService>(StockService).toSelf();
 DIContainer.bind<EntryService>(EntryService).toSelf();
+DIContainer.bind<DepartureService>(DepartureService).toSelf();
 DIContainer.bind<AreaServiceService>(AreaServiceService).toSelf();
 DIContainer.bind<AssetService>(AssetService).toSelf();
 DIContainer.bind<SectorService>(SectorService).toSelf();
 DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
-
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
 /**

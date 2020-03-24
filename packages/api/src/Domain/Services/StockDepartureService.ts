@@ -7,7 +7,7 @@ import Departure from '../Entities/Departure';
 import Stock from '../Entities/Stock';
 import Product from '../Entities/Product';
 import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
-// import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
+import EntityNotFoundException from '../../Application/Exceptions/EntityNotFoundException';
 
 @injectable()
 export default class StockDepartureService {
@@ -26,15 +26,12 @@ export default class StockDepartureService {
     const stock = await this.stockRepository.findOneByStockProduct(product.getId());
     if (stock) {
       const actualQuantity = stock.getQuantity();
-      stock.setQuantity(actualQuantity + quantity);
+      stock.setQuantity(actualQuantity - quantity);
       const stockDeparture = new StockDeparture(stock, departure);
       await this.stockDepartureRepository.persist(stockDeparture);
       await this.stockRepository.persist(stock);
     } else {
-      const stock = new Stock(product, quantity);
-      const stockDeparture = new StockDeparture(stock, departure);
-      await this.stockRepository.persist(stock);
-      await this.stockDepartureRepository.persist(stockDeparture);
+      throw new EntityNotFoundException(`Stock with product: ${product.getName()} not found`);
     }
   }
 
@@ -52,7 +49,7 @@ export default class StockDepartureService {
   public async updateQuantityStock(product: Product, quantity: number): Promise<void> {
     const stock = await this.stockRepository.findOneByStockProduct(product.getId());
     const actualQuantity = stock.getQuantity();
-    stock.setQuantity(actualQuantity - quantity);
+    stock.setQuantity(actualQuantity + quantity);
     await this.stockRepository.persist(stock);
   }
 

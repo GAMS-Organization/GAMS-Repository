@@ -26,6 +26,7 @@ import Check from '@material-ui/icons/Check';
 import Visibility from '@material-ui/icons/Visibility';
 
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
+import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
 
 class DepartureConsumption extends React.Component {
   constructor(props) {
@@ -45,37 +46,14 @@ class DepartureConsumption extends React.Component {
   }
 
   async deleteDeparture(prop) {
-    //  const response = await serviceUser.delete(prop[0]);
-    //  if (response.type === 'DELETED_SUCCESFUL') {
-    //    this.setState({ notification: true });
-    //  } else {
-    //    this.setState({ notification: true, errors: response.error });
-    //  }
-  }
+    const response = await serviceDepartureConsumptionStock.delete(prop[0]);
 
-  handleClickUpdate(prop) {
-    this.setState({
-      stock: {
-        id: prop[0],
-        fecha: prop[1],
-        producto: prop[2],
-        cantidad: prop[3],
-        observacion: prop[5],
-      },
-    });
-    this.child.showModal();
+    if (response.type === 'DELETED_SUCCESFUL') {
+      this.setState({ notification: true });
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
   }
-
-  /*async componentWillMount() {
-        const response = await serviceProduct.list();
-        let products = [];
-        for (const product of response.data.items) {
-          let dataProduct = [product.id.toString(), product.name];
-          products.push(dataProduct);
-        }
-    
-        this.setState({ product: products });
-    }*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

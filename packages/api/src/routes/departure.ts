@@ -49,7 +49,9 @@ router.delete(
     authMiddleware(req, res, next);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const destroyDepartureAction: DestroyDepartureAction = DIContainer.resolve<DestroyDepartureAction>(DestroyDepartureAction);
+    const destroyDepartureAction: DestroyDepartureAction = DIContainer.resolve<DestroyDepartureAction>(
+      DestroyDepartureAction,
+    );
     await destroyDepartureAction.execute(request, response);
   }),
 );

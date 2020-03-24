@@ -3,20 +3,12 @@ export default class StoreDepartureCommand {
   private observations: string;
   private products: number[];
   private quantities: number[];
-  private providers: string[];
 
-  public constructor(
-    date: string,
-    observations: string,
-    products: number[],
-    quantities: number[],
-    providers: string[],
-  ) {
+  public constructor(date: string, observations: string, products: number[], quantities: number[]) {
     this.date = date;
     this.observations = observations;
     this.products = products;
     this.quantities = quantities;
-    this.providers = providers;
   }
 
   public getDate(): string {
@@ -33,9 +25,5 @@ export default class StoreDepartureCommand {
 
   public getQuantities(): number[] {
     return this.quantities;
-  }
-
-  public getProviders(): string[] {
-    return this.providers;
   }
 }
