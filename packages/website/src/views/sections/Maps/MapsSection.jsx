@@ -7,14 +7,12 @@ import Arrow_Upward from '@material-ui/icons/ArrowUpward';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import CustomTabs from '../../components/CustomTabs/CustomTabs.jsx';
-import EntryPurchase from '../../components/Stock/EntryPurchase.jsx';
 import CurrentStock from '../../components/Stock/CurrentStock.jsx';
 import DepartureConsumption from '../../components/Stock/DepartureConsumption';
 import MapsSectorTable from '../../components/Maps/MapsSectorTable';
 import serviceSector from '../../../services/api/sector';
-
-import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
-import serviceCurrentStock from '../../../services/api/currentStock';
+import Pagination from '../../components/Pagination/Pagination';
+import Card from '../../components/Card/Card.jsx';
 
 const styles = {
   cardCategoryWhite: {
@@ -44,6 +42,9 @@ const styles = {
       lineHeight: '1',
     },
   },
+  cardCenter: {
+    alignItems: 'center',
+  },
 };
 
 class MapsSection extends React.Component {
@@ -54,12 +55,18 @@ class MapsSection extends React.Component {
       entry: [],
       stock: [],
       departure: [],
+      totalPages: 1,
+      page: 1,
     };
   }
 
-  async componentWillMount() {
-    //obtiene los sectores
-    const responseSector = await serviceSector.list();
+  componentWillMount = async () => {
+    await this.listSectors();
+  };
+
+  //obtiene los sectores
+  listSectors = async (page = 1, itemsPerPage = 15) => {
+    const responseSector = await serviceSector.list(page, itemsPerPage);
     let sectors = [];
     for (const sector of responseSector.data.items) {
       let dataSector = [sector.id.toString(), sector.name, sector.code];
@@ -67,12 +74,44 @@ class MapsSection extends React.Component {
     }
 
     this.setState({ sector: sectors });
-  }
+  };
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          this.state.page === 1 ? this.listSectors(1) : this.listSectors(this.state.page - 1);
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: async () => {
+            this.listSectors(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        this.state.page === this.state.totalPages
+          ? this.listSectors(this.state.totalPages)
+          : this.listSectors(this.state.page + 1);
+      },
+    });
+    return pages;
+  };
 
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <CustomTabs
             title=""
@@ -113,6 +152,11 @@ class MapsSection extends React.Component {
               },
             ]}
           />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card className={classes.cardCenter}>
+            <Pagination pages={this.pagination()} color="gamsRed" />
+          </Card>
         </GridItem>
       </GridContainer>
     );
