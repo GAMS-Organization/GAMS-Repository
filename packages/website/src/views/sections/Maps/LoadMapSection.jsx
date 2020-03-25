@@ -50,7 +50,7 @@ class LoadMapSection extends React.Component {
   };
 
   //se actualiza la section luego de ser editado
-  updateSector = async e => {
+  /*updateSector = async e => {
     e.preventDefault();
 
     const fields = ['id', 'name', 'code'];
@@ -70,7 +70,7 @@ class LoadMapSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, sector, Transition } = this.props;
@@ -85,7 +85,7 @@ class LoadMapSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Sector actualizado correctamente'
+              : 'Mapa cargado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -105,12 +105,12 @@ class LoadMapSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar sector</h4>
+            <h4 className={classes.modalTitle}>Cargar mapa</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateSector}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
+                {/*<GridItem xs={12} sm={12} md={1}>
                   <CustomInput
                     labelText="ID"
                     id="id"
@@ -124,9 +124,9 @@ class LoadMapSection extends React.Component {
                       defaultValue: id,
                       name: 'id',
                     }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
+                  />                  
+                </GridItem>*/}
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -135,13 +135,14 @@ class LoadMapSection extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      disabled: true,
                       required: true,
                       defaultValue: name,
                       name: 'name',
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Codigo"
                     id="code"
@@ -150,12 +151,21 @@ class LoadMapSection extends React.Component {
                       fullWidth: true,
                     }}
                     inputProps={{
+                      disabled: true,
                       required: true,
                       defaultValue: code,
                       name: 'code',
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <Button type="" color="gamsBlue">
+                    Cargar archivo
+                  </Button>
+                </GridItem>
+                {/*<GridItem xs={12} sm={12} md={12}>
+                  <embed></embed> MOSTRAT PDF
+                  </GridItem>*/}
               </GridContainer>
               <Button type="submit" color="gamsRed">
                 Actualizar

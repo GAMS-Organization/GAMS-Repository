@@ -38,21 +38,9 @@ class MapsSectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se eliminan los sectores
-  /*deleteSector = async prop => {
-    const response = await serviceSector.delete(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    window.location.reload();
-  };*/
-
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1] } });
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();
   };
 
@@ -116,21 +104,6 @@ class MapsSectorTable extends React.Component {
                         <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
-
-                    {/*<Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={this.deleteSector.bind(this, prop)}
-                      >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                      </IconButton>
-                    </Tooltip>*/}
                   </TableCell>
                 </TableRow>
               );
