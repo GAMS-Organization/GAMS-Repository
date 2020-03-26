@@ -28,7 +28,7 @@ class ProductTableSection extends React.Component {
     await this.listProducts();
   }
 
-  listProducts = async (page = 1, itemsPerPage = 15)=> {
+  listProducts = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceProduct.list(page, itemsPerPage);
     let products = [];
     for (const product of response.data.items) {
@@ -39,13 +39,12 @@ class ProductTableSection extends React.Component {
     this.setState({ product: products, totalPages: response.data.pageCount, page: page });
   };
 
-
   pagination = () => {
     const pages = [
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1? this.listProducts(1) : this.listProducts(this.state.page-1);
+          this.state.page === 1 ? this.listProducts(1) : this.listProducts(this.state.page - 1);
         },
       },
     ];
@@ -64,7 +63,9 @@ class ProductTableSection extends React.Component {
     pages.push({
       text: 'NEXT',
       onClick: () => {
-        this.state.page === this.state.totalPages? this.listProducts(this.state.totalPages) : this.listProducts(this.state.page + 1);
+        this.state.page === this.state.totalPages
+          ? this.listProducts(this.state.totalPages)
+          : this.listProducts(this.state.page + 1);
       },
     });
     return pages;
@@ -73,7 +74,7 @@ class ProductTableSection extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <GridContainer justify={"center"}>
+      <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">

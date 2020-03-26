@@ -19,6 +19,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceUser from '../../../services/api/user';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import { InputLabel } from '@material-ui/core';
 
 class UpdateUserSection extends React.Component {
   constructor(props) {
@@ -138,7 +139,7 @@ class UpdateUserSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -153,7 +154,7 @@ class UpdateUserSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Apellido"
                     id="surname"
@@ -168,7 +169,7 @@ class UpdateUserSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={5}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Correo"
                     id="email"
@@ -183,8 +184,11 @@ class UpdateUserSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
                   <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                      Tipo de usuario
+                    </InputLabel>
                     <Select
                       MenuProps={{
                         className: classes.selectMenu,

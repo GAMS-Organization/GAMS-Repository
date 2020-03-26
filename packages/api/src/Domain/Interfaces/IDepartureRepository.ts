@@ -5,7 +5,7 @@ export default interface IDepartureRepository {
   findAllPaginated(initialIndex: number, limit: number): Promise<Departure[]>;
   count(): Promise<number>;
   findOneById(id: number): Promise<Departure>;
-  findOneByProductName(product: string): Promise<Departure>;
+  findByProductName(id: number): Promise<Departure[]>;
   persist(departure: Departure): Promise<Departure>;
   destroy(departure: Departure): Promise<boolean>;
 }

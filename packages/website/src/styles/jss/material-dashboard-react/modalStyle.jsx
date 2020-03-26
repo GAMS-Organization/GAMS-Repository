@@ -1,4 +1,5 @@
 import { whiteColor, grayColor } from '../material-dashboard-react';
+import customSelect from './components/customSelectStyle';
 
 const modalStyle = theme => ({
   modalRoot: {
@@ -155,6 +156,7 @@ const modalStyle = theme => ({
     padding: '40px 0',
     margin: '0',
   },
+  ...customSelect,
 });
 
 export default modalStyle;

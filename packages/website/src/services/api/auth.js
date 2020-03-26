@@ -1,6 +1,6 @@
 import Api from './api';
 import authAdapter from '../adapters/authAdapter';
-import authStorage from "../localStorage/authStorage";
+import authStorage from '../localStorage/authStorage';
 
 class Auth {
   async logIn(email, password) {
@@ -15,14 +15,14 @@ class Auth {
 
     const responseAdapted = authAdapter.login(loginResponse);
 
-    if(responseAdapted.token){
+    if (responseAdapted.token) {
       authStorage.setSession(responseAdapted.token);
     }
     return authAdapter.login(loginResponse);
   }
 
   async logOut() {
-      authStorage.deleteSession();
+    authStorage.deleteSession();
   }
 }
 

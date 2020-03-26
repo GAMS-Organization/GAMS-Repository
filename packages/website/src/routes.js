@@ -52,17 +52,17 @@ const dashboardRoutes = [
     layout: '/admin',
   },
   {
-    path: '/service',
-    name: 'Servicio',
-    icon: Build,
-    component: Service,
-    layout: '/admin',
-  },
-  {
     path: '/area',
     name: 'Área',
     icon: LocationOn,
     component: Area,
+    layout: '/admin',
+  },
+  {
+    path: '/service',
+    name: 'Servicio',
+    icon: Build,
+    component: Service,
     layout: '/admin',
   },
   {

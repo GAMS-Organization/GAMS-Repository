@@ -20,12 +20,13 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
+import { InputLabel } from '@material-ui/core';
 
 class NewUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rolSelected: 'user',
+      rolSelected: '',
       errors: {},
       notification: false,
     };
@@ -169,7 +170,10 @@ class NewUserSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Tipo de usuario
+                        </InputLabel>
                         <Select
                           MenuProps={{
                             className: classes.selectMenu,

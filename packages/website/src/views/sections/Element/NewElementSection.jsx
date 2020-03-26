@@ -31,7 +31,7 @@ class NewElementSection extends React.Component {
       errors: {},
       notification: false,
       service: [],
-      selectedService: [],
+      selectedService: '',
     };
   }
 
@@ -136,10 +136,11 @@ class NewElementSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <InputLabel id="demo-mutiple-name-label-Servicio">Servicios</InputLabel>
-                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.selectUnderlineRoot}>
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                          Service
+                        </InputLabel>
                         <Select
-                          labelId="demo-mutiple-name-label-Servicio"
                           MenuProps={{
                             className: classes.selectMenu,
                           }}
@@ -148,14 +149,20 @@ class NewElementSection extends React.Component {
                           }}
                           value={this.state.selectedService}
                           onChange={this.handleChangeService}
-                          input={<Input />}
                           inputProps={{
                             name: 'service',
                             id: 'service',
                           }}
                         >
                           {this.state.service.map(service => (
-                            <MenuItem key={service} value={service}>
+                            <MenuItem
+                              key={service}
+                              value={service}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
                               {service}
                             </MenuItem>
                           ))}

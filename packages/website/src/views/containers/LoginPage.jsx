@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
     super(props);
     this.state = {
       checked: [],
-      errors: {error:{}},
+      errors: { error: {} },
     };
   }
 

@@ -2,6 +2,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import StockDeparture from './StockDeparture';
 import Consumption from './Consumption';
+import Product from './Product';
 
 @Entity('departure')
 // eslint-disable-next-line require-jsdoc
@@ -44,6 +45,14 @@ export default class Departure {
 
   public getConsumptions(): Consumption[] {
     return this.consumptions;
+  }
+
+  public getProductsFromConsumptions(consumptions: Consumption[]): Product[] {
+    const products = [];
+    for (const consumption of consumptions) {
+      products.push(consumption.getProduct());
+    }
+    return products;
   }
 
   public setConsumptions(value: Consumption[]): void {
