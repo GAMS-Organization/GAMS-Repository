@@ -1,6 +1,6 @@
 import { isError } from '../../utils/helpers/isError';
 
-class exitStockAdapter {
+class departureStockAdapter {
   create(createResponse) {
     let { status, data } = createResponse;
 
@@ -15,7 +15,7 @@ class exitStockAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: details,
         },
       };
     }
@@ -82,4 +82,4 @@ class exitStockAdapter {
   }
 }
 
-export default new exitStockAdapter();
+export default new departureStockAdapter();
