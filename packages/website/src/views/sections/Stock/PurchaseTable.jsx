@@ -64,9 +64,7 @@ class PurchaseTable extends React.Component {
   };
 
   async componentWillMount() {
-    const page = 1;
-    const itemsPerPage = 30;
-    const response = await serviceProduct.list(page, itemsPerPage);
+    const response = await serviceProduct.list(1, 500);
     let dataProduct = {};
     for (const product of response.data.items) {
       dataProduct[product.id] = product.name;
