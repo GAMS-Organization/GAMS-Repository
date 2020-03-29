@@ -43,16 +43,8 @@ class NewAssetSection extends React.Component {
     };
   }
 
-  //se obtienen los servicios, sectores, areas y elementos
+  //se obtienen los sectores
   async componentWillMount() {
-    //servicios
-    const responseService = await serviceService.list();
-    let services = [];
-    for (const service of responseService.data.items) {
-      let dataService = service.name;
-      services.push(dataService);
-    }
-
     //sectores
     const responseSector = await serviceSector.list();
     let sectores = [];
@@ -61,14 +53,7 @@ class NewAssetSection extends React.Component {
       sectores.push(dataSector);
     }
 
-    //elementos
-    const responseElement = await serviceElement.list();
-    let elements = [];
-    for (const element of responseElement.data.items) {
-      let dataElement = element.name;
-      elements.push(dataElement);
-    }
-    this.setState({ service: services, sector: sectores, element: elements });
+    this.setState({ sector: sectores });
   }
 
   //Controlador para seleccionar un sector
@@ -106,7 +91,7 @@ class NewAssetSection extends React.Component {
 
   //Controlador para seleccionar un servicio
   handleChangeService = async event => {
-    const { service } = await serviceService.getByName(event.target.value);
+    const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const elements = service.elements.map(element => {
       return element.name;
     });
@@ -146,7 +131,6 @@ class NewAssetSection extends React.Component {
   render() {
     const { classes, sector, area, service, element } = this.props;
     const { errors } = this.state;
-    console.log(this.state);
     return (
       <div id="section-new-asset">
         <Snackbar

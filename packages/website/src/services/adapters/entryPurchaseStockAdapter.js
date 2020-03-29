@@ -15,7 +15,7 @@ class entryStockAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: details,
         },
       };
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import serviceProduct from '../../../services/api/products';
-import serviceEntry from '../../../services/api/entryPurchaseStock';
+import serviceDeparture from '../../../services/api/departureConsumptionStock';
 import Button from '../../components/CustomButtons/Button';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -10,9 +10,8 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
-import CardFooter from '../../components/Card/CardFooter';
 
-class PurchaseTable extends React.Component {
+class ConsumptionTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,17 +26,15 @@ class PurchaseTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se crea la compra
-  handleConfirmPurchaseClick = async e => {
+  //se crea el consumo
+  handleConfirmConsumptionClick = async e => {
     e.preventDefault();
 
     const products = [];
     const quantities = [];
-    const providers = [];
-    for (const purchase of this.state.data) {
-      products.push(parseInt(purchase.product));
-      quantities.push(parseInt(purchase.quantity));
-      providers.push(purchase.provider);
+    for (const consumption of this.state.data) {
+      products.push(parseInt(consumption.product));
+      quantities.push(parseInt(consumption.quantity));
     }
 
     const formElements = e.target.elements;
@@ -50,10 +47,9 @@ class PurchaseTable extends React.Component {
       observations: observations,
       products: products,
       quantities: quantities,
-      providers: providers,
     };
 
-    const response = await serviceEntry.create(request);
+    const response = await serviceDeparture.create(request);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -73,17 +69,13 @@ class PurchaseTable extends React.Component {
     }
 
     this.setState({
-      columns: [
-        { title: 'Producto', field: 'product', lookup: dataProduct },
-        { title: 'Proveedor', field: 'provider' },
-        { title: 'Cantidad', field: 'quantity' },
-      ],
+      columns: [{ title: 'Producto', field: 'product', lookup: dataProduct }, { title: 'Cantidad', field: 'quantity' }],
     });
   }
 
   render() {
     return (
-      <GridItem xs={12} sm={12} md={7}>
+      <GridItem xs={12} sm={12} md={5}>
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -91,14 +83,15 @@ class PurchaseTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Entrada registrada correctamente'
+              : 'Salida registrada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
+
         <MaterialTable
-          title="Nueva entrada"
+          title="Nueva salida"
           columns={this.state.columns}
           data={this.state.data}
           options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
@@ -156,7 +149,7 @@ class PurchaseTable extends React.Component {
         />
         <Card>
           <CardBody>
-            <form onSubmit={this.handleConfirmPurchaseClick}>
+            <form onSubmit={this.handleConfirmConsumptionClick}>
               <GridContainer alignItems={'center'}>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
@@ -189,7 +182,7 @@ class PurchaseTable extends React.Component {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <Button type="submit" color="gamsRed">
-                    Comprar
+                    Consumir
                   </Button>
                 </GridItem>
               </GridContainer>
@@ -201,4 +194,4 @@ class PurchaseTable extends React.Component {
   }
 }
 
-export default PurchaseTable;
+export default ConsumptionTable;
