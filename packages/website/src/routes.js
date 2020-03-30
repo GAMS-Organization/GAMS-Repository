@@ -19,7 +19,6 @@ import Service from 'views/containers/Service.jsx';
 import Area from 'views/containers/Area.jsx';
 import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
-import Maps from 'views/containers/Maps.jsx';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -79,13 +78,6 @@ const dashboardRoutes = [
     name: 'Activos',
     icon: AllInclusive,
     component: Asset,
-    layout: '/admin',
-  },
-  {
-    path: '/Maps',
-    name: 'Mapas',
-    icon: MapIcon,
-    component: Maps,
     layout: '/admin',
   },
   {

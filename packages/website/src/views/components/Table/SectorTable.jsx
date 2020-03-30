@@ -14,10 +14,13 @@ import IconButton from '@material-ui/core/IconButton';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
+import MapIcon from '@material-ui/icons/Map';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
+
+import LoadMapSection from '../../sections/Maps/LoadMapSection';
 
 import serviceSector from '../../../services/api/sector';
 
@@ -54,6 +57,12 @@ class SectorTable extends React.Component {
     this.child.showModal();
   };
 
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoad = async prop => {
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
+    this.child.showModal();
+  };
+
   componentWillMount = () => {
     this.setState({ modal: false });
   };
@@ -79,6 +88,7 @@ class SectorTable extends React.Component {
           close
         />
         <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <LoadMapSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -117,6 +127,15 @@ class SectorTable extends React.Component {
                         onClick={this.deleteSector.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip id="tooltip-top" title="Ver mapa" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Maps"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickLoad.bind(this, prop)}
+                      >
+                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
