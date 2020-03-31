@@ -16,7 +16,7 @@ export default class Sector {
   public areas: Area[];
   @OneToMany(_type => Asset, asset => asset.sector)
   public assets: Asset[];
-  @Column()
+  @Column({nullable: true})
   public map: string;
 
   public constructor(name: string, code: string) {

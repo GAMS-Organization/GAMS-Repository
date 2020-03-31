@@ -15,26 +15,26 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into user_roles values (2, 1, 2);`);
     await queryRunner.query(`insert into user_roles values (3, 1, 3);`);
     //Create sectors
-    await queryRunner.query(`insert into sector values (1, 'Campus deportes', 'CD');`);
-    await queryRunner.query(`insert into sector values (2, 'Edificio principal', 'E01');`);
-    await queryRunner.query(`insert into sector values (3, 'Cuarto nivel', 'E02');`);
-    await queryRunner.query(`insert into sector values (4, 'Biblioteca y Cooperadora', 'E03');`);
-    await queryRunner.query(`insert into sector values (5, 'Laboratorio Quimica', 'E04');`);
-    await queryRunner.query(`insert into sector values (6, 'Laboratorio Electromecanica', 'E05');`);
-    await queryRunner.query(`insert into sector values (7, 'Laboratorio Fisica Lar Sistemas', 'E06');`);
-    await queryRunner.query(`insert into sector values (8, 'Laboratorio Electronica', 'E07');`);
-    await queryRunner.query(`insert into sector values (9, 'Taller Mantenimiento y Servicios Generales', 'E08');`);
-    await queryRunner.query(`insert into sector values (10, 'Dasuten', 'E09');`);
-    await queryRunner.query(`insert into sector values (11, 'Comedor universitario', 'E10');`);
-    await queryRunner.query(`insert into sector values (12, 'Secyt', 'E11');`);
-    await queryRunner.query(`insert into sector values (13, 'Quincho CEUT', 'E12');`);
-    await queryRunner.query(`insert into sector values (14, 'Portico', 'E13');`);
-    await queryRunner.query(`insert into sector values (17, 'Patio interno', 'P01');`);
-    await queryRunner.query(`insert into sector values (15, 'Parque frente', 'P02');`);
-    await queryRunner.query(`insert into sector values (16, 'Parque sur', 'P03');`);
-    await queryRunner.query(`insert into sector values (18, 'Parque playon', 'P04');`);
-    await queryRunner.query(`insert into sector values (19, 'Parque laboratorios exteriores', 'Plab');`);
-    await queryRunner.query(`insert into sector values (20, 'Parque estacionamiento', 'P05');`);
+    await queryRunner.query(`insert into sector values (1, 'Campus deportes', 'CD', NULL);`);
+    await queryRunner.query(`insert into sector values (2, 'Edificio principal', 'E01', NULL);`);
+    await queryRunner.query(`insert into sector values (3, 'Cuarto nivel', 'E02', NULL);`);
+    await queryRunner.query(`insert into sector values (4, 'Biblioteca y Cooperadora', 'E03', NULL);`);
+    await queryRunner.query(`insert into sector values (5, 'Laboratorio Quimica', 'E04', NULL);`);
+    await queryRunner.query(`insert into sector values (6, 'Laboratorio Electromecanica', 'E05', NULL);`);
+    await queryRunner.query(`insert into sector values (7, 'Laboratorio Fisica Lar Sistemas', 'E06', NULL);`);
+    await queryRunner.query(`insert into sector values (8, 'Laboratorio Electronica', 'E07', NULL);`);
+    await queryRunner.query(`insert into sector values (9, 'Taller Mantenimiento y Servicios Generales', 'E08', NULL);`);
+    await queryRunner.query(`insert into sector values (10, 'Dasuten', 'E09', NULL);`);
+    await queryRunner.query(`insert into sector values (11, 'Comedor universitario', 'E10', NULL);`);
+    await queryRunner.query(`insert into sector values (12, 'Secyt', 'E11', NULL);`);
+    await queryRunner.query(`insert into sector values (13, 'Quincho CEUT', 'E12', NULL);`);
+    await queryRunner.query(`insert into sector values (14, 'Portico', 'E13', NULL);`);
+    await queryRunner.query(`insert into sector values (17, 'Patio interno', 'P01', NULL);`);
+    await queryRunner.query(`insert into sector values (15, 'Parque frente', 'P02', NULL);`);
+    await queryRunner.query(`insert into sector values (16, 'Parque sur', 'P03', NULL);`);
+    await queryRunner.query(`insert into sector values (18, 'Parque playon', 'P04', NULL);`);
+    await queryRunner.query(`insert into sector values (19, 'Parque laboratorios exteriores', 'Plab', NULL);`);
+    await queryRunner.query(`insert into sector values (20, 'Parque estacionamiento', 'P05', NULL);`);
 
     //Create Services
     await queryRunner.query(`insert into service values (1, 'Agua potable', 'Ag');`);

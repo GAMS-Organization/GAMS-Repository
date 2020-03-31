@@ -41,7 +41,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `sector` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, UNIQUE INDEX `IDX_23e1125a0a0e6b06d3e825ba99` (`name`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `sector` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `map` varchar(255) NULL, UNIQUE INDEX `IDX_23e1125a0a0e6b06d3e825ba99` (`name`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
