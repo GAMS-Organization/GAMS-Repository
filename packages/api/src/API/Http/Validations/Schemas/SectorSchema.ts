@@ -17,3 +17,12 @@ export const storeSectorSchema = {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const updateSectorSchema = {
+  map: Joi.string()
+    .min(3)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    })
+};
