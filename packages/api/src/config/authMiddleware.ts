@@ -29,6 +29,8 @@ export const authMiddleware = (request: Request, _response: Response, next: Next
       }
       if (roles) {
         checkRolesMiddleware(roles, decoded);
+        // @ts-ignore
+        request.body.authorId = decoded.userId;
       }
       return next();
     });
