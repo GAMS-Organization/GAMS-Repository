@@ -11,7 +11,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexStockAction: IndexStockAction = DIContainer.resolve<IndexStockAction>(IndexStockAction);
@@ -22,7 +22,7 @@ router.get(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateStockAction: UpdateStockAction = DIContainer.resolve<UpdateStockAction>(UpdateStockAction);

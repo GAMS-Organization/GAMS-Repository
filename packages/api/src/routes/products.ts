@@ -15,7 +15,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
@@ -26,7 +26,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeProductAction: StoreProductAction = DIContainer.resolve<StoreProductAction>(StoreProductAction);
@@ -37,7 +37,7 @@ router.post(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
@@ -48,7 +48,7 @@ router.get(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
@@ -59,7 +59,7 @@ router.put(
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
@@ -72,7 +72,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);

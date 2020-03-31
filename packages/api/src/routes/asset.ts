@@ -15,7 +15,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexAssetsAction: IndexAssetsAction = DIContainer.resolve<IndexAssetsAction>(IndexAssetsAction);
@@ -26,7 +26,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeAssetAction: StoreAssetAction = DIContainer.resolve<StoreAssetAction>(StoreAssetAction);
@@ -73,7 +73,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyAssetAction: DestroyAssetAction = DIContainer.resolve<DestroyAssetAction>(DestroyAssetAction);
