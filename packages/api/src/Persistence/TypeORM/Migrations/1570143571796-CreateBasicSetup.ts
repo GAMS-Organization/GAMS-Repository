@@ -23,7 +23,9 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into sector values (6, 'Laboratorio Electromecanica', 'E05', NULL);`);
     await queryRunner.query(`insert into sector values (7, 'Laboratorio Fisica Lar Sistemas', 'E06', NULL);`);
     await queryRunner.query(`insert into sector values (8, 'Laboratorio Electronica', 'E07', NULL);`);
-    await queryRunner.query(`insert into sector values (9, 'Taller Mantenimiento y Servicios Generales', 'E08', NULL);`);
+    await queryRunner.query(
+      `insert into sector values (9, 'Taller Mantenimiento y Servicios Generales', 'E08', NULL);`,
+    );
     await queryRunner.query(`insert into sector values (10, 'Dasuten', 'E09', NULL);`);
     await queryRunner.query(`insert into sector values (11, 'Comedor universitario', 'E10', NULL);`);
     await queryRunner.query(`insert into sector values (12, 'Secyt', 'E11', NULL);`);

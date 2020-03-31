@@ -24,5 +24,5 @@ export const updateSectorSchema = {
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);
-    })
+    }),
 };
