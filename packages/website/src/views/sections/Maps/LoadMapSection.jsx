@@ -16,11 +16,13 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import { Input } from '@material-ui/core';
 
 class LoadMapSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedFile: null,
       sector: {},
       errors: {},
       open: false,
@@ -48,6 +50,14 @@ class LoadMapSection extends React.Component {
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };
+
+  fileSelectedHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0],
+    });
+  };
+
+  fileUploadHandler = () => {};
 
   //se actualiza la section luego de ser editado
   /*updateSector = async e => {
@@ -110,22 +120,6 @@ class LoadMapSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateSector}>
               <GridContainer>
-                {/*<GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />                  
-                </GridItem>*/}
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
@@ -159,12 +153,14 @@ class LoadMapSection extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <Button type="" color="gamsBlue">
+                  <input type="file" onChange={this.fileSelectedHandler} />
+                  <button onClick={this.fileUploadHandler}>Subir</button>
+                  {/*<Button type="" color="gamsBlue">
                     Cargar archivo
-                  </Button>
+                  </Button>*/}
                 </GridItem>
                 {/*<GridItem xs={12} sm={12} md={12}>
-                  <embed></embed> MOSTRAT PDF
+                  <embed></embed> MOSTRAR PDF
                   </GridItem>*/}
               </GridContainer>
               <Button type="submit" color="gamsRed">
