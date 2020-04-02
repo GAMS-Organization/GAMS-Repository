@@ -47,6 +47,18 @@ class sector {
 
     return sectorAdapter.delete(deleteResponse);
   }
+
+  async upload(dataSector) {
+    const body = dataSector;
+
+    let uploadResponse;
+    try {
+      uploadResponse = await Api.put(`sector/${body.id}`, body);
+    } catch (err) {
+      uploadResponse = err;
+    }
+    return sectorAdapter.upload(uploadResponse);
+  }
 }
 
 export default new sector();

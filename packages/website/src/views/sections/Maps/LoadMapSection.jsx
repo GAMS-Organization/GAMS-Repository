@@ -57,13 +57,13 @@ class LoadMapSection extends React.Component {
     });
   };
 
-  fileUploadHandler = () => {};
+  //fileUploadHandler = () => {};
 
-  //se actualiza la section luego de ser editado
-  /*updateSector = async e => {
+  //se actualiza el mapa luego de ser editado
+  uploadMapSector = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'name', 'code'];
+    const fields = ['id', 'name', 'code', 'map'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -73,14 +73,15 @@ class LoadMapSection extends React.Component {
 
     formValues.roles = [formValues.roles];
 
-    const response = await serviceSector.update(formValues);
+    const response = await serviceSector.upload(formValues);
+    console.log(response);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDLOAD_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, sector, Transition } = this.props;
@@ -118,7 +119,7 @@ class LoadMapSection extends React.Component {
             <h4 className={classes.modalTitle}>Cargar mapa</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.updateSector}>
+            <form onSubmit={this.uploadMapSector}>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
@@ -154,14 +155,10 @@ class LoadMapSection extends React.Component {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <input type="file" onChange={this.fileSelectedHandler} />
-                  <button onClick={this.fileUploadHandler}>Subir</button>
                   {/*<Button type="" color="gamsBlue">
                     Cargar archivo
                   </Button>*/}
                 </GridItem>
-                {/*<GridItem xs={12} sm={12} md={12}>
-                  <embed></embed> MOSTRAR PDF
-                  </GridItem>*/}
               </GridContainer>
               <Button type="submit" color="gamsRed">
                 Actualizar
