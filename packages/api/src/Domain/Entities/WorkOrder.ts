@@ -3,6 +3,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'ty
 import User from './User';
 import Asset from './Asset';
 import UserWorkOrder from './UserWorkOrder';
+import { STATE } from '../../API/Http/Enums/WorkOrder';
 
 @Entity('work_order')
 // eslint-disable-next-line require-jsdoc
@@ -11,15 +12,15 @@ export default class WorkOrder {
   public id: number;
   @Column()
   public orderDate: string;
-  @Column()
+  @Column({nullable:true})
   public startDate: string;
-  @Column()
+  @Column({nullable:true})
   public realizationDate: string;
   @Column()
   public priority: string;
   @Column()
   public state: string;
-  @Column()
+  @Column({nullable:true})
   public taskDespcription: string;
   @Column()
   public comment: string;
@@ -30,14 +31,13 @@ export default class WorkOrder {
   @OneToMany(_type => UserWorkOrder, userWorkOrders => userWorkOrders.workOrder)
   public userWorkOrders: UserWorkOrder[];
 
-  public constructor(orderDate: string, taskDespcription: string, priority: string, asset: Asset, user: User) {
+  public constructor(orderDate: string, priority: string, comment: string, asset: Asset, user: User) {
     this.orderDate = orderDate;
-    this.taskDespcription = taskDespcription;
+    this.comment = comment;
     this.priority = priority;
     this.asset = asset;
     this.user = user;
-    //Hay que hacer los enums para los estados y otras cosas
-    this.state = '';
+    this.state = STATE.FREE;
   }
 
   public getId(): number {

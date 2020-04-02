@@ -10,6 +10,7 @@ import asset from './asset';
 import entry from './entry';
 import departure from './departure';
 import service from './service';
+import workOrder from './workOrder';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = Router();
@@ -36,6 +37,8 @@ router.use('/element', element);
 router.use('/asset', asset);
 
 router.use('/service', service);
+
+router.use('/workOrder', workOrder);
 
 router.get(
   '/',
