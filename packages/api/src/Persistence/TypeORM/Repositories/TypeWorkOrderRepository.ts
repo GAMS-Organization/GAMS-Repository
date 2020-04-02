@@ -22,11 +22,11 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   }
 
   public async findByUserId(id: number): Promise<WorkOrder[]> {
-    return await this.repository(WorkOrder).find({ where: { user: id }, relations:['user'] });
+    return await this.repository(WorkOrder).find({ where: { user: id }, relations: ['user'] });
   }
 
   public async findByAssetId(id: number): Promise<WorkOrder[]> {
-    return await this.repository(WorkOrder).find({ where: { asset: id }, relations:['asset'] });
+    return await this.repository(WorkOrder).find({ where: { asset: id }, relations: ['asset'] });
   }
 
   public async persist(workOrder: WorkOrder): Promise<WorkOrder> {

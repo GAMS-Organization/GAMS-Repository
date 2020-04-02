@@ -12,15 +12,15 @@ export default class WorkOrder {
   public id: number;
   @Column()
   public orderDate: string;
-  @Column({nullable:true})
+  @Column({ nullable: true })
   public startDate: string;
-  @Column({nullable:true})
+  @Column({ nullable: true })
   public realizationDate: string;
   @Column()
   public priority: string;
   @Column()
   public state: string;
-  @Column({nullable:true})
+  @Column({ nullable: true })
   public taskDespcription: string;
   @Column()
   public comment: string;

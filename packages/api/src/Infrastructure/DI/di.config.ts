@@ -232,7 +232,6 @@ DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
 
 DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
 
-
 /**
  * Adapters
  */
@@ -281,7 +280,6 @@ DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
 
 DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
-
 
 /**
  * Handlers
@@ -374,6 +372,5 @@ DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServi
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
 DIContainer.bind<IWorkOrderRepository>(INTERFACES.IWorkOrderRepository).to(TypeWorkOrderRepository);
-
 
 export default DIContainer;
