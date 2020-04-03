@@ -121,6 +121,22 @@ class LoadMapSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.uploadMapSector}>
               <GridContainer>
+                <GridItem xs={12} sm={12} md={1}>
+                  <CustomInput
+                    labelText="ID"
+                    id="id"
+                    error={errors.name}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      required: true,
+                      defaultValue: id,
+                      name: 'id',
+                    }}
+                  />
+                </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
@@ -137,7 +153,7 @@ class LoadMapSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
                     labelText="Codigo"
                     id="code"
@@ -154,7 +170,7 @@ class LoadMapSection extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <input type="file" onChange={this.fileSelectedHandler} />
+                  <input type="file" id="map" onChange={this.fileSelectedHandler} />
                   {/*<Button type="" color="gamsBlue">
                     Cargar archivo
                   </Button>*/}
