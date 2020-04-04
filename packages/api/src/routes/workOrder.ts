@@ -2,7 +2,7 @@ import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreWorkOrderAction from '../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
-// import IndexWorkOrderAction from '../API/Http/Actions/WorkOrder/IndexWorkOrderAction';
+import IndexWorkOrdersAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
 // import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
 // import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 // import DestroyWorkOrderAction from '../API/Http/Actions/WorkOrder/DestroyWorkOrderAction';
@@ -12,16 +12,16 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = express.Router();
 
-// router.get(
-//   '/',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const indexWorkOrderAction: IndexWorkOrderAction = DIContainer.resolve<IndexWorkOrderAction>(IndexWorkOrderAction);
-//     await indexWorkOrderAction.execute(request, response);
-//   }),
-// );
+router.get(
+  '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexWorkOrdersAction: IndexWorkOrdersAction = DIContainer.resolve<IndexWorkOrdersAction>(IndexWorkOrdersAction);
+    await indexWorkOrdersAction.execute(request, response);
+  }),
+);
 
 router.post(
   '/',

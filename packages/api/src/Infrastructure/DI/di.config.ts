@@ -172,6 +172,8 @@ import StoreWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/StoreWorkOr
 import StoreWorkOrderAction from '../../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
 import IWorkOrderRepository from '../../Domain/Interfaces/IWorkOrderRepository';
 import TypeWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeWorkOrderRepository';
+import WorkOrderService from '../../Domain/Services/WorkOrderService';
+import IndexWorkOrdersAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
 
 const DIContainer = new Container();
 
@@ -231,6 +233,8 @@ DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
 DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
 
 DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
+DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
+
 
 /**
  * Adapters
@@ -349,6 +353,7 @@ DIContainer.bind<SectorService>(SectorService).toSelf();
 DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
+DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 
 /**

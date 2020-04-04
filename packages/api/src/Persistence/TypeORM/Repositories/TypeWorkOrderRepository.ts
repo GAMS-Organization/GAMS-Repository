@@ -10,7 +10,7 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<WorkOrder[]> {
-    return await this.repository(WorkOrder).find({ skip: initialIndex, take: limit });
+    return await this.repository(WorkOrder).find({ skip: initialIndex, take: limit, relations: ['user', 'asset'] });
   }
 
   public async count(): Promise<number> {
