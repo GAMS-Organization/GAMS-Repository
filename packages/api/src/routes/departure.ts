@@ -13,7 +13,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexDepartureAction: IndexDepartureAction = DIContainer.resolve<IndexDepartureAction>(IndexDepartureAction);
@@ -24,7 +24,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeDepartureAction: StoreDepartureAction = DIContainer.resolve<StoreDepartureAction>(StoreDepartureAction);
@@ -35,7 +35,7 @@ router.post(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showDepartureAction: ShowDepartureAction = DIContainer.resolve<ShowDepartureAction>(ShowDepartureAction);
@@ -46,7 +46,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyDepartureAction: DestroyDepartureAction = DIContainer.resolve<DestroyDepartureAction>(

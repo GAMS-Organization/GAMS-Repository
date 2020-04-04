@@ -16,6 +16,8 @@ export default class Sector {
   public areas: Area[];
   @OneToMany(_type => Asset, asset => asset.sector)
   public assets: Asset[];
+  @Column({ nullable: true })
+  public map: string;
 
   public constructor(name: string, code: string) {
     this.name = name;
@@ -34,11 +36,19 @@ export default class Sector {
     return this.code;
   }
 
+  public getMap(): string {
+    return this.map;
+  }
+
   public setName(name: string): void {
     this.name = name;
   }
 
   public setCode(code: string): void {
     this.code = code;
+  }
+
+  public setMap(map: string): void {
+    this.map = map;
   }
 }

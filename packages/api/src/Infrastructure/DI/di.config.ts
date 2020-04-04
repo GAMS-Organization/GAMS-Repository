@@ -164,6 +164,9 @@ import TypeStockDepartureRepository from '../../Persistence/TypeORM/Repositories
 import ConsumptionService from '../../Domain/Services/ConsumptionService';
 import DepartureService from '../../Domain/Services/DepartureService';
 import StockDepartureService from '../../Domain/Services/StockDepartureService';
+import UpdateSectorAction from '../../API/Http/Actions/Sector/UpdateSectorAction';
+import UpdateSectorAdapter from '../../API/Http/Adapters/Sector/UpdateSectorAdapter';
+import UpdateSectorHandler from '../../Application/Handlers/Sector/UpdateSectorHandler';
 
 const DIContainer = new Container();
 
@@ -201,6 +204,7 @@ DIContainer.bind<IndexStockAction>(IndexStockAction).toSelf();
 
 DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
 DIContainer.bind<IndexSectorsAction>(IndexSectorsAction).toSelf();
+DIContainer.bind<UpdateSectorAction>(UpdateSectorAction).toSelf();
 DIContainer.bind<DestroySectorAction>(DestroySectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
@@ -251,6 +255,7 @@ DIContainer.bind<ShowDepartureAdapter>(ShowDepartureAdapter).toSelf();
 DIContainer.bind<StoreDepartureAdapter>(StoreDepartureAdapter).toSelf();
 
 DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
+DIContainer.bind<UpdateSectorAdapter>(UpdateSectorAdapter).toSelf();
 DIContainer.bind<DestroySectorAdapter>(DestroySectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
@@ -297,6 +302,7 @@ DIContainer.bind<StoreStockHandler>(StoreStockHandler).toSelf();
 DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
 
 DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
+DIContainer.bind<UpdateSectorHandler>(UpdateSectorHandler).toSelf();
 DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();

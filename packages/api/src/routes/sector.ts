@@ -6,16 +6,16 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import IndexSectorsAction from '../API/Http/Actions/Sector/IndexSectorsAction';
 import DestroySectorAction from '../API/Http/Actions/Sector/DestroySectorAction';
 import StoreSectorAction from '../API/Http/Actions/Sector/StoreSectorAction';
-// import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
-// import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
-// import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
+// import ShowSectorAction from '../API/Http/Actions/Sector/ShowSectorAction';
+// import ShowSectorByNameAction from '../API/Http/Actions/Sector/ShowSectorByNameAction';
+import UpdateSectorAction from '../API/Http/Actions/Sector/UpdateSectorAction';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
 
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
@@ -27,7 +27,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeSectorAction: StoreSectorAction = DIContainer.resolve<StoreSectorAction>(StoreSectorAction);
@@ -41,10 +41,11 @@ router.get(
     authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
-    await showProductAction.execute(request, response);
+    const showSectorAction: ShowSectorAction = DIContainer.resolve<ShowSectorAction>(ShowSectorAction);
+    await showSectorAction.execute(request, response);
   }),
 );
+*/
 
 router.put(
   '/:id([0-9]+)',
@@ -54,28 +55,28 @@ router.put(
   },
 
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
-    await updateProductAction.execute(request, response);
+    const updateSectorAction: UpdateSectorAction = DIContainer.resolve<UpdateSectorAction>(UpdateSectorAction);
+    await updateSectorAction.execute(request, response);
   }),
 );
-
+/*
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {
     authMiddleware(req, res, next);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
-      ShowProductByNameAction,
+    const showSectorByNameAction: ShowSectorByNameAction = DIContainer.resolve<ShowSectorByNameAction>(
+      ShowSectorByNameAction,
     );
-    await showProductByNameAction.execute(request, response);
+    await showSectorByNameAction.execute(request, response);
   }),
 );
 */
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroySectorAction: DestroySectorAction = DIContainer.resolve<DestroySectorAction>(DestroySectorAction);
