@@ -10,7 +10,11 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<WorkOrder[]> {
-    return await this.repository(WorkOrder).find({ skip: initialIndex, take: limit, relations: ['user', 'asset'] });
+    return await this.repository(WorkOrder).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['user', 'asset', 'userWorkOrders', 'userWorkOrders.user'],
+    });
   }
 
   public async count(): Promise<number> {
@@ -18,7 +22,10 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   }
 
   public async findOneById(id: number): Promise<WorkOrder> {
-    return await this.repository(WorkOrder).findOne(id);
+    return await this.repository(WorkOrder).findOne({
+      where: { id: id },
+      relations: ['user', 'asset', 'userWorkOrders', 'userWorkOrders.user'],
+    });
   }
 
   public async findByUserId(id: number): Promise<WorkOrder[]> {

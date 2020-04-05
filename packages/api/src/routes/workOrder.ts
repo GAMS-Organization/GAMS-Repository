@@ -3,7 +3,7 @@ import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreWorkOrderAction from '../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
 import IndexWorkOrdersAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
-// import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
+import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
 // import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 // import DestroyWorkOrderAction from '../API/Http/Actions/WorkOrder/DestroyWorkOrderAction';
 // import ShowWorkOrderByNameAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderByNameAction';
@@ -18,7 +18,9 @@ router.get(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexWorkOrdersAction: IndexWorkOrdersAction = DIContainer.resolve<IndexWorkOrdersAction>(IndexWorkOrdersAction);
+    const indexWorkOrdersAction: IndexWorkOrdersAction = DIContainer.resolve<IndexWorkOrdersAction>(
+      IndexWorkOrdersAction,
+    );
     await indexWorkOrdersAction.execute(request, response);
   }),
 );
@@ -33,6 +35,20 @@ router.post(
     await storeWorkOrderAction.execute(request, response);
   }),
 );
+
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateWorkOrderAction: UpdateWorkOrderAction = DIContainer.resolve<UpdateWorkOrderAction>(
+      UpdateWorkOrderAction,
+    );
+    await updateWorkOrderAction.execute(request, response);
+  }),
+);
+
 /*
 router.get(
   '/:id([0-9]+)',
@@ -42,17 +58,6 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showWorkOrderAction: ShowWorkOrderAction = DIContainer.resolve<ShowWorkOrderAction>(ShowWorkOrderAction);
     await showWorkOrderAction.execute(request, response);
-  }),
-);
-
-router.put(
-  '/:id([0-9]+)',
-  (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
-  },
-  asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateWorkOrderAction: UpdateWorkOrderAction = DIContainer.resolve<UpdateWorkOrderAction>(UpdateWorkOrderAction);
-    await updateWorkOrderAction.execute(request, response);
   }),
 );
 

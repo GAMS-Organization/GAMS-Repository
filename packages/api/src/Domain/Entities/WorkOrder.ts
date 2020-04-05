@@ -48,7 +48,7 @@ export default class WorkOrder {
     return this.orderDate;
   }
 
-  public getTaskDespcription(): string {
+  public getTaskDescription(): string {
     return this.taskDespcription;
   }
 
@@ -84,11 +84,21 @@ export default class WorkOrder {
     return this.userWorkOrders;
   }
 
+  public getWorkersIdByUserWorkOrders(): number[] {
+    const workersId = [];
+    if (this.userWorkOrders) {
+      for (const userWorkOrder of this.userWorkOrders) {
+        workersId.push(userWorkOrder.getUser().getId());
+      }
+    }
+    return workersId;
+  }
+
   public setOrderDate(orderDate: string): void {
     this.orderDate = orderDate;
   }
 
-  public setTaskDespcription(taskDespcription: string): void {
+  public setTaskDescription(taskDespcription: string): void {
     this.taskDespcription = taskDespcription;
   }
 

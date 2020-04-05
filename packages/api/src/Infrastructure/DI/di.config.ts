@@ -174,6 +174,11 @@ import IWorkOrderRepository from '../../Domain/Interfaces/IWorkOrderRepository';
 import TypeWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeWorkOrderRepository';
 import WorkOrderService from '../../Domain/Services/WorkOrderService';
 import IndexWorkOrdersAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
+import UpdateWorkOrderAction from '../../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
+import UpdateWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/UpdateWorkOrderAdapter';
+import UpdateWorkOrderHandler from '../../Application/Handlers/WorkOrder/UpdateWorkOrderHandler';
+import IUserWorkOrderRepository from '../../Domain/Interfaces/IUserWorkOrderRepository';
+import TypeUserWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeUserWorkOrderRepository';
 
 const DIContainer = new Container();
 
@@ -234,7 +239,7 @@ DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
 
 DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
 DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
-
+DIContainer.bind<UpdateWorkOrderAction>(UpdateWorkOrderAction).toSelf();
 
 /**
  * Adapters
@@ -284,6 +289,7 @@ DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
 
 DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
+DIContainer.bind<UpdateWorkOrderAdapter>(UpdateWorkOrderAdapter).toSelf();
 
 /**
  * Handlers
@@ -333,6 +339,7 @@ DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
 
 DIContainer.bind<StoreWorkOrderHandler>(StoreWorkOrderHandler).toSelf();
+DIContainer.bind<UpdateWorkOrderHandler>(UpdateWorkOrderHandler).toSelf();
 
 /*
  * Services
@@ -377,5 +384,6 @@ DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServi
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
 DIContainer.bind<IWorkOrderRepository>(INTERFACES.IWorkOrderRepository).to(TypeWorkOrderRepository);
+DIContainer.bind<IUserWorkOrderRepository>(INTERFACES.IUserWorkOrderRepository).to(TypeUserWorkOrderRepository);
 
 export default DIContainer;

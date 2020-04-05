@@ -15,7 +15,10 @@ export default class IndexWorkOrdersAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const workOrdersData = await this.workOrderService.returnAllPaginated(request.query.page, request.query.items_per_page);
+    const workOrdersData = await this.workOrderService.returnAllPaginated(
+      request.query.page,
+      request.query.items_per_page,
+    );
 
     const getAllPresenter = new GetAllWorkOrdersPresenter(workOrdersData.data);
 
