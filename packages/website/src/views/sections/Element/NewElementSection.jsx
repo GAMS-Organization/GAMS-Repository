@@ -138,7 +138,7 @@ class NewElementSection extends React.Component {
                     <GridItem xs={12} sm={12} md={10}>
                       <FormControl fullWidth className={classes.selectFormControl}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
-                          Service
+                          Servicio
                         </InputLabel>
                         <Select
                           MenuProps={{

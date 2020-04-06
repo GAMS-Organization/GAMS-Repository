@@ -15,6 +15,7 @@ import DepartureConsumption from '../../components/Stock/DepartureConsumption';
 
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import serviceCurrentStock from '../../../services/api/currentStock';
+import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
 
 const styles = {
   cardCategoryWhite: {
@@ -60,10 +61,10 @@ class TableStockSection extends React.Component {
   async componentWillMount() {
     const responseEntry = await serviceEntryPurchaseStock.list();
     const responseCurrentStock = await serviceCurrentStock.list();
-    /*const responseExit = await serviceExitStock.list();*/
+    const responseDeparture = await serviceDepartureConsumptionStock.list();
     let entries = [];
     let stocks = [];
-    let exits = [];
+    let departures = [];
     for (const entry of responseEntry.data.items) {
       let dataEntry = [entry.id.toString(), entry.date.slice(0, 10), entry.observations];
       entries.push(dataEntry);
@@ -74,7 +75,12 @@ class TableStockSection extends React.Component {
       stocks.push(dataStock);
     }
 
-    this.setState({ entry: entries, stock: stocks });
+    for (const departure of responseDeparture.data.items) {
+      let dataDeparture = [departure.id.toString(), departure.date.slice(0, 10), departure.observations];
+      departures.push(dataDeparture);
+    }
+
+    this.setState({ entry: entries, stock: stocks, departure: departures });
   }
 
   render() {
@@ -114,7 +120,7 @@ class TableStockSection extends React.Component {
                 tabContent: (
                   <DepartureConsumption
                     tableHeaderColor="gamsBlue"
-                    tableHead={['ID', 'Fecha', 'Producto', 'Cantidad', 'Observacion']}
+                    tableHead={['ID', 'Fecha', 'Observacion']}
                     tableData={this.state.departure}
                   />
                 ),

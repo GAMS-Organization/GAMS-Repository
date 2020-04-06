@@ -64,9 +64,7 @@ class PurchaseTable extends React.Component {
   };
 
   async componentWillMount() {
-    const page = 1;
-    const itemsPerPage = 30;
-    const response = await serviceProduct.list(page, itemsPerPage);
+    const response = await serviceProduct.list(1, 500);
     let dataProduct = {};
     for (const product of response.data.items) {
       dataProduct[product.id] = product.name;
@@ -83,7 +81,7 @@ class PurchaseTable extends React.Component {
 
   render() {
     return (
-      <GridContainer>
+      <GridItem xs={12} sm={12} md={7}>
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -97,108 +95,106 @@ class PurchaseTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <GridItem xs={12} sm={12} md={8}>
-          <MaterialTable
-            title="Nueva entrada"
-            columns={this.state.columns}
-            data={this.state.data}
-            options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
-            localization={{
-              header: { actions: 'Acciones' },
-              body: {
-                addTooltip: 'Nuevo',
-                deleteTooltip: 'Eliminar',
-                editTooltip: 'Editar',
-                emptyDataSourceMessage: 'Ningun producto añadido',
-                editRow: {
-                  saveTooltip: 'Guardar',
-                  cancelTooltip: 'Cancelar',
-                  deleteText: '¿Estás seguro de querer eliminar este registro?',
-                },
+        <MaterialTable
+          title="Nueva entrada"
+          columns={this.state.columns}
+          data={this.state.data}
+          options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
+          localization={{
+            header: { actions: 'Acciones' },
+            body: {
+              addTooltip: 'Nuevo',
+              deleteTooltip: 'Eliminar',
+              editTooltip: 'Editar',
+              emptyDataSourceMessage: 'Ningun producto añadido',
+              editRow: {
+                saveTooltip: 'Guardar',
+                cancelTooltip: 'Cancelar',
+                deleteText: '¿Estás seguro de querer eliminar este registro?',
               },
-            }}
-            editable={{
-              onRowAdd: newData =>
-                new Promise(resolve => {
-                  setTimeout(() => {
-                    resolve();
+            },
+          }}
+          editable={{
+            onRowAdd: newData =>
+              new Promise(resolve => {
+                setTimeout(() => {
+                  resolve();
+                  this.setState(prevState => {
+                    const data = [...prevState.data];
+                    data.push(newData);
+                    return { ...prevState, data };
+                  });
+                }, 600);
+              }),
+            onRowUpdate: (newData, oldData) =>
+              new Promise(resolve => {
+                setTimeout(() => {
+                  resolve();
+                  if (oldData) {
                     this.setState(prevState => {
                       const data = [...prevState.data];
-                      data.push(newData);
+                      data[data.indexOf(oldData)] = newData;
                       return { ...prevState, data };
                     });
-                  }, 600);
-                }),
-              onRowUpdate: (newData, oldData) =>
-                new Promise(resolve => {
-                  setTimeout(() => {
-                    resolve();
-                    if (oldData) {
-                      this.setState(prevState => {
-                        const data = [...prevState.data];
-                        data[data.indexOf(oldData)] = newData;
-                        return { ...prevState, data };
-                      });
-                    }
-                  }, 600);
-                }),
-              onRowDelete: oldData =>
-                new Promise(resolve => {
-                  setTimeout(() => {
-                    resolve();
-                    this.setState(prevState => {
-                      const data = [...prevState.data];
-                      data.splice(data.indexOf(oldData), 1);
-                      return { ...prevState, data };
-                    });
-                  }, 600);
-                }),
-            }}
-          />
-          <Card>
-            <CardBody>
-              <form onSubmit={this.handleConfirmPurchaseClick}>
-                <GridContainer alignItems={'center'}>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText=""
-                      id="date"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        type: 'date',
-                        required: true,
-                        defaultValue: '',
-                        name: 'date',
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Observaciones"
-                      id="observations"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        required: true,
-                        defaultValue: '',
-                        name: 'observations',
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Button type="submit" color="gamsRed">
-                      Confirmar compra
-                    </Button>
-                  </GridItem>
-                </GridContainer>
-              </form>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+                  }
+                }, 600);
+              }),
+            onRowDelete: oldData =>
+              new Promise(resolve => {
+                setTimeout(() => {
+                  resolve();
+                  this.setState(prevState => {
+                    const data = [...prevState.data];
+                    data.splice(data.indexOf(oldData), 1);
+                    return { ...prevState, data };
+                  });
+                }, 600);
+              }),
+          }}
+        />
+        <Card>
+          <CardBody>
+            <form onSubmit={this.handleConfirmPurchaseClick}>
+              <GridContainer alignItems={'center'}>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText=""
+                    id="date"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      type: 'date',
+                      required: true,
+                      defaultValue: '',
+                      name: 'date',
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Observaciones"
+                    id="observations"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: '',
+                      name: 'observations',
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <Button type="submit" color="gamsRed">
+                    Comprar
+                  </Button>
+                </GridItem>
+              </GridContainer>
+            </form>
+          </CardBody>
+        </Card>
+      </GridItem>
     );
   }
 }

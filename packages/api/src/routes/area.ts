@@ -15,7 +15,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexAreasAction: IndexAreasAction = DIContainer.resolve<IndexAreasAction>(IndexAreasAction);
@@ -26,7 +26,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeAreaAction: StoreAreaAction = DIContainer.resolve<StoreAreaAction>(StoreAreaAction);
@@ -59,7 +59,7 @@ router.put(
 router.get(
   '/sector/:name([a-z0-9-]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showAreaBySectorAction: ShowAreaBySectorAction = DIContainer.resolve<ShowAreaBySectorAction>(
@@ -72,7 +72,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next);
+    authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyAreaAction: DestroyAreaAction = DIContainer.resolve<DestroyAreaAction>(DestroyAreaAction);
