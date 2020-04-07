@@ -53,13 +53,13 @@ class SectorTable extends React.Component {
 
   //se crea la ventana emergente en donde se editaran los sectores
   handleClickUpdate = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
     this.child.showModal();
   };
 
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
     this.child.showModal();
   };
 
@@ -129,7 +129,12 @@ class SectorTable extends React.Component {
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip id="tooltip-top" title="Ver mapa" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top-map"
+                      title="Ver mapa"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
                       <IconButton
                         aria-label="Maps"
                         className={classes.tableActionButton}

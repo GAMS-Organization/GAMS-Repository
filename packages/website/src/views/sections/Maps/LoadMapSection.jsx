@@ -57,11 +57,10 @@ class LoadMapSection extends React.Component {
     });
   };
 
-  //fileUploadHandler = () => {};
-
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
+    console.log(response.error);
 
     const fields = ['id', 'name', 'code', 'map'];
     const formElements = e.target.elements;
@@ -73,11 +72,12 @@ class LoadMapSection extends React.Component {
 
     formValues.roles = [formValues.roles];
 
-    const response = await serviceSector.upload(formValues);
+    const response = await serviceSector.uploadMap(formValues);
     console.log(response);
-
+    console.log(response.error);
     if (response.type === 'UPDLOAD_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -86,7 +86,7 @@ class LoadMapSection extends React.Component {
   render() {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
-    const { id, name, code } = sector;
+    const { id, name, code, map } = sector;
     return (
       <div>
         <Snackbar
@@ -170,8 +170,23 @@ class LoadMapSection extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
-                  <input type="file" id="map" onChange={this.fileSelectedHandler} />
-                  {/*<Button type="" color="gamsBlue">
+                  <input
+                    labelText="Mapa"
+                    id="map"
+                    type="file"
+                    error={errors.map}
+                    onChange={this.fileSelectedHandler}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: map,
+                      name: 'map',
+                    }}
+                  />
+                  {/*<input type="file" error={errors.map} id="map" onChange={this.fileSelectedHandler} />
+                  <Button type="" color="gamsBlue">
                     Cargar archivo
                   </Button>*/}
                 </GridItem>

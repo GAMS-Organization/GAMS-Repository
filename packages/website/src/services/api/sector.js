@@ -48,7 +48,7 @@ class sector {
     return sectorAdapter.delete(deleteResponse);
   }
 
-  async upload(dataSector) {
+  async uploadMap(dataSector) {
     const body = dataSector;
 
     let uploadResponse;
@@ -57,7 +57,7 @@ class sector {
     } catch (err) {
       uploadResponse = err;
     }
-    return sectorAdapter.upload(uploadResponse);
+    return sectorAdapter.uploadMap(uploadResponse);
   }
 }
 
