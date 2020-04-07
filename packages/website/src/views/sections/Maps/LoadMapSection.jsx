@@ -60,7 +60,8 @@ class LoadMapSection extends React.Component {
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
-    console.log(response.error);
+
+    console.log(this.state.errors);
 
     const fields = ['id', 'name', 'code', 'map'];
     const formElements = e.target.elements;
@@ -73,8 +74,9 @@ class LoadMapSection extends React.Component {
     formValues.roles = [formValues.roles];
 
     const response = await serviceSector.uploadMap(formValues);
+    console.log(this.state.errors);
     console.log(response);
-    console.log(response.error);
+
     if (response.type === 'UPDLOAD_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
       window.location.reload();
@@ -185,10 +187,6 @@ class LoadMapSection extends React.Component {
                       name: 'map',
                     }}
                   />
-                  {/*<input type="file" error={errors.map} id="map" onChange={this.fileSelectedHandler} />
-                  <Button type="" color="gamsBlue">
-                    Cargar archivo
-                  </Button>*/}
                 </GridItem>
               </GridContainer>
               <Button type="submit" color="gamsRed">
