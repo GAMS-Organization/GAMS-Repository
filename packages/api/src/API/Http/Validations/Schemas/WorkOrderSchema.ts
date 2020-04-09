@@ -101,3 +101,48 @@ export const updateWorkOrderSchema = {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const assignWorkOrderSchema = {
+  startDate: Joi.string()
+    .required()
+    .allow(null)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  state: Joi.string()
+    .min(3)
+    .max(12)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  workersId: Joi.array()
+    .items(Joi.number())
+    .required()
+    .allow(null)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};
+
+export const takeWorkOrderSchema = {
+  startDate: Joi.string()
+    .required()
+    .allow(null)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  state: Joi.string()
+    .min(3)
+    .max(12)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  authorId: Joi.number()
+    .required()
+    .positive()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};

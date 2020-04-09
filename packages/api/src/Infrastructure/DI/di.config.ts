@@ -179,6 +179,12 @@ import UpdateWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/UpdateWork
 import UpdateWorkOrderHandler from '../../Application/Handlers/WorkOrder/UpdateWorkOrderHandler';
 import IUserWorkOrderRepository from '../../Domain/Interfaces/IUserWorkOrderRepository';
 import TypeUserWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeUserWorkOrderRepository';
+import AssignWorkOrderHandler from '../../Application/Handlers/WorkOrder/AssignWorkOrderHandler';
+import AssignWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/AssignWorkOrderAdapter';
+import AssignWorkOrderAction from '../../API/Http/Actions/WorkOrder/AssignWorkOrderAction';
+import TakeWorkOrderAction from '../../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
+import TakeWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/TakeWorkOrderAdapter';
+import TakeWorkOrderHandler from '../../Application/Handlers/WorkOrder/TakeWorkOrderHandler';
 
 const DIContainer = new Container();
 
@@ -240,6 +246,8 @@ DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
 DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
 DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
 DIContainer.bind<UpdateWorkOrderAction>(UpdateWorkOrderAction).toSelf();
+DIContainer.bind<AssignWorkOrderAction>(AssignWorkOrderAction).toSelf();
+DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
 
 /**
  * Adapters
@@ -290,6 +298,8 @@ DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
 
 DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
 DIContainer.bind<UpdateWorkOrderAdapter>(UpdateWorkOrderAdapter).toSelf();
+DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
+DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
 
 /**
  * Handlers
@@ -340,6 +350,8 @@ DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
 
 DIContainer.bind<StoreWorkOrderHandler>(StoreWorkOrderHandler).toSelf();
 DIContainer.bind<UpdateWorkOrderHandler>(UpdateWorkOrderHandler).toSelf();
+DIContainer.bind<AssignWorkOrderHandler>(AssignWorkOrderHandler).toSelf();
+DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
 
 /*
  * Services

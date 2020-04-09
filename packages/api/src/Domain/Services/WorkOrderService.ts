@@ -40,6 +40,7 @@ export default class WorkOrderService {
   public async updateWorkers(workOrder: WorkOrder, workers: User[]): Promise<WorkOrder> {
     let error = false;
     for (const worker of workers) {
+      console.log("-------------------------------------------------", worker,"--------------------------------------------------- ")
       if (worker.getRolesFromUserRole()[0] === 'user') {
         error = true;
       }

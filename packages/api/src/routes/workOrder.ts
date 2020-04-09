@@ -4,6 +4,8 @@ import DIContainer from '../Infrastructure/DI/di.config';
 import StoreWorkOrderAction from '../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
 import IndexWorkOrdersAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
 import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
+import AssignWorkOrderAction from '../API/Http/Actions/WorkOrder/AssignWorkOrderAction';
+import TakeWorkOrderAction from '../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
 // import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 // import DestroyWorkOrderAction from '../API/Http/Actions/WorkOrder/DestroyWorkOrderAction';
 // import ShowWorkOrderByNameAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderByNameAction';
@@ -46,6 +48,32 @@ router.put(
       UpdateWorkOrderAction,
     );
     await updateWorkOrderAction.execute(request, response);
+  }),
+);
+
+router.put(
+  '/assign/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const assignWorkOrderAction: AssignWorkOrderAction = DIContainer.resolve<AssignWorkOrderAction>(
+      AssignWorkOrderAction,
+    );
+    await assignWorkOrderAction.execute(request, response);
+  }),
+);
+
+router.put(
+  '/take/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const takeWorkOrderAction: TakeWorkOrderAction = DIContainer.resolve<TakeWorkOrderAction>(
+      TakeWorkOrderAction,
+    );
+    await takeWorkOrderAction.execute(request, response);
   }),
 );
 
