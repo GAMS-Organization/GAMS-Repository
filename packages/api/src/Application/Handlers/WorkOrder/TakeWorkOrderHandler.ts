@@ -6,6 +6,7 @@ import WorkOrder from '../../../Domain/Entities/WorkOrder';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IUserRepository from '../../../Domain/Interfaces/IUserRepository';
 import WorkOrderService from '../../../Domain/Services/WorkOrderService';
+import { STATE } from '../../../API/Http/Enums/WorkOrder';
 
 @injectable()
 export default class TakeWorkOrderHandler {
@@ -28,13 +29,13 @@ export default class TakeWorkOrderHandler {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
     }
     workOrder.setStartDate(command.getStartDate());
-    workOrder.setState(command.getState());
+    workOrder.setState(STATE.TAKEN);
 
     const workers = [];
-    const workersId= await workOrder.getWorkersIdByUserWorkOrders();
-    for(const workerId of workersId){
+    const workersId = await workOrder.getWorkersIdByUserWorkOrders();
+    for (const workerId of workersId) {
       const worker = await this.userRepository.findOneById(workerId);
-      if(worker.getId() !== command.getWorkerId()){
+      if (worker.getId() !== command.getWorkerId()) {
         workers.push(worker);
       }
     }

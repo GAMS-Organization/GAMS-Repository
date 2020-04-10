@@ -4,8 +4,8 @@ import IWorkOrderRepository from '../Interfaces/IWorkOrderRepository';
 import WorkOrder from '../Entities/WorkOrder';
 import User from '../Entities/User';
 import IUserWorkOrderRepository from '../Interfaces/IUserWorkOrderRepository';
-import ValidationException from '../../Application/Exceptions/ValidationException';
 import UserWorkOrder from '../Entities/UserWorkOrder';
+import EntityNotFoundException from '../../Application/Exceptions/EntityNotFoundException';
 
 @injectable()
 export default class WorkOrderService {
@@ -40,13 +40,12 @@ export default class WorkOrderService {
   public async updateWorkers(workOrder: WorkOrder, workers: User[]): Promise<WorkOrder> {
     let error = false;
     for (const worker of workers) {
-      console.log("-------------------------------------------------", worker,"--------------------------------------------------- ")
       if (worker.getRolesFromUserRole()[0] === 'user') {
         error = true;
       }
     }
     if (error) {
-      throw new ValidationException(`One WorkerUser at least has a invalid rol account`);
+      throw new EntityNotFoundException(`One WorkerUser at least has a invalid rol account`);
     }
 
     const workOrders = workOrder.getUserWorkOrders();

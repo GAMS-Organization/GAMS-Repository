@@ -1,45 +1,46 @@
 import IWorkOrderRepository from '../../../Domain/Interfaces/IWorkOrderRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import AssignWorkOrderCommand from '../../Commands/WorkOrder/AssignWorkOrderCommand';
+import CancelWorkOrderCommand from '../../Commands/WorkOrder/CancelWorkOrderCommand';
 import WorkOrder from '../../../Domain/Entities/WorkOrder';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IUserRepository from '../../../Domain/Interfaces/IUserRepository';
-import WorkOrderService from '../../../Domain/Services/WorkOrderService';
 import { STATE } from '../../../API/Http/Enums/WorkOrder';
 
 @injectable()
-export default class AssignWorkOrderHandler {
+export default class CancelWorkOrderHandler {
   private workOrderRepository: IWorkOrderRepository;
   private userRepository: IUserRepository;
-  private workOrderService: WorkOrderService;
   public constructor(
     @inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IWorkOrderRepository,
     @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,
-    @inject(WorkOrderService) workOrderService: WorkOrderService,
   ) {
     this.workOrderRepository = workOrderRepository;
     this.userRepository = userRepository;
-    this.workOrderService = workOrderService;
   }
 
-  public async execute(command: AssignWorkOrderCommand): Promise<WorkOrder> {
+  public async execute(command: CancelWorkOrderCommand): Promise<WorkOrder> {
+    const user = await this.userRepository.findOneById(command.getUserId());
+
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
     }
-    workOrder.setStartDate(command.getStartDate());
-    workOrder.setState(STATE.ASSIGNED);
 
-    const workers = [];
-    for (const workerId of command.getWorkersId()) {
-      const worker = await this.userRepository.findOneById(workerId);
-      if (!worker) {
-        throw new EntityNotFoundException(`WorkerUser with id: ${workerId} not found`);
+    if (user.getRolesFromUserRole()[0] === 'user') {
+      if (user !== workOrder.getUser()) {
+        throw new EntityNotFoundException(`Can not cancel the work order, you are not the author`);
       }
-      workers.push(worker);
+      if (workOrder.getState() !== STATE.FREE) {
+        throw new EntityNotFoundException(
+          `Can not cancel the work order, it is already on state: ${workOrder.getState()}`,
+        );
+      }
     }
 
-    return await this.workOrderService.updateWorkers(await this.workOrderRepository.persist(workOrder), workers);
+    workOrder.setState(STATE.CANCELED);
+    workOrder.setTaskDescription(command.getTaskDescription());
+
+    return await this.workOrderRepository.persist(workOrder);
   }
 }

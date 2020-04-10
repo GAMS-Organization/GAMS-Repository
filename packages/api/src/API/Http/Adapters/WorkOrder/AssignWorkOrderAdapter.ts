@@ -20,11 +20,6 @@ export default class AssignWorkOrderAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new AssignWorkOrderCommand(
-      parseInt(request.params.id),
-      request.body.startDate,
-      request.body.state,
-      request.body.workersId,
-    );
+    return new AssignWorkOrderCommand(parseInt(request.params.id), request.body.startDate, request.body.workersId);
   }
 }

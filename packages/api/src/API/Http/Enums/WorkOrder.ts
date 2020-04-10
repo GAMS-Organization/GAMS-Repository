@@ -3,6 +3,7 @@ export const STATE = {
   PAUSED: 'pausada',
   FINISHED: 'finalizada',
   ASSIGNED: 'asignada',
+  TAKEN: 'tomada',
   CANCELED: 'cancelada',
 };
 

@@ -185,6 +185,9 @@ import AssignWorkOrderAction from '../../API/Http/Actions/WorkOrder/AssignWorkOr
 import TakeWorkOrderAction from '../../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
 import TakeWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/TakeWorkOrderAdapter';
 import TakeWorkOrderHandler from '../../Application/Handlers/WorkOrder/TakeWorkOrderHandler';
+import CancelWorkOrderHandler from '../../Application/Handlers/WorkOrder/CancelWorkOrderHandler';
+import CancelWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/CancelWorkOrderAdapter';
+import CancelWorkOrderAction from '../../API/Http/Actions/WorkOrder/CancelWorkOrderAction';
 
 const DIContainer = new Container();
 
@@ -248,6 +251,7 @@ DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
 DIContainer.bind<UpdateWorkOrderAction>(UpdateWorkOrderAction).toSelf();
 DIContainer.bind<AssignWorkOrderAction>(AssignWorkOrderAction).toSelf();
 DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
+DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 
 /**
  * Adapters
@@ -300,6 +304,7 @@ DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
 DIContainer.bind<UpdateWorkOrderAdapter>(UpdateWorkOrderAdapter).toSelf();
 DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
 DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
+DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
 
 /**
  * Handlers
@@ -352,6 +357,7 @@ DIContainer.bind<StoreWorkOrderHandler>(StoreWorkOrderHandler).toSelf();
 DIContainer.bind<UpdateWorkOrderHandler>(UpdateWorkOrderHandler).toSelf();
 DIContainer.bind<AssignWorkOrderHandler>(AssignWorkOrderHandler).toSelf();
 DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
+DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
 
 /*
  * Services

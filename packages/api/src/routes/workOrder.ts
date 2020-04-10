@@ -6,6 +6,7 @@ import IndexWorkOrdersAction from '../API/Http/Actions/WorkOrder/IndexWorkOrders
 import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
 import AssignWorkOrderAction from '../API/Http/Actions/WorkOrder/AssignWorkOrderAction';
 import TakeWorkOrderAction from '../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
+import CancelWorkOrderAction from '../API/Http/Actions/WorkOrder/CancelWorkOrderAction';
 // import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 // import DestroyWorkOrderAction from '../API/Http/Actions/WorkOrder/DestroyWorkOrderAction';
 // import ShowWorkOrderByNameAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderByNameAction';
@@ -70,13 +71,23 @@ router.put(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const takeWorkOrderAction: TakeWorkOrderAction = DIContainer.resolve<TakeWorkOrderAction>(
-      TakeWorkOrderAction,
-    );
+    const takeWorkOrderAction: TakeWorkOrderAction = DIContainer.resolve<TakeWorkOrderAction>(TakeWorkOrderAction);
     await takeWorkOrderAction.execute(request, response);
   }),
 );
 
+router.put(
+  '/cancel/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const cancelWorkOrderAction: CancelWorkOrderAction = DIContainer.resolve<CancelWorkOrderAction>(
+      CancelWorkOrderAction,
+    );
+    await cancelWorkOrderAction.execute(request, response);
+  }),
+);
 /*
 router.get(
   '/:id([0-9]+)',

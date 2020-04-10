@@ -20,11 +20,6 @@ export default class TakeWorkOrderAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new TakeWorkOrderCommand(
-      parseInt(request.params.id),
-      request.body.startDate,
-      request.body.state,
-      request.body.authorId,
-    );
+    return new TakeWorkOrderCommand(parseInt(request.params.id), request.body.startDate, request.body.authorId);
   }
 }
