@@ -18,6 +18,8 @@ import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
 
+import imgPlano from '../../../styles/img/plano3.jpg';
+
 class LoadMapSection extends React.Component {
   constructor(props) {
     super(props);
@@ -52,6 +54,7 @@ class LoadMapSection extends React.Component {
   };
 
   fileSelectedHandler = event => {
+    console.log(event.target.files[0]);
     this.setState({
       selectedFile: event.target.files[0],
     });
@@ -61,9 +64,7 @@ class LoadMapSection extends React.Component {
   uploadMapSector = async e => {
     e.preventDefault();
 
-    console.log(this.state.errors);
-
-    const fields = ['id', 'name', 'code', 'map'];
+    const fields = ['id', 'map'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -71,13 +72,9 @@ class LoadMapSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.roles = [formValues.roles];
-
     const response = await serviceSector.uploadMap(formValues);
-    console.log(this.state.errors);
-    console.log(response);
 
-    if (response.type === 'UPDLOAD_SUCCESFUL') {
+    if (response.type === 'UPLOAD_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
       window.location.reload();
     } else {
@@ -139,7 +136,7 @@ class LoadMapSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -155,23 +152,10 @@ class LoadMapSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={2}>
-                  <CustomInput
-                    labelText="Codigo"
-                    id="code"
-                    error={errors.code}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: code,
-                      name: 'code',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+
+                <GridItem xs={12} sm={12} md={7}>
+                  <br />
+                  <br />
                   <input
                     labelText="Mapa"
                     id="map"
@@ -197,6 +181,13 @@ class LoadMapSection extends React.Component {
               </Button>
             </form>
           </DialogContent>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+              <DialogContent>
+                <img src={imgPlano} width="100%" height="100%" /*onLoadSuccess={this.fileSelectedHandler}*/></img>
+              </DialogContent>
+            </GridItem>
+          </GridContainer>
         </Dialog>
       </div>
     );
