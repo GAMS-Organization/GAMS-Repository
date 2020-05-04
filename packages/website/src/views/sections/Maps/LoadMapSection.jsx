@@ -13,6 +13,7 @@ import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
+import CardAvatar from '../../components/Card/CardAvatar';
 
 import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
@@ -24,7 +25,7 @@ class LoadMapSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFile: null,
+      selectedImage: null,
       sector: {},
       errors: {},
       open: false,
@@ -32,6 +33,10 @@ class LoadMapSection extends React.Component {
       rolClicked: false,
     };
   }
+
+  showButtonUploadImage = () => {
+    document.getElementById('uploadImageButton').style.display = 'inline-block';
+  };
 
   componentDidMount = () => {
     this.props.onRef(this);
@@ -53,12 +58,21 @@ class LoadMapSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  fileSelectedHandler = event => {
+  imageSelectedHandler = event => {
     console.log(event.target.files[0]);
     this.setState({
-      selectedFile: event.target.files[0],
+      selectedImage: event.target.files[0],
     });
+    this.showButtonUploadImage();
   };
+
+  /*EJEMPLO DE ROOFTOP*/
+  /*imageSelectedHandler = event => {
+    this.setState({
+      selectedImage: event.target.files[0],
+    });
+    this.showButtonUploadImage();
+  };*/
 
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
@@ -152,7 +166,6 @@ class LoadMapSection extends React.Component {
                     }}
                   />
                 </GridItem>
-
                 <GridItem xs={12} sm={12} md={7}>
                   <br />
                   <br />
@@ -160,13 +173,15 @@ class LoadMapSection extends React.Component {
                     labelText="Mapa"
                     id="map"
                     type="file"
+                    accept="image/*"
                     error={errors.map}
-                    onChange={this.fileSelectedHandler}
+                    onChange={this.imageSelectedHandler}
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
                       required: true,
+                      //defaultValue: this.props.formData.profileImage,
                       defaultValue: map,
                       name: 'map',
                     }}
@@ -183,9 +198,18 @@ class LoadMapSection extends React.Component {
           </DialogContent>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-              <DialogContent>
-                <img src={imgPlano} width="100%" height="100%" /*onLoadSuccess={this.fileSelectedHandler}*/></img>
-              </DialogContent>
+              <CardAvatar>
+                <img
+                  id="profileImageShow"
+                  //src={this.props.formData.profileImage}
+                  //className={`${classes.customAvatarPlaceholder}`}
+                  width="100%"
+                  height="100%"
+                />
+              </CardAvatar>
+              {/*<CardAvatar>
+                <img src={imgPlano} width="100%" height="100%" onLoadSuccess={this.fileSelectedHandler}></img>
+              </CardAvatar>*/}
             </GridItem>
           </GridContainer>
         </Dialog>
