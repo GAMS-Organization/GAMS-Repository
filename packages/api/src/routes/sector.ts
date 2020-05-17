@@ -6,9 +6,9 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import IndexSectorsAction from '../API/Http/Actions/Sector/IndexSectorsAction';
 import DestroySectorAction from '../API/Http/Actions/Sector/DestroySectorAction';
 import StoreSectorAction from '../API/Http/Actions/Sector/StoreSectorAction';
+import UploadImageAction from '../API/Http/Actions/Sector/UploadMapSectorAction';
 // import ShowSectorAction from '../API/Http/Actions/Sector/ShowSectorAction';
 // import ShowSectorByNameAction from '../API/Http/Actions/Sector/ShowSectorByNameAction';
-import UpdateSectorAction from '../API/Http/Actions/Sector/UpdateSectorAction';
 
 const router = express.Router();
 
@@ -47,18 +47,17 @@ router.get(
 );
 */
 
-router.put(
-  '/:id([0-9]+)',
-
-  (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
-  },
-
+router.post(
+  '/map/:id([0-9]+)',
+  /*(req, res, next): void => {
+    authMiddleware(req, res, next);
+  },*/
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateSectorAction: UpdateSectorAction = DIContainer.resolve<UpdateSectorAction>(UpdateSectorAction);
-    await updateSectorAction.execute(request, response);
+    const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
+    await uploadImageAction.execute(request, response);
   }),
 );
+
 /*
 router.get(
   '/name/:name([a-z0-9-]+)',
