@@ -8,10 +8,10 @@ class StorageService implements IStorageService {
   public getConfig(): RequestHandler {
     const storage = multer.diskStorage({
       destination: function(_req, _file, cb) {
-        cb(null, '/');
+        cb(null, '/home/');
       },
       filename: function(_req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
+        cb(null, file.originalname + '-' + Date.now());
       },
     });
 
@@ -19,6 +19,8 @@ class StorageService implements IStorageService {
 
     return upload.single('file');
   }
+
 }
+
 
 export default StorageService;

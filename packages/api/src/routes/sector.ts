@@ -49,9 +49,9 @@ router.get(
 
 router.post(
   '/map/:id([0-9]+)',
-  /*(req, res, next): void => {
-    authMiddleware(req, res, next);
-  },*/
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
     await uploadImageAction.execute(request, response);
