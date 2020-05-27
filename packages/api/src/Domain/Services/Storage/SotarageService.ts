@@ -19,8 +19,6 @@ class StorageService implements IStorageService {
 
     return upload.single('file');
   }
-
 }
-
 
 export default StorageService;
