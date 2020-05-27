@@ -59,6 +59,16 @@ class sector {
     }
     return sectorAdapter.uploadMap(uploadResponse);
   }
+
+  async imageMapUpload(formDataImage) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.post(`upload-image/`, formDataImage, { 'Content-Type': 'multipart/form-data' });
+    } catch (err) {
+      loadResponse = err;
+    }
+    return loadResponse;
+  }
 }
 
 export default new sector();

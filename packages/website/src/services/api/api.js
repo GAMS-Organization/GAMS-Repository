@@ -7,7 +7,7 @@ class ApiFetch {
     this.apiUrl = process.env.API_URL ? process.env.API_URL : 'http://localhost/api/api/';
   }
 
-  get(endpoint) {
+  get(endpoint, customHead = {}) {
     return new Promise(async (resolve, reject) => {
       let requestData = {
         method: 'get',
@@ -15,14 +15,14 @@ class ApiFetch {
       };
 
       try {
-        resolve(await this.makeRequest(requestData));
+        resolve(await this.makeRequest(requestData, customHead));
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  post(endpoint, body) {
+  post(endpoint, body, customHead = {}) {
     return new Promise(async (resolve, reject) => {
       let requestData = {
         method: 'post',
@@ -31,14 +31,14 @@ class ApiFetch {
       };
 
       try {
-        resolve(await this.makeRequest(requestData));
+        resolve(await this.makeRequest(requestData, customHead));
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  put(endpoint, body) {
+  put(endpoint, body, customHead = {}) {
     return new Promise(async (resolve, reject) => {
       let requestData = {
         method: 'put',
@@ -47,14 +47,14 @@ class ApiFetch {
       };
 
       try {
-        resolve(await this.makeRequest(requestData));
+        resolve(await this.makeRequest(requestData, customHead));
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  delete(endpoint, body) {
+  delete(endpoint, body, customHead = {}) {
     return new Promise(async (resolve, reject) => {
       let requestData = {
         method: 'delete',
@@ -63,7 +63,7 @@ class ApiFetch {
       };
 
       try {
-        resolve(await this.makeRequest(requestData));
+        resolve(await this.makeRequest(requestData, customHead));
       } catch (error) {
         reject(error);
       }
