@@ -107,6 +107,7 @@ class sectorAdapter {
     if (!isError(status)) {
       return {
         type: 'UPLOAD_IMAGE_SUCCESFUL',
+        data: data,
       };
     } else {
       const { code, details } = data.errors;

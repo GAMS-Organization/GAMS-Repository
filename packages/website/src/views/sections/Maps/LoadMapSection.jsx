@@ -34,10 +34,6 @@ class LoadMapSection extends React.Component {
     };
   }
 
-  showButtonUploadImage = () => {
-    document.getElementById('uploadImageButton').style.display = 'inline-block';
-  };
-
   componentDidMount = () => {
     this.props.onRef(this);
   };
@@ -59,11 +55,9 @@ class LoadMapSection extends React.Component {
   };
 
   imageSelectedHandler = event => {
-    console.log(event.target.files[0]);
     this.setState({
       selectedImage: event.target.files[0],
     });
-    this.showButtonUploadImage();
   };
 
   /*EJEMPLO DE ROOFTOP*/
@@ -86,11 +80,24 @@ class LoadMapSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    const response = await serviceSector.uploadMap(formValues);
+    const formDataImage = new FormData();
+    formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    if (response.type === 'UPLOAD_SUCCESFUL') {
-      this.setState({ notification: true, open: false, rolClicked: false });
-      window.location.reload();
+    const response = await serviceSector.imageMapUpload(formDataImage);
+
+    if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+      const formValues = {
+        id: formElements.namedItem('id').value,
+        map: response.data.path,
+      };
+      const response2 = await serviceSector.uploadMap(formValues);
+
+      if (response2.type === 'UPLOAD_SUCCESFUL') {
+        this.setState({ notification: true, open: false, rolClicked: false });
+        window.location.reload();
+      } else {
+        this.setState({ notification: true, errors: response2.error });
+      }
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -181,7 +188,6 @@ class LoadMapSection extends React.Component {
                     }}
                     inputProps={{
                       required: true,
-                      //defaultValue: this.props.formData.profileImage,
                       defaultValue: map,
                       name: 'map',
                     }}
@@ -207,9 +213,9 @@ class LoadMapSection extends React.Component {
                   height="100%"
                 />
               </CardAvatar>
-              {/*<CardAvatar>
+              <CardAvatar>
                 <img src={imgPlano} width="100%" height="100%" onLoadSuccess={this.fileSelectedHandler}></img>
-              </CardAvatar>*/}
+              </CardAvatar>
             </GridItem>
           </GridContainer>
         </Dialog>

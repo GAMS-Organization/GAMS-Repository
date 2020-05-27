@@ -76,7 +76,7 @@ class ApiFetch {
         method: requestData.method,
         url: `${this.apiUrl}${requestData.endpoint}`,
         data: requestData.body ? requestData.body : null,
-        headers: { authorization: authStorage.getSession() },
+        headers: { ...headers, authorization: authStorage.getSession() },
       }).catch(error => {
         if (unauthorized(error.response.status)) {
           window.location.replace('/');
