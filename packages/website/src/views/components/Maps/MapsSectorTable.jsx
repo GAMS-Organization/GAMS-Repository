@@ -19,12 +19,11 @@ import MapIcon from '@material-ui/icons/Map';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-
 import LoadMapSection from '../../sections/Maps/LoadMapSection';
 
 import serviceSector from '../../../services/api/sector';
 
-class SectorTable extends React.Component {
+class MapsSectorTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,27 +38,9 @@ class SectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se eliminan los sectores
-  deleteSector = async prop => {
-    const response = await serviceSector.delete(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    window.location.reload();
-  };
-
-  //se crea la ventana emergente en donde se editaran los sectores
-  handleClickUpdate = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
-    this.child.showModal();
-  };
-
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
     this.child.showModal();
   };
 
@@ -87,7 +68,6 @@ class SectorTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <LoadMapSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -115,26 +95,7 @@ class SectorTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={this.deleteSector.bind(this, prop)}
-                      >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-map"
-                      title="Ver mapa"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
+                    <Tooltip id="tooltip-top" title="Ver mapa" placement="top" classes={{ tooltip: classes.tooltip }}>
                       <IconButton
                         aria-label="Maps"
                         className={classes.tableActionButton}
@@ -154,11 +115,11 @@ class SectorTable extends React.Component {
   }
 }
 
-SectorTable.defaultProps = {
+MapsSectorTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-SectorTable.propTypes = {
+MapsSectorTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -178,4 +139,4 @@ SectorTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(SectorTable);
+export default withStyles(tableStyle)(MapsSectorTable);

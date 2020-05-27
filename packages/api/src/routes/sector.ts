@@ -53,6 +53,8 @@ router.post(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    console.log('--------------------------------------', request);
+
     const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
     await uploadImageAction.execute(request, response);
   }),
