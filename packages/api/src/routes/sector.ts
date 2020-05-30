@@ -7,6 +7,7 @@ import IndexSectorsAction from '../API/Http/Actions/Sector/IndexSectorsAction';
 import DestroySectorAction from '../API/Http/Actions/Sector/DestroySectorAction';
 import StoreSectorAction from '../API/Http/Actions/Sector/StoreSectorAction';
 import UploadImageAction from '../API/Http/Actions/Sector/UploadMapSectorAction';
+import UpdateSectorAction from '../API/Http/Actions/Sector/UpdateSectorAction';
 // import ShowSectorAction from '../API/Http/Actions/Sector/ShowSectorAction';
 // import ShowSectorByNameAction from '../API/Http/Actions/Sector/ShowSectorByNameAction';
 
@@ -21,6 +22,17 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexSectorsAction: IndexSectorsAction = DIContainer.resolve<IndexSectorsAction>(IndexSectorsAction);
     await indexSectorsAction.execute(request, response);
+  }),
+);
+
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateSectorAction: UpdateSectorAction = DIContainer.resolve<UpdateSectorAction>(UpdateSectorAction);
+    await updateSectorAction.execute(request, response);
   }),
 );
 

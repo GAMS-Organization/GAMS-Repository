@@ -9,6 +9,7 @@ import House from '@material-ui/icons/Home';
 import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
+import MapIcon from '@material-ui/icons/Map';
 // core components/views for Admin layout
 import UsersView from 'views/containers/UsersView.jsx';
 import Products from 'views/containers/Products';

@@ -47,6 +47,18 @@ class sector {
 
     return sectorAdapter.delete(deleteResponse);
   }
+
+  async imageMapUpload(formDataImage, id) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.post(`sector/map/${id}`, formDataImage, { 'Content-Type': 'multipart/form-data' });
+    } catch (err) {
+      loadResponse = err;
+    }
+    console.log(loadResponse);
+
+    return sectorAdapter.imageMapUpload(loadResponse);
+  }
 }
 
 export default new sector();
