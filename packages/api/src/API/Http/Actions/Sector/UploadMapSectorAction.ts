@@ -11,7 +11,7 @@ class UploadImageAction {
     this.storageService = storageService;
   }
   public async execute(request: Request, response: Response) {
-    const uploadFile = this.storageService.getConfig();
+    const uploadFile = this.storageService.getConfig('sector/');
     await uploadFile(request, response, error => {
       if (error) {
         throw new ServerError(error.message);

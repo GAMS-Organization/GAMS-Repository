@@ -36,6 +36,18 @@ class sector {
     return sectorAdapter.update(updateResponse);
   }
 
+  async getMapImage(dataSector) {
+    const body = dataSector;
+
+    let updateResponse;
+    try {
+      updateResponse = await Api.get(`sector/${body.id}`);
+    } catch (err) {
+      updateResponse = err;
+    }
+    return updateResponse;
+  }
+
   async delete(id) {
     let deleteResponse;
 

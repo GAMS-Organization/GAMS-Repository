@@ -46,7 +46,7 @@ class LoadMapSection extends React.Component {
     this.setState({ open: false, rolClicked: false });
   };
 
-  showModal = () => {
+  showModal = async () => {
     this.setState({ open: true });
   };
 
@@ -59,14 +59,6 @@ class LoadMapSection extends React.Component {
       selectedImage: event.target.files[0],
     });
   };
-
-  /*EJEMPLO DE ROOFTOP*/
-  /*imageSelectedHandler = event => {
-    this.setState({
-      selectedImage: event.target.files[0],
-    });
-    this.showButtonUploadImage();
-  };*/
 
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
@@ -198,18 +190,12 @@ class LoadMapSection extends React.Component {
           </DialogContent>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-              <CardAvatar>
-                <img
-                  id="profileImageShow"
-                  //src={this.props.formData.profileImage}
-                  //className={`${classes.customAvatarPlaceholder}`}
-                  width="100%"
-                  height="100%"
-                />
-              </CardAvatar>
-              <CardAvatar>
-                <img src={imgPlano} width="100%" height="100%" onLoadSuccess={this.fileSelectedHandler}></img>
-              </CardAvatar>
+              <img
+                src={`http://localhost/api/static/ale-minacori.jpeg`}
+                width="100%"
+                height="100%"
+                onLoadSuccess={this.fileSelectedHandler}
+              ></img>
             </GridItem>
           </GridContainer>
         </Dialog>
