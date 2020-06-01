@@ -46,7 +46,7 @@ class LoadMapSection extends React.Component {
     this.setState({ open: false, rolClicked: false });
   };
 
-  showModal = () => {
+  showModal = async () => {
     this.setState({ open: true });
   };
 
@@ -60,39 +60,25 @@ class LoadMapSection extends React.Component {
     });
   };
 
-  /*EJEMPLO DE ROOFTOP*/
-  /*imageSelectedHandler = event => {
-    this.setState({
-      selectedImage: event.target.files[0],
-    });
-    this.showButtonUploadImage();
-  };*/
-
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'map'];
     const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    const response = await serviceSector.imageMapUpload(formDataImage);
+    const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
 
     if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
       const formValues = {
         id: formElements.namedItem('id').value,
         map: response.data.path,
       };
-      const response2 = await serviceSector.uploadMap(formValues);
+      const response2 = await serviceSector.update(formValues);
 
-      if (response2.type === 'UPLOAD_SUCCESFUL') {
+      if (response2.type === 'UPDATED_SUCCESFUL') {
         this.setState({ notification: true, open: false, rolClicked: false });
         window.location.reload();
       } else {
@@ -204,18 +190,12 @@ class LoadMapSection extends React.Component {
           </DialogContent>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-              <CardAvatar>
-                <img
-                  id="profileImageShow"
-                  //src={this.props.formData.profileImage}
-                  //className={`${classes.customAvatarPlaceholder}`}
-                  width="100%"
-                  height="100%"
-                />
-              </CardAvatar>
-              <CardAvatar>
-                <img src={imgPlano} width="100%" height="100%" onLoadSuccess={this.fileSelectedHandler}></img>
-              </CardAvatar>
+              <img
+                src={`http://localhost/api/static/ale-minacori.jpeg`}
+                width="100%"
+                height="100%"
+                onLoadSuccess={this.fileSelectedHandler}
+              ></img>
             </GridItem>
           </GridContainer>
         </Dialog>

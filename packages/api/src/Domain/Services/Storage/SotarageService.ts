@@ -5,13 +5,13 @@ import { IStorageService } from './IStorageService';
 
 @injectable()
 class StorageService implements IStorageService {
-  public getConfig(): RequestHandler {
+  public getConfig(path: string): RequestHandler {
     const storage = multer.diskStorage({
       destination: function(_req, _file, cb) {
-        cb(null, '/home/');
+        cb(null, `/usr/src/service/packages/api/localStorage/${path}`);
       },
       filename: function(_req, file, cb) {
-        cb(null, file.originalname + '-' + Date.now());
+        cb(null, file.originalname);
       },
     });
 

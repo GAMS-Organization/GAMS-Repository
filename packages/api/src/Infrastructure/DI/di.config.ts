@@ -170,6 +170,9 @@ import UpdateSectorHandler from '../../Application/Handlers/Sector/UpdateSectorH
 import { IStorageService } from '../../Domain/Services/Storage/IStorageService';
 import StorageService from '../../Domain/Services/Storage/SotarageService';
 import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorAction';
+import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
+import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
+import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
 
 const DIContainer = new Container();
 
@@ -211,6 +214,7 @@ DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
 DIContainer.bind<IndexSectorsAction>(IndexSectorsAction).toSelf();
 DIContainer.bind<UpdateSectorAction>(UpdateSectorAction).toSelf();
 DIContainer.bind<DestroySectorAction>(DestroySectorAction).toSelf();
+DIContainer.bind<ShowSectorAction>(ShowSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
@@ -262,6 +266,7 @@ DIContainer.bind<StoreDepartureAdapter>(StoreDepartureAdapter).toSelf();
 DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
 DIContainer.bind<UpdateSectorAdapter>(UpdateSectorAdapter).toSelf();
 DIContainer.bind<DestroySectorAdapter>(DestroySectorAdapter).toSelf();
+DIContainer.bind<ShowSectorAdapter>(ShowSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
@@ -309,6 +314,7 @@ DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
 DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
 DIContainer.bind<UpdateSectorHandler>(UpdateSectorHandler).toSelf();
 DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
+DIContainer.bind<ShowSectorHandler>(ShowSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();

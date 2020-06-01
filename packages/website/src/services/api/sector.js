@@ -36,6 +36,18 @@ class sector {
     return sectorAdapter.update(updateResponse);
   }
 
+  async getMapImage(dataSector) {
+    const body = dataSector;
+
+    let updateResponse;
+    try {
+      updateResponse = await Api.get(`sector/${body.id}`);
+    } catch (err) {
+      updateResponse = err;
+    }
+    return updateResponse;
+  }
+
   async delete(id) {
     let deleteResponse;
 
@@ -48,22 +60,10 @@ class sector {
     return sectorAdapter.delete(deleteResponse);
   }
 
-  async uploadMap(dataSector) {
-    const body = dataSector;
-
-    let uploadResponse;
-    try {
-      uploadResponse = await Api.put(`sector/${body.id}`, body);
-    } catch (err) {
-      uploadResponse = err;
-    }
-    return sectorAdapter.uploadMap(uploadResponse);
-  }
-
-  async imageMapUpload(formDataImage) {
+  async imageMapUpload(formDataImage, id) {
     let loadResponse;
     try {
-      loadResponse = await Api.post(`sector/map/1`, formDataImage, { 'Content-Type': 'multipart/form-data' });
+      loadResponse = await Api.post(`sector/map/${id}`, formDataImage, { 'Content-Type': 'multipart/form-data' });
     } catch (err) {
       loadResponse = err;
     }
