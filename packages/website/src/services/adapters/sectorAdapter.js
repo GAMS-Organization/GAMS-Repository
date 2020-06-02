@@ -111,6 +111,8 @@ class sectorAdapter {
       };
     } else {
       const { code, details } = data.errors;
+      console.log(data.errors);
+
       return {
         type: 'UPLOAD_IMAGE_FAIL',
         error: {
