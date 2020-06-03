@@ -63,18 +63,18 @@ class LoadMapSection extends React.Component {
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
-
     const formElements = e.target.elements;
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
     const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+    const NameSector = 'sector/';
 
     if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
       const formValues = {
         id: formElements.namedItem('id').value,
-        map: response.data.path,
+        map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
       };
       const response2 = await serviceSector.update(formValues);
 
