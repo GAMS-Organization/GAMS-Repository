@@ -70,22 +70,27 @@ class LoadMapSection extends React.Component {
 
     const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
     const NameSector = 'sector/';
+    const invalid = / /;
 
-    if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
-      const formValues = {
-        id: formElements.namedItem('id').value,
-        map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
-      };
-      const response2 = await serviceSector.update(formValues);
-
-      if (response2.type === 'UPDATED_SUCCESFUL') {
-        this.setState({ notification: true, open: false, rolClicked: false });
-        window.location.reload();
-      } else {
-        this.setState({ notification: true, errors: response2.error });
-      }
+    if (invalid.test(response.data.path.split(/(\\|\/)/g).pop())) {
+      alert('EL nombre de la imagen no puede contener espacios en blanco');
     } else {
-      this.setState({ notification: true, errors: response.error });
+      if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+        const formValues = {
+          id: formElements.namedItem('id').value,
+          map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
+        };
+        const response2 = await serviceSector.update(formValues);
+
+        if (response2.type === 'UPDATED_SUCCESFUL') {
+          this.setState({ notification: true, open: false, rolClicked: false });
+          //window.location.reload();
+        } else {
+          this.setState({ notification: true, errors: response2.error });
+        }
+      } else {
+        this.setState({ notification: true, errors: response.error });
+      }
     }
   };
 
