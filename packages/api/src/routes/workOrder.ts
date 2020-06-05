@@ -12,6 +12,7 @@ import CancelWorkOrderAction from '../API/Http/Actions/WorkOrder/CancelWorkOrder
 // import ShowWorkOrderByNameAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderByNameAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
 
 const router = express.Router();
 
@@ -88,6 +89,20 @@ router.put(
     await cancelWorkOrderAction.execute(request, response);
   }),
 );
+
+router.post(
+  '/complete/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const comppleteWorkOrderAction: CompleteWorkOrderAction = DIContainer.resolve<CompleteWorkOrderAction>(
+      CompleteWorkOrderAction,
+    );
+    await comppleteWorkOrderAction.execute(request, response);
+  }),
+);
+
 /*
 router.get(
   '/:id([0-9]+)',

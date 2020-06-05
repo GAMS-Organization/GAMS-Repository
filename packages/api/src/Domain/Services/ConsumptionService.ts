@@ -6,6 +6,7 @@ import Consumption from '../Entities/Consumption';
 import Departure from '../Entities/Departure';
 import StockDepartureService from './StockDepartureService';
 import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
+import WorkOrder from '../Entities/WorkOrder';
 
 // import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
@@ -27,16 +28,20 @@ export default class ConsumptionService {
 
   public async setConsumptionToDeparture(
     departure: Departure,
-    commandProducts: number[],
-    commandQuantities: number[],
+    productsId: number[],
+    quantities: number[],
+    workOrder?: WorkOrder
   ): Promise<Departure> {
     const products = await this.productRepository.findAll();
     for (const product of products) {
       const productId = product.getId();
-      if (commandProducts.includes(productId)) {
-        let index = commandProducts.indexOf(productId);
-        let quantity = commandQuantities[index];
+      if (productsId.includes(productId)) {
+        let index = productsId.indexOf(productId);
+        let quantity = quantities[index];
         const consumption = new Consumption(quantity, product, departure);
+        if(workOrder){
+          consumption.setWorkOrder(workOrder);
+        }
         await this.consumptionRepository.persist(consumption);
         await this.stockDepartureService.setStockDeparture(departure, product, quantity);
       }

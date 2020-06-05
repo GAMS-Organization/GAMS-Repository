@@ -122,7 +122,7 @@ class ViewDepartureConsumption extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Detalles de la entrada</h4>
+            <h4 className={classes.modalTitle}>Detalles de la salida</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             {departure.consumptions ? (

@@ -144,3 +144,31 @@ export const cancelWorkOrderSchema = {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const completeWorkOrderSchema = {
+  realizationDate: Joi.string()
+    .required()
+    .allow(null)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  taskDescription: Joi.string()
+    .max(250)
+    .required()
+    .allow(null)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  productsId: Joi.array()
+    .items(Joi.number().positive())
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  quantities: Joi.array()
+    .items(Joi.number().positive())
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};
