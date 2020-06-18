@@ -30,7 +30,7 @@ export default class ConsumptionService {
     departure: Departure,
     productsId: number[],
     quantities: number[],
-    workOrder?: WorkOrder
+    workOrder?: WorkOrder,
   ): Promise<Departure> {
     const products = await this.productRepository.findAll();
     for (const product of products) {
@@ -39,7 +39,7 @@ export default class ConsumptionService {
         let index = productsId.indexOf(productId);
         let quantity = quantities[index];
         const consumption = new Consumption(quantity, product, departure);
-        if(workOrder){
+        if (workOrder) {
           consumption.setWorkOrder(workOrder);
         }
         await this.consumptionRepository.persist(consumption);

@@ -20,6 +20,12 @@ export default class CompleteWorkOrderAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new CompleteWorkOrderCommand(parseInt(request.params.id), request.body.realizationDate, request.body.taskDescription, request.body.productsId , request.body.quantities);
+    return new CompleteWorkOrderCommand(
+      parseInt(request.params.id),
+      request.body.realizationDate,
+      request.body.taskDescription,
+      request.body.productsId,
+      request.body.quantities,
+    );
   }
 }

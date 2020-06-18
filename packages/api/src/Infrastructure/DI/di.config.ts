@@ -257,7 +257,6 @@ DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
 DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 
-
 /**
  * Adapters
  */

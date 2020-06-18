@@ -33,15 +33,18 @@ export default class CompleteWorkOrderHandler {
     workOrder.setState(STATE.FINISHED);
     workOrder.setTaskDescription(command.getTaskDescription());
 
-    workOrder = await this.workOrderRepository.persist(workOrder)
+    workOrder = await this.workOrderRepository.persist(workOrder);
 
-    const departure = new Departure(command.getRealizationDate(), `Consumido por la órden de trabajo con id ${command.getId()}`);
+    const departure = new Departure(
+      command.getRealizationDate(),
+      `Consumido por la órden de trabajo con id ${command.getId()}`,
+    );
 
     await this.consumptionService.setConsumptionToDeparture(
       await this.departureRepository.persist(departure),
       command.getProductsId(),
       command.getQuantities(),
-      workOrder
+      workOrder,
     );
 
     return workOrder;
