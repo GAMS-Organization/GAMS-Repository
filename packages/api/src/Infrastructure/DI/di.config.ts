@@ -167,6 +167,12 @@ import StockDepartureService from '../../Domain/Services/StockDepartureService';
 import UpdateSectorAction from '../../API/Http/Actions/Sector/UpdateSectorAction';
 import UpdateSectorAdapter from '../../API/Http/Adapters/Sector/UpdateSectorAdapter';
 import UpdateSectorHandler from '../../Application/Handlers/Sector/UpdateSectorHandler';
+import { IStorageService } from '../../Domain/Services/Storage/IStorageService';
+import StorageService from '../../Domain/Services/Storage/SotarageService';
+import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorAction';
+import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
+import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
+import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
 import StoreWorkOrderHandler from '../../Application/Handlers/WorkOrder/StoreWorkOrderHandler';
 import StoreWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/StoreWorkOrderAdapter';
 import StoreWorkOrderAction from '../../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
@@ -197,6 +203,8 @@ const DIContainer = new Container();
 /**
  * Controllers
  */
+DIContainer.bind<UploadImageAction>(UploadImageAction).toSelf();
+
 DIContainer.bind<LoginAction>(LoginAction).toSelf();
 
 DIContainer.bind<IndexUsersAction>(IndexUsersAction).toSelf();
@@ -230,6 +238,7 @@ DIContainer.bind<StoreSectorAction>(StoreSectorAction).toSelf();
 DIContainer.bind<IndexSectorsAction>(IndexSectorsAction).toSelf();
 DIContainer.bind<UpdateSectorAction>(UpdateSectorAction).toSelf();
 DIContainer.bind<DestroySectorAction>(DestroySectorAction).toSelf();
+DIContainer.bind<ShowSectorAction>(ShowSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
@@ -289,6 +298,7 @@ DIContainer.bind<StoreDepartureAdapter>(StoreDepartureAdapter).toSelf();
 DIContainer.bind<StoreSectorAdapter>(StoreSectorAdapter).toSelf();
 DIContainer.bind<UpdateSectorAdapter>(UpdateSectorAdapter).toSelf();
 DIContainer.bind<DestroySectorAdapter>(DestroySectorAdapter).toSelf();
+DIContainer.bind<ShowSectorAdapter>(ShowSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
@@ -343,6 +353,7 @@ DIContainer.bind<UpdateStockHandler>(UpdateStockHandler).toSelf();
 DIContainer.bind<StoreSectorHandler>(StoreSectorHandler).toSelf();
 DIContainer.bind<UpdateSectorHandler>(UpdateSectorHandler).toSelf();
 DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
+DIContainer.bind<ShowSectorHandler>(ShowSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
@@ -386,6 +397,7 @@ DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
+DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
 
 /**
  * Repository Interfaces

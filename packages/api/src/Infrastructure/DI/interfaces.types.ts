@@ -19,6 +19,7 @@ const INTERFACES = {
   IElementRepository: Symbol.for('IElementRepository'),
   IAssetRepository: Symbol.for('IAssetRepository'),
   IAreaServiceRepository: Symbol.for('IAreaServiceRepository'),
+  IStorageService: Symbol.for('IStorageService'),
 };
 
 export { INTERFACES };
