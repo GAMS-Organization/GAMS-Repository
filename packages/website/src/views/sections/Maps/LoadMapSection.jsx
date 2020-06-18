@@ -19,8 +19,6 @@ import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
 
-import imgPlano from '../../../styles/img/plano3.jpg';
-
 class LoadMapSection extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +34,11 @@ class LoadMapSection extends React.Component {
         place: 'tr',
       },
       rolClicked: false,
+    };
+    const styles = {
+      img: {
+        padding: '15px',
+      },
     };
   }
 
@@ -140,6 +143,8 @@ class LoadMapSection extends React.Component {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
     const { id, name, code, map } = sector;
+    console.log(sector);
+
     return (
       <div>
         <Snackbar
@@ -233,11 +238,10 @@ class LoadMapSection extends React.Component {
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
               <img
-                //src={`http://localhost/api/static/ale-minacori.jpeg`}
-                src="sector/bici.jpeg"
+                src={`http://localhost/api/static/${this.props.sector.map}`}
                 width="100%"
                 height="100%"
-                onLoadSuccess={this.fileSelectedHandler}
+                border="10"
               ></img>
             </GridItem>
           </GridContainer>
