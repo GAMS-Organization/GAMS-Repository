@@ -11,3 +11,6 @@ logs/
 *.map
 .env.prod
 .DS_Store
+
+packages/*/localStorage/*.jpg
+packages/*/localStorage/*.jpeg
