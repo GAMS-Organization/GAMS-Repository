@@ -30,3 +30,24 @@ export const storeAreaSchema = {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const updateAreaSchema = {
+  name: Joi.string()
+    .min(3)
+    .max(100)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  services: Joi.array()
+    .items(Joi.string())
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  maps: Joi.array()
+    .items(Joi.object())
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};

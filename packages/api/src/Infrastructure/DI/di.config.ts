@@ -173,6 +173,11 @@ import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorActi
 import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
 import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
 import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
+import IMapAreaRepository from '../../Domain/Interfaces/IMapAreaRepository';
+import TypeMapAreaRepository from '../../Persistence/TypeORM/Repositories/TypeMapAreaRepository';
+import UpdateAreaAction from '../../API/Http/Actions/Area/UpdateAreaAction';
+import UpdateAreaAdapter from '../../API/Http/Adapters/Area/UpdateAreaAdapter';
+import UpdateAreaHandler from '../../Application/Handlers/Area/UpdateAreaHandler';
 
 const DIContainer = new Container();
 
@@ -218,6 +223,7 @@ DIContainer.bind<ShowSectorAction>(ShowSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
+DIContainer.bind<UpdateAreaAction>(UpdateAreaAction).toSelf();
 DIContainer.bind<DestroyAreaAction>(DestroyAreaAction).toSelf();
 DIContainer.bind<ShowAreaBySectorAction>(ShowAreaBySectorAction).toSelf();
 
@@ -270,6 +276,7 @@ DIContainer.bind<ShowSectorAdapter>(ShowSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
+DIContainer.bind<UpdateAreaAdapter>(UpdateAreaAdapter).toSelf();
 DIContainer.bind<ShowAreaBySectorAdapter>(ShowAreaBySectorAdapter).toSelf();
 
 DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
@@ -317,6 +324,7 @@ DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
 DIContainer.bind<ShowSectorHandler>(ShowSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
+DIContainer.bind<UpdateAreaHandler>(UpdateAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
 DIContainer.bind<ShowAreaBySectorHandler>(ShowAreaBySectorHandler).toSelf();
 
@@ -372,5 +380,6 @@ DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(T
 DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServiceRepository);
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
+DIContainer.bind<IMapAreaRepository>(INTERFACES.IMapAreaRepository).to(TypeMapAreaRepository);
 
 export default DIContainer;
