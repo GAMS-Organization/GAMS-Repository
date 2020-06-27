@@ -93,7 +93,7 @@ export default class AreaServiceService {
       }
     }
 
-    if(maps.length !== 0 ){
+    if (maps.length !== 0) {
       await this.setMapsToAreaService(area, maps);
     }
 
@@ -102,9 +102,9 @@ export default class AreaServiceService {
 
   public async setMapsToAreaService(area: Area, maps: IMap[]) {
     const areaServices: AreaService[] = await this.areaServiceRepository.findByAreaName(area.getId());
-    for(const areaService of areaServices){
-      for(const map of maps){
-        if(map.service === areaService.getService().getName()){
+    for (const areaService of areaServices) {
+      for (const map of maps) {
+        if (map.service === areaService.getService().getName()) {
           areaService.setMap(map.url);
           await this.areaServiceRepository.persist(areaService);
         }
