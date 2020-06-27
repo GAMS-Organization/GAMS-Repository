@@ -173,8 +173,6 @@ import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorActi
 import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
 import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
 import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
-import IMapAreaRepository from '../../Domain/Interfaces/IMapAreaRepository';
-import TypeMapAreaRepository from '../../Persistence/TypeORM/Repositories/TypeMapAreaRepository';
 import UpdateAreaAction from '../../API/Http/Actions/Area/UpdateAreaAction';
 import UpdateAreaAdapter from '../../API/Http/Adapters/Area/UpdateAreaAdapter';
 import UpdateAreaHandler from '../../Application/Handlers/Area/UpdateAreaHandler';
@@ -380,6 +378,5 @@ DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(T
 DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServiceRepository);
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
-DIContainer.bind<IMapAreaRepository>(INTERFACES.IMapAreaRepository).to(TypeMapAreaRepository);
 
 export default DIContainer;

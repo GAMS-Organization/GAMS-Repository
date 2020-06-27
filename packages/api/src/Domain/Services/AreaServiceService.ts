@@ -7,6 +7,7 @@ import IServiceRepository from '../Interfaces/IServiceRepository';
 import Service from '../Entities/Service';
 import AssetService from './AssetService';
 import IAreaRepository from '../Interfaces/IAreaRepository';
+import { IMap } from '../../utils/customInterfaces';
 
 @injectable()
 export default class AreaServiceService {
@@ -76,7 +77,7 @@ export default class AreaServiceService {
     return await this.destroyRelationsByService(service);
   }
 
-  public async updateServices(area: Area, commandServices: string[]) {
+  public async updateServices(area: Area, commandServices: string[], maps: IMap[]) {
     const services = await this.serviceRepository.findAll();
     for (const service of services) {
       const serviceName = service.getName();
@@ -92,6 +93,22 @@ export default class AreaServiceService {
       }
     }
 
+    if(maps.length !== 0 ){
+      await this.setMapsToAreaService(area, maps);
+    }
+
     return await this.areaRepository.findOneById(area.getId());
+  }
+
+  public async setMapsToAreaService(area: Area, maps: IMap[]) {
+    const areaServices: AreaService[] = await this.areaServiceRepository.findByAreaName(area.getId());
+    for(const areaService of areaServices){
+      for(const map of maps){
+        if(map.service === areaService.getService().getName()){
+          areaService.setMap(map.url);
+          await this.areaServiceRepository.persist(areaService);
+        }
+      }
+    }
   }
 }

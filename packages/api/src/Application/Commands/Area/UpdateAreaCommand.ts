@@ -1,10 +1,12 @@
+import { IMap } from '../../../utils/customInterfaces';
+
 export default class UpdateAreaCommand {
   private id: number;
   private name: string;
   private services: string[];
-  private maps: object[];
+  private maps: IMap[];
 
-  public constructor(id: number, name: string, services: string[], maps: object[]) {
+  public constructor(id: number, name: string, services: string[], maps: IMap[]) {
     this.id = id;
     this.name = name;
     this.services = services;
@@ -23,7 +25,7 @@ export default class UpdateAreaCommand {
     return this.services;
   }
 
-  public getMaps(): object[] {
+  public getMaps(): IMap[] {
     return this.maps;
   }
 }

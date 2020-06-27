@@ -19,6 +19,7 @@ export default class UpdateAreaPresenter implements IPresenter {
       code: this.result.getCode(),
       sector: this.result.getSector().getName(),
       services: this.result.getServicesNames(),
+      maps: this.result.getMaps(),
     };
   }
 }

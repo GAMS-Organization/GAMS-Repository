@@ -3,7 +3,6 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'ty
 import Sector from './Sector';
 import Asset from './Asset';
 import AreaService from './AreaService';
-import MapArea from './MapArea';
 
 @Entity('area')
 // eslint-disable-next-line require-jsdoc
@@ -20,8 +19,6 @@ export default class Area {
   public areaServices: AreaService[];
   @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
-  @OneToMany(_type => MapArea, map => map.area)
-  public maps: MapArea[];
 
   public constructor(name: string, code: string, sector: Sector) {
     this.name = name;
@@ -59,13 +56,17 @@ export default class Area {
 
   public getServicesNames(): string[] {
     const servicesNames = [];
-    this.areaServices.map(service => {
-      servicesNames.push(service.getService().getName());
+    this.areaServices.map(relation => {
+      servicesNames.push(relation.getService().getName());
     });
     return servicesNames;
   }
 
-  public getMaps(): MapArea[] {
-    return this.maps;
+  public getMaps(): string[] {
+    const maps = [];
+    this.areaServices.map(relation => {
+      maps.push(relation.getMap());
+    });
+    return maps;
   }
 }

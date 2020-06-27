@@ -21,15 +21,14 @@ export default class UpdateAreaHandler {
 
   public async execute(command: UpdateAreaCommand): Promise<Area> {
     console.log('llega al handler');
-    const area = await this.areaRepository.findOneById(command.getId());
+    let area = await this.areaRepository.findOneById(command.getId());
     if (!area) {
       throw new EntityNotFoundException(`Area with id: ${command.getId()} not found`);
     }
     area.setName(command.getName());
 
-    // ver el tema de actualizar y crear los mapas
+    area = await this.areaServiceService.updateServices(await this.areaRepository.persist(area), command.getServices(), command.getMaps());
 
-    // area.setMap(command.getMap());
-    return await this.areaServiceService.updateServices(await this.areaRepository.persist(area), command.getServices());
+    return area;
   }
 }
