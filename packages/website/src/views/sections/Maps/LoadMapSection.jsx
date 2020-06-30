@@ -19,8 +19,6 @@ import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
 
-import imgPlano from '../../../styles/img/plano3.jpg';
-
 class LoadMapSection extends React.Component {
   constructor(props) {
     super(props);
@@ -29,8 +27,18 @@ class LoadMapSection extends React.Component {
       sector: {},
       errors: {},
       open: false,
-      notification: false,
+      notification: {
+        show: false,
+        message: '',
+        color: '',
+        place: 'tr',
+      },
       rolClicked: false,
+    };
+    const styles = {
+      img: {
+        padding: '15px',
+      },
     };
   }
 
@@ -51,7 +59,14 @@ class LoadMapSection extends React.Component {
   };
 
   closeNotification = () => {
-    this.setState({ notification: false, errors: {} });
+    this.setState({
+      notification: {
+        show: false,
+        errors: {},
+        place: 'tr',
+        message: '',
+      },
+    });
   };
 
   imageSelectedHandler = event => {
@@ -63,29 +78,64 @@ class LoadMapSection extends React.Component {
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
-
     const formElements = e.target.elements;
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
     const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+    const NameSector = 'sector/';
+    const invalid = / /;
 
-    if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
-      const formValues = {
-        id: formElements.namedItem('id').value,
-        map: response.data.path,
-      };
-      const response2 = await serviceSector.update(formValues);
-
-      if (response2.type === 'UPDATED_SUCCESFUL') {
-        this.setState({ notification: true, open: false, rolClicked: false });
-        window.location.reload();
-      } else {
-        this.setState({ notification: true, errors: response2.error });
-      }
+    //En la primer condicion valida que el nombre de la imagen no contenga un espacio en blanco
+    if (invalid.test(response.data.path.split(/(\\|\/)/g).pop())) {
+      this.setState({
+        notification: {
+          show: true,
+          color: 'danger',
+          message: 'IMPORTANTE: EL NOMBRE DE LA IMAGEN NO PUEDE CONTENER ESPACIOS EN BLANCO',
+          place: 'tc',
+        },
+        open: true,
+        rolClicked: false,
+      });
     } else {
-      this.setState({ notification: true, errors: response.error });
+      if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+        const formValues = {
+          id: formElements.namedItem('id').value,
+          map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
+        };
+        const response2 = await serviceSector.update(formValues);
+
+        if (response2.type === 'UPDATED_SUCCESFUL') {
+          this.setState({
+            notification: { show: true, color: 'success', message: 'El mapa fue cargado correctamente', place: 'tr' },
+            open: false,
+            rolClicked: false,
+          });
+          window.location.reload();
+        } else {
+          this.setState({
+            notification: {
+              show: true,
+              color: 'danger',
+              message: `Error ${this.state.errors.code}, ${this.state.errors.errors}`,
+              place: 'tr',
+            },
+            errors: response2.error,
+          });
+        }
+      } else {
+        this.setState({
+          notification: {
+            show: true,
+            color: 'danger',
+            message: `Error ${this.state.errors.code}, ${this.state.errors.errors}`,
+            place: 'tr',
+          },
+          errors: response.error,
+        });
+      }
     }
   };
 
@@ -93,22 +143,19 @@ class LoadMapSection extends React.Component {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
     const { id, name, code, map } = sector;
+    console.log(sector);
+
     return (
       <div>
         <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
+          place={this.state.notification.place}
+          color={this.state.notification.color}
           icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Mapa cargado correctamente'
-          }
-          open={this.state.notification}
+          message={this.state.notification.message}
+          open={this.state.notification.show}
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,
@@ -191,10 +238,10 @@ class LoadMapSection extends React.Component {
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
               <img
-                src={`http://localhost/api/static/ale-minacori.jpeg`}
+                src={`http://localhost/api/static/${this.props.sector.map}`}
                 width="100%"
                 height="100%"
-                onLoadSuccess={this.fileSelectedHandler}
+                border="10"
               ></img>
             </GridItem>
           </GridContainer>

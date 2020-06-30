@@ -21,6 +21,8 @@ class sector {
     } catch (err) {
       listResponse = err;
     }
+    console.log(listResponse);
+
     return sectorAdapter.list(listResponse);
   }
 

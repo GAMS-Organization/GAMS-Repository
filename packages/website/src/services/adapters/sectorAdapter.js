@@ -81,6 +81,26 @@ class sectorAdapter {
     }
   }
 
+  uploadMap(uploadResponse) {
+    let { status, data } = uploadResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'UPLOAD_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'UPLOAD_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
   imageMapUpload(uploadResponse) {
     let { status, data } = uploadResponse;
 
@@ -91,6 +111,8 @@ class sectorAdapter {
       };
     } else {
       const { code, details } = data.errors;
+      console.log(data.errors);
+
       return {
         type: 'UPLOAD_IMAGE_FAIL',
         error: {
