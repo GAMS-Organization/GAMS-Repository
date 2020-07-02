@@ -29,7 +29,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `area-service` (`id` int NOT NULL AUTO_INCREMENT, `areaId` int NULL, `serviceId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `area-service` (`id` int NOT NULL AUTO_INCREMENT, `areaId` int NULL, `serviceId` int NULL, `map` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
