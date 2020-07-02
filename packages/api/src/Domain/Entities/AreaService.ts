@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, Column, PrimaryGeneratedColumn } from 'typeorm';
 import Service from './Service';
 import Area from './Area';
 
@@ -12,6 +12,8 @@ export default class AreaService {
   public area: Area;
   @ManyToOne(_type => Service, service => service.areaServices)
   public service: Service;
+  @Column()
+  public map: string;
 
   public constructor(area: Area, service: Service) {
     this.area = area;
@@ -36,5 +38,13 @@ export default class AreaService {
 
   public setService(value: Service): void {
     this.service = value;
+  }
+
+  public setMap(map: string): void {
+    this.map = map;
+  }
+
+  public getMap(): string {
+    return this.map;
   }
 }

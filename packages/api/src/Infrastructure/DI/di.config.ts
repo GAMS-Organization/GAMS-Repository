@@ -173,6 +173,9 @@ import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorActi
 import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
 import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
 import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
+import UpdateAreaAction from '../../API/Http/Actions/Area/UpdateAreaAction';
+import UpdateAreaAdapter from '../../API/Http/Adapters/Area/UpdateAreaAdapter';
+import UpdateAreaHandler from '../../Application/Handlers/Area/UpdateAreaHandler';
 import StoreWorkOrderHandler from '../../Application/Handlers/WorkOrder/StoreWorkOrderHandler';
 import StoreWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/StoreWorkOrderAdapter';
 import StoreWorkOrderAction from '../../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
@@ -242,6 +245,7 @@ DIContainer.bind<ShowSectorAction>(ShowSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
+DIContainer.bind<UpdateAreaAction>(UpdateAreaAction).toSelf();
 DIContainer.bind<DestroyAreaAction>(DestroyAreaAction).toSelf();
 DIContainer.bind<ShowAreaBySectorAction>(ShowAreaBySectorAction).toSelf();
 
@@ -302,6 +306,7 @@ DIContainer.bind<ShowSectorAdapter>(ShowSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
+DIContainer.bind<UpdateAreaAdapter>(UpdateAreaAdapter).toSelf();
 DIContainer.bind<ShowAreaBySectorAdapter>(ShowAreaBySectorAdapter).toSelf();
 
 DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
@@ -356,6 +361,7 @@ DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
 DIContainer.bind<ShowSectorHandler>(ShowSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
+DIContainer.bind<UpdateAreaHandler>(UpdateAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
 DIContainer.bind<ShowAreaBySectorHandler>(ShowAreaBySectorHandler).toSelf();
 
