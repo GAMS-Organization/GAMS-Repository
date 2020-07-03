@@ -19,13 +19,6 @@ export default class Consumption {
   @JoinColumn()
   public workOrder: WorkOrder;
 
-  // public constructor(quantity: number, product: Product, departure: Departure, workOrder: WorkOrder) {
-  //   this.quantity = quantity;
-  //   this.product = product;
-  //   this.departure = departure;
-  //   this.workOrder = workOrder;
-  // }
-
   public constructor(quantity: number, product: Product, departure: Departure) {
     this.quantity = quantity;
     this.product = product;

@@ -173,6 +173,33 @@ import UploadImageAction from '../../API/Http/Actions/Sector/UploadMapSectorActi
 import ShowSectorAction from '../../API/Http/Actions/Sector/ShowSectorAction';
 import ShowSectorAdapter from '../../API/Http/Adapters/Sector/ShowSectorAdapter';
 import ShowSectorHandler from '../../Application/Handlers/Sector/ShowSectorHandler';
+import UpdateAreaAction from '../../API/Http/Actions/Area/UpdateAreaAction';
+import UpdateAreaAdapter from '../../API/Http/Adapters/Area/UpdateAreaAdapter';
+import UpdateAreaHandler from '../../Application/Handlers/Area/UpdateAreaHandler';
+import StoreWorkOrderHandler from '../../Application/Handlers/WorkOrder/StoreWorkOrderHandler';
+import StoreWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/StoreWorkOrderAdapter';
+import StoreWorkOrderAction from '../../API/Http/Actions/WorkOrder/StoreWorkOrderAction';
+import IWorkOrderRepository from '../../Domain/Interfaces/IWorkOrderRepository';
+import TypeWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeWorkOrderRepository';
+import WorkOrderService from '../../Domain/Services/WorkOrderService';
+import IndexWorkOrdersAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersAction';
+import UpdateWorkOrderAction from '../../API/Http/Actions/WorkOrder/UpdateWorkOrderAction';
+import UpdateWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/UpdateWorkOrderAdapter';
+import UpdateWorkOrderHandler from '../../Application/Handlers/WorkOrder/UpdateWorkOrderHandler';
+import IUserWorkOrderRepository from '../../Domain/Interfaces/IUserWorkOrderRepository';
+import TypeUserWorkOrderRepository from '../../Persistence/TypeORM/Repositories/TypeUserWorkOrderRepository';
+import AssignWorkOrderHandler from '../../Application/Handlers/WorkOrder/AssignWorkOrderHandler';
+import AssignWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/AssignWorkOrderAdapter';
+import AssignWorkOrderAction from '../../API/Http/Actions/WorkOrder/AssignWorkOrderAction';
+import TakeWorkOrderAction from '../../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
+import TakeWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/TakeWorkOrderAdapter';
+import TakeWorkOrderHandler from '../../Application/Handlers/WorkOrder/TakeWorkOrderHandler';
+import CancelWorkOrderHandler from '../../Application/Handlers/WorkOrder/CancelWorkOrderHandler';
+import CancelWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/CancelWorkOrderAdapter';
+import CancelWorkOrderAction from '../../API/Http/Actions/WorkOrder/CancelWorkOrderAction';
+import CompleteWorkOrderAction from '../../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
+import CompleteWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/CompleteWorkOrderAdapter';
+import CompleteWorkOrderHandler from '../../Application/Handlers/WorkOrder/CompleteWorkOrderHandler';
 
 const DIContainer = new Container();
 
@@ -218,6 +245,7 @@ DIContainer.bind<ShowSectorAction>(ShowSectorAction).toSelf();
 
 DIContainer.bind<StoreAreaAction>(StoreAreaAction).toSelf();
 DIContainer.bind<IndexAreasAction>(IndexAreasAction).toSelf();
+DIContainer.bind<UpdateAreaAction>(UpdateAreaAction).toSelf();
 DIContainer.bind<DestroyAreaAction>(DestroyAreaAction).toSelf();
 DIContainer.bind<ShowAreaBySectorAction>(ShowAreaBySectorAction).toSelf();
 
@@ -233,6 +261,14 @@ DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
 DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
+
+DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
+DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
+DIContainer.bind<UpdateWorkOrderAction>(UpdateWorkOrderAction).toSelf();
+DIContainer.bind<AssignWorkOrderAction>(AssignWorkOrderAction).toSelf();
+DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
+DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
+DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 
 /**
  * Adapters
@@ -270,6 +306,7 @@ DIContainer.bind<ShowSectorAdapter>(ShowSectorAdapter).toSelf();
 
 DIContainer.bind<StoreAreaAdapter>(StoreAreaAdapter).toSelf();
 DIContainer.bind<DestroyAreaAdapter>(DestroyAreaAdapter).toSelf();
+DIContainer.bind<UpdateAreaAdapter>(UpdateAreaAdapter).toSelf();
 DIContainer.bind<ShowAreaBySectorAdapter>(ShowAreaBySectorAdapter).toSelf();
 
 DIContainer.bind<StoreServiceAdapter>(StoreServiceAdapter).toSelf();
@@ -281,6 +318,13 @@ DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
+
+DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
+DIContainer.bind<UpdateWorkOrderAdapter>(UpdateWorkOrderAdapter).toSelf();
+DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
+DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
+DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
+DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
 
 /**
  * Handlers
@@ -317,6 +361,7 @@ DIContainer.bind<DestroySectorHandler>(DestroySectorHandler).toSelf();
 DIContainer.bind<ShowSectorHandler>(ShowSectorHandler).toSelf();
 
 DIContainer.bind<StoreAreaHandler>(StoreAreaHandler).toSelf();
+DIContainer.bind<UpdateAreaHandler>(UpdateAreaHandler).toSelf();
 DIContainer.bind<DestroyAreaHandler>(DestroyAreaHandler).toSelf();
 DIContainer.bind<ShowAreaBySectorHandler>(ShowAreaBySectorHandler).toSelf();
 
@@ -329,6 +374,13 @@ DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
+
+DIContainer.bind<StoreWorkOrderHandler>(StoreWorkOrderHandler).toSelf();
+DIContainer.bind<UpdateWorkOrderHandler>(UpdateWorkOrderHandler).toSelf();
+DIContainer.bind<AssignWorkOrderHandler>(AssignWorkOrderHandler).toSelf();
+DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
+DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
+DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
 
 /*
  * Services
@@ -349,6 +401,7 @@ DIContainer.bind<SectorService>(SectorService).toSelf();
 DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
+DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
 
@@ -372,5 +425,7 @@ DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(T
 DIContainer.bind<IServiceRepository>(INTERFACES.IServiceRepository).to(TypeServiceRepository);
 DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeElementRepository);
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
+DIContainer.bind<IWorkOrderRepository>(INTERFACES.IWorkOrderRepository).to(TypeWorkOrderRepository);
+DIContainer.bind<IUserWorkOrderRepository>(INTERFACES.IUserWorkOrderRepository).to(TypeUserWorkOrderRepository);
 
 export default DIContainer;
