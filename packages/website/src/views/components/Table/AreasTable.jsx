@@ -17,8 +17,9 @@ import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-
+import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
+import UpdateProductSection from '../../sections/Products/UpdateProductSection';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -47,6 +48,12 @@ class AreasTable extends React.Component {
     window.location.reload();
   };
 
+  //se crea la ventana emergente en donde se editaran las areas
+  handleClickUpdate = prop => {
+    this.setState({ area: { id: prop[0], name: prop[1], services: prop[4] } });
+    this.child.showModal();
+  };
+
   componentWillMount = () => {
     this.setState({ modal: false });
   };
@@ -72,6 +79,7 @@ class AreasTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -98,6 +106,15 @@ class AreasTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickUpdate.bind(this, prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
