@@ -50,6 +50,7 @@ class AreasTable extends React.Component {
 
   //se crea la ventana emergente en donde se editaran las areas
   handleClickUpdate = prop => {
+    //aca debo cortar el string serveces y transformarlo en un array de strings
     this.setState({ area: { id: prop[0], name: prop[1], services: prop[4] } });
     this.child.showModal();
   };

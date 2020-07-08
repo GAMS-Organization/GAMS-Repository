@@ -16,12 +16,20 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import FormControl from '@material-ui/core/FormControl';
+import { InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import serviceService from '../../../services/api/service';
 
 class UpdateAreaSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       area: {},
+      service: [],
+      //selectedServices: props.area.services,
+      selectedServices: [],
       errors: {},
       open: false,
       notification: false,
@@ -29,8 +37,20 @@ class UpdateAreaSection extends React.Component {
     };
   }
 
+  //Se obtienen los servicios
+  async componentWillMount() {
+    const response = await serviceService.list();
+    let services = [];
+    for (const service of response.data.items) {
+      let dataService = service.name;
+      services.push(dataService);
+    }
+    this.setState({ service: services });
+  }
+
   componentDidMount = () => {
     this.props.onRef(this);
+    console.log(this.state.area);
   };
 
   componentWillUnmount = () => {
@@ -61,7 +81,9 @@ class UpdateAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.roles = [formValues.roles];
+    //formValues.roles = [formValues.roles];
+
+    formValues.services = formValues.services.split(',');
 
     const response = await serviceArea.update(formValues);
 
@@ -71,6 +93,10 @@ class UpdateAreaSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
+  };
+
+  handleChangeServices = event => {
+    this.setState({ selectedServices: event.target.value });
   };
 
   render() {
@@ -142,20 +168,50 @@ class UpdateAreaSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={12}>
-                  <CustomInput
-                    labelText="Servicios"
-                    id="services"
-                    error={errors.services}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: services,
-                      name: 'services',
-                    }}
-                  />
+                <GridItem xs={12} sm={12} md={10}>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
+                      Servicios
+                    </InputLabel>
+                    <Select
+                      multiple
+                      value={this.state.selectedServices}
+                      onChange={this.handleChangeServices}
+                      MenuProps={{
+                        className: classes.selectMenu,
+                        classes: { paper: classes.selectPaper },
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      inputProps={{
+                        name: 'services',
+                        id: 'services',
+                        defaultValue: services,
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: classes.selectMenuItem,
+                        }}
+                      >
+                        Servicios
+                      </MenuItem>
+                      {this.state.service.map(service => (
+                        <MenuItem
+                          key={service}
+                          value={service}
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelectedMultiple,
+                          }}
+                        >
+                          {service}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </GridItem>
               </GridContainer>
               <Button type="submit" color="gamsRed">
