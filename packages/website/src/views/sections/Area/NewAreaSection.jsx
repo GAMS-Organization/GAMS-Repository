@@ -84,7 +84,9 @@ class NewAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    console.log(formValues.services);
     formValues.services = formValues.services.split(',');
+    console.log(formValues.services);
 
     const response = await serviceArea.create(formValues);
 

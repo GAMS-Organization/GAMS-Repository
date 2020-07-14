@@ -20,6 +20,7 @@ import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
 import UpdateProductSection from '../../sections/Products/UpdateProductSection';
+import area from '../../../services/api/area';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -50,9 +51,11 @@ class AreasTable extends React.Component {
 
   //se crea la ventana emergente en donde se editaran las areas
   handleClickUpdate = prop => {
-    //aca debo cortar el string serveces y transformarlo en un array de strings
-    this.setState({ area: { id: prop[0], name: prop[1], services: prop[4] } });
-    this.child.showModal();
+    //Se corta el string services y lo transforma en un array de strings
+    var servicio = prop[4].split(' - ');
+
+    this.setState({ area: { id: prop[0], name: prop[1], services: servicio } });
+    this.child.showModal(servicio);
   };
 
   componentWillMount = () => {

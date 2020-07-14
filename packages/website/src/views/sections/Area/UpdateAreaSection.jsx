@@ -28,7 +28,6 @@ class UpdateAreaSection extends React.Component {
     this.state = {
       area: {},
       service: [],
-      //selectedServices: props.area.services,
       selectedServices: [],
       errors: {},
       open: false,
@@ -50,7 +49,6 @@ class UpdateAreaSection extends React.Component {
 
   componentDidMount = () => {
     this.props.onRef(this);
-    console.log(this.state.area);
   };
 
   componentWillUnmount = () => {
@@ -61,8 +59,9 @@ class UpdateAreaSection extends React.Component {
     this.setState({ open: false });
   };
 
-  showModal = () => {
-    this.setState({ open: true });
+  showModal = servicios => {
+    console.log(servicios);
+    this.setState({ open: true, selectedServices: servicios });
   };
 
   closeNotification = () => {
