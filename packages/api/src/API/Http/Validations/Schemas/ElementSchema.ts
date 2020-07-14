@@ -24,9 +24,36 @@ export const storeElementSchema = {
       return customErrorMessages.default(errors);
     }),
   description: Joi.string()
+    .allow(null)
     .min(0)
     .max(100)
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
 };
+
+export const updateElementSchema = {
+  name: Joi.string()
+    .min(3)
+    .max(100)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  description: Joi.string()
+    .allow(null)
+    .min(0)
+    .max(100)
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  steps: Joi.string()
+    .allow(null)
+    .min(0)
+    .max(1000)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+};
+

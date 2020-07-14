@@ -14,6 +14,8 @@ export default class Element {
   public code: string;
   @Column()
   public description: string;
+  @Column()
+  public steps: string;
   @ManyToOne(_type => Service, service => service.elements)
   public service: Service;
   @OneToMany(_type => Asset, asset => asset.element)
@@ -42,6 +44,10 @@ export default class Element {
     return this.description;
   }
 
+  public getSteps(): string {
+      return this.steps;
+  }
+
   public getService(): Service {
     return this.service;
   }
@@ -50,8 +56,8 @@ export default class Element {
     this.name = name;
   }
 
-  public setCode(code: string): void {
-    this.code = code;
+  public setSteps(steps: string): void {
+    this.steps = steps;
   }
 
   public setDescription(description: string): void {
