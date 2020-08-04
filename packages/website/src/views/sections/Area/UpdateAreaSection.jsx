@@ -60,7 +60,6 @@ class UpdateAreaSection extends React.Component {
   };
 
   showModal = servicios => {
-    console.log(servicios);
     this.setState({ open: true, selectedServices: servicios });
   };
 

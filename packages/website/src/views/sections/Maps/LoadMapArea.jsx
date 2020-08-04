@@ -16,15 +16,16 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CardAvatar from '../../components/Card/CardAvatar';
 
 import serviceSector from '../../../services/api/sector';
+import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
 
-class LoadMapSection extends React.Component {
+class LoadMapArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedImage: null,
-      sector: {},
+      area: {},
       errors: {},
       open: false,
       notification: {
@@ -76,14 +77,14 @@ class LoadMapSection extends React.Component {
   };
 
   //se actualiza el mapa luego de ser editado
-  uploadMapSector = async e => {
+  uploadMapArea = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+    const response = await serviceArea.imageMapUpload(formDataImage, formElements.namedItem('id').value);
     const NameSector = 'sector/';
     const invalid = / /;
 
@@ -105,7 +106,7 @@ class LoadMapSection extends React.Component {
           id: formElements.namedItem('id').value,
           map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
         };
-        const response2 = await serviceSector.update(formValues);
+        const response2 = await serviceArea.update(formValues);
 
         if (response2.type === 'UPDATED_SUCCESFUL') {
           this.setState({
@@ -140,9 +141,9 @@ class LoadMapSection extends React.Component {
   };
 
   render() {
-    const { classes, sector, Transition } = this.props;
+    const { classes, area, Transition } = this.props;
     const { errors } = this.state;
-    const { id, name, code, map } = sector;
+    const { id, name, code, map } = area;
 
     return (
       <div>
@@ -171,7 +172,7 @@ class LoadMapSection extends React.Component {
             <h4 className={classes.modalTitle}>Cargar mapa</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.uploadMapSector}>
+            <form onSubmit={this.uploadMapArea}>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={1}>
                   <CustomInput
@@ -234,23 +235,13 @@ class LoadMapSection extends React.Component {
               </Button>
             </form>
           </DialogContent>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12}>
-              <img
-                src={`http://localhost/api/static/${this.props.sector.map}`}
-                width="100%"
-                height="100%"
-                border="10"
-              ></img>
-            </GridItem>
-          </GridContainer>
         </Dialog>
       </div>
     );
   }
 }
 
-LoadMapSection.propTypes = {
+LoadMapArea.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   lastName: PropTypes.string,
@@ -259,4 +250,4 @@ LoadMapSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(modalStyle)(LoadMapSection);
+export default withStyles(modalStyle)(LoadMapArea);

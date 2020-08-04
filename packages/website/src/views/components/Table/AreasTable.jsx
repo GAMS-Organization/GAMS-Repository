@@ -21,6 +21,8 @@ import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
 import UpdateProductSection from '../../sections/Products/UpdateProductSection';
 import area from '../../../services/api/area';
+import LoadMapArea from '../../sections/Maps/LoadMapArea';
+import MapIcon from '@material-ui/icons/Map';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -58,6 +60,14 @@ class AreasTable extends React.Component {
     this.child.showModal(servicio);
   };
 
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoadMap = async prop => {
+    var servicio = prop[4].split(' - ');
+
+    this.setState({ area: { id: prop[0], name: prop[1], services: servicio } });
+    this.child.showModal(servicio);
+  };
+
   componentWillMount = () => {
     this.setState({ modal: false });
   };
@@ -84,6 +94,7 @@ class AreasTable extends React.Component {
           close
         />
         <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <LoadMapArea area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -131,6 +142,20 @@ class AreasTable extends React.Component {
                         onClick={this.deleteArea.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-map"
+                      title="Ver mapa"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Maps"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickLoadMap.bind(this, prop)}
+                      >
+                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
