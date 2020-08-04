@@ -82,7 +82,6 @@ class SectorTable extends React.Component {
           close
         />
         <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
-        <LoadMapSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

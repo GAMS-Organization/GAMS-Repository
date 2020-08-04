@@ -119,10 +119,10 @@ class UpdateStock extends React.Component {
                     error={errors.name}
                     formControlProps={{
                       fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
                       disabled: true,
-                      required: true,
                       defaultValue: id,
                       name: 'id',
                     }}
@@ -135,9 +135,9 @@ class UpdateStock extends React.Component {
                     error={errors.quantity}
                     formControlProps={{
                       fullWidth: true,
+                      required: true,
                     }}
                     inputProps={{
-                      required: true,
                       defaultValue: quantity,
                       name: 'quantity',
                     }}
@@ -150,11 +150,14 @@ class UpdateStock extends React.Component {
                     error={errors.minimunQuantity}
                     formControlProps={{
                       fullWidth: true,
+                      required: true,
+                      min:1
                     }}
                     inputProps={{
-                      required: true,
+                      type: "number",
                       defaultValue: minimunQuantity,
                       name: 'minimunQuantity',
+                      inputProps: {min:1}
                     }}
                   />
                 </GridItem>

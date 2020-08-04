@@ -49,14 +49,20 @@ class ConsumptionTable extends React.Component {
       quantities: quantities,
     };
 
-    const response = await serviceDeparture.create(request);
+    if(products.length !== quantities.length || products.length === 0 || quantities.length=== 0){
+      this.setState({ notification: true, errors: {code: 422, errors: "No se pudo crear. Campos incompletos"} });
+    } else{
+      const response = await serviceDeparture.create(request);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
-      window.location.reload();
-    } else {
-      this.setState({ notification: true, errors: response.error });
+      if (response.type === 'CREATED_SUCCESFUL') {
+        this.setState({ notification: true });
+        window.location.reload();
+      } else {
+        this.setState({ notification: true, errors: response.error });
+      }
     }
+
+
   };
 
   async componentWillMount() {
