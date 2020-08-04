@@ -69,6 +69,7 @@ class UpdateStock extends React.Component {
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
