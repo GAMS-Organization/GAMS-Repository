@@ -42,6 +42,7 @@ class DepartureConsumption extends React.Component {
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }

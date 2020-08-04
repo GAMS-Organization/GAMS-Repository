@@ -185,7 +185,7 @@ class ConsumptionTable extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Button type="submit" color="gamsRed">
+                  <Button type="submit" color="gamsRed" size={'sm'}>
                     Consumir
                   </Button>
                 </GridItem>
