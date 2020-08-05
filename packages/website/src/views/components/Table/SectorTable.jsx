@@ -20,8 +20,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import LoadMapSection from '../../sections/Maps/LoadMapSection';
-
 import serviceSector from '../../../services/api/sector';
 
 class SectorTable extends React.Component {

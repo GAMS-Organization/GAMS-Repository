@@ -190,8 +190,8 @@ material-dashboard-react
         │   └── Typography.jsx
         ├── UpgradeToPro
         │   └── UpgradeToPro.jsx
-        └── UsersView
-            └── UsersView.jsx``
+        └── Users
+            └── Users.jsx``
 
 ## Browser Support
 

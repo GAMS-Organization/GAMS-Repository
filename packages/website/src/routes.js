@@ -11,7 +11,7 @@ import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
 import MapIcon from '@material-ui/icons/Map';
 // core components/views for Admin layout
-import UsersView from 'views/containers/UsersView.jsx';
+import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
 import Stock from 'views/containers/Stock.jsx';
 import Sector from 'views/containers/Sector.jsx';
@@ -28,7 +28,7 @@ const dashboardRoutes = [
     path: '/users',
     name: 'Usuarios',
     icon: Person,
-    component: UsersView,
+    component: Users,
     layout: '/admin',
   },
   {

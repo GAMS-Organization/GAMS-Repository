@@ -50,7 +50,7 @@ class ConsumptionTable extends React.Component {
     };
 
     if(products.length !== quantities.length || products.length === 0 || quantities.length=== 0){
-      this.setState({ notification: true, errors: {code: 422, errors: "No se pudo crear. Campos incompletos"} });
+      this.setState({ notification: true, errors: {code: 422, errors: "No se pudo consumir. Campos incompletos"} });
     } else{
       const response = await serviceDeparture.create(request);
 

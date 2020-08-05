@@ -97,6 +97,7 @@ class NewProduct extends React.Component {
                           fullWidth: true,
                         }}
                         inputProps={{
+                          type: 'file',
                           required: true,
                           defaultValue: name,
                           name: 'name',
