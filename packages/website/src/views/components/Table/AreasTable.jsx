@@ -94,7 +94,7 @@ class AreasTable extends React.Component {
           close
         />
         <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
-        <LoadMapArea area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
+        {/*<LoadMapArea area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />*/}
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
