@@ -53,8 +53,8 @@ class PurchaseTable extends React.Component {
       providers: providers,
     };
 
-    if(products.length !== quantities.length || products.length === 0 || quantities.length=== 0){
-      this.setState({ notification: true, errors: {code: 422, errors: "No se pudo comprar. Campos incompletos"} });
+    if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
+      this.setState({ notification: true, errors: { code: 422, errors: 'No se pudo comprar. Campos incompletos' } });
     } else {
       const response = await serviceEntry.create(request);
 

@@ -235,13 +235,14 @@ class UpdateSectorSection extends React.Component {
           </DialogContent>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-              {this.props.sector.map?
-              <img
-                src={`http://localhost/api/static/${this.props.sector.map}`}
-                width="100%"
-                height="100%"
-                border="10"
-              /> : null}
+              {this.props.sector.map ? (
+                <img
+                  src={`http://localhost/api/static/${this.props.sector.map}`}
+                  width="100%"
+                  height="100%"
+                  border="10"
+                />
+              ) : null}
             </GridItem>
           </GridContainer>
         </Dialog>

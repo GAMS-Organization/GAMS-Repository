@@ -29,7 +29,7 @@ class AreaTableSection extends React.Component {
   }
 
   listAreas = async (page = 1, itemsPerPage = 15) => {
-    const response = await serviceArea.list();
+    const response = await serviceArea.list(page, itemsPerPage);
 
     let areas = [];
     for (const area of response.data.items) {

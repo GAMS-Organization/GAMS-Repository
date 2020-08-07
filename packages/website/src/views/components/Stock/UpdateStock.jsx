@@ -152,13 +152,13 @@ class UpdateStock extends React.Component {
                     formControlProps={{
                       fullWidth: true,
                       required: true,
-                      min:1
+                      min: 1,
                     }}
                     inputProps={{
-                      type: "number",
+                      type: 'number',
                       defaultValue: minimunQuantity,
                       name: 'minimunQuantity',
-                      inputProps: {min:1}
+                      inputProps: { min: 1 },
                     }}
                   />
                 </GridItem>

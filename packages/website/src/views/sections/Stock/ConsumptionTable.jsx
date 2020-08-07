@@ -49,9 +49,9 @@ class ConsumptionTable extends React.Component {
       quantities: quantities,
     };
 
-    if(products.length !== quantities.length || products.length === 0 || quantities.length=== 0){
-      this.setState({ notification: true, errors: {code: 422, errors: "No se pudo consumir. Campos incompletos"} });
-    } else{
+    if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
+      this.setState({ notification: true, errors: { code: 422, errors: 'No se pudo consumir. Campos incompletos' } });
+    } else {
       const response = await serviceDeparture.create(request);
 
       if (response.type === 'CREATED_SUCCESFUL') {
@@ -61,8 +61,6 @@ class ConsumptionTable extends React.Component {
         this.setState({ notification: true, errors: response.error });
       }
     }
-
-
   };
 
   async componentWillMount() {
