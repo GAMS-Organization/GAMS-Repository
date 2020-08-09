@@ -4,6 +4,7 @@ packages/*/dist/*.js
 packages/*/out
 packages/*/dist/*.js.map
 packages/*/*.log
+packages/api/localStorage/*
 __pycache__
 *.log
 .env
@@ -11,3 +12,4 @@ logs/
 *.map
 .env.prod
 .DS_Store
+

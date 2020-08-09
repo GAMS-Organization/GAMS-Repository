@@ -11,7 +11,7 @@ export default class Service {
   public id: number;
   @Column({ unique: true })
   public name: string;
-  @Column()
+  @Column({ unique: true })
   public code: string;
   @OneToMany(_type => Element, element => element.service)
   public elements: Element[];

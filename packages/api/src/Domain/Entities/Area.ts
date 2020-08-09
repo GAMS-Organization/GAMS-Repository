@@ -56,9 +56,17 @@ export default class Area {
 
   public getServicesNames(): string[] {
     const servicesNames = [];
-    this.areaServices.map(service => {
-      servicesNames.push(service.getService().getName());
+    this.areaServices.map(relation => {
+      servicesNames.push(relation.getService().getName());
     });
     return servicesNames;
+  }
+
+  public getMaps(): string[] {
+    const maps = [];
+    this.areaServices.map(relation => {
+      maps.push(relation.getMap());
+    });
+    return maps;
   }
 }

@@ -20,6 +20,7 @@ export default class GetAllSectorsPresenter implements IPresenter {
         id: sector.getId(),
         name: sector.getName(),
         code: sector.getCode(),
+        map: sector.getMap(),
       });
     });
 

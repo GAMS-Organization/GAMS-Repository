@@ -21,19 +21,19 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` varchar(255) NOT NULL, `startDate` varchar(255) NOT NULL, `realizationDate` varchar(255) NOT NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDespcription` varchar(255) NOT NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` varchar(255) NOT NULL, `startDate` varchar(255) NULL, `realizationDate` varchar(255) NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDespcription` varchar(255) NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `area-service` (`id` int NOT NULL AUTO_INCREMENT, `areaId` int NULL, `serviceId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `area_service` (`id` int NOT NULL AUTO_INCREMENT, `map` varchar(255) NULL, `areaId` int NULL, `serviceId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `service` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, UNIQUE INDEX `IDX_7806a14d42c3244064b4a1706c` (`name`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `service` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, UNIQUE INDEX `IDX_7806a14d42c3244064b4a1706c` (`name`), UNIQUE INDEX `IDX_4cb3cf237c83885cc504634829` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -81,6 +81,10 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
+      'CREATE TABLE `mapArea` (`id` int NOT NULL AUTO_INCREMENT, `service` varchar(255) NOT NULL, `url` varchar(255) NOT NULL, `areaId` int NULL, UNIQUE INDEX `IDX_3f9b879805368b406ce05edfc3` (`url`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      undefined,
+    );
+    await queryRunner.query(
       'ALTER TABLE `user_roles` ADD CONSTRAINT `FK_472b25323af01488f1f66a06b67` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
@@ -109,11 +113,11 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'ALTER TABLE `area-service` ADD CONSTRAINT `FK_ea19be70512f2b64870a3529ad9` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      'ALTER TABLE `area_service` ADD CONSTRAINT `FK_79c4b759226c21522cfe66219e8` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
     await queryRunner.query(
-      'ALTER TABLE `area-service` ADD CONSTRAINT `FK_1847a744880dab1f2bc22308a37` FOREIGN KEY (`serviceId`) REFERENCES `service`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      'ALTER TABLE `area_service` ADD CONSTRAINT `FK_6e329d1e5060017c14c34c0ac2c` FOREIGN KEY (`serviceId`) REFERENCES `service`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
     await queryRunner.query(
@@ -176,9 +180,14 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       'ALTER TABLE `consumption` ADD CONSTRAINT `FK_23d383f2776aa87b544e24d392a` FOREIGN KEY (`workOrderId`) REFERENCES `work_order`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
+    await queryRunner.query(
+      'ALTER TABLE `mapArea` ADD CONSTRAINT `FK_d4572a2095b2531936df0478d9c` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
+    await queryRunner.query('ALTER TABLE `mapArea` DROP FOREIGN KEY `FK_d4572a2095b2531936df0478d9c`', undefined);
     await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_23d383f2776aa87b544e24d392a`', undefined);
     await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_3cf430ce18c99afa34c6f607750`', undefined);
     await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_461bbf4235654cac96842e8f5f7`', undefined);
@@ -200,8 +209,8 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('ALTER TABLE `asset` DROP FOREIGN KEY `FK_3bada5f55dc6e8a3c71a8164866`', undefined);
     await queryRunner.query('ALTER TABLE `asset` DROP FOREIGN KEY `FK_441e8d43918124ba45db8e20edf`', undefined);
     await queryRunner.query('ALTER TABLE `asset` DROP FOREIGN KEY `FK_0b2bf7ef3b0a9a9f92a882826e1`', undefined);
-    await queryRunner.query('ALTER TABLE `area-service` DROP FOREIGN KEY `FK_1847a744880dab1f2bc22308a37`', undefined);
-    await queryRunner.query('ALTER TABLE `area-service` DROP FOREIGN KEY `FK_ea19be70512f2b64870a3529ad9`', undefined);
+    await queryRunner.query('ALTER TABLE `area_service` DROP FOREIGN KEY `FK_6e329d1e5060017c14c34c0ac2c`', undefined);
+    await queryRunner.query('ALTER TABLE `area_service` DROP FOREIGN KEY `FK_79c4b759226c21522cfe66219e8`', undefined);
     await queryRunner.query('ALTER TABLE `element` DROP FOREIGN KEY `FK_42e4c2a1cfb51ff941af50e3d38`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_2046c91e37525f7609487efdde8`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_0967520a5843ce4e307fb1302ec`', undefined);
@@ -215,8 +224,9 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     );
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_86033897c009fcca8b6505d6be2`', undefined);
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_472b25323af01488f1f66a06b67`', undefined);
+    await queryRunner.query('DROP INDEX `IDX_3f9b879805368b406ce05edfc3` ON `mapArea`', undefined);
+    await queryRunner.query('DROP TABLE `mapArea`', undefined);
     await queryRunner.query('DROP INDEX `REL_23d383f2776aa87b544e24d392` ON `consumption`', undefined);
-    await queryRunner.query('DROP INDEX `REL_461bbf4235654cac96842e8f5f` ON `consumption`', undefined);
     await queryRunner.query('DROP TABLE `consumption`', undefined);
     await queryRunner.query('DROP TABLE `departure`', undefined);
     await queryRunner.query('DROP TABLE `stock_departure`', undefined);
@@ -232,9 +242,10 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('DROP TABLE `sector`', undefined);
     await queryRunner.query('DROP INDEX `IDX_1f435756948298c61ecc3c6dab` ON `asset`', undefined);
     await queryRunner.query('DROP TABLE `asset`', undefined);
+    await queryRunner.query('DROP INDEX `IDX_4cb3cf237c83885cc504634829` ON `service`', undefined);
     await queryRunner.query('DROP INDEX `IDX_7806a14d42c3244064b4a1706c` ON `service`', undefined);
     await queryRunner.query('DROP TABLE `service`', undefined);
-    await queryRunner.query('DROP TABLE `area-service`', undefined);
+    await queryRunner.query('DROP TABLE `area_service`', undefined);
     await queryRunner.query('DROP INDEX `IDX_a116b872585dc87200c7efb4a6` ON `element`', undefined);
     await queryRunner.query('DROP INDEX `IDX_08e0499daf3714e09cc58aae88` ON `element`', undefined);
     await queryRunner.query('DROP TABLE `element`', undefined);

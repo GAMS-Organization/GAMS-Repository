@@ -136,7 +136,7 @@ class NewElementSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                      <FormControl fullWidth required className={classes.selectFormControl}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Servicio
                         </InputLabel>
@@ -147,6 +147,7 @@ class NewElementSection extends React.Component {
                           classes={{
                             select: classes.select,
                           }}
+                          required
                           value={this.state.selectedService}
                           onChange={this.handleChangeService}
                           inputProps={{

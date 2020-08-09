@@ -24,6 +24,7 @@ export const storeElementSchema = {
       return customErrorMessages.default(errors);
     }),
   description: Joi.string()
+    .allow(null)
     .min(0)
     .max(100)
     .error(errors => {

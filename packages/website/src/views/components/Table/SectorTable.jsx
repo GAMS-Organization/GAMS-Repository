@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
+import MapIcon from '@material-ui/icons/Map';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
@@ -48,9 +49,9 @@ class SectorTable extends React.Component {
     window.location.reload();
   };
 
-  //se crea la ventana emergente en donde se editaran los sectores
-  handleClickUpdate = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoad = async prop => {
+    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
     this.child.showModal();
   };
 
@@ -117,6 +118,20 @@ class SectorTable extends React.Component {
                         onClick={this.deleteSector.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-map"
+                      title="Ver mapa"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Maps"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickLoad.bind(this, prop)}
+                      >
+                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

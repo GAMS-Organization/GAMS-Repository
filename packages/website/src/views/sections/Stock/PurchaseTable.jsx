@@ -53,13 +53,17 @@ class PurchaseTable extends React.Component {
       providers: providers,
     };
 
-    const response = await serviceEntry.create(request);
-
-    if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
-      window.location.reload();
+    if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
+      this.setState({ notification: true, errors: { code: 422, errors: 'No se pudo comprar. Campos incompletos' } });
     } else {
-      this.setState({ notification: true, errors: response.error });
+      const response = await serviceEntry.create(request);
+
+      if (response.type === 'CREATED_SUCCESFUL') {
+        this.setState({ notification: true });
+        window.location.reload();
+      } else {
+        this.setState({ notification: true, errors: response.error });
+      }
     }
   };
 
@@ -186,7 +190,7 @@ class PurchaseTable extends React.Component {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Button type="submit" color="gamsRed">
+                  <Button type="submit" color="gamsRed" size={'sm'}>
                     Comprar
                   </Button>
                 </GridItem>

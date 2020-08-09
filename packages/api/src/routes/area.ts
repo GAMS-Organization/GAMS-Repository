@@ -7,8 +7,8 @@ import IndexAreasAction from '../API/Http/Actions/Area/IndexAreasAction';
 import DestroyAreaAction from '../API/Http/Actions/Area/DestroyAreaAction';
 import StoreAreaAction from '../API/Http/Actions/Area/StoreAreaAction';
 import ShowAreaBySectorAction from '../API/Http/Actions/Area/ShowAreaBySectorAction';
+import UpdateAreaAction from '../API/Http/Actions/Area/UpdateAreaAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
-// import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 const router = express.Router();
 
@@ -33,6 +33,18 @@ router.post(
     await storeAreaAction.execute(request, response);
   }),
 );
+
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateAreaAction: UpdateAreaAction = DIContainer.resolve<UpdateAreaAction>(UpdateAreaAction);
+    await updateAreaAction.execute(request, response);
+  }),
+);
+
 /*
 router.get(
   '/:id([0-9]+)',
@@ -42,17 +54,6 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
     await showProductAction.execute(request, response);
-  }),
-);
-
-router.put(
-  '/:id([0-9]+)',
-  (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
-  },
-  asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
-    await updateProductAction.execute(request, response);
   }),
 );
 */
