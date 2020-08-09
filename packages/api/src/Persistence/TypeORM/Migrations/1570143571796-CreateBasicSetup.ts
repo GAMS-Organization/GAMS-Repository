@@ -44,7 +44,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(`insert into service values (3, 'Ascensor', 'Asc');`);
     await queryRunner.query(`insert into service values (4, 'Cerramiento', 'Ce');`);
     await queryRunner.query(`insert into service values (5, 'Cloacas', 'Cl');`);
-    await queryRunner.query(`insert into service values (6, 'Edilicio', 'Ed');`);
+    await queryRunner.query(`insert into service values (11, 'Edilicio', 'Ed');`);
     await queryRunner.query(`insert into service values (7, 'Energia Electrica', 'EE');`);
     await queryRunner.query(`insert into service values (8, 'Gas', 'G');`);
     await queryRunner.query(`insert into service values (9, 'Iluminacion', 'Ilum');`);
@@ -137,7 +137,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
       (84, 'Zocalo tubo 36 W');`);
 
     //Create Areas
-    await queryRunner.query(`insert into product values
+    await queryRunner.query(`insert into area values
     (22,'Administración','110',2),
     (23,'Ala Este','02',12),
     (24,'Ala Oeste','03',12),
@@ -253,7 +253,7 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     (135,'Ingreso Peatonal','IP',14);`);
 
     //Create Areas-Services
-    await queryRunner.query(`insert into product values;
+    await queryRunner.query(`insert into area_service values
     (113,NULL,22,1),
     (114,NULL,22,2),
     (115,NULL,22,4),
@@ -363,8 +363,8 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     (224,NULL,43,7),
     (225,NULL,43,8),
     (226,NULL,43,9),
-    (227,NULL,43,11)
-    ,(228NULL,,44,4),
+    (227,NULL,43,11),
+    (228,NULL,44,4),
     (229,NULL,44,7),
     (230,NULL,44,9),
     (231,NULL,44,11),
