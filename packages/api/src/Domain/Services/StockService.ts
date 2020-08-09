@@ -58,7 +58,10 @@ export default class StockService {
         await this.stockEntryService.newStockEntry(entry, stock);
       } else {
         const date: Date = new Date(Date.now());
-        const departure = new Departure(date.toISOString(), `Ajuste de stock, producto: ${stock.getProduct().getName()}`);
+        const departure = new Departure(
+          date.toISOString(),
+          `Ajuste de stock, producto: ${stock.getProduct().getName()}`,
+        );
         stock.setQuantity(command.getQuantity());
         stock.setMinimunQuantity(command.getMinimunQuantity());
         await this.departureRepository.persist(departure);

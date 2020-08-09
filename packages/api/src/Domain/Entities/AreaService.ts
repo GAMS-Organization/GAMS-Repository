@@ -12,7 +12,7 @@ export default class AreaService {
   public area: Area;
   @ManyToOne(_type => Service, service => service.areaServices)
   public service: Service;
-  @Column()
+  @Column({ nullable: true })
   public map: string;
 
   public constructor(area: Area, service: Service) {

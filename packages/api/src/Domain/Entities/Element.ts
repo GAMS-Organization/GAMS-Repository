@@ -12,7 +12,7 @@ export default class Element {
   public name: string;
   @Column({ unique: true })
   public code: string;
-  @Column({nullable: true})
+  @Column({ nullable: true })
   public description: string;
   @ManyToOne(_type => Service, service => service.elements)
   public service: Service;
