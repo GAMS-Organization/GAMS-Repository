@@ -25,15 +25,15 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `area-service` (`id` int NOT NULL AUTO_INCREMENT, `areaId` int NULL, `serviceId` int NULL, `map` varchar(255) NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `area-service` (`id` int NOT NULL AUTO_INCREMENT, `map` varchar(255) NULL, `areaId` int NULL, `serviceId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `service` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, UNIQUE INDEX `IDX_7806a14d42c3244064b4a1706c` (`name`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `service` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, UNIQUE INDEX `IDX_7806a14d42c3244064b4a1706c` (`name`), UNIQUE INDEX `IDX_4cb3cf237c83885cc504634829` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -216,7 +216,6 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_86033897c009fcca8b6505d6be2`', undefined);
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_472b25323af01488f1f66a06b67`', undefined);
     await queryRunner.query('DROP INDEX `REL_23d383f2776aa87b544e24d392` ON `consumption`', undefined);
-    await queryRunner.query('DROP INDEX `REL_461bbf4235654cac96842e8f5f` ON `consumption`', undefined);
     await queryRunner.query('DROP TABLE `consumption`', undefined);
     await queryRunner.query('DROP TABLE `departure`', undefined);
     await queryRunner.query('DROP TABLE `stock_departure`', undefined);
@@ -232,6 +231,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('DROP TABLE `sector`', undefined);
     await queryRunner.query('DROP INDEX `IDX_1f435756948298c61ecc3c6dab` ON `asset`', undefined);
     await queryRunner.query('DROP TABLE `asset`', undefined);
+    await queryRunner.query('DROP INDEX `IDX_4cb3cf237c83885cc504634829` ON `service`', undefined);
     await queryRunner.query('DROP INDEX `IDX_7806a14d42c3244064b4a1706c` ON `service`', undefined);
     await queryRunner.query('DROP TABLE `service`', undefined);
     await queryRunner.query('DROP TABLE `area-service`', undefined);
