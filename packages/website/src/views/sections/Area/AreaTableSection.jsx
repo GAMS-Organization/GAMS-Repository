@@ -96,7 +96,7 @@ class AreaTableSection extends React.Component {
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
+        <GridItem>
           <Card className={classes.cardCenter}>
             <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
