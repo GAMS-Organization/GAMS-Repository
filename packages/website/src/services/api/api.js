@@ -4,7 +4,7 @@ import { unauthorized } from '../../utils/helpers/isError';
 
 class ApiFetch {
   constructor() {
-    this.apiUrl = process.env.API_URL ? process.env.API_URL : 'http://gams.frsfco.utn.edu.ar/api/api/';
+    this.apiUrl = process.env.API_URL ? process.env.API_URL : 'http://localhost/api/api/';
   }
 
   get(endpoint, customHead = {}) {
