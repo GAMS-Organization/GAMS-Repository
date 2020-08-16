@@ -41,7 +41,7 @@ class NewAreaSection extends React.Component {
   //Se obtienen los servicios y sectores
   async componentWillMount() {
     //servicios
-    const response = await serviceService.list();
+    const response = await serviceService.list(1, 50);
     let services = [];
     for (const service of response.data.items) {
       let dataService = service.name;
@@ -50,7 +50,7 @@ class NewAreaSection extends React.Component {
     this.setState({ service: services });
 
     //sectores
-    const responseSector = await serviceSector.list();
+    const responseSector = await serviceSector.list(1, 50);
     let sectors = [];
     for (const sector of responseSector.data.items) {
       let dataSector = sector.name;

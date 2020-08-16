@@ -26,7 +26,7 @@ const styles = {
   },
 };
 
-class UsersView extends React.Component {
+class Users extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,10 +44,10 @@ class UsersView extends React.Component {
   }
 }
 
-UsersView.propTypes = {
+Users.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
 };
 
-export default withStyles(styles)(UsersView);
+export default withStyles(styles)(Users);

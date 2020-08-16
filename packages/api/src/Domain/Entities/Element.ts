@@ -12,7 +12,7 @@ export default class Element {
   public name: string;
   @Column({ unique: true })
   public code: string;
-  @Column()
+  @Column({ nullable: true })
   public description: string;
   @Column()
   public steps: string;
