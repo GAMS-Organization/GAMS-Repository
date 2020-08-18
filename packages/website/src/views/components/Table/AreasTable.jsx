@@ -65,7 +65,7 @@ class AreasTable extends React.Component {
     var servicio = prop[4].split(' - ');
 
     this.setState({ area: { id: prop[0], name: prop[1], services: servicio } });
-    this.child.showModal(servicio);
+    this.son.showModal(servicio);
   };
 
   componentWillMount = () => {
@@ -94,7 +94,7 @@ class AreasTable extends React.Component {
           close
         />
         <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
-        {/*<LoadMapArea area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />*/}
+        <LoadMapArea area={this.state.area} onRef={ref => (this.son = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

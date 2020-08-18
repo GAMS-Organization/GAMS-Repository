@@ -169,7 +169,7 @@ class LoadMapArea extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Cargar mapa</h4>
+            <h4 className={classes.modalTitle}>Cargando mapas</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.uploadMapArea}>
