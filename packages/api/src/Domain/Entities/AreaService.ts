@@ -3,7 +3,7 @@ import { Entity, ManyToOne, Column, PrimaryGeneratedColumn } from 'typeorm';
 import Service from './Service';
 import Area from './Area';
 
-@Entity('area-service')
+@Entity('area_service')
 // eslint-disable-next-line require-jsdoc
 export default class AreaService {
   @PrimaryGeneratedColumn()
@@ -12,7 +12,7 @@ export default class AreaService {
   public area: Area;
   @ManyToOne(_type => Service, service => service.areaServices)
   public service: Service;
-  @Column()
+  @Column({ nullable: true })
   public map: string;
 
   public constructor(area: Area, service: Service) {

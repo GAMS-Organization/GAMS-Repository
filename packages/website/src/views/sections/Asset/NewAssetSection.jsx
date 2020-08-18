@@ -46,7 +46,7 @@ class NewAssetSection extends React.Component {
   //se obtienen los sectores
   async componentWillMount() {
     //sectores
-    const responseSector = await serviceSector.list();
+    const responseSector = await serviceSector.list(1, 50);
     let sectores = [];
     for (const sector of responseSector.data.items) {
       let dataSector = sector.name;

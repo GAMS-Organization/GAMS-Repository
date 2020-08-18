@@ -20,8 +20,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import LoadMapSection from '../../sections/Maps/LoadMapSection';
-
 import serviceSector from '../../../services/api/sector';
 
 class SectorTable extends React.Component {
@@ -82,7 +80,6 @@ class SectorTable extends React.Component {
           close
         />
         <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
-        <LoadMapSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
