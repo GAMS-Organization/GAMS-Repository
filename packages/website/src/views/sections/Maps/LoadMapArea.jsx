@@ -19,13 +19,24 @@ import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
+import Arrow_Upward from '@material-ui/icons/ArrowUpward';
+import EntryPurchase from '../../components/Stock/EntryPurchase';
+import Assignment from '@material-ui/icons/Assignment';
+import CurrentStock from '../../components/Stock/CurrentStock';
+import Arrow_Downward from '@material-ui/icons/ArrowDownward';
+import DepartureConsumption from '../../components/Stock/DepartureConsumption';
+import CustomTabs from '../../components/CustomTabs/CustomTabs';
+import serviceCurrentStock from '../../../services/api/currentStock';
+import MapIcon from '@material-ui/icons/Map';
 
 class LoadMapArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedImage: null,
+      selectedServices: [],
       area: {},
+      service: [],
       errors: {},
       open: false,
       notification: {
@@ -43,6 +54,20 @@ class LoadMapArea extends React.Component {
     };
   }
 
+  //se obtienen los servicios y sus respectivos  mapas
+  componentWillMount = async () => {
+    const responseService = await serviceArea.list();
+
+    let services = [];
+
+    for (const service of responseService.data.items) {
+      let dataService = [service.id.toString(), service.name];
+      services.push(dataService);
+    }
+
+    this.setState({ service: services });
+  };
+
   componentDidMount = () => {
     this.props.onRef(this);
   };
@@ -55,8 +80,8 @@ class LoadMapArea extends React.Component {
     this.setState({ open: false, rolClicked: false });
   };
 
-  showModal = async () => {
-    this.setState({ open: true });
+  showModal = async servicios => {
+    this.setState({ open: true, selectedServices: servicios });
   };
 
   closeNotification = () => {
@@ -161,6 +186,8 @@ class LoadMapArea extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
+          fullWidth={true}
+          maxWidth={'lg'}
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
@@ -169,7 +196,7 @@ class LoadMapArea extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Cargando mapas</h4>
+            <h4 className={classes.modalTitle}>Editar mapa</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.uploadMapArea}>
@@ -226,6 +253,17 @@ class LoadMapArea extends React.Component {
                     }}
                   />
                 </GridItem>
+                <CustomTabs
+                  title=""
+                  headerColor="gamsBlue"
+                  tabs={this.state.selectedServices.map(service => {
+                    return {
+                      tabName: service,
+                      tabIcon: MapIcon,
+                      //tabContent: <>{service}</>,
+                    };
+                  })}
+                />
               </GridContainer>
               <Button type="submit" color="gamsRed">
                 Actualizar

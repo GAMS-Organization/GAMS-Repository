@@ -61,6 +61,7 @@ class UpdateAreaSection extends React.Component {
 
   showModal = servicios => {
     this.setState({ open: true, selectedServices: servicios });
+    console.log(this.state.selectedServices);
   };
 
   closeNotification = () => {
