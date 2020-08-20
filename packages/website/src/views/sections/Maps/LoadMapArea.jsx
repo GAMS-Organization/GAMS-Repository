@@ -17,6 +17,7 @@ import CardAvatar from '../../components/Card/CardAvatar';
 
 import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
+import serviceService from '../../../services/api/service';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { Input } from '@material-ui/core';
 import Arrow_Upward from '@material-ui/icons/ArrowUpward';
@@ -102,15 +103,15 @@ class LoadMapArea extends React.Component {
   };
 
   //se actualiza el mapa luego de ser editado
-  uploadMapArea = async e => {
+  uploadMapService = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    const response = await serviceArea.imageMapUpload(formDataImage, formElements.namedItem('id').value);
-    const NameSector = 'sector/';
+    const response = await serviceService.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+    const NameServicio = 'servicio/';
     const invalid = / /;
 
     //En la primer condicion valida que el nombre de la imagen no contenga un espacio en blanco
@@ -129,9 +130,9 @@ class LoadMapArea extends React.Component {
       if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
         const formValues = {
           id: formElements.namedItem('id').value,
-          map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
+          map: NameServicio.concat(response.data.path.split(/(\\|\/)/g).pop()),
         };
-        const response2 = await serviceArea.update(formValues);
+        const response2 = await serviceService.update(formValues);
 
         if (response2.type === 'UPDATED_SUCCESFUL') {
           this.setState({
@@ -201,7 +202,7 @@ class LoadMapArea extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.uploadMapArea}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
+                {/*<GridItem xs={12} sm={12} md={1}>
                   <CustomInput
                     labelText="ID"
                     id="id"
@@ -216,43 +217,7 @@ class LoadMapArea extends React.Component {
                       name: 'id',
                     }}
                   />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Nombre"
-                    id="name"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: name,
-                      name: 'name',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={7}>
-                  <br />
-                  <br />
-                  <input
-                    labelText="Mapa"
-                    id="map"
-                    type="file"
-                    accept="image/*"
-                    error={errors.map}
-                    onChange={this.imageSelectedHandler}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: map,
-                      name: 'map',
-                    }}
-                  />
-                </GridItem>
+                </GridItem>*/}
                 <CustomTabs
                   title=""
                   headerColor="gamsBlue"
@@ -261,6 +226,33 @@ class LoadMapArea extends React.Component {
                       tabName: service,
                       tabIcon: MapIcon,
                       //tabContent: <>{service}</>,
+                      tabContent:
+                        ((
+                          <img
+                            src={`http://localhost/api/static/${service.map}`}
+                            width="100%"
+                            height="100%"
+                            border="10"
+                          ></img>
+                        ),
+                        (
+                          <input
+                            labelText="Mapa"
+                            id="map"
+                            type="file"
+                            accept="image/*"
+                            error={errors.map}
+                            onChange={this.imageSelectedHandler}
+                            formControlProps={{
+                              fullWidth: true,
+                            }}
+                            inputProps={{
+                              required: true,
+                              defaultValue: map,
+                              name: 'map',
+                            }}
+                          />
+                        )),
                     };
                   })}
                 />
