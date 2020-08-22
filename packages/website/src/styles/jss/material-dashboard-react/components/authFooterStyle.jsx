@@ -1,4 +1,4 @@
-import { defaultFont, primaryColor, grayColor, gamsRedColor, gamsBlueColor } from '../../material-dashboard-react.jsx';
+import { defaultFont, grayColor, gamsRedColor } from '../../material-dashboard-react.jsx';
 
 const footerStyle = {
   block: {

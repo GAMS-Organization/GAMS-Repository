@@ -10,7 +10,6 @@ import AddAlert from '@material-ui/icons/AddAlert';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
@@ -18,7 +17,6 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceAsset from '../../../services/api/asset';
-import serviceElement from '../../../services/api/element';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import { InputLabel, Input } from '@material-ui/core';
@@ -129,8 +127,7 @@ class NewAssetSection extends React.Component {
   };
 
   render() {
-    const { classes, sector, area, service, element } = this.props;
-    const { errors } = this.state;
+    const { classes } = this.props;
     return (
       <div id="section-new-asset">
         <Snackbar

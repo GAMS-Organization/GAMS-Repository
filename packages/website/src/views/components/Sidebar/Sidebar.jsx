@@ -11,7 +11,6 @@ import ListItem from '@material-ui/core/ListItem/index';
 import ListItemText from '@material-ui/core/ListItemText/index';
 import Icon from '@material-ui/core/Icon/index';
 // core components
-import AdminNavbarLinks from '../Navbars/AdminNavbarLinks.jsx';
 
 import sidebarStyle from '../../../styles/jss/material-dashboard-react/components/sidebarStyle.jsx';
 
@@ -20,7 +19,7 @@ const Sidebar = ({ ...props }) => {
   function activeRoute(routeName) {
     return props.location.pathname.indexOf(routeName) > -1 ? true : false;
   }
-  const { classes, color, logo, image, logoText, routes } = props;
+  const { classes, color, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {

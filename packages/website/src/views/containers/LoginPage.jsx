@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios/index';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import InputAdornment from '@material-ui/core/InputAdornment/index';
 import Icon from '@material-ui/core/Icon/index';
-import Checkbox from '@material-ui/core/Checkbox/index';
-import FormControlLabel from '@material-ui/core/FormControlLabel/index';
-
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
-import Check from '@material-ui/icons/Check';
-
 // core components
 import GridContainer from '../components/Grid/GridContainer.jsx';
 import GridItem from '../components/Grid/GridItem.jsx';
@@ -25,8 +19,6 @@ import CardFooter from '../components/Card/CardFooter.jsx';
 
 import loginPageStyle from '../../styles/jss/material-dashboard-react/views/loginPageStyle.jsx';
 import loginService from '../../services/api/auth';
-
-const { REACT_APP_SERVER_URL } = process.env;
 
 class LoginPage extends React.Component {
   constructor(props) {

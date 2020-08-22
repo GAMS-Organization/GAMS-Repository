@@ -25,8 +25,6 @@ const styles = {
   },
 };
 
-const { REACT_APP_SERVER_URL } = process.env;
-
 class Sector extends React.Component {
   constructor(props) {
     super(props);

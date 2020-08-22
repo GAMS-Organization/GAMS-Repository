@@ -10,11 +10,9 @@ import Hidden from '@material-ui/core/Hidden/index';
 // @material-ui/icons
 import Menu from '@material-ui/icons/Menu';
 // core components
-import AdminNavbarLinks from './AdminNavbarLinks.jsx';
 import Button from '../CustomButtons/Button.jsx';
 
 import headerStyle from '../../../styles/jss/material-dashboard-react/components/headerStyle.jsx';
-import { rooftopBlueColor } from '../../../styles/jss/material-dashboard-react';
 
 function Header({ ...props }) {
   function makeBrand() {

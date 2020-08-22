@@ -10,7 +10,6 @@ import {
   warningColor,
   dangerColor,
   whiteColor,
-  grayColor,
   blackColor,
   rooftopBlueColor,
   rooftopOrangeColor,

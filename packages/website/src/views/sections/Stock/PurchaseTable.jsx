@@ -10,7 +10,6 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
-import CardFooter from '../../components/Card/CardFooter';
 
 class PurchaseTable extends React.Component {
   constructor(props) {

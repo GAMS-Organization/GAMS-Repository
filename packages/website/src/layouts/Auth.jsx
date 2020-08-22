@@ -6,7 +6,6 @@ import { Switch, Route } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // core components
-import AuthNavbar from '../views/components/Navbars/AuthNavbar.jsx';
 import Footer from '../views/components/Footer/AuthFooter.jsx';
 
 import routes from '../routes.js';
@@ -48,10 +47,9 @@ class Pages extends React.Component {
     return activeRoute;
   };
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     return (
       <div>
-        {/*<AuthNavbar brandText={this.getActiveRoute(routes)} {...rest} />*/}
         <div className={classes.wrapper}>
           <div className={classes.fullPage} style={{ backgroundImage: 'url(' + this.getBgImage() + ')' }}>
             {switchRoutes}

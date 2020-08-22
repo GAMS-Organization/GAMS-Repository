@@ -33,11 +33,6 @@ class UpdateSectorSection extends React.Component {
       },
       rolClicked: false,
     };
-    const styles = {
-      img: {
-        padding: '15px',
-      },
-    };
   }
 
   componentDidMount = () => {
@@ -140,7 +135,7 @@ class UpdateSectorSection extends React.Component {
   render() {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
-    const { id, name, code, map } = sector;
+    const { id, name, map } = sector;
     console.log(sector);
 
     return (
@@ -241,6 +236,7 @@ class UpdateSectorSection extends React.Component {
                   width="100%"
                   height="100%"
                   border="10"
+                  alt="mapa"
                 />
               ) : null}
             </GridItem>

@@ -12,16 +12,11 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
-import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
 import MapIcon from '@material-ui/icons/Map';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 import LoadMapSection from '../../sections/Maps/LoadMapSection';
-
-import serviceSector from '../../../services/api/sector';
 
 class MapsSectorTable extends React.Component {
   constructor(props) {

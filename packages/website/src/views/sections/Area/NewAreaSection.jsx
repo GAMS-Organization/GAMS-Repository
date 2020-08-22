@@ -20,7 +20,7 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 import serviceArea from '../../../services/api/area';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
-import { InputLabel, Input } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
 import serviceSector from '../../../services/api/sector';
 
@@ -97,7 +97,7 @@ class NewAreaSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code, sector, services } = this.props;
+    const { classes, name, code } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-area">

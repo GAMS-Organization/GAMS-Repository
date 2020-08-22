@@ -1,5 +1,4 @@
 // @material-ui/icons
-import Dashboard from '@material-ui/icons/Dashboard';
 import Person from '@material-ui/icons/Person';
 import LocationOn from '@material-ui/icons/LocationOn';
 import Login from '@material-ui/icons/LockOpen';
@@ -9,7 +8,6 @@ import House from '@material-ui/icons/Home';
 import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
-import MapIcon from '@material-ui/icons/Map';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
