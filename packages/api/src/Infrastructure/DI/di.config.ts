@@ -200,6 +200,9 @@ import CancelWorkOrderAction from '../../API/Http/Actions/WorkOrder/CancelWorkOr
 import CompleteWorkOrderAction from '../../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
 import CompleteWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/CompleteWorkOrderAdapter';
 import CompleteWorkOrderHandler from '../../Application/Handlers/WorkOrder/CompleteWorkOrderHandler';
+import UpdateElementAction from '../../API/Http/Actions/Element/UpdateElementAction';
+import UpdateElementAdapter from '../../API/Http/Adapters/Element/UpdateElementAdapter';
+import UpdateElementHandler from '../../Application/Handlers/Element/UpdateElementHandler';
 
 const DIContainer = new Container();
 
@@ -257,6 +260,8 @@ DIContainer.bind<ShowServiceAction>(ShowServiceAction).toSelf();
 DIContainer.bind<StoreElementAction>(StoreElementAction).toSelf();
 DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
 DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
+DIContainer.bind<UpdateElementAction>(UpdateElementAction).toSelf();
+
 
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
@@ -315,6 +320,7 @@ DIContainer.bind<ShowServiceAdapter>(ShowServiceAdapter).toSelf();
 
 DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
 DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
+DIContainer.bind<UpdateElementAdapter>(UpdateElementAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
@@ -371,6 +377,7 @@ DIContainer.bind<ShowServiceHandler>(ShowServiceHandler).toSelf();
 
 DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
 DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
+DIContainer.bind<UpdateElementHandler>(UpdateElementHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
