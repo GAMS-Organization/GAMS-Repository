@@ -15,16 +15,19 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 import CardAvatar from '../../components/Card/CardAvatar';
 
-import serviceSector from '../../../services/api/sector';
+import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import { Input } from '@material-ui/core';
+import CustomTabs from '../../components/CustomTabs/CustomTabs';
+import MapIcon from '@material-ui/icons/Map';
 
-class LoadMapSection extends React.Component {
+class LoadMapArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedImage: null,
-      sector: {},
+      selectedServices: [],
+      area: {},
+      service: [],
       errors: {},
       open: false,
       notification: {
@@ -42,6 +45,20 @@ class LoadMapSection extends React.Component {
     };
   }
 
+  //se obtienen los servicios y sus respectivos  mapas
+  componentWillMount = async () => {
+    const responseService = await serviceArea.list();
+
+    let services = [];
+
+    for (const service of responseService.data.items) {
+      let dataService = [service.id.toString(), service.name];
+      services.push(dataService);
+    }
+
+    this.setState({ service: services });
+  };
+
   componentDidMount = () => {
     this.props.onRef(this);
   };
@@ -54,8 +71,8 @@ class LoadMapSection extends React.Component {
     this.setState({ open: false, rolClicked: false });
   };
 
-  showModal = async () => {
-    this.setState({ open: true });
+  showModal = async servicios => {
+    this.setState({ open: true, selectedServices: servicios });
   };
 
   closeNotification = () => {
@@ -76,15 +93,15 @@ class LoadMapSection extends React.Component {
   };
 
   //se actualiza el mapa luego de ser editado
-  uploadMapSector = async e => {
+  uploadMapService = async (e, areaName) => {
     e.preventDefault();
-    const formElements = e.target.elements;
-
+    const inputElement = e.target.elements.namedItem('map');
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
-    const NameSector = 'sector/';
+    const response = await serviceArea.imageMapUpload(formDataImage, this.props.area.id);
+
+    const nameArea = 'area/';
     const invalid = / /;
 
     //En la primer condicion valida que el nombre de la imagen no contenga un espacio en blanco
@@ -101,11 +118,16 @@ class LoadMapSection extends React.Component {
       });
     } else {
       if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+        const urlService = nameArea.concat(response.data.path.split(/(\\|\/)/g).pop());
+
         const formValues = {
-          id: formElements.namedItem('id').value,
-          map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
+          id: this.props.area.id,
+
+          maps: [{ url: urlService, service: inputElement.id }],
+          services: this.state.selectedServices,
+          name: this.props.area.name,
         };
-        const response2 = await serviceSector.update(formValues);
+        const response2 = await serviceArea.update(formValues);
 
         if (response2.type === 'UPDATED_SUCCESFUL') {
           this.setState({
@@ -113,7 +135,7 @@ class LoadMapSection extends React.Component {
             open: false,
             rolClicked: false,
           });
-          window.location.reload();
+          //window.location.reload();
         } else {
           this.setState({
             notification: {
@@ -140,9 +162,9 @@ class LoadMapSection extends React.Component {
   };
 
   render() {
-    const { classes, sector, Transition } = this.props;
+    const { classes, area, Transition } = this.props;
     const { errors } = this.state;
-    const { id, name, code, map } = sector;
+    const { id, name, code, maps, services } = area;
 
     return (
       <div>
@@ -160,6 +182,8 @@ class LoadMapSection extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
+          fullWidth={true}
+          maxWidth={'lg'}
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
@@ -168,64 +192,55 @@ class LoadMapSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Cargar mapa</h4>
+            <h4 className={classes.modalTitle}>Editar mapa</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.uploadMapSector}>
+            <form
+              onSubmit={e => {
+                this.uploadMapService(e, name);
+              }}
+            >
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <CustomInput
-                    labelText="Nombre"
-                    id="name"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: name,
-                      name: 'name',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={7}>
-                  <br />
-                  <br />
-                  <input
-                    labelText="Mapa"
-                    id="map"
-                    type="file"
-                    accept="image/*"
-                    error={errors.map}
-                    onChange={this.imageSelectedHandler}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: map,
-                      name: 'map',
-                    }}
-                  />
-                </GridItem>
+                <CustomTabs
+                  title=""
+                  headerColor="gamsBlue"
+                  tabs={this.state.selectedServices.map((service, index) => {
+                    return {
+                      tabName: service,
+                      tabIcon: MapIcon,
+                      tabContent: (
+                        <>
+                          <img
+                            src={`http://localhost/api/static/${maps[index]}`}
+                            width="100%"
+                            height="100%"
+                            border="10"
+                            alt={'Mapa'}
+                          />
+                          <input
+                            labelText="Mapa"
+                            id={service}
+                            type="file"
+                            accept="image/*"
+                            error={errors.map}
+                            name={'map'}
+                            onChange={this.imageSelectedHandler}
+                            formControlProps={{
+                              fullWidth: true,
+                            }}
+                            inputProps={{
+                              required: true,
+                              defaultValue: maps[index],
+                              name: 'map',
+                            }}
+                          />
+                        </>
+                      ),
+                    };
+                  })}
+                />
               </GridContainer>
+
               <Button type="submit" color="gamsRed">
                 Actualizar
               </Button>
@@ -234,23 +249,13 @@ class LoadMapSection extends React.Component {
               </Button>
             </form>
           </DialogContent>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12}>
-              <img
-                src={`http://localhost/api/static/${this.props.sector.map}`}
-                width="100%"
-                height="100%"
-                border="10"
-              ></img>
-            </GridItem>
-          </GridContainer>
         </Dialog>
       </div>
     );
   }
 }
 
-LoadMapSection.propTypes = {
+LoadMapArea.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   lastName: PropTypes.string,
@@ -259,4 +264,4 @@ LoadMapSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(modalStyle)(LoadMapSection);
+export default withStyles(modalStyle)(LoadMapArea);

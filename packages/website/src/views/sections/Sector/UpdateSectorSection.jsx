@@ -71,6 +71,7 @@ class UpdateSectorSection extends React.Component {
     this.setState({
       selectedImage: event.target.files[0],
     });
+    console.log(this.state.selectedImage);
   };
 
   //se actualiza el mapa luego de ser editado
@@ -82,6 +83,7 @@ class UpdateSectorSection extends React.Component {
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
     const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+
     const NameSector = 'sector/';
     const invalid = / /;
 
@@ -111,7 +113,7 @@ class UpdateSectorSection extends React.Component {
             open: false,
             rolClicked: false,
           });
-          window.location.reload();
+          //window.location.reload();
         } else {
           this.setState({
             notification: {
@@ -141,7 +143,6 @@ class UpdateSectorSection extends React.Component {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
     const { id, name, code, map } = sector;
-    console.log(sector);
 
     return (
       <div>

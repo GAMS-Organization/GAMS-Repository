@@ -33,13 +33,17 @@ class AreaTableSection extends React.Component {
 
     let areas = [];
     for (const area of response.data.items) {
-      let dataArea = [
-        area.id.toString(),
-        area.name,
-        area.code,
-        area.sector,
-        area.services.toString().replace(/,/gi, ' - '),
-      ];
+      let dataArea = {
+        visibleData: [
+          area.id.toString(),
+          area.name,
+          area.code,
+          area.sector,
+          area.services.toString().replace(/,/gi, ' - '),
+        ],
+        maps: area.maps,
+        services: area.services,
+      };
       areas.push(dataArea);
     }
     this.setState({ area: areas, totalPages: response.data.pageCount, page: page });

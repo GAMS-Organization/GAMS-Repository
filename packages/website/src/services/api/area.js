@@ -57,6 +57,17 @@ class area {
 
     return areaAdapter.delete(deleteResponse);
   }
+
+  async imageMapUpload(formDataImage, id) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.post(`area/map/${id}`, formDataImage, { 'Content-Type': 'multipart/form-data' });
+    } catch (err) {
+      loadResponse = err;
+    }
+
+    return areaAdapter.imageMapUpload(loadResponse);
+  }
 }
 
 export default new area();

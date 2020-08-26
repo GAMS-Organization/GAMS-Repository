@@ -21,7 +21,6 @@ class sector {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
 
     return sectorAdapter.list(listResponse);
   }
@@ -38,18 +37,6 @@ class sector {
     return sectorAdapter.update(updateResponse);
   }
 
-  async getMapImage(dataSector) {
-    const body = dataSector;
-
-    let updateResponse;
-    try {
-      updateResponse = await Api.get(`sector/${body.id}`);
-    } catch (err) {
-      updateResponse = err;
-    }
-    return updateResponse;
-  }
-
   async delete(id) {
     let deleteResponse;
 
@@ -63,6 +50,7 @@ class sector {
   }
 
   async imageMapUpload(formDataImage, id) {
+    console.log(id);
     let loadResponse;
     try {
       loadResponse = await Api.post(`sector/map/${id}`, formDataImage, { 'Content-Type': 'multipart/form-data' });
@@ -70,7 +58,6 @@ class sector {
       loadResponse = err;
     }
     console.log(loadResponse);
-
     return sectorAdapter.imageMapUpload(loadResponse);
   }
 }

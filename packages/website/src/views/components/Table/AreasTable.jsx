@@ -21,7 +21,7 @@ import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
 import UpdateProductSection from '../../sections/Products/UpdateProductSection';
 import area from '../../../services/api/area';
-import LoadMapArea from '../../sections/Maps/LoadMapArea';
+import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
 
 class AreasTable extends React.Component {
@@ -54,18 +54,18 @@ class AreasTable extends React.Component {
   //se crea la ventana emergente en donde se editaran las areas
   handleClickUpdate = prop => {
     //Se corta el string services y lo transforma en un array de strings
-    var servicio = prop[4].split(' - ');
+    var servicio = prop.visibleData[4].split(' - ');
 
-    this.setState({ area: { id: prop[0], name: prop[1], services: servicio } });
+    this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
     this.child.showModal(servicio);
   };
 
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoadMap = async prop => {
-    var servicio = prop[4].split(' - ');
-
-    this.setState({ area: { id: prop[0], name: prop[1], services: servicio } });
-    this.son.showModal(servicio);
+    this.setState({
+      area: { id: prop.visibleData[0], name: prop.visibleData[1], services: prop.services, maps: prop.maps },
+    });
+    this.son.showModal(prop.services);
   };
 
   componentWillMount = () => {
@@ -113,7 +113,7 @@ class AreasTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
