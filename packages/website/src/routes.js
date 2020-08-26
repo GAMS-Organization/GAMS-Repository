@@ -17,11 +17,26 @@ import Service from 'views/containers/Service.jsx';
 import Area from 'views/containers/Area.jsx';
 import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
+import Preventive from 'views/containers/Preventive';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 
 const dashboardRoutes = [
+  {
+    path: '/stock',
+    name: 'Stock',
+    icon: AssignmentIcon,
+    component: Stock,
+    layout: '/admin',
+  },
+  {
+    path: '/preventive',
+    name: 'Preventivo',
+    icon: AssignmentIcon,
+    component: Preventive,
+    layout: '/admin',
+  },
   {
     path: '/users',
     name: 'Usuarios',
@@ -34,13 +49,6 @@ const dashboardRoutes = [
     name: 'Productos',
     icon: Toys,
     component: Products,
-    layout: '/admin',
-  },
-  {
-    path: '/stock',
-    name: 'Stock',
-    icon: AssignmentIcon,
-    component: Stock,
     layout: '/admin',
   },
   {
