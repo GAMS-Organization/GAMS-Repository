@@ -8,13 +8,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
-import CardAvatar from '../../components/Card/CardAvatar';
-
 import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CustomTabs from '../../components/CustomTabs/CustomTabs';
@@ -69,6 +66,7 @@ class LoadMapArea extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false, rolClicked: false });
+    window.location.reload();
   };
 
   showModal = async servicios => {
@@ -100,7 +98,6 @@ class LoadMapArea extends React.Component {
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
     const response = await serviceArea.imageMapUpload(formDataImage, this.props.area.id);
-
     const nameArea = 'area/';
     const invalid = / /;
 
@@ -131,11 +128,15 @@ class LoadMapArea extends React.Component {
 
         if (response2.type === 'UPDATED_SUCCESFUL') {
           this.setState({
-            notification: { show: true, color: 'success', message: 'El mapa fue cargado correctamente', place: 'tr' },
-            open: false,
+            notification: {
+              show: true,
+              color: 'success',
+              message: 'El mapa fue cargado correctamente, al refrescar pagina se podra visualizar',
+              place: 'tr',
+            },
+            open: true,
             rolClicked: false,
           });
-          //window.location.reload();
         } else {
           this.setState({
             notification: {
@@ -192,7 +193,7 @@ class LoadMapArea extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Editar mapa</h4>
+            <h4 className={classes.modalTitle}>Editar mapa: {name}</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form
@@ -210,43 +211,58 @@ class LoadMapArea extends React.Component {
                       tabIcon: MapIcon,
                       tabContent: (
                         <>
-                          <img
-                            src={`http://localhost/api/static/${maps[index]}`}
-                            width="100%"
-                            height="100%"
-                            border="10"
-                            alt={'Mapa'}
-                          />
-                          <input
-                            labelText="Mapa"
-                            id={service}
-                            type="file"
-                            accept="image/*"
-                            error={errors.map}
-                            name={'map'}
-                            onChange={this.imageSelectedHandler}
-                            formControlProps={{
-                              fullWidth: true,
-                            }}
-                            inputProps={{
-                              required: true,
-                              defaultValue: maps[index],
-                              name: 'map',
-                            }}
-                          />
+                          <GridContainer justify={'center'}>
+                            <GridItem xs={12} sm={12} md={10}>
+                              <img
+                                src={`http://localhost/api/static/${maps[index]}`}
+                                width="100%"
+                                height="100%"
+                                align="center"
+                                alt={'No se ha cargado el mapa aún o no se ha encontrado'}
+                              />
+                            </GridItem>
+                          </GridContainer>
+                          <br />
+                          <br />
+                          <GridContainer>
+                            <GridItem xs={12} sm={8} md={8}>
+                              <input
+                                labelText="Mapa"
+                                id={service}
+                                type="file"
+                                accept="image/*"
+                                error={errors.map}
+                                name={'map'}
+                                onChange={this.imageSelectedHandler}
+                                required={true}
+                                formControlProps={{
+                                  fullWidth: true,
+                                }}
+                                inputProps={{
+                                  defaultValue: maps[index],
+                                  name: 'map',
+                                }}
+                              />
+                            </GridItem>
+                            <GridItem xs={12} sm={4} md={4}>
+                              <Button type="submit" color="gamsRed">
+                                Actualizar
+                              </Button>
+                            </GridItem>
+                          </GridContainer>
                         </>
                       ),
                     };
                   })}
                 />
               </GridContainer>
-
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <GridItem>
+                  <Button color="danger" size={'lg'} simple onClick={this.handleClose}>
+                    Salir
+                  </Button>
+                </GridItem>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

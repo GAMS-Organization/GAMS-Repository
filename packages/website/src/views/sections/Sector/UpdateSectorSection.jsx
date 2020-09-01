@@ -71,7 +71,6 @@ class UpdateSectorSection extends React.Component {
     this.setState({
       selectedImage: event.target.files[0],
     });
-    console.log(this.state.selectedImage);
   };
 
   //se actualiza el mapa luego de ser editado
@@ -113,7 +112,7 @@ class UpdateSectorSection extends React.Component {
             open: false,
             rolClicked: false,
           });
-          //window.location.reload();
+          window.location.reload();
         } else {
           this.setState({
             notification: {
@@ -215,11 +214,11 @@ class UpdateSectorSection extends React.Component {
                     accept="image/*"
                     error={errors.map}
                     onChange={this.imageSelectedHandler}
+                    required={true}
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
-                      required: true,
                       defaultValue: map,
                       name: 'map',
                     }}
