@@ -4,103 +4,85 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "../../../styles/sass/styles.scss";
 import {
   rooftopBlueColor,
-  rooftopOrangeColor
 } from "../../../styles/jss/material-dashboard-react";
+import NewEvent from './NewEvent';
+import Slide from '@material-ui/core/Slide';
+import UpdateEvent from './UpdateEvent';
 
-const localizer = momentLocalizer(moment);
+class PreventiveCalendar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      localizer: momentLocalizer(moment),
+      events: [],
 
-function eventStyleGetter(event) {
-  const style = {
-    // backgroundColor: event.hexColor,
-    backgroundColor: "#5cb860",
-    color: "black",
-    border: "0px",
-    display: "block"
-  };
-  return {
-    style: style
-  };
-}
-
-export default function PreventiveCalendar({ trainingsObject }) {
-  return (
-    <Calendar
-      localizer={localizer}
-      events={[{
-        title: 'string',
-        start: new Date(),
-        end: new Date(),
-      }]}
-      startAccessor="start"
-      endAccessor="end"
-      style={{
-        height: 500,
-        fontWeight: 400,
-        color: rooftopBlueColor[0]
-      }}
-    />
-  );
-}
-
-function getClassesFromTrainingsObject(trainingsObject) {
-  var training;
-  var trainings = [];
-  for (const finishedTraining of trainingsObject.finishedTrainings) {
-    training = finishedTraining.trainingClasses.map(trainingClass => {
-      const { id, startDate, finishDate } = trainingClass;
-      const { start, end } = getCourseTimes(startDate, finishDate);
-      return {
-        id,
-        title: deletedTitle(finishedTraining.name),
-        allDay: false,
-        start,
-        end,
-        hexColor: "#BFBFBF"
-      };
-    });
-    trainings = [...trainings, ...training];
+    };
   }
-  for (const currentTraining of trainingsObject.currentTrainings) {
-    let trainingColor = rooftopOrangeColor[Math.trunc(Math.random() * 9)];
 
-    training = currentTraining.trainingClasses.map(trainingClass => {
-      const { id, startDate, finishDate } = trainingClass;
-
-      const { start, end } = getCourseTimes(startDate, finishDate);
-      return {
-        id,
-        title: currentTraining.name,
-        allDay: false,
-        start,
-        end,
-        hexColor: trainingColor
-      };
-    });
-    trainings = [...trainings, ...training];
-  }
-  return trainings;
-}
-
-function getCourseTimes(startDate, finishDate) {
-  const [courseStartDate, courseStartHour] = startDate.split(" ");
-  const [startYear, startMonth, startDay] = courseStartDate.split("-");
-  const [startHour, startMinute] = courseStartHour.split(":");
-
-  const [courseEndDate, courseEndHour] = finishDate.split(" ");
-  const [endYear, endMonth, endDay] = courseEndDate.split("-");
-  const [endHour, endMinute] = courseEndHour.split(":");
-
-  return {
-    start: new Date(startYear, startMonth, startDay, startHour, startMinute),
-    end: new Date(endYear, endMonth, endDay, endHour, endMinute)
+  handleClickCreateEvent = event => {
+    const events = this.state.events;
+    events.push(event);
+    this.setState({ events });
   };
+
+  handleClickShowCreateModal = slot => {
+    this.setState({ slot, event:false });
+    this.child.showModal();
+  };
+
+  handleClickUpdateEvent = event => {
+    const events = this.state.events;
+    events.push(event);
+    this.setState({ events });
+  };
+
+  handleClickShowUpdateModal = event => {
+    this.setState({ event, slot: false });
+    this.child.showModal();
+  };
+
+  render(){
+    const Transition = React.forwardRef(function Transition(props, ref) {
+      return <Slide direction="down" ref={ref} {...props} />;
+    });
+    return (
+      <>
+      <Calendar
+        localizer={this.state.localizer}
+        events={this.state.events}
+        views={['month']}
+        startAccessor="start"
+        endAccessor="end"
+        selectable={true}
+        onSelectSlot={(e) => this.handleClickShowCreateModal(e)}
+        onSelectEvent={(e) => this.handleClickShowUpdateModal(e)}
+        style={{
+          height: 500,
+          fontWeight: 400,
+          color: rooftopBlueColor[0]
+        }}
+      />
+        {this.state.slot?
+          <NewEvent
+            event={this.state.slot}
+            create={this.handleClickCreateEvent}
+            onRef={ref => (this.child = ref)}
+            Transition={Transition}
+          />
+          : null
+        }
+        {this.state.event?
+          <UpdateEvent
+            event={this.state.event}
+            create={this.handleClickUpdateEvent}
+            onRef={ref => (this.child = ref)}
+            Transition={Transition}
+          />
+          : null
+        }
+      </>
+    );
+  }
 }
 
-const deletedTitle = title => (
-  <div>
-    <div style={{ display: "inline-block" }}>{`${title} -`}</div>
-    <div style={{ color: "#CA2D2D", display: "inline-block" }}>
-      &nbsp;{"Finalizado"}
-    </div>
-  </div>
-);
+export default PreventiveCalendar;
