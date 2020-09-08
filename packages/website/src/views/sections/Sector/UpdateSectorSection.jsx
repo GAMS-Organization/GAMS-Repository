@@ -82,6 +82,7 @@ class UpdateSectorSection extends React.Component {
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
     const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+
     const NameSector = 'sector/';
     const invalid = / /;
 
@@ -141,7 +142,6 @@ class UpdateSectorSection extends React.Component {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
     const { id, name, code, map } = sector;
-    console.log(sector);
 
     return (
       <div>
@@ -214,11 +214,11 @@ class UpdateSectorSection extends React.Component {
                     accept="image/*"
                     error={errors.map}
                     onChange={this.imageSelectedHandler}
+                    required={true}
                     formControlProps={{
                       fullWidth: true,
                     }}
                     inputProps={{
-                      required: true,
                       defaultValue: map,
                       name: 'map',
                     }}

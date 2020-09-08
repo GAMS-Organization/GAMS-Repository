@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd gamsdocker
+rm -r mysql-data
+rm -r mysql-config
+
+echo 'Se borraron los archivos mysql-data & mysql-config'
