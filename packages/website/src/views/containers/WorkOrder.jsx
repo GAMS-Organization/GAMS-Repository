@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
-
+import NewWorkOrder from '../sections/WorkOrder/NewWorkOrder';
 import NewUserSection from '../sections/users/NewUserSection';
 import UsersTable from '../sections/users/UsersTableSection';
 
@@ -26,7 +26,7 @@ const styles = {
   },
 };
 
-class Users extends React.Component {
+class WorkOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,14 +35,18 @@ class Users extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <NewWorkOrder />
+      </div>
+    );
   }
 }
 
-Users.propTypes = {
+WorkOrder.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
 };
 
-export default withStyles(styles)(Users);
+export default withStyles(styles)(WorkOrder);
