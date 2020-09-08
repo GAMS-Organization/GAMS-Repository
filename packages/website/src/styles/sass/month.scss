@@ -91,6 +91,7 @@
   flex: 1 0 0%;
 
   background-color: white;
+  cursor: pointer;
 
   & + & {
     border-left: 1px solid $cell-border;

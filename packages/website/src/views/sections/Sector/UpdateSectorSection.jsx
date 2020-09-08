@@ -136,7 +136,6 @@ class UpdateSectorSection extends React.Component {
     const { classes, sector, Transition } = this.props;
     const { errors } = this.state;
     const { id, name, map } = sector;
-    console.log(sector);
 
     return (
       <div>

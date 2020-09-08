@@ -21,7 +21,6 @@ class sector {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
 
     return sectorAdapter.list(listResponse);
   }
@@ -69,7 +68,6 @@ class sector {
     } catch (err) {
       loadResponse = err;
     }
-    console.log(loadResponse);
 
     return sectorAdapter.imageMapUpload(loadResponse);
   }
