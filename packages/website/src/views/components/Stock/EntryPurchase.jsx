@@ -33,7 +33,7 @@ class EntryPurchase extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false });
-  }
+  };
 
   deleteEntry = async prop => {
     const response = await serviceEntryPurchaseStock.delete(prop[0]);
@@ -44,16 +44,16 @@ class EntryPurchase extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
-   handleClickSeeDetails = async prop => {
+  handleClickSeeDetails = async prop => {
     const id = prop[0];
     const entryDetails = await serviceEntryPurchaseStock.getById(id);
     this.setState({
       entry: entryDetails.data.data,
     });
     this.child.showModal();
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
