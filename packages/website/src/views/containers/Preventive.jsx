@@ -23,17 +23,14 @@ const styles = {
   },
 };
 
-class Preventive extends React.Component{
+class Preventive extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
-  render(){
-    return(
-      <PreventiveCalendar>
-        </PreventiveCalendar>
-    );
+  render() {
+    return <PreventiveCalendar />;
   }
 }
 

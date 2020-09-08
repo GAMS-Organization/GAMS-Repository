@@ -12,15 +12,15 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
+import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
-import UpdateProductSection from '../../sections/Products/UpdateProductSection';
-import area from '../../../services/api/area';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
+import Slide from '@material-ui/core/Slide';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -72,7 +72,9 @@ class AreasTable extends React.Component {
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-
+    const Transition = React.forwardRef(function Transition(props, ref) {
+      return <Slide direction="down" ref={ref} {...props} />;
+    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar

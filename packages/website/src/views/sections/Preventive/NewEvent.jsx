@@ -15,6 +15,12 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import { createDate, toDate } from '../../../utils/helpers/dateHelper';
+import FormControl from '@material-ui/core/FormControl';
+import { InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import serviceUser from '../../../services/api/user';
 
 class NewEvent extends React.Component {
   constructor(props) {
@@ -23,7 +29,10 @@ class NewEvent extends React.Component {
       errors: {},
       open: false,
       notification: false,
+      selectedWorkers: [],
+      workers: [],
     };
+    this.listWorkers();
   }
 
   componentDidMount = () => {
@@ -35,7 +44,7 @@ class NewEvent extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, selectedWorkers: [] });
   };
 
   showModal = () => {
@@ -46,9 +55,25 @@ class NewEvent extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  createEvent = async e => {
+  listWorkers = async (page = 1, itemsPerPage = 15) => {
+    const response = await serviceUser.list(page, itemsPerPage);
 
-    const fields = ['startDate', 'endDate', 'title'];
+    let workers = [];
+    for (const user of response.data.items) {
+      if (user.roles[0] !== 'user') {
+        let workersData = { id: user.id, name: user.name, surname: user.surname };
+        workers.push(workersData);
+      }
+    }
+    this.setState({ workers });
+  };
+
+  handleChangeWorkers = event => {
+    this.setState({ selectedWorkers: event.target.value });
+  };
+
+  createEvent = async e => {
+    const fields = ['startDate', 'endDate', 'title', 'description', 'workers'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -58,14 +83,20 @@ class NewEvent extends React.Component {
 
     const event = {
       title: formValues.title,
-      start: formValues.startDate,
-      end: formValues.endDate,
+      start: this.props.event.start,
+      end: this.props.event.end,
       allDay: true,
-    }
-
+      resource: {
+        description: formValues.description,
+        workers: this.state.selectedWorkers,
+      },
+    };
 
     this.props.create(event);
+    this.handleClose();
+    this.props.closeHandler();
 
+    // window.location.reload();
 
     // e.preventDefault();
     //
@@ -116,7 +147,7 @@ class NewEvent extends React.Component {
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={() => this.setState({open: false})}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -125,39 +156,7 @@ class NewEvent extends React.Component {
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.createEvent}>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Fecha de inicio"
-                    id="startDate"
-                    error={errors.startDate}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: event.start,
-                      name: 'startDate',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Fecha de fin"
-                    id="endDate"
-                    error={errors.endDate}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: event.end,
-                      name: 'endDate',
-                    }}
-                  />
-                </GridItem>
+              <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Título"
@@ -173,13 +172,108 @@ class NewEvent extends React.Component {
                     }}
                   />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Fecha de inicio"
+                    id="startDate"
+                    error={errors.startDate}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      required: true,
+                      defaultValue: toDate(event.start),
+                      name: 'startDate',
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <CustomInput
+                    labelText="Fecha de fin"
+                    id="endDate"
+                    error={errors.endDate}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      required: true,
+                      defaultValue: toDate(event.end),
+                      name: 'endDate',
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={12}>
+                  <CustomInput
+                    labelText="Descripción"
+                    id="description"
+                    error={errors.description}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: '',
+                      name: 'description',
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={10}>
+                  <FormControl fullWidth className={classes.selectFormControl}>
+                    <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
+                      Responsables
+                    </InputLabel>
+                    <Select
+                      multiple
+                      value={this.state.selectedWorkers}
+                      onChange={this.handleChangeWorkers}
+                      MenuProps={{
+                        className: classes.selectMenu,
+                        classes: { paper: classes.selectPaper },
+                      }}
+                      classes={{
+                        select: classes.select,
+                      }}
+                      inputProps={{
+                        name: 'workers',
+                        id: 'workers',
+                      }}
+                    >
+                      <MenuItem
+                        disabled
+                        classes={{
+                          root: classes.selectMenuItem,
+                        }}
+                      >
+                        Responsables
+                      </MenuItem>
+                      {this.state.workers.map(worker => (
+                        <MenuItem
+                          key={worker.id}
+                          value={worker.name + ' ' + worker.surname}
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelectedMultiple,
+                          }}
+                        >
+                          {worker.name + ' ' + worker.surname}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <Button type="submit" color="gamsRed">
+                    Crear
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
+                  <Button type="reset" color="danger" simple onClick={this.handleClose}>
+                    Cancelar
+                  </Button>
+                </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Crear
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -196,6 +290,7 @@ NewEvent.propTypes = {
   password: PropTypes.string,
   type: PropTypes.string,
   create: PropTypes.func,
+  closeHandler: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(NewEvent);

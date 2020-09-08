@@ -56,4 +56,3 @@ export const updateElementSchema = {
       return customErrorMessages.default(errors);
     }),
 };
-

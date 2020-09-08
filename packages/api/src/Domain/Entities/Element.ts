@@ -45,7 +45,7 @@ export default class Element {
   }
 
   public getSteps(): string {
-      return this.steps;
+    return this.steps;
   }
 
   public getService(): Service {

@@ -262,7 +262,6 @@ DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
 DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
 DIContainer.bind<UpdateElementAction>(UpdateElementAction).toSelf();
 
-
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
 DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();

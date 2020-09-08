@@ -8,6 +8,7 @@ import House from '@material-ui/icons/Home';
 import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
+import Today from '@material-ui/icons/Today';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -33,7 +34,7 @@ const dashboardRoutes = [
   {
     path: '/preventive',
     name: 'Preventivo',
-    icon: AssignmentIcon,
+    icon: Today,
     component: Preventive,
     layout: '/admin',
   },

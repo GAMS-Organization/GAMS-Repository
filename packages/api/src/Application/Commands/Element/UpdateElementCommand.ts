@@ -4,7 +4,7 @@ export default class UpdateElementCommand {
   private description: string;
   private steps: string;
 
-  public constructor(id: number, name: string,  description: string, steps: string) {
+  public constructor(id: number, name: string, description: string, steps: string) {
     this.id = id;
     this.name = name;
     this.description = description;
