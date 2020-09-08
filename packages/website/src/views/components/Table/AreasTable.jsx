@@ -15,8 +15,12 @@ import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-
+import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
+import UpdateProductSection from '../../sections/Products/UpdateProductSection';
+import area from '../../../services/api/area';
+import LoadMapArea from '../../sections/Area/LoadMapArea';
+import MapIcon from '@material-ui/icons/Map';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -45,6 +49,23 @@ class AreasTable extends React.Component {
     window.location.reload();
   };
 
+  //se crea la ventana emergente en donde se editaran las areas
+  handleClickUpdate = prop => {
+    //Se corta el string services y lo transforma en un array de strings
+    var servicio = prop.visibleData[4].split(' - ');
+
+    this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
+    this.child.showModal(servicio);
+  };
+
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoadMap = async prop => {
+    this.setState({
+      area: { id: prop.visibleData[0], name: prop.visibleData[1], services: prop.services, maps: prop.maps },
+    });
+    this.son.showModal(prop.services);
+  };
+
   componentWillMount = () => {
     this.setState({ modal: false });
   };
@@ -67,6 +88,8 @@ class AreasTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <LoadMapArea area={this.state.area} onRef={ref => (this.son = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -85,7 +108,7 @@ class AreasTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -93,6 +116,15 @@ class AreasTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickUpdate.bind(this, prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
@@ -105,6 +137,20 @@ class AreasTable extends React.Component {
                         onClick={this.deleteArea.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-map"
+                      title="Ver mapa"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Maps"
+                        className={classes.tableActionButton}
+                        onClick={this.handleClickLoadMap.bind(this, prop)}
+                      >
+                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

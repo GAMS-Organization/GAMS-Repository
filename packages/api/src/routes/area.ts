@@ -8,6 +8,7 @@ import DestroyAreaAction from '../API/Http/Actions/Area/DestroyAreaAction';
 import StoreAreaAction from '../API/Http/Actions/Area/StoreAreaAction';
 import ShowAreaBySectorAction from '../API/Http/Actions/Area/ShowAreaBySectorAction';
 import UpdateAreaAction from '../API/Http/Actions/Area/UpdateAreaAction';
+import UploadImageAction from '../API/Http/Actions/Area/UploadMapAreaAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 
 const router = express.Router();
@@ -67,6 +68,17 @@ router.get(
       ShowAreaBySectorAction,
     );
     await showAreaBySectorAction.execute(request, response);
+  }),
+);
+
+router.post(
+  '/map/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
+    await uploadImageAction.execute(request, response);
   }),
 );
 

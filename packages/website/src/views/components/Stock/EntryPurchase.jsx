@@ -29,15 +29,13 @@ class EntryPurchase extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteEntry = this.deleteEntry.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false });
-  }
+  };
 
-  async deleteEntry(prop) {
+  deleteEntry = async prop => {
     const response = await serviceEntryPurchaseStock.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -46,16 +44,16 @@ class EntryPurchase extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
-  async handleClickSeeDetails(prop) {
+  handleClickSeeDetails = async prop => {
     const id = prop[0];
     const entryDetails = await serviceEntryPurchaseStock.getById(id);
     this.setState({
       entry: entryDetails.data.data,
     });
     this.child.showModal();
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
