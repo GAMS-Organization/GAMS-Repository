@@ -50,14 +50,12 @@ class sector {
   }
 
   async imageMapUpload(formDataImage, id) {
-    console.log(id);
     let loadResponse;
     try {
       loadResponse = await Api.post(`sector/map/${id}`, formDataImage, { 'Content-Type': 'multipart/form-data' });
     } catch (err) {
       loadResponse = err;
     }
-    console.log(loadResponse);
     return sectorAdapter.imageMapUpload(loadResponse);
   }
 }

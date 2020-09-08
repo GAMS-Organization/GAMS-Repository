@@ -79,8 +79,6 @@ class UpdateAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    //formValues.roles = [formValues.roles];
-
     formValues.services = formValues.services.split(',');
 
     const response = await serviceArea.update(formValues);
