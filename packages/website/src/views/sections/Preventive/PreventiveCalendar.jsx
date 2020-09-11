@@ -13,6 +13,8 @@ class PreventiveCalendar extends React.Component {
     this.state = {
       localizer: momentLocalizer(moment),
       events: [],
+      showNewEventModal: false,
+      showUpdateEventModal: false,
     };
   }
 
@@ -23,8 +25,7 @@ class PreventiveCalendar extends React.Component {
   };
 
   handleClickShowCreateModal = slot => {
-    this.setState({ slot, event: false });
-    this.child.showModal();
+    this.setState({ slot, event: false, showNewEventModal: true });
   };
 
   handleClickUpdateEvent = event => {
@@ -34,12 +35,11 @@ class PreventiveCalendar extends React.Component {
   };
 
   handleClickShowUpdateModal = event => {
-    this.setState({ event, slot: false });
-    this.child.showModal();
+    this.setState({ event, slot: false, showUpdateEventModal: true });
   };
 
   handleClose = () => {
-    this.setState({ slot: false, event: false });
+    this.setState({ slot: false, event: false, showNewEventModal: false, showUpdateEventModal: false });
   };
 
   render() {
@@ -63,20 +63,18 @@ class PreventiveCalendar extends React.Component {
             color: rooftopBlueColor[0],
           }}
         />
-        {this.state.slot ? (
+        {this.state.slot && this.state.showNewEventModal ? (
           <NewEvent
             event={this.state.slot}
             create={this.handleClickCreateEvent}
-            onRef={ref => (this.child = ref)}
             Transition={Transition}
             closeHandler={this.handleClose}
           />
         ) : null}
-        {this.state.event ? (
+        {this.state.event && this.state.showUpdateEventModal ? (
           <UpdateEvent
             event={this.state.event}
             create={this.handleClickUpdateEvent}
-            onRef={ref => (this.child = ref)}
             Transition={Transition}
             closeHandler={this.handleClose}
           />

@@ -27,7 +27,7 @@ class UpdateEvent extends React.Component {
     super(props);
     this.state = {
       errors: {},
-      open: false,
+      open: true,
       notification: false,
       selectedWorkers: [],
       workers: [],
@@ -35,20 +35,9 @@ class UpdateEvent extends React.Component {
     this.listWorkers();
   }
 
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
   handleClose = () => {
+    this.props.closeHandler();
     this.setState({ open: false, selectedWorkers: [] });
-  };
-
-  showModal = () => {
-    this.setState({ open: true });
   };
 
   closeNotification = () => {
@@ -88,7 +77,7 @@ class UpdateEvent extends React.Component {
       allDay: true,
       resource: {
         description: formValues.description,
-        workers: formValues.workers,
+        workers: this.state.selectedWorkers,
       },
     };
 
@@ -148,12 +137,12 @@ class UpdateEvent extends React.Component {
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={() => this.setState({ open: false })}
+          onClose={this.handleClose}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Crear evento</h4>
+            <h4 className={classes.modalTitle}>Actualizar evento</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.createEvent}>
@@ -252,7 +241,7 @@ class UpdateEvent extends React.Component {
                       {this.state.workers.map(worker => (
                         <MenuItem
                           key={worker.id}
-                          value={worker.name + ' ' + worker.surname}
+                          value={worker.id}
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelectedMultiple,

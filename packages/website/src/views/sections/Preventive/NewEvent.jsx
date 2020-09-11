@@ -27,7 +27,7 @@ class NewEvent extends React.Component {
     super(props);
     this.state = {
       errors: {},
-      open: false,
+      open: true,
       notification: false,
       selectedWorkers: [],
       workers: [],
@@ -35,20 +35,9 @@ class NewEvent extends React.Component {
     this.listWorkers();
   }
 
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
   handleClose = () => {
+    this.props.closeHandler();
     this.setState({ open: false, selectedWorkers: [] });
-  };
-
-  showModal = () => {
-    this.setState({ open: true });
   };
 
   closeNotification = () => {
@@ -147,7 +136,7 @@ class NewEvent extends React.Component {
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={() => this.setState({ open: false })}
+          onClose={this.handleClose}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -251,7 +240,7 @@ class NewEvent extends React.Component {
                       {this.state.workers.map(worker => (
                         <MenuItem
                           key={worker.id}
-                          value={worker.name + ' ' + worker.surname}
+                          value={worker.id}
                           classes={{
                             root: classes.selectMenuItem,
                             selected: classes.selectMenuItemSelectedMultiple,
