@@ -8,6 +8,10 @@ export const toDate = date => {
   return moment(date).format('DD-MM-YYYY');
 };
 
+export const toTime = date => {
+  return moment(date).format('HH:mm');
+};
+
 export const createDate = (date = null) => {
   return date ? moment(date) : moment();
 };

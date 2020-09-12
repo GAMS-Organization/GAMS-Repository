@@ -35,6 +35,7 @@ class PreventiveCalendar extends React.Component {
   };
 
   handleClickShowUpdateModal = event => {
+    console.log(event);
     this.setState({ event, slot: false, showUpdateEventModal: true });
   };
 
@@ -51,7 +52,7 @@ class PreventiveCalendar extends React.Component {
         <Calendar
           localizer={this.state.localizer}
           events={this.state.events}
-          views={['month']}
+          views={['month', 'day']}
           startAccessor="start"
           endAccessor="end"
           selectable={true}

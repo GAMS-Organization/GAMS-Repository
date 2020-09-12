@@ -15,6 +15,12 @@ $active-border: darken($btn-border, 12%);
     flex-grow:1;
     padding: 0 10px;
     text-align: center;
+    background-color: $active-background;
+    color: white;
+    border-color: white;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: thin;
   }
 
   & button {
@@ -41,7 +47,7 @@ $active-border: darken($btn-border, 12%);
       &:hover,
       &:focus {
         color: $btn-color;
-        background-color: darken($btn-bg, 17%);
+        background-color: $active-background;
         border-color: darken($btn-border, 25%);
       }
     }

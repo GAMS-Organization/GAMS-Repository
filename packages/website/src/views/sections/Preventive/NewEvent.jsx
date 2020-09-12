@@ -15,12 +15,13 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import { createDate, toDate } from '../../../utils/helpers/dateHelper';
+import { createDate, toDate, toTime } from '../../../utils/helpers/dateHelper';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceUser from '../../../services/api/user';
+import CheckboxInput from '../../components/CustomInput/Checkbox';
 
 class NewEvent extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class NewEvent extends React.Component {
       notification: false,
       selectedWorkers: [],
       workers: [],
+      allDay: false,
     };
     this.listWorkers();
   }
@@ -61,6 +63,10 @@ class NewEvent extends React.Component {
     this.setState({ selectedWorkers: event.target.value });
   };
 
+  handleCheck = value => {
+    this.setState({ allDay: value });
+  };
+
   createEvent = async e => {
     const fields = ['startDate', 'endDate', 'title', 'description', 'workers'];
     const formElements = e.target.elements;
@@ -74,7 +80,7 @@ class NewEvent extends React.Component {
       title: formValues.title,
       start: this.props.event.start,
       end: this.props.event.end,
-      allDay: true,
+      allDay: false,
       resource: {
         description: formValues.description,
         workers: this.state.selectedWorkers,
@@ -193,7 +199,7 @@ class NewEvent extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={12}>
+                <GridItem xs={12} sm={12} md={8}>
                   <CustomInput
                     labelText="Descripción"
                     id="description"
@@ -207,6 +213,45 @@ class NewEvent extends React.Component {
                       name: 'description',
                     }}
                   />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="Comienza"
+                        id="startTime"
+                        error={errors.startTime}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          disabled: this.state.allDay,
+                          required: true,
+                          defaultValue: toTime(event.start),
+                          name: 'startTime',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="Finaliza"
+                        id="endTime"
+                        error={errors.endTime}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          disabled: this.state.allDay,
+                          required: true,
+                          defaultValue: toTime(event.end),
+                          name: 'endTime',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CheckboxInput handleCheck={this.handleCheck} label={'Todo el día'} />
+                    </GridItem>
+                  </GridContainer>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={10}>
                   <FormControl fullWidth className={classes.selectFormControl}>
