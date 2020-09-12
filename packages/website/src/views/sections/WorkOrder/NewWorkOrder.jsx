@@ -24,6 +24,8 @@ import { Input, InputLabel } from '@material-ui/core';
 import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import serviceService from '../../../services/api/service';
+import serviceAsset from '../../../services/api/asset';
+import serviceUser from '../../../services/api/user';
 
 class NewWorkOrder extends React.Component {
   constructor(props) {
@@ -39,11 +41,19 @@ class NewWorkOrder extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
+      DateNow: '',
     };
   }
 
+  DateNow = () => {
+    var date = Date.Now();
+    console.log(date);
+
+    this.setState({ DateNow: date });
+  };
+
   //se obtienen los sectores
-  async componentWillMount() {
+  componentWillMount = async () => {
     //sectores
     const responseSector = await serviceSector.list(1, 50);
     let sectores = [];
@@ -53,7 +63,7 @@ class NewWorkOrder extends React.Component {
     }
 
     this.setState({ sector: sectores });
-  }
+  };
 
   //Controlador para seleccionar un sector
   handleChangeSector = async event => {
@@ -100,11 +110,36 @@ class NewWorkOrder extends React.Component {
   //Controlador para seleccionar un elemento
   handleChangeElement = event => {
     this.setState({ selectedElement: event.target.value });
+
+    //const response = await.serviceAsset;
+  };
+
+  //Se obtiene el activo
+  getAsset = async e => {
+    e.preventDefault();
+
+    const fields = ['sector', 'area', 'service', 'element'];
+    const formElements = e.target.elements;
+    const formValues = fields
+      .map(field => ({
+        [field]: formElements.namedItem(field).id,
+      }))
+      .reduce((current, next) => ({ ...current, ...next }));
+
+    console.log(formValues);
+
+    formValues.roles = [formValues.roles];
+
+    //const response = await serviceAsset;
   };
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };
+
+  /*handleChange = event => {
+    setAge(event.target.value);
+  };*/
 
   render() {
     const { classes, name } = this.props;
@@ -135,18 +170,11 @@ class NewWorkOrder extends React.Component {
                 <CardBody>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
-                      <CustomInput
-                        labelText="Nombre"
-                        id="name"
-                        error={errors.name}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          required: true,
-                          defaultValue: name,
-                          name: 'name',
-                        }}
+                      <img
+                        //src={`http://localhost/api/static/${this.props.sector.map}`}
+                        width="100%"
+                        height="100%"
+                        border="10"
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
@@ -291,26 +319,77 @@ class NewWorkOrder extends React.Component {
                         <CustomInput
                           labelText=""
                           id="date"
+                          value={this.state.DateNow}
+                          //ready={this.date}
                           formControlProps={{
+                            //ready: this.date,
                             fullWidth: true,
                             disabled: true,
                           }}
                           inputProps={{
                             type: 'date',
                             required: true,
-                            defaultValue: new Date().toDateString(),
+                            //defaultValue: Date.now(),
                             name: 'date',
                           }}
                         />
                       </GridItem>
+                      <GridItem xs={12} sm={12} md={10}>
+                        <FormControl fullWidth className={classes.selectFormControl}>
+                          <InputLabel htmlFor="Prioridad" className={classes.selectLabel}>
+                            Prioridad
+                          </InputLabel>
+                          <Select
+                            MenuProps={{
+                              className: classes.selectMenu,
+                            }}
+                            classes={{
+                              select: classes.select,
+                            }}
+                            onChange={this.handleChange}
+                            value={this.state.Priority}
+                            inputProps={{
+                              name: 'priority',
+                              id: 'priority',
+                            }}
+                          >
+                            <MenuItem /*value={alta}*/>Alta</MenuItem>
+                            <MenuItem /*value={media}*/>Media</MenuItem>
+                            <MenuItem /*value={baja}*/>Baja</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={10}>
+                        <CustomInput
+                          labelText="Observaciones"
+                          id="observations"
+                          formControlProps={{
+                            fullWidth: true,
+                          }}
+                          inputProps={{
+                            required: true,
+                            defaultValue: '',
+                            name: 'observations',
+                          }}
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={6}>
+                        <CardFooter>
+                          <Button type="submit" color="gamsRed">
+                            Crear
+                          </Button>
+                        </CardFooter>
+                      </GridItem>
+                      {/*<GridItem xs={12} sm={12} md={6}>
+                        <CardFooter>
+                          <Button color="danger" simple onClick={this.closeNotification}>
+                            Cancelar
+                          </Button>
+                        </CardFooter>
+                      </GridItem>*/}
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
-                </CardFooter>
               </Card>
             </form>
           </GridItem>
