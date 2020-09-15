@@ -137,6 +137,27 @@ class NewWorkOrder extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //Se crea el activo
+  /*CreateWorkOrder = async e => {
+    e.preventDefault();
+
+    const formValues = {
+      sector: this.state.selectedSector,
+      area: this.state.selectedArea,
+      service: this.state.selectedService,
+      element: this.state.selectedElement,
+    };
+
+    const response = await serviceAsset.create(formValues);
+
+    if (response.type === 'CREATED_SUCCESFUL') {
+      this.setState({ notification: true });
+      window.location.reload();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
+  };*/
+
   /*handleChange = event => {
     setAge(event.target.value);
   };*/
@@ -194,6 +215,7 @@ class NewWorkOrder extends React.Component {
                             onChange={this.handleChangeSector}
                             input={<Input />}
                             inputProps={{
+                              required: true,
                               name: 'sector',
                               id: 'sector',
                             }}
@@ -228,6 +250,7 @@ class NewWorkOrder extends React.Component {
                             value={this.state.selectedArea}
                             onChange={this.handleChangeArea}
                             inputProps={{
+                              required: true,
                               name: 'area',
                               id: 'area',
                             }}
@@ -262,6 +285,7 @@ class NewWorkOrder extends React.Component {
                             value={this.state.selectedService}
                             onChange={this.handleChangeService}
                             inputProps={{
+                              required: true,
                               name: 'service',
                               id: 'service',
                             }}
@@ -296,6 +320,7 @@ class NewWorkOrder extends React.Component {
                             value={this.state.selectedElement}
                             onChange={this.handleChangeElement}
                             inputProps={{
+                              required: true,
                               name: 'element',
                               id: 'element',
                             }}
@@ -349,6 +374,7 @@ class NewWorkOrder extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.Priority}
                             inputProps={{
+                              required: true,
                               name: 'priority',
                               id: 'priority',
                             }}
@@ -373,7 +399,7 @@ class NewWorkOrder extends React.Component {
                           }}
                         />
                       </GridItem>
-                      <GridItem xs={12} sm={12} md={6}>
+                      <GridItem justify={'center'} xs={4} sm={4} md={4}>
                         <CardFooter>
                           <Button type="submit" color="gamsRed">
                             Crear
