@@ -15,3 +15,7 @@ export const toTime = date => {
 export const createDate = (date = null) => {
   return date ? moment(date) : moment();
 };
+
+export const createDateTime = (date, time) => {
+  return moment(date + " " + time, "DD-MM-YYYY HH:mm");
+};

@@ -15,7 +15,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import { createDate, toDate, toTime } from '../../../utils/helpers/dateHelper';
+import { createDate, createDateTime, toDate, toTime } from '../../../utils/helpers/dateHelper';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
@@ -68,7 +68,7 @@ class NewEvent extends React.Component {
   };
 
   createEvent = async e => {
-    const fields = ['startDate', 'endDate', 'title', 'description', 'workers'];
+    const fields = ['startDate', 'endDate', 'title', 'description', 'workers', 'startTime', 'endTime'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -76,10 +76,12 @@ class NewEvent extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    console.log(createDateTime(formValues.startDate, formValues.startTime));
+
     const event = {
       title: formValues.title,
-      start: this.props.event.start,
-      end: this.props.event.end,
+      start: createDateTime(formValues.startDate, formValues.startTime),
+      end: createDateTime(formValues.endDate, formValues.endTime),
       allDay: false,
       resource: {
         description: formValues.description,
@@ -127,7 +129,7 @@ class NewEvent extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Producto actualizado correctamente'
+              : 'Evento creado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -228,6 +230,7 @@ class NewEvent extends React.Component {
                           disabled: this.state.allDay,
                           required: true,
                           defaultValue: toTime(event.start),
+                          type: 'time',
                           name: 'startTime',
                         }}
                       />
@@ -244,6 +247,7 @@ class NewEvent extends React.Component {
                           disabled: this.state.allDay,
                           required: true,
                           defaultValue: toTime(event.end),
+                          type: 'time',
                           name: 'endTime',
                         }}
                       />

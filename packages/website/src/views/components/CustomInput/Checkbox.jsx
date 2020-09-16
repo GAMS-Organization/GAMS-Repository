@@ -11,8 +11,9 @@ import styles from '../../../styles/jss/material-dashboard-react/checkboxAdnRadi
 class CheckboxInput extends React.Component {
   constructor(props) {
     super(props);
+    const {checked} = props;
     this.state = {
-      checked: false,
+      checked: checked,
     };
   }
 
