@@ -42,6 +42,7 @@ class NewWorkOrder extends React.Component {
       element: [],
       selectedElement: '',
       DateNow: '',
+      prioritySelected: '',
     };
   }
 
@@ -158,9 +159,9 @@ class NewWorkOrder extends React.Component {
     }
   };*/
 
-  /*handleChange = event => {
-    setAge(event.target.value);
-  };*/
+  handleChangePriority = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
   render() {
     const { classes, name } = this.props;
@@ -371,17 +372,48 @@ class NewWorkOrder extends React.Component {
                             classes={{
                               select: classes.select,
                             }}
-                            onChange={this.handleChange}
-                            value={this.state.Priority}
+                            value={this.state.prioritySelected}
+                            onChange={this.handleChangePriority}
                             inputProps={{
-                              required: true,
-                              name: 'priority',
+                              name: 'prioritySelected',
                               id: 'priority',
                             }}
                           >
-                            <MenuItem /*value={alta}*/>Alta</MenuItem>
-                            <MenuItem /*value={media}*/>Media</MenuItem>
-                            <MenuItem /*value={baja}*/>Baja</MenuItem>
+                            <MenuItem
+                              disabled
+                              classes={{
+                                root: classes.selectMenuItem,
+                              }}
+                            >
+                              Prioridad
+                            </MenuItem>
+                            <MenuItem
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                              value="Alta"
+                            >
+                              Alta
+                            </MenuItem>
+                            <MenuItem
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                              value="Media"
+                            >
+                              Media
+                            </MenuItem>
+                            <MenuItem
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                              value="Baja"
+                            >
+                              Baja
+                            </MenuItem>
                           </Select>
                         </FormControl>
                       </GridItem>
