@@ -200,6 +200,9 @@ import CancelWorkOrderAction from '../../API/Http/Actions/WorkOrder/CancelWorkOr
 import CompleteWorkOrderAction from '../../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
 import CompleteWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/CompleteWorkOrderAdapter';
 import CompleteWorkOrderHandler from '../../Application/Handlers/WorkOrder/CompleteWorkOrderHandler';
+import ShowAssetAction from '../../API/Http/Actions/Asset/ShowAssetAction';
+import ShowAssetAdapter from '../../API/Http/Adapters/Asset/ShowAssetAdapter';
+import ShowAssetHandler from '../../Application/Handlers/Asset/ShowAssetHandler';
 
 const DIContainer = new Container();
 
@@ -261,6 +264,7 @@ DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
 DIContainer.bind<DestroyAssetAction>(DestroyAssetAction).toSelf();
+DIContainer.bind<ShowAssetAction>(ShowAssetAction).toSelf();
 
 DIContainer.bind<StoreWorkOrderAction>(StoreWorkOrderAction).toSelf();
 DIContainer.bind<IndexWorkOrdersAction>(IndexWorkOrdersAction).toSelf();
@@ -318,6 +322,7 @@ DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
+DIContainer.bind<ShowAssetAdapter>(ShowAssetAdapter).toSelf();
 
 DIContainer.bind<StoreWorkOrderAdapter>(StoreWorkOrderAdapter).toSelf();
 DIContainer.bind<UpdateWorkOrderAdapter>(UpdateWorkOrderAdapter).toSelf();
@@ -374,6 +379,7 @@ DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
+DIContainer.bind<ShowAssetHandler>(ShowAssetHandler).toSelf();
 
 DIContainer.bind<StoreWorkOrderHandler>(StoreWorkOrderHandler).toSelf();
 DIContainer.bind<UpdateWorkOrderHandler>(UpdateWorkOrderHandler).toSelf();

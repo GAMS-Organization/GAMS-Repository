@@ -6,6 +6,7 @@ import IndexAssetsAction from '../API/Http/Actions/Asset/IndexAssetsAction';
 import DestroyAssetAction from '../API/Http/Actions/Asset/DestroyAssetAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import ShowAssetAction from '../API/Http/Actions/Asset/ShowAssetAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 // import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
@@ -31,6 +32,17 @@ router.post(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeAssetAction: StoreAssetAction = DIContainer.resolve<StoreAssetAction>(StoreAssetAction);
     await storeAssetAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/filters/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const showAssetAction: ShowAssetAction = DIContainer.resolve<ShowAssetAction>(ShowAssetAction);
+    await showAssetAction.execute(request, response);
   }),
 );
 /*
