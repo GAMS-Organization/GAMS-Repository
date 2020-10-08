@@ -26,6 +26,10 @@ import serviceArea from '../../../services/api/area';
 import serviceService from '../../../services/api/service';
 import serviceAsset from '../../../services/api/asset';
 import serviceUser from '../../../services/api/user';
+import { log } from 'winston';
+import Api from '../../../services/api/api';
+import sector from '../../../services/api/sector';
+//import sector from '../../../services/api/sector';
 
 class NewWorkOrder extends React.Component {
   constructor(props) {
@@ -55,7 +59,6 @@ class NewWorkOrder extends React.Component {
 
   //se obtienen los sectores
   componentWillMount = async () => {
-    //sectores
     const responseSector = await serviceSector.list(1, 50);
     let sectores = [];
     for (const sector of responseSector.data.items) {
@@ -85,11 +88,14 @@ class NewWorkOrder extends React.Component {
       selectedService: '',
       selectedElement: '',
     });
+    console.log(this.state.selectedSector);
   };
 
   //Controlador para seleccionar un area
   handleChangeArea = async event => {
     const selectedArea = this.state.area.find(area => area.name === event.target.value);
+    const idArea = selectedArea.id;
+    console.log(idArea);
     this.setState({
       selectedArea: event.target.value,
       service: selectedArea.services,
@@ -97,6 +103,7 @@ class NewWorkOrder extends React.Component {
       selectedService: '',
       selectedElement: '',
     });
+    console.log(this.state.selectedArea);
   };
 
   //Controlador para seleccionar un servicio
@@ -109,14 +116,40 @@ class NewWorkOrder extends React.Component {
   };
 
   //Controlador para seleccionar un elemento
-  handleChangeElement = event => {
+  handleChangeElement = async event => {
     this.setState({ selectedElement: event.target.value });
 
-    //const response = await.serviceAsset;
+    let assetResponse;
+    try {
+      //assetResponse = await serviceAsset.get(`asset/?page=${page}&items_per_page=${itemsPerPage}`);
+      assetResponse = await serviceAsset.get(
+        `asset/?sector=${selectedSector.id}&area=${selectedArea.id}&service=${selectedService.id}&element=${selectedElement.id}`,
+      );
+    } catch (err) {
+      assetResponse = err;
+    }
+
+    /*const formValues = {
+      sector: this.state.selectedSector,
+      area: this.state.selectedArea,
+      service: this.state.selectedService,
+      element: this.state.selectedElement,
+    };
+    console.log(this.state.selectedArea.id);
+    console.log(formValues);
+
+    const response = await serviceAsset.create(formValues);
+
+    if (response.type === 'CREATED_SUCCESFUL') {
+      this.setState({ notification: true });
+      window.location.reload();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }*/
   };
 
   //Se obtiene el activo
-  getAsset = async e => {
+  /*getAsset = async e => {
     e.preventDefault();
 
     const fields = ['sector', 'area', 'service', 'element'];
@@ -132,13 +165,13 @@ class NewWorkOrder extends React.Component {
     formValues.roles = [formValues.roles];
 
     //const response = await serviceAsset;
-  };
+  };*/
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };
 
-  //Se crea el activo
+  //Se crea la orden de trabajo
   /*CreateWorkOrder = async e => {
     e.preventDefault();
 
