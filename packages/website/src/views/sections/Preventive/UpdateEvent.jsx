@@ -248,7 +248,7 @@ class UpdateEvent extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12}>
-                      <CheckboxInput handleCheck={this.handleCheck} label={'Todo el día'} checked={this.state.allDay}/>
+                      <CheckboxInput handleCheck={this.handleCheck} label={'Todo el día'} checked={this.state.allDay} />
                     </GridItem>
                   </GridContainer>
                 </GridItem>

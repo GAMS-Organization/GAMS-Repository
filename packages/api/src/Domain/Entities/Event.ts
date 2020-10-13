@@ -1,32 +1,31 @@
 /* eslint-disable new-cap */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import UserEvent from './UserEvent';
 
 @Entity('event')
 // eslint-disable-next-line require-jsdoc
-export default class Product {
+export default class Event {
   @PrimaryGeneratedColumn()
   public id: number;
   @Column()
   public title: string;
   @Column()
   public description: string;
-  @Column()
+  @Column({ nullable: true })
   public startDate: string;
-  @Column()
+  @Column({ nullable: true })
   public endDate: string;
-  @Column()
+  @Column({ nullable: true })
   public allDay: boolean;
-  @Column()
-  public workers: number[];
+  @OneToMany(_type => UserEvent, userEvents => userEvents.event)
+  public userEvents: UserEvent[];
 
-  public constructor(title: string, description: string, startDate: string, endDate: string, allDay: boolean, workers: number[]) {
+  public constructor(title: string, description: string, startDate: string, endDate: string, allDay: boolean) {
     this.title = title;
     this.description = description;
     this.startDate = startDate;
     this.endDate = endDate;
     this.allDay = allDay;
-    this.workers = workers;
   }
 
   public getId(): number {
@@ -53,8 +52,8 @@ export default class Product {
     return this.allDay;
   }
 
-  public getWorkers(): number[] {
-    return this.workers;
+  public getWorkers(): UserEvent[] {
+    return this.userEvents;
   }
 
   public setTitle(title: string): void {
@@ -77,7 +76,7 @@ export default class Product {
     this.allDay = allDay;
   }
 
-  public setWorkers(workers: number[]): void {
-    this.workers = workers;
+  public setWorkers(userEvents: UserEvent[]): void {
+    this.userEvents = userEvents;
   }
 }

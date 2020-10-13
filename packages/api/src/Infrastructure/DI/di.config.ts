@@ -203,6 +203,13 @@ import CompleteWorkOrderHandler from '../../Application/Handlers/WorkOrder/Compl
 import UpdateElementAction from '../../API/Http/Actions/Element/UpdateElementAction';
 import UpdateElementAdapter from '../../API/Http/Adapters/Element/UpdateElementAdapter';
 import UpdateElementHandler from '../../Application/Handlers/Element/UpdateElementHandler';
+import IEventRepository from '../../Domain/Interfaces/IEventRepository';
+import TypeEventRepository from '../../Persistence/TypeORM/Repositories/TypeEventRepository';
+import StoreEventAction from '../../API/Http/Actions/Event/StoreEventAction';
+import StoreEventAdapter from '../../API/Http/Adapters/Event/StoreEventAdapter';
+import StoreEventHandler from '../../Application/Handlers/Event/StoreEventHandler';
+import IUserEventRepository from '../../Domain/Interfaces/IUserEventRepository';
+import TypeUserEventRepository from '../../Persistence/TypeORM/Repositories/TypeUserEventRepository';
 
 const DIContainer = new Container();
 
@@ -274,6 +281,8 @@ DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
 DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 
+DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
+
 /**
  * Adapters
  */
@@ -330,6 +339,8 @@ DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
 DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
 DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
 DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
+
+DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
 
 /**
  * Handlers
@@ -388,6 +399,8 @@ DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
 DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
 DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
 
+DIContainer.bind<StoreEventHandler>(StoreEventHandler).toSelf();
+
 /*
  * Services
  */
@@ -433,5 +446,7 @@ DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeEleme
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
 DIContainer.bind<IWorkOrderRepository>(INTERFACES.IWorkOrderRepository).to(TypeWorkOrderRepository);
 DIContainer.bind<IUserWorkOrderRepository>(INTERFACES.IUserWorkOrderRepository).to(TypeUserWorkOrderRepository);
+DIContainer.bind<IEventRepository>(INTERFACES.IEventRepository).to(TypeEventRepository);
+DIContainer.bind<IUserEventRepository>(INTERFACES.IUserEventRepository).to(TypeUserEventRepository);
 
 export default DIContainer;

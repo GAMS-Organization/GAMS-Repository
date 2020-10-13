@@ -1,0 +1,77 @@
+import * as express from 'express';
+import DIContainer from '../Infrastructure/DI/di.config';
+import { authMiddleware } from '../config/authMiddleware';
+import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import StoreEventAction from '../API/Http/Actions/Event/StoreEventAction';
+
+const router = express.Router();
+
+// router.get(
+//   '/',
+//   (req, res, next): void => {
+//     authMiddleware(req, res, next, ['admin', 'personal']);
+//   },
+//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+//     const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
+//     await indexProductAction.execute(request, response);
+//   }),
+// );
+
+router.post(
+  '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const storeEventAction: StoreEventAction = DIContainer.resolve<StoreEventAction>(StoreEventAction);
+    await storeEventAction.execute(request, response);
+  }),
+);
+
+// router.get(
+//   '/:id([0-9]+)',
+//   (req, res, next): void => {
+//     authMiddleware(req, res, next, ['admin', 'personal']);
+//   },
+//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+//     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
+//     await showProductAction.execute(request, response);
+//   }),
+// );
+//
+// router.put(
+//   '/:id([0-9]+)',
+//   (req, res, next): void => {
+//     authMiddleware(req, res, next, ['admin', 'personal']);
+//   },
+//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+//     const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
+//     await updateProductAction.execute(request, response);
+//   }),
+// );
+//
+// router.get(
+//   '/name/:name([a-z0-9-]+)',
+//   (req, res, next): void => {
+//     authMiddleware(req, res, next, ['admin', 'personal']);
+//   },
+//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+//     const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
+//       ShowProductByNameAction,
+//     );
+//     await showProductByNameAction.execute(request, response);
+//   }),
+// );
+//
+// router.delete(
+//   '/:id([0-9]+)',
+//   (req, res, next): void => {
+//     authMiddleware(req, res, next, ['admin', 'personal']);
+//   },
+//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
+//     const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
+//     await destroyProductAction.execute(request, response);
+//   }),
+// );
+
+export default router;
