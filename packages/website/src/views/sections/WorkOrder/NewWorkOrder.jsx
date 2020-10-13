@@ -16,7 +16,6 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceProduct from '../../../services/api/products';
 import newWorkOrderStyle from '../../../styles/jss/material-dashboard-react/sections/newWorkOrderStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
@@ -29,7 +28,6 @@ import serviceUser from '../../../services/api/user';
 import { log } from 'winston';
 import Api from '../../../services/api/api';
 import sector from '../../../services/api/sector';
-//import sector from '../../../services/api/sector';
 
 class NewWorkOrder extends React.Component {
   constructor(props) {
@@ -54,18 +52,18 @@ class NewWorkOrder extends React.Component {
     };
   }
 
-  DateNow = () => {
+  /*DateNow = () => {
     var date = Date.Now();
 
     this.setState({ DateNow: date });
-  };
+  };*/
 
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
     let sectores = [];
     for (const sector of responseSector.data.items) {
-      let dataSector = sector.name;
+      let dataSector = sector;
       sectores.push(dataSector);
     }
 
@@ -74,26 +72,20 @@ class NewWorkOrder extends React.Component {
 
   //Controlador para seleccionar un sector
   handleChangeSector = async event => {
-    console.log(event.target.value);
-    const sector = event.target.value;
-    console.log(sector);
-
-    //const sector = this.state.sector.find(sector => sector.sector === event.target.value);
-    //console.log(sector);
-    /*const idSector = sector.id;
+    const sector = this.state.sector.find(sector => sector.name === event.target.value);
+    const idSector = sector.id;
     const nameSector = sector.name;
-    console.log(idSector);
-    console.log(nameSector);*/
+
     //areas
-    const responseArea = await serviceArea.listBySector(sector.replace(/\s/gi, '-'));
+    const responseArea = await serviceArea.listBySector(nameSector.replace(/\s/gi, '-'));
     let areas = [];
     for (const area of responseArea.areas) {
       areas.push(area);
     }
 
     this.setState({
-      selectedSector: sector,
-      //idSector: idSector,
+      selectedSector: nameSector,
+      idSector: idSector,
       area: areas,
       service: [],
       element: [],
@@ -105,13 +97,12 @@ class NewWorkOrder extends React.Component {
 
   //Controlador para seleccionar un area
   handleChangeArea = async event => {
-    const selectedArea = this.state.area.find(area => area.name === event.target.value);
-    const idArea = selectedArea.id;
-    console.log(selectedArea);
-    console.log(idArea);
+    const area = this.state.area.find(area => area.name === event.target.value);
+    const idArea = area.id;
+    const nameArea = area.name;
     this.setState({
-      selectedArea: event.target.value,
-      service: selectedArea.services,
+      selectedArea: nameArea,
+      service: area.services,
       element: [],
       selectedService: '',
       selectedElement: '',
@@ -121,11 +112,10 @@ class NewWorkOrder extends React.Component {
 
   //Controlador para seleccionar un servicio
   handleChangeService = async event => {
-    console.log(this.state.service);
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
     const elements = service.elements.map(element => {
-      return element.name;
+      return element;
     });
     this.setState({
       selectedService: event.target.value,
@@ -137,21 +127,20 @@ class NewWorkOrder extends React.Component {
 
   //Controlador para seleccionar un elemento
   handleChangeElement = async event => {
-    console.log(this.state.element);
-    const { element } = this.state.element.find(event.target.value);
-
-    console.log(element);
-    /*this.setState({ selectedElement: event.target.value });
-    console.log(this.state.selectedElement);*/
+    const element = this.state.element.find(element => element.name === event.target.value);
+    const idElement = element.id;
+    const nameElement = element.name;
+    this.setState({ selectedElement: nameElement });
 
     const formValues = {
-      sector: this.state.selectedSector,
-      area: this.state.selectedArea,
-      service: this.state.selectedService,
-      element: this.state.selectedElement,
+      sector: this.state.idSector,
+      area: this.state.idArea,
+      service: this.state.idService,
+      element: idElement,
     };
 
-    //const response = await serviceAsset.get(formValues);
+    const response = await serviceAsset.get(formValues);
+    console.log(response);
 
     /*if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -259,7 +248,6 @@ class NewWorkOrder extends React.Component {
                             }}
                             value={this.state.selectedSector}
                             onChange={this.handleChangeSector}
-                            //onChange={e => this.handleChangeSector(e, idSector)}
                             input={<Input />}
                             inputProps={{
                               required: true,
@@ -269,15 +257,14 @@ class NewWorkOrder extends React.Component {
                           >
                             {this.state.sector.map(sector => (
                               <MenuItem
-                                //idSector={sector.id}
-                                key={sector}
-                                value={sector}
+                                key={sector.name}
+                                value={sector.name}
                                 classes={{
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {sector}
+                                {sector.name}
                               </MenuItem>
                             ))}
                           </Select>
@@ -375,14 +362,14 @@ class NewWorkOrder extends React.Component {
                           >
                             {this.state.element.map(element => (
                               <MenuItem
-                                key={element}
-                                value={element}
+                                key={element.name}
+                                value={element.name}
                                 classes={{
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {element}
+                                {element.name}
                               </MenuItem>
                             ))}
                           </Select>

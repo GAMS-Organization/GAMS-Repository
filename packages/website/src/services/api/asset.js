@@ -49,20 +49,20 @@ class asset {
     return assetAdapter.delete(deleteResponse);
   }
 
-  /*async get(dataAsset) {
-    //const body = dataAsset;
+  async get(dataAsset) {
+    const body = dataAsset;
 
     let assetResponse;
     try {
       assetResponse = await Api.get(
-        `asset/filters?sector=${selectedSector.id}&area=${selectedArea.id}&service=${selectedService.id}&element=${selectedElement.id}`,
+        `asset/filters?sector=${body.sector}&area=${body.area}&service=${body.service}&element=${body.element}`,
       );
     } catch (err) {
       assetResponse = err;
     }
-
+    console.log(assetResponse);
     return assetAdapter.get(assetResponse);
-  }*/
+  }
 }
 
 export default new asset();
