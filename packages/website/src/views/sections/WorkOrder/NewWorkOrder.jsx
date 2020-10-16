@@ -49,6 +49,7 @@ class NewWorkOrder extends React.Component {
       idArea: '',
       idService: '',
       idElement: '',
+      idAsset: '',
     };
   }
 
@@ -130,7 +131,6 @@ class NewWorkOrder extends React.Component {
     const element = this.state.element.find(element => element.name === event.target.value);
     const idElement = element.id;
     const nameElement = element.name;
-    this.setState({ selectedElement: nameElement });
 
     const formValues = {
       sector: this.state.idSector,
@@ -141,8 +141,15 @@ class NewWorkOrder extends React.Component {
 
     const response = await serviceAsset.get(formValues);
     console.log(response);
-    const idAsset = response.id;
-    console.log(idAsset);
+    //const idAsset = response.data[0];
+    const idAsset = response.data.id;
+    //{this.response.data.map(data => ())}
+
+    //const idAsset = response.data[0];
+    //console.log(idAsset);
+    //console.log(response.data[0]);
+
+    this.setState({ selectedElement: nameElement });
     if (response.type === 'GET_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
@@ -161,6 +168,7 @@ class NewWorkOrder extends React.Component {
 
   //Se crea la orden de trabajo
   CreateWorkOrder = async e => {
+    console.log(this.state.idAsset);
     e.preventDefault();
 
     const formValues = {
