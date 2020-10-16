@@ -125,7 +125,7 @@ class NewWorkOrder extends React.Component {
     });
   };
 
-  //Controlador para seleccionar un elemento
+  //Controlador para seleccionar un elemento y obtener el activo
   handleChangeElement = async event => {
     const element = this.state.element.find(element => element.name === event.target.value);
     const idElement = element.id;
@@ -141,39 +141,26 @@ class NewWorkOrder extends React.Component {
 
     const response = await serviceAsset.get(formValues);
     console.log(response);
-
-    /*if (response.type === 'CREATED_SUCCESFUL') {
+    const idAsset = response.id;
+    console.log(idAsset);
+    if (response.type === 'GET_SUCCESFUL') {
       this.setState({ notification: true });
-      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
-    }*/
+    }
   };
 
-  //Se obtiene el activo
-  /*getAsset = async e => {
-    e.preventDefault();
-
-    const fields = ['sector', 'area', 'service', 'element'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).id,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
-
-    formValues.roles = [formValues.roles];
-
-    //const response = await serviceAsset;
-  };*/
-
   closeNotification = () => {
+    this.setState({ notification: false, errors: {} });
+    window.location.reload();
+  };
+
+  closeNotificationSucces = () => {
     this.setState({ notification: false, errors: {} });
   };
 
   //Se crea la orden de trabajo
-  /*CreateWorkOrder = async e => {
+  CreateWorkOrder = async e => {
     e.preventDefault();
 
     const formValues = {
@@ -187,11 +174,19 @@ class NewWorkOrder extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
-      window.location.reload();
+      //window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+
+    /*{
+  "orderDate": string,
+  "priority": string,
+  "comment": string,
+  "assetId": number,
+  "authorId":number,
+  }*/
+  };
 
   handleChangePriority = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -209,10 +204,10 @@ class NewWorkOrder extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Orden creada correctamente. Pronto lo estaremos resolviendo.'
+              : 'Activo obtenido correctamente.'
           }
           open={this.state.notification}
-          closeNotification={this.closeNotification}
+          closeNotification={this.closeNotificationSucces}
           close
         />
         <GridContainer>
@@ -384,7 +379,7 @@ class NewWorkOrder extends React.Component {
                           formControlProps={{
                             //ready: this.date,
                             fullWidth: true,
-                            disabled: true,
+                            //disabled: true,
                           }}
                           inputProps={{
                             type: 'date',
@@ -465,20 +460,22 @@ class NewWorkOrder extends React.Component {
                           }}
                         />
                       </GridItem>
-                      <GridItem justify={'center'} xs={4} sm={4} md={4}>
-                        <CardFooter>
-                          <Button type="submit" color="gamsRed">
-                            Crear
-                          </Button>
-                        </CardFooter>
-                      </GridItem>
-                      {/*<GridItem xs={12} sm={12} md={6}>
-                        <CardFooter>
-                          <Button color="danger" simple onClick={this.closeNotification}>
-                            Cancelar
-                          </Button>
-                        </CardFooter>
-                      </GridItem>*/}
+                      <GridContainer>
+                        <GridItem justify={'center'} xs={4} sm={7} md={8}>
+                          <CardFooter>
+                            <Button type="submit" color="gamsRed">
+                              Crear
+                            </Button>
+                          </CardFooter>
+                        </GridItem>
+                        <GridItem justify={'center'} xs={8} sm={5} md={4}>
+                          <CardFooter>
+                            <Button color="danger" simple onClick={this.closeNotification}>
+                              Cancelar
+                            </Button>
+                          </CardFooter>
+                        </GridItem>
+                      </GridContainer>
                     </GridItem>
                   </GridContainer>
                 </CardBody>
