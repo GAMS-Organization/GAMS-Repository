@@ -56,7 +56,7 @@ import DisableUserAdapter from '../../API/Http/Adapters/Users/DisableUserAdapter
 import DisableUserHandler from '../../Application/Handlers/Users/DisableUserHandler';
 import EnableUserAdapter from '../../API/Http/Adapters/Users/EnableUserAdapter';
 import EnableUserHandler from '../../Application/Handlers/Users/EnableUserHandler';
-
+import EventService from '../../Domain/Services/EventService';
 import UserRoleService from '../../Domain/Services/UserRoleService';
 import UserService from '../../Domain/Services/UserService';
 import { ILoggerService } from '../../Domain/Services/Logger/ILoggerService';
@@ -210,7 +210,6 @@ import StoreEventAdapter from '../../API/Http/Adapters/Event/StoreEventAdapter';
 import StoreEventHandler from '../../Application/Handlers/Event/StoreEventHandler';
 import IUserEventRepository from '../../Domain/Interfaces/IUserEventRepository';
 import TypeUserEventRepository from '../../Persistence/TypeORM/Repositories/TypeUserEventRepository';
-
 const DIContainer = new Container();
 
 /**
@@ -421,6 +420,8 @@ DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
+DIContainer.bind<EventService>(EventService).toSelf();
+
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
 

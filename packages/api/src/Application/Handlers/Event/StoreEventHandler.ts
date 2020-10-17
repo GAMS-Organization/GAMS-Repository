@@ -1,14 +1,13 @@
 import { inject, injectable } from 'inversify';
-import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
 import StoreEventCommand from '../../Commands/Event/StoreEventCommand';
 import Event from '../../../Domain/Entities/Event';
-import IEventRepository from '../../../Domain/Interfaces/IEventRepository';
+import EventService from '../../../Domain/Services/EventService';
 
 @injectable()
 export default class StoreEventHandler {
-  private eventRepository: IEventRepository;
-  public constructor(@inject(INTERFACES.IEventRepository) eventRepository: IEventRepository) {
-    this.eventRepository = eventRepository;
+  private eventService: EventService;
+  public constructor(@inject(EventService) eventService: EventService) {
+    this.eventService = eventService;
   }
 
   public async execute(command: StoreEventCommand): Promise<Event> {
@@ -19,8 +18,8 @@ export default class StoreEventHandler {
       command.getEndDate(),
       command.getAllDay(),
     );
-    return await this.eventRepository.persist(event);
+    return await this.eventService.setUserToEvent(await this.eventService.storeEvent(event), command.getWorkersId());
   }
 
-  //Hay que agregar un servicio o algo para crear los UserEvent y asignarlos
+  //Hay que crear toda la base de datos nueva y ver si funciona el servicio este
 }
