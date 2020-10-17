@@ -50,6 +50,8 @@ class NewWorkOrder extends React.Component {
       idService: '',
       idElement: '',
       idAsset: '',
+      selectedAsset: '',
+      asset: [],
     };
   }
 
@@ -126,7 +128,7 @@ class NewWorkOrder extends React.Component {
     });
   };
 
-  //Controlador para seleccionar un elemento y obtener el activo
+  //Controlador para seleccionar un elemento y obtener los activos
   handleChangeElement = async event => {
     const element = this.state.element.find(element => element.name === event.target.value);
     const idElement = element.id;
@@ -139,22 +141,17 @@ class NewWorkOrder extends React.Component {
       element: idElement,
     };
 
-    const response = await serviceAsset.get(formValues);
-    console.log(response);
-    //const idAsset = response.data[0];
-    const idAsset = response.data.id;
-    //{this.response.data.map(data => ())}
-
-    //const idAsset = response.data[0];
-    //console.log(idAsset);
-    //console.log(response.data[0]);
-
-    this.setState({ selectedElement: nameElement });
-    if (response.type === 'GET_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
+    const responseAsset = await serviceAsset.get(formValues);
+    console.log(responseAsset);
+    let assets = [];
+    for (const asset of responseAsset.data) {
+      assets.push(asset);
     }
+    console.log(assets);
+    /*const asset = response.data.map(asset => {
+      return asset;
+    });*/
+    this.setState({ selectedElement: nameElement, asset: assets });
   };
 
   closeNotification = () => {
@@ -373,6 +370,41 @@ class NewWorkOrder extends React.Component {
                                 }}
                               >
                                 {element.name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </GridItem>
+                      <GridItem xs={12} sm={12} md={10}>
+                        <FormControl fullWidth className={classes.selectFormControl}>
+                          <InputLabel htmlFor="Activo" className={classes.selectLabel}>
+                            Activo
+                          </InputLabel>
+                          <Select
+                            MenuProps={{
+                              className: classes.selectMenu,
+                            }}
+                            classes={{
+                              select: classes.select,
+                            }}
+                            value={this.state.selectedAsset}
+                            onChange={this.handleChangeElement}
+                            inputProps={{
+                              required: true,
+                              name: 'asset',
+                              id: 'asset',
+                            }}
+                          >
+                            {this.state.asset.map(asset => (
+                              <MenuItem
+                                key={asset}
+                                value={asset}
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected,
+                                }}
+                              >
+                                {asset}
                               </MenuItem>
                             ))}
                           </Select>
