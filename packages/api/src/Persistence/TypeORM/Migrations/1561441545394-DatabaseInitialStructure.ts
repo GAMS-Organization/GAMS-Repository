@@ -17,6 +17,14 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
+      'CREATE TABLE `event` (`id` int NOT NULL AUTO_INCREMENT, `title` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `startDate` varchar(255) NULL, `endDate` varchar(255) NULL, `allDay` tinyint NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      undefined,
+    );
+    await queryRunner.query(
+      'CREATE TABLE `user_event` (`id` int NOT NULL AUTO_INCREMENT, `userId` int NULL, `eventId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      undefined,
+    );
+    await queryRunner.query(
       "CREATE TABLE `users` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `surname` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `state` varchar(255) NOT NULL DEFAULT 'active', `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), UNIQUE INDEX `IDX_97672ac88f789774dd47f7c8be` (`email`), PRIMARY KEY (`id`)) ENGINE=InnoDB",
       undefined,
     );
@@ -25,7 +33,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `steps` varchar(1000) NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `steps` varchar(255) NOT NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -94,6 +102,14 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     );
     await queryRunner.query(
       'ALTER TABLE `user_work_order` ADD CONSTRAINT `FK_2557568d77c976fbc2488740cbe` FOREIGN KEY (`workOrderId`) REFERENCES `work_order`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `user_event` ADD CONSTRAINT `FK_77452fe8443c349b0e628507cbb` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `user_event` ADD CONSTRAINT `FK_6a41d7c0f21abb37cd273824fa6` FOREIGN KEY (`eventId`) REFERENCES `event`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
     await queryRunner.query(
@@ -205,6 +221,8 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('ALTER TABLE `element` DROP FOREIGN KEY `FK_42e4c2a1cfb51ff941af50e3d38`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_2046c91e37525f7609487efdde8`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_0967520a5843ce4e307fb1302ec`', undefined);
+    await queryRunner.query('ALTER TABLE `user_event` DROP FOREIGN KEY `FK_6a41d7c0f21abb37cd273824fa6`', undefined);
+    await queryRunner.query('ALTER TABLE `user_event` DROP FOREIGN KEY `FK_77452fe8443c349b0e628507cbb`', undefined);
     await queryRunner.query(
       'ALTER TABLE `user_work_order` DROP FOREIGN KEY `FK_2557568d77c976fbc2488740cbe`',
       undefined,
@@ -231,6 +249,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('DROP TABLE `sector`', undefined);
     await queryRunner.query('DROP INDEX `IDX_1f435756948298c61ecc3c6dab` ON `asset`', undefined);
     await queryRunner.query('DROP TABLE `asset`', undefined);
+    await queryRunner.query('DROP INDEX `IDX_4cb3cf237c83885cc504634829` ON `service`', undefined);
     await queryRunner.query('DROP INDEX `IDX_7806a14d42c3244064b4a1706c` ON `service`', undefined);
     await queryRunner.query('DROP TABLE `service`', undefined);
     await queryRunner.query('DROP TABLE `area_service`', undefined);
@@ -240,6 +259,8 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('DROP TABLE `work_order`', undefined);
     await queryRunner.query('DROP INDEX `IDX_97672ac88f789774dd47f7c8be` ON `users`', undefined);
     await queryRunner.query('DROP TABLE `users`', undefined);
+    await queryRunner.query('DROP TABLE `user_event`', undefined);
+    await queryRunner.query('DROP TABLE `event`', undefined);
     await queryRunner.query('DROP TABLE `user_work_order`', undefined);
     await queryRunner.query('DROP TABLE `user_roles`', undefined);
     await queryRunner.query('DROP TABLE `roles`', undefined);

@@ -20,6 +20,4 @@ export default class StoreEventHandler {
     );
     return await this.eventService.setUserToEvent(await this.eventService.storeEvent(event), command.getWorkersId());
   }
-
-  //Hay que crear toda la base de datos nueva y ver si funciona el servicio este
 }

@@ -1,6 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateBasicSetup1570143571796 implements MigrationInterface {
+  name = 'CreateBasicSetup1570143571796';
   public async up(queryRunner: QueryRunner): Promise<any> {
     //Create roles
     await queryRunner.query(`insert into roles values (1, 'admin');`);
