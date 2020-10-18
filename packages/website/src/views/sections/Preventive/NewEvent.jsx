@@ -20,6 +20,8 @@ import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import servicePreventive from '../../../services/api/preventive';
+
 import serviceUser from '../../../services/api/user';
 import CheckboxInput from '../../components/CustomInput/Checkbox';
 
@@ -80,41 +82,24 @@ class NewEvent extends React.Component {
 
     const event = {
       title: formValues.title,
-      start: createDateTime(formValues.startDate, formValues.startTime),
-      end: createDateTime(formValues.endDate, formValues.endTime),
-      allDay: false,
-      resource: {
-        description: formValues.description,
-        workers: this.state.selectedWorkers,
-      },
+      startDate: formValues.startDate + ' ' + formValues.startTime,
+      endDate: formValues.endDate + ' ' + formValues.endTime,
+      allDay: this.state.allDay,
+      description: formValues.description,
+      workersId: this.state.selectedWorkers,
     };
 
-    this.props.create(event);
     this.handleClose();
     this.props.closeHandler();
 
-    // window.location.reload();
+    const response = await servicePreventive.create(event);
 
-    // e.preventDefault();
-    //
-    // const fields = ['id', 'name'];
-    // const formElements = e.target.elements;
-    // const formValues = fields
-    //   .map(field => ({
-    //     [field]: formElements.namedItem(field).value,
-    //   }))
-    //   .reduce((current, next) => ({ ...current, ...next }));
-    //
-    // formValues.roles = [formValues.roles];
-    //
-    // const response = await serviceProduct.update(formValues);
-    //
-    // if (response.type === 'UPDATED_SUCCESFUL') {
-    //   this.setState({ notification: true, open: false, rolClicked: false });
-    //   window.location.reload();
-    // } else {
-    //   this.setState({ notification: true, errors: response.error });
-    // }
+    if (response.type === 'CREATED_SUCCESFUL') {
+      this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
   };
 
   render() {

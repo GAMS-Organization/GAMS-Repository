@@ -6,6 +6,7 @@ import { rooftopBlueColor } from '../../../styles/jss/material-dashboard-react';
 import NewEvent from './NewEvent';
 import Slide from '@material-ui/core/Slide';
 import UpdateEvent from './UpdateEvent';
+import preventive from '../../../services/api/preventive';
 
 class PreventiveCalendar extends React.Component {
   constructor(props) {
@@ -16,6 +17,11 @@ class PreventiveCalendar extends React.Component {
       showNewEventModal: false,
       showUpdateEventModal: false,
     };
+  }
+
+  async componentWillMount() {
+    const response = await preventive.list();
+    this.setState({ events: response.events });
   }
 
   handleClickCreateEvent = event => {
