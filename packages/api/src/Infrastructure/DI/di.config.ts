@@ -210,6 +210,7 @@ import StoreEventAdapter from '../../API/Http/Adapters/Event/StoreEventAdapter';
 import StoreEventHandler from '../../Application/Handlers/Event/StoreEventHandler';
 import IUserEventRepository from '../../Domain/Interfaces/IUserEventRepository';
 import TypeUserEventRepository from '../../Persistence/TypeORM/Repositories/TypeUserEventRepository';
+import IndexEventAction from '../../API/Http/Actions/Event/IndexEventAction';
 const DIContainer = new Container();
 
 /**
@@ -281,6 +282,7 @@ DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 
 DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
+DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();
 
 /**
  * Adapters

@@ -3,19 +3,20 @@ import DIContainer from '../Infrastructure/DI/di.config';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import StoreEventAction from '../API/Http/Actions/Event/StoreEventAction';
+import IndexEventAction from '../API/Http/Actions/Event/IndexEventAction';
 
 const router = express.Router();
 
-// router.get(
-//   '/',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const indexProductAction: IndexProductsAction = DIContainer.resolve<IndexProductsAction>(IndexProductsAction);
-//     await indexProductAction.execute(request, response);
-//   }),
-// );
+router.get(
+  '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexEventAction: IndexEventAction = DIContainer.resolve<IndexEventAction>(IndexEventAction);
+    await indexEventAction.execute(request, response);
+  }),
+);
 
 router.post(
   '/',

@@ -38,6 +38,20 @@ export default class UserRoleService {
     return event;
   }
 
+  public async returnAllPaginated(
+    page: number = 1,
+    itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
+  ): Promise<PaginatedSuccessData> {
+    const entriesQuantity = await this.eventRepository.count();
+    const entries = await this.eventRepository.findAllPaginated(itemsPerPage * page - itemsPerPage, itemsPerPage);
+    return {
+      data: entries,
+      dataLength: entries.length,
+      totalDataQuantity: entriesQuantity,
+      totalPages: Math.ceil(entriesQuantity / itemsPerPage),
+    };
+  }
+
   //public async destroyUserRolesFromUser(userId: number): Promise<void> {
   //  const userRoles = await this.userRoleRepository.findByUserId(userId);
   //  for (const userRole of userRoles) {

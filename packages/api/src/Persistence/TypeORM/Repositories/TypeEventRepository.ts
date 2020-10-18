@@ -6,13 +6,14 @@ import IEventRepository from '../../../Domain/Interfaces/IEventRepository';
 @injectable()
 export default class TypeEventRepository extends TypeRepository implements IEventRepository {
   public async findAll(): Promise<Event[]> {
-    return await this.repository(Event).find();
+    return await this.repository(Event).find({ relations: ['userEvents', 'userEvents.user'] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Event[]> {
     return await this.repository(Event).find({
       skip: initialIndex,
       take: limit,
+      relations: ['userEvents', 'userEvents.user'],
     });
   }
 
