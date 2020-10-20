@@ -87,7 +87,6 @@ class assetAdapter {
     if (!isError(status)) {
       return {
         data,
-        type: 'GET_SUCCESFUL',
       };
     } else {
       const { code, details } = data.errors;

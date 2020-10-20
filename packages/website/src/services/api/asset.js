@@ -60,7 +60,6 @@ class asset {
     } catch (err) {
       assetResponse = err;
     }
-    console.log(assetResponse);
     return assetAdapter.get(assetResponse);
   }
 }

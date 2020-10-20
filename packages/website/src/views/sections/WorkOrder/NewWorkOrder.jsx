@@ -43,7 +43,7 @@ class NewWorkOrder extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
-      DateNow: '',
+      dateNow: '',
       prioritySelected: '',
       idSector: '',
       idArea: '',
@@ -52,14 +52,15 @@ class NewWorkOrder extends React.Component {
       idAsset: '',
       selectedAsset: '',
       asset: [],
+      comment: '',
     };
   }
 
-  /*DateNow = () => {
+  DateNow = () => {
     var date = Date.Now();
 
-    this.setState({ DateNow: date });
-  };*/
+    this.setState({ dateNow: date });
+  };
 
   //se obtienen los sectores
   componentWillMount = async () => {
@@ -142,16 +143,19 @@ class NewWorkOrder extends React.Component {
     };
 
     const responseAsset = await serviceAsset.get(formValues);
-    console.log(responseAsset);
     let assets = [];
-    for (const asset of responseAsset.data) {
+    for (const asset of responseAsset.data.data) {
       assets.push(asset);
     }
-    console.log(assets);
-    /*const asset = response.data.map(asset => {
-      return asset;
-    });*/
     this.setState({ selectedElement: nameElement, asset: assets });
+  };
+
+  handleChangeAsset = async event => {
+    const asset = this.state.asset.find(asset => asset.code === event.target.value);
+    const codeAsset = asset.code;
+    const idAsset = asset.id;
+
+    this.setState({ selectedAsset: codeAsset, idAsset: idAsset });
   };
 
   closeNotification = () => {
@@ -165,16 +169,18 @@ class NewWorkOrder extends React.Component {
 
   //Se crea la orden de trabajo
   CreateWorkOrder = async e => {
-    console.log(this.state.idAsset);
     e.preventDefault();
+    const formElements = e.target.elements;
+    const date = formElements.namedItem('date').value;
+    const observations = formElements.namedItem('observations').value;
 
     const formValues = {
-      sector: this.state.selectedSector,
-      area: this.state.selectedArea,
-      service: this.state.selectedService,
-      element: this.state.selectedElement,
+      orderDate: date,
+      priority: this.state.prioritySelected,
+      comment: observations,
+      assetId: this.state.idAsset,
     };
-
+    console.log(formValues);
     const response = await serviceAsset.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
@@ -388,7 +394,7 @@ class NewWorkOrder extends React.Component {
                               select: classes.select,
                             }}
                             value={this.state.selectedAsset}
-                            onChange={this.handleChangeElement}
+                            onChange={this.handleChangeAsset}
                             inputProps={{
                               required: true,
                               name: 'asset',
@@ -397,14 +403,14 @@ class NewWorkOrder extends React.Component {
                           >
                             {this.state.asset.map(asset => (
                               <MenuItem
-                                key={asset}
-                                value={asset}
+                                key={asset.code}
+                                value={asset.code}
                                 classes={{
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {asset}
+                                {asset.code}
                               </MenuItem>
                             ))}
                           </Select>
@@ -414,7 +420,7 @@ class NewWorkOrder extends React.Component {
                         <CustomInput
                           labelText=""
                           id="date"
-                          value={this.state.DateNow}
+                          value={this.state.dateNow}
                           //ready={this.date}
                           formControlProps={{
                             //ready: this.date,
