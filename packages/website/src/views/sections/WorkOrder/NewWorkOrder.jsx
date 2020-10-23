@@ -24,9 +24,7 @@ import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import serviceService from '../../../services/api/service';
 import serviceAsset from '../../../services/api/asset';
-import serviceUser from '../../../services/api/user';
-import { log } from 'winston';
-import Api from '../../../services/api/api';
+import serviceWorkOrder from '../../../services/api/workOrder';
 import sector from '../../../services/api/sector';
 
 class NewWorkOrder extends React.Component {
@@ -181,22 +179,14 @@ class NewWorkOrder extends React.Component {
       assetId: this.state.idAsset,
     };
     console.log(formValues);
-    const response = await serviceAsset.create(formValues);
-
+    const response = await serviceWorkOrder.create(formValues);
+    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
       //window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-
-    /*{
-  "orderDate": string,
-  "priority": string,
-  "comment": string,
-  "assetId": number,
-  "authorId":number,
-  }*/
   };
 
   handleChangePriority = event => {
@@ -215,7 +205,7 @@ class NewWorkOrder extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Activo obtenido correctamente.'
+              : 'Orden de trabajo creada correctamente.'
           }
           open={this.state.notification}
           closeNotification={this.closeNotificationSucces}
