@@ -107,17 +107,12 @@ class NewWorkOrder extends React.Component {
     const area = this.state.area.find(area => area.name === event.target.value);
     const idArea = area.id;
     const nameArea = area.name;
-    console.log(area.services);
-
-    for (const map of area.services) {
-      if (area.services.name === 'Edilicio') {
-        console.log(area.services);
-      }
-    }
+    const map = area.maps[0];
 
     this.setState({
       selectedArea: nameArea,
       service: area.services,
+      map: map,
       element: [],
       selectedService: '',
       selectedElement: '',
@@ -129,11 +124,15 @@ class NewWorkOrder extends React.Component {
   handleChangeService = async event => {
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
+    console.log(service);
+    //const map = service.map;
+    //console.log(map);
     const elements = service.elements.map(element => {
       return element;
     });
     this.setState({
       selectedService: event.target.value,
+      //map: map,
       selectedElement: '',
       element: elements,
       idService: idService,
