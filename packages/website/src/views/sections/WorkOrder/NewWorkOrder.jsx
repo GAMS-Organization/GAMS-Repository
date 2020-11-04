@@ -51,6 +51,7 @@ class NewWorkOrder extends React.Component {
       selectedAsset: '',
       asset: [],
       comment: '',
+      map: '',
     };
   }
 
@@ -63,13 +64,15 @@ class NewWorkOrder extends React.Component {
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
+    const imagenGlobal = 'global/imagen2.jpg';
+
     let sectores = [];
     for (const sector of responseSector.data.items) {
       let dataSector = sector;
       sectores.push(dataSector);
     }
 
-    this.setState({ sector: sectores });
+    this.setState({ sector: sectores, map: imagenGlobal });
   };
 
   //Controlador para seleccionar un sector
@@ -77,6 +80,7 @@ class NewWorkOrder extends React.Component {
     const sector = this.state.sector.find(sector => sector.name === event.target.value);
     const idSector = sector.id;
     const nameSector = sector.name;
+    const mapSector = sector.map;
 
     //areas
     const responseArea = await serviceArea.listBySector(nameSector.replace(/\s/gi, '-'));
@@ -87,6 +91,7 @@ class NewWorkOrder extends React.Component {
 
     this.setState({
       selectedSector: nameSector,
+      map: mapSector,
       idSector: idSector,
       area: areas,
       service: [],
@@ -102,6 +107,14 @@ class NewWorkOrder extends React.Component {
     const area = this.state.area.find(area => area.name === event.target.value);
     const idArea = area.id;
     const nameArea = area.name;
+    console.log(area.services);
+
+    for (const map of area.services) {
+      if (area.services.name === 'Edilicio') {
+        console.log(area.services);
+      }
+    }
+
     this.setState({
       selectedArea: nameArea,
       service: area.services,
@@ -183,7 +196,7 @@ class NewWorkOrder extends React.Component {
     console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
-      //window.location.reload();
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -223,7 +236,7 @@ class NewWorkOrder extends React.Component {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <img
-                        //src={`http://localhost/api/static/${this.props.sector.map}`}
+                        src={`http://localhost/api/static/${this.state.map}`}
                         width="100%"
                         height="100%"
                         border="10"
