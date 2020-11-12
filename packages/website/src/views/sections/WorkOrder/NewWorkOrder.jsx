@@ -52,6 +52,7 @@ class NewWorkOrder extends React.Component {
       asset: [],
       comment: '',
       map: '',
+      mapsArea: [],
     };
   }
 
@@ -64,7 +65,7 @@ class NewWorkOrder extends React.Component {
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
-    const imagenGlobal = 'global/imagen2.jpg';
+    const imagenGlobal = 'global/Edificios+Parques.jpg';
 
     let sectores = [];
     for (const sector of responseSector.data.items) {
@@ -109,10 +110,16 @@ class NewWorkOrder extends React.Component {
     const nameArea = area.name;
     const map = area.maps[0];
 
+    let mapsAreas = [];
+    for (const mapa of area.maps) {
+      mapsAreas.push(mapa);
+    }
+
     this.setState({
       selectedArea: nameArea,
       service: area.services,
       map: map,
+      mapsAreas: mapsAreas,
       element: [],
       selectedService: '',
       selectedElement: '',
@@ -124,15 +131,22 @@ class NewWorkOrder extends React.Component {
   handleChangeService = async event => {
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
-    console.log(service);
-    //const map = service.map;
-    //console.log(map);
+
+    let count = 0;
+    for (const position of this.state.service) {
+      if (position == service.name) {
+        var positionMap = count;
+      }
+      count = count + 1;
+    }
+    const map = this.state.mapsAreas[positionMap];
+
     const elements = service.elements.map(element => {
       return element;
     });
     this.setState({
       selectedService: event.target.value,
-      //map: map,
+      map: map,
       selectedElement: '',
       element: elements,
       idService: idService,
@@ -190,9 +204,7 @@ class NewWorkOrder extends React.Component {
       comment: observations,
       assetId: this.state.idAsset,
     };
-    console.log(formValues);
     const response = await serviceWorkOrder.create(formValues);
-    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
       window.location.reload();
