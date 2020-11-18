@@ -56,12 +56,6 @@ class NewWorkOrder extends React.Component {
     };
   }
 
-  DateNow = () => {
-    var date = Date.Now();
-
-    this.setState({ dateNow: date });
-  };
-
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
@@ -132,14 +126,7 @@ class NewWorkOrder extends React.Component {
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
 
-    let count = 0;
-    for (const position of this.state.service) {
-      if (position == service.name) {
-        var positionMap = count;
-      }
-      count = count + 1;
-    }
-    const map = this.state.mapsAreas[positionMap];
+    const map = this.state.mapsAreas[this.state.service.indexOf(service.name)];
 
     const elements = service.elements.map(element => {
       return element;
@@ -424,7 +411,7 @@ class NewWorkOrder extends React.Component {
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {asset.code}
+                                {asset.code.split('-')[3]}
                               </MenuItem>
                             ))}
                           </Select>
@@ -435,16 +422,12 @@ class NewWorkOrder extends React.Component {
                           labelText=""
                           id="date"
                           value={this.state.dateNow}
-                          //ready={this.date}
                           formControlProps={{
-                            //ready: this.date,
                             fullWidth: true,
-                            //disabled: true,
                           }}
                           inputProps={{
                             type: 'date',
                             required: true,
-                            //defaultValue: Date.now(),
                             name: 'date',
                           }}
                         />
