@@ -22,7 +22,7 @@ export default class TypeEventRepository extends TypeRepository implements IEven
   }
 
   public async findOneById(id: number): Promise<Event> {
-    return await this.repository(Event).findOne({ where: { id: id } });
+    return await this.repository(Event).findOne({ where: { id: id }, relations: ['userEvents', 'userEvents.user'] });
   }
 
   public async persist(event: Event): Promise<Event> {

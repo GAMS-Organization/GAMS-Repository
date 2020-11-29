@@ -38,6 +38,19 @@ export default class UserRoleService {
     return event;
   }
 
+  public async updateUserToEvent(event: Event, commandWorkers: number[]): Promise<Event> {
+    await this.destroyUserEventFromEvent(event);
+    return await this.setUserToEvent(event, commandWorkers);
+  }
+
+  public async destroyUserEventFromEvent(event: Event): Promise<void> {
+    const userEvents = await this.userEventRepository.findByEventId(event.getId());
+
+    for (const userEvent of userEvents) {
+      await this.userEventRepository.destroy(userEvent);
+    }
+  }
+
   public async returnAllPaginated(
     page: number = 1,
     itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
@@ -51,15 +64,4 @@ export default class UserRoleService {
       totalPages: Math.ceil(entriesQuantity / itemsPerPage),
     };
   }
-
-  //public async destroyUserRolesFromUser(userId: number): Promise<void> {
-  //  const userRoles = await this.userRoleRepository.findByUserId(userId);
-  //  for (const userRole of userRoles) {
-  //    try {
-  //      await this.userRoleRepository.destroy(userRole);
-  //    } catch (e) {
-  //      throw new CannotDeleteEntity(`UserRole with id: ${userRole.getId()} could not be deleted`);
-  //    }
-  //  }
-  //}
 }
