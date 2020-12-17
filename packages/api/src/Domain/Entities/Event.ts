@@ -56,6 +56,12 @@ export default class Event {
     return this.userEvents;
   }
 
+  public getWorkersId(): number[] {
+    return this.userEvents.map(userEvent => {
+      return userEvent.user.getId();
+    });
+  }
+
   public setTitle(title: string): void {
     this.title = title;
   }

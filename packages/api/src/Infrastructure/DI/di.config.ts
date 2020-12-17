@@ -211,6 +211,9 @@ import StoreEventHandler from '../../Application/Handlers/Event/StoreEventHandle
 import IUserEventRepository from '../../Domain/Interfaces/IUserEventRepository';
 import TypeUserEventRepository from '../../Persistence/TypeORM/Repositories/TypeUserEventRepository';
 import IndexEventAction from '../../API/Http/Actions/Event/IndexEventAction';
+import UpdateEventAdapter from '../../API/Http/Adapters/Event/UpdateEventAdapter';
+import UpdateEventHandler from '../../Application/Handlers/Event/UpdateEventHandler';
+import UpdateEventAction from '../../API/Http/Actions/Event/UpdateEventAction';
 const DIContainer = new Container();
 
 /**
@@ -283,6 +286,7 @@ DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 
 DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
 DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();
+DIContainer.bind<UpdateEventAction>(UpdateEventAction).toSelf();
 
 /**
  * Adapters
@@ -342,6 +346,7 @@ DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
 DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
 
 DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
+DIContainer.bind<UpdateEventAdapter>(UpdateEventAdapter).toSelf();
 
 /**
  * Handlers
@@ -401,6 +406,7 @@ DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
 DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
 
 DIContainer.bind<StoreEventHandler>(StoreEventHandler).toSelf();
+DIContainer.bind<UpdateEventHandler>(UpdateEventHandler).toSelf();
 
 /*
  * Services

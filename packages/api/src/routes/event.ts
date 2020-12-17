@@ -4,6 +4,7 @@ import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import StoreEventAction from '../API/Http/Actions/Event/StoreEventAction';
 import IndexEventAction from '../API/Http/Actions/Event/IndexEventAction';
+import UpdateEventAction from '../API/Http/Actions/Event/UpdateEventAction';
 
 const router = express.Router();
 
@@ -40,16 +41,16 @@ router.post(
 //   }),
 // );
 //
-// router.put(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
-//     await updateProductAction.execute(request, response);
-//   }),
-// );
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateEventAction: UpdateEventAction = DIContainer.resolve<UpdateEventAction>(UpdateEventAction);
+    await updateEventAction.execute(request, response);
+  }),
+);
 //
 // router.get(
 //   '/name/:name([a-z0-9-]+)',
