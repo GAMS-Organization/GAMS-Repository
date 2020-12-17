@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import PreventiveCalendar from '../sections/Preventive/PreventiveCalendar';
+import PreventiveTableSection from '../sections/Preventive/PreventiveTableSection';
+import Button from '../components/CustomButtons/Button';
+import GridContainer from '../components/Grid/GridContainer';
+import GridItem from '../components/Grid/GridItem';
 
 const styles = {
   cardCategoryWhite: {
@@ -26,11 +30,29 @@ const styles = {
 class Preventive extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showAll: false,
+    };
   }
 
+  handleShowAllClick = () => {
+    this.setState({ showAll: !this.state.showAll });
+  };
+
   render() {
-    return <PreventiveCalendar />;
+    return (
+      <>
+        <PreventiveCalendar />
+        <GridContainer justify={'center'}>
+          <GridItem>
+            <Button onClick={() => this.handleShowAllClick()} color={'gamsRed'}>
+              {!this.state.showAll ? 'Mostrar tabla' : 'Ocultar tabla'}
+            </Button>
+          </GridItem>
+        </GridContainer>
+        {this.state.showAll ? <PreventiveTableSection /> : null}
+      </>
+    );
   }
 }
 

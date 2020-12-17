@@ -7,6 +7,8 @@ import NewEvent from './NewEvent';
 import Slide from '@material-ui/core/Slide';
 import UpdateEvent from './UpdateEvent';
 import preventive from '../../../services/api/preventive';
+import withStyles from '@material-ui/core/styles/withStyles';
+import preventiveCalendarStyle from '../../../styles/jss/material-dashboard-react/sections/preventiveCalendarStyle';
 
 class PreventiveCalendar extends React.Component {
   constructor(props) {
@@ -16,13 +18,21 @@ class PreventiveCalendar extends React.Component {
       events: [],
       showNewEventModal: false,
       showUpdateEventModal: false,
+      month: new Date().getMonth() + 1,
     };
   }
 
   async componentWillMount() {
-    const response = await preventive.list();
+    const response = await preventive.listByMonth(this.state.month);
     this.setState({ events: response.events });
   }
+
+  handleChangeMonth = async month => {
+    if (this.state.month !== month) {
+      const response = await preventive.listByMonth(month);
+      this.setState({ month, events: response.events });
+    }
+  };
 
   handleClickCreateEvent = event => {
     const events = this.state.events;
@@ -50,11 +60,12 @@ class PreventiveCalendar extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="down" ref={ref} {...props} />;
     });
     return (
-      <>
+      <div className={classes.calendarContainer}>
         <Calendar
           localizer={this.state.localizer}
           events={this.state.events}
@@ -62,6 +73,7 @@ class PreventiveCalendar extends React.Component {
           startAccessor="start"
           endAccessor="end"
           selectable={true}
+          onNavigate={e => this.handleChangeMonth(e.getMonth() + 1)}
           onSelectSlot={e => this.handleClickShowCreateModal(e)}
           onSelectEvent={e => this.handleClickShowUpdateModal(e)}
           style={{
@@ -86,9 +98,9 @@ class PreventiveCalendar extends React.Component {
             closeHandler={this.handleClose}
           />
         ) : null}
-      </>
+      </div>
     );
   }
 }
 
-export default PreventiveCalendar;
+export default withStyles(preventiveCalendarStyle)(PreventiveCalendar);

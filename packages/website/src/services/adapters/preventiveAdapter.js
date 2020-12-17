@@ -26,7 +26,27 @@ class preventiveAdapter {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
-      const events = data.items.map(event => {
+      return {
+        data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  };
+
+  listByMonth = listResponse => {
+    let { status, data } = listResponse;
+
+    if (!isError(status)) {
+      const events = data.data.map(event => {
         const workers = event.workers.map(worker => {
           return worker.user.id;
         });

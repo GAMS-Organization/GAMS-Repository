@@ -21,6 +21,16 @@ class preventive {
     }
     return preventiveAdapter.list(listResponse);
   };
+
+  listByMonth = async month => {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`event/${month}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return preventiveAdapter.listByMonth(listResponse);
+  };
 }
 
 export default new preventive();
