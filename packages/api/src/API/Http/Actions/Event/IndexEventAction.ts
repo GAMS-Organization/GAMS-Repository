@@ -15,18 +15,18 @@ export default class IndexEventAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const usersData = await this.eventService.returnAllPaginated(request.query.page, request.query.items_per_page);
+    const eventsData = await this.eventService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
-    const getAllPresenter = new GetAllEventsPresenter(usersData.data);
+    const getAllPresenter = new GetAllEventsPresenter(eventsData.data);
 
     return response
       .status(HTTP_CODES.OK)
       .json(
         paginatedSuccess(
           getAllPresenter.getData(),
-          usersData.dataLength,
-          usersData.totalDataQuantity,
-          usersData.totalPages,
+          eventsData.dataLength,
+          eventsData.totalDataQuantity,
+          eventsData.totalPages,
         ),
       );
   }

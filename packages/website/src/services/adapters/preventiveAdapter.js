@@ -32,8 +32,8 @@ class preventiveAdapter {
         });
         return {
           title: event.title,
-          start: createDateTime(event.startDate),
-          end: createDateTime(event.endDate),
+          start: createDateTime(event.startDate).toDate(),
+          end: createDateTime(event.endDate).toDate(),
           allDay: event.allDay,
           resource: {
             description: event.description,

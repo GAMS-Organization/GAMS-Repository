@@ -5,6 +5,7 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import StoreEventAction from '../API/Http/Actions/Event/StoreEventAction';
 import IndexEventAction from '../API/Http/Actions/Event/IndexEventAction';
 import UpdateEventAction from '../API/Http/Actions/Event/UpdateEventAction';
+import IndexEventsByMonthAction from '../API/Http/Actions/Event/IndexEventsByMonthAction';
 
 const router = express.Router();
 
@@ -41,6 +42,20 @@ router.post(
 //   }),
 // );
 //
+
+router.get(
+  '/:month([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexEventsByMonth: IndexEventsByMonthAction = DIContainer.resolve<IndexEventsByMonthAction>(
+      IndexEventsByMonthAction,
+    );
+    await indexEventsByMonth.execute(request, response);
+  }),
+);
+
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {

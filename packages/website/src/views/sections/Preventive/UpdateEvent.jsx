@@ -56,14 +56,18 @@ class UpdateEvent extends React.Component {
         workers.push(workersData);
       }
     }
-    this.setState({ workers });
+    this.setState({ workers, selectedWorkers: this.props.event.resource.workers, allDay: this.props.event.allDay });
   };
 
   handleChangeWorkers = event => {
     this.setState({ selectedWorkers: event.target.value });
   };
 
-  createEvent = async e => {
+  handleCheck = value => {
+    this.setState({ allDay: value });
+  };
+
+  updateEvent = async e => {
     const fields = ['startDate', 'endDate', 'title', 'description', 'workers', 'startTime', 'endTime'];
     const formElements = e.target.elements;
     const formValues = fields
@@ -88,35 +92,11 @@ class UpdateEvent extends React.Component {
     this.props.create(event);
     this.handleClose();
     this.props.closeHandler();
-
-    // e.preventDefault();
-    //
-    // const fields = ['id', 'name'];
-    // const formElements = e.target.elements;
-    // const formValues = fields
-    //   .map(field => ({
-    //     [field]: formElements.namedItem(field).value,
-    //   }))
-    //   .reduce((current, next) => ({ ...current, ...next }));
-    //
-    // formValues.roles = [formValues.roles];
-    //
-    // const response = await serviceProduct.update(formValues);
-    //
-    // if (response.type === 'UPDATED_SUCCESFUL') {
-    //   this.setState({ notification: true, open: false, rolClicked: false });
-    //   window.location.reload();
-    // } else {
-    //   this.setState({ notification: true, errors: response.error });
-    // }
   };
 
   render() {
     const { classes, event, Transition } = this.props;
     const { errors } = this.state;
-    if (this.state.selectedWorkers.length === 0 && event) {
-      this.setState({ selectedWorkers: event.resource.workers, allDay: event.allDay });
-    }
     return (
       <div>
         <Snackbar
@@ -149,7 +129,7 @@ class UpdateEvent extends React.Component {
             <h4 className={classes.modalTitle}>Actualizar evento</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.createEvent}>
+            <form onSubmit={this.updateEvent}>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput

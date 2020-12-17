@@ -11,19 +11,18 @@ import styles from '../../../styles/jss/material-dashboard-react/checkboxAdnRadi
 class CheckboxInput extends React.Component {
   constructor(props) {
     super(props);
-    const { checked } = props;
     this.state = {
-      checked: checked,
+      checked: false,
     };
   }
 
   handleToggle = () => {
-    this.setState({ checked: !this.state.checked });
-    this.props.handleCheck(!this.state.checked);
+    this.setState({ checked: !this.props.checked });
+    this.props.handleCheck(!this.props.checked);
   };
 
   render() {
-    const { classes, label } = this.props;
+    const { classes, label, checked } = this.props;
     return (
       <div>
         <Checkbox
@@ -34,6 +33,7 @@ class CheckboxInput extends React.Component {
           classes={{
             checked: classes.checked,
           }}
+          checked={checked}
         />
         {label ? <label>{label}</label> : null}
       </div>

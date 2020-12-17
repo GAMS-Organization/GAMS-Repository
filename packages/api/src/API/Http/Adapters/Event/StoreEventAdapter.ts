@@ -25,7 +25,7 @@ export default class StoreEventAdapter {
       request.body.description,
       request.body.startDate ? request.body.startDate : null,
       request.body.endDate ? request.body.endDate : null,
-      request.body.allDay ? request.body.allDay : null,
+      request.body.allDay ? request.body.allDay : false,
       request.body.workersId ? request.body.workersId : null,
     );
   }
