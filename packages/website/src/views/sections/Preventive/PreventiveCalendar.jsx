@@ -51,7 +51,6 @@ class PreventiveCalendar extends React.Component {
   };
 
   handleClickShowUpdateModal = event => {
-    console.log(event);
     this.setState({ event, slot: false, showUpdateEventModal: true });
   };
 
@@ -93,7 +92,7 @@ class PreventiveCalendar extends React.Component {
         {this.state.event && this.state.showUpdateEventModal ? (
           <UpdateEvent
             event={this.state.event}
-            create={this.handleClickUpdateEvent}
+            update={this.handleClickUpdateEvent}
             Transition={Transition}
             closeHandler={this.handleClose}
           />

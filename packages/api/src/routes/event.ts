@@ -6,6 +6,7 @@ import StoreEventAction from '../API/Http/Actions/Event/StoreEventAction';
 import IndexEventAction from '../API/Http/Actions/Event/IndexEventAction';
 import UpdateEventAction from '../API/Http/Actions/Event/UpdateEventAction';
 import IndexEventsByMonthAction from '../API/Http/Actions/Event/IndexEventsByMonthAction';
+import DestroyEventAction from '../API/Http/Actions/Event/DestroyEventAction';
 
 const router = express.Router();
 
@@ -80,15 +81,15 @@ router.put(
 //   }),
 // );
 //
-// router.delete(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyProductAction: DestroyProductAction = DIContainer.resolve<DestroyProductAction>(DestroyProductAction);
-//     await destroyProductAction.execute(request, response);
-//   }),
-// );
+router.delete(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyEventAction: DestroyEventAction = DIContainer.resolve<DestroyEventAction>(DestroyEventAction);
+    await destroyEventAction.execute(request, response);
+  }),
+);
 
 export default router;

@@ -22,6 +22,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceUser from '../../../services/api/user';
 import CheckboxInput from '../../components/CustomInput/Checkbox';
+import servicePreventive from '../../../services/api/preventive';
 
 class UpdateEvent extends React.Component {
   constructor(props) {
@@ -76,22 +77,43 @@ class UpdateEvent extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    console.log(createDateTime(formValues.startDate, formValues.startTime));
+    this.handleClose();
+    this.props.closeHandler();
 
     const event = {
       title: formValues.title,
-      start: createDateTime(formValues.startDate, formValues.startTime),
-      end: createDateTime(formValues.endDate, formValues.endTime),
-      allDay: false,
-      resource: {
-        description: formValues.description,
-        workers: this.state.selectedWorkers,
-      },
+      startDate: formValues.startDate + ' ' + formValues.startTime,
+      endDate: formValues.endDate + ' ' + formValues.endTime,
+      allDay: this.state.allDay,
+      description: formValues.description,
+      workersId: this.state.selectedWorkers,
     };
 
-    this.props.create(event);
     this.handleClose();
     this.props.closeHandler();
+
+    const response = await servicePreventive.update(event, this.props.event.resource.id);
+
+    if (response.type === 'UPDATED_SUCCESSFULLY') {
+      this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
+  };
+
+  deleteEvent = async e => {
+    this.handleClose();
+    this.props.closeHandler();
+
+    const response = await servicePreventive.delete(this.props.event.resource.id);
+
+    if (response.type === 'DELETED_SUCCESSFULLY') {
+      this.setState({ notification: true, open: false, rolClicked: false });
+      window.location.reload();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
   };
 
   render() {
@@ -282,6 +304,11 @@ class UpdateEvent extends React.Component {
                   </Button>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
+                  <Button onClick={e => this.deleteEvent(e)} color="gamsBlack">
+                    Eliminar
+                  </Button>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={3}>
                   <Button type="reset" color="danger" simple onClick={this.handleClose}>
                     Cancelar
                   </Button>
@@ -302,7 +329,7 @@ UpdateEvent.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   type: PropTypes.string,
-  create: PropTypes.func,
+  update: PropTypes.func,
   closeHandler: PropTypes.func,
 };
 

@@ -217,6 +217,9 @@ import UpdateEventAction from '../../API/Http/Actions/Event/UpdateEventAction';
 import IndexEventsByMonthAction from '../../API/Http/Actions/Event/IndexEventsByMonthAction';
 import IndexEventsByMonthAdapter from '../../API/Http/Adapters/Event/IndexEventsByMonthAdapter';
 import IndexEventsByMonthHandler from '../../Application/Handlers/Event/IndexEventsByMonthHandler';
+import DestroyEventHandler from '../../Application/Handlers/Event/DestroyEventHandler';
+import DestroyEventAdapter from '../../API/Http/Adapters/Event/DestroyEventAdapter';
+import DestroyEventAction from '../../API/Http/Actions/Event/DestroyEventAction';
 const DIContainer = new Container();
 
 /**
@@ -291,6 +294,7 @@ DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
 DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();
 DIContainer.bind<IndexEventsByMonthAction>(IndexEventsByMonthAction).toSelf();
 DIContainer.bind<UpdateEventAction>(UpdateEventAction).toSelf();
+DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 
 /**
  * Adapters
@@ -352,6 +356,7 @@ DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
 DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
 DIContainer.bind<IndexEventsByMonthAdapter>(IndexEventsByMonthAdapter).toSelf();
 DIContainer.bind<UpdateEventAdapter>(UpdateEventAdapter).toSelf();
+DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
 
 /**
  * Handlers
@@ -413,6 +418,7 @@ DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
 DIContainer.bind<StoreEventHandler>(StoreEventHandler).toSelf();
 DIContainer.bind<IndexEventsByMonthHandler>(IndexEventsByMonthHandler).toSelf();
 DIContainer.bind<UpdateEventHandler>(UpdateEventHandler).toSelf();
+DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 
 /*
  * Services

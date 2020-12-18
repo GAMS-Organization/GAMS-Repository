@@ -78,8 +78,6 @@ class NewEvent extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    console.log(createDateTime(formValues.startDate, formValues.startTime));
-
     const event = {
       title: formValues.title,
       startDate: formValues.startDate + ' ' + formValues.startTime,

@@ -12,10 +12,20 @@ class preventive {
     return preventiveAdapter.create(createResponse);
   };
 
-  list = async () => {
+  update = async (body, id) => {
+    let updateResponse;
+    try {
+      updateResponse = await Api.put(`event/${id}`, body);
+    } catch (err) {
+      updateResponse = err;
+    }
+    return preventiveAdapter.update(updateResponse);
+  };
+
+  list = async (page = 1, itemsPerPage = 15) => {
     let listResponse;
     try {
-      listResponse = await Api.get('event/');
+      listResponse = await Api.get(`event/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
@@ -30,6 +40,16 @@ class preventive {
       listResponse = err;
     }
     return preventiveAdapter.listByMonth(listResponse);
+  };
+
+  delete = async id => {
+    let deleteResponse;
+    try {
+      deleteResponse = await Api.delete(`event/${id}`);
+    } catch (err) {
+      deleteResponse = err;
+    }
+    return preventiveAdapter.delete(deleteResponse);
   };
 }
 

@@ -22,6 +22,26 @@ class preventiveAdapter {
     }
   };
 
+  update = updateResponse => {
+    let { status, data } = updateResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'UPDATED_SUCCESSFULLY',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'UPDATED_UNSUCCESSFULLY',
+        error: {
+          code: status,
+          type: code,
+          errors: details,
+        },
+      };
+    }
+  };
+
   list = listResponse => {
     let { status, data } = listResponse;
 
@@ -58,6 +78,7 @@ class preventiveAdapter {
           resource: {
             description: event.description,
             workers,
+            id: event.id,
           },
         };
       });
@@ -73,6 +94,26 @@ class preventiveAdapter {
           code: status,
           type: code,
           errors: details.error,
+        },
+      };
+    }
+  };
+
+  delete = deleteResponse => {
+    let { status, data } = deleteResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'DELETED_SUCCESSFULLY',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'DELETED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
         },
       };
     }

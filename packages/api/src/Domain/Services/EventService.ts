@@ -64,4 +64,9 @@ export default class UserRoleService {
       totalPages: Math.ceil(entriesQuantity / itemsPerPage),
     };
   }
+
+  public async destroyEvent(event): Promise<boolean> {
+    await this.destroyUserEventFromEvent(event);
+    return await this.eventRepository.destroy(event);
+  }
 }
