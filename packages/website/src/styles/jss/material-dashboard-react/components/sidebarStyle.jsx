@@ -162,6 +162,7 @@ const sidebarStyle = theme => ({
     display: 'block',
     padding: '10px 15px',
     backgroundColor: 'transparent',
+    borderColor: gamsRedColor[0],
     ...defaultFont,
   },
   itemIcon: {
@@ -459,6 +460,12 @@ const sidebarStyle = theme => ({
       width: '100%',
       bottom: '13px',
     },
+  },
+  floatRight: {
+    float: 'right',
+  },
+  childrenContainer: {
+    marginLeft: '1rem',
   },
 });
 

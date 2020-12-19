@@ -9,6 +9,7 @@ import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
 import Today from '@material-ui/icons/Today';
+import Input from '@material-ui/icons/Input';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -53,39 +54,47 @@ const dashboardRoutes = [
     layout: '/admin',
   },
   {
-    path: '/sector',
-    name: 'Sector',
-    icon: House,
-    component: Sector,
+    name: 'Gestión',
+    icon: Input,
     layout: '/admin',
-  },
-  {
-    path: '/area',
-    name: 'Área',
-    icon: LocationOn,
-    component: Area,
-    layout: '/admin',
-  },
-  {
-    path: '/service',
-    name: 'Servicio',
-    icon: Build,
-    component: Service,
-    layout: '/admin',
-  },
-  {
-    path: '/element',
-    name: 'Elementos',
-    icon: Category,
-    component: Element,
-    layout: '/admin',
-  },
-  {
-    path: '/asset',
-    name: 'Activos',
-    icon: AllInclusive,
-    component: Asset,
-    layout: '/admin',
+    group: true,
+    children: [
+      {
+        path: '/sector',
+        name: 'Sector',
+        icon: House,
+        component: Sector,
+        layout: '/admin',
+      },
+      {
+        path: '/area',
+        name: 'Área',
+        icon: LocationOn,
+        component: Area,
+        layout: '/admin',
+      },
+      {
+        path: '/service',
+        name: 'Servicio',
+        icon: Build,
+        component: Service,
+        layout: '/admin',
+      },
+      {
+        path: '/element',
+        name: 'Elementos',
+        icon: Category,
+        component: Element,
+        layout: '/admin',
+      },
+      {
+        path: '/asset',
+        name: 'Activos',
+        icon: AllInclusive,
+        component: Asset,
+        layout: '/admin',
+      },
+    ],
   },
   {
     path: '/login-page',
