@@ -25,9 +25,20 @@ const Sidebar = ({ ...props }) => {
     let isActive = children.filter(child => props.location.pathname.includes(child.layout + child.path));
     return isActive.length !== 0;
   }
-  const { classes, color, image, logoText, routes } = props;
+  const { classes, color, image, logoText, routes, userInfo } = props;
 
   const [open, setOpen] = React.useState(false);
+
+  // verifies if userInfo.roles exist on route
+  function isAvailableRoute(validRoles) {
+    let isAvailable = false;
+    for (const userRol of userInfo.roles) {
+      if (validRoles.includes(userRol)) {
+        isAvailable = true;
+      }
+    }
+    return isAvailable;
+  }
 
   const handleClick = name => {
     if (open === name) {
@@ -40,6 +51,9 @@ const Sidebar = ({ ...props }) => {
   let links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
+        if (!isAvailableRoute(prop.roles)) {
+          return null;
+        }
         let listItemClasses = classNames({
           [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
         });
@@ -127,7 +141,7 @@ const Sidebar = ({ ...props }) => {
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
-          anchor={'left'}
+          anchor={'right'}
           open={props.open}
           classes={{
             paper: classNames(classes.drawerPaper),

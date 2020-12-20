@@ -31,6 +31,7 @@ const dashboardRoutes = [
     icon: AssignmentIcon,
     component: Stock,
     layout: '/admin',
+    roles: ['admin', 'personal'],
   },
   {
     path: '/preventive',
@@ -38,6 +39,7 @@ const dashboardRoutes = [
     icon: Today,
     component: Preventive,
     layout: '/admin',
+    roles: ['admin', 'personal'],
   },
   {
     path: '/users',
@@ -45,6 +47,7 @@ const dashboardRoutes = [
     icon: Person,
     component: Users,
     layout: '/admin',
+    roles: ['admin', 'personal'],
   },
   {
     path: '/products',
@@ -52,12 +55,14 @@ const dashboardRoutes = [
     icon: Toys,
     component: Products,
     layout: '/admin',
+    roles: ['admin', 'personal'],
   },
   {
     name: 'Gestión',
     icon: Input,
     layout: '/admin',
     group: true,
+    roles: ['admin', 'personal'],
     children: [
       {
         path: '/sector',
@@ -65,6 +70,7 @@ const dashboardRoutes = [
         icon: House,
         component: Sector,
         layout: '/admin',
+        roles: ['admin', 'personal'],
       },
       {
         path: '/area',
@@ -72,6 +78,7 @@ const dashboardRoutes = [
         icon: LocationOn,
         component: Area,
         layout: '/admin',
+        roles: ['admin', 'personal'],
       },
       {
         path: '/service',
@@ -79,6 +86,7 @@ const dashboardRoutes = [
         icon: Build,
         component: Service,
         layout: '/admin',
+        roles: ['admin', 'personal'],
       },
       {
         path: '/element',
@@ -86,6 +94,7 @@ const dashboardRoutes = [
         icon: Category,
         component: Element,
         layout: '/admin',
+        roles: ['admin', 'personal'],
       },
       {
         path: '/asset',
@@ -93,6 +102,7 @@ const dashboardRoutes = [
         icon: AllInclusive,
         component: Asset,
         layout: '/admin',
+        roles: ['admin', 'personal'],
       },
     ],
   },
@@ -102,6 +112,7 @@ const dashboardRoutes = [
     icon: Login,
     component: LoginPage,
     layout: '/auth',
+    roles: ['admin', 'personal', 'user'],
   },
 ];
 
