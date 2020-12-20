@@ -29,8 +29,12 @@ const Sidebar = ({ ...props }) => {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = name => {
+    if (open === name) {
+      setOpen(false);
+    } else {
+      setOpen(name);
+    }
   };
 
   let links = (
@@ -63,14 +67,14 @@ const Sidebar = ({ ...props }) => {
               button
               divider={activeGroup(prop.children)}
               className={classes.itemLink + listItemClasses}
-              onClick={() => handleClick()}
+              onClick={() => handleClick(prop.name)}
             >
               {typeof prop.icon === 'string' ? (
                 <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
               ) : (
                 <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
               )}
-              {open ? (
+              {open === prop.name ? (
                 <KeyboardArrowUp className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
               ) : (
                 <KeyboardArrowDown className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
@@ -81,7 +85,7 @@ const Sidebar = ({ ...props }) => {
                 disableTypography={true}
               />
             </ListItem>
-            <Collapse in={open} timeout="auto" unmountOnExit className={classes.childrenContainer}>
+            <Collapse in={open === prop.name} timeout="auto" unmountOnExit className={classes.childrenContainer}>
               <List component="div" disablePadding>
                 {prop.children.map((prop, key) => {
                   let listItemClasses = classNames({
