@@ -86,7 +86,13 @@ class Dashboard extends React.Component {
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">
-          <Navbar routes={routes} handleDrawerToggle={this.handleDrawerToggle} color="gamsBlue" {...rest} />
+          <Navbar
+            routes={routes}
+            handleDrawerToggle={this.handleDrawerToggle}
+            color="gamsBlue"
+            userInfo={this.state.userInfo}
+            {...rest}
+          />
           <div className={classes.content}>
             <div className={classes.container}>
               <Switch>

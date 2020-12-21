@@ -117,6 +117,15 @@ const headerStyle = theme => ({
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
   },
+  customContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  userName: {
+    margin: 0,
+    padding: '12px 30px',
+  },
 });
 
 export default headerStyle;

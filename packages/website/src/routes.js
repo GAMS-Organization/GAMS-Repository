@@ -47,7 +47,7 @@ const dashboardRoutes = [
     icon: Person,
     component: Users,
     layout: '/admin',
-    roles: ['admin', 'personal'],
+    roles: ['admin'],
   },
   {
     path: '/products',

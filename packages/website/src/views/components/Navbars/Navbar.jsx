@@ -25,18 +25,19 @@ function Header({ ...props }) {
     });
     return name;
   }
-  const { classes, color } = props;
+  const { classes, color, userInfo } = props;
   const appBarClasses = classNames({
     [' ' + classes[color]]: color,
   });
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>
+        <div className={classes.flex + ' ' + classes.customContainer}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
+          <Button disabled color="transparent" href="#" className={classes.title}>
             {makeBrand()}
           </Button>
+          <h6 className={classes.userName}>{userInfo.name}</h6>
         </div>
         <Hidden smDown implementation="css">
           {/*<AdminNavbarLinks {...classes} />*/}
