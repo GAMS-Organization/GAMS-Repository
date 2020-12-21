@@ -10,6 +10,7 @@ import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
+import Explore from '@material-ui/icons/Explore';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -20,6 +21,7 @@ import Area from 'views/containers/Area.jsx';
 import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
 import Preventive from 'views/containers/Preventive';
+import Activities from 'views/containers/Activities';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -105,6 +107,14 @@ const dashboardRoutes = [
         roles: ['admin', 'personal'],
       },
     ],
+  },
+  {
+    path: '/my-activities',
+    name: 'Actividades',
+    icon: Explore,
+    component: Activities,
+    layout: '/admin',
+    roles: ['admin', 'personal', 'user'],
   },
   {
     path: '/login-page',

@@ -13,6 +13,7 @@ import CancelWorkOrderAction from '../API/Http/Actions/WorkOrder/CancelWorkOrder
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
+import IndexWorkOrdersByAuthorAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
 
 const router = express.Router();
 
@@ -100,6 +101,19 @@ router.post(
       CompleteWorkOrderAction,
     );
     await comppleteWorkOrderAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/myWorkOrders',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexWorkOrdersByAuthorAction: IndexWorkOrdersByAuthorAction = DIContainer.resolve<
+      IndexWorkOrdersByAuthorAction
+    >(IndexWorkOrdersByAuthorAction);
+    await indexWorkOrdersByAuthorAction.execute(request, response);
   }),
 );
 

@@ -21,6 +21,10 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
     return await this.repository(WorkOrder).count();
   }
 
+  public async countByUser(userId: number): Promise<number> {
+    return await this.repository(WorkOrder).count({ where: { user: userId }, relations: ['user'] });
+  }
+
   public async findOneById(id: number): Promise<WorkOrder> {
     return await this.repository(WorkOrder).findOne({
       where: { id: id },
@@ -28,8 +32,12 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
     });
   }
 
-  public async findByUserId(id: number): Promise<WorkOrder[]> {
-    return await this.repository(WorkOrder).find({ where: { user: id }, relations: ['user'] });
+  public async findByUserId(id: number, initialIndex: number, limit: number): Promise<WorkOrder[]> {
+    return await this.repository(WorkOrder).find({
+      where: { user: id },
+      skip: initialIndex,
+      take: limit,
+    });
   }
 
   public async findByAssetId(id: number): Promise<WorkOrder[]> {

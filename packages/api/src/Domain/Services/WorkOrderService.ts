@@ -37,6 +37,25 @@ export default class WorkOrderService {
     };
   }
 
+  public async returnAllPaginatedByAuthor(
+    userId: number,
+    page: number = 1,
+    itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
+  ): Promise<PaginatedSuccessData> {
+    const workOrderQuantity = await this.workOrderRepository.countByUser(userId);
+    const workOrders = await this.workOrderRepository.findByUserId(
+      userId,
+      itemsPerPage * page - itemsPerPage,
+      itemsPerPage,
+    );
+    return {
+      data: workOrders,
+      dataLength: workOrders.length,
+      totalDataQuantity: workOrderQuantity,
+      totalPages: Math.ceil(workOrderQuantity / itemsPerPage),
+    };
+  }
+
   public async updateWorkers(workOrder: WorkOrder, workers: User[]): Promise<WorkOrder> {
     let error = false;
     for (const worker of workers) {

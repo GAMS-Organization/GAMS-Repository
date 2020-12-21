@@ -14,18 +14,19 @@ export default class Element {
   public code: string;
   @Column({ nullable: true })
   public description: string;
-  @Column()
+  @Column({ nullable: true })
   public steps: string;
   @ManyToOne(_type => Service, service => service.elements)
   public service: Service;
   @OneToMany(_type => Asset, asset => asset.element)
   public assets: Asset[];
 
-  public constructor(name: string, code: string, service: Service, description: string) {
+  public constructor(name: string, code: string, service: Service, description: string, steps: string) {
     this.name = name;
     this.code = code;
     this.description = description;
     this.service = service;
+    this.steps = steps;
   }
 
   public getId(): number {
