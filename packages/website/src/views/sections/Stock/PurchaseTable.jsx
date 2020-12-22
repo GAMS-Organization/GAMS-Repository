@@ -40,7 +40,6 @@ class PurchaseTable extends React.Component {
     }
 
     const formElements = e.target.elements;
-
     const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
 

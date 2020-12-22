@@ -6,11 +6,16 @@ import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardBody from '../../components/Card/CardBody';
 import GridContainer from '../../components/Grid/GridContainer';
-import CustomInput from '../../components/CustomInput/CustomInput';
 import CardFooter from '../../components/Card/CardFooter';
 import Button from '../../components/CustomButtons/Button';
 import SnackbarContent from '../../components/Snackbar/SnackbarContent';
 import Explore from '@material-ui/icons/Explore';
+
+import workOrderService from '../../../services/api/workOrder';
+import Info from '../../components/Typography/Info';
+import Warning from '../../components/Typography/Warning';
+import Success from '../../components/Typography/Success';
+import Danger from '../../components/Typography/Danger';
 
 const styles = {
   cardCategoryWhite: {
@@ -29,72 +34,100 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
+  mx3: {
+    marginLeft: '1rem',
+    marginRight: '.8rem',
+  },
 };
 
 class WorkOrdersHistory extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      workOrders: [],
+      totalWorkOrderPages: 1,
+      workOrderPage: 1,
+    };
   }
+
+  componentWillMount = async () => {
+    const response = await workOrderService.listByUser();
+    this.setState({ workOrders: response.items, totalWorkOrderPages: response.pageCount });
+  };
+
+  handleOnClick = async () => {
+    const response = await workOrderService.listByUser(this.state.workOrderPage + 1);
+    this.setState({
+      workOrders: this.state.workOrders.concat(response.items),
+      totalWorkOrderPages: response.pageCount,
+      workOrderPage: this.state.workOrderPage + 1,
+    });
+  };
 
   render() {
     const { classes } = this.props;
 
+    const state = {
+      libre: 'info',
+      pausada: 'warning',
+      finalizada: 'success',
+      asignada: 'warning',
+      tomada: 'warning',
+      cancelada: 'danger',
+    };
+
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <form onSubmit={this.createProduct}>
-            <Card>
-              <CardHeader color="gamsBlue">
-                <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
-                <p className={classes.cardCategoryWhite}>Todas sus actividades son listadas aquí</p>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <SnackbarContent
-                      message={'INFO - This is a regular notification made with color="info"'}
-                      close
-                      color="info"
-                      icon={Explore}
-                    />
-                    <br />
-                    <SnackbarContent
-                      message={'SUCCESS - This is a regular notification made with color="success"'}
-                      close
-                      color="success"
-                    />
-                    <br />
-                    <SnackbarContent
-                      message={'WARNING - This is a regular notification made with color="warning"'}
-                      close
-                      color="warning"
-                    />
-                    <br />
-                    <SnackbarContent
-                      message={'DANGER - This is a regular notification made with color="danger"'}
-                      close
-                      color="danger"
-                    />
-                    <br />
-                    <SnackbarContent
-                      message={'PRIMARY - This is a regular notification made with color="primary"'}
-                      close
-                      color="primary"
-                    />
-                    <br />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
+          <Card>
+            <CardHeader color="gamsBlue">
+              <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
+              <GridContainer>
+                <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
+                  Todas sus actividades son listadas aquí.
+                </p>
+                <Info badge>Notificada</Info>
+                <Warning badge>En proceso</Warning>
+                <Success badge>Realizada</Success>
+                <Danger badge>Cancelada</Danger>
+              </GridContainer>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={12}>
+                  {this.state.workOrders.length !== 0 ? (
+                    this.state.workOrders.map(workOrder => {
+                      return (
+                        <SnackbarContent
+                          message={`${workOrder.orderDate} - ${workOrder.comment} - Propridad: ${workOrder.priority}`}
+                          color={state[workOrder.state]}
+                          icon={Explore}
+                        />
+                      );
+                    })
+                  ) : (
+                    <GridContainer justify={'center'}>
+                      <h5>Todavía no haz realizado ninguna actividad.</h5>
+                    </GridContainer>
+                  )}
+                </GridItem>
+              </GridContainer>
+            </CardBody>
+            {this.state.workOrderPage !== this.state.totalWorkOrderPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12}>
-                  <Button type="submit" color="gamsRed">
+                  <Button
+                    color="gamsRed"
+                    onClick={() => {
+                      this.handleOnClick();
+                    }}
+                  >
                     Ver más
                   </Button>
                 </GridContainer>
               </CardFooter>
-            </Card>
-          </form>
+            ) : null}
+          </Card>
         </GridItem>
       </GridContainer>
     );

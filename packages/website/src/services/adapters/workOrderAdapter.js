@@ -1,6 +1,6 @@
 import { isError } from '../../utils/helpers/isError';
 
-class assetAdapter {
+class workOrderAdapter {
   create(createResponse) {
     let { status, data } = createResponse;
 
@@ -26,12 +26,32 @@ class assetAdapter {
 
     if (!isError(status)) {
       return {
-        data,
+        ...data,
       };
     } else {
       const { code, details } = data.errors;
       return {
         type: 'LIST_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
+
+  /*listBySector(listBySectorResponse) {
+    let { status, data } = listBySectorResponse;
+
+    if (!isError(status)) {
+      return {
+        areas: data.data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_BY_SECTOR_FAIL',
         error: {
           code: status,
           type: code,
@@ -81,25 +101,27 @@ class assetAdapter {
     }
   }
 
-  get(assetResponse) {
-    let { status, data } = assetResponse;
+  imageMapUpload(uploadResponse) {
+    let { status, data } = uploadResponse;
 
     if (!isError(status)) {
       return {
-        data,
+        type: 'UPLOAD_IMAGE_SUCCESFUL',
+        data: data,
       };
     } else {
       const { code, details } = data.errors;
+
       return {
-        type: 'ASSET_FAIL',
+        type: 'UPLOAD_IMAGE_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          details: details,
         },
       };
     }
-  }
+  }*/
 }
 
-export default new assetAdapter();
+export default new workOrderAdapter();

@@ -16,14 +16,21 @@ import headerStyle from '../../../styles/jss/material-dashboard-react/components
 
 function Header({ ...props }) {
   function makeBrand() {
-    var name;
-    props.routes.map((prop, key) => {
-      if (prop.layout + prop.path === props.location.pathname) {
-        name = prop.name;
+    var title;
+    for (const prop of props.routes) {
+      if (!prop.group) {
+        if (prop.layout + prop.path === props.location.pathname) {
+          title = prop.title;
+        }
+      } else {
+        for (const child of prop.children) {
+          if (child.layout + child.path === props.location.pathname) {
+            title = child.title;
+          }
+        }
       }
-      return null;
-    });
-    return name;
+    }
+    return title;
   }
   const { classes, color, userInfo } = props;
   const appBarClasses = classNames({

@@ -134,4 +134,13 @@ export default class AssetService {
       }
     }
   }
+
+  public async findSpecificAsset(
+    sectorId: number,
+    areaId: number,
+    serviceId: number,
+    elementId: number,
+  ): Promise<Asset[]> {
+    return await this.assetRepository.findBySectorAreaServiceElementIds(sectorId, areaId, serviceId, elementId);
+  }
 }

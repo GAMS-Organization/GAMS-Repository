@@ -6,8 +6,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import typographyStyle from '../../../styles/jss/material-dashboard-react/components/typographyStyle.jsx';
 
 function Success({ ...props }) {
-  const { classes, children } = props;
-  return <div className={classes.defaultFontStyle + ' ' + classes.successText}>{children}</div>;
+  const { classes, children, badge } = props;
+  if (!badge) {
+    return <div className={classes.defaultFontStyle + ' ' + classes.successText}>{children}</div>;
+  } else {
+    return <div className={classes.defaultFontStyle + ' ' + classes.successBadge}>{children}</div>;
+  }
 }
 
 Success.propTypes = {

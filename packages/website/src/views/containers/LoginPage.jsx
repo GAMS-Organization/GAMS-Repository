@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
     const response = await loginService.logIn(email, password);
 
     if (response.user) {
-      return history.push('/admin/');
+      return history.push('/admin/my-activities');
     }
 
     this.setState({
