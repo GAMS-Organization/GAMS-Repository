@@ -3,9 +3,7 @@ import workOrderAdapter from '../adapters/workOrderAdapter';
 
 class workOrder {
   async create(dataWorkOrder) {
-    console.log(dataWorkOrder);
     const body = dataWorkOrder;
-    console.log(body);
     let createResponse;
     try {
       createResponse = await Api.post('workorder/', body);

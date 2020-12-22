@@ -26,7 +26,6 @@ class products {
 
   async update(dataProduct) {
     const body = dataProduct;
-    console.log(body);
     let updateResponse;
     try {
       updateResponse = await Api.put(`product/${body.id}`, body);
