@@ -6,7 +6,7 @@ class workOrder {
     const body = dataWorkOrder;
     let createResponse;
     try {
-      createResponse = await Api.post('workorder/', body);
+      createResponse = await Api.post('workOrder/', body);
     } catch (err) {
       createResponse = err;
     }
@@ -16,7 +16,7 @@ class workOrder {
   async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get(`workorder/?page=${page}&items_per_page=${itemsPerPage}`);
+      listResponse = await Api.get(`workOrder/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
@@ -26,7 +26,17 @@ class workOrder {
   async listByUser(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get(`workorder/myWorkOrders/?page=${page}&items_per_page=${itemsPerPage}`);
+      listResponse = await Api.get(`workOrder/myWorkOrders/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return workOrderAdapter.list(listResponse);
+  }
+
+  async listByWorker(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`workOrder/byWorker/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
@@ -38,7 +48,7 @@ class workOrder {
 
     let updateResponse;
     try {
-      updateResponse = await Api.put(`workorder/${body.id}`, body);
+      updateResponse = await Api.put(`workOrder/${body.id}`, body);
     } catch (err) {
       updateResponse = err;
     }
@@ -49,7 +59,7 @@ class workOrder {
     let deleteResponse;
 
     try {
-      deleteResponse = await Api.delete(`workorder/${id}`);
+      deleteResponse = await Api.delete(`workOrder/${id}`);
     } catch (err) {
       deleteResponse = err;
     }

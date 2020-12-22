@@ -14,6 +14,7 @@ import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
 import IndexWorkOrdersByAuthorAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
+import IndexWorkOrdersByWorkerAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByWorkerAction';
 
 const router = express.Router();
 
@@ -114,6 +115,19 @@ router.get(
       IndexWorkOrdersByAuthorAction
     >(IndexWorkOrdersByAuthorAction);
     await indexWorkOrdersByAuthorAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/byWorker',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexWorkOrdersByWorkerAction: IndexWorkOrdersByWorkerAction = DIContainer.resolve<
+      IndexWorkOrdersByWorkerAction
+    >(IndexWorkOrdersByWorkerAction);
+    await indexWorkOrdersByWorkerAction.execute(request, response);
   }),
 );
 

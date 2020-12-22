@@ -40,27 +40,27 @@ const styles = {
   },
 };
 
-class WorkOrdersHistory extends React.Component {
+class WorkOrdersAuthorHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      workOrders: [],
-      totalWorkOrderPages: 1,
-      workOrderPage: 1,
+      workOrdersAuthor: [],
+      totalWorkOrderAuthorPages: 1,
+      workOrderAuthorPage: 1,
     };
   }
 
   componentWillMount = async () => {
     const response = await workOrderService.listByUser();
-    this.setState({ workOrders: response.items, totalWorkOrderPages: response.pageCount });
+    this.setState({ workOrdersAuthor: response.items, totalWorkOrderAuthorPages: response.pageCount });
   };
 
   handleOnClick = async () => {
-    const response = await workOrderService.listByUser(this.state.workOrderPage + 1);
+    const response = await workOrderService.listByUser(this.state.workOrderAuthorPage + 1);
     this.setState({
-      workOrders: this.state.workOrders.concat(response.items),
-      totalWorkOrderPages: response.pageCount,
-      workOrderPage: this.state.workOrderPage + 1,
+      workOrdersAuthor: this.state.workOrdersAuthor.concat(response.items),
+      totalWorkOrderAuthorPages: response.pageCount,
+      workOrderAuthorPage: this.state.workOrderAuthorPage + 1,
     });
   };
 
@@ -95,8 +95,8 @@ class WorkOrdersHistory extends React.Component {
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  {this.state.workOrders.length !== 0 ? (
-                    this.state.workOrders.map(workOrder => {
+                  {this.state.workOrdersAuthor.length !== 0 ? (
+                    this.state.workOrdersAuthor.map(workOrder => {
                       return (
                         <SnackbarContent
                           message={`${workOrder.orderDate} - ${workOrder.comment} - Propridad: ${workOrder.priority}`}
@@ -113,7 +113,7 @@ class WorkOrdersHistory extends React.Component {
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.workOrderPage !== this.state.totalWorkOrderPages ? (
+            {this.state.workOrderAuthorPage !== this.state.totalWorkOrderAuthorPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12}>
                   <Button
@@ -134,8 +134,8 @@ class WorkOrdersHistory extends React.Component {
   }
 }
 
-WorkOrdersHistory.propTypes = {
+WorkOrdersAuthorHistory.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(WorkOrdersHistory);
+export default withStyles(styles)(WorkOrdersAuthorHistory);
