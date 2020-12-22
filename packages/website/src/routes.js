@@ -9,7 +9,7 @@ import House from '@material-ui/icons/Home';
 import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
-import MapIcon from '@material-ui/icons/Map';
+import OfflineBolt from '@material-ui/icons/OfflineBolt';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -19,6 +19,7 @@ import Service from 'views/containers/Service.jsx';
 import Area from 'views/containers/Area.jsx';
 import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
+import WorkOrder from 'views/containers/WorkOrder';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -30,6 +31,15 @@ const dashboardRoutes = [
     icon: Person,
     component: Users,
     layout: '/admin',
+    title: 'Usuarios',
+  },
+  {
+    path: '/WorkOrder',
+    name: 'O. trabajo',
+    icon: OfflineBolt,
+    component: WorkOrder,
+    layout: '/admin',
+    title: 'Ordenes de Trabajo',
   },
   {
     path: '/products',
@@ -37,6 +47,7 @@ const dashboardRoutes = [
     icon: Toys,
     component: Products,
     layout: '/admin',
+    title: 'Productos',
   },
   {
     path: '/stock',
@@ -44,6 +55,7 @@ const dashboardRoutes = [
     icon: AssignmentIcon,
     component: Stock,
     layout: '/admin',
+    title: 'Stock',
   },
   {
     path: '/sector',
@@ -51,6 +63,7 @@ const dashboardRoutes = [
     icon: House,
     component: Sector,
     layout: '/admin',
+    title: 'Sector',
   },
   {
     path: '/area',
@@ -58,6 +71,7 @@ const dashboardRoutes = [
     icon: LocationOn,
     component: Area,
     layout: '/admin',
+    title: 'Área',
   },
   {
     path: '/service',
@@ -65,6 +79,7 @@ const dashboardRoutes = [
     icon: Build,
     component: Service,
     layout: '/admin',
+    title: 'Servicio',
   },
   {
     path: '/element',
@@ -72,6 +87,7 @@ const dashboardRoutes = [
     icon: Category,
     component: Element,
     layout: '/admin',
+    title: 'Elementos',
   },
   {
     path: '/asset',
@@ -79,6 +95,7 @@ const dashboardRoutes = [
     icon: AllInclusive,
     component: Asset,
     layout: '/admin',
+    title: 'Activos',
   },
   {
     path: '/login-page',
@@ -86,6 +103,7 @@ const dashboardRoutes = [
     icon: Login,
     component: LoginPage,
     layout: '/auth',
+    title: 'Salir',
   },
 ];
 

@@ -48,6 +48,20 @@ class asset {
 
     return assetAdapter.delete(deleteResponse);
   }
+
+  async get(dataAsset) {
+    const body = dataAsset;
+
+    let assetResponse;
+    try {
+      assetResponse = await Api.get(
+        `asset/filters?sector=${body.sector}&area=${body.area}&service=${body.service}&element=${body.element}`,
+      );
+    } catch (err) {
+      assetResponse = err;
+    }
+    return assetAdapter.get(assetResponse);
+  }
 }
 
 export default new asset();

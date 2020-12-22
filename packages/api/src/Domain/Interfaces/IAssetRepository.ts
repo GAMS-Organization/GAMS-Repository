@@ -8,6 +8,12 @@ export default interface IAssetRepository {
   findByAreaId(id: number): Promise<Asset[]>;
   findByServiceId(id: number): Promise<Asset[]>;
   findByElementId(id: number): Promise<Asset[]>;
+  findBySectorAreaServiceElementIds(
+    sectorId: number,
+    areaId: number,
+    serviceId: number,
+    elementId: number,
+  ): Promise<Asset[]>;
   findAllPaginated(initialIndex: number, limit: number): Promise<Asset[]>;
   count(): Promise<number>;
   findByWorkOrderId(workOrderId: number): Promise<Asset>;

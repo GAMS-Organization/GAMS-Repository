@@ -107,7 +107,7 @@ class NewAssetSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //Se crea la seccion
+  //Se crea el activo
   createAsset = async e => {
     e.preventDefault();
 
@@ -193,7 +193,7 @@ class NewAssetSection extends React.Component {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
                       <FormControl fullWidth className={classes.selectFormControl}>
-                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                        <InputLabel htmlFor="Area" className={classes.selectLabel}>
                           Área
                         </InputLabel>
                         <Select
@@ -227,7 +227,7 @@ class NewAssetSection extends React.Component {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
                       <FormControl fullWidth className={classes.selectFormControl}>
-                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                        <InputLabel htmlFor="servicio" className={classes.selectLabel}>
                           Servicio
                         </InputLabel>
                         <Select
@@ -261,7 +261,7 @@ class NewAssetSection extends React.Component {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={10}>
                       <FormControl fullWidth className={classes.selectFormControl}>
-                        <InputLabel htmlFor="sector" className={classes.selectLabel}>
+                        <InputLabel htmlFor="Elemento" className={classes.selectLabel}>
                           Elemento
                         </InputLabel>
                         <Select
