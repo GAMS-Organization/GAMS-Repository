@@ -8,6 +8,7 @@ import House from '@material-ui/icons/Home';
 import Toys from '@material-ui/icons/Toys';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Category from '@material-ui/icons/Category';
+import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
 // core components/views for Admin layout
@@ -20,6 +21,7 @@ import Area from 'views/containers/Area.jsx';
 import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
 import Preventive from 'views/containers/Preventive';
+import WorkOrder from 'views/containers/WorkOrder';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -31,6 +33,7 @@ const dashboardRoutes = [
     icon: AssignmentIcon,
     component: Stock,
     layout: '/admin',
+    title: 'Stock',
     roles: ['admin', 'personal'],
   },
   {
@@ -39,6 +42,7 @@ const dashboardRoutes = [
     icon: Today,
     component: Preventive,
     layout: '/admin',
+    title: 'Mantenimiento preventivo',
     roles: ['admin', 'personal'],
   },
   {
@@ -47,7 +51,17 @@ const dashboardRoutes = [
     icon: Person,
     component: Users,
     layout: '/admin',
+    title: 'Usuarios',
     roles: ['admin'],
+  },
+  {
+    path: '/WorkOrder',
+    name: 'O. trabajo',
+    icon: OfflineBolt,
+    component: WorkOrder,
+    layout: '/admin',
+    title: 'Ordenes de Trabajo',
+    roles: ['admin', 'personal', 'user'],
   },
   {
     path: '/products',
@@ -55,6 +69,7 @@ const dashboardRoutes = [
     icon: Toys,
     component: Products,
     layout: '/admin',
+    title: 'Productos',
     roles: ['admin', 'personal'],
   },
   {
@@ -62,30 +77,34 @@ const dashboardRoutes = [
     icon: Input,
     layout: '/admin',
     group: true,
+    title: 'Gestón',
     roles: ['admin', 'personal'],
     children: [
       {
         path: '/sector',
-        name: 'Sector',
+        name: 'Sectores',
         icon: House,
         component: Sector,
         layout: '/admin',
+        title: 'Sectores',
         roles: ['admin', 'personal'],
       },
       {
         path: '/area',
-        name: 'Área',
+        name: 'Áreas',
         icon: LocationOn,
         component: Area,
         layout: '/admin',
+        title: 'Áreas',
         roles: ['admin', 'personal'],
       },
       {
         path: '/service',
-        name: 'Servicio',
+        name: 'Servicios',
         icon: Build,
         component: Service,
         layout: '/admin',
+        title: 'Servicios',
         roles: ['admin', 'personal'],
       },
       {
@@ -94,6 +113,7 @@ const dashboardRoutes = [
         icon: Category,
         component: Element,
         layout: '/admin',
+        title: 'Elementos',
         roles: ['admin', 'personal'],
       },
       {
@@ -102,6 +122,7 @@ const dashboardRoutes = [
         icon: AllInclusive,
         component: Asset,
         layout: '/admin',
+        title: 'Activos',
         roles: ['admin', 'personal'],
       },
     ],
@@ -112,6 +133,7 @@ const dashboardRoutes = [
     icon: Login,
     component: LoginPage,
     layout: '/auth',
+    title: 'Salir',
     roles: ['admin', 'personal', 'user'],
   },
 ];

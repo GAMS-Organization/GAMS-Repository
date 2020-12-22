@@ -21,6 +21,7 @@ import serviceUser from '../../../services/api/user';
 import newUserSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newUserSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import { InputLabel } from '@material-ui/core';
+import { loadFromFile } from 'react-pdf/dist/shared/utils';
 
 class NewUserSection extends React.Component {
   constructor(props) {
