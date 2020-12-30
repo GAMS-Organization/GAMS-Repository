@@ -20,6 +20,10 @@ import UpdateProductSection from '../../sections/Products/UpdateProductSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceProduct from '../../../services/api/products';
+import CustomInput from '../CustomInput/CustomInput';
+import Search from '@material-ui/icons/Search';
+import Icon from '@material-ui/core/Icon';
+import classNames from 'classnames';
 
 class ProductTable extends React.Component {
   constructor(props) {
@@ -79,6 +83,22 @@ class ProductTable extends React.Component {
           close
         />
         <UpdateProductSection product={this.state.product} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <div className={classes.searchInputContainer}>
+          <CustomInput
+            labelText="Buscar"
+            id="search"
+            formControlProps={{
+              fullWidth: true,
+              className: 'mt0',
+            }}
+            inputProps={{
+              required: true,
+              defaultValue: '',
+              name: 'search',
+            }}
+          />
+          <Search className={classNames(classes.itemIcon)}>{}</Search>
+        </div>
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

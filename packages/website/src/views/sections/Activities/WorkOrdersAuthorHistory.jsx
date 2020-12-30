@@ -9,13 +9,13 @@ import GridContainer from '../../components/Grid/GridContainer';
 import CardFooter from '../../components/Card/CardFooter';
 import Button from '../../components/CustomButtons/Button';
 import SnackbarContent from '../../components/Snackbar/SnackbarContent';
-import Explore from '@material-ui/icons/Explore';
 
 import workOrderService from '../../../services/api/workOrder';
 import Info from '../../components/Typography/Info';
 import Warning from '../../components/Typography/Warning';
 import Success from '../../components/Typography/Success';
 import Danger from '../../components/Typography/Danger';
+import OfflineBolt from '@material-ui/icons/OfflineBolt';
 
 const styles = {
   cardCategoryWhite: {
@@ -101,7 +101,7 @@ class WorkOrdersAuthorHistory extends React.Component {
                         <SnackbarContent
                           message={`${workOrder.orderDate} - ${workOrder.comment} - Propridad: ${workOrder.priority}`}
                           color={state[workOrder.state]}
-                          icon={Explore}
+                          icon={OfflineBolt}
                         />
                       );
                     })
