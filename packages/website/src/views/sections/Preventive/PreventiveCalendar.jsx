@@ -9,6 +9,7 @@ import UpdateEvent from './UpdateEvent';
 import preventive from '../../../services/api/preventive';
 import withStyles from '@material-ui/core/styles/withStyles';
 import preventiveCalendarStyle from '../../../styles/jss/material-dashboard-react/sections/preventiveCalendarStyle';
+import 'moment/locale/es';
 
 class PreventiveCalendar extends React.Component {
   constructor(props) {
@@ -79,6 +80,14 @@ class PreventiveCalendar extends React.Component {
             height: 500,
             fontWeight: 400,
             color: rooftopBlueColor[0],
+          }}
+          messages={{
+            next: 'Siguiente',
+            previous: 'Anterior',
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
           }}
         />
         {this.state.slot && this.state.showNewEventModal ? (

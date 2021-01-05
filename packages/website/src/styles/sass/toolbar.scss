@@ -21,6 +21,7 @@ $active-border: darken($btn-border, 12%);
     border-top: solid;
     border-bottom: solid;
     border-width: thin;
+    text-transform: capitalize;
   }
 
   & button {
