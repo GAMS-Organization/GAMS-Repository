@@ -5,9 +5,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -78,7 +75,7 @@ class UpdateStock extends React.Component {
   render() {
     const { classes, current, Transition } = this.props;
     const { errors } = this.state;
-    const { id, product, quantity, minimunQuantity, state } = current;
+    const { id, quantity, minimunQuantity } = current;
     return (
       <div>
         <Snackbar
@@ -94,7 +91,6 @@ class UpdateStock extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,

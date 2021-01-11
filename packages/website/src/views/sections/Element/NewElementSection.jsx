@@ -20,14 +20,13 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 import serviceElement from '../../../services/api/element';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
-import { InputLabel, Input } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
 
 class NewElementSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //rolSelected: 'area',
       errors: {},
       notification: false,
       service: [],
@@ -78,7 +77,7 @@ class NewElementSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code, service, description } = this.props;
+    const { classes, name, code, description } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-element">

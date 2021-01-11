@@ -30,9 +30,6 @@ class ProductTable extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteProduct = this.deleteProduct.bind(this);
-    this.handleClickUpdate = this.handleClickUpdate.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   closeNotification = () => {

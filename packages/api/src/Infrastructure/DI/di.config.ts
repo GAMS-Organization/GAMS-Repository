@@ -56,7 +56,7 @@ import DisableUserAdapter from '../../API/Http/Adapters/Users/DisableUserAdapter
 import DisableUserHandler from '../../Application/Handlers/Users/DisableUserHandler';
 import EnableUserAdapter from '../../API/Http/Adapters/Users/EnableUserAdapter';
 import EnableUserHandler from '../../Application/Handlers/Users/EnableUserHandler';
-
+import EventService from '../../Domain/Services/EventService';
 import UserRoleService from '../../Domain/Services/UserRoleService';
 import UserService from '../../Domain/Services/UserService';
 import { ILoggerService } from '../../Domain/Services/Logger/ILoggerService';
@@ -204,6 +204,26 @@ import ShowAssetAction from '../../API/Http/Actions/Asset/ShowAssetAction';
 import ShowAssetAdapter from '../../API/Http/Adapters/Asset/ShowAssetAdapter';
 import ShowAssetHandler from '../../Application/Handlers/Asset/ShowAssetHandler';
 
+import UpdateElementAction from '../../API/Http/Actions/Element/UpdateElementAction';
+import UpdateElementAdapter from '../../API/Http/Adapters/Element/UpdateElementAdapter';
+import UpdateElementHandler from '../../Application/Handlers/Element/UpdateElementHandler';
+import IEventRepository from '../../Domain/Interfaces/IEventRepository';
+import TypeEventRepository from '../../Persistence/TypeORM/Repositories/TypeEventRepository';
+import StoreEventAction from '../../API/Http/Actions/Event/StoreEventAction';
+import StoreEventAdapter from '../../API/Http/Adapters/Event/StoreEventAdapter';
+import StoreEventHandler from '../../Application/Handlers/Event/StoreEventHandler';
+import IUserEventRepository from '../../Domain/Interfaces/IUserEventRepository';
+import TypeUserEventRepository from '../../Persistence/TypeORM/Repositories/TypeUserEventRepository';
+import IndexEventAction from '../../API/Http/Actions/Event/IndexEventAction';
+import UpdateEventAdapter from '../../API/Http/Adapters/Event/UpdateEventAdapter';
+import UpdateEventHandler from '../../Application/Handlers/Event/UpdateEventHandler';
+import UpdateEventAction from '../../API/Http/Actions/Event/UpdateEventAction';
+import IndexEventsByMonthAction from '../../API/Http/Actions/Event/IndexEventsByMonthAction';
+import IndexEventsByMonthAdapter from '../../API/Http/Adapters/Event/IndexEventsByMonthAdapter';
+import IndexEventsByMonthHandler from '../../Application/Handlers/Event/IndexEventsByMonthHandler';
+import DestroyEventHandler from '../../Application/Handlers/Event/DestroyEventHandler';
+import DestroyEventAdapter from '../../API/Http/Adapters/Event/DestroyEventAdapter';
+import DestroyEventAction from '../../API/Http/Actions/Event/DestroyEventAction';
 const DIContainer = new Container();
 
 /**
@@ -260,6 +280,7 @@ DIContainer.bind<ShowServiceAction>(ShowServiceAction).toSelf();
 DIContainer.bind<StoreElementAction>(StoreElementAction).toSelf();
 DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
 DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
+DIContainer.bind<UpdateElementAction>(UpdateElementAction).toSelf();
 
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
@@ -273,6 +294,12 @@ DIContainer.bind<AssignWorkOrderAction>(AssignWorkOrderAction).toSelf();
 DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
 DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
+
+DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
+DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();
+DIContainer.bind<IndexEventsByMonthAction>(IndexEventsByMonthAction).toSelf();
+DIContainer.bind<UpdateEventAction>(UpdateEventAction).toSelf();
+DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 
 /**
  * Adapters
@@ -319,6 +346,7 @@ DIContainer.bind<ShowServiceAdapter>(ShowServiceAdapter).toSelf();
 
 DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
 DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
+DIContainer.bind<UpdateElementAdapter>(UpdateElementAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
@@ -330,6 +358,11 @@ DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
 DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
 DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
 DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
+
+DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
+DIContainer.bind<IndexEventsByMonthAdapter>(IndexEventsByMonthAdapter).toSelf();
+DIContainer.bind<UpdateEventAdapter>(UpdateEventAdapter).toSelf();
+DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
 
 /**
  * Handlers
@@ -376,6 +409,7 @@ DIContainer.bind<ShowServiceHandler>(ShowServiceHandler).toSelf();
 
 DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
 DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
+DIContainer.bind<UpdateElementHandler>(UpdateElementHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
@@ -387,6 +421,11 @@ DIContainer.bind<AssignWorkOrderHandler>(AssignWorkOrderHandler).toSelf();
 DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
 DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
 DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
+
+DIContainer.bind<StoreEventHandler>(StoreEventHandler).toSelf();
+DIContainer.bind<IndexEventsByMonthHandler>(IndexEventsByMonthHandler).toSelf();
+DIContainer.bind<UpdateEventHandler>(UpdateEventHandler).toSelf();
+DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 
 /*
  * Services
@@ -408,6 +447,8 @@ DIContainer.bind<AreaService>(AreaService).toSelf();
 DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
+DIContainer.bind<EventService>(EventService).toSelf();
+
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
 
@@ -433,5 +474,7 @@ DIContainer.bind<IElementRepository>(INTERFACES.IElementRepository).to(TypeEleme
 DIContainer.bind<IAssetRepository>(INTERFACES.IAssetRepository).to(TypeAssetRepository);
 DIContainer.bind<IWorkOrderRepository>(INTERFACES.IWorkOrderRepository).to(TypeWorkOrderRepository);
 DIContainer.bind<IUserWorkOrderRepository>(INTERFACES.IUserWorkOrderRepository).to(TypeUserWorkOrderRepository);
+DIContainer.bind<IEventRepository>(INTERFACES.IEventRepository).to(TypeEventRepository);
+DIContainer.bind<IUserEventRepository>(INTERFACES.IUserEventRepository).to(TypeUserEventRepository);
 
 export default DIContainer;

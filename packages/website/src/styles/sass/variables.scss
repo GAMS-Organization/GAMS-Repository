@@ -1,0 +1,55 @@
+
+$out-of-range-color: #dddbf1;
+$out-of-range-bg-color: #7c7c79;
+
+$calendar-border: #DDD !default;
+$cell-border: #DDD !default;
+
+$border-color: #CCC !default;
+
+$segment-width: percentage(1 / 7) !default;
+
+$time-selection-color: white !default;
+$time-selection-bg-color: rgba(0,0,0, .50) !default;
+$date-selection-bg-color: rgba(0,0,0, .10) !default;
+
+
+$event-bg: #3174ad !default;
+$event-border: darken(#3174ad, 10%) !default;
+$event-outline: #3b99fc !default;
+$event-color: #fff !default;
+$event-border-radius: 5px !default;
+$event-padding: 2px 5px !default;
+$event-zindex: 4 !default;
+
+$btn-color: white !default;
+$btn-bg: #fff !default;
+$btn-border: #ccc !default;
+
+$current-time-color: #74ad31 !default;
+
+$rbc-css-prefix: rbc-i !default;
+
+$today-highlight-bg: #eaf6ff !default;
+
+$gams-black-0: #2d2d2a;
+$gams-black-1: #40403d;
+$gams-black-2: #151514;
+
+$gams-gray-0: #4c4c47;
+$gams-gray-1: #7c7c79;
+$gams-gray-2: #31312e;
+
+$gams-blue-0: #324a5f;
+$gams-blue-1: #576a7c;
+$gams-blue-2: #253646;
+
+$gams-red-0: #c14953;
+$gams-red-1: #cc6a72;
+$gams-red-2: #7b2f35;
+
+$gams-white-0: #dddbf1;
+$gams-white-1: #e9e8f6;
+$gams-white-2: #c9c8dc;
+
+$gams-green-0: #5cb860;

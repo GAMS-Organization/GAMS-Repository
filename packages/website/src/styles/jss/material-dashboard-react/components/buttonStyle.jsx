@@ -15,11 +15,6 @@ import {
   gamsGrayColor,
   gamsBlueColor,
   gamsBlackColor,
-  gamsBlueBoxShadow,
-  gamsRedBoxShadow,
-  gamsBlackBoxShadow,
-  gamsWhiteBoxShadow,
-  gamsGrayBoxShadow,
 } from '../../material-dashboard-react.jsx';
 
 const buttonStyle = {

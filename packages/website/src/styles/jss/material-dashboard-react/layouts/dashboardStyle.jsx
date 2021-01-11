@@ -1,6 +1,5 @@
 import { drawerWidth, transition, container } from '../../material-dashboard-react.jsx';
 import image from '../../../img/imagenTaller2.jpg';
-import { blackColor, hexToRgb } from '../../material-dashboard-react';
 
 const appStyle = theme => ({
   wrapper: {

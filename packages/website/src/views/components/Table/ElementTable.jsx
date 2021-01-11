@@ -8,12 +8,10 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
-import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
@@ -54,9 +52,6 @@ class ElementTable extends React.Component {
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
 
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar

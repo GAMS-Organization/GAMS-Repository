@@ -17,7 +17,7 @@ import customTabsStyle from '../../../styles/jss/material-dashboard-react/compon
 
 class CustomTabs extends React.Component {
   state = {
-    value: 0,
+    value: 1,
   };
   handleChange = (event, value) => {
     this.setState({ value });

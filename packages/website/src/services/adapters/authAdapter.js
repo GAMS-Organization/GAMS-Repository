@@ -14,7 +14,7 @@ class AuthAdapter {
       };
     }
 
-    const { code, details } = data.errors;
+    const { code } = data.errors;
 
     if (code === 'NOT_FOUND') {
       return {

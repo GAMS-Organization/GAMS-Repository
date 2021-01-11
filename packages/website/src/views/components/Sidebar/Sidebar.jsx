@@ -11,73 +11,127 @@ import ListItem from '@material-ui/core/ListItem/index';
 import ListItemText from '@material-ui/core/ListItemText/index';
 import Icon from '@material-ui/core/Icon/index';
 // core components
-import AdminNavbarLinks from '../Navbars/AdminNavbarLinks.jsx';
 
 import sidebarStyle from '../../../styles/jss/material-dashboard-react/components/sidebarStyle.jsx';
+import { Collapse } from '@material-ui/core';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 const Sidebar = ({ ...props }) => {
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
-    return props.location.pathname.indexOf(routeName) > -1 ? true : false;
+    return props.location.pathname.includes(routeName);
   }
-  const { classes, color, logo, image, logoText, routes } = props;
-  var links = (
+  function activeGroup(children) {
+    let isActive = children.filter(child => props.location.pathname.includes(child.layout + child.path));
+    return isActive.length !== 0;
+  }
+  const { classes, color, image, logoText, routes, userInfo } = props;
+
+  const [open, setOpen] = React.useState(false);
+
+  // verifies if userInfo.roles exist on route
+  function isAvailableRoute(validRoles) {
+    let isAvailable = false;
+    for (const userRol of userInfo.roles) {
+      if (validRoles.includes(userRol)) {
+        isAvailable = true;
+      }
+    }
+    return isAvailable;
+  }
+
+  const handleClick = name => {
+    if (open === name) {
+      setOpen(false);
+    } else {
+      setOpen(name);
+    }
+  };
+
+  let links = (
     <List className={classes.list}>
       {routes.map((prop, key) => {
-        var activePro = ' ';
-        var listItemClasses;
-        if (prop.path === '/upgrade-to-pro') {
-          activePro = classes.activePro + ' ';
-          listItemClasses = classNames({
-            [' ' + classes[color]]: true,
-          });
-        } else {
-          listItemClasses = classNames({
-            [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
-          });
+        if (!isAvailableRoute(prop.roles)) {
+          return null;
         }
+        let listItemClasses = classNames({
+          [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
+        });
         const whiteFontClasses = classNames({
           [' ' + classes.whiteFont]: activeRoute(prop.layout + prop.path),
         });
-        return (
-          <NavLink to={prop.layout + prop.path} className={activePro + classes.item} activeClassName="active" key={key}>
+        return !prop.group ? (
+          <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={key}>
             <ListItem button className={classes.itemLink + listItemClasses}>
               {typeof prop.icon === 'string' ? (
-                <Icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive,
-                  })}
-                >
-                  {prop.icon}
-                </Icon>
+                <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
               ) : (
-                <prop.icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive,
-                  })}
-                />
+                <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
               )}
               <ListItemText
-                primary={props.rtlActive ? prop.rtlName : prop.name}
-                className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive,
-                })}
+                primary={prop.name}
+                className={classNames(classes.itemText, whiteFontClasses)}
                 disableTypography={true}
               />
             </ListItem>
           </NavLink>
+        ) : (
+          <>
+            <ListItem
+              button
+              divider={activeGroup(prop.children)}
+              className={classes.itemLink + listItemClasses}
+              onClick={() => handleClick(prop.name)}
+            >
+              {typeof prop.icon === 'string' ? (
+                <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
+              ) : (
+                <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
+              )}
+              {open === prop.name ? (
+                <KeyboardArrowUp className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
+              ) : (
+                <KeyboardArrowDown className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
+              )}
+              <ListItemText
+                primary={prop.name}
+                className={classNames(classes.itemText, whiteFontClasses)}
+                disableTypography={true}
+              />
+            </ListItem>
+            <Collapse in={open === prop.name} timeout="auto" unmountOnExit className={classes.childrenContainer}>
+              <List component="div" disablePadding>
+                {prop.children.map((prop, key) => {
+                  let listItemClasses = classNames({
+                    [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
+                  });
+                  return (
+                    <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={key}>
+                      <ListItem button className={classes.itemLink + listItemClasses}>
+                        {typeof prop.icon === 'string' ? (
+                          <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
+                        ) : (
+                          <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
+                        )}
+                        <ListItemText
+                          primary={prop.name}
+                          className={classNames(classes.itemText, whiteFontClasses)}
+                          disableTypography={true}
+                        />
+                      </ListItem>
+                    </NavLink>
+                  );
+                })}
+              </List>
+            </Collapse>
+          </>
         );
       })}
     </List>
   );
-  var brand = (
+  let brand = (
     <div className={classes.logo}>
-      <a
-        href="https://www.sanfrancisco.utn.edu.ar"
-        className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive,
-        })}
-      >
+      <a href="https://www.sanfrancisco.utn.edu.ar" className={classNames(classes.logoLink)}>
         {logoText}
       </a>
     </div>
@@ -87,12 +141,10 @@ const Sidebar = ({ ...props }) => {
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
-          anchor={props.rtlActive ? 'left' : 'right'}
+          anchor={'right'}
           open={props.open}
           classes={{
-            paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive,
-            }),
+            paper: classNames(classes.drawerPaper),
           }}
           onClose={props.handleDrawerToggle}
           ModalProps={{
@@ -115,9 +167,7 @@ const Sidebar = ({ ...props }) => {
           variant="permanent"
           open
           classes={{
-            paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive,
-            }),
+            paper: classNames(classes.drawerPaper),
           }}
         >
           {brand}

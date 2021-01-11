@@ -13,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateServiceSection from '../../sections/Service/UpdateServiceSection.jsx';

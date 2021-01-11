@@ -1,9 +1,7 @@
 import {
-  primaryColor,
   dangerColor,
   successColor,
   grayColor,
-  rooftopOrangeColor,
   defaultFont,
   gamsBlueColor,
   gamsBlackColor,
