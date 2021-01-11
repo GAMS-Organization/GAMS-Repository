@@ -33,7 +33,7 @@ class UpdateEvent extends React.Component {
       notification: false,
       selectedWorkers: [],
       workers: [],
-      allDay: false,
+      allDay: props.event.allDay,
     };
     this.listWorkers();
   }
