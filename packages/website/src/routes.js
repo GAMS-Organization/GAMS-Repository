@@ -11,6 +11,7 @@ import Category from '@material-ui/icons/Category';
 import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
+import ListIcon from '@material-ui/icons/List';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -22,6 +23,7 @@ import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
 import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
+import ListWorkOrder from 'views/containers/ListWorkOrder';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -55,13 +57,32 @@ const dashboardRoutes = [
     roles: ['admin'],
   },
   {
-    path: '/WorkOrder',
     name: 'O. trabajo',
-    icon: OfflineBolt,
-    component: WorkOrder,
+    icon: Input,
     layout: '/admin',
+    group: true,
     title: 'Ordenes de Trabajo',
     roles: ['admin', 'personal', 'user'],
+    children: [
+      {
+        path: '/WorkOrder',
+        name: 'Crear',
+        icon: OfflineBolt,
+        component: WorkOrder,
+        layout: '/admin',
+        title: 'Ordenes de Trabajo',
+        roles: ['admin', 'personal', 'user'],
+      },
+      {
+        path: '/ListWorkOrder',
+        name: 'Listado',
+        icon: ListIcon,
+        component: ListWorkOrder,
+        layout: '/admin',
+        title: 'Listado ordenes de trabajo',
+        roles: ['admin', 'personal', 'user'],
+      },
+    ],
   },
   {
     path: '/products',
