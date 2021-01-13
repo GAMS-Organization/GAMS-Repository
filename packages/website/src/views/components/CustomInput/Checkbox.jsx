@@ -12,13 +12,13 @@ class CheckboxInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false,
+      checked: props.checked,
     };
   }
 
   handleToggle = () => {
-    this.setState({ checked: !this.props.checked });
-    this.props.handleCheck(!this.props.checked);
+    this.setState({ checked: !this.state.checked });
+    this.props.handleCheck(!this.state.checked);
   };
 
   render() {

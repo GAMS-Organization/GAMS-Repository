@@ -236,7 +236,7 @@ class NewEvent extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12}>
-                      <CheckboxInput handleCheck={this.handleCheck} label={'Todo el día'} />
+                      <CheckboxInput checked={this.state.allDay} handleCheck={this.handleCheck} label={'Todo el día'} />
                     </GridItem>
                   </GridContainer>
                 </GridItem>
