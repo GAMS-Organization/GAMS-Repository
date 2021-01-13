@@ -22,7 +22,6 @@ import Snackbar from '../Snackbar/Snackbar';
 import serviceProduct from '../../../services/api/products';
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
-import Icon from '@material-ui/core/Icon';
 import classNames from 'classnames';
 
 class ProductTable extends React.Component {
@@ -33,6 +32,7 @@ class ProductTable extends React.Component {
       product: {},
       errors: {},
       notification: false,
+      search: '',
     };
   }
 
@@ -67,6 +67,12 @@ class ProductTable extends React.Component {
     const Transition = React.forwardRef(function Transition(props, ref) {
       return <Slide direction="down" ref={ref} {...props} />;
     });
+    let filteredData = tableData;
+    if (this.state.search !== '') {
+      filteredData = tableData.filter(item => {
+        return item[1].toLowerCase().includes(this.state.search.toLowerCase());
+      });
+    }
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -95,6 +101,9 @@ class ProductTable extends React.Component {
               required: true,
               defaultValue: '',
               name: 'search',
+              onChange: e => {
+                this.setState({ search: e.target.value });
+              },
             }}
           />
           <Search className={classNames(classes.itemIcon)}>{}</Search>
@@ -114,7 +123,7 @@ class ProductTable extends React.Component {
             </TableHead>
           ) : null}
           <TableBody>
-            {tableData.map((prop, key) => {
+            {filteredData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
                   {prop.map((prop, key) => {
