@@ -8,6 +8,7 @@ import jwtConfig from '../../../config/jwtConfig';
 import User from '../../../Domain/Entities/User';
 import { UserStates } from '../../../Domain/Enums/UserStates';
 import AuthorizationFailed from '../../Exceptions/AuthorizationFailed';
+import { sendEmail } from '../../../Domain/Services/Mailer/MailerService';
 
 @injectable()
 export default class LoginHandler {
@@ -18,6 +19,8 @@ export default class LoginHandler {
   }
 
   public async execute(command: LoginCommand): Promise<{ user: User; token: string }> {
+    sendEmail();
+
     const user = await this.userRepository.findOneByUsername(command.getEmail());
 
     if (!user) {
