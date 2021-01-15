@@ -17,7 +17,7 @@ class ListTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      WorkOrder: [],
+      workOrder: [],
       totalPages: 1,
       page: 1,
     };
@@ -95,7 +95,7 @@ class ListTableSection extends React.Component {
             <CardBody>
               <ListWorkOrderTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Código', 'Sector', 'Área', 'Servicio', 'Elemento']}
+                tableHead={['Fecha', 'Prioridad', 'Usuario', 'Estado', 'Fecha de realización']}
                 tableData={this.state.workOrder}
               />
             </CardBody>

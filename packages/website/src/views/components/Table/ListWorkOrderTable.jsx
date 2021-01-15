@@ -16,7 +16,7 @@ import Close from '@material-ui/icons/Close';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceAsset from '../../../services/api/asset';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 class ListWorkOrderTable extends React.Component {
   constructor(props) {
@@ -34,8 +34,8 @@ class ListWorkOrderTable extends React.Component {
   };
 
   //se elimina el activo
-  /*deleteAsset = async prop => {
-    const response = await serviceAsset.delete(prop[0]);
+  deleteWorOrder = async prop => {
+    const response = await serviceWorkOrder.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -43,7 +43,7 @@ class ListWorkOrderTable extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
     window.location.reload();
-  };*/
+  };
 
   componentWillMount = () => {
     this.setState({ modal: false });
@@ -102,7 +102,7 @@ class ListWorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteAsset.bind(this, prop)}
+                        onClick={this.deleteWorOrder.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
