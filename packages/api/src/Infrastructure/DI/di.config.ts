@@ -224,6 +224,7 @@ import IndexEventsByMonthHandler from '../../Application/Handlers/Event/IndexEve
 import DestroyEventHandler from '../../Application/Handlers/Event/DestroyEventHandler';
 import DestroyEventAdapter from '../../API/Http/Adapters/Event/DestroyEventAdapter';
 import DestroyEventAction from '../../API/Http/Actions/Event/DestroyEventAction';
+import MailerService from '../../Domain/Services/Mailer/MailerService';
 const DIContainer = new Container();
 
 /**
@@ -448,6 +449,7 @@ DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<EventService>(EventService).toSelf();
+DIContainer.bind<MailerService>(MailerService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);

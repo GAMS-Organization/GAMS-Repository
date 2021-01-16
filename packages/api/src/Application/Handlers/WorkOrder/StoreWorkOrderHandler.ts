@@ -6,21 +6,26 @@ import WorkOrder from '../../../Domain/Entities/WorkOrder';
 import IAssetRepository from '../../../Domain/Interfaces/IAssetRepository';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IUserRepository from '../../../Domain/Interfaces/IUserRepository';
+import MailerService from '../../../Domain/Services/Mailer/MailerService';
+import { mailTitles } from '../../../Domain/Enums/MailTitlesAndMessages';
 
 @injectable()
 export default class StoreWorkOrderHandler {
   private workOrderRepository: IProductRepository;
   private assetRepository: IAssetRepository;
   private userRepository: IUserRepository;
+  private mailerService: MailerService;
 
   public constructor(
     @inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IProductRepository,
     @inject(INTERFACES.IAssetRepository) assetRepository: IAssetRepository,
     @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,
+    @inject(MailerService) mailerService: MailerService,
   ) {
     this.workOrderRepository = workOrderRepository;
     this.assetRepository = assetRepository;
     this.userRepository = userRepository;
+    this.mailerService = mailerService;
   }
 
   public async execute(command: StoreWorkOrderCommand): Promise<WorkOrder> {
@@ -37,6 +42,9 @@ export default class StoreWorkOrderHandler {
     }
 
     const workOrder = new WorkOrder(command.getOrderDate(), command.getpriority(), command.getComment(), asset, user);
+
+    await this.mailerService.sendEmail(mailTitles.workOrderCreated, command.getComment());
+
     return await this.workOrderRepository.persist(workOrder);
   }
 }

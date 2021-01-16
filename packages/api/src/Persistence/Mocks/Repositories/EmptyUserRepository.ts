@@ -17,6 +17,10 @@ export default class EmptyUserRepository implements IUserRepository {
     return Promise.resolve(null);
   }
 
+  public findByRole(_role: string): Promise<User[]> {
+    return Promise.resolve([]);
+  }
+
   public findOneByUsername(_username: string): Promise<User> {
     return Promise.resolve(null);
   }
