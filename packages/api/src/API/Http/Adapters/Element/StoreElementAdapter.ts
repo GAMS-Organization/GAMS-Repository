@@ -25,6 +25,7 @@ export default class StoreElementAdapter {
       request.body.code,
       request.body.service,
       request.body.description,
+      request.body.steps ? request.body.steps : '',
     );
   }
 }

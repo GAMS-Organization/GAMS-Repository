@@ -224,6 +224,8 @@ import IndexEventsByMonthHandler from '../../Application/Handlers/Event/IndexEve
 import DestroyEventHandler from '../../Application/Handlers/Event/DestroyEventHandler';
 import DestroyEventAdapter from '../../API/Http/Adapters/Event/DestroyEventAdapter';
 import DestroyEventAction from '../../API/Http/Actions/Event/DestroyEventAction';
+import IndexWorkOrdersByAuthorAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
+import IndexWorkOrdersByWorkerAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersByWorkerAction';
 const DIContainer = new Container();
 
 /**
@@ -294,6 +296,8 @@ DIContainer.bind<AssignWorkOrderAction>(AssignWorkOrderAction).toSelf();
 DIContainer.bind<TakeWorkOrderAction>(TakeWorkOrderAction).toSelf();
 DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
+DIContainer.bind<IndexWorkOrdersByAuthorAction>(IndexWorkOrdersByAuthorAction).toSelf();
+DIContainer.bind<IndexWorkOrdersByWorkerAction>(IndexWorkOrdersByWorkerAction).toSelf();
 
 DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
 DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();

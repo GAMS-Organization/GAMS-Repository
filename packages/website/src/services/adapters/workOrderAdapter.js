@@ -26,7 +26,7 @@ class workOrderAdapter {
 
     if (!isError(status)) {
       return {
-        data,
+        ...data,
       };
     } else {
       const { code, details } = data.errors;
@@ -41,7 +41,27 @@ class workOrderAdapter {
     }
   }
 
-  /*update(updateResponse) {
+  /*listBySector(listBySectorResponse) {
+    let { status, data } = listBySectorResponse;
+
+    if (!isError(status)) {
+      return {
+        areas: data.data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_BY_SECTOR_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
+
+  update(updateResponse) {
     let { status, data } = updateResponse;
 
     if (!isError(status)) {
@@ -59,7 +79,7 @@ class workOrderAdapter {
         },
       };
     }
-  }*/
+  }
 
   delete(deleteResponse) {
     let { status, data } = deleteResponse;
@@ -80,6 +100,28 @@ class workOrderAdapter {
       };
     }
   }
+
+  imageMapUpload(uploadResponse) {
+    let { status, data } = uploadResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'UPLOAD_IMAGE_SUCCESFUL',
+        data: data,
+      };
+    } else {
+      const { code, details } = data.errors;
+
+      return {
+        type: 'UPLOAD_IMAGE_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }*/
 }
 
 export default new workOrderAdapter();

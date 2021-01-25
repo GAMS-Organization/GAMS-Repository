@@ -1238,6 +1238,25 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
       (1005,NULL,208,9),
       (1006,NULL,208,11);`,
     );
+
+    //Create elementos
+    await queryRunner.query(
+      `insert into element values 
+      (1,'Puerta madera','PuM','Puerta de madera beige','','4'),
+      (2,'Ventana madera','VenM','Ventana de madera vertical','','4'),
+      (3,'Canilla cruz','CanX','Canilla en forma de cruz','','1'),
+      (4,'Foco 35W','Lum35W','Foco común de 35W','','9');`,
+    );
+
+    //Create activos
+    await queryRunner.query(
+      `insert into asset values 
+      (1,'E01-110-Ce-PuM1','2','22','4','1'),
+      (2,'E01-110-Ce-PuM2','2','22','4','1'),
+      (3,'E01-110-Ce-VenM1','2','22','4','2'),
+      (4,'E01-110-Ce-VenM2','2','22','4','2'),
+      (5,'E01-110-Ce-VenM3','2','22','4','2');`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {

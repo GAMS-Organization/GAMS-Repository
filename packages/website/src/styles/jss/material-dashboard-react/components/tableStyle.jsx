@@ -103,6 +103,14 @@ const tableStyle = theme => ({
     color: gamsRedColor[0],
     boxShadow: 'none',
   },
+  searchInputContainer: {
+    width: '200px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  itemIcon: {
+    color: gamsRedColor[0],
+  },
 });
 
 export default tableStyle;

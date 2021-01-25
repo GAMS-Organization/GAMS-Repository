@@ -18,8 +18,6 @@ class ProductTableSection extends React.Component {
     super(props);
     this.state = {
       product: [],
-      totalPages: 10,
-      page: 1,
     };
   }
 
@@ -28,7 +26,7 @@ class ProductTableSection extends React.Component {
     await this.listProducts();
   }
 
-  listProducts = async (page = 1, itemsPerPage = 15) => {
+  listProducts = async (page = 1, itemsPerPage = 500) => {
     const response = await serviceProduct.list(page, itemsPerPage);
     let products = [];
     for (const product of response.data.items) {
@@ -36,39 +34,7 @@ class ProductTableSection extends React.Component {
       products.push(dataProduct);
     }
 
-    this.setState({ product: products, totalPages: response.data.pageCount, page: page });
-  };
-
-  pagination = () => {
-    const pages = [
-      {
-        text: 'PREV',
-        onClick: () => {
-          this.state.page === 1 ? this.listProducts(1) : this.listProducts(this.state.page - 1);
-        },
-      },
-    ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listProducts(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: 'NEXT',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listProducts(this.state.totalPages)
-          : this.listProducts(this.state.page + 1);
-      },
-    });
-    return pages;
+    this.setState({ product: products, totalPages: response.data.pageCount });
   };
 
   render() {
@@ -84,11 +50,6 @@ class ProductTableSection extends React.Component {
             <CardBody>
               <ProductTable tableHeaderColor="gamsBlue" tableHead={['ID', 'Nombre']} tableData={this.state.product} />
             </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem>
-          <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>
