@@ -17,6 +17,10 @@ export default class TypeUserWorkOrderRepository extends TypeRepository implemen
     return await this.repository(UserWorkOrder).find({ where: { user: id }, relations: ['user', 'workOrder'] });
   }
 
+  public async countByUserId(userId: number): Promise<number> {
+    return await this.repository(UserWorkOrder).count({ where: { user: userId }, relations: ['user'] });
+  }
+
   public async findByWorkOrderId(id: number): Promise<UserWorkOrder[]> {
     return await this.repository(UserWorkOrder).find({ where: { workOrder: id }, relations: ['user', 'workOrder'] });
   }

@@ -21,12 +21,12 @@ class workOrderAdapter {
     }
   }
 
-  /*list(listResponse) {
+  list(listResponse) {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
       return {
-        data,
+        ...data,
       };
     } else {
       const { code, details } = data.errors;
@@ -41,7 +41,7 @@ class workOrderAdapter {
     }
   }
 
-  listBySector(listBySectorResponse) {
+  /*listBySector(listBySectorResponse) {
     let { status, data } = listBySectorResponse;
 
     if (!isError(status)) {
