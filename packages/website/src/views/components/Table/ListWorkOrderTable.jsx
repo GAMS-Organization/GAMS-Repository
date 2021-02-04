@@ -33,7 +33,7 @@ class ListWorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se elimina el activo
+  //se elimina la orden de trabajo
   deleteWorOrder = async prop => {
     const response = await serviceWorkOrder.delete(prop[0]);
 

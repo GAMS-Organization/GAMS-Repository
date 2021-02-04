@@ -41,10 +41,10 @@ class ListWorkOrder extends React.Component {
   }
 }
 
-/*ListSection.propTypes = {
+ListWorkOrder.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
-};*/
+};
 
 export default withStyles(styles)(ListWorkOrder);

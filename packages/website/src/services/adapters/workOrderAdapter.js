@@ -23,7 +23,7 @@ class workOrderAdapter {
 
   list(listResponse) {
     let { status, data } = listResponse;
-
+    console.log(data);
     if (!isError(status)) {
       return {
         ...data,
@@ -41,7 +41,7 @@ class workOrderAdapter {
     }
   }
 
-  /*listBySector(listBySectorResponse) {
+  listBySector(listBySectorResponse) {
     let { status, data } = listBySectorResponse;
 
     if (!isError(status)) {
@@ -121,7 +121,7 @@ class workOrderAdapter {
         },
       };
     }
-  }*/
+  }
 }
 
 export default new workOrderAdapter();

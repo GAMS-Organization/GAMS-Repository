@@ -67,6 +67,16 @@ const dashboardRoutes = [
         title: 'Nueva órden de trabajo',
         roles: ['admin', 'personal', 'user'],
       },
+      {
+        path: '/ListWorkOrder',
+        name: 'Historial',
+        icon: OfflineBolt,
+        component: ListWorkOrder,
+        layout: '/admin',
+        group: true,
+        title: 'Historial',
+        roles: ['admin', 'personal', 'user'],
+      },
     ],
   },
   {
