@@ -17,27 +17,7 @@ import routes from '../routes.js';
 import dashboardStyle from '../styles/jss/material-dashboard-react/layouts/dashboardStyle.jsx';
 
 import logo from '../styles/img/UTN.png';
-
-let userInfo = {};
-
-const switchRoutes = (
-  <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === '/admin') {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={props => {
-              const Component = prop.component;
-              return <Component {...props} {...userInfo} />;
-            }}
-            key={key}
-          />
-        );
-      }
-    })}
-  </Switch>
-);
+import authStorage from '../services/localStorage/authStorage';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -70,7 +50,11 @@ class Dashboard extends React.Component {
       this.setState({ mobileOpen: false });
     }
   };
-
+  componentWillMount = async () => {
+    const name = await authStorage.getSessionUserName();
+    const roles = await authStorage.getSessionUserRoles().split(/,/gi);
+    this.setState({ userInfo: { name, roles } });
+  };
   componentDidUpdate(e) {
     if (e.history.location.pathname !== e.location.pathname) {
       this.refs.mainPanel.scrollTop = 0;
@@ -82,9 +66,13 @@ class Dashboard extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeFunction);
   }
+
   render() {
     const { classes, ...rest } = this.props;
 
+    if (!this.state.userInfo) {
+      return <></>;
+    }
     return (
       <div className={classes.wrapper}>
         <Sidebar
@@ -94,12 +82,51 @@ class Dashboard extends React.Component {
           handleDrawerToggle={this.handleDrawerToggle}
           open={this.state.mobileOpen}
           color="gamsRed"
+          userInfo={this.state.userInfo}
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">
-          <Navbar routes={routes} handleDrawerToggle={this.handleDrawerToggle} color="gamsBlue" {...rest} />
+          <Navbar
+            routes={routes}
+            handleDrawerToggle={this.handleDrawerToggle}
+            color="gamsBlue"
+            userInfo={this.state.userInfo}
+            {...rest}
+          />
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>
+              <Switch>
+                {routes.map((prop, key) => {
+                  if (prop.layout === '/admin') {
+                    if (prop.group) {
+                      return prop.children.map((prop, key) => {
+                        return (
+                          <Route
+                            path={prop.layout + prop.path}
+                            component={props => {
+                              const Component = prop.component;
+                              return <Component {...props} {...this.state.userInfo} />;
+                            }}
+                            key={key}
+                          />
+                        );
+                      });
+                    } else {
+                      return (
+                        <Route
+                          path={prop.layout + prop.path}
+                          component={props => {
+                            const Component = prop.component;
+                            return <Component {...props} {...this.state.userInfo} />;
+                          }}
+                          key={key}
+                        />
+                      );
+                    }
+                  }
+                })}
+              </Switch>
+            </div>
           </div>
           <Footer />
         </div>

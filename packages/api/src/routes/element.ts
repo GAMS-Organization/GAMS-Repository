@@ -2,13 +2,13 @@ import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreElementAction from '../API/Http/Actions/Element/StoreElementAction';
+import UpdateElementAction from '../API/Http/Actions/Element/UpdateElementAction';
 import IndexElementsAction from '../API/Http/Actions/Element/IndexElementsAction';
 import DestroyElementAction from '../API/Http/Actions/Element/DestroyElementAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
-// import UpdateProductAction from '../API/Http/Actions/Product/UpdateProductAction';
 
 const router = express.Router();
 
@@ -33,6 +33,17 @@ router.post(
     await storeElementAction.execute(request, response);
   }),
 );
+
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateElementAction: UpdateElementAction = DIContainer.resolve<UpdateElementAction>(UpdateElementAction);
+    await updateElementAction.execute(request, response);
+  }),
+);
 /*
 router.get(
   '/:id([0-9]+)',
@@ -42,18 +53,6 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
     await showProductAction.execute(request, response);
-  }),
-);
-
-router.put(
-  '/:id([0-9]+)',
-
-  (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
-  },
-  asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateProductAction: UpdateProductAction = DIContainer.resolve<UpdateProductAction>(UpdateProductAction);
-    await updateProductAction.execute(request, response);
   }),
 );
 

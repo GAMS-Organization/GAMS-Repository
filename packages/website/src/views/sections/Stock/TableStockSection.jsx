@@ -58,7 +58,7 @@ class TableStockSection extends React.Component {
   }
 
   //se obtienen las entradas, el stock actual y las salidas
-  async componentWillMount() {
+  componentWillMount = async () => {
     const responseEntry = await serviceEntryPurchaseStock.list();
     const responseCurrentStock = await serviceCurrentStock.list();
     const responseDeparture = await serviceDepartureConsumptionStock.list();
@@ -81,10 +81,9 @@ class TableStockSection extends React.Component {
     }
 
     this.setState({ entry: entries, stock: stocks, departure: departures });
-  }
+  };
 
   render() {
-    const { classes } = this.props;
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>

@@ -11,6 +11,7 @@ import entry from './entry';
 import departure from './departure';
 import service from './service';
 import workOrder from './workOrder';
+import event from './event';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = Router();
@@ -39,6 +40,8 @@ router.use('/asset', asset);
 router.use('/service', service);
 
 router.use('/workOrder', workOrder);
+
+router.use('/event', event);
 
 router.get(
   '/',

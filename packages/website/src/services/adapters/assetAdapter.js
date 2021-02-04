@@ -80,6 +80,26 @@ class assetAdapter {
       };
     }
   }
+
+  get(assetResponse) {
+    let { status, data } = assetResponse;
+
+    if (!isError(status)) {
+      return {
+        data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'ASSET_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
 }
 
 export default new assetAdapter();

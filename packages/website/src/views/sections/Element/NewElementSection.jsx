@@ -20,14 +20,13 @@ import CardFooter from '../../components/Card/CardFooter.jsx';
 import serviceElement from '../../../services/api/element';
 import newAreaSectionStyle from '../../../styles/jss/material-dashboard-react/sections/newAreaSectionStyle';
 import Snackbar from '../../components/Snackbar/Snackbar';
-import { InputLabel, Input } from '@material-ui/core';
+import { InputLabel } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
 
 class NewElementSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //rolSelected: 'area',
       errors: {},
       notification: false,
       service: [],
@@ -59,7 +58,7 @@ class NewElementSection extends React.Component {
   createElement = async e => {
     e.preventDefault();
 
-    const fields = ['name', 'code', 'service', 'description'];
+    const fields = ['name', 'code', 'service', 'description', 'steps'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -78,7 +77,7 @@ class NewElementSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code, service, description } = this.props;
+    const { classes, name, code, description, steps } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-element">
@@ -105,7 +104,7 @@ class NewElementSection extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={8}>
+                    <GridItem xs={12} sm={12} md={5}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
@@ -135,7 +134,7 @@ class NewElementSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={4}>
                       <FormControl fullWidth required className={classes.selectFormControl}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Servicio
@@ -170,7 +169,7 @@ class NewElementSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Descripcion"
                         id="description"
@@ -182,6 +181,21 @@ class NewElementSection extends React.Component {
                           required: false,
                           defaultValue: description,
                           name: 'description',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomInput
+                        labelText="Pasos"
+                        id="steps"
+                        error={errors.steps}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: false,
+                          defaultValue: steps,
+                          name: 'steps',
                         }}
                       />
                     </GridItem>

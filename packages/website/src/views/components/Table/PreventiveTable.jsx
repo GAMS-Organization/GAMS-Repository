@@ -7,28 +7,18 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import Tooltip from '@material-ui/core/Tooltip';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
-import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
-import MapIcon from '@material-ui/icons/Map';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-import LoadMapSection from '../../sections/Maps/LoadMapSection';
 
-import serviceSector from '../../../services/api/sector';
-
-class MapsSectorTable extends React.Component {
+class PreventiveTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      sector: {},
+      events: {},
       errors: {},
       notification: false,
     };
@@ -38,21 +28,12 @@ class MapsSectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se crea la ventana emergente en donde se cargaran los mapas
-  handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2] } });
-    this.child.showModal();
-  };
-
   componentWillMount = () => {
     this.setState({ modal: false });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -62,13 +43,12 @@ class MapsSectorTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Sector eliminado correctamente'
+              : 'Preventiveo eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <LoadMapSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -94,17 +74,6 @@ class MapsSectorTable extends React.Component {
                       </TableCell>
                     );
                   })}
-                  <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Ver mapa" placement="top" classes={{ tooltip: classes.tooltip }}>
-                      <IconButton
-                        aria-label="Maps"
-                        className={classes.tableActionButton}
-                        onClick={this.handleClickLoad.bind(this, prop)}
-                      >
-                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
-                  </TableCell>
                 </TableRow>
               );
             })}
@@ -115,11 +84,11 @@ class MapsSectorTable extends React.Component {
   }
 }
 
-MapsSectorTable.defaultProps = {
+PreventiveTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-MapsSectorTable.propTypes = {
+PreventiveTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -139,4 +108,4 @@ MapsSectorTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(MapsSectorTable);
+export default withStyles(tableStyle)(PreventiveTable);

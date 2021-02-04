@@ -3,12 +3,14 @@ export default class StoreElementCommand {
   private code: string;
   private service: string;
   private description: string;
+  private steps: string;
 
-  public constructor(name: string, code: string, service: string, description: string) {
+  public constructor(name: string, code: string, service: string, description: string, steps: string) {
     this.name = name;
     this.code = code;
     this.service = service;
     this.description = description;
+    this.steps = steps;
   }
 
   public getName(): string {
@@ -25,5 +27,9 @@ export default class StoreElementCommand {
 
   public getService(): string {
     return this.service;
+  }
+
+  public getSteps(): string {
+    return this.steps;
   }
 }

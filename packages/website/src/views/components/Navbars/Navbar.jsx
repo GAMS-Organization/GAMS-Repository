@@ -10,35 +10,41 @@ import Hidden from '@material-ui/core/Hidden/index';
 // @material-ui/icons
 import Menu from '@material-ui/icons/Menu';
 // core components
-import AdminNavbarLinks from './AdminNavbarLinks.jsx';
 import Button from '../CustomButtons/Button.jsx';
 
 import headerStyle from '../../../styles/jss/material-dashboard-react/components/headerStyle.jsx';
-import { rooftopBlueColor } from '../../../styles/jss/material-dashboard-react';
 
 function Header({ ...props }) {
   function makeBrand() {
-    var name;
-    props.routes.map((prop, key) => {
-      if (prop.layout + prop.path === props.location.pathname) {
-        name = prop.name;
+    var title;
+    for (const prop of props.routes) {
+      if (!prop.group) {
+        if (prop.layout + prop.path === props.location.pathname) {
+          title = prop.title;
+        }
+      } else {
+        for (const child of prop.children) {
+          if (child.layout + child.path === props.location.pathname) {
+            title = child.title;
+          }
+        }
       }
-      return null;
-    });
-    return name;
+    }
+    return title;
   }
-  const { classes, color } = props;
+  const { classes, color, userInfo } = props;
   const appBarClasses = classNames({
     [' ' + classes[color]]: color,
   });
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>
+        <div className={classes.flex + ' ' + classes.customContainer}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
+          <Button disabled color="transparent" href="#" className={classes.title}>
             {makeBrand()}
           </Button>
+          <h6 className={classes.userName}>{userInfo.name}</h6>
         </div>
         <Hidden smDown implementation="css">
           {/*<AdminNavbarLinks {...classes} />*/}

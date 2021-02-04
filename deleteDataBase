@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd gamsdocker
+rm -r mysql-data
+rm -r mysql-config
+cd ..
+cd packages/api
+rm -r dist
+
+echo 'Se borraron los archivos mysql-data & mysql-config de gamsdocker y dist de api'

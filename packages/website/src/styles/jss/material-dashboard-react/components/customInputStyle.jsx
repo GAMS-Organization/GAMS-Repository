@@ -1,9 +1,7 @@
 import {
-  primaryColor,
   dangerColor,
   successColor,
   grayColor,
-  rooftopOrangeColor,
   defaultFont,
   gamsBlueColor,
   gamsBlackColor,
@@ -94,6 +92,9 @@ const customInputStyle = {
     margin: '27px 0 0 0',
     position: 'relative',
     verticalAlign: 'unset',
+    '&.mt0': {
+      marginTop: '0px',
+    },
   },
 };
 

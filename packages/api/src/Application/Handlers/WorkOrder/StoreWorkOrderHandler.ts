@@ -1,4 +1,4 @@
-import IProdcutRepository from '../../../Domain/Interfaces/IWorkOrderRepository';
+import IProductRepository from '../../../Domain/Interfaces/IWorkOrderRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
 import StoreWorkOrderCommand from '../../Commands/WorkOrder/StoreWorkOrderCommand';
@@ -9,12 +9,12 @@ import IUserRepository from '../../../Domain/Interfaces/IUserRepository';
 
 @injectable()
 export default class StoreWorkOrderHandler {
-  private workOrderRepository: IProdcutRepository;
+  private workOrderRepository: IProductRepository;
   private assetRepository: IAssetRepository;
   private userRepository: IUserRepository;
 
   public constructor(
-    @inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IProdcutRepository,
+    @inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IProductRepository,
     @inject(INTERFACES.IAssetRepository) assetRepository: IAssetRepository,
     @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,
   ) {

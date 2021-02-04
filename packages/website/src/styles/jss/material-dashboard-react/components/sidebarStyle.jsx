@@ -10,7 +10,6 @@ import {
   warningColor,
   dangerColor,
   whiteColor,
-  grayColor,
   blackColor,
   rooftopBlueColor,
   rooftopOrangeColor,
@@ -163,6 +162,7 @@ const sidebarStyle = theme => ({
     display: 'block',
     padding: '10px 15px',
     backgroundColor: 'transparent',
+    borderColor: gamsRedColor[0],
     ...defaultFont,
   },
   itemIcon: {
@@ -450,7 +450,7 @@ const sidebarStyle = theme => ({
     position: 'relative',
     height: 'calc(100vh - 75px)',
     overflow: 'auto',
-    width: '200px',
+    width: drawerWidth,
     zIndex: '4',
     overflowScrolling: 'touch',
   },
@@ -460,6 +460,12 @@ const sidebarStyle = theme => ({
       width: '100%',
       bottom: '13px',
     },
+  },
+  floatRight: {
+    float: 'right',
+  },
+  childrenContainer: {
+    marginLeft: '1rem',
   },
 });
 

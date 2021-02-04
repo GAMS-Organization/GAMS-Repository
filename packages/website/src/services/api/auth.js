@@ -16,7 +16,7 @@ class Auth {
     const responseAdapted = authAdapter.login(loginResponse);
 
     if (responseAdapted.token) {
-      authStorage.setSession(responseAdapted.token);
+      authStorage.setSession(responseAdapted);
     }
     return authAdapter.login(loginResponse);
   }

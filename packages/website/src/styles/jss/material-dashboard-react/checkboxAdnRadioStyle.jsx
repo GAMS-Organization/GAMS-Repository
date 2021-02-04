@@ -1,11 +1,11 @@
-import { primaryColor, blackColor, hexToRgb } from '../material-dashboard-react.jsx';
+import { primaryColor, blackColor, gamsRedColor, hexToRgb } from '../material-dashboard-react.jsx';
 
 const checkboxAdnRadioStyle = {
   root: {
     padding: '13px',
   },
   checked: {
-    color: primaryColor[0] + '!important',
+    color: gamsRedColor[0] + '!important',
   },
   checkedIcon: {
     width: '20px',
@@ -27,7 +27,7 @@ const checkboxAdnRadioStyle = {
   radioChecked: {
     width: '20px',
     height: '20px',
-    border: '1px solid ' + primaryColor[0],
+    border: '1px solid ' + gamsRedColor[0],
     borderRadius: '50%',
     boxSizing: 'content-box',
   },

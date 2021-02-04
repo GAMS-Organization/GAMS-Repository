@@ -1,6 +1,5 @@
 import Api from './api';
 import currentStockAdapter from '../adapters/currentStockAdapter';
-import serviceAdapter from '../adapters/serviceAdapter';
 
 class currentStock {
   async create(dataCurrentStock) {
