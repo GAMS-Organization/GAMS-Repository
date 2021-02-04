@@ -51,6 +51,38 @@ const typographyStyle = {
   dangerText: {
     color: dangerColor[0],
   },
+  infoBadge: {
+    backgroundColor: infoColor[0],
+    borderRadius: '3px',
+    fontWeight: 'bolder',
+    color: 'white',
+    padding: '3px 8px',
+    margin: '0 5px',
+  },
+  successBadge: {
+    backgroundColor: successColor[0],
+    borderRadius: '3px',
+    fontWeight: 'bolder',
+    color: 'white',
+    padding: '3px 8px',
+    margin: '0 5px',
+  },
+  warningBadge: {
+    backgroundColor: warningColor[0],
+    borderRadius: '3px',
+    fontWeight: 'bolder',
+    color: 'white',
+    padding: '3px 8px',
+    margin: '0 5px',
+  },
+  dangerBadge: {
+    backgroundColor: dangerColor[0],
+    borderRadius: '3px',
+    fontWeight: 'bolder',
+    color: 'white',
+    padding: '3px 8px',
+    margin: '0 5px',
+  },
 };
 
 export default typographyStyle;

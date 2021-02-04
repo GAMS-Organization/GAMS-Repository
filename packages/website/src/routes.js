@@ -11,6 +11,7 @@ import Category from '@material-ui/icons/Category';
 import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
+import Explore from '@material-ui/icons/Explore';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -22,11 +23,21 @@ import Element from 'views/containers/Element.jsx';
 import Asset from 'views/containers/Asset.jsx';
 import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
+import Activities from 'views/containers/Activities';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 
 const dashboardRoutes = [
+  {
+    path: '/my-activities',
+    name: 'Actividades',
+    icon: Explore,
+    component: Activities,
+    layout: '/admin',
+    title: 'Historial de actividades',
+    roles: ['admin', 'personal', 'user'],
+  },
   {
     path: '/stock',
     name: 'Stock',
@@ -37,12 +48,41 @@ const dashboardRoutes = [
     roles: ['admin', 'personal'],
   },
   {
+    name: 'O. trabajo',
+    icon: OfflineBolt,
+    layout: '/admin',
+    group: true,
+    title: 'Ordenes de Trabajo',
+    roles: ['admin', 'personal', 'user'],
+    children: [
+      {
+        path: '/WorkOrder',
+        name: 'Nueva O.T.',
+        icon: OfflineBolt,
+        component: WorkOrder,
+        layout: '/admin',
+        group: true,
+        title: 'Nueva órden de trabajo',
+        roles: ['admin', 'personal', 'user'],
+      },
+    ],
+  },
+  {
     path: '/preventive',
     name: 'Preventivo',
     icon: Today,
     component: Preventive,
     layout: '/admin',
     title: 'Mantenimiento preventivo',
+    roles: ['admin', 'personal'],
+  },
+  {
+    path: '/products',
+    name: 'Productos',
+    icon: Toys,
+    component: Products,
+    layout: '/admin',
+    title: 'Productos',
     roles: ['admin', 'personal'],
   },
   {
@@ -55,29 +95,11 @@ const dashboardRoutes = [
     roles: ['admin'],
   },
   {
-    path: '/WorkOrder',
-    name: 'O. trabajo',
-    icon: OfflineBolt,
-    component: WorkOrder,
-    layout: '/admin',
-    title: 'Ordenes de Trabajo',
-    roles: ['admin', 'personal', 'user'],
-  },
-  {
-    path: '/products',
-    name: 'Productos',
-    icon: Toys,
-    component: Products,
-    layout: '/admin',
-    title: 'Productos',
-    roles: ['admin', 'personal'],
-  },
-  {
     name: 'Gestión',
     icon: Input,
     layout: '/admin',
     group: true,
-    title: 'Gestón',
+    title: 'Gestión',
     roles: ['admin', 'personal'],
     children: [
       {
