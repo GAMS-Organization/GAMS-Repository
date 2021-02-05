@@ -41,7 +41,6 @@ class workOrder {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
     return workOrderAdapter.list(listResponse);
   }
 

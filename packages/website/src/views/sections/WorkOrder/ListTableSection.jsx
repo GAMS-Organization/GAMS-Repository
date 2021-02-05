@@ -30,24 +30,35 @@ class ListTableSection extends React.Component {
 
   listWorkOrders = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceWorkOrder.list(page, itemsPerPage);
-    console.log(response);
+    console.log(response, 'jhhgjgjgh');
+
     let workOrders = [];
-    for (const workOrder of response.data.items) {
-      let dataWorkOrder = [
-        workOrder.id.toString(),
-        workOrder.orderDate,
-        workOrder.priority,
-        workOrder.comment,
-        workOrder.user,
-        workOrder.asset,
-        workOrder.state,
-        workOrder.startDate,
-        workOrder.realizationDate,
-        workOrder.workers,
-      ];
+    for (const workOrder of response.items) {
+      let name = '';
+      for (const worker of workOrder.workers) {
+        if (name === '') {
+          name = worker.user.name;
+        } else {
+          name = name + ' - ' + worker.user.name;
+        }
+      }
+      let dataWorkOrder = {
+        id: workOrder.id,
+        startDate: workOrder.startDate,
+        comment: workOrder.comment,
+        realizationDate: workOrder.realizationDate,
+        visibleData: [
+          workOrder.orderDate,
+          workOrder.priority,
+          workOrder.user.name + ' ' + workOrder.user.surname,
+          workOrder.asset.code,
+          workOrder.state,
+          name,
+        ],
+      };
       workOrders.push(dataWorkOrder);
     }
-    this.setState({ workOrder: workOrders, totalPages: response.data.pageCount, page: page });
+    this.setState({ workOrder: workOrders, totalPages: response.pageCount, page: page });
   };
 
   pagination = () => {
@@ -95,7 +106,7 @@ class ListTableSection extends React.Component {
             <CardBody>
               <ListWorkOrderTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Fecha', 'Prioridad', 'Usuario', 'Estado', 'Fecha de realización']}
+                tableHead={['Fecha de solicitud', 'Prioridad', 'Usuario', 'Activo', 'Estado', 'Responsables']}
                 tableData={this.state.workOrder}
               />
             </CardBody>
