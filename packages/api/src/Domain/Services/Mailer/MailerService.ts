@@ -61,6 +61,8 @@ export default class MailerService {
 
   private getCustomMessage(type: string, workOrder: WorkOrder): string {
     let message: string = '';
+    console.log(workOrder);
+    //hay que agregar las relaciones con las areasm secotres y elementos
     switch (type) {
       case 'newWorkOrder':
         message = `El elemento ${workOrder
