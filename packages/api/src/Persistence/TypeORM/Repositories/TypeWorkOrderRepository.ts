@@ -35,7 +35,16 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   public async findOneById(id: number): Promise<WorkOrder> {
     return await this.repository(WorkOrder).findOne({
       where: { id: id },
-      relations: ['user', 'asset', 'userWorkOrders', 'userWorkOrders.user'],
+      relations: [
+        'user',
+        'asset',
+        'asset.sector',
+        'asset.area',
+        'asset.service',
+        'asset.element',
+        'userWorkOrders',
+        'userWorkOrders.user',
+      ],
     });
   }
 

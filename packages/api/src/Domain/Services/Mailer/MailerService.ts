@@ -65,22 +65,21 @@ export default class MailerService {
     //hay que agregar las relaciones con las areasm secotres y elementos
     switch (type) {
       case 'newWorkOrder':
-        message = `El elemento ${workOrder
-          .getAsset()
-          .getElement()
-          .getName()} que se encuentra dentro del sector
-         ${workOrder
-           .getAsset()
-           .getSector()
-           .getName()}, área ${workOrder
-          .getAsset()
-          .getArea()
-          .getName()}, le ha sido
-          asignada una nueva órden de trabajo.
-           El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente
-            comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder
-          .getAsset()
-          .getCode()}`;
+        message =
+          `El elemento ${workOrder
+            .getAsset()
+            .getElement()
+            .getName()} que se encuentra dentro del sector ` +
+          `${workOrder
+            .getAsset()
+            .getSector()
+            .getName()}, área ${workOrder
+            .getAsset()
+            .getArea()
+            .getName()}, le ha ` +
+          `sido asignada una nueva órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
+          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
         break;
       default:
         break;

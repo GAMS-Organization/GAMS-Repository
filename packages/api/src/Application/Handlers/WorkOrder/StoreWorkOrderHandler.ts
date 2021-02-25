@@ -38,6 +38,8 @@ export default class StoreWorkOrderHandler {
 
     const workOrder = new WorkOrder(command.getOrderDate(), command.getpriority(), command.getComment(), asset, user);
 
-    return await this.workOrderRepository.persist(workOrder);
+    const workOrderCreated = await this.workOrderRepository.persist(workOrder);
+
+    return await this.workOrderRepository.findOneById(workOrderCreated.id);
   }
 }
