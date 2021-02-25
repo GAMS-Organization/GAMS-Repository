@@ -13,6 +13,7 @@ export default class TakeWorkOrderHandler {
   private workOrderRepository: IWorkOrderRepository;
   private userRepository: IUserRepository;
   private workOrderService: WorkOrderService;
+
   public constructor(
     @inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IWorkOrderRepository,
     @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,

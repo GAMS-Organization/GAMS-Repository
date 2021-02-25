@@ -46,12 +46,13 @@ export default class MailerService {
       }
     }
     const recipient: string[] = [];
-    if (user) {
+    if (user.length !== 0) {
       user.forEach(user => {
         recipient.push(user.getEmail());
       });
     } else {
       const users: User[] = await this.userService.findByRole('personal');
+      console.log(users);
       users.forEach(user => {
         recipient.push(user.getEmail());
       });
@@ -61,11 +62,72 @@ export default class MailerService {
 
   private getCustomMessage(type: string, workOrder: WorkOrder): string {
     let message: string = '';
-    console.log(workOrder);
-    //hay que agregar las relaciones con las areasm secotres y elementos
     switch (type) {
       case 'newWorkOrder':
         message =
+          `El elemento ${workOrder
+            .getAsset()
+            .getElement()
+            .getName()} que se encuentra dentro del sector ` +
+          `${workOrder
+            .getAsset()
+            .getSector()
+            .getName()}, área ${workOrder
+            .getAsset()
+            .getArea()
+            .getName()}, le ha ` +
+          `sido asignada una nueva órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
+          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+        break;
+      case 'asignWorkOrder':
+        message =
+          `Te ha sido asignada una orden de trabajo` +
+          ' ' +
+          `El elemento ${workOrder
+            .getAsset()
+            .getElement()
+            .getName()} que se encuentra dentro del sector ` +
+          `${workOrder
+            .getAsset()
+            .getSector()
+            .getName()}, área ${workOrder
+            .getAsset()
+            .getArea()
+            .getName()}, le ha ` +
+          `sido asignada una nueva órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
+          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+        break;
+      case 'takeWorkOrder':
+        message =
+          `Una orden de trabajo ha sido tomada por ${workOrder
+            .getUserWorkOrders()[0]
+            .getUser()
+            .getName()} ${workOrder
+            .getUserWorkOrders()[0]
+            .getUser()
+            .getSurname()} ` +
+          ' ' +
+          `El elemento ${workOrder
+            .getAsset()
+            .getElement()
+            .getName()} que se encuentra dentro del sector ` +
+          `${workOrder
+            .getAsset()
+            .getSector()
+            .getName()}, área ${workOrder
+            .getAsset()
+            .getArea()
+            .getName()}, le ha ` +
+          `sido asignada una nueva órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
+          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+        break;
+      case 'completeWorkOrder':
+        message =
+          `La orden de trabajo ha sido completada` +
+          ' ' +
           `El elemento ${workOrder
             .getAsset()
             .getElement()
