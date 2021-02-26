@@ -20,7 +20,6 @@ class workOrder {
     } catch (err) {
       listResponse = err;
     }
-    console.log(listResponse);
     return workOrderAdapter.list(listResponse);
   }
 
@@ -49,23 +48,23 @@ class workOrder {
 
     let updateResponse;
     try {
-      updateResponse = await Api.put(`workOrder/${body.id}`, body);
+      updateResponse = await Api.put(`workOrder/${body.id}`, body.takeDescription);
     } catch (err) {
       updateResponse = err;
     }
     return workOrderAdapter.update(updateResponse);
   }
 
-  async delete(id) {
-    let deleteResponse;
-
+  async cancel(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let cancelResponse;
     try {
-      deleteResponse = await Api.delete(`workOrder/${id}`);
+      cancelResponse = await Api.cancel(`workOrder/cancel/${body.id}`, body);
     } catch (err) {
-      deleteResponse = err;
+      cancelResponse = err;
     }
 
-    return workOrderAdapter.delete(deleteResponse);
+    return workOrderAdapter.delete(cancelResponse);
   }
 }
 

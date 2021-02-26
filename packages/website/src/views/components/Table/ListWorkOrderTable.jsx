@@ -17,6 +17,9 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceWorkOrder from '../../../services/api/workOrder';
+import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
+import Slide from '@material-ui/core/Slide';
+import Edit from '@material-ui/icons/Edit';
 
 class ListWorkOrderTable extends React.Component {
   constructor(props) {
@@ -34,8 +37,9 @@ class ListWorkOrderTable extends React.Component {
   };
 
   //se elimina la orden de trabajo
-  deleteWorOrder = async prop => {
-    const response = await serviceWorkOrder.delete(prop[0]);
+  /*cancelWorkOrder = async prop => {
+    console.log(prop);
+    const response = await serviceWorkOrder.cancel(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -43,6 +47,12 @@ class ListWorkOrderTable extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
     window.location.reload();
+  };*/
+
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickCancel = async prop => {
+    this.setState({ workOrder: { id: prop[0] } });
+    this.child.showModal();
   };
 
   componentWillMount = () => {
@@ -51,7 +61,9 @@ class ListWorkOrderTable extends React.Component {
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-
+    const Transition = React.forwardRef(function Transition(props, ref) {
+      return <Slide direction="down" ref={ref} {...props} />;
+    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -66,6 +78,11 @@ class ListWorkOrderTable extends React.Component {
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
+        />
+        <CancelWorkOrderSection
+          workOrder={this.state.workOrder}
+          onRef={ref => (this.child = ref)}
+          Transition={Transition}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -95,18 +112,32 @@ class ListWorkOrderTable extends React.Component {
                   <TableCell className={classes.tableActions}>
                     <Tooltip
                       id="tooltip-top-start"
-                      title="Eliminar"
+                      title="Cancelar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
-                        aria-label="Close"
+                        aria-label="Cancel"
                         className={classes.tableActionButton}
-                        onClick={this.deleteWorOrder.bind(this, prop)}
+                        onClick={this.handleClickCancel.bind(this, prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
+                    {/*<Tooltip*/}
+                    {/*  id="tooltip-top-start"*/}
+                    {/*  title="Cancelar"*/}
+                    {/*  placement="top"*/}
+                    {/*  classes={{ tooltip: classes.tooltip }}*/}
+                    {/*>*/}
+                    {/*  <IconButton*/}
+                    {/*    aria-label="Close"*/}
+                    {/*    className={classes.tableActionButton}*/}
+                    {/*    onClick={this.handleClickCancel.bind(this, prop)}*/}
+                    {/*  >*/}
+                    {/*    <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />*/}
+                    {/*  </IconButton>*/}
+                    {/*</Tooltip>*/}
                   </TableCell>
                 </TableRow>
               );
