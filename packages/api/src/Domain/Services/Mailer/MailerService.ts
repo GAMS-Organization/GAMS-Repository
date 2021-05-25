@@ -80,7 +80,7 @@ export default class MailerService {
           `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
           `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
         break;
-      case 'asignWorkOrder':
+      case 'assignWorkOrder':
         message =
           `Te ha sido asignada una orden de trabajo` +
           ' ' +

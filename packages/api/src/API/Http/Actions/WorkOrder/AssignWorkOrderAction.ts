@@ -29,12 +29,7 @@ export default class AssignWorkOrderAction {
 
     const result = await this.handler.execute(command);
 
-    await this.mailerService.sendEmail(
-      mailTitles.workOrderAssigned,
-      result,
-      'asignWorkOrder',
-      result.getWorkersIdByUserWorkOrders(),
-    );
+    await this.mailerService.sendEmail(mailTitles.workOrderAssigned, result, 'assignWorkOrder', command.getWorkersId());
 
     const presenter = new UpdateWorkOrderPresenter(result);
 
