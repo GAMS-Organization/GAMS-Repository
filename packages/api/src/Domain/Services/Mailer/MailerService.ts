@@ -65,7 +65,7 @@ export default class MailerService {
     switch (type) {
       case 'newWorkOrder':
         message =
-          `El elemento ${workOrder
+          `Al elemento ${workOrder
             .getAsset()
             .getElement()
             .getName()} que se encuentra dentro del sector ` +
@@ -84,7 +84,7 @@ export default class MailerService {
         message =
           `Te ha sido asignada una orden de trabajo` +
           ' ' +
-          `El elemento ${workOrder
+          `Al elemento ${workOrder
             .getAsset()
             .getElement()
             .getName()} que se encuentra dentro del sector ` +
@@ -109,7 +109,7 @@ export default class MailerService {
             .getUser()
             .getSurname()} ` +
           ' ' +
-          `El elemento ${workOrder
+          `Al elemento ${workOrder
             .getAsset()
             .getElement()
             .getName()} que se encuentra dentro del sector ` +
@@ -126,9 +126,32 @@ export default class MailerService {
         break;
       case 'completeWorkOrder':
         message =
-          `La orden de trabajo ha sido completada` +
+          `La orden de trabajo ha sido completada por ${workOrder.getWorkersNameByUserWorkOrders().join(', ')}` +
           ' ' +
-          `El elemento ${workOrder
+          `Al elemento ${workOrder
+            .getAsset()
+            .getElement()
+            .getName()} que se encuentra dentro del sector ` +
+          `${workOrder
+            .getAsset()
+            .getSector()
+            .getName()}, área ${workOrder
+            .getAsset()
+            .getArea()
+            .getName()}, le había ` +
+          `sido asignada una órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} había dejado el siguiente ` +
+          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder
+            .getAsset()
+            .getCode()}` +
+          ' ' +
+          `Descripción del trabajo: ${workOrder.getTaskDescription()}.`;
+        break;
+      case 'cancelWorkOrder':
+        message =
+          `La orden de trabajo ha sido cancelada` +
+          ' ' +
+          `Al elemento ${workOrder
             .getAsset()
             .getElement()
             .getName()} que se encuentra dentro del sector ` +
@@ -139,8 +162,8 @@ export default class MailerService {
             .getAsset()
             .getArea()
             .getName()}, le ha ` +
-          `sido asignada una nueva órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
+          `sido cancelada la órden de trabajo.` +
+          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} había dejado el siguiente ` +
           `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
         break;
       default:

@@ -94,6 +94,16 @@ export default class WorkOrder {
     return workersId;
   }
 
+  public getWorkersNameByUserWorkOrders(): string[] {
+    const workersFullName = [];
+    if (this.userWorkOrders) {
+      for (const userWorkOrder of this.userWorkOrders) {
+        workersFullName.push(`${userWorkOrder.getUser().getName()} ${userWorkOrder.getUser().getSurname()}`);
+      }
+    }
+    return workersFullName;
+  }
+
   public setOrderDate(orderDate: string): void {
     this.orderDate = orderDate;
   }
