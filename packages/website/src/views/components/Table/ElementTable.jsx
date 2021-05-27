@@ -36,8 +36,8 @@ class ElementTable extends React.Component {
   };
 
   handleClickUpdate = async prop => {
-    const res = await serviceElement.list(page, itemsPerPage);
-    console.log(prop);
+    const res = await serviceElement.getById(prop.id);
+    console.log(res);
     // this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
     // this.child.showModal(servicio);
   };
