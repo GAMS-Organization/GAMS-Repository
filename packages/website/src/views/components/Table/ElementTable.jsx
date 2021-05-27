@@ -17,6 +17,8 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceElement from '../../../services/api/element';
+import UpdateElementSection from '../../sections/Element/UpdateElementSection';
+import Edit from '@material-ui/icons/Edit';
 
 class ElementTable extends React.Component {
   constructor(props) {
@@ -31,6 +33,13 @@ class ElementTable extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
+  };
+
+  handleClickUpdate = async prop => {
+    const res = await serviceElement.list(page, itemsPerPage);
+    console.log(prop);
+    // this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
+    // this.child.showModal(servicio);
   };
 
   //se elimina el elemento
@@ -67,6 +76,7 @@ class ElementTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        {/*<UpdateElementSection element={this.state.element} />*/}
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -85,7 +95,7 @@ class ElementTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -93,6 +103,15 @@ class ElementTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickUpdate(prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
