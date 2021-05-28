@@ -63,6 +63,7 @@ Snackbar.propTypes = {
   place: PropTypes.oneOf(['tl', 'tr', 'tc', 'br', 'bl', 'bc']),
   open: PropTypes.bool,
   rtlActive: PropTypes.bool,
+  closeNotification: PropTypes.func,
 };
 
 export default withStyles(snackbarContentStyle)(Snackbar);
