@@ -88,6 +88,7 @@ class ElementTableSection extends React.Component {
                 tableHeaderColor="gamsBlue"
                 tableHead={['Nombre', 'Codigo', 'Servicio', 'Descripcion']}
                 tableData={this.state.element}
+                listElements={this.listElements}
               />
             </CardBody>
           </Card>

@@ -37,9 +37,11 @@ class ElementTable extends React.Component {
 
   handleClickUpdate = async prop => {
     const res = await serviceElement.getById(prop.id);
-    console.log(res);
-    // this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
-    // this.child.showModal(servicio);
+    this.setState({ element: res, modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
   };
 
   //se elimina el elemento
@@ -52,10 +54,6 @@ class ElementTable extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
     window.location.reload();
-  };
-
-  componentWillMount = () => {
-    this.setState({ modal: false });
   };
 
   render() {
@@ -76,7 +74,12 @@ class ElementTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<UpdateElementSection element={this.state.element} />*/}
+        <UpdateElementSection
+          element={this.state.element}
+          open={this.state.modal}
+          close={this.closeModal}
+          listElements={this.props.listElements}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -159,6 +162,7 @@ ElementTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listElements: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(ElementTable);
