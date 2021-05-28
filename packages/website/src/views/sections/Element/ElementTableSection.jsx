@@ -32,7 +32,10 @@ class ElementTableSection extends React.Component {
     const response = await serviceElement.list(page, itemsPerPage);
     let elements = [];
     for (const element of response.data.items) {
-      let dataElement = [element.id.toString(), element.name, element.code, element.service.name, element.description];
+      let dataElement = {
+        visibleData: [element.name, element.code, element.service.name, element.description],
+        id: element.id,
+      };
       elements.push(dataElement);
     }
     this.setState({ element: elements, totalPages: response.data.pageCount, page: page });
@@ -83,8 +86,9 @@ class ElementTableSection extends React.Component {
             <CardBody>
               <ElementTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Codigo', 'Servicio', 'Descripcion']}
+                tableHead={['Nombre', 'Codigo', 'Servicio', 'Descripcion']}
                 tableData={this.state.element}
+                listElements={this.listElements}
               />
             </CardBody>
           </Card>

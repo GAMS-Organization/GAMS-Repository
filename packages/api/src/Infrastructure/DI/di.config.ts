@@ -226,6 +226,9 @@ import DestroyEventAdapter from '../../API/Http/Adapters/Event/DestroyEventAdapt
 import DestroyEventAction from '../../API/Http/Actions/Event/DestroyEventAction';
 import IndexWorkOrdersByAuthorAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
 import IndexWorkOrdersByWorkerAction from '../../API/Http/Actions/WorkOrder/IndexWorkOrdersByWorkerAction';
+import ShowElementAction from '../../API/Http/Actions/Element/ShowElementAction';
+import ShowElementAdapter from '../../API/Http/Adapters/Element/ShowElementAdapter';
+import ShowElementHandler from '../../Application/Handlers/Element/ShowElementHandler';
 const DIContainer = new Container();
 
 /**
@@ -283,6 +286,7 @@ DIContainer.bind<StoreElementAction>(StoreElementAction).toSelf();
 DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
 DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
 DIContainer.bind<UpdateElementAction>(UpdateElementAction).toSelf();
+DIContainer.bind<ShowElementAction>(ShowElementAction).toSelf();
 
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
@@ -351,6 +355,7 @@ DIContainer.bind<ShowServiceAdapter>(ShowServiceAdapter).toSelf();
 DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
 DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 DIContainer.bind<UpdateElementAdapter>(UpdateElementAdapter).toSelf();
+DIContainer.bind<ShowElementAdapter>(ShowElementAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
@@ -414,6 +419,7 @@ DIContainer.bind<ShowServiceHandler>(ShowServiceHandler).toSelf();
 DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
 DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
 DIContainer.bind<UpdateElementHandler>(UpdateElementHandler).toSelf();
+DIContainer.bind<ShowElementHandler>(ShowElementHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();

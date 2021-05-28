@@ -53,6 +53,10 @@ export default class Element {
     return this.service;
   }
 
+  public getServiceName(): string {
+    return this.service.getName();
+  }
+
   public setName(name: string): void {
     this.name = name;
   }

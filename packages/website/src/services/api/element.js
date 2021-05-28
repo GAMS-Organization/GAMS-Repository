@@ -36,6 +36,16 @@ class element {
     return elementAdapter.update(updateResponse);
   }
 
+  async getById(elementId) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.get(`element/${elementId}`);
+    } catch (err) {
+      loadResponse = err;
+    }
+    return elementAdapter.getById(loadResponse);
+  }
+
   async delete(id) {
     let deleteResponse;
 
