@@ -48,7 +48,12 @@ class ProductTableSection extends React.Component {
               <p className={classes.cardCategoryWhite}>Aquí se listan todos los productos</p>
             </CardHeader>
             <CardBody>
-              <ProductTable tableHeaderColor="gamsBlue" tableHead={['ID', 'Nombre']} tableData={this.state.product} />
+              <ProductTable
+                tableHeaderColor="gamsBlue"
+                tableHead={['ID', 'Nombre']}
+                tableData={this.state.product}
+                listProducts={this.listProducts}
+              />
             </CardBody>
           </Card>
         </GridItem>

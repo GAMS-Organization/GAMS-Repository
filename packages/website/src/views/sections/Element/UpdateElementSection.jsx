@@ -78,7 +78,7 @@ class UpdateElementSection extends React.Component {
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
-          close={true}
+          close
         />
         <Dialog
           classes={{

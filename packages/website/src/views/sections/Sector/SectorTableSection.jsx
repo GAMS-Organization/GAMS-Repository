@@ -86,6 +86,7 @@ class SectorTableSection extends React.Component {
                 tableHeaderColor="gamsBlue"
                 tableHead={['ID', 'Nombre', 'Codigo', 'Ruta archivo']}
                 tableData={this.state.sector}
+                listSectors={this.listSectors}
               />
             </CardBody>
           </Card>

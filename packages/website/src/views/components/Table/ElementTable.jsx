@@ -50,10 +50,10 @@ class ElementTable extends React.Component {
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listElements();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {
