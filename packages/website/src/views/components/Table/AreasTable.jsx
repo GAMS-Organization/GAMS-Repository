@@ -27,6 +27,7 @@ class AreasTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      mapModal: false,
       area: {},
       errors: {},
       notification: false,
@@ -37,44 +38,45 @@ class AreasTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoadMap = async prop => {
+    this.setState({
+      area: {
+        id: prop.visibleData[0],
+        name: prop.visibleData[1],
+        services: prop.services,
+        maps: prop.maps,
+      },
+      mapModal: true,
+    });
+  };
+
+  //se crea la ventana emergente en donde se editaran las areas
+  handleClickUpdate = prop => {
+    //Se corta el string services y lo transforma en un array de strings
+    let services = prop.visibleData[4].split(' - ');
+
+    this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: services }, modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false, mapModal: false });
+  };
+
   //se elimina el area
   deleteArea = async prop => {
     const response = await serviceArea.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listAreas();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
-  };
-
-  //se crea la ventana emergente en donde se editaran las areas
-  handleClickUpdate = prop => {
-    //Se corta el string services y lo transforma en un array de strings
-    var servicio = prop.visibleData[4].split(' - ');
-
-    this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: servicio } });
-    this.child.showModal(servicio);
-  };
-
-  //se crea la ventana emergente en donde se cargaran los mapas
-  handleClickLoadMap = async prop => {
-    this.setState({
-      area: { id: prop.visibleData[0], name: prop.visibleData[1], services: prop.services, maps: prop.maps },
-    });
-    this.son.showModal(prop.services);
-  };
-
-  componentWillMount = () => {
-    this.setState({ modal: false });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -90,8 +92,18 @@ class AreasTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateAreaSection area={this.state.area} onRef={ref => (this.child = ref)} Transition={Transition} />
-        <LoadMapArea area={this.state.area} onRef={ref => (this.son = ref)} Transition={Transition} />
+        <UpdateAreaSection
+          area={this.state.area}
+          open={this.state.modal}
+          close={this.closeModal}
+          listAreas={this.props.listAreas}
+        />
+        <LoadMapArea
+          area={this.state.area}
+          open={this.state.mapModal}
+          close={this.closeModal}
+          listAreas={this.props.listAreas}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -188,6 +200,7 @@ AreasTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listAreas: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(AreasTable);

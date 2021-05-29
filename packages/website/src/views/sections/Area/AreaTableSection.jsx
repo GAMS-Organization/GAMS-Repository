@@ -96,6 +96,7 @@ class AreaTableSection extends React.Component {
                 tableHeaderColor="gamsBlue"
                 tableHead={['ID', 'Nombre', 'Codigo', 'Sector', 'Servicios']}
                 tableData={this.state.area}
+                listAreas={this.listAreas}
               />
             </CardBody>
           </Card>
