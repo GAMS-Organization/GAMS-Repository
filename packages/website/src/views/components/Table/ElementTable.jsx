@@ -17,6 +17,8 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceElement from '../../../services/api/element';
+import UpdateElementSection from '../../sections/Element/UpdateElementSection';
+import Edit from '@material-ui/icons/Edit';
 
 class ElementTable extends React.Component {
   constructor(props) {
@@ -33,20 +35,25 @@ class ElementTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  handleClickUpdate = async prop => {
+    const res = await serviceElement.getById(prop.id);
+    this.setState({ element: res, modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
   //se elimina el elemento
   deleteElement = async prop => {
-    const response = await serviceElement.delete(prop[0]);
+    const response = await serviceElement.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listElements();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
-  };
-
-  componentWillMount = () => {
-    this.setState({ modal: false });
   };
 
   render() {
@@ -67,6 +74,12 @@ class ElementTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <UpdateElementSection
+          element={this.state.element}
+          open={this.state.modal}
+          close={this.closeModal}
+          listElements={this.props.listElements}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -85,7 +98,7 @@ class ElementTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -93,6 +106,15 @@ class ElementTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickUpdate(prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Eliminar"
@@ -140,6 +162,7 @@ ElementTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listElements: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(ElementTable);

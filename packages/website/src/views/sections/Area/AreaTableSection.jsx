@@ -34,13 +34,8 @@ class AreaTableSection extends React.Component {
     let areas = [];
     for (const area of response.data.items) {
       let dataArea = {
-        visibleData: [
-          area.id.toString(),
-          area.name,
-          area.code,
-          area.sector,
-          area.services.toString().replace(/,/gi, ' - '),
-        ],
+        visibleData: [area.name, area.code, area.sector, area.services.toString().replace(/,/gi, ' - ')],
+        id: area.id.toString(),
         maps: area.maps,
         services: area.services,
       };
@@ -94,8 +89,9 @@ class AreaTableSection extends React.Component {
             <CardBody>
               <AreasTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Codigo', 'Sector', 'Servicios']}
+                tableHead={['Nombre', 'Codigo', 'Sector', 'Servicios']}
                 tableData={this.state.area}
+                listAreas={this.listAreas}
               />
             </CardBody>
           </Card>

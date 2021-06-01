@@ -1,5 +1,6 @@
 import Api from './api';
 import userAdapter from '../adapters/userAdapter';
+import elementAdapter from '../adapters/elementAdapter';
 
 class User {
   async create(dataUser) {
@@ -34,6 +35,16 @@ class User {
       updateResponse = err;
     }
     return userAdapter.update(updateResponse);
+  }
+
+  async getById(userId) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.get(`users/${userId}`);
+    } catch (err) {
+      loadResponse = err;
+    }
+    return userAdapter.getById(loadResponse);
   }
 
   async delete(id) {

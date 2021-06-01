@@ -7,6 +7,7 @@ import IndexElementsAction from '../API/Http/Actions/Element/IndexElementsAction
 import DestroyElementAction from '../API/Http/Actions/Element/DestroyElementAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
+import ShowElementAction from '../API/Http/Actions/Element/ShowElementAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 
@@ -44,18 +45,18 @@ router.put(
     await updateElementAction.execute(request, response);
   }),
 );
-/*
+
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
     authMiddleware(req, res, next, ['admin']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
-    await showProductAction.execute(request, response);
+    const showElementAction: ShowElementAction = DIContainer.resolve<ShowElementAction>(ShowElementAction);
+    await showElementAction.execute(request, response);
   }),
 );
-
+/*
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {

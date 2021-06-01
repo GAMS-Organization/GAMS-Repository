@@ -30,36 +30,35 @@ class CurrentStock extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteStock = this.deleteStock.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false });
-  }
+  };
 
-  async deleteStock(prop) {
-    const response = await serviceCurrentStock.delete(prop[0]);
+  deleteStock = async prop => {
+    const response = await serviceCurrentStock.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listStock();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
-  handleClickUpdate(prop) {
+  handleClickUpdate = prop => {
     this.setState({
       current: {
-        id: prop[0],
-        product: prop[1],
-        quantity: prop[2],
-        minimunQuantity: prop[3],
-        state: prop[4],
+        id: prop.id,
+        product: prop[0],
+        quantity: prop[1],
+        minimunQuantity: prop[2],
+        state: prop[3],
       },
     });
     this.child.showModal();
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -100,7 +99,7 @@ class CurrentStock extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -112,7 +111,7 @@ class CurrentStock extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -150,6 +149,7 @@ CurrentStock.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listStock: PropTypes.func,
 };
 
 export default withStyles(tasksStyle)(CurrentStock);

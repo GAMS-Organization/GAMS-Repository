@@ -30,7 +30,7 @@ class ProductTableSection extends React.Component {
     const response = await serviceProduct.list(page, itemsPerPage);
     let products = [];
     for (const product of response.data.items) {
-      let dataProduct = [product.id.toString(), product.name];
+      let dataProduct = { visibleData: [product.name], id: product.id.toString() };
       products.push(dataProduct);
     }
 
@@ -48,7 +48,12 @@ class ProductTableSection extends React.Component {
               <p className={classes.cardCategoryWhite}>Aquí se listan todos los productos</p>
             </CardHeader>
             <CardBody>
-              <ProductTable tableHeaderColor="gamsBlue" tableHead={['ID', 'Nombre']} tableData={this.state.product} />
+              <ProductTable
+                tableHeaderColor="gamsBlue"
+                tableHead={['Nombre']}
+                tableData={this.state.product}
+                listProducts={this.listProducts}
+              />
             </CardBody>
           </Card>
         </GridItem>

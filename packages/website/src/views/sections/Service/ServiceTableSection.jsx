@@ -32,7 +32,7 @@ class ServiceTableSection extends React.Component {
     const response = await serviceService.list(page, itemsPerPage);
     let services = [];
     for (const service of response.data.items) {
-      let dataService = [service.id.toString(), service.name, service.code];
+      let dataService = { visibleData: [service.name, service.code], id: service.id.toString() };
       services.push(dataService);
     }
 
@@ -84,8 +84,9 @@ class ServiceTableSection extends React.Component {
             <CardBody>
               <ServiceTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Codigo']}
+                tableHead={['Nombre', 'Codigo']}
                 tableData={this.state.service}
+                listServices={this.listServices}
               />
             </CardBody>
           </Card>
