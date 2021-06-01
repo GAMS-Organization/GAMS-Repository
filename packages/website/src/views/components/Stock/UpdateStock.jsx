@@ -26,9 +26,6 @@ class UpdateStock extends React.Component {
       open: false,
       notification: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.updateStock = this.updateStock.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   componentDidMount() {
@@ -39,19 +36,19 @@ class UpdateStock extends React.Component {
     this.props.onRef(undefined);
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
-  async updateStock(e) {
+  updateStock = async e => {
     e.preventDefault();
 
     const fields = ['id', 'quantity', 'minimunQuantity'];
@@ -70,7 +67,7 @@ class UpdateStock extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
   render() {
     const { classes, current, Transition } = this.props;

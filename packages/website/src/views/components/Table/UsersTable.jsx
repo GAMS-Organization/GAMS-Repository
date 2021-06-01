@@ -125,7 +125,7 @@ class UsersTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteUser.bind(this, prop)}
+                        onClick={() => this.deleteUser(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

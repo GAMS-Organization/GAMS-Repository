@@ -20,8 +20,9 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
 import Slide from '@material-ui/core/Slide';
 import Edit from '@material-ui/icons/Edit';
+import UpdateElementSection from '../../sections/Element/UpdateElementSection';
 
-class ListWorkOrderTable extends React.Component {
+class WorkOrderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,34 +37,17 @@ class ListWorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se elimina la orden de trabajo
-  /*cancelWorkOrder = async prop => {
-    console.log(prop);
-    const response = await serviceWorkOrder.cancel(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    window.location.reload();
-  };*/
-
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickCancel = async prop => {
-    this.setState({ workOrder: { id: prop.id } });
-    this.child.showModal();
+    this.setState({ workOrder: { id: prop.id }, modal: true });
   };
 
-  componentWillMount = () => {
+  closeModal = () => {
     this.setState({ modal: false });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -81,8 +65,9 @@ class ListWorkOrderTable extends React.Component {
         />
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
-          onRef={ref => (this.child = ref)}
-          Transition={Transition}
+          open={this.state.modal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -118,6 +103,7 @@ class ListWorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Cancel"
+                        disabled={prop.visibleData[4] === 'cancelada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickCancel(prop)}
                       >
@@ -135,11 +121,11 @@ class ListWorkOrderTable extends React.Component {
   }
 }
 
-ListWorkOrderTable.defaultProps = {
+WorkOrderTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-ListWorkOrderTable.propTypes = {
+WorkOrderTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -157,6 +143,7 @@ ListWorkOrderTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listWorkOrders: PropTypes.func,
 };
 
-export default withStyles(tableStyle)(ListWorkOrderTable);
+export default withStyles(tableStyle)(WorkOrderTable);

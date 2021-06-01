@@ -26,27 +26,13 @@ class CancelWorkOrderSection extends React.Component {
     this.state = {
       workOrder: {},
       errors: {},
-      open: false,
       notification: false,
-      rolClicked: false,
     };
   }
 
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  showModal = () => {
-    this.setState({ open: true });
-  };
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.props !== nextProps || this.state.notification !== nextState.notification;
+  }
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
@@ -65,18 +51,19 @@ class CancelWorkOrderSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     formValues.id = this.props.workOrder.id;
+
     const response = await serviceWorkOrder.cancel(formValues);
-    console.log(response);
-    if (response.type === 'UPDATED_SUCCESFUL') {
-      this.setState({ notification: true, open: false, rolClicked: false });
-      window.location.reload();
+    if (response.type === 'CANCEL_SUCCESFUL') {
+      this.setState({ notification: true, open: false });
+      this.props.listWorkOrders();
+      this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
   };
 
   render() {
-    const { classes, workOrder, Transition } = this.props;
+    const { classes, workOrder, Transition, open, close } = this.props;
     const { errors } = this.state;
     const { id } = workOrder;
     return (
@@ -100,10 +87,9 @@ class CancelWorkOrderSection extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
-          open={this.state.open}
+          open={open}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.state.open}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -141,7 +127,7 @@ class CancelWorkOrderSection extends React.Component {
                 </GridItem>
                 <GridItem justify={'center'} xs={8} sm={5} md={4}>
                   <CardFooter>
-                    <Button color="danger" simple onClick={this.handleClose}>
+                    <Button color="danger" simple onClick={() => close()}>
                       No
                     </Button>
                   </CardFooter>
@@ -157,11 +143,10 @@ class CancelWorkOrderSection extends React.Component {
 
 CancelWorkOrderSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  razon: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  type: PropTypes.string,
+  workOrder: PropTypes.object,
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  listWorkOrders: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(CancelWorkOrderSection);

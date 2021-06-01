@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ListWorkOrderTable from '../../components/Table/ListWorkOrderTable';
+import WorkOrderTable from '../../components/Table/WorkOrderTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
@@ -13,7 +13,7 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 import Pagination from '../../components/Pagination/Pagination';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
-class ListTableSection extends React.Component {
+class WorkOrderTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,10 +103,11 @@ class ListTableSection extends React.Component {
               <p className={classes.cardCategoryWhite}>Aquí se listan todas las ordenes de trabajo</p>
             </CardHeader>
             <CardBody>
-              <ListWorkOrderTable
+              <WorkOrderTable
                 tableHeaderColor="gamsBlue"
                 tableHead={['Fecha de solicitud', 'Prioridad', 'Usuario', 'Activo', 'Estado', 'Responsables']}
                 tableData={this.state.workOrder}
+                listWorkOrders={this.listWorkOrders}
               />
             </CardBody>
           </Card>
@@ -121,4 +122,4 @@ class ListTableSection extends React.Component {
   }
 }
 
-export default withStyles(tablesSectionsstyle)(ListTableSection);
+export default withStyles(tablesSectionsstyle)(WorkOrderTableSection);

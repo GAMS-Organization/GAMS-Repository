@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
-import ListTableSection from '../sections/WorkOrder/ListTableSection';
+import ListTableSection from '../sections/WorkOrder/WorkOrderTableSection';
 
 const styles = {
   cardCategoryWhite: {
