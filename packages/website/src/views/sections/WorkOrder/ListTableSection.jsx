@@ -30,7 +30,6 @@ class ListTableSection extends React.Component {
 
   listWorkOrders = async (page = 1, itemsPerPage = 15) => {
     const response = await serviceWorkOrder.list(page, itemsPerPage);
-    console.log(response, 'jhhgjgjgh');
 
     let workOrders = [];
     for (const workOrder of response.items) {

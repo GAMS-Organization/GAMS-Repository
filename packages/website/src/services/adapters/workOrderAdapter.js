@@ -23,7 +23,6 @@ class workOrderAdapter {
 
   list(listResponse) {
     let { status, data } = listResponse;
-    console.log(data);
     if (!isError(status)) {
       return {
         ...data,
@@ -114,6 +113,25 @@ class workOrderAdapter {
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  cancel(dataWorkOrder) {
+    let { status, data } = dataWorkOrder;
+    if (!isError(status)) {
+      return {
+        type: 'CANCEL_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'CANCEL_FAIL',
         error: {
           code: status,
           type: code,

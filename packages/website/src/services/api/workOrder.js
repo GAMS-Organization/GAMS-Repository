@@ -59,12 +59,12 @@ class workOrder {
     const body = dataWorkOrder;
     let cancelResponse;
     try {
-      cancelResponse = await Api.cancel(`workOrder/cancel/${body.id}`, body);
+      cancelResponse = await Api.put(`workOrder/cancel/${body.id}`, body);
     } catch (err) {
       cancelResponse = err;
     }
 
-    return workOrderAdapter.delete(cancelResponse);
+    return workOrderAdapter.cancel(cancelResponse);
   }
 }
 

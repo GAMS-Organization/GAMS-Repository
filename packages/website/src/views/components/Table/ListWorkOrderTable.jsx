@@ -51,7 +51,7 @@ class ListWorkOrderTable extends React.Component {
 
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickCancel = async prop => {
-    this.setState({ workOrder: { id: prop[0] } });
+    this.setState({ workOrder: { id: prop.id } });
     this.child.showModal();
   };
 
@@ -73,7 +73,7 @@ class ListWorkOrderTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Activo eliminado correctamente'
+              : 'Orden de trabajo cancelada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -119,25 +119,11 @@ class ListWorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Cancel"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickCancel.bind(this, prop)}
+                        onClick={() => this.handleClickCancel(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
-                    {/*<Tooltip*/}
-                    {/*  id="tooltip-top-start"*/}
-                    {/*  title="Cancelar"*/}
-                    {/*  placement="top"*/}
-                    {/*  classes={{ tooltip: classes.tooltip }}*/}
-                    {/*>*/}
-                    {/*  <IconButton*/}
-                    {/*    aria-label="Close"*/}
-                    {/*    className={classes.tableActionButton}*/}
-                    {/*    onClick={this.handleClickCancel.bind(this, prop)}*/}
-                    {/*  >*/}
-                    {/*    <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />*/}
-                    {/*  </IconButton>*/}
-                    {/*</Tooltip>*/}
                   </TableCell>
                 </TableRow>
               );

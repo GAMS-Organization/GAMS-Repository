@@ -14,8 +14,11 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceProduct from '../../../services/api/products';
+import serviceWorkOrder from '../../../services/api/workOrder';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import CardFooter from '../../components/Card/CardFooter';
+import CardBody from '../../components/Card/CardBody';
+import workOrder from '../../../services/api/workOrder';
 
 class CancelWorkOrderSection extends React.Component {
   constructor(props) {
@@ -50,10 +53,10 @@ class CancelWorkOrderSection extends React.Component {
   };
 
   //se actualiza el producto luego de ser editado
-  /*cancelProduct = async e => {
+  cancelWorkOrder = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'name'];
+    const fields = ['taskDescription'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -61,17 +64,16 @@ class CancelWorkOrderSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.roles = [formValues.roles];
-
-    const response = await serviceProduct.update(formValues);
-
+    formValues.id = this.props.workOrder.id;
+    const response = await serviceWorkOrder.cancel(formValues);
+    console.log(response);
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
       window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, workOrder, Transition } = this.props;
@@ -106,49 +108,45 @@ class CancelWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar producto</h4>
+            <h4 className={classes.modalTitle}>¿Esta seguro que desea cancelar esta orden de trabajo?</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.cancelWorkOrder}>
+              <CardBody>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <CustomInput
+                      labelText="Motivo de la cancelación"
+                      id="taskDescription"
+                      error={errors.razon}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        required: true,
+                        defaultValue: '',
+                        name: 'taskDescription',
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
+                <GridItem justify={'center'} xs={4} sm={7} md={8}>
+                  <CardFooter>
+                    <Button type="submit" color="gamsRed">
+                      Sí
+                    </Button>
+                  </CardFooter>
                 </GridItem>
-                {/*<GridItem xs={12} sm={12} md={8}>*/}
-                {/*  <CustomInput*/}
-                {/*    labelText="Nombre"*/}
-                {/*    id="name"*/}
-                {/*    error={errors.name}*/}
-                {/*    formControlProps={{*/}
-                {/*      fullWidth: true,*/}
-                {/*    }}*/}
-                {/*    inputProps={{*/}
-                {/*      required: true,*/}
-                {/*      defaultValue: name,*/}
-                {/*      name: 'name',*/}
-                {/*    }}*/}
-                {/*  />*/}
-                {/*</GridItem>*/}
+                <GridItem justify={'center'} xs={8} sm={5} md={4}>
+                  <CardFooter>
+                    <Button color="danger" simple onClick={this.handleClose}>
+                      No
+                    </Button>
+                  </CardFooter>
+                </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -159,7 +157,7 @@ class CancelWorkOrderSection extends React.Component {
 
 CancelWorkOrderSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
+  razon: PropTypes.string,
   lastName: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
