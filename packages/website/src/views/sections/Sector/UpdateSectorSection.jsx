@@ -24,37 +24,14 @@ class UpdateSectorSection extends React.Component {
       selectedImage: null,
       sector: {},
       errors: {},
-      open: false,
       notification: {
         show: false,
         message: '',
         color: '',
         place: 'tr',
       },
-      rolClicked: false,
-    };
-    const styles = {
-      img: {
-        padding: '15px',
-      },
     };
   }
-
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
-  handleClose = () => {
-    this.setState({ open: false, rolClicked: false });
-  };
-
-  showModal = async () => {
-    this.setState({ open: true });
-  };
 
   closeNotification = () => {
     this.setState({
@@ -95,8 +72,6 @@ class UpdateSectorSection extends React.Component {
           message: 'IMPORTANTE: EL NOMBRE DE LA IMAGEN NO PUEDE CONTENER ESPACIOS EN BLANCO',
           place: 'tc',
         },
-        open: true,
-        rolClicked: false,
       });
     } else {
       if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
@@ -109,10 +84,9 @@ class UpdateSectorSection extends React.Component {
         if (response2.type === 'UPDATED_SUCCESFUL') {
           this.setState({
             notification: { show: true, color: 'success', message: 'El mapa fue cargado correctamente', place: 'tr' },
-            open: false,
-            rolClicked: false,
           });
-          window.location.reload();
+          this.props.listSectors();
+          this.props.close();
         } else {
           this.setState({
             notification: {
@@ -139,9 +113,9 @@ class UpdateSectorSection extends React.Component {
   };
 
   render() {
-    const { classes, sector, Transition } = this.props;
+    const { classes, sector, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name, code, map } = sector;
+    const { id, name, map } = sector;
 
     return (
       <div>
@@ -159,10 +133,9 @@ class UpdateSectorSection extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
-          open={this.state.open}
+          open={open}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.state.open}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -228,7 +201,7 @@ class UpdateSectorSection extends React.Component {
               <Button type="submit" color="gamsRed">
                 Actualizar
               </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
+              <Button color="danger" simple onClick={() => close()}>
                 Cancelar
               </Button>
             </form>
@@ -253,11 +226,10 @@ class UpdateSectorSection extends React.Component {
 
 UpdateSectorSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  type: PropTypes.string,
+  sector: PropTypes.object,
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  listSectors: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(UpdateSectorSection);

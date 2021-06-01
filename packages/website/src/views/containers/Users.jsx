@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 
-import NewUserSection from '../sections/users/NewUserSection';
-import UsersTable from '../sections/users/UsersTableSection';
+import NewUserSection from '../sections/Users/NewUserSection';
+import UsersTable from '../sections/Users/UsersTableSection';
 
 const styles = {
   cardCategoryWhite: {

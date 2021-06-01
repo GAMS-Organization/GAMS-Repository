@@ -67,6 +67,7 @@ class areaAdapter {
     if (!isError(status)) {
       return {
         type: 'UPDATED_SUCCESFUL',
+        area: data.data,
       };
     } else {
       const { code, details } = data.errors;

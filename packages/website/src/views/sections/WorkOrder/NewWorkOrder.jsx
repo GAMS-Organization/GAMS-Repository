@@ -171,7 +171,6 @@ class NewWorkOrder extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-    window.location.reload();
   };
 
   closeNotificationSucces = () => {
@@ -194,7 +193,6 @@ class NewWorkOrder extends React.Component {
     const response = await serviceWorkOrder.create(formValues);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
-      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }

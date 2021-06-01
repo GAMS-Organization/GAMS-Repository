@@ -33,7 +33,10 @@ class UsersTableSection extends React.Component {
 
     let users = [];
     for (const user of response.data.items) {
-      let dataUser = [user.id.toString(), user.name, user.surname, user.email, user.roles[0], user.state];
+      let dataUser = {
+        visibleData: [user.name, user.surname, user.email, user.roles[0], user.state],
+        id: user.id.toString(),
+      };
       users.push(dataUser);
     }
     this.setState({ users: users, totalPages: response.data.pageCount, page: page });
@@ -84,8 +87,9 @@ class UsersTableSection extends React.Component {
             <CardBody>
               <UsersTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
+                tableHead={['Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
                 tableData={this.state.users}
+                listUsers={this.listUsers}
               />
             </CardBody>
           </Card>

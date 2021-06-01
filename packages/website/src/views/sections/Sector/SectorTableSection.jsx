@@ -32,7 +32,7 @@ class SectorTableSection extends React.Component {
     const response = await serviceSector.list(page, itemsPerPage);
     let sectors = [];
     for (const sector of response.data.items) {
-      let dataSector = [sector.id.toString(), sector.name, sector.code, sector.map];
+      let dataSector = { visibleData: [sector.name, sector.code, sector.map], id: sector.id.toString() };
       sectors.push(dataSector);
     }
 
@@ -84,8 +84,9 @@ class SectorTableSection extends React.Component {
             <CardBody>
               <SectorTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Nombre', 'Codigo', 'Ruta archivo']}
+                tableHead={['Nombre', 'Codigo', 'Ruta archivo']}
                 tableData={this.state.sector}
+                listSectors={this.listSectors}
               />
             </CardBody>
           </Card>

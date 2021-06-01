@@ -6,7 +6,7 @@ import Product from '../../../Domain/Entities/Product';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 
 @injectable()
-export default class ShowUserHandler {
+export default class ShowProductHandler {
   private productRepository: IProductRepository;
 
   public constructor(@inject(INTERFACES.IProductRepository) productRepository: IProductRepository) {
