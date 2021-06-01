@@ -43,7 +43,7 @@ class ProductTable extends React.Component {
 
   //se crea la ventana emergente en donde se editaran los productos
   handleClickUpdate = prop => {
-    this.setState({ product: { id: prop[0], name: prop[1] }, modal: true });
+    this.setState({ product: { id: prop.id, name: prop[0] }, modal: true });
   };
 
   closeModal = () => {
@@ -52,7 +52,7 @@ class ProductTable extends React.Component {
 
   //se elimina el producto
   deleteProduct = async prop => {
-    const response = await serviceProduct.delete(prop[0]);
+    const response = await serviceProduct.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -128,7 +128,7 @@ class ProductTable extends React.Component {
             {filteredData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -140,7 +140,7 @@ class ProductTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -154,7 +154,7 @@ class ProductTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteProduct.bind(this, prop)}
+                        onClick={() => this.deleteProduct(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

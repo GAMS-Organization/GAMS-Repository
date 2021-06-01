@@ -42,8 +42,8 @@ class AreasTable extends React.Component {
   handleClickLoadMap = async prop => {
     this.setState({
       area: {
-        id: prop.visibleData[0],
-        name: prop.visibleData[1],
+        id: prop.id,
+        name: prop.visibleData[0],
         services: prop.services,
         maps: prop.maps,
       },
@@ -54,9 +54,9 @@ class AreasTable extends React.Component {
   //se crea la ventana emergente en donde se editaran las areas
   handleClickUpdate = prop => {
     //Se corta el string services y lo transforma en un array de strings
-    let services = prop.visibleData[4].split(' - ');
+    let services = prop.visibleData[3].split(' - ');
 
-    this.setState({ area: { id: prop.visibleData[0], name: prop.visibleData[1], services: services }, modal: true });
+    this.setState({ area: { id: prop.id, name: prop.visibleData[0], services: services }, modal: true });
   };
 
   closeModal = () => {
@@ -65,7 +65,7 @@ class AreasTable extends React.Component {
 
   //se elimina el area
   deleteArea = async prop => {
-    const response = await serviceArea.delete(prop[0]);
+    const response = await serviceArea.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -134,7 +134,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -148,7 +148,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteArea.bind(this, prop)}
+                        onClick={() => this.deleteArea(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -162,7 +162,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Maps"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickLoadMap.bind(this, prop)}
+                        onClick={() => this.handleClickLoadMap(prop)}
                       >
                         <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
