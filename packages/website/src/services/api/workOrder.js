@@ -48,7 +48,7 @@ class workOrder {
 
     let updateResponse;
     try {
-      updateResponse = await Api.put(`workOrder/${body.id}`, body.takeDescription);
+      updateResponse = await Api.put(`workOrder/${body.id}`, body);
     } catch (err) {
       updateResponse = err;
     }

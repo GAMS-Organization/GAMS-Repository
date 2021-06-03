@@ -42,6 +42,24 @@ class WorkOrderTable extends React.Component {
     this.setState({ workOrder: { id: prop.id }, modal: true });
   };
 
+  handleClickUpdate = async prop => {
+    this.setState({
+      workOrder: {
+        id: prop.id,
+        orderDate: prop.orderDate,
+        startDate: prop.startDate,
+        realizationDate: prop.realizationDate,
+        priority: prop.priority,
+        comment: prop.comment,
+        taskDescription: prop.taskDescription,
+        state: prop.state,
+        assetId: prop.assetId,
+        userId: prop.userId,
+      },
+      modal: true,
+    });
+  };
+
   closeModal = () => {
     this.setState({ modal: false });
   };
@@ -69,6 +87,12 @@ class WorkOrderTable extends React.Component {
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
+        {/*<UpdateWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.modal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />*/}
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -108,6 +132,15 @@ class WorkOrderTable extends React.Component {
                         onClick={() => this.handleClickCancel(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <IconButton
+                        aria-label="Edit"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickCancel(prop)}
+                      >
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

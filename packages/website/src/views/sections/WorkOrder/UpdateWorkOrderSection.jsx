@@ -20,7 +20,7 @@ import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import workOrder from '../../../services/api/workOrder';
 
-class CancelWorkOrderSection extends React.Component {
+class UpdateWorkOrderSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,7 +94,7 @@ class CancelWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Editar Orden de trabajo</h4>
+            <h4 className={classes.modalTitle}>¿Esta seguro que desea cancelar esta orden de trabajo?</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.cancelWorkOrder}>
