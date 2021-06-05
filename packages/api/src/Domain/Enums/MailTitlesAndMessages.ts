@@ -1,9 +1,9 @@
 export const mailTitles = {
-  workOrderAssigned: 'Una órden de trabajo te fue asignada',
-  workOrderCreated: 'Se ha creado una órden de trabajo',
-  workOrderCompleted: 'Se ha completado una órden de trabajo',
-  workOrderTaken: 'Una órden de trabajo ha sido tomada',
-  workOrderCancelled: 'Una órden de trabajo ha sido cacncelada',
+  workOrderAssigned: 'Una orden de trabajo te fue asignada',
+  workOrderCreated: 'Una orden de trabajo ha sido creada',
+  workOrderCompleted: 'Una orden de trabajo ha sido completada',
+  workOrderTaken: 'Una orden de trabajo ha sido tomada',
+  workOrderCancelled: 'Una orden de trabajo ha sido cacncelada',
 };
 
 export const mailMessages = {};

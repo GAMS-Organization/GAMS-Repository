@@ -49,10 +49,6 @@ export default class CompleteWorkOrderHandler {
 
     workOrder = await this.workOrderRepository.findOneById(command.getId());
 
-    console.log('workOrder', workOrder);
-    console.log('UserWorkOrder', workOrder.getUserWorkOrders());
-    console.log('workersName', workOrder.getWorkersNameByUserWorkOrders());
-
     return workOrder;
   }
 }

@@ -14,13 +14,7 @@ export default class MailerService {
   }
 
   public async sendEmail(subject: string, workOrder: WorkOrder, type: string, userId?: number[]) {
-    const recipient = await this.getRecipientMail(userId);
     //Recipient contiene el/los email del destinatario
-    console.log(
-      '----------------------------------------------------------------------',
-      recipient,
-      '----------------------------------------------------------------------',
-    );
     const msg = {
       to: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
       from: process.env.EMAIL_SENDER, // Change to your verified sender
@@ -52,7 +46,6 @@ export default class MailerService {
       });
     } else {
       const users: User[] = await this.userService.findByRole('personal');
-      console.log(users);
       users.forEach(user => {
         recipient.push(user.getEmail());
       });
