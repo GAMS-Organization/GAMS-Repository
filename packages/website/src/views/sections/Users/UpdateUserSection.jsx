@@ -34,21 +34,9 @@ class UpdateUserSection extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
-  handleClose = () => {
-    this.setState({ open: false, rolClicked: false });
-  };
-
-  showModal = () => {
-    this.setState({ open: true });
-  };
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.props !== nextProps || this.state !== nextState;
+  }
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
@@ -76,14 +64,15 @@ class UpdateUserSection extends React.Component {
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
-      window.location.reload();
+      this.props.listUsers();
+      this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
   };
 
   render() {
-    const { classes, user, Transition } = this.props;
+    const { classes, user, Transition, close, open } = this.props;
     const { errors } = this.state;
     const { id, name, surname, email, roles } = user;
     if (this.state.rolSelected !== roles && roles !== undefined && !this.state.rolClicked) {
@@ -110,10 +99,9 @@ class UpdateUserSection extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
-          open={this.state.open}
+          open={open}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.state.open}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -245,7 +233,7 @@ class UpdateUserSection extends React.Component {
               <Button type="submit" color="gamsRed">
                 Actualizar
               </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
+              <Button color="danger" simple onClick={() => close()}>
                 Cancelar
               </Button>
             </form>
@@ -258,11 +246,10 @@ class UpdateUserSection extends React.Component {
 
 UpdateUserSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  type: PropTypes.string,
+  user: PropTypes.object,
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  listUsers: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(UpdateUserSection);

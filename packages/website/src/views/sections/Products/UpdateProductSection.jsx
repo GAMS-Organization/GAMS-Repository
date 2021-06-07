@@ -23,27 +23,13 @@ class UpdateProductSection extends React.Component {
     this.state = {
       product: {},
       errors: {},
-      open: false,
       notification: false,
-      rolClicked: false,
     };
   }
 
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  showModal = () => {
-    this.setState({ open: true });
-  };
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.props !== nextProps || this.state.notification !== nextState.notification;
+  }
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
@@ -53,28 +39,28 @@ class UpdateProductSection extends React.Component {
   updateProduct = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'name'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
-    formValues.roles = [formValues.roles];
+    const formValues = {
+      id: this.props.product.id,
+      name: this.state.product.name ? this.state.product.name : this.props.product.name,
+    };
 
     const response = await serviceProduct.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
-      this.setState({ notification: true, open: false, rolClicked: false });
-      window.location.reload();
+      this.setState({ notification: true, open: false });
+      this.props.listProducts();
+      this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
   };
 
+  handleChange = event => {
+    this.setState({ product: { ...this.state.product, [event.target.name]: event.target.value } });
+  };
+
   render() {
-    const { classes, product, Transition } = this.props;
+    const { classes, product, Transition, open, close } = this.props;
     const { errors } = this.state;
     const { id, name } = product;
     return (
@@ -98,10 +84,9 @@ class UpdateProductSection extends React.Component {
             root: classes.modalRoot,
             paper: classes.modal,
           }}
-          open={this.state.open}
+          open={open}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.state.open}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -139,6 +124,7 @@ class UpdateProductSection extends React.Component {
                       required: true,
                       defaultValue: name,
                       name: 'name',
+                      onChange: this.handleChange,
                     }}
                   />
                 </GridItem>
@@ -146,7 +132,7 @@ class UpdateProductSection extends React.Component {
               <Button type="submit" color="gamsRed">
                 Actualizar
               </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
+              <Button color="danger" simple onClick={() => close()}>
                 Cancelar
               </Button>
             </form>
@@ -159,11 +145,10 @@ class UpdateProductSection extends React.Component {
 
 UpdateProductSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  type: PropTypes.string,
+  product: PropTypes.object,
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  listProducts: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(UpdateProductSection);

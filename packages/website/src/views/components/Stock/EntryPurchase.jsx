@@ -36,19 +36,18 @@ class EntryPurchase extends React.Component {
   };
 
   deleteEntry = async prop => {
-    const response = await serviceEntryPurchaseStock.delete(prop[0]);
+    const response = await serviceEntryPurchaseStock.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      window.location.reload();
+      this.props.listEntries();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
   };
 
   handleClickSeeDetails = async prop => {
-    const id = prop[0];
-    const entryDetails = await serviceEntryPurchaseStock.getById(id);
+    const entryDetails = await serviceEntryPurchaseStock.getById(prop.id);
     this.setState({
       entry: entryDetails.data.data,
     });
@@ -94,7 +93,7 @@ class EntryPurchase extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -106,7 +105,7 @@ class EntryPurchase extends React.Component {
                       <IconButton
                         aria-label="Visibility"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickSeeDetails.bind(this, prop)}
+                        onClick={() => this.handleClickSeeDetails(prop)}
                       >
                         <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
                       </IconButton>
@@ -120,7 +119,7 @@ class EntryPurchase extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteEntry.bind(this, prop)}
+                        onClick={() => this.deleteEntry(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -158,6 +157,7 @@ EntryPurchase.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listEntries: PropTypes.func,
 };
 
 export default withStyles(tasksStyle)(EntryPurchase);

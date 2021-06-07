@@ -51,14 +51,18 @@ class TableStockSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entry: [],
-      stock: [],
-      departure: [],
+      entry: [{ visibleData: [] }],
+      stock: [{ visibleData: [] }],
+      departure: [{ visibleData: [] }],
     };
   }
 
   //se obtienen las entradas, el stock actual y las salidas
   componentWillMount = async () => {
+    await this.listEntriesStockDepartures();
+  };
+
+  listEntriesStockDepartures = async () => {
     const responseEntry = await serviceEntryPurchaseStock.list();
     const responseCurrentStock = await serviceCurrentStock.list();
     const responseDeparture = await serviceDepartureConsumptionStock.list();
@@ -66,17 +70,23 @@ class TableStockSection extends React.Component {
     let stocks = [];
     let departures = [];
     for (const entry of responseEntry.data.items) {
-      let dataEntry = [entry.id.toString(), entry.date.slice(0, 10), entry.observations];
+      let dataEntry = { visibleData: [entry.date.slice(0, 10), entry.observations], id: entry.id.toString() };
       entries.push(dataEntry);
     }
 
     for (const stock of responseCurrentStock.data.items) {
-      let dataStock = [stock.id.toString(), stock.product, stock.quantity, stock.minimunQuantity, stock.state];
+      let dataStock = {
+        visibleData: [stock.product, stock.quantity, stock.minimunQuantity, stock.state],
+        id: stock.id.toString(),
+      };
       stocks.push(dataStock);
     }
 
     for (const departure of responseDeparture.data.items) {
-      let dataDeparture = [departure.id.toString(), departure.date.slice(0, 10), departure.observations];
+      let dataDeparture = {
+        visibleData: [departure.date.slice(0, 10), departure.observations],
+        id: departure.id.toString(),
+      };
       departures.push(dataDeparture);
     }
 
@@ -97,8 +107,9 @@ class TableStockSection extends React.Component {
                 tabContent: (
                   <EntryPurchase
                     tableHeaderColor="gamsBlue"
-                    tableHead={['ID', 'Fecha', 'Observacion']}
+                    tableHead={['Fecha', 'Observacion']}
                     tableData={this.state.entry}
+                    listEntries={this.listEntriesStockDepartures}
                   />
                 ),
               },
@@ -108,8 +119,9 @@ class TableStockSection extends React.Component {
                 tabContent: (
                   <CurrentStock
                     tableHeaderColor="gamsBlue"
-                    tableHead={['ID', 'Producto', 'Cantidad', 'Cant. Minima', 'Estado']}
+                    tableHead={['Producto', 'Cantidad', 'Cant. Minima', 'Estado']}
                     tableData={this.state.stock}
+                    listStock={this.listEntriesStockDepartures}
                   />
                 ),
               },
@@ -119,8 +131,9 @@ class TableStockSection extends React.Component {
                 tabContent: (
                   <DepartureConsumption
                     tableHeaderColor="gamsBlue"
-                    tableHead={['ID', 'Fecha', 'Observacion']}
+                    tableHead={['Fecha', 'Observacion']}
                     tableData={this.state.departure}
+                    listDepartures={this.listEntriesStockDepartures}
                   />
                 ),
               },

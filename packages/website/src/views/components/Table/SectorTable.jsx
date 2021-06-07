@@ -36,33 +36,29 @@ class SectorTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea la ventana emergente en donde se cargaran los mapas
+  handleClickLoad = async prop => {
+    this.setState({ sector: { id: prop.id, name: prop[0], code: prop[1], map: prop[2] }, modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
   //se eliminan los sectores
   deleteSector = async prop => {
-    const response = await serviceSector.delete(prop[0]);
+    const response = await serviceSector.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listSectors();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
-  };
-
-  //se crea la ventana emergente en donde se cargaran los mapas
-  handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop[0], name: prop[1], code: prop[2], map: prop[3] } });
-    this.child.showModal();
-  };
-
-  componentWillMount = () => {
-    this.setState({ modal: false });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -78,7 +74,12 @@ class SectorTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateSectorSection sector={this.state.sector} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <UpdateSectorSection
+          sector={this.state.sector}
+          open={this.state.modal}
+          close={this.closeModal}
+          listSectors={this.props.listSectors}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -97,7 +98,7 @@ class SectorTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -114,7 +115,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteSector.bind(this, prop)}
+                        onClick={() => this.deleteSector(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -128,7 +129,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Maps"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickLoad.bind(this, prop)}
+                        onClick={() => this.handleClickLoad(prop)}
                       >
                         <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -166,6 +167,7 @@ SectorTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listSectors: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(SectorTable);

@@ -29,33 +29,30 @@ class DepartureConsumption extends React.Component {
       errors: {},
       notification: false,
     };
-    this.deleteDeparture = this.deleteDeparture.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false });
-  }
+  };
 
-  async deleteDeparture(prop) {
-    const response = await serviceDepartureConsumptionStock.delete(prop[0]);
+  deleteDeparture = async prop => {
+    const response = await serviceDepartureConsumptionStock.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      window.location.reload();
+      this.props.listDeparture();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  }
+  };
 
-  async handleClickSeeDetails(prop) {
-    const id = prop[0];
-    const departureDetails = await serviceDepartureConsumptionStock.getById(id);
+  handleClickSeeDetails = async prop => {
+    const departureDetails = await serviceDepartureConsumptionStock.getById(prop.id);
     this.setState({
       departure: departureDetails.data.data,
     });
     this.child.showModal();
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -100,7 +97,7 @@ class DepartureConsumption extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -112,7 +109,7 @@ class DepartureConsumption extends React.Component {
                       <IconButton
                         aria-label="Visibility"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickSeeDetails.bind(this, prop)}
+                        onClick={() => this.handleClickSeeDetails(prop)}
                       >
                         <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
                       </IconButton>
@@ -126,7 +123,7 @@ class DepartureConsumption extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteDeparture.bind(this, prop)}
+                        onClick={() => this.deleteDeparture(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -164,6 +161,7 @@ DepartureConsumption.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listDeparture: PropTypes.func,
 };
 
 export default withStyles(tasksStyle)(DepartureConsumption);

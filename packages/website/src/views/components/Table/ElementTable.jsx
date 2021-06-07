@@ -46,14 +46,14 @@ class ElementTable extends React.Component {
 
   //se elimina el elemento
   deleteElement = async prop => {
-    const response = await serviceElement.delete(prop[0]);
+    const response = await serviceElement.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listElements();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   render() {

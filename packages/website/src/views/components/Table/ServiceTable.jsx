@@ -37,19 +37,19 @@ class ServiceTable extends React.Component {
 
   //se eliminan los servicios
   deleteService = async prop => {
-    const response = await serviceService.delete(prop[0]);
+    const response = await serviceService.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listServices();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   //se crea la ventana emergente en donde se editaran los servicios
   handleClickUpdate = prop => {
-    this.setState({ service: { id: prop[0], name: prop[1], code: prop[2] } });
+    this.setState({ service: { id: prop.id, name: prop.visibleData[0], code: prop.visibleData[1] } });
     this.child.showModal();
   };
 
@@ -96,7 +96,7 @@ class ServiceTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -151,6 +151,7 @@ ServiceTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listServices: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(ServiceTable);

@@ -16,7 +16,7 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateUserSection from '../../sections/users/UpdateUserSection';
+import UpdateUserSection from '../../sections/Users/UpdateUserSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceUser from '../../../services/api/user';
@@ -30,13 +30,11 @@ class UsersTable extends React.Component {
       errors: {},
       notification: false,
     };
-    this.handleClickUpdate = this.handleClickUpdate.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
   //se eliminan el usuario
   deleteUser = async prop => {
@@ -44,27 +42,24 @@ class UsersTable extends React.Component {
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listUsers();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
   };
 
   //se crea la ventana emergente en donde se editaran los usuarios
-  handleClickUpdate(prop) {
-    this.setState({ user: { id: prop[0], name: prop[1], surname: prop[2], email: prop[3], roles: prop[4] } });
-    this.child.showModal();
-  }
+  handleClickUpdate = async userId => {
+    const res = await serviceUser.getById(userId);
+    this.setState({ user: res, modal: true });
+  };
 
-  componentWillMount() {
+  closeModal = () => {
     this.setState({ modal: false });
-  }
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -80,7 +75,12 @@ class UsersTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateUserSection user={this.state.user} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <UpdateUserSection
+          user={this.state.user}
+          open={this.state.modal}
+          close={this.closeModal}
+          listUsers={this.props.listUsers}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -99,7 +99,7 @@ class UsersTable extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -111,7 +111,7 @@ class UsersTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={() => this.handleClickUpdate(prop.id)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -163,6 +163,7 @@ UsersTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listUsers: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(UsersTable);

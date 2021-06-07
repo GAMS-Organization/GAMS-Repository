@@ -26,20 +26,17 @@ class LoadMapArea extends React.Component {
       area: {},
       service: [],
       errors: {},
-      open: false,
       notification: {
         show: false,
         message: '',
         color: '',
         place: 'tr',
       },
-      rolClicked: false,
     };
-    const styles = {
-      img: {
-        padding: '15px',
-      },
-    };
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return this.props !== nextProps || this.state !== nextState;
   }
 
   //se obtienen los servicios y sus respectivos  mapas
@@ -54,23 +51,6 @@ class LoadMapArea extends React.Component {
     }
 
     this.setState({ service: services });
-  };
-
-  componentDidMount = () => {
-    this.props.onRef(this);
-  };
-
-  componentWillUnmount = () => {
-    this.props.onRef(undefined);
-  };
-
-  handleClose = () => {
-    this.setState({ open: false, rolClicked: false });
-    window.location.reload();
-  };
-
-  showModal = async servicios => {
-    this.setState({ open: true, selectedServices: servicios });
   };
 
   closeNotification = () => {
@@ -110,8 +90,6 @@ class LoadMapArea extends React.Component {
           message: 'IMPORTANTE: EL NOMBRE DE LA IMAGEN NO PUEDE CONTENER ESPACIOS EN BLANCO',
           place: 'tc',
         },
-        open: true,
-        rolClicked: false,
       });
     } else {
       if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
@@ -131,12 +109,15 @@ class LoadMapArea extends React.Component {
             notification: {
               show: true,
               color: 'success',
-              message: 'El mapa fue cargado correctamente, al refrescar pagina se podra visualizar',
+              message: 'El mapa fue cargado correctamente',
               place: 'tr',
             },
-            open: true,
-            rolClicked: false,
+            area: {
+              ...this.state.area,
+              maps: response2.area.maps,
+            },
           });
+          this.props.listAreas();
         } else {
           this.setState({
             notification: {
@@ -163,10 +144,12 @@ class LoadMapArea extends React.Component {
   };
 
   render() {
-    const { classes, area, Transition } = this.props;
+    const { classes, area, Transition, close, open } = this.props;
     const { errors } = this.state;
     const { id, name, code, maps, services } = area;
-
+    if (this.state.area.id !== id) {
+      this.setState({ area: area, selectedServices: area.services });
+    }
     return (
       <div>
         <Snackbar
@@ -185,10 +168,9 @@ class LoadMapArea extends React.Component {
           }}
           fullWidth={true}
           maxWidth={'lg'}
-          open={this.state.open}
+          open={open}
           TransitionComponent={Transition}
-          keepMounted
-          onClose={this.state.open}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -214,7 +196,7 @@ class LoadMapArea extends React.Component {
                           <GridContainer justify={'center'}>
                             <GridItem xs={12} sm={12} md={10}>
                               <img
-                                src={`http://localhost/api/static/${maps[index]}`}
+                                src={`http://localhost/api/static/${this.state.area.maps[index]}`}
                                 width="100%"
                                 height="100%"
                                 align="center"
@@ -258,7 +240,7 @@ class LoadMapArea extends React.Component {
               </GridContainer>
               <GridContainer justify={'center'}>
                 <GridItem>
-                  <Button color="danger" size={'lg'} simple onClick={this.handleClose}>
+                  <Button color="danger" size={'lg'} simple onClick={() => close()}>
                     Salir
                   </Button>
                 </GridItem>
@@ -273,11 +255,10 @@ class LoadMapArea extends React.Component {
 
 LoadMapArea.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  type: PropTypes.string,
+  area: PropTypes.object,
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  listAreas: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(LoadMapArea);

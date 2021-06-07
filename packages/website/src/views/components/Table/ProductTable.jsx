@@ -23,6 +23,7 @@ import serviceProduct from '../../../services/api/products';
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
+import serviceElement from '../../../services/api/element';
 
 class ProductTable extends React.Component {
   constructor(props) {
@@ -40,33 +41,29 @@ class ProductTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  //se crea la ventana emergente en donde se editaran los productos
+  handleClickUpdate = prop => {
+    this.setState({ product: { id: prop.id, name: prop[0] }, modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
   //se elimina el producto
   deleteProduct = async prop => {
-    const response = await serviceProduct.delete(prop[0]);
+    const response = await serviceProduct.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
+      this.props.listProducts();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
-  };
-
-  //se crea la ventana emergente en donde se editaran los productos
-  handleClickUpdate = prop => {
-    this.setState({ product: { id: prop[0], name: prop[1] } });
-    this.child.showModal();
-  };
-
-  componentWillMount = () => {
-    this.setState({ modal: false });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     let filteredData = tableData;
     if (this.state.search !== '') {
       filteredData = tableData.filter(item => {
@@ -88,7 +85,12 @@ class ProductTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateProductSection product={this.state.product} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <UpdateProductSection
+          product={this.state.product}
+          open={this.state.modal}
+          close={this.closeModal}
+          listProducts={this.props.listProducts}
+        />
         <div className={classes.searchInputContainer}>
           <CustomInput
             labelText="Buscar"
@@ -126,7 +128,7 @@ class ProductTable extends React.Component {
             {filteredData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -138,7 +140,7 @@ class ProductTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={this.handleClickUpdate.bind(this, prop)}
+                        onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
@@ -152,7 +154,7 @@ class ProductTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteProduct.bind(this, prop)}
+                        onClick={() => this.deleteProduct(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -190,6 +192,7 @@ ProductTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listProducts: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(ProductTable);
