@@ -39,7 +39,7 @@ class UpdateWorkOrderSection extends React.Component {
   };
 
   //se actualiza el producto luego de ser editado
-  cancelWorkOrder = async e => {
+  /*cancelWorkOrder = async e => {
     e.preventDefault();
 
     const fields = ['taskDescription'];
@@ -60,7 +60,7 @@ class UpdateWorkOrderSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, workOrder, Transition, open, close } = this.props;
@@ -75,7 +75,7 @@ class UpdateWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Orden de trabajo cancelada correctamente'
+              : 'Orden de trabajo editada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -94,15 +94,15 @@ class UpdateWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>¿Esta seguro que desea cancelar esta orden de trabajo?</h4>
+            <h4 className={classes.modalTitle}>Editar orden de trabajo</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.cancelWorkOrder}>
+            <form onSubmit={this.UpdateWorkOrder}>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText="Motivo de la cancelación"
+                      labelText="editar"
                       id="taskDescription"
                       error={errors.razon}
                       formControlProps={{
@@ -141,7 +141,7 @@ class UpdateWorkOrderSection extends React.Component {
   }
 }
 
-CancelWorkOrderSection.propTypes = {
+UpdateWorkOrderSection.propTypes = {
   classes: PropTypes.object.isRequired,
   workOrder: PropTypes.object,
   open: PropTypes.bool,
@@ -149,4 +149,4 @@ CancelWorkOrderSection.propTypes = {
   listWorkOrders: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(CancelWorkOrderSection);
+export default withStyles(modalStyle)(UpdateWorkOrderSection);

@@ -94,7 +94,7 @@ class CancelWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Editar Orden de trabajo</h4>
+            <h4 className={classes.modalTitle}>Cancelar Orden de trabajo</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.cancelWorkOrder}>

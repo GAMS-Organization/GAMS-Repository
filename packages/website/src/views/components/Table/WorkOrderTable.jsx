@@ -18,6 +18,7 @@ import Snackbar from '../Snackbar/Snackbar';
 
 import serviceWorkOrder from '../../../services/api/workOrder';
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
+import UpdateWorkOrderSection from '../../sections/WorkOrder/UpdateWorkOrderSection';
 import Slide from '@material-ui/core/Slide';
 import Edit from '@material-ui/icons/Edit';
 import UpdateElementSection from '../../sections/Element/UpdateElementSection';
@@ -27,6 +28,7 @@ class WorkOrderTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      updateModal: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -56,12 +58,12 @@ class WorkOrderTable extends React.Component {
         assetId: prop.assetId,
         userId: prop.userId,
       },
-      modal: true,
+      updateModal: true,
     });
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, updateModal: false });
   };
 
   render() {
@@ -87,12 +89,12 @@ class WorkOrderTable extends React.Component {
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
-        {/*<UpdateWorkOrderSection
+        <UpdateWorkOrderSection
           workOrder={this.state.workOrder}
-          open={this.state.modal}
+          open={this.state.updateModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
-        />*/}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -138,7 +140,7 @@ class WorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
-                        onClick={() => this.handleClickCancel(prop)}
+                        onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
