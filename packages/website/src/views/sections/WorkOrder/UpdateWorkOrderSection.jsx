@@ -19,6 +19,10 @@ import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle'
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import workOrder from '../../../services/api/workOrder';
+import FormControl from '@material-ui/core/FormControl';
+import { InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class UpdateWorkOrderSection extends React.Component {
   constructor(props) {
@@ -101,8 +105,80 @@ class UpdateWorkOrderSection extends React.Component {
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
+                    <FormControl fullWidth className={classes.selectFormControl}>
+                      <InputLabel htmlFor="Prioridad" className={classes.selectLabel}>
+                        Prioridad
+                      </InputLabel>
+                      <Select
+                        MenuProps={{
+                          className: classes.selectMenu,
+                        }}
+                        classes={{
+                          select: classes.select,
+                        }}
+                        value={this.state.prioritySelected}
+                        onChange={this.handleChangePriority}
+                        inputProps={{
+                          name: 'prioritySelected',
+                          id: 'priority',
+                        }}
+                      >
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem,
+                          }}
+                        >
+                          Prioridad
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="Alta"
+                        >
+                          Alta
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="Media"
+                        >
+                          Media
+                        </MenuItem>
+                        <MenuItem
+                          classes={{
+                            root: classes.selectMenuItem,
+                            selected: classes.selectMenuItemSelected,
+                          }}
+                          value="Baja"
+                        >
+                          Baja
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText="editar"
+                      labelText="Comentario"
+                      id="comment"
+                      error={errors.razon}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        required: true,
+                        defaultValue: '',
+                        name: 'comment',
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <CustomInput
+                      labelText="Descripción de la tarea"
                       id="taskDescription"
                       error={errors.razon}
                       formControlProps={{
