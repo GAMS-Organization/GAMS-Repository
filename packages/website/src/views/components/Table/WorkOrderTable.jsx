@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import PanToolIcon from '@material-ui/icons/PanTool';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
@@ -18,15 +19,18 @@ import Snackbar from '../Snackbar/Snackbar';
 
 import serviceWorkOrder from '../../../services/api/workOrder';
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
+import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
 import Slide from '@material-ui/core/Slide';
 import Edit from '@material-ui/icons/Edit';
 import UpdateElementSection from '../../sections/Element/UpdateElementSection';
+import workOrder from '../../../services/api/workOrder';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      modalTake: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -42,8 +46,12 @@ class WorkOrderTable extends React.Component {
     this.setState({ workOrder: { id: prop.id }, modal: true });
   };
 
+  handleClickTake = async prop => {
+    this.setState({ workOrder: {}, modalTake: true });
+  };
+
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, modalTake: false });
   };
 
   render() {
@@ -66,6 +74,12 @@ class WorkOrderTable extends React.Component {
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.modal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />
+        <TakeWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.modalTake}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
@@ -108,6 +122,20 @@ class WorkOrderTable extends React.Component {
                         onClick={() => this.handleClickCancel(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Tomar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Take"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickTake(prop)}
+                      >
+                        <PanToolIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

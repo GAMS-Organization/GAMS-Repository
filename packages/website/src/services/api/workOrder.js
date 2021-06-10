@@ -48,7 +48,7 @@ class workOrder {
 
     let updateResponse;
     try {
-      updateResponse = await Api.put(`workOrder/${body.id}`, body.takeDescription);
+      updateResponse = await Api.put(`workOrder/${body.id}`, body);
     } catch (err) {
       updateResponse = err;
     }
@@ -65,6 +65,18 @@ class workOrder {
     }
 
     return workOrderAdapter.cancel(cancelResponse);
+  }
+
+  async take(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let takeResponse;
+    try {
+      takeResponse = await Api.put(`workOrder/take/${body.id}`, body);
+      console.log(takeResponse);
+    } catch (err) {
+      takeResponse = err;
+    }
+    return workOrderAdapter.take(takeResponse);
   }
 }
 
