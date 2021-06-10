@@ -163,7 +163,7 @@ class UpdateWorkOrderSection extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText="Comentario"
+                      labelText="Observaciones"
                       id="comment"
                       error={errors.razon}
                       formControlProps={{
@@ -171,7 +171,7 @@ class UpdateWorkOrderSection extends React.Component {
                       }}
                       inputProps={{
                         required: true,
-                        defaultValue: '',
+                        defaultValue: workOrder.comment,
                         name: 'comment',
                       }}
                     />
@@ -186,7 +186,7 @@ class UpdateWorkOrderSection extends React.Component {
                       }}
                       inputProps={{
                         required: true,
-                        defaultValue: '',
+                        defaultValue: workOrder.taskDescription,
                         name: 'taskDescription',
                       }}
                     />
