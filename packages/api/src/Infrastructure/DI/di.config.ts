@@ -229,6 +229,12 @@ import IndexWorkOrdersByWorkerAction from '../../API/Http/Actions/WorkOrder/Inde
 import ShowElementAction from '../../API/Http/Actions/Element/ShowElementAction';
 import ShowElementAdapter from '../../API/Http/Adapters/Element/ShowElementAdapter';
 import ShowElementHandler from '../../Application/Handlers/Element/ShowElementHandler';
+import StoreEducationalElementAction from '../../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
+import StoreEducationalElementAdapter from '../../API/Http/Adapters/EducationalElement/StoreEducationalElementAdapter';
+import StoreEducationalElementHandler from '../../Application/Handlers/EducationalElement/StoreEducationalElementHandler';
+import EducationalElementService from '../../Domain/Services/EducationalElementService';
+import IEducationalElementRepository from '../../Domain/Interfaces/IEducationalElementRepository';
+import TypeEducationalElementRepository from '../../Persistence/TypeORM/Repositories/TypeEducationalElementRepository';
 const DIContainer = new Container();
 
 /**
@@ -309,6 +315,8 @@ DIContainer.bind<IndexEventsByMonthAction>(IndexEventsByMonthAction).toSelf();
 DIContainer.bind<UpdateEventAction>(UpdateEventAction).toSelf();
 DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 
+DIContainer.bind<StoreEducationalElementAction>(StoreEducationalElementAction).toSelf();
+
 /**
  * Adapters
  */
@@ -372,6 +380,8 @@ DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
 DIContainer.bind<IndexEventsByMonthAdapter>(IndexEventsByMonthAdapter).toSelf();
 DIContainer.bind<UpdateEventAdapter>(UpdateEventAdapter).toSelf();
 DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
+
+DIContainer.bind<StoreEducationalElementAdapter>(StoreEducationalElementAdapter).toSelf();
 
 /**
  * Handlers
@@ -437,6 +447,8 @@ DIContainer.bind<IndexEventsByMonthHandler>(IndexEventsByMonthHandler).toSelf();
 DIContainer.bind<UpdateEventHandler>(UpdateEventHandler).toSelf();
 DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 
+DIContainer.bind<StoreEducationalElementHandler>(StoreEducationalElementHandler).toSelf();
+
 /*
  * Services
  */
@@ -458,6 +470,7 @@ DIContainer.bind<ServiceService>(ServiceService).toSelf();
 DIContainer.bind<ElementService>(ElementService).toSelf();
 DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<EventService>(EventService).toSelf();
+DIContainer.bind<EducationalElementService>(EducationalElementService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
@@ -476,6 +489,9 @@ DIContainer.bind<IDepartureRepository>(INTERFACES.IDepartureRepository).to(TypeD
 DIContainer.bind<IStockEntryRepository>(INTERFACES.IStockEntryRepository).to(TypeStockEntryRepository);
 DIContainer.bind<IStockDepartureRepository>(INTERFACES.IStockDepartureRepository).to(TypeStockDepartureRepository);
 DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProductRepository);
+DIContainer.bind<IEducationalElementRepository>(INTERFACES.IEducationalElementRepository).to(
+  TypeEducationalElementRepository,
+);
 DIContainer.bind<ISectorRepository>(INTERFACES.ISectorRepository).to(TypeSectorRepository);
 DIContainer.bind<IAreaRepository>(INTERFACES.IAreaRepository).to(TypeAreaRepository);
 DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(TypeAreaServiceRepository);

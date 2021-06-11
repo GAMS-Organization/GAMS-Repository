@@ -12,6 +12,7 @@ import departure from './departure';
 import service from './service';
 import workOrder from './workOrder';
 import event from './event';
+import educational from './educationalElement';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = Router();
@@ -42,6 +43,8 @@ router.use('/service', service);
 router.use('/workOrder', workOrder);
 
 router.use('/event', event);
+
+router.use('/educational', educational);
 
 router.get(
   '/',
