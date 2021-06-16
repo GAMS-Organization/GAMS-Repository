@@ -51,7 +51,6 @@ class CancelWorkOrderSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     formValues.id = this.props.workOrder.id;
-
     const response = await serviceWorkOrder.cancel(formValues);
     if (response.type === 'CANCEL_SUCCESFUL') {
       this.setState({ notification: true, open: false });

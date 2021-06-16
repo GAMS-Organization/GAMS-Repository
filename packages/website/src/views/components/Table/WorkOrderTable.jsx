@@ -47,7 +47,7 @@ class WorkOrderTable extends React.Component {
   };
 
   handleClickTake = async prop => {
-    this.setState({ workOrder: {}, modalTake: true });
+    this.setState({ workOrder: { id: prop.id }, modalTake: true });
   };
 
   closeModal = () => {

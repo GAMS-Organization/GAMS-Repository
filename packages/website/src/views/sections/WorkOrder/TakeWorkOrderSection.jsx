@@ -42,7 +42,7 @@ class TakeWorkOrderSection extends React.Component {
   cancelWorkOrder = async e => {
     e.preventDefault();
 
-    const fields = ['date'];
+    const fields = ['startDate'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -50,7 +50,7 @@ class TakeWorkOrderSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    //formValues.id = this.props.workOrder.id;
+    formValues.id = this.props.workOrder.id;
     const response = await serviceWorkOrder.take(formValues);
     if (response.type === 'TAKE_SUCCESFUL') {
       this.setState({ notification: true, open: false });
@@ -102,7 +102,7 @@ class TakeWorkOrderSection extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText=""
-                      id="date"
+                      id="startDate"
                       value={this.state.dateNow}
                       formControlProps={{
                         fullWidth: true,

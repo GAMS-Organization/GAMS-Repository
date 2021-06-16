@@ -72,7 +72,6 @@ class workOrder {
     let takeResponse;
     try {
       takeResponse = await Api.put(`workOrder/take/${body.id}`, body);
-      console.log(takeResponse);
     } catch (err) {
       takeResponse = err;
     }

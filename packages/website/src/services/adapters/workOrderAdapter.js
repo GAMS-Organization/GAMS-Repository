@@ -124,7 +124,6 @@ class workOrderAdapter {
 
   cancel(dataWorkOrder) {
     let { status, data } = dataWorkOrder;
-    console.log(dataWorkOrder);
     if (!isError(status)) {
       return {
         type: 'CANCEL_SUCCESFUL',
@@ -144,7 +143,6 @@ class workOrderAdapter {
 
   take(takeResponse) {
     let { status, data } = takeResponse;
-    console.log(takeResponse);
     if (!isError(status)) {
       return {
         type: 'TAKE_SUCCESFUL',
