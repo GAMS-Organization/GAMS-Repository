@@ -41,7 +41,6 @@ class WorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se crea la ventana emergente en donde se cargaran los mapas
   handleClickCancel = async prop => {
     this.setState({ workOrder: { id: prop.id }, modal: true });
   };
@@ -132,6 +131,7 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Take"
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'tomada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
                       >
