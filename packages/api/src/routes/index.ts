@@ -13,6 +13,7 @@ import service from './service';
 import workOrder from './workOrder';
 import event from './event';
 import educational from './educationalElement';
+import elementRequest from './elementRequest';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = Router();
@@ -45,6 +46,8 @@ router.use('/workOrder', workOrder);
 router.use('/event', event);
 
 router.use('/educational', educational);
+
+router.use('/elementRequest', elementRequest);
 
 router.get(
   '/',
