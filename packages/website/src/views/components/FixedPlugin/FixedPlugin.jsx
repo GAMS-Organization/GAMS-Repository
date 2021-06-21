@@ -19,11 +19,10 @@ class FixedPlugin extends Component {
       bg_checked: true,
       bgImage: this.props.bgImage,
     };
-    this.handleClick = this.handleClick.bind(this);
   }
-  handleClick() {
+  handleClick = () => {
     this.props.handleFixedClick();
-  }
+  };
   render() {
     return (
       <div
