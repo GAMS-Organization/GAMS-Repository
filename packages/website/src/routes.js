@@ -12,7 +12,6 @@ import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
 import Explore from '@material-ui/icons/Explore';
-import ListIcon from '@material-ui/icons/List';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';

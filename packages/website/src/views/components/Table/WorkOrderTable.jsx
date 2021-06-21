@@ -17,13 +17,8 @@ import Close from '@material-ui/icons/Close';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceWorkOrder from '../../../services/api/workOrder';
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
 import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
-import Slide from '@material-ui/core/Slide';
-import Edit from '@material-ui/icons/Edit';
-import UpdateElementSection from '../../sections/Element/UpdateElementSection';
-import workOrder from '../../../services/api/workOrder';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {

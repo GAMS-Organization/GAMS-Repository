@@ -18,7 +18,6 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
-import workOrder from '../../../services/api/workOrder';
 
 class CancelWorkOrderSection extends React.Component {
   constructor(props) {

@@ -20,7 +20,6 @@ import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
-import Slide from '@material-ui/core/Slide';
 
 class AreasTable extends React.Component {
   constructor(props) {
