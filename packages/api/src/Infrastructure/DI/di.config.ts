@@ -241,6 +241,9 @@ import StoreElementRequestHandler from '../../Application/Handlers/ElementReques
 import ElementRequestService from '../../Domain/Services/ElementRequestService';
 import IElementRequestRepository from '../../Domain/Interfaces/IElementRequestRepository';
 import TypeElementRequestRepository from '../../Persistence/TypeORM/Repositories/TypeElementRequestRepository';
+import UpdateElementRequestAction from '../../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
+import UpdateElementRequestAdapter from '../../API/Http/Adapters/ElementRequest/UpdateElementRequestAdapter';
+import UpdateElementRequestHandler from '../../Application/Handlers/ElementRequest/UpdateElementRequestHandler';
 const DIContainer = new Container();
 
 /**
@@ -324,6 +327,7 @@ DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 DIContainer.bind<StoreEducationalElementAction>(StoreEducationalElementAction).toSelf();
 
 DIContainer.bind<StoreElementRequestAction>(StoreElementRequestAction).toSelf();
+DIContainer.bind<UpdateElementRequestAction>(UpdateElementRequestAction).toSelf();
 
 /**
  * Adapters
@@ -392,6 +396,7 @@ DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
 DIContainer.bind<StoreEducationalElementAdapter>(StoreEducationalElementAdapter).toSelf();
 
 DIContainer.bind<StoreElementRequestAdapter>(StoreElementRequestAdapter).toSelf();
+DIContainer.bind<UpdateElementRequestAdapter>(UpdateElementRequestAdapter).toSelf();
 
 /**
  * Handlers
@@ -460,6 +465,7 @@ DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 DIContainer.bind<StoreEducationalElementHandler>(StoreEducationalElementHandler).toSelf();
 
 DIContainer.bind<StoreElementRequestHandler>(StoreElementRequestHandler).toSelf();
+DIContainer.bind<UpdateElementRequestHandler>(UpdateElementRequestHandler).toSelf();
 
 /*
  * Services

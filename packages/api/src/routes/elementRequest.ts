@@ -9,6 +9,7 @@ import StoreElementRequestAction from '../API/Http/Actions/ElementRequest/StoreE
 //import ShowElementRequestByNameAction from '../API/Http/Actions/ElementRequest/ShowElementRequestByNameAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
 
 const router = express.Router();
 
@@ -51,18 +52,18 @@ router.post(
 //   }),
 // );
 //
-// router.put(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const updateElementRequestAction: UpdateElementRequestAction = DIContainer.resolve<
-//       UpdateElementRequestAction
-//     >(UpdateElementRequestAction);
-//     await updateElementRequestAction.execute(request, response);
-//   }),
-// );
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateElementRequestAction: UpdateElementRequestAction = DIContainer.resolve<UpdateElementRequestAction>(
+      UpdateElementRequestAction,
+    );
+    await updateElementRequestAction.execute(request, response);
+  }),
+);
 //
 // router.get(
 //   '/name/:name([a-z0-9-]+)',

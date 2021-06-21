@@ -29,7 +29,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` varchar(255) NOT NULL, `elementId` int NULL, `userId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` varchar(255) NOT NULL, `quantity` int NOT NULL, `elementId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -126,6 +126,10 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     );
     await queryRunner.query(
       'ALTER TABLE `element_request` ADD CONSTRAINT `FK_f270ce54c07b4a4c87b5d8b8364` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `element_request` ADD CONSTRAINT `FK_600aa92c0b433d38e08e83b7f1c` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
     await queryRunner.query(
@@ -237,6 +241,10 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('ALTER TABLE `element` DROP FOREIGN KEY `FK_42e4c2a1cfb51ff941af50e3d38`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_2046c91e37525f7609487efdde8`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_0967520a5843ce4e307fb1302ec`', undefined);
+    await queryRunner.query(
+      'ALTER TABLE `element_request` DROP FOREIGN KEY `FK_600aa92c0b433d38e08e83b7f1c`',
+      undefined,
+    );
     await queryRunner.query(
       'ALTER TABLE `element_request` DROP FOREIGN KEY `FK_f270ce54c07b4a4c87b5d8b8364`',
       undefined,

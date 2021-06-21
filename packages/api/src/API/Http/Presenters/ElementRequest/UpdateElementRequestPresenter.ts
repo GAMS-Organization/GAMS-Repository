@@ -1,7 +1,7 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
 import ElementRequest from '../../../../Domain/Entities/ElementRequest';
 
-export default class StoreElementRequestPresenter implements IPresenter {
+export default class UpdateElementRequestPresenter implements IPresenter {
   private result: ElementRequest;
 
   public constructor(result: ElementRequest) {
@@ -23,6 +23,7 @@ export default class StoreElementRequestPresenter implements IPresenter {
       },
       date: this.result.getDate(),
       area: this.result.getArea(),
+      status: this.result.getStatus(),
       quantity: this.result.getQuantity(),
     };
   }

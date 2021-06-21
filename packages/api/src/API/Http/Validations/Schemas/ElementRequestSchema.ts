@@ -20,6 +20,18 @@ export const storeElementRequestSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
+  areaId: Joi.number()
+    .min(1)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
+  quantity: Joi.number()
+    .min(1)
+    .required()
+    .error(errors => {
+      return customErrorMessages.default(errors);
+    }),
 };
 
 export const updateElementRequestSchema = {
@@ -29,15 +41,14 @@ export const updateElementRequestSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  authorId: Joi.number()
-    .min(1)
+  status: Joi.string()
     .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  date: Joi.string()
+  areaId: Joi.number()
+    .min(1)
     .required()
-    .allow(null)
     .error(errors => {
       return customErrorMessages.default(errors);
     }),

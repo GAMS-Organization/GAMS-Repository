@@ -1,6 +1,8 @@
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import IEducationalElementRepository from '../Interfaces/IEducationalElementRepository';
+import EducationalElement from '../Entities/EducationalElement';
+import ValidationException from '../../Application/Exceptions/ValidationException';
 
 @injectable()
 export default class EducationalElementService {
@@ -27,5 +29,28 @@ export default class EducationalElementService {
       totalDataQuantity: educationalElementQuantity,
       totalPages: Math.ceil(educationalElementQuantity / itemsPerPage),
     };
+  }
+
+  public async updateQuantity(
+    quantity: number,
+    educationalElement: EducationalElement,
+    type: 'borrow' | 'return',
+  ): Promise<EducationalElement> {
+    const totalQuantity = educationalElement.getTotalQuantity();
+    const borrowedQuantity = educationalElement.getBorrowQuantity();
+    if (type === 'borrow') {
+      const available = totalQuantity - borrowedQuantity;
+      if (quantity > available) {
+        throw new ValidationException('The amount requested is bigger than the available amount');
+      }
+      educationalElement.setBorrowQuantity(borrowedQuantity + quantity);
+    } else {
+      if (borrowedQuantity - quantity < 0) {
+        educationalElement.setBorrowQuantity(0);
+      } else {
+        educationalElement.setBorrowQuantity(borrowedQuantity - quantity);
+      }
+    }
+    return this.educationalElementRepository.persist(educationalElement);
   }
 }

@@ -14,7 +14,10 @@ export default class TypeElementRequestRepository extends TypeRepository impleme
   }
 
   public async findOneById(id: number): Promise<ElementRequest> {
-    return await this.repository(ElementRequest).findOne(id);
+    return await this.repository(ElementRequest).findOne({
+      where: { id: id },
+      relations: ['area', 'element', 'user'],
+    });
   }
 
   public async count(): Promise<number> {
