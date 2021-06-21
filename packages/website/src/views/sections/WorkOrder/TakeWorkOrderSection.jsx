@@ -52,7 +52,7 @@ class TakeWorkOrderSection extends React.Component {
 
     formValues.id = this.props.workOrder.id;
     const response = await serviceWorkOrder.take(formValues);
-    if (response.type === 'TAKE_SUCCESFUL') {
+    if (response.type === 'TAKE_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
       this.props.close();

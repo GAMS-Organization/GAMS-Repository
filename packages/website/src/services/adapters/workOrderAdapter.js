@@ -40,26 +40,6 @@ class workOrderAdapter {
     }
   }
 
-  listBySector(listBySectorResponse) {
-    let { status, data } = listBySectorResponse;
-
-    if (!isError(status)) {
-      return {
-        areas: data.data,
-      };
-    } else {
-      const { code, details } = data.errors;
-      return {
-        type: 'LIST_BY_SECTOR_FAIL',
-        error: {
-          code: status,
-          type: code,
-          errors: details.error,
-        },
-      };
-    }
-  }
-
   update(updateResponse) {
     let { status, data } = updateResponse;
 
@@ -126,7 +106,7 @@ class workOrderAdapter {
     let { status, data } = dataWorkOrder;
     if (!isError(status)) {
       return {
-        type: 'CANCEL_SUCCESFUL',
+        type: 'CANCEL_SUCCESSFUL',
       };
     } else {
       const { code, details } = data.errors;
@@ -145,7 +125,7 @@ class workOrderAdapter {
     let { status, data } = takeResponse;
     if (!isError(status)) {
       return {
-        type: 'TAKE_SUCCESFUL',
+        type: 'TAKE_SUCCESSFUL',
       };
     } else {
       const { code, details } = data.errors;

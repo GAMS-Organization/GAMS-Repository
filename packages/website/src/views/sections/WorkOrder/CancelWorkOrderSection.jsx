@@ -38,7 +38,6 @@ class CancelWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se actualiza el producto luego de ser editado
   cancelWorkOrder = async e => {
     e.preventDefault();
 
@@ -52,7 +51,7 @@ class CancelWorkOrderSection extends React.Component {
 
     formValues.id = this.props.workOrder.id;
     const response = await serviceWorkOrder.cancel(formValues);
-    if (response.type === 'CANCEL_SUCCESFUL') {
+    if (response.type === 'CANCEL_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
       this.props.close();

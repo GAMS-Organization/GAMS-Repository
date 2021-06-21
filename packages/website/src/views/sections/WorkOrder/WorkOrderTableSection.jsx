@@ -23,7 +23,7 @@ class WorkOrderTableSection extends React.Component {
     };
   }
 
-  //se obtienen los activos
+  //se obtienen las ordenes de trabajo
   async componentWillMount() {
     await this.listWorkOrders();
   }

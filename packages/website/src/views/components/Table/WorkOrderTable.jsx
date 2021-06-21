@@ -29,8 +29,8 @@ class WorkOrderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      modalTake: false,
+      cancelModal: false,
+      takeModal: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -42,15 +42,15 @@ class WorkOrderTable extends React.Component {
   };
 
   handleClickCancel = async prop => {
-    this.setState({ workOrder: { id: prop.id }, modal: true });
+    this.setState({ workOrder: { id: prop.id }, cancelModal: true });
   };
 
   handleClickTake = async prop => {
-    this.setState({ workOrder: { id: prop.id }, modalTake: true });
+    this.setState({ workOrder: { id: prop.id }, takeModal: true });
   };
 
   closeModal = () => {
-    this.setState({ modal: false, modalTake: false });
+    this.setState({ cancelModal: false, takeModal: false });
   };
 
   render() {
@@ -72,13 +72,13 @@ class WorkOrderTable extends React.Component {
         />
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
-          open={this.state.modal}
+          open={this.state.cancelModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
         <TakeWorkOrderSection
           workOrder={this.state.workOrder}
-          open={this.state.modalTake}
+          open={this.state.takeModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
