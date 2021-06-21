@@ -18,16 +18,28 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
+import FormControl from '@material-ui/core/FormControl';
+import { InputLabel } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import serviceUser from '../../../services/api/user';
 
-class TakeWorkOrderSection extends React.Component {
+class AssignWorkOrderSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       workOrder: {},
       errors: {},
       notification: false,
+      selectedWorkers: [],
+      workers: [],
     };
+    this.listWorkers();
   }
+
+  /*handleClose = () => {
+    this.setState({ open: false, selectedWorkers: [] });
+  };*/
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     return this.props !== nextProps || this.state.notification !== nextState.notification;
@@ -37,7 +49,23 @@ class TakeWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  takeWorkOrder = async e => {
+  listWorkers = async (page = 1, itemsPerPage = 15) => {
+    const response = await serviceUser.list(page, itemsPerPage);
+    let workers = [];
+    for (const user of response.data.items) {
+      if (user.roles[0] !== 'user') {
+        let workersData = { id: user.id, name: user.name, surname: user.surname };
+        workers.push(workersData);
+      }
+    }
+    this.setState({ workers });
+  };
+
+  handleChangeWorkers = event => {
+    this.setState({ selectedWorkers: event.target.value });
+  };
+
+  assignWorkOrder = async e => {
     e.preventDefault();
 
     const fields = ['startDate'];
@@ -50,7 +78,7 @@ class TakeWorkOrderSection extends React.Component {
 
     formValues.id = this.props.workOrder.id;
     const response = await serviceWorkOrder.take(formValues);
-    if (response.type === 'TAKE_SUCCESSFUL') {
+    if (response.type === 'ASSIGN_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
       this.props.close();
@@ -91,10 +119,10 @@ class TakeWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>¿Esta seguro que desea tomar esta orden de trabajo?</h4>
+            <h4 className={classes.modalTitle}>Asignar Orden de Trabajo</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.takeWorkOrder}>
+            <form onSubmit={this.assignWorkOrder}>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
@@ -111,6 +139,50 @@ class TakeWorkOrderSection extends React.Component {
                         name: 'date',
                       }}
                     />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <FormControl fullWidth className={classes.selectFormControl}>
+                      <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
+                        Responsables
+                      </InputLabel>
+                      <Select
+                        multiple
+                        value={this.state.selectedWorkers}
+                        onChange={this.handleChangeWorkers}
+                        MenuProps={{
+                          className: classes.selectMenu,
+                          classes: { paper: classes.selectPaper },
+                        }}
+                        classes={{
+                          select: classes.select,
+                        }}
+                        inputProps={{
+                          name: 'workers',
+                          id: 'workers',
+                        }}
+                      >
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem,
+                          }}
+                        >
+                          Responsables
+                        </MenuItem>
+                        {this.state.workers.map(worker => (
+                          <MenuItem
+                            key={worker.id}
+                            value={worker.id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelectedMultiple,
+                            }}
+                          >
+                            {worker.name + ' ' + worker.surname}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </GridItem>
                 </GridContainer>
               </CardBody>
@@ -138,7 +210,7 @@ class TakeWorkOrderSection extends React.Component {
   }
 }
 
-TakeWorkOrderSection.propTypes = {
+AssignWorkOrderSection.propTypes = {
   classes: PropTypes.object.isRequired,
   workOrder: PropTypes.object,
   open: PropTypes.bool,
@@ -146,4 +218,4 @@ TakeWorkOrderSection.propTypes = {
   listWorkOrders: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(TakeWorkOrderSection);
+export default withStyles(modalStyle)(AssignWorkOrderSection);
