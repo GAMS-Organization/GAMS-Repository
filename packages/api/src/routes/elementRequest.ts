@@ -3,7 +3,7 @@ import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreElementRequestAction from '../API/Http/Actions/ElementRequest/StoreElementRequestAction';
 //import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
-//import IndexElementRequestsAction from '../API/Http/Actions/ElementRequest/IndexElementRequestsAction';
+import IndexElementRequestsAction from '../API/Http/Actions/ElementRequest/IndexElementRequestAction';
 //import ShowElementRequestAction from '../API/Http/Actions/ElementRequest/ShowElementRequestAction';
 //import DestroyElementRequestAction from '../API/Http/Actions/ElementRequest/DestroyElementRequestAction';
 //import ShowElementRequestByNameAction from '../API/Http/Actions/ElementRequest/ShowElementRequestByNameAction';
@@ -13,18 +13,18 @@ import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/Updat
 
 const router = express.Router();
 
-// router.get(
-//   '/',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const indexElementRequestAction: IndexElementRequestsAction = DIContainer.resolve<
-//       IndexElementRequestsAction
-//     >(IndexElementRequestsAction);
-//     await indexElementRequestAction.execute(request, response);
-//   }),
-// );
+router.get(
+  '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexElementRequestAction: IndexElementRequestsAction = DIContainer.resolve<IndexElementRequestsAction>(
+      IndexElementRequestsAction,
+    );
+    await indexElementRequestAction.execute(request, response);
+  }),
+);
 
 router.post(
   '/',

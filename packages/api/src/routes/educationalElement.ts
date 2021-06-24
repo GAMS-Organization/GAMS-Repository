@@ -3,7 +3,7 @@ import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreEducationalElementAction from '../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
 //import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
-//import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementsAction';
+import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementAction';
 //import ShowEducationalElementAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementAction';
 //import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
 //import ShowEducationalElementByNameAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementByNameAction';
@@ -12,18 +12,18 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
 const router = express.Router();
 
-// router.get(
-//   '/',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const indexEducationalElementAction: IndexEducationalElementsAction = DIContainer.resolve<
-//       IndexEducationalElementsAction
-//     >(IndexEducationalElementsAction);
-//     await indexEducationalElementAction.execute(request, response);
-//   }),
-// );
+router.get(
+  '/',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexEducationalElementAction: IndexEducationalElementsAction = DIContainer.resolve<
+      IndexEducationalElementsAction
+    >(IndexEducationalElementsAction);
+    await indexEducationalElementAction.execute(request, response);
+  }),
+);
 
 router.post(
   '/',

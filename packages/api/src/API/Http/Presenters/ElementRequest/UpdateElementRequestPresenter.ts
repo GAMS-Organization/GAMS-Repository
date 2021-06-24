@@ -22,7 +22,11 @@ export default class UpdateElementRequestPresenter implements IPresenter {
         id: this.result.getUser().getId(),
       },
       date: this.result.getDate(),
-      area: this.result.getArea(),
+      area: {
+        name: this.result.getArea().getName(),
+        id: this.result.getArea().getId(),
+        code: this.result.getArea().getCode(),
+      },
       status: this.result.getStatus(),
       quantity: this.result.getQuantity(),
     };

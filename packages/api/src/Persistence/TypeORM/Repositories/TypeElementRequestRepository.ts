@@ -10,7 +10,11 @@ export default class TypeElementRequestRepository extends TypeRepository impleme
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<ElementRequest[]> {
-    return await this.repository(ElementRequest).find({ skip: initialIndex, take: limit });
+    return await this.repository(ElementRequest).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['area', 'element', 'user'],
+    });
   }
 
   public async findOneById(id: number): Promise<ElementRequest> {

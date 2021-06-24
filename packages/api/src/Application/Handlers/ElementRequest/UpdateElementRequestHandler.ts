@@ -6,21 +6,26 @@ import ElementRequest from '../../../Domain/Entities/ElementRequest';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
 import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
+import { STATUS } from '../../../API/Http/Enums/EducationalElement';
+import EducationalElementService from '../../../Domain/Services/EducationalElementService';
 
 @injectable()
 export default class UpdateElementRequestHandler {
   private elementRequestRepository: IElementRequestRepository;
   private educationalElementRepository: IEducationalElementRepository;
   private areaRepository: IAreaRepository;
+  private educationalElementService: EducationalElementService;
 
   public constructor(
     @inject(INTERFACES.IElementRequestRepository) elementRequestRepository: IElementRequestRepository,
     @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
+    @inject(EducationalElementService) educationalElementService: EducationalElementService,
   ) {
     this.elementRequestRepository = elementRequestRepository;
     this.educationalElementRepository = educationalElementRepository;
     this.areaRepository = areaRepository;
+    this.educationalElementService = educationalElementService;
   }
 
   public async execute(command: UpdateElementRequestCommand): Promise<ElementRequest> {
@@ -46,6 +51,10 @@ export default class UpdateElementRequestHandler {
     elementRequest.getElement().getId() !== command.getEducationalElementId()
       ? elementRequest.setElement(educationalElement)
       : null;
+
+    if (command.getStatus() === STATUS.RETURNED) {
+      await this.educationalElementService.updateQuantity(elementRequest.getQuantity(), educationalElement, 'return');
+    }
 
     return await this.elementRequestRepository.persist(elementRequest);
   }
