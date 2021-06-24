@@ -2,7 +2,7 @@ import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
 import StoreEducationalElementAction from '../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
-//import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
+import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
 import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementAction';
 //import ShowEducationalElementAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementAction';
 //import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
@@ -51,18 +51,18 @@ router.post(
 //   }),
 // );
 //
-// router.put(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const updateEducationalElementAction: UpdateEducationalElementAction = DIContainer.resolve<
-//       UpdateEducationalElementAction
-//     >(UpdateEducationalElementAction);
-//     await updateEducationalElementAction.execute(request, response);
-//   }),
-// );
+router.put(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const updateEducationalElementAction: UpdateEducationalElementAction = DIContainer.resolve<
+      UpdateEducationalElementAction
+    >(UpdateEducationalElementAction);
+    await updateEducationalElementAction.execute(request, response);
+  }),
+);
 //
 // router.get(
 //   '/name/:name([a-z0-9-]+)',

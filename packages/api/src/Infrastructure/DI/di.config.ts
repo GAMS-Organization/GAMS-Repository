@@ -244,6 +244,9 @@ import TypeElementRequestRepository from '../../Persistence/TypeORM/Repositories
 import UpdateElementRequestAction from '../../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
 import UpdateElementRequestAdapter from '../../API/Http/Adapters/ElementRequest/UpdateElementRequestAdapter';
 import UpdateElementRequestHandler from '../../Application/Handlers/ElementRequest/UpdateElementRequestHandler';
+import UpdateEducationalElementAction from '../../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
+import UpdateEducationalElementAdapter from '../../API/Http/Adapters/EducationalElement/UpdateEducationalElementAdapter';
+import UpdateEducationalElementHandler from '../../Application/Handlers/EducationalElement/UpdateEducationalElementHandler';
 const DIContainer = new Container();
 
 /**
@@ -325,6 +328,7 @@ DIContainer.bind<UpdateEventAction>(UpdateEventAction).toSelf();
 DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 
 DIContainer.bind<StoreEducationalElementAction>(StoreEducationalElementAction).toSelf();
+DIContainer.bind<UpdateEducationalElementAction>(UpdateEducationalElementAction).toSelf();
 
 DIContainer.bind<StoreElementRequestAction>(StoreElementRequestAction).toSelf();
 DIContainer.bind<UpdateElementRequestAction>(UpdateElementRequestAction).toSelf();
@@ -394,6 +398,7 @@ DIContainer.bind<UpdateEventAdapter>(UpdateEventAdapter).toSelf();
 DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
 
 DIContainer.bind<StoreEducationalElementAdapter>(StoreEducationalElementAdapter).toSelf();
+DIContainer.bind<UpdateEducationalElementAdapter>(UpdateEducationalElementAdapter).toSelf();
 
 DIContainer.bind<StoreElementRequestAdapter>(StoreElementRequestAdapter).toSelf();
 DIContainer.bind<UpdateElementRequestAdapter>(UpdateElementRequestAdapter).toSelf();
@@ -463,6 +468,7 @@ DIContainer.bind<UpdateEventHandler>(UpdateEventHandler).toSelf();
 DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 
 DIContainer.bind<StoreEducationalElementHandler>(StoreEducationalElementHandler).toSelf();
+DIContainer.bind<UpdateEducationalElementHandler>(UpdateEducationalElementHandler).toSelf();
 
 DIContainer.bind<StoreElementRequestHandler>(StoreElementRequestHandler).toSelf();
 DIContainer.bind<UpdateElementRequestHandler>(UpdateElementRequestHandler).toSelf();
