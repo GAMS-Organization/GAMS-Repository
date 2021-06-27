@@ -6,6 +6,7 @@ import { UserStates } from '../Enums/UserStates';
 import UserWorkOrder from './UserWorkOrder';
 import WorkOrder from './WorkOrder';
 import UserEvent from './UserEvent';
+import ElementRequest from './ElementRequest';
 
 @Entity('users')
 // eslint-disable-next-line require-jsdoc
@@ -34,6 +35,8 @@ export default class User {
   public userWorkOrders: UserWorkOrder[];
   @OneToMany(_type => WorkOrder, workOrder => workOrder.user)
   public workOrders: WorkOrder[];
+  @OneToMany(_type => ElementRequest, elementRequest => elementRequest.user)
+  public elementRequests: ElementRequest[];
   @OneToMany(_type => UserEvent, userEvent => userEvent.user)
   public userEvents: UserEvent[];
 

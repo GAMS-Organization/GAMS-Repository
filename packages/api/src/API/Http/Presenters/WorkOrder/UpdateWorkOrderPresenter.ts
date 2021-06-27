@@ -23,7 +23,11 @@ export default class StoreWorkOrderPresenter implements IPresenter {
       comment: this.result.getComment(),
       taskDescription: this.result.getTaskDescription(),
       asset: this.result.getAsset(),
-      user: this.result.getUser(),
+      user: {
+        name: this.result.getUser().getName(),
+        surname: this.result.getUser().getSurname(),
+        id: this.result.getUser().getId(),
+      },
       workers: this.result.getUserWorkOrders(),
     };
   }
