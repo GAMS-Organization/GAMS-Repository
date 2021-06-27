@@ -56,7 +56,10 @@ class AreasTable extends React.Component {
     //Se corta el string services y lo transforma en un array de strings
     let services = prop.visibleData[3].split(' - ');
 
-    this.setState({ area: { id: prop.id, name: prop.visibleData[0], services: services }, modal: true });
+    this.setState({
+      area: { id: prop.id, name: prop.visibleData[0], services: services, maps: prop.maps },
+      modal: true,
+    });
   };
 
   closeModal = () => {
