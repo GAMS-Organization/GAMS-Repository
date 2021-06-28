@@ -1,15 +1,15 @@
 import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
-import StoreElementRequestAction from '../API/Http/Actions/ElementRequest/StoreElementRequestAction';
-//import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
-import IndexElementRequestsAction from '../API/Http/Actions/ElementRequest/IndexElementRequestAction';
-//import ShowElementRequestAction from '../API/Http/Actions/ElementRequest/ShowElementRequestAction';
-//import DestroyElementRequestAction from '../API/Http/Actions/ElementRequest/DestroyElementRequestAction';
-//import ShowElementRequestByNameAction from '../API/Http/Actions/ElementRequest/ShowElementRequestByNameAction';
+import StoreToolRequestAction from '../API/Http/Actions/ToolRequest/StoreToolRequestAction';
+//import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
+import IndexToolRequestsAction from '../API/Http/Actions/ToolRequest/IndexToolRequestAction';
+//import ShowToolRequestAction from '../API/Http/Actions/ToolRequest/ShowToolRequestAction';
+//import DestroyToolRequestAction from '../API/Http/Actions/ToolRequest/DestroyToolRequestAction';
+//import ShowToolRequestByNameAction from '../API/Http/Actions/ToolRequest/ShowToolRequestByNameAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
-import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
+import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
 
 const router = express.Router();
 
@@ -19,10 +19,10 @@ router.get(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexElementRequestAction: IndexElementRequestsAction = DIContainer.resolve<IndexElementRequestsAction>(
-      IndexElementRequestsAction,
+    const indexToolRequestAction: IndexToolRequestsAction = DIContainer.resolve<IndexToolRequestsAction>(
+      IndexToolRequestsAction,
     );
-    await indexElementRequestAction.execute(request, response);
+    await indexToolRequestAction.execute(request, response);
   }),
 );
 
@@ -32,10 +32,10 @@ router.post(
     authMiddleware(req, res, next, ['admin', 'personal', 'user']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const storeElementRequestAction: StoreElementRequestAction = DIContainer.resolve<StoreElementRequestAction>(
-      StoreElementRequestAction,
+    const storeToolRequestAction: StoreToolRequestAction = DIContainer.resolve<StoreToolRequestAction>(
+      StoreToolRequestAction,
     );
-    await storeElementRequestAction.execute(request, response);
+    await storeToolRequestAction.execute(request, response);
   }),
 );
 
@@ -45,10 +45,10 @@ router.post(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showElementRequestAction: ShowElementRequestAction = DIContainer.resolve<ShowElementRequestAction>(
-//       ShowElementRequestAction,
+//     const showToolRequestAction: ShowToolRequestAction = DIContainer.resolve<ShowToolRequestAction>(
+//       ShowToolRequestAction,
 //     );
-//     await showElementRequestAction.execute(request, response);
+//     await showToolRequestAction.execute(request, response);
 //   }),
 // );
 //
@@ -58,10 +58,10 @@ router.put(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateElementRequestAction: UpdateElementRequestAction = DIContainer.resolve<UpdateElementRequestAction>(
-      UpdateElementRequestAction,
+    const updateToolRequestAction: UpdateToolRequestAction = DIContainer.resolve<UpdateToolRequestAction>(
+      UpdateToolRequestAction,
     );
-    await updateElementRequestAction.execute(request, response);
+    await updateToolRequestAction.execute(request, response);
   }),
 );
 //
@@ -71,10 +71,10 @@ router.put(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showElementRequestByNameAction: ShowElementRequestByNameAction = DIContainer.resolve<
-//       ShowElementRequestByNameAction
-//     >(ShowElementRequestByNameAction);
-//     await showElementRequestByNameAction.execute(request, response);
+//     const showToolRequestByNameAction: ShowToolRequestByNameAction = DIContainer.resolve<
+//       ShowToolRequestByNameAction
+//     >(ShowToolRequestByNameAction);
+//     await showToolRequestByNameAction.execute(request, response);
 //   }),
 // );
 //
@@ -84,10 +84,10 @@ router.put(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyElementRequestAction: DestroyElementRequestAction = DIContainer.resolve<
-//       DestroyElementRequestAction
-//     >(DestroyElementRequestAction);
-//     await destroyElementRequestAction.execute(request, response);
+//     const destroyToolRequestAction: DestroyToolRequestAction = DIContainer.resolve<
+//       DestroyToolRequestAction
+//     >(DestroyToolRequestAction);
+//     await destroyToolRequestAction.execute(request, response);
 //   }),
 // );
 

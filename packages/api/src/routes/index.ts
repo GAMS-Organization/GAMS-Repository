@@ -15,6 +15,8 @@ import event from './event';
 import educational from './educationalElement';
 import elementRequest from './elementRequest';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import tool from './tool';
+import toolRequest from './toolRequest';
 
 const router = Router();
 
@@ -48,6 +50,10 @@ router.use('/event', event);
 router.use('/educational', educational);
 
 router.use('/elementRequest', elementRequest);
+
+router.use('/tool', tool);
+
+router.use('/toolRequest', toolRequest);
 
 router.get(
   '/',

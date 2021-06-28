@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import { success } from '../../../../utils/customResponse';
-import UpdateElementRequestAdapter from '../../Adapters/ElementRequest/UpdateElementRequestAdapter';
-import UpdateElementRequestHandler from '../../../../Application/Handlers/ElementRequest/UpdateElementRequestHandler';
-import UpdateElementRequestPresenter from '../../Presenters/ElementRequest/UpdateElementRequestPresenter';
+import UpdateToolRequestAdapter from '../../Adapters/ToolRequest/UpdateToolRequestAdapter';
+import UpdateToolRequestHandler from '../../../../Application/Handlers/ToolRequest/UpdateToolRequestHandler';
+import UpdateToolRequestPresenter from '../../Presenters/ToolRequest/UpdateToolRequestPresenter';
 import { injectable } from 'inversify';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
 
 @injectable()
-export default class UpdateElementRequestAction {
-  private adapter: UpdateElementRequestAdapter;
-  private handler: UpdateElementRequestHandler;
+export default class UpdateToolRequestAction {
+  private adapter: UpdateToolRequestAdapter;
+  private handler: UpdateToolRequestHandler;
 
-  public constructor(adapter: UpdateElementRequestAdapter, handler: UpdateElementRequestHandler) {
+  public constructor(adapter: UpdateToolRequestAdapter, handler: UpdateToolRequestHandler) {
     this.adapter = adapter;
     this.handler = handler;
   }
@@ -21,10 +21,10 @@ export default class UpdateElementRequestAction {
 
     const result = await this.handler.execute(command);
 
-    const presenter = new UpdateElementRequestPresenter(result);
+    const presenter = new UpdateToolRequestPresenter(result);
 
     return response
       .status(HTTP_CODES.OK)
-      .json(success(presenter.getData(), 'UpdateElementRequestAction: ElementRequest has been updated'));
+      .json(success(presenter.getData(), 'UpdateToolRequestAction: ToolRequest has been updated'));
   }
 }

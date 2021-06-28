@@ -1,8 +1,8 @@
 import * as Joi from 'joi';
 import * as customErrorMessages from '../Utils/BaseErrorSchema';
 
-export const storeElementRequestSchema = {
-  educationalElementId: Joi.number()
+export const storeToolRequestSchema = {
+  toolId: Joi.number()
     .min(1)
     .required()
     .error(errors => {
@@ -34,8 +34,8 @@ export const storeElementRequestSchema = {
     }),
 };
 
-export const updateElementRequestSchema = {
-  educationalElementId: Joi.number()
+export const updateToolRequestSchema = {
+  toolId: Joi.number()
     .min(1)
     .required()
     .error(errors => {

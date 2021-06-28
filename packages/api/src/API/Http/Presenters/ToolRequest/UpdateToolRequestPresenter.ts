@@ -1,10 +1,10 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
-import ElementRequest from '../../../../Domain/Entities/ElementRequest';
+import ToolRequest from '../../../../Domain/Entities/ToolRequest';
 
 export default class UpdateToolRequestPresenter implements IPresenter {
-  private result: ElementRequest;
+  private result: ToolRequest;
 
-  public constructor(result: ElementRequest) {
+  public constructor(result: ToolRequest) {
     this.result = result;
   }
 
@@ -15,7 +15,7 @@ export default class UpdateToolRequestPresenter implements IPresenter {
   public getData(): object {
     return {
       id: this.result.getId(),
-      educationalElement: this.result.getElement(),
+      tool: this.result.getTool(),
       user: {
         name: this.result.getUser().getName(),
         surname: this.result.getUser().getSurname(),

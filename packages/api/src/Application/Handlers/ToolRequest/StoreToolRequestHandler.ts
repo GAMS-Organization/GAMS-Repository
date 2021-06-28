@@ -1,41 +1,41 @@
-import IElementRequestRepository from '../../../Domain/Interfaces/IElementRequestRepository';
+import IToolRequestRepository from '../../../Domain/Interfaces/IToolRequestRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import StoreElementRequestCommand from '../../Commands/ElementRequest/StoreElementRequestCommand';
-import ElementRequest from '../../../Domain/Entities/ElementRequest';
-import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
+import StoreToolRequestCommand from '../../Commands/ToolRequest/StoreToolRequestCommand';
+import ToolRequest from '../../../Domain/Entities/ToolRequest';
+import IToolRepository from '../../../Domain/Interfaces/IToolRepository';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IUserRepository from '../../../Domain/Interfaces/IUserRepository';
-import { STATUS } from '../../../API/Http/Enums/EducationalElement';
+import { STATUS } from '../../../API/Http/Enums/Tool';
 import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
-import EducationalElementService from '../../../Domain/Services/EducationalElementService';
+import ToolService from '../../../Domain/Services/ToolService';
 
 @injectable()
-export default class StoreElementRequestHandler {
-  private elementRequestRepository: IElementRequestRepository;
-  private educationalElementRepository: IEducationalElementRepository;
+export default class StoreToolRequestHandler {
+  private toolRequestRepository: IToolRequestRepository;
+  private toolRepository: IToolRepository;
   private userRepository: IUserRepository;
   private areaRepository: IAreaRepository;
-  private educationalElementService: EducationalElementService;
+  private toolService: ToolService;
   public constructor(
-    @inject(INTERFACES.IElementRequestRepository) elementRequestRepository: IElementRequestRepository,
-    @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
+    @inject(INTERFACES.IToolRequestRepository) toolRequestRepository: IToolRequestRepository,
+    @inject(INTERFACES.IToolRepository) toolRepository: IToolRepository,
     @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,
     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
-    @inject(EducationalElementService) educationalElementService: EducationalElementService,
+    @inject(ToolService) toolService: ToolService,
   ) {
-    this.elementRequestRepository = elementRequestRepository;
-    this.educationalElementRepository = educationalElementRepository;
+    this.toolRequestRepository = toolRequestRepository;
+    this.toolRepository = toolRepository;
     this.userRepository = userRepository;
     this.areaRepository = areaRepository;
-    this.educationalElementService = educationalElementService;
+    this.toolService = toolService;
   }
 
-  public async execute(command: StoreElementRequestCommand): Promise<ElementRequest> {
-    const educationalElement = await this.educationalElementRepository.findOneById(command.getEducationalElementId());
+  public async execute(command: StoreToolRequestCommand): Promise<ToolRequest> {
+    const tool = await this.toolRepository.findOneById(command.getToolId());
 
-    if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getEducationalElementId()} not found`);
+    if (!tool) {
+      throw new EntityNotFoundException(`Tool with id: ${command.getToolId()} not found`);
     }
 
     const user = await this.userRepository.findOneById(command.getUserId());
@@ -50,14 +50,22 @@ export default class StoreElementRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
-    const elementRequest = new ElementRequest(
-      await this.educationalElementService.updateQuantity(command.getQuantity(), educationalElement, 'borrow'),
+    const toolUpdated = await this.toolService.updateQuantity(command.getQuantity(), tool, 'borrow');
+
+    console.log(
+      '*********************************************',
+      toolUpdated,
+      '*********************************************',
+    );
+    const toolRequest = new ToolRequest(
+      toolUpdated,
       user,
       STATUS.PENDING,
       command.getDate(),
       area,
       command.getQuantity(),
     );
-    return await this.elementRequestRepository.persist(elementRequest);
+
+    return await this.toolRequestRepository.persist(toolRequest);
   }
 }

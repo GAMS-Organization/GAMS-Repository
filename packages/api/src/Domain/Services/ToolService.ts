@@ -1,56 +1,47 @@
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
-import IEducationalElementRepository from '../Interfaces/IEducationalElementRepository';
-import EducationalElement from '../Entities/EducationalElement';
-import ValidationException from '../../Application/Exceptions/ValidationException';
+import IToolRepository from '../Interfaces/IToolRepository';
+import Tool from '../Entities/Tool';
+import EntityNotFoundException from '../../Application/Exceptions/EntityNotFoundException';
 
 @injectable()
-export default class EducationalElementService {
-  private educationalElementRepository: IEducationalElementRepository;
+export default class ToolService {
+  private toolRepository: IToolRepository;
 
-  public constructor(
-    @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
-  ) {
-    this.educationalElementRepository = educationalElementRepository;
+  public constructor(@inject(INTERFACES.IToolRepository) toolRepository: IToolRepository) {
+    this.toolRepository = toolRepository;
   }
 
   public async returnAllPaginated(
     page: number = 1,
     itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
   ): Promise<PaginatedSuccessData> {
-    const educationalElementQuantity = await this.educationalElementRepository.count();
-    const educationalElements = await this.educationalElementRepository.findAllPaginated(
-      itemsPerPage * page - itemsPerPage,
-      itemsPerPage,
-    );
+    const toolQuantity = await this.toolRepository.count();
+    const tools = await this.toolRepository.findAllPaginated(itemsPerPage * page - itemsPerPage, itemsPerPage);
     return {
-      data: educationalElements,
-      dataLength: educationalElements.length,
-      totalDataQuantity: educationalElementQuantity,
-      totalPages: Math.ceil(educationalElementQuantity / itemsPerPage),
+      data: tools,
+      dataLength: tools.length,
+      totalDataQuantity: toolQuantity,
+      totalPages: Math.ceil(toolQuantity / itemsPerPage),
     };
   }
 
-  public async updateQuantity(
-    quantity: number,
-    educationalElement: EducationalElement,
-    type: 'borrow' | 'return',
-  ): Promise<EducationalElement> {
-    const totalQuantity = educationalElement.getTotalQuantity();
-    const borrowedQuantity = educationalElement.getBorrowQuantity();
+  public async updateQuantity(quantity: number, tool: Tool, type: 'borrow' | 'return'): Promise<Tool> {
+    const totalQuantity = tool.getTotalQuantity();
+    const borrowedQuantity = tool.getBorrowQuantity();
     if (type === 'borrow') {
       const available = totalQuantity - borrowedQuantity;
       if (quantity > available) {
-        throw new ValidationException('The amount requested is bigger than the available amount');
+        throw new EntityNotFoundException('The amount requested is bigger than the available amount');
       }
-      educationalElement.setBorrowQuantity(borrowedQuantity + quantity);
+      tool.setBorrowQuantity(borrowedQuantity + quantity);
     } else {
       if (borrowedQuantity - quantity < 0) {
-        educationalElement.setBorrowQuantity(0);
+        tool.setBorrowQuantity(0);
       } else {
-        educationalElement.setBorrowQuantity(borrowedQuantity - quantity);
+        tool.setBorrowQuantity(borrowedQuantity - quantity);
       }
     }
-    return this.educationalElementRepository.persist(educationalElement);
+    return this.toolRepository.persist(tool);
   }
 }

@@ -1,35 +1,35 @@
 import { Request, Response } from 'express';
 import { paginatedSuccess } from '../../../../utils/customResponse';
 import { inject, injectable } from 'inversify';
-import GetAllElementRequestPresenter from '../../Presenters/ElementRequest/GetAllElementRequestPresenter';
+import GetAllToolRequestPresenter from '../../Presenters/ToolRequest/GetAllToolRequestPresenter';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
-import ElementRequestService from '../../../../Domain/Services/ElementRequestService';
+import ToolRequestService from '../../../../Domain/Services/ToolRequestService';
 
 @injectable()
 // eslint-disable-next-line require-jsdoc
-export default class IndexElementRequestAction {
-  private elementRequestService: ElementRequestService;
+export default class IndexToolRequestAction {
+  private toolRequestService: ToolRequestService;
 
-  public constructor(@inject(ElementRequestService) elementRequestService: ElementRequestService) {
-    this.elementRequestService = elementRequestService;
+  public constructor(@inject(ToolRequestService) toolRequestService: ToolRequestService) {
+    this.toolRequestService = toolRequestService;
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const elementRequestsData = await this.elementRequestService.returnAllPaginated(
+    const toolRequestsData = await this.toolRequestService.returnAllPaginated(
       request.query.page,
       request.query.items_per_page,
     );
 
-    const getAllPresenter = new GetAllElementRequestPresenter(elementRequestsData.data);
+    const getAllPresenter = new GetAllToolRequestPresenter(toolRequestsData.data);
 
     return response
       .status(HTTP_CODES.OK)
       .json(
         paginatedSuccess(
           getAllPresenter.getData(),
-          elementRequestsData.dataLength,
-          elementRequestsData.totalDataQuantity,
-          elementRequestsData.totalPages,
+          toolRequestsData.dataLength,
+          toolRequestsData.totalDataQuantity,
+          toolRequestsData.totalPages,
         ),
       );
   }

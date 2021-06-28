@@ -1,43 +1,43 @@
-import IElementRequestRepository from '../../../Domain/Interfaces/IElementRequestRepository';
+import IToolRequestRepository from '../../../Domain/Interfaces/IToolRequestRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import UpdateElementRequestCommand from '../../Commands/ElementRequest/UpdateElementRequestCommand';
-import ElementRequest from '../../../Domain/Entities/ElementRequest';
+import UpdateToolRequestCommand from '../../Commands/ToolRequest/UpdateToolRequestCommand';
+import ToolRequest from '../../../Domain/Entities/ToolRequest';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
-import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
-import { STATUS } from '../../../API/Http/Enums/EducationalElement';
-import EducationalElementService from '../../../Domain/Services/EducationalElementService';
+import IToolRepository from '../../../Domain/Interfaces/IToolRepository';
+import { STATUS } from '../../../API/Http/Enums/Tool';
+import ToolService from '../../../Domain/Services/ToolService';
 
 @injectable()
 export default class UpdateToolRequestHandler {
-  private elementRequestRepository: IElementRequestRepository;
-  private educationalElementRepository: IEducationalElementRepository;
+  private toolRequestRepository: IToolRequestRepository;
+  private toolRepository: IToolRepository;
   private areaRepository: IAreaRepository;
-  private educationalElementService: EducationalElementService;
+  private toolService: ToolService;
 
   public constructor(
-    @inject(INTERFACES.IElementRequestRepository) elementRequestRepository: IElementRequestRepository,
-    @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
+    @inject(INTERFACES.IToolRequestRepository) toolRequestRepository: IToolRequestRepository,
+    @inject(INTERFACES.IToolRepository) toolRepository: IToolRepository,
     @inject(INTERFACES.IAreaRepository) areaRepository: IAreaRepository,
-    @inject(EducationalElementService) educationalElementService: EducationalElementService,
+    @inject(ToolService) toolService: ToolService,
   ) {
-    this.elementRequestRepository = elementRequestRepository;
-    this.educationalElementRepository = educationalElementRepository;
+    this.toolRequestRepository = toolRequestRepository;
+    this.toolRepository = toolRepository;
     this.areaRepository = areaRepository;
-    this.educationalElementService = educationalElementService;
+    this.toolService = toolService;
   }
 
-  public async execute(command: UpdateElementRequestCommand): Promise<ElementRequest> {
-    const elementRequest = await this.elementRequestRepository.findOneById(command.getId());
-    if (!elementRequest) {
-      throw new EntityNotFoundException(`ElementRequest with id: ${command.getId()} not found`);
+  public async execute(command: UpdateToolRequestCommand): Promise<ToolRequest> {
+    const toolRequest = await this.toolRequestRepository.findOneById(command.getId());
+    if (!toolRequest) {
+      throw new EntityNotFoundException(`ToolRequest with id: ${command.getId()} not found`);
     }
 
-    const educationalElement = await this.educationalElementRepository.findOneById(command.getEducationalElementId());
+    const tool = await this.toolRepository.findOneById(command.getToolId());
 
-    if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getEducationalElementId()} not found`);
+    if (!tool) {
+      throw new EntityNotFoundException(`Tool with id: ${command.getToolId()} not found`);
     }
 
     const area = await this.areaRepository.findOneById(command.getAreaId());
@@ -46,16 +46,14 @@ export default class UpdateToolRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
-    elementRequest.setStatus(command.getStatus());
-    elementRequest.getArea().getId() !== command.getAreaId() ? elementRequest.setArea(area) : null;
-    elementRequest.getElement().getId() !== command.getEducationalElementId()
-      ? elementRequest.setElement(educationalElement)
-      : null;
+    toolRequest.setStatus(command.getStatus());
+    toolRequest.getArea().getId() !== command.getAreaId() ? toolRequest.setArea(area) : null;
+    toolRequest.getTool().getId() !== command.getToolId() ? toolRequest.setTool(tool) : null;
 
     if (command.getStatus() === STATUS.RETURNED) {
-      await this.educationalElementService.updateQuantity(elementRequest.getQuantity(), educationalElement, 'return');
+      await this.toolService.updateQuantity(toolRequest.getQuantity(), tool, 'return');
     }
 
-    return await this.elementRequestRepository.persist(elementRequest);
+    return await this.toolRequestRepository.persist(toolRequest);
   }
 }

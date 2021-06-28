@@ -1,10 +1,10 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
-import EducationalElement from '../../../../Domain/Entities/EducationalElement';
+import Tool from '../../../../Domain/Entities/Tool';
 
 export default class GetAllToolPresenter implements IPresenter {
   private result: any;
 
-  public constructor(result: EducationalElement[]) {
+  public constructor(result: Tool[]) {
     this.result = result;
   }
 
@@ -13,17 +13,17 @@ export default class GetAllToolPresenter implements IPresenter {
   }
 
   public getData(): object {
-    const educationalElementResult: any[] = [];
+    const toolResult: any[] = [];
 
-    this.result.forEach((educationalElement: EducationalElement): void => {
-      educationalElementResult.push({
-        id: educationalElement.getId(),
-        name: educationalElement.getName(),
-        totalQuantity: educationalElement.getTotalQuantity(),
-        borrowQuantity: educationalElement.getBorrowQuantity(),
+    this.result.forEach((tool: Tool): void => {
+      toolResult.push({
+        id: tool.getId(),
+        name: tool.getName(),
+        totalQuantity: tool.getTotalQuantity(),
+        borrowQuantity: tool.getBorrowQuantity(),
       });
     });
 
-    return educationalElementResult;
+    return toolResult;
   }
 }

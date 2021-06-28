@@ -1,11 +1,11 @@
-import ElementRequest from '../Entities/ElementRequest';
+import ToolRequest from '../Entities/ToolRequest';
 
-export default interface IElementRequestRepository {
-  findAll(): Promise<ElementRequest[]>;
-  findAllPaginated(initialIndex: number, limit: number): Promise<ElementRequest[]>;
+export default interface IToolRequestRepository {
+  findAll(): Promise<ToolRequest[]>;
+  findAllPaginated(initialIndex: number, limit: number): Promise<ToolRequest[]>;
   count(): Promise<number>;
-  findOneById(id: number): Promise<ElementRequest>;
-  findOneByElementRequestName(name: string): Promise<ElementRequest>;
-  persist(elementRequest: ElementRequest): Promise<ElementRequest>;
-  destroy(elementRequest: ElementRequest): Promise<boolean>;
+  findOneById(id: number): Promise<ToolRequest>;
+  findOneByToolRequestName(name: string): Promise<ToolRequest>;
+  persist(toolRequest: ToolRequest): Promise<ToolRequest>;
+  destroy(toolRequest: ToolRequest): Promise<boolean>;
 }

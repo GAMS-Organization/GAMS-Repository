@@ -1,12 +1,12 @@
 import * as express from 'express';
 import DIContainer from '../Infrastructure/DI/di.config';
 
-import StoreEducationalElementAction from '../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
-import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
-import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementAction';
-//import ShowEducationalElementAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementAction';
-//import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
-//import ShowEducationalElementByNameAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementByNameAction';
+import StoreToolAction from '../API/Http/Actions/Tool/StoreToolAction';
+import UpdateToolAction from '../API/Http/Actions/Tool/UpdateToolAction';
+import IndexToolsAction from '../API/Http/Actions/Tool/IndexToolAction';
+//import ShowToolAction from '../API/Http/Actions/Tool/ShowToolAction';
+//import DestroyToolAction from '../API/Http/Actions/Tool/DestroyToolAction';
+//import ShowToolByNameAction from '../API/Http/Actions/Tool/ShowToolByNameAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
@@ -18,10 +18,8 @@ router.get(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const indexEducationalElementAction: IndexEducationalElementsAction = DIContainer.resolve<
-      IndexEducationalElementsAction
-    >(IndexEducationalElementsAction);
-    await indexEducationalElementAction.execute(request, response);
+    const indexToolAction: IndexToolsAction = DIContainer.resolve<IndexToolsAction>(IndexToolsAction);
+    await indexToolAction.execute(request, response);
   }),
 );
 
@@ -31,10 +29,8 @@ router.post(
     authMiddleware(req, res, next, ['admin', 'personal', 'user']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const storeEducationalElementAction: StoreEducationalElementAction = DIContainer.resolve<
-      StoreEducationalElementAction
-    >(StoreEducationalElementAction);
-    await storeEducationalElementAction.execute(request, response);
+    const storeToolAction: StoreToolAction = DIContainer.resolve<StoreToolAction>(StoreToolAction);
+    await storeToolAction.execute(request, response);
   }),
 );
 
@@ -44,10 +40,10 @@ router.post(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showEducationalElementAction: ShowEducationalElementAction = DIContainer.resolve<ShowEducationalElementAction>(
-//       ShowEducationalElementAction,
+//     const showToolAction: ShowToolAction = DIContainer.resolve<ShowToolAction>(
+//       ShowToolAction,
 //     );
-//     await showEducationalElementAction.execute(request, response);
+//     await showToolAction.execute(request, response);
 //   }),
 // );
 //
@@ -57,10 +53,8 @@ router.put(
     authMiddleware(req, res, next, ['admin', 'personal']);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-    const updateEducationalElementAction: UpdateEducationalElementAction = DIContainer.resolve<
-      UpdateEducationalElementAction
-    >(UpdateEducationalElementAction);
-    await updateEducationalElementAction.execute(request, response);
+    const updateToolAction: UpdateToolAction = DIContainer.resolve<UpdateToolAction>(UpdateToolAction);
+    await updateToolAction.execute(request, response);
   }),
 );
 //
@@ -70,10 +64,10 @@ router.put(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showEducationalElementByNameAction: ShowEducationalElementByNameAction = DIContainer.resolve<
-//       ShowEducationalElementByNameAction
-//     >(ShowEducationalElementByNameAction);
-//     await showEducationalElementByNameAction.execute(request, response);
+//     const showToolByNameAction: ShowToolByNameAction = DIContainer.resolve<
+//       ShowToolByNameAction
+//     >(ShowToolByNameAction);
+//     await showToolByNameAction.execute(request, response);
 //   }),
 // );
 //
@@ -83,10 +77,10 @@ router.put(
 //     authMiddleware(req, res, next, ['admin', 'personal']);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyEducationalElementAction: DestroyEducationalElementAction = DIContainer.resolve<
-//       DestroyEducationalElementAction
-//     >(DestroyEducationalElementAction);
-//     await destroyEducationalElementAction.execute(request, response);
+//     const destroyToolAction: DestroyToolAction = DIContainer.resolve<
+//       DestroyToolAction
+//     >(DestroyToolAction);
+//     await destroyToolAction.execute(request, response);
 //   }),
 // );
 

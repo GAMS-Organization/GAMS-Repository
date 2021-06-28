@@ -1,12 +1,12 @@
 /* eslint-disable new-cap */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import EducationalElement from './EducationalElement';
+import Tool from './Tool';
 import User from './User';
 import Area from './Area';
 
-@Entity('element_request')
+@Entity('tool_request')
 // eslint-disable-next-line require-jsdoc
-export default class ElementRequest {
+export default class ToolRequest {
   @PrimaryGeneratedColumn()
   public id: number;
   @Column()
@@ -15,22 +15,15 @@ export default class ElementRequest {
   public date: string;
   @Column()
   public quantity: number;
-  @ManyToOne(_type => EducationalElement, educationalElement => educationalElement.elementRequests)
-  public element: EducationalElement;
-  @ManyToOne(_type => User, user => user.elementRequests)
+  @ManyToOne(_type => Tool, tool => tool.toolRequests)
+  public tool: Tool;
+  @ManyToOne(_type => User, user => user.toolRequests)
   public user: User;
-  @ManyToOne(_type => Area, area => area.elementRequests)
+  @ManyToOne(_type => Area, area => area.toolRequests)
   public area: Area;
 
-  public constructor(
-    element: EducationalElement,
-    user: User,
-    status: string,
-    date: string,
-    area: Area,
-    quantity: number,
-  ) {
-    this.element = element;
+  public constructor(tool: Tool, user: User, status: string, date: string, area: Area, quantity: number) {
+    this.tool = tool;
     this.status = status;
     this.user = user;
     this.date = date;
@@ -42,8 +35,8 @@ export default class ElementRequest {
     return this.id;
   }
 
-  public getElement(): EducationalElement {
-    return this.element;
+  public getTool(): Tool {
+    return this.tool;
   }
 
   public getUser(): User {
@@ -74,7 +67,7 @@ export default class ElementRequest {
     this.area = area;
   }
 
-  public setElement(element: EducationalElement): void {
-    this.element = element;
+  public setTool(tool: Tool): void {
+    this.tool = tool;
   }
 }

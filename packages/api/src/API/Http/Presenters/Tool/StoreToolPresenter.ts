@@ -1,10 +1,10 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
-import EducationalElement from '../../../../Domain/Entities/EducationalElement';
+import Tool from '../../../../Domain/Entities/Tool';
 
 export default class StoreToolPresenter implements IPresenter {
-  private result: EducationalElement;
+  private result: Tool;
 
-  public constructor(result: EducationalElement) {
+  public constructor(result: Tool) {
     this.result = result;
   }
 

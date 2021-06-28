@@ -1,31 +1,29 @@
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
-import IElementRequestRepository from '../Interfaces/IElementRequestRepository';
+import IToolRequestRepository from '../Interfaces/IToolRequestRepository';
 
 @injectable()
-export default class ElementRequestService {
-  private elementRequestRepository: IElementRequestRepository;
+export default class ToolRequestService {
+  private toolRequestRepository: IToolRequestRepository;
 
-  public constructor(
-    @inject(INTERFACES.IElementRequestRepository) elementRequestRepository: IElementRequestRepository,
-  ) {
-    this.elementRequestRepository = elementRequestRepository;
+  public constructor(@inject(INTERFACES.IToolRequestRepository) toolRequestRepository: IToolRequestRepository) {
+    this.toolRequestRepository = toolRequestRepository;
   }
 
   public async returnAllPaginated(
     page: number = 1,
     itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
   ): Promise<PaginatedSuccessData> {
-    const elementRequestQuantity = await this.elementRequestRepository.count();
-    const elementRequests = await this.elementRequestRepository.findAllPaginated(
+    const toolRequestQuantity = await this.toolRequestRepository.count();
+    const toolRequests = await this.toolRequestRepository.findAllPaginated(
       itemsPerPage * page - itemsPerPage,
       itemsPerPage,
     );
     return {
-      data: elementRequests,
-      dataLength: elementRequests.length,
-      totalDataQuantity: elementRequestQuantity,
-      totalPages: Math.ceil(elementRequestQuantity / itemsPerPage),
+      data: toolRequests,
+      dataLength: toolRequests.length,
+      totalDataQuantity: toolRequestQuantity,
+      totalPages: Math.ceil(toolRequestQuantity / itemsPerPage),
     };
   }
 }

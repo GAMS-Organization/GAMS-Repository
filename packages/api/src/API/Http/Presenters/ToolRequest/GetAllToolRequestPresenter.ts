@@ -1,10 +1,10 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
-import ElementRequest from '../../../../Domain/Entities/ElementRequest';
+import ToolRequest from '../../../../Domain/Entities/ToolRequest';
 
 export default class GetAllToolRequestPresenter implements IPresenter {
   private result: any;
 
-  public constructor(result: ElementRequest[]) {
+  public constructor(result: ToolRequest[]) {
     this.result = result;
   }
 
@@ -13,28 +13,28 @@ export default class GetAllToolRequestPresenter implements IPresenter {
   }
 
   public getData(): object {
-    const elementRequestResult: any[] = [];
+    const toolRequestResult: any[] = [];
 
-    this.result.forEach((elementRequest: ElementRequest): void => {
-      elementRequestResult.push({
-        id: elementRequest.getId(),
-        educationalElement: elementRequest.getElement(),
+    this.result.forEach((toolRequest: ToolRequest): void => {
+      toolRequestResult.push({
+        id: toolRequest.getId(),
+        tool: toolRequest.getTool(),
         user: {
-          name: elementRequest.getUser().getName(),
-          surname: elementRequest.getUser().getSurname(),
-          id: elementRequest.getUser().getId(),
+          name: toolRequest.getUser().getName(),
+          surname: toolRequest.getUser().getSurname(),
+          id: toolRequest.getUser().getId(),
         },
-        date: elementRequest.getDate(),
+        date: toolRequest.getDate(),
         area: {
-          name: elementRequest.getArea().getName(),
-          id: elementRequest.getArea().getId(),
-          code: elementRequest.getArea().getCode(),
+          name: toolRequest.getArea().getName(),
+          id: toolRequest.getArea().getId(),
+          code: toolRequest.getArea().getCode(),
         },
-        status: elementRequest.getStatus(),
-        quantity: elementRequest.getQuantity(),
+        status: toolRequest.getStatus(),
+        quantity: toolRequest.getQuantity(),
       });
     });
 
-    return elementRequestResult;
+    return toolRequestResult;
   }
 }

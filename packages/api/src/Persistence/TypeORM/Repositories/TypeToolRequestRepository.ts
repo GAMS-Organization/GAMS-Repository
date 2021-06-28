@@ -1,43 +1,43 @@
-import IElementRequestRepository from '../../../Domain/Interfaces/IElementRequestRepository';
-import ElementRequest from '../../../Domain/Entities/ElementRequest';
+import IToolRequestRepository from '../../../Domain/Interfaces/IToolRequestRepository';
+import ToolRequest from '../../../Domain/Entities/ToolRequest';
 import { injectable } from 'inversify';
 import TypeRepository from './TypeRepository';
 
 @injectable()
-export default class TypeElementRequestRepository extends TypeRepository implements IElementRequestRepository {
-  public async findAll(): Promise<ElementRequest[]> {
-    return await this.repository(ElementRequest).find();
+export default class TypeToolRequestRepository extends TypeRepository implements IToolRequestRepository {
+  public async findAll(): Promise<ToolRequest[]> {
+    return await this.repository(ToolRequest).find();
   }
 
-  public async findAllPaginated(initialIndex: number, limit: number): Promise<ElementRequest[]> {
-    return await this.repository(ElementRequest).find({
+  public async findAllPaginated(initialIndex: number, limit: number): Promise<ToolRequest[]> {
+    return await this.repository(ToolRequest).find({
       skip: initialIndex,
       take: limit,
-      relations: ['area', 'element', 'user'],
+      relations: ['area', 'tool', 'user'],
     });
   }
 
-  public async findOneById(id: number): Promise<ElementRequest> {
-    return await this.repository(ElementRequest).findOne({
+  public async findOneById(id: number): Promise<ToolRequest> {
+    return await this.repository(ToolRequest).findOne({
       where: { id: id },
-      relations: ['area', 'element', 'user'],
+      relations: ['area', 'tool', 'user'],
     });
   }
 
   public async count(): Promise<number> {
-    return await this.repository(ElementRequest).count();
+    return await this.repository(ToolRequest).count();
   }
 
-  public async findOneByElementRequestName(name: string): Promise<ElementRequest> {
-    return await this.repository(ElementRequest).findOne({ where: { name: name } });
+  public async findOneByToolRequestName(name: string): Promise<ToolRequest> {
+    return await this.repository(ToolRequest).findOne({ where: { name: name } });
   }
 
-  public async persist(elementRequest: ElementRequest): Promise<ElementRequest> {
-    return await this.repository(ElementRequest).save(elementRequest);
+  public async persist(toolRequest: ToolRequest): Promise<ToolRequest> {
+    return await this.repository(ToolRequest).save(toolRequest);
   }
 
-  public async destroy(elementRequest: ElementRequest): Promise<boolean> {
-    const result = await this.repository(ElementRequest).delete(elementRequest.getId());
+  public async destroy(toolRequest: ToolRequest): Promise<boolean> {
+    const result = await this.repository(ToolRequest).delete(toolRequest.getId());
 
     return result && result.affected === 1;
   }

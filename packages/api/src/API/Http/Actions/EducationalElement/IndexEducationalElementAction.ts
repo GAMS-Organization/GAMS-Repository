@@ -8,28 +8,28 @@ import EducationalElementService from '../../../../Domain/Services/EducationalEl
 @injectable()
 // eslint-disable-next-line require-jsdoc
 export default class IndexEducationalElementAction {
-  private elementRequestService: EducationalElementService;
+  private educationalElementService: EducationalElementService;
 
-  public constructor(@inject(EducationalElementService) elementRequestService: EducationalElementService) {
-    this.elementRequestService = elementRequestService;
+  public constructor(@inject(EducationalElementService) educationalElementService: EducationalElementService) {
+    this.educationalElementService = educationalElementService;
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const elementRequestsData = await this.elementRequestService.returnAllPaginated(
+    const educationalElementsData = await this.educationalElementService.returnAllPaginated(
       request.query.page,
       request.query.items_per_page,
     );
 
-    const getAllPresenter = new GetAllEducationalElementPresenter(elementRequestsData.data);
+    const getAllPresenter = new GetAllEducationalElementPresenter(educationalElementsData.data);
 
     return response
       .status(HTTP_CODES.OK)
       .json(
         paginatedSuccess(
           getAllPresenter.getData(),
-          elementRequestsData.dataLength,
-          elementRequestsData.totalDataQuantity,
-          elementRequestsData.totalPages,
+          educationalElementsData.dataLength,
+          educationalElementsData.totalDataQuantity,
+          educationalElementsData.totalPages,
         ),
       );
   }

@@ -1,20 +1,20 @@
 export default class StoreToolRequestCommand {
-  private educationalElementId: number;
+  private toolId: number;
   private userId: number;
   private date: string;
   private areaId: number;
   private quantity: number;
 
-  public constructor(educationalElementId: number, userId: number, date: string, areaId: number, quantity: number) {
-    this.educationalElementId = educationalElementId;
+  public constructor(toolId: number, userId: number, date: string, areaId: number, quantity: number) {
+    this.toolId = toolId;
     this.userId = userId;
     this.date = date;
     this.areaId = areaId;
     this.quantity = quantity;
   }
 
-  public getEducationalElementId(): number {
-    return this.educationalElementId;
+  public getToolId(): number {
+    return this.toolId;
   }
 
   public getUserId(): number {

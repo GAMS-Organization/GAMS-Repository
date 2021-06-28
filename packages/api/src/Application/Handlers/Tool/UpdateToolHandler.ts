@@ -1,34 +1,30 @@
-import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
+import IToolRepository from '../../../Domain/Interfaces/IToolRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import EducationalElement from '../../../Domain/Entities/EducationalElement';
-import UpdateEducationalElementCommand from '../../Commands/EducationalElement/UpdateEducationalElementCommand';
+import Tool from '../../../Domain/Entities/Tool';
+import UpdateToolCommand from '../../Commands/Tool/UpdateToolCommand';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 
 @injectable()
-export default class UpdateEducationalElementHandler {
-  private educationalElementRepository: IEducationalElementRepository;
-  public constructor(
-    @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
-  ) {
-    this.educationalElementRepository = educationalElementRepository;
+export default class UpdateToolHandler {
+  private toolRepository: IToolRepository;
+  public constructor(@inject(INTERFACES.IToolRepository) toolRepository: IToolRepository) {
+    this.toolRepository = toolRepository;
   }
 
-  public async execute(command: UpdateEducationalElementCommand): Promise<EducationalElement> {
-    const educationalElement = await this.educationalElementRepository.findOneById(command.getId());
+  public async execute(command: UpdateToolCommand): Promise<Tool> {
+    const tool = await this.toolRepository.findOneById(command.getId());
 
-    if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getId()} not found`);
+    if (!tool) {
+      throw new EntityNotFoundException(`Tool with id: ${command.getId()} not found`);
     }
 
-    educationalElement.getName() !== command.getName() ? educationalElement.setName(command.getName()) : null;
-    educationalElement.getTotalQuantity() !== command.getTotalQuantity()
-      ? educationalElement.setTotalQuantity(command.getTotalQuantity())
-      : null;
-    educationalElement.getBorrowQuantity() !== command.getBorrowQuantity()
-      ? educationalElement.setBorrowQuantity(command.getBorrowQuantity())
+    tool.getName() !== command.getName() ? tool.setName(command.getName()) : null;
+    tool.getTotalQuantity() !== command.getTotalQuantity() ? tool.setTotalQuantity(command.getTotalQuantity()) : null;
+    tool.getBorrowQuantity() !== command.getBorrowQuantity()
+      ? tool.setBorrowQuantity(command.getBorrowQuantity())
       : null;
 
-    return await this.educationalElementRepository.persist(educationalElement);
+    return await this.toolRepository.persist(tool);
   }
 }

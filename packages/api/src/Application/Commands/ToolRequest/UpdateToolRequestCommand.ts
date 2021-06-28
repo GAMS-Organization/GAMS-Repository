@@ -1,12 +1,12 @@
 export default class UpdateToolRequestCommand {
   private id: number;
-  private educationalElementId: number;
+  private toolId: number;
   private status: string;
   private areaId: number;
 
-  public constructor(id: number, educationalElementId: number, status: string, areaId: number) {
+  public constructor(id: number, toolId: number, status: string, areaId: number) {
     this.id = id;
-    this.educationalElementId = educationalElementId;
+    this.toolId = toolId;
     this.status = status;
     this.areaId = areaId;
   }
@@ -15,8 +15,8 @@ export default class UpdateToolRequestCommand {
     return this.id;
   }
 
-  public getEducationalElementId(): number {
-    return this.educationalElementId;
+  public getToolId(): number {
+    return this.toolId;
   }
 
   public getStatus(): string {

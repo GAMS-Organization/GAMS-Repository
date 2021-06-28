@@ -1,24 +1,18 @@
-import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
+import IToolRepository from '../../../Domain/Interfaces/IToolRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import StoreEducationalElementCommand from '../../Commands/EducationalElement/StoreEducationalElementCommand';
-import EducationalElement from '../../../Domain/Entities/EducationalElement';
+import StoreToolCommand from '../../Commands/Tool/StoreToolCommand';
+import Tool from '../../../Domain/Entities/Tool';
 
 @injectable()
-export default class StoreEducationalElementHandler {
-  private educationalElementRepository: IEducationalElementRepository;
-  public constructor(
-    @inject(INTERFACES.IEducationalElementRepository) educationalElementRepository: IEducationalElementRepository,
-  ) {
-    this.educationalElementRepository = educationalElementRepository;
+export default class StoreToolHandler {
+  private toolRepository: IToolRepository;
+  public constructor(@inject(INTERFACES.IToolRepository) toolRepository: IToolRepository) {
+    this.toolRepository = toolRepository;
   }
 
-  public async execute(command: StoreEducationalElementCommand): Promise<EducationalElement> {
-    const educationalElement = new EducationalElement(
-      command.getName(),
-      command.getTotalQuantity(),
-      command.getBorrowQuantity(),
-    );
-    return await this.educationalElementRepository.persist(educationalElement);
+  public async execute(command: StoreToolCommand): Promise<Tool> {
+    const tool = new Tool(command.getName(), command.getTotalQuantity(), command.getBorrowQuantity());
+    return await this.toolRepository.persist(tool);
   }
 }

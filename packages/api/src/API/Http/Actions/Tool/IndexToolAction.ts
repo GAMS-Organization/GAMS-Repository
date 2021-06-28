@@ -1,35 +1,32 @@
 import { Request, Response } from 'express';
 import { paginatedSuccess } from '../../../../utils/customResponse';
 import { inject, injectable } from 'inversify';
-import GetAllEducationalElementPresenter from '../../Presenters/EducationalElement/GetAllEducationalElementPresenter';
+import GetAllToolPresenter from '../../Presenters/Tool/GetAllToolPresenter';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
-import EducationalElementService from '../../../../Domain/Services/EducationalElementService';
+import ToolService from '../../../../Domain/Services/ToolService';
 
 @injectable()
 // eslint-disable-next-line require-jsdoc
-export default class IndexEducationalElementAction {
-  private elementRequestService: EducationalElementService;
+export default class IndexToolAction {
+  private toolService: ToolService;
 
-  public constructor(@inject(EducationalElementService) elementRequestService: EducationalElementService) {
-    this.elementRequestService = elementRequestService;
+  public constructor(@inject(ToolService) toolService: ToolService) {
+    this.toolService = toolService;
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
-    const elementRequestsData = await this.elementRequestService.returnAllPaginated(
-      request.query.page,
-      request.query.items_per_page,
-    );
+    const toolsData = await this.toolService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
-    const getAllPresenter = new GetAllEducationalElementPresenter(elementRequestsData.data);
+    const getAllPresenter = new GetAllToolPresenter(toolsData.data);
 
     return response
       .status(HTTP_CODES.OK)
       .json(
         paginatedSuccess(
           getAllPresenter.getData(),
-          elementRequestsData.dataLength,
-          elementRequestsData.totalDataQuantity,
-          elementRequestsData.totalPages,
+          toolsData.dataLength,
+          toolsData.totalDataQuantity,
+          toolsData.totalPages,
         ),
       );
   }

@@ -1,7 +1,7 @@
 import * as Joi from 'joi';
 import * as customErrorMessages from '../Utils/BaseErrorSchema';
 
-export const storeEducationalElementSchema = {
+export const storeToolSchema = {
   name: Joi.string()
     .min(3)
     .max(100)
@@ -23,7 +23,7 @@ export const storeEducationalElementSchema = {
     }),
 };
 
-export const updateEducationalElementSchema = {
+export const updateToolSchema = {
   name: Joi.string()
     .min(3)
     .max(100)

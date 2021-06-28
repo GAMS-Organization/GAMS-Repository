@@ -1,26 +1,26 @@
 import { Request } from 'express';
 import { injectable } from 'inversify';
-import UpdateEducationalElementCommand from '../../../../Application/Commands/EducationalElement/UpdateEducationalElementCommand';
+import UpdateToolCommand from '../../../../Application/Commands/Tool/UpdateToolCommand';
 import Validator from '../../Validations/Utils/Validator';
-import { updateEducationalElementSchema } from '../../Validations/Schemas/EducationalElementSchema';
+import { updateToolSchema } from '../../Validations/Schemas/ToolSchema';
 import ValidationException from '../../../../Application/Exceptions/ValidationException';
 
 @injectable()
-export default class UpdateEducationalElementAdapter {
+export default class UpdateToolAdapter {
   private validator: Validator;
 
   public constructor() {
     this.validator = new Validator();
   }
 
-  public from(request: Request): UpdateEducationalElementCommand {
-    const error = this.validator.validate(request.body, updateEducationalElementSchema);
+  public from(request: Request): UpdateToolCommand {
+    const error = this.validator.validate(request.body, updateToolSchema);
 
     if (error) {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new UpdateEducationalElementCommand(
+    return new UpdateToolCommand(
       parseInt(request.params.id),
       request.body.name,
       request.body.totalQuantity,

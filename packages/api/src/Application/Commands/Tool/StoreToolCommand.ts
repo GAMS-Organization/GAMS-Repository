@@ -1,4 +1,4 @@
-export default class StoreEducationalElementCommand {
+export default class StoreToolCommand {
   private name: string;
   private totalQuantity: number;
   private borrowQuantity: number;
