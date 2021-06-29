@@ -139,7 +139,11 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Take"
-                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'tomada'}
+                        disabled={
+                          prop.visibleData[4] === 'cancelada' ||
+                          prop.visibleData[4] === 'tomada' ||
+                          prop.visibleData[4] === 'asignada'
+                        }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
                       >
@@ -154,7 +158,11 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Assign"
-                        disabled={prop.visibleData[4] === 'cancelada'}
+                        disabled={
+                          prop.visibleData[4] === 'cancelada' ||
+                          prop.visibleData[4] === 'asignada' ||
+                          prop.visibleData[4] === 'tomada'
+                        }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickAssign(prop)}
                       >

@@ -77,6 +77,17 @@ class workOrder {
     }
     return workOrderAdapter.take(takeResponse);
   }
+
+  async assign(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let assignResponse;
+    try {
+      assignResponse = await Api.put(`workOrder/assign/${body.id}`, body);
+    } catch (err) {
+      assignResponse = err;
+    }
+    return workOrderAdapter.assign(assignResponse);
+  }
 }
 
 export default new workOrder();

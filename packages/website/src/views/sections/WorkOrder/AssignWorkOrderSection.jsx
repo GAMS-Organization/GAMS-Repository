@@ -37,12 +37,13 @@ class AssignWorkOrderSection extends React.Component {
     this.listWorkers();
   }
 
-  /*handleClose = () => {
+  handleClose = () => {
+    this.props.close();
     this.setState({ open: false, selectedWorkers: [] });
-  };*/
+  };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.props !== nextProps || this.state.notification !== nextState.notification;
+    return this.props !== nextProps || this.state !== nextState;
   }
 
   closeNotification = () => {
@@ -68,7 +69,7 @@ class AssignWorkOrderSection extends React.Component {
   assignWorkOrder = async e => {
     e.preventDefault();
 
-    const fields = ['startDate'];
+    const fields = ['startDate', 'workers'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -76,8 +77,14 @@ class AssignWorkOrderSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.id = this.props.workOrder.id;
-    const response = await serviceWorkOrder.take(formValues);
+    const assignData = {
+      id: this.props.workOrder.id,
+      startDate: formValues.startDate,
+      workersId: this.state.selectedWorkers,
+    };
+
+    const response = await serviceWorkOrder.assign(assignData);
+    //this.handleClose();
     if (response.type === 'ASSIGN_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
@@ -114,7 +121,7 @@ class AssignWorkOrderSection extends React.Component {
           }}
           open={open}
           TransitionComponent={Transition}
-          onClose={close}
+          onClose={this.handleClose}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -196,7 +203,7 @@ class AssignWorkOrderSection extends React.Component {
                 </GridItem>
                 <GridItem justify={'center'} xs={8} sm={5} md={4}>
                   <CardFooter>
-                    <Button color="danger" simple onClick={() => close()}>
+                    <Button type="reset" color="danger" simple onClick={this.handleClose}>
                       No
                     </Button>
                   </CardFooter>
