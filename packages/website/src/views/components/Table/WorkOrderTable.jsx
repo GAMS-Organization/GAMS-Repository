@@ -14,13 +14,14 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-// core components
+import AssignmentIcon from '@material-ui/icons/Assignment'; // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
 import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
 import AssignWorkOrderSection from '../../sections/WorkOrder/AssignWorkOrderSection';
+import CompleteWorkOrderSection from '../../sections/WorkOrder/CompleteWorkOrderSection';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class WorkOrderTable extends React.Component {
       cancelModal: false,
       takeModal: false,
       assignModal: false,
+      completeModal: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -51,8 +53,12 @@ class WorkOrderTable extends React.Component {
     this.setState({ workOrder: { id: prop.id }, assignModal: true });
   };
 
+  handleClickComplete = async prop => {
+    this.setState({ workOrder: { id: prop.id }, completeModal: true });
+  };
+
   closeModal = () => {
-    this.setState({ cancelModal: false, takeModal: false, assignModal: false });
+    this.setState({ cancelModal: false, takeModal: false, assignModal: false, completeModal: false });
   };
 
   render() {
@@ -90,6 +96,12 @@ class WorkOrderTable extends React.Component {
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
+        {/*<CompleteWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.completeModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />*/}
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -152,7 +164,7 @@ class WorkOrderTable extends React.Component {
                     </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
-                      title="Assign"
+                      title="Asignar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
@@ -167,6 +179,21 @@ class WorkOrderTable extends React.Component {
                         onClick={() => this.handleClickAssign(prop)}
                       >
                         <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Completar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Complete"
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'completada'}
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickComplete(prop)}
+                      >
+                        <AssignmentIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
