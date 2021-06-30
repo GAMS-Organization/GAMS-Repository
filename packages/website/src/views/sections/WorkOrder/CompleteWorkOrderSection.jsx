@@ -34,7 +34,6 @@ class CompleteWorkOrderSection extends React.Component {
       selectedWorkers: [],
       workers: [],
     };
-    this.listWorkers();
   }
 
   handleClose = () => {
@@ -50,23 +49,7 @@ class CompleteWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  listWorkers = async (page = 1, itemsPerPage = 15) => {
-    const response = await serviceUser.list(page, itemsPerPage);
-    let workers = [];
-    for (const user of response.data.items) {
-      if (user.roles[0] !== 'user') {
-        let workersData = { id: user.id, name: user.name, surname: user.surname };
-        workers.push(workersData);
-      }
-    }
-    this.setState({ workers });
-  };
-
-  handleChangeWorkers = event => {
-    this.setState({ selectedWorkers: event.target.value });
-  };
-
-  assignWorkOrder = async e => {
+  /*completeWorkOrder = async e => {
     e.preventDefault();
 
     const fields = ['startDate', 'workers'];
@@ -84,7 +67,7 @@ class CompleteWorkOrderSection extends React.Component {
     };
 
     const response = await serviceWorkOrder.assign(assignData);
-    //this.handleClose();
+    this.handleClose();
     if (response.type === 'ASSIGN_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
@@ -92,7 +75,7 @@ class CompleteWorkOrderSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, workOrder, Transition, open, close } = this.props;
