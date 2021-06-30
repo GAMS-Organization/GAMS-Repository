@@ -90,7 +90,7 @@ class CompleteWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Orden de trabajo tomada correctamente'
+              : 'Orden de trabajo completada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -109,16 +109,16 @@ class CompleteWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Asignar Orden de Trabajo</h4>
+            <h4 className={classes.modalTitle}>Completar Orden de Trabajo</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.assignWorkOrder}>
+            <form onSubmit={this.completeWorkOrder}>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText=""
-                      id="startDate"
+                      id="realizationDate"
                       value={this.state.dateNow}
                       formControlProps={{
                         fullWidth: true,
@@ -129,50 +129,6 @@ class CompleteWorkOrderSection extends React.Component {
                         name: 'date',
                       }}
                     />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <FormControl fullWidth className={classes.selectFormControl}>
-                      <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
-                        Responsables
-                      </InputLabel>
-                      <Select
-                        multiple
-                        value={this.state.selectedWorkers}
-                        onChange={this.handleChangeWorkers}
-                        MenuProps={{
-                          className: classes.selectMenu,
-                          classes: { paper: classes.selectPaper },
-                        }}
-                        classes={{
-                          select: classes.select,
-                        }}
-                        inputProps={{
-                          name: 'workers',
-                          id: 'workers',
-                        }}
-                      >
-                        <MenuItem
-                          disabled
-                          classes={{
-                            root: classes.selectMenuItem,
-                          }}
-                        >
-                          Responsables
-                        </MenuItem>
-                        {this.state.workers.map(worker => (
-                          <MenuItem
-                            key={worker.id}
-                            value={worker.id}
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelectedMultiple,
-                            }}
-                          >
-                            {worker.name + ' ' + worker.surname}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
                   </GridItem>
                 </GridContainer>
               </CardBody>
