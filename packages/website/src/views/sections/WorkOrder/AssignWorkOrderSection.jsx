@@ -84,7 +84,7 @@ class AssignWorkOrderSection extends React.Component {
     };
 
     const response = await serviceWorkOrder.assign(assignData);
-    //this.handleClose();
+    this.handleClose();
     if (response.type === 'ASSIGN_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
