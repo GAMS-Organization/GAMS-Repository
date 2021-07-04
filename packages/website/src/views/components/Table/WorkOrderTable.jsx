@@ -96,12 +96,12 @@ class WorkOrderTable extends React.Component {
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
-        {/*<CompleteWorkOrderSection
+        <CompleteWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.completeModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
-        />*/}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

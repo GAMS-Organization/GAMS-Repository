@@ -22,7 +22,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import serviceUser from '../../../services/api/user';
+import serviceProducts from '../../../services/api/products';
 
 class CompleteWorkOrderSection extends React.Component {
   constructor(props) {
@@ -31,9 +31,10 @@ class CompleteWorkOrderSection extends React.Component {
       workOrder: {},
       errors: {},
       notification: false,
-      selectedWorkers: [],
-      workers: [],
+      selectedProducts: [],
+      products: [],
     };
+    this.listProducts();
   }
 
   handleClose = () => {
@@ -47,6 +48,21 @@ class CompleteWorkOrderSection extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
+  };
+
+  listProducts = async (page = 1, itemsPerPage = 150) => {
+    const response = await serviceProducts.list(page, itemsPerPage);
+    console.log(response);
+    let products = [];
+    for (const product of response.data.items) {
+      let productsData = { id: product.id, name: product.name };
+      products.push(productsData);
+    }
+    this.setState({ products });
+  };
+
+  handleChangeProducts = event => {
+    this.setState({ selectedProducts: event.target.value });
   };
 
   /*completeWorkOrder = async e => {
@@ -129,6 +145,65 @@ class CompleteWorkOrderSection extends React.Component {
                         name: 'date',
                       }}
                     />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <CustomInput
+                      labelText="Comentarios"
+                      id="taskDescription"
+                      error={errors.razon}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        required: true,
+                        defaultValue: '',
+                        name: 'taskDescription',
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <FormControl fullWidth className={classes.selectFormControl}>
+                      <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
+                        Productos
+                      </InputLabel>
+                      <Select
+                        multiple
+                        value={this.state.selectedProducts}
+                        onChange={this.handleChangeProducts}
+                        MenuProps={{
+                          className: classes.selectMenu,
+                          classes: { paper: classes.selectPaper },
+                        }}
+                        classes={{
+                          select: classes.select,
+                        }}
+                        inputProps={{
+                          name: 'products',
+                          id: 'products',
+                        }}
+                      >
+                        <MenuItem
+                          disabled
+                          classes={{
+                            root: classes.selectMenuItem,
+                          }}
+                        >
+                          Productos
+                        </MenuItem>
+                        {this.state.products.map(product => (
+                          <MenuItem
+                            key={product.id}
+                            value={product.id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelectedMultiple,
+                            }}
+                          >
+                            {product.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </GridItem>
                 </GridContainer>
               </CardBody>
