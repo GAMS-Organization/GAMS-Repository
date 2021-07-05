@@ -88,6 +88,18 @@ class workOrder {
     }
     return workOrderAdapter.assign(assignResponse);
   }
+
+  async complete(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let completeResponse;
+    try {
+      completeResponse = await Api.post(`workOrder/complete/${body.id}`, body);
+      console.log(completeResponse);
+    } catch (err) {
+      completeResponse = err;
+    }
+    return workOrderAdapter.complete(completeResponse);
+  }
 }
 
 export default new workOrder();

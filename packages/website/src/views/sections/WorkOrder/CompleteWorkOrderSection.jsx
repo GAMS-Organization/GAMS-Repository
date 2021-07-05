@@ -23,6 +23,9 @@ import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceProducts from '../../../services/api/products';
+import MaterialTable from 'material-table';
+import serviceProduct from '../../../services/api/products';
+import serviceDeparture from '../../../services/api/departureConsumptionStock';
 
 class CompleteWorkOrderSection extends React.Component {
   constructor(props) {
@@ -31,10 +34,11 @@ class CompleteWorkOrderSection extends React.Component {
       workOrder: {},
       errors: {},
       notification: false,
-      selectedProducts: [],
       products: [],
+      columns: [],
+      data: [],
     };
-    this.listProducts();
+    //this.listProducts();
   }
 
   handleClose = () => {
@@ -50,19 +54,54 @@ class CompleteWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  listProducts = async (page = 1, itemsPerPage = 150) => {
-    const response = await serviceProducts.list(page, itemsPerPage);
-    console.log(response);
-    let products = [];
+  async componentWillMount() {
+    const response = await serviceProduct.list(1, 500);
+    let dataProduct = {};
     for (const product of response.data.items) {
-      let productsData = { id: product.id, name: product.name };
-      products.push(productsData);
+      dataProduct[product.id] = product.name;
     }
-    this.setState({ products });
-  };
 
-  handleChangeProducts = event => {
-    this.setState({ selectedProducts: event.target.value });
+    this.setState({
+      columns: [{ title: 'Producto', field: 'product', lookup: dataProduct }, { title: 'Cantidad', field: 'quantity' }],
+    });
+  }
+
+  completeWorkOrder = async e => {
+    e.preventDefault();
+
+    const products = [];
+    const quantities = [];
+    for (const consumption of this.state.data) {
+      products.push(parseInt(consumption.product));
+      quantities.push(parseInt(consumption.quantity));
+    }
+
+    const formElements = e.target.elements;
+
+    const realizationDate = formElements.namedItem('realizationDate').value;
+    const taskDescription = formElements.namedItem('taskDescription').value;
+
+    const request = {
+      id: this.props.workOrder.id,
+      realizationDate: realizationDate,
+      taskDescription: taskDescription,
+      productId: products,
+      quantities: quantities,
+    };
+
+    if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
+      this.setState({
+        notification: true,
+        errors: { code: 422, errors: 'No se puedo completar la orden de trabajo. Campos incompletos' },
+      });
+    } else {
+      const response = await serviceWorkOrder.complete(request);
+      if (response.type === 'COMPLETED_SUCCESFUL') {
+        this.setState({ notification: true });
+      } else {
+        this.setState({ notification: true, errors: response.error });
+      }
+    }
   };
 
   /*completeWorkOrder = async e => {
@@ -132,6 +171,65 @@ class CompleteWorkOrderSection extends React.Component {
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
+                    <MaterialTable
+                      title="Agregue los productos utilizados"
+                      columns={this.state.columns}
+                      data={this.state.data}
+                      options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
+                      localization={{
+                        header: { actions: 'Acciones' },
+                        body: {
+                          addTooltip: 'Nuevo',
+                          deleteTooltip: 'Eliminar',
+                          editTooltip: 'Editar',
+                          emptyDataSourceMessage: 'Ningun producto añadido',
+                          editRow: {
+                            saveTooltip: 'Guardar',
+                            cancelTooltip: 'Cancelar',
+                            deleteText: '¿Estás seguro de querer eliminar este registro?',
+                          },
+                        },
+                      }}
+                      editable={{
+                        onRowAdd: newData =>
+                          new Promise(resolve => {
+                            setTimeout(() => {
+                              resolve();
+                              this.setState(prevState => {
+                                const data = [...prevState.data];
+                                data.push(newData);
+                                return { ...prevState, data };
+                              });
+                            }, 600);
+                          }),
+                        onRowUpdate: (newData, oldData) =>
+                          new Promise(resolve => {
+                            setTimeout(() => {
+                              resolve();
+                              if (oldData) {
+                                this.setState(prevState => {
+                                  const data = [...prevState.data];
+                                  data[data.indexOf(oldData)] = newData;
+                                  return { ...prevState, data };
+                                });
+                              }
+                            }, 600);
+                          }),
+                        onRowDelete: oldData =>
+                          new Promise(resolve => {
+                            setTimeout(() => {
+                              resolve();
+                              this.setState(prevState => {
+                                const data = [...prevState.data];
+                                data.splice(data.indexOf(oldData), 1);
+                                return { ...prevState, data };
+                              });
+                            }, 600);
+                          }),
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText=""
                       id="realizationDate"
@@ -161,7 +259,7 @@ class CompleteWorkOrderSection extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={12}>
+                  {/*<GridItem xs={12} sm={12} md={12}>
                     <FormControl fullWidth className={classes.selectFormControl}>
                       <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
                         Productos
@@ -204,7 +302,7 @@ class CompleteWorkOrderSection extends React.Component {
                         ))}
                       </Select>
                     </FormControl>
-                  </GridItem>
+                  </GridItem>*/}
                 </GridContainer>
               </CardBody>
               <GridContainer>
