@@ -139,6 +139,25 @@ class workOrderAdapter {
       };
     }
   }
+
+  assign(assignResponse) {
+    let { status, data } = assignResponse;
+    if (!isError(status)) {
+      return {
+        type: 'ASSIGN_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'ASSIGN_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
 }
 
 export default new workOrderAdapter();
