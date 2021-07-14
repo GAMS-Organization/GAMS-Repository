@@ -56,6 +56,7 @@ class CompleteWorkOrderSection extends React.Component {
 
   async componentWillMount() {
     const response = await serviceProduct.list(1, 500);
+    console.log(response);
     let dataProduct = {};
     for (const product of response.data.items) {
       dataProduct[product.id] = product.name;
@@ -85,10 +86,9 @@ class CompleteWorkOrderSection extends React.Component {
       id: this.props.workOrder.id,
       realizationDate: realizationDate,
       taskDescription: taskDescription,
-      productId: products,
+      productsId: products,
       quantities: quantities,
     };
-
     if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
       this.setState({
         notification: true,
@@ -96,7 +96,8 @@ class CompleteWorkOrderSection extends React.Component {
       });
     } else {
       const response = await serviceWorkOrder.complete(request);
-      if (response.type === 'COMPLETED_SUCCESFUL') {
+      console.log(response);
+      if (response.type === 'COMPLETED_SUCCESSFUL') {
         this.setState({ notification: true });
       } else {
         this.setState({ notification: true, errors: response.error });
@@ -259,50 +260,6 @@ class CompleteWorkOrderSection extends React.Component {
                       }}
                     />
                   </GridItem>
-                  {/*<GridItem xs={12} sm={12} md={12}>
-                    <FormControl fullWidth className={classes.selectFormControl}>
-                      <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
-                        Productos
-                      </InputLabel>
-                      <Select
-                        multiple
-                        value={this.state.selectedProducts}
-                        onChange={this.handleChangeProducts}
-                        MenuProps={{
-                          className: classes.selectMenu,
-                          classes: { paper: classes.selectPaper },
-                        }}
-                        classes={{
-                          select: classes.select,
-                        }}
-                        inputProps={{
-                          name: 'products',
-                          id: 'products',
-                        }}
-                      >
-                        <MenuItem
-                          disabled
-                          classes={{
-                            root: classes.selectMenuItem,
-                          }}
-                        >
-                          Productos
-                        </MenuItem>
-                        {this.state.products.map(product => (
-                          <MenuItem
-                            key={product.id}
-                            value={product.id}
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelectedMultiple,
-                            }}
-                          >
-                            {product.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </GridItem>*/}
                 </GridContainer>
               </CardBody>
               <GridContainer>

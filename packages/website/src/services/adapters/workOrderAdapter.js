@@ -161,6 +161,7 @@ class workOrderAdapter {
 
   complete(completeResponse) {
     let { status, data } = completeResponse;
+    console.log(completeResponse);
     if (!isError(status)) {
       return {
         type: 'COMPLETED_SUCCESSFUL',
