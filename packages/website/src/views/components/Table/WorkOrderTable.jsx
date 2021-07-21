@@ -14,7 +14,10 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import AssignmentIcon from '@material-ui/icons/Assignment'; // core components
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import Visibility from '@material-ui/icons/Visibility';
+
+// core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
@@ -22,6 +25,7 @@ import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSect
 import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
 import AssignWorkOrderSection from '../../sections/WorkOrder/AssignWorkOrderSection';
 import CompleteWorkOrderSection from '../../sections/WorkOrder/CompleteWorkOrderSection';
+import DetailWorkOrderSection from '../../sections/WorkOrder/DetailWorkOrderSection';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {
@@ -31,6 +35,7 @@ class WorkOrderTable extends React.Component {
       takeModal: false,
       assignModal: false,
       completeModal: false,
+      detailModal: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -40,6 +45,10 @@ class WorkOrderTable extends React.Component {
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };
+
+  /*handleClickDetail = async prop => {
+    this.setState({ workOrder: { id: prop.id }, detailModal: true });
+  };*/
 
   handleClickCancel = async prop => {
     this.setState({ workOrder: { id: prop.id }, cancelModal: true });
@@ -78,6 +87,12 @@ class WorkOrderTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        {/*<DetailWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.detailModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />*/}
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.cancelModal}
@@ -128,6 +143,20 @@ class WorkOrderTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Detalles"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Details"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickCancel(prop)}
+                      >
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
                       title="Cancelar"
