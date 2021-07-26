@@ -46,9 +46,9 @@ class WorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*handleClickDetail = async prop => {
+  handleClickDetail = async prop => {
     this.setState({ workOrder: { id: prop.id }, detailModal: true });
-  };*/
+  };
 
   handleClickCancel = async prop => {
     this.setState({ workOrder: { id: prop.id }, cancelModal: true });
@@ -87,12 +87,12 @@ class WorkOrderTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<DetailWorkOrderSection
+        <DetailWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.detailModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
-        />*/}
+        />
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.cancelModal}
@@ -152,7 +152,7 @@ class WorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Details"
                         className={classes.tableActionButton}
-                        onClick={() => this.handleClickCancel(prop)}
+                        onClick={() => this.handleClickDetail(prop)}
                       >
                         <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

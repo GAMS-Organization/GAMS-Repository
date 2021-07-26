@@ -56,7 +56,6 @@ class CompleteWorkOrderSection extends React.Component {
 
   async componentWillMount() {
     const response = await serviceProduct.list(1, 500);
-    console.log(response);
     let dataProduct = {};
     for (const product of response.data.items) {
       dataProduct[product.id] = product.name;
