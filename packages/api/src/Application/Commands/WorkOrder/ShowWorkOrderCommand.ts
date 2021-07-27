@@ -1,4 +1,4 @@
-export default class ShowSectorCommand {
+export default class ShowWorkOrderCommand {
   private id: number;
 
   public constructor(id: number) {

@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
 // import { success } from '../../../../utils/customResponse';
-import ShowSectorAdapter from '../../Adapters/Sector/ShowSectorAdapter';
-import ShowSectorHandler from '../../../../Application/Handlers/Sector/ShowSectorHandler';
-import GetSectorPresenter from '../../Presenters/Sector/GetSectorPresenter';
+import ShowWorkOrderAdapter from '../../Adapters/WorkOrder/ShowWorkOrderAdapter';
+import ShowWorkOrderHandler from '../../../../Application/Handlers/WorkOrder/ShowWorkOrderHandler';
+import GetWorkOrderPresenter from '../../Presenters/WorkOrder/GetWorkOrderPresenter';
 import { injectable } from 'inversify';
 import { HTTP_CODES } from '../../Enums/HttpStatuses';
 import { success } from '../../../../utils/customResponse';
 
 @injectable()
-export default class ShowSectorAction {
-  private adapter: ShowSectorAdapter;
-  private handler: ShowSectorHandler;
+export default class ShowWorkOrderAction {
+  private adapter: ShowWorkOrderAdapter;
+  private handler: ShowWorkOrderHandler;
 
-  public constructor(adapter: ShowSectorAdapter, handler: ShowSectorHandler) {
+  public constructor(adapter: ShowWorkOrderAdapter, handler: ShowWorkOrderHandler) {
     this.adapter = adapter;
     this.handler = handler;
   }
@@ -22,11 +22,11 @@ export default class ShowSectorAction {
 
     const result = await this.handler.execute(command);
 
-    const presenter = new GetSectorPresenter(result);
+    const presenter = new GetWorkOrderPresenter(result);
 
     // @ts-ignore
     return response
       .status(HTTP_CODES.OK)
-      .json(success(presenter.getData(), 'ShowSectorAction: Sector has been retrieved'));
+      .json(success(presenter.getData(), 'ShowWorkOrderAction: Work order has been retrieved'));
   }
 }

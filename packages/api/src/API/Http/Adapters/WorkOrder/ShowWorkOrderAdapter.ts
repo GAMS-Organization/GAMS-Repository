@@ -1,21 +1,21 @@
-import ShowSectorCommand from '../../../../Application/Commands/Sector/ShowSectorCommand';
+import ShowWorkOrderCommand from '../../../../Application/Commands/WorkOrder/ShowWorkOrderCommand';
 import { Request } from 'express';
 import { injectable } from 'inversify';
 import ValidationException from '../../../../Application/Exceptions/ValidationException';
 
 @injectable()
-export default class ShowSectorAdapter {
-  public from(request: Request): ShowSectorCommand {
-    const sectorId = parseInt(request.params.id);
+export default class ShowWorkOrderAdapter {
+  public from(request: Request): ShowWorkOrderCommand {
+    const workOrderId = parseInt(request.params.id);
 
-    if (!sectorId) {
-      throw new ValidationException('Sector id are required');
+    if (!workOrderId) {
+      throw new ValidationException('Work order id are required');
     }
 
-    if (sectorId < 1) {
-      throw new ValidationException('Sector id is not valid');
+    if (workOrderId < 1) {
+      throw new ValidationException('Work order id is not valid');
     }
 
-    return new ShowSectorCommand(sectorId);
+    return new ShowWorkOrderCommand(workOrderId);
   }
 }

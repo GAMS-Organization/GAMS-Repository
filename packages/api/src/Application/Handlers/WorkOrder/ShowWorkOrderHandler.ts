@@ -1,23 +1,23 @@
-import ISectorRepository from '../../../Domain/Interfaces/ISectorRepository';
+import IWorkOrderRepository from '../../../Domain/Interfaces/IWorkOrderRepository';
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../../Infrastructure/DI/interfaces.types';
-import ShowSectorCommand from '../../Commands/Sector/ShowSectorCommand';
-import Sector from '../../../Domain/Entities/Sector';
+import ShowWorkOrderCommand from '../../Commands/WorkOrder/ShowWorkOrderCommand';
+import WorkOrder from '../../../Domain/Entities/WorkOrder';
 import EntityNotFoundException from '../../Exceptions/EntityNotFoundException';
 
 @injectable()
-export default class ShowUserHandler {
-  private sectorRepository: ISectorRepository;
+export default class ShowWorkOrderHandler {
+  private workOrderRepository: IWorkOrderRepository;
 
-  public constructor(@inject(INTERFACES.ISectorRepository) sectorRepository: ISectorRepository) {
-    this.sectorRepository = sectorRepository;
+  public constructor(@inject(INTERFACES.IWorkOrderRepository) workOrderRepository: IWorkOrderRepository) {
+    this.workOrderRepository = workOrderRepository;
   }
 
-  public async execute(command: ShowSectorCommand): Promise<Sector> {
-    const sector = await this.sectorRepository.findOneById(command.getId());
-    if (!sector) {
-      throw new EntityNotFoundException(`Sector with id: ${command.getId()} not found`);
+  public async execute(command: ShowWorkOrderCommand): Promise<WorkOrder> {
+    const workOrder = await this.workOrderRepository.findOneById(command.getId());
+    if (!workOrder) {
+      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
     }
-    return sector;
+    return workOrder;
   }
 }
