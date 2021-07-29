@@ -26,6 +26,7 @@ import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection'
 import AssignWorkOrderSection from '../../sections/WorkOrder/AssignWorkOrderSection';
 import CompleteWorkOrderSection from '../../sections/WorkOrder/CompleteWorkOrderSection';
 import DetailWorkOrderSection from '../../sections/WorkOrder/DetailWorkOrderSection';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {
@@ -46,8 +47,19 @@ class WorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  /*handleClickSeeDetails = async prop => {
+    const departureDetails = await serviceWorkOrder.getById(prop.id);
+    this.setState({
+      departure: departureDetails.data.data,
+    });
+    this.child.showModal();
+  };*/
+
   handleClickDetail = async prop => {
-    this.setState({ workOrder: { id: prop.id }, detailModal: true });
+    const workOrderDetails = await serviceWorkOrder.getById(prop.id);
+    console.log(workOrderDetails);
+    this.setState({ workOrder: { workOrderDetails }, detailModal: true });
+    //this.setState({ workOrder: { id: prop.id }, detailModal: true });
   };
 
   handleClickCancel = async prop => {

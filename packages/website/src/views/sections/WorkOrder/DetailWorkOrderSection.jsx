@@ -17,6 +17,7 @@ import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle'
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import PropTypes from 'prop-types';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 class DetailWorkOrderSection extends React.Component {
   constructor(props) {

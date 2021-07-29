@@ -101,6 +101,17 @@ class workOrder {
     console.log(completeResponse);
     return workOrderAdapter.complete(completeResponse);
   }
+
+  async show(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let completeResponse;
+    try {
+      completeResponse = await Api.get(`workOrder/${body.id}`);
+    } catch (err) {
+      completeResponse = err;
+    }
+    return workOrderAdapter.show(completeResponse);
+  }
 }
 
 export default new workOrder();
