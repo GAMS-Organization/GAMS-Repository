@@ -1,5 +1,6 @@
 import Api from './api';
 import workOrderAdapter from '../adapters/workOrderAdapter';
+import departureConsumptionStockAdapter from '../adapters/departureConsumptionStockAdapter';
 
 class workOrder {
   async create(dataWorkOrder) {
@@ -102,11 +103,10 @@ class workOrder {
     return workOrderAdapter.complete(completeResponse);
   }
 
-  async show(dataWorkOrder) {
-    const body = dataWorkOrder;
+  async show(idWorkOrder) {
     let completeResponse;
     try {
-      completeResponse = await Api.get(`workOrder/${body.id}`);
+      completeResponse = await Api.get(`workOrder/${idWorkOrder}`);
     } catch (err) {
       completeResponse = err;
     }

@@ -181,7 +181,7 @@ class workOrderAdapter {
     let { status, data } = showResponse;
     if (!isError(status)) {
       return {
-        type: 'SHOW_SUCCESSFUL',
+        data,
       };
     } else {
       const { code, details } = data.errors;

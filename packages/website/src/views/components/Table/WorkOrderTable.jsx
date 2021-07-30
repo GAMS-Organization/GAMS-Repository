@@ -47,19 +47,10 @@ class WorkOrderTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*handleClickSeeDetails = async prop => {
-    const departureDetails = await serviceWorkOrder.getById(prop.id);
-    this.setState({
-      departure: departureDetails.data.data,
-    });
-    this.child.showModal();
-  };*/
-
   handleClickDetail = async prop => {
-    const workOrderDetails = await serviceWorkOrder.getById(prop.id);
-    console.log(workOrderDetails);
-    this.setState({ workOrder: { workOrderDetails }, detailModal: true });
-    //this.setState({ workOrder: { id: prop.id }, detailModal: true });
+    const workOrderDetails = await serviceWorkOrder.show(prop.id);
+    console.log(workOrderDetails.data.data);
+    this.setState({ workOrder: workOrderDetails.data.data, detailModal: true });
   };
 
   handleClickCancel = async prop => {
@@ -79,7 +70,13 @@ class WorkOrderTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ cancelModal: false, takeModal: false, assignModal: false, completeModal: false });
+    this.setState({
+      cancelModal: false,
+      takeModal: false,
+      assignModal: false,
+      completeModal: false,
+      detailModal: false,
+    });
   };
 
   render() {
