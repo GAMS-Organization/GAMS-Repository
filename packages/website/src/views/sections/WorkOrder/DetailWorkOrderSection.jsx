@@ -38,6 +38,52 @@ class DetailWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  /*showUsers = user => {
+    return user.map(users => {
+      return (
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText="Usuario"
+              id="user"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                disabled: true,
+                defaultValue: users.name,
+                name: 'user',
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+      );
+    });
+  };*/
+
+  showWorkers = workers => {
+    return workers.map(worker => {
+      return (
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
+            <CustomInput
+              labelText="Usuario"
+              id="user"
+              formControlProps={{
+                fullWidth: true,
+              }}
+              inputProps={{
+                disabled: true,
+                defaultValue: worker.name,
+                name: 'user',
+              }}
+            />
+          </GridItem>
+        </GridContainer>
+      );
+    });
+  };
+
   render() {
     const { classes, workOrder, Transition, open, close } = this.props;
     const { errors } = this.state;
@@ -103,20 +149,8 @@ class DetailWorkOrderSection extends React.Component {
                   }}
                 />
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Usuario"
-                  id=""
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: '',
-                    defaultValue: '',
-                  }}
-                />
-              </GridItem>
+              {/*{this.showUsers(workOrder.user)}*/}
+              {this.showWorkers(workOrder.workers)}
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Activo"
