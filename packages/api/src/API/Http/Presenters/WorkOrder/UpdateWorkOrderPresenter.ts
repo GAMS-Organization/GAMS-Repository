@@ -22,9 +22,39 @@ export default class StoreWorkOrderPresenter implements IPresenter {
       state: this.result.getState(),
       comment: this.result.getComment(),
       taskDescription: this.result.getTaskDescription(),
-      asset: this.result.getAsset(),
-      user: this.result.getUser(),
-      workers: this.result.getUserWorkOrders(),
+      asset: {
+        code: this.result.getAsset().getCode(),
+        sector: this.result
+          .getAsset()
+          .getSector()
+          .getName(),
+        area: this.result
+          .getAsset()
+          .getArea()
+          .getName(),
+        service: this.result
+          .getAsset()
+          .getService()
+          .getName(),
+        element: this.result
+          .getAsset()
+          .getElement()
+          .getName(),
+      },
+      user: {
+        id: this.result.getId(),
+        name: this.result.getUser().getName(),
+        surname: this.result.getUser().getSurname(),
+      },
+      workers: this.result.getUserWorkOrders()
+        ? this.result.getUserWorkOrders().map(worker => {
+            return {
+              id: worker.getId(),
+              name: worker.getUser().getName(),
+              surname: worker.getUser().getSurname(),
+            };
+          })
+        : null,
     };
   }
 }

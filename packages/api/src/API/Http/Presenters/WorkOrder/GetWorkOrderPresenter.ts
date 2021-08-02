@@ -23,10 +23,29 @@ export default class GetWorkOrderPresenter implements IPresenter {
         name: this.result.getUser().getName(),
         surname: this.result.getUser().getSurname(),
       },
-      asset: this.result.getAsset(),
+      asset: {
+        code: this.result.getAsset().getCode(),
+        sector: this.result
+          .getAsset()
+          .getSector()
+          .getName(),
+        area: this.result
+          .getAsset()
+          .getArea()
+          .getName(),
+        service: this.result
+          .getAsset()
+          .getService()
+          .getName(),
+        element: this.result
+          .getAsset()
+          .getElement()
+          .getName(),
+      },
       state: this.result.getState(),
-      startDate: this.result.getStartDate() ? this.result.getStartDate() : null,
-      realizationDate: this.result.getRealizationDate() ? this.result.getRealizationDate() : null,
+      startDate: this.result.getStartDate() || null,
+      realizationDate: this.result.getRealizationDate() || null,
+      taskDescription: this.result.getTaskDescription() || null,
       workers: this.result.getUserWorkOrders()
         ? this.result.getUserWorkOrders().map(worker => {
             return {
