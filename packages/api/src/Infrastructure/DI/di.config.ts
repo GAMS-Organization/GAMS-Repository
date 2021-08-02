@@ -247,6 +247,9 @@ import UpdateElementRequestHandler from '../../Application/Handlers/ElementReque
 import UpdateEducationalElementAction from '../../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
 import UpdateEducationalElementAdapter from '../../API/Http/Adapters/EducationalElement/UpdateEducationalElementAdapter';
 import UpdateEducationalElementHandler from '../../Application/Handlers/EducationalElement/UpdateEducationalElementHandler';
+import ShowWorkOrderAction from '../../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
+import ShowWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/ShowWorkOrderAdapter';
+import ShowWorkOrderHandler from '../../Application/Handlers/WorkOrder/ShowWorkOrderHandler';
 const DIContainer = new Container();
 
 /**
@@ -320,6 +323,7 @@ DIContainer.bind<CancelWorkOrderAction>(CancelWorkOrderAction).toSelf();
 DIContainer.bind<CompleteWorkOrderAction>(CompleteWorkOrderAction).toSelf();
 DIContainer.bind<IndexWorkOrdersByAuthorAction>(IndexWorkOrdersByAuthorAction).toSelf();
 DIContainer.bind<IndexWorkOrdersByWorkerAction>(IndexWorkOrdersByWorkerAction).toSelf();
+DIContainer.bind<ShowWorkOrderAction>(ShowWorkOrderAction).toSelf();
 
 DIContainer.bind<StoreEventAction>(StoreEventAction).toSelf();
 DIContainer.bind<IndexEventAction>(IndexEventAction).toSelf();
@@ -391,6 +395,7 @@ DIContainer.bind<AssignWorkOrderAdapter>(AssignWorkOrderAdapter).toSelf();
 DIContainer.bind<TakeWorkOrderAdapter>(TakeWorkOrderAdapter).toSelf();
 DIContainer.bind<CancelWorkOrderAdapter>(CancelWorkOrderAdapter).toSelf();
 DIContainer.bind<CompleteWorkOrderAdapter>(CompleteWorkOrderAdapter).toSelf();
+DIContainer.bind<ShowWorkOrderAdapter>(ShowWorkOrderAdapter).toSelf();
 
 DIContainer.bind<StoreEventAdapter>(StoreEventAdapter).toSelf();
 DIContainer.bind<IndexEventsByMonthAdapter>(IndexEventsByMonthAdapter).toSelf();
@@ -461,6 +466,7 @@ DIContainer.bind<AssignWorkOrderHandler>(AssignWorkOrderHandler).toSelf();
 DIContainer.bind<TakeWorkOrderHandler>(TakeWorkOrderHandler).toSelf();
 DIContainer.bind<CancelWorkOrderHandler>(CancelWorkOrderHandler).toSelf();
 DIContainer.bind<CompleteWorkOrderHandler>(CompleteWorkOrderHandler).toSelf();
+DIContainer.bind<ShowWorkOrderHandler>(ShowWorkOrderHandler).toSelf();
 
 DIContainer.bind<StoreEventHandler>(StoreEventHandler).toSelf();
 DIContainer.bind<IndexEventsByMonthHandler>(IndexEventsByMonthHandler).toSelf();

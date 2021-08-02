@@ -1,7 +1,7 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
 import WorkOrder from '../../../../Domain/Entities/WorkOrder';
 
-export default class StoreWorkOrderPresenter implements IPresenter {
+export default class GetWorkOrderPresenter implements IPresenter {
   private result: WorkOrder;
 
   public constructor(result: WorkOrder) {
@@ -16,12 +16,13 @@ export default class StoreWorkOrderPresenter implements IPresenter {
     return {
       id: this.result.getId(),
       orderDate: this.result.getOrderDate(),
-      startDate: this.result.getStartDate(),
-      realizationDate: this.result.getRealizationDate(),
       priority: this.result.getPriority(),
-      state: this.result.getState(),
       comment: this.result.getComment(),
-      taskDescription: this.result.getTaskDescription(),
+      user: {
+        id: this.result.getId(),
+        name: this.result.getUser().getName(),
+        surname: this.result.getUser().getSurname(),
+      },
       asset: {
         code: this.result.getAsset().getCode(),
         sector: this.result
@@ -41,11 +42,10 @@ export default class StoreWorkOrderPresenter implements IPresenter {
           .getElement()
           .getName(),
       },
-      user: {
-        id: this.result.getId(),
-        name: this.result.getUser().getName(),
-        surname: this.result.getUser().getSurname(),
-      },
+      state: this.result.getState(),
+      startDate: this.result.getStartDate() || null,
+      realizationDate: this.result.getRealizationDate() || null,
+      taskDescription: this.result.getTaskDescription() || null,
       workers: this.result.getUserWorkOrders()
         ? this.result.getUserWorkOrders().map(worker => {
             return {

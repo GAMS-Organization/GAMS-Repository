@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import NewProduct from '../sections/Products/NewProduct';
-import ProductTableSection from '../sections/Products/ProductTableSection';
+// core components
+import ListTableSection from '../sections/WorkOrder/WorkOrderTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -24,7 +24,7 @@ const styles = {
   },
 };
 
-class Products extends React.Component {
+class ListWorkOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,17 +35,16 @@ class Products extends React.Component {
   render() {
     return (
       <div>
-        <NewProduct />
-        <ProductTableSection />
+        <ListTableSection />
       </div>
     );
   }
 }
 
-Products.propTypes = {
+ListWorkOrder.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
 };
 
-export default withStyles(styles)(Products);
+export default withStyles(styles)(ListWorkOrder);

@@ -1,6 +1,5 @@
 import Api from './api';
 import userAdapter from '../adapters/userAdapter';
-import elementAdapter from '../adapters/elementAdapter';
 
 class User {
   async create(dataUser) {

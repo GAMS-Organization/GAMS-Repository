@@ -2,77 +2,54 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import Slide from '@material-ui/core/Slide';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import PanToolIcon from '@material-ui/icons/PanTool';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
-
+// core components
+import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 
-class ExitStock extends React.Component {
+import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
+import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
+
+class WorkOrderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      entry: {},
+      cancelModal: false,
+      takeModal: false,
+      workOrder: {},
       errors: {},
       notification: false,
     };
-    /*this.deleteEntry = this.deleteEntry.bind(this);*/
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
-  closeNotification() {
-    this.setState({ notification: false });
-  }
+  closeNotification = () => {
+    this.setState({ notification: false, errors: {} });
+  };
 
-  /*async deleteEntry(prop) {
-    const response = await serviceUser.delete(prop[0]);
+  handleClickCancel = async prop => {
+    this.setState({ workOrder: { id: prop.id }, cancelModal: true });
+  };
 
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  }*/
+  handleClickTake = async prop => {
+    this.setState({ workOrder: { id: prop.id }, takeModal: true });
+  };
 
-  handleClickUpdate(prop) {
-    this.setState({
-      stock: {
-        id: prop[0],
-        fecha: prop[1],
-        producto: prop[2],
-        cantidad: prop[3],
-        observacion: prop[5],
-      },
-    });
-    this.child.showModal();
-  }
-
-  /*async componentWillMount() {
-        const response = await serviceProduct.list();
-        let products = [];
-        for (const product of response.data.items) {
-          let dataProduct = [product.id.toString(), product.name];
-          products.push(dataProduct);
-        }
-    
-        this.setState({ product: products });
-    }*/
+  closeModal = () => {
+    this.setState({ cancelModal: false, takeModal: false });
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    const Transition = React.forwardRef(function Transition(props, ref) {
-      return <Slide direction="down" ref={ref} {...props} />;
-    });
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -82,11 +59,23 @@ class ExitStock extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Salida eliminada correctamente'
+              : 'Orden de trabajo cancelada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
+        />
+        <CancelWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.cancelModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />
+        <TakeWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.takeModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -106,7 +95,7 @@ class ExitStock extends React.Component {
             {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
-                  {prop.map((prop, key) => {
+                  {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
                         {prop}
@@ -116,16 +105,32 @@ class ExitStock extends React.Component {
                   <TableCell className={classes.tableActions}>
                     <Tooltip
                       id="tooltip-top-start"
-                      title="Eliminar"
+                      title="Cancelar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
-                        aria-label="Close"
+                        aria-label="Cancel"
+                        disabled={prop.visibleData[4] === 'cancelada'}
                         className={classes.tableActionButton}
-                        onClick={this.deleteEntry.bind(this, prop)}
+                        onClick={() => this.handleClickCancel(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Tomar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Take"
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'tomada'}
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickTake(prop)}
+                      >
+                        <PanToolIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
@@ -139,11 +144,11 @@ class ExitStock extends React.Component {
   }
 }
 
-ExitStock.defaultProps = {
-  tableHeaderColor: 'gamsBlue',
+WorkOrderTable.defaultProps = {
+  tableHeaderColor: 'gray',
 };
 
-ExitStock.propTypes = {
+WorkOrderTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -161,6 +166,7 @@ ExitStock.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listWorkOrders: PropTypes.func,
 };
 
-export default withStyles(tasksStyle)(ExitStock);
+export default withStyles(tableStyle)(WorkOrderTable);
