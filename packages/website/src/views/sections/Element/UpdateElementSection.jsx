@@ -43,7 +43,6 @@ class UpdateElementSection extends React.Component {
       id: this.props.element.id,
       name: this.state.element.name ? this.state.element.name : this.props.element.name,
       steps: this.state.element.steps ? this.state.element.steps : this.props.element.steps,
-      description: this.state.element.description ? this.state.element.description : this.props.element.description,
     };
 
     const response = await serviceElement.update(formValues);
@@ -64,7 +63,7 @@ class UpdateElementSection extends React.Component {
   render() {
     const { classes, element, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id, name, code, description, steps, service } = element;
+    const { id, name, code, steps, service } = element;
     return (
       <div>
         <Snackbar
@@ -157,22 +156,6 @@ class UpdateElementSection extends React.Component {
                       required: true,
                       defaultValue: name,
                       name: 'name',
-                      onChange: this.handleChange,
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12}>
-                  <CustomInput
-                    labelText="Descripción"
-                    id="description"
-                    error={errors.description}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: description,
-                      name: 'description',
                       onChange: this.handleChange,
                     }}
                   />

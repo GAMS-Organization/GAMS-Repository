@@ -18,7 +18,6 @@ export default class GetElementPresenter implements IPresenter {
       name: this.result.getName(),
       code: this.result.getCode(),
       service: this.result.getServiceName(),
-      description: this.result.getDescription(),
       steps: this.result.getSteps(),
     };
   }

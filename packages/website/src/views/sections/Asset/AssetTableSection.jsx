@@ -39,6 +39,7 @@ class AssetTableSection extends React.Component {
         asset.area.name,
         asset.service.name,
         asset.element.name,
+        asset.description,
       ];
       assets.push(dataAsset);
     }
@@ -90,7 +91,7 @@ class AssetTableSection extends React.Component {
             <CardBody>
               <AssetTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['ID', 'Código', 'Sector', 'Área', 'Servicio', 'Elemento']}
+                tableHead={['ID', 'Código', 'Sector', 'Área', 'Servicio', 'Elemento', 'Descripción']}
                 tableData={this.state.asset}
               />
             </CardBody>

@@ -58,7 +58,7 @@ class NewElementSection extends React.Component {
   createElement = async e => {
     e.preventDefault();
 
-    const fields = ['name', 'code', 'service', 'description', 'steps'];
+    const fields = ['name', 'code', 'service', 'steps'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -76,7 +76,7 @@ class NewElementSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code, description, steps } = this.props;
+    const { classes, name, code, steps } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-element">
@@ -167,21 +167,6 @@ class NewElementSection extends React.Component {
                           ))}
                         </Select>
                       </FormControl>
-                    </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
-                      <CustomInput
-                        labelText="Descripcion"
-                        id="description"
-                        error={errors.description}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          required: false,
-                          defaultValue: description,
-                          name: 'description',
-                        }}
-                      />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12}>
                       <CustomInput

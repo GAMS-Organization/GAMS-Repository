@@ -23,13 +23,6 @@ export const storeElementSchema = {
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
-  description: Joi.string()
-    .allow(null)
-    .min(0)
-    .max(100)
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
   steps: Joi.string()
     .allow(null)
     .min(0)
@@ -44,13 +37,6 @@ export const updateElementSchema = {
     .min(3)
     .max(100)
     .required()
-    .error(errors => {
-      return customErrorMessages.default(errors);
-    }),
-  description: Joi.string()
-    .allow(null)
-    .min(0)
-    .max(100)
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
