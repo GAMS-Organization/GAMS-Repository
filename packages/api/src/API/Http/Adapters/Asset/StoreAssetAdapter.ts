@@ -20,6 +20,12 @@ export default class StoreAreaAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new StoreAssetCommand(request.body.sector, request.body.area, request.body.service, request.body.element);
+    return new StoreAssetCommand(
+      request.body.sector,
+      request.body.description,
+      request.body.area,
+      request.body.service,
+      request.body.element,
+    );
   }
 }

@@ -18,7 +18,6 @@ export default class UpdateElementHandler {
       throw new EntityNotFoundException(`Element with id: ${command.getId()} not found`);
     }
     Element.setName(command.getName());
-    Element.setDescription(command.getDescription());
     Element.setSteps(command.getSteps());
 
     return await this.ElementRepository.persist(Element);

@@ -16,6 +16,7 @@ export default class StoreAssetPresenter implements IPresenter {
     return {
       id: this.result.getId(),
       code: this.result.getCode(),
+      description: this.result.getDescription(),
       sector: this.result.getSector(),
       area: this.result.getArea(),
       service: this.result.getService(),
