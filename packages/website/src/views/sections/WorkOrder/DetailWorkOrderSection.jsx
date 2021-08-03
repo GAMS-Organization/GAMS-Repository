@@ -38,44 +38,23 @@ class DetailWorkOrderSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*showUsers = user => {
-    return user.map(users => {
-      return (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="Usuario"
-              id="user"
-              formControlProps={{
-                fullWidth: true,
-              }}
-              inputProps={{
-                disabled: true,
-                defaultValue: users.name,
-                name: 'user',
-              }}
-            />
-          </GridItem>
-        </GridContainer>
-      );
-    });
-  };*/
-
   showWorkers = workers => {
     return workers.map(worker => {
+      /*const responsible = worker.name + ' ' + worker.surname;
+      const responsables = responsible.join('-');*/
       return (
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={4}>
             <CustomInput
-              labelText="Usuario"
-              id="user"
+              labelText="Responsables"
+              id="worker"
               formControlProps={{
                 fullWidth: true,
               }}
               inputProps={{
                 disabled: true,
-                defaultValue: worker.name,
-                name: 'user',
+                defaultValue: worker.name + ' ' + worker.surname,
+                name: 'worker',
               }}
             />
           </GridItem>
@@ -119,6 +98,25 @@ class DetailWorkOrderSection extends React.Component {
             <h4 className={classes.modalTitle}>Detalles</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
+            {workOrder.workers ? <>{this.showWorkers(workOrder.workers)}</> : null}
+            {workOrder.user ? (
+              <>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Usuario"
+                    id="user"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      defaultValue: workOrder.user.name + ' ' + workOrder.user.surname,
+                      name: 'user',
+                    }}
+                  />
+                </GridItem>
+              </>
+            ) : null}
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
@@ -149,21 +147,6 @@ class DetailWorkOrderSection extends React.Component {
                   }}
                 />
               </GridItem>
-              {/*{this.showUsers(workOrder.user)}*/}
-              {this.showWorkers(workOrder.workers)}
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Activo"
-                  id=""
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: '',
-                  }}
-                />
-              </GridItem>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Estado"
@@ -174,124 +157,122 @@ class DetailWorkOrderSection extends React.Component {
                   inputProps={{
                     disabled: true,
                     name: 'state',
-                    defaltValue: workOrder.state,
+                    defaultValue: workOrder.state,
                   }}
                 />
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Responsables"
-                  id=""
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: '',
-                  }}
-                />
-              </GridItem>
-
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Día de comienzo"
-                  id="startDate"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'startDate',
-                    type: 'date',
-                    defaltValue: workOrder.startDate,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Día realizado"
-                  id="realizationDate"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'startDate',
-                    type: 'date',
-                    defaltValue: workOrder.realizationDate,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Sector"
-                  id="sector"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'sector',
-                    defaltValue: workOrder.sector,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Área"
-                  id="area"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'area',
-                    defaltValue: workOrder.area,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Servicio"
-                  id="servicio"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'servicio',
-                    defaltValue: workOrder.servicio,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Elemento"
-                  id="elemento"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'elemento',
-                    defaltValue: workOrder.element,
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={12}>
-                <CustomInput
-                  labelText="Detalle"
-                  id="details"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    name: 'details',
-                    defaltValue: workOrder.details,
-                  }}
-                />
-              </GridItem>
+              {workOrder.startDate ? (
+                <>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Día de comienzo"
+                      id="startDate"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'startDate',
+                        type: 'date',
+                        defaltValue: workOrder.startDate,
+                      }}
+                    />
+                  </GridItem>
+                </>
+              ) : null}
+              {workOrder.realizationDate ? (
+                <>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Día Completada"
+                      id="realizationDate"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'realizationDate',
+                        type: 'date',
+                        defaltValue: workOrder.realizationDate,
+                      }}
+                    />
+                  </GridItem>
+                </>
+              ) : null}
+              {workOrder.asset ? (
+                <>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Activo"
+                      id="asset"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'asset',
+                        defaultValue: workOrder.asset.code,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Sector"
+                      id="sector"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'sector',
+                        defaltValue: workOrder.asset.sector,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Área"
+                      id="area"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'area',
+                        defaltValue: workOrder.asset.area,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Servicio"
+                      id="servicio"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'servicio',
+                        defaltValue: workOrder.asset.service,
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Elemento"
+                      id="elemento"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'elemento',
+                        defaltValue: workOrder.asset.element,
+                      }}
+                    />
+                  </GridItem>
+                </>
+              ) : null}
             </GridContainer>
             <GridContainer>
               <GridItem justify={'center'} xs={4} sm={7} md={4}></GridItem>
