@@ -49,7 +49,6 @@ class WorkOrderTable extends React.Component {
 
   handleClickDetail = async prop => {
     const workOrderDetails = await serviceWorkOrder.show(prop.id);
-    console.log(workOrderDetails.data.data);
     this.setState({ workOrder: workOrderDetails.data.data, detailModal: true });
   };
 

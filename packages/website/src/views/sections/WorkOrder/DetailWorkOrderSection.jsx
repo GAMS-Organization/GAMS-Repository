@@ -40,25 +40,21 @@ class DetailWorkOrderSection extends React.Component {
 
   showWorkers = workers => {
     return workers.map(worker => {
-      /*const responsible = worker.name + ' ' + worker.surname;
-      const responsables = responsible.join('-');*/
       return (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={4}>
-            <CustomInput
-              labelText="Responsables"
-              id="worker"
-              formControlProps={{
-                fullWidth: true,
-              }}
-              inputProps={{
-                disabled: true,
-                defaultValue: worker.name + ' ' + worker.surname,
-                name: 'worker',
-              }}
-            />
-          </GridItem>
-        </GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomInput
+            labelText="Responsable"
+            id="worker"
+            formControlProps={{
+              fullWidth: true,
+            }}
+            inputProps={{
+              disabled: true,
+              defaultValue: worker.name + ' ' + worker.surname,
+              name: 'worker',
+            }}
+          />
+        </GridItem>
       );
     });
   };
@@ -98,26 +94,27 @@ class DetailWorkOrderSection extends React.Component {
             <h4 className={classes.modalTitle}>Detalles</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            {workOrder.workers ? <>{this.showWorkers(workOrder.workers)}</> : null}
-            {workOrder.user ? (
-              <>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Usuario"
-                    id="user"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      defaultValue: workOrder.user.name + ' ' + workOrder.user.surname,
-                      name: 'user',
-                    }}
-                  />
-                </GridItem>
-              </>
-            ) : null}
             <GridContainer>
+              {workOrder.workers ? <>{this.showWorkers(workOrder.workers)}</> : null}
+              {workOrder.user ? (
+                <>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <CustomInput
+                      labelText="Usuario"
+                      id="user"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        defaultValue: workOrder.user.name + ' ' + workOrder.user.surname,
+                        name: 'user',
+                      }}
+                    />
+                  </GridItem>
+                </>
+              ) : null}
+
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Fecha de la orden"
@@ -174,7 +171,7 @@ class DetailWorkOrderSection extends React.Component {
                         disabled: true,
                         name: 'startDate',
                         type: 'date',
-                        defaltValue: workOrder.startDate,
+                        defaultValue: workOrder.startDate,
                       }}
                     />
                   </GridItem>
@@ -193,7 +190,7 @@ class DetailWorkOrderSection extends React.Component {
                         disabled: true,
                         name: 'realizationDate',
                         type: 'date',
-                        defaltValue: workOrder.realizationDate,
+                        defaultValue: workOrder.realizationDate,
                       }}
                     />
                   </GridItem>
@@ -225,7 +222,7 @@ class DetailWorkOrderSection extends React.Component {
                       inputProps={{
                         disabled: true,
                         name: 'sector',
-                        defaltValue: workOrder.asset.sector,
+                        defaultValue: workOrder.asset.sector,
                       }}
                     />
                   </GridItem>
@@ -239,7 +236,7 @@ class DetailWorkOrderSection extends React.Component {
                       inputProps={{
                         disabled: true,
                         name: 'area',
-                        defaltValue: workOrder.asset.area,
+                        defaultValue: workOrder.asset.area,
                       }}
                     />
                   </GridItem>
@@ -253,7 +250,7 @@ class DetailWorkOrderSection extends React.Component {
                       inputProps={{
                         disabled: true,
                         name: 'servicio',
-                        defaltValue: workOrder.asset.service,
+                        defaultValue: workOrder.asset.service,
                       }}
                     />
                   </GridItem>
@@ -267,7 +264,25 @@ class DetailWorkOrderSection extends React.Component {
                       inputProps={{
                         disabled: true,
                         name: 'elemento',
-                        defaltValue: workOrder.asset.element,
+                        defaultValue: workOrder.asset.element,
+                      }}
+                    />
+                  </GridItem>
+                </>
+              ) : null}
+              {workOrder.comment ? (
+                <>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <CustomInput
+                      labelText="Comentario"
+                      id="comment"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        disabled: true,
+                        name: 'comment',
+                        defaultValue: workOrder.comment,
                       }}
                     />
                   </GridItem>

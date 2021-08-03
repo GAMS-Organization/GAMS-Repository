@@ -94,12 +94,10 @@ class workOrder {
     const body = dataWorkOrder;
     let completeResponse;
     try {
-      console.log(body);
       completeResponse = await Api.post(`workOrder/complete/${body.id}`, body);
     } catch (err) {
       completeResponse = err;
     }
-    console.log(completeResponse);
     return workOrderAdapter.complete(completeResponse);
   }
 
