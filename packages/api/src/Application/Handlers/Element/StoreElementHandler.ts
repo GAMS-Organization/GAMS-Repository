@@ -26,13 +26,7 @@ export default class StoreElementHandler {
       throw new EntityNotFoundException(`Service with name: ${command.getService()} not found`);
     }
 
-    const element = new Element(
-      command.getName(),
-      command.getCode(),
-      service,
-      command.getDescription(),
-      command.getSteps(),
-    );
+    const element = new Element(command.getName(), command.getCode(), service, command.getSteps());
     return await this.elementRepository.persist(element);
   }
 }

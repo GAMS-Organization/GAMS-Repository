@@ -18,7 +18,6 @@ export default class UpdateElementPresenter implements IPresenter {
       name: this.result.getName(),
       code: this.result.getCode(),
       service: this.result.getService(),
-      description: this.result.getDescription(),
     };
   }
 }

@@ -17,6 +17,7 @@ export default class StoreAssetHandler {
       command.getArea(),
       command.getService(),
       command.getElement(),
+      command.getDescription(),
     );
   }
 }

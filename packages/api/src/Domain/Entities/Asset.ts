@@ -13,6 +13,8 @@ export default class Asset {
   public id: string;
   @Column({ unique: true })
   public code: string;
+  @Column({ nullable: true })
+  public description: string;
   @ManyToOne(_type => Sector, sector => sector.assets)
   public sector: Sector;
   @ManyToOne(_type => Area, area => area.assets)
@@ -24,12 +26,20 @@ export default class Asset {
   @OneToMany(_type => WorkOrder, workOrder => workOrder.asset)
   public workOrders: WorkOrder[];
 
-  public constructor(sector: Sector, area: Area, service: Service, element: Element, code: string) {
+  public constructor(
+    sector: Sector,
+    area: Area,
+    service: Service,
+    element: Element,
+    code: string,
+    description: string,
+  ) {
     this.sector = sector;
     this.area = area;
     this.service = service;
     this.element = element;
     this.code = code;
+    this.description = description;
   }
 
   public getId(): string {
@@ -38,6 +48,10 @@ export default class Asset {
 
   public getCode(): string {
     return this.code;
+  }
+
+  public getDescription(): string {
+    return this.description;
   }
 
   public getSector(): Sector {
@@ -62,6 +76,10 @@ export default class Asset {
 
   public setCode(code: string): void {
     this.code = code;
+  }
+
+  public setDescription(description: string): void {
+    this.description = description;
   }
 
   public setSector(sector: Sector): void {

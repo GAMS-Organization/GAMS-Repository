@@ -41,7 +41,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `steps` varchar(255) NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `code` varchar(255) NOT NULL, `steps` varchar(255) NOT NULL, `serviceId` int NULL, UNIQUE INDEX `IDX_08e0499daf3714e09cc58aae88` (`name`), UNIQUE INDEX `IDX_a116b872585dc87200c7efb4a6` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -53,7 +53,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `asset` (`id` int NOT NULL AUTO_INCREMENT, `code` varchar(255) NOT NULL, `sectorId` int NULL, `areaId` int NULL, `serviceId` int NULL, `elementId` int NULL, UNIQUE INDEX `IDX_1f435756948298c61ecc3c6dab` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `asset` (`id` int NOT NULL AUTO_INCREMENT, `code` varchar(255) NOT NULL, `description` varchar(255) NULL, `sectorId` int NULL, `areaId` int NULL, `serviceId` int NULL, `elementId` int NULL, UNIQUE INDEX `IDX_1f435756948298c61ecc3c6dab` (`code`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
