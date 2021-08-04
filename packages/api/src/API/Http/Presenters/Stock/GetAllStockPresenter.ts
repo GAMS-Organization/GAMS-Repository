@@ -1,7 +1,7 @@
 import IPresenter from '../../../../Infrastructure/Presenters/Contracts/IPresenter';
 import Stock from '../../../../Domain/Entities/Stock';
 
-export default class GetAllUsersPresenter implements IPresenter {
+export default class GetAllStockPresenter implements IPresenter {
   private result: any;
 
   public constructor(result: Stock[]) {
