@@ -12,7 +12,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceProduct from '../../../services/api/products';
+import serviceTools from '../../../services/api/tool';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import newToolStyle from '../../../styles/jss/material-dashboard-react/sections/NewToolStyle';
@@ -34,25 +34,24 @@ class NewToolSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*createProduct = async e => {
+  createTool = async e => {
     e.preventDefault();
 
-    const fields = ['name'];
+    const fields = ['name, totalQuantity, borrowQuantity'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
         [field]: formElements.namedItem(field).value,
       }))
       .reduce((current, next) => ({ ...current, ...next }));
-
-    const response = await serviceProduct.create(formValues);
+    const response = await serviceTools.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, name } = this.props;
@@ -74,7 +73,7 @@ class NewToolSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createProduct}>
+            <form onSubmit={this.createTool}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nueva herramienta</h4>
@@ -82,7 +81,7 @@ class NewToolSection extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
@@ -92,8 +91,35 @@ class NewToolSection extends React.Component {
                         }}
                         inputProps={{
                           required: true,
-                          defaultValue: name,
                           name: 'name',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomInput
+                        labelText="Cantidad"
+                        id="totalQuantity"
+                        error={errors.totalQuantity}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: true,
+                          name: 'totalQuantity',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <CustomInput
+                        labelText="Cantidad prestada"
+                        id="borrowQuantity"
+                        error={errors.borrowQuantity}
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: true,
+                          name: 'borrowQuantity',
                         }}
                       />
                     </GridItem>
