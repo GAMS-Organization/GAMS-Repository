@@ -84,7 +84,7 @@ class AssignWorkOrderSection extends React.Component {
     };
 
     const response = await serviceWorkOrder.assign(assignData);
-    //this.handleClose();
+    this.handleClose();
     if (response.type === 'ASSIGN_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
@@ -107,7 +107,7 @@ class AssignWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Orden de trabajo tomada correctamente'
+              : 'Orden de trabajo asignada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}

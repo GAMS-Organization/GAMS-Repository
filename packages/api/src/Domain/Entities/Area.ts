@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToOne } from 'ty
 import Sector from './Sector';
 import Asset from './Asset';
 import AreaService from './AreaService';
+import ElementRequest from './ElementRequest';
 
 @Entity('area')
 // eslint-disable-next-line require-jsdoc
@@ -19,6 +20,8 @@ export default class Area {
   public areaServices: AreaService[];
   @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
+  @OneToMany(_type => ElementRequest, elementRequests => elementRequests.area)
+  public elementRequests: ElementRequest[];
 
   public constructor(name: string, code: string, sector: Sector) {
     this.name = name;

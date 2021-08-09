@@ -21,7 +21,11 @@ export default class GetAllWorkOrdersPresenter implements IPresenter {
         orderDate: workOrder.getOrderDate(),
         priority: workOrder.getPriority(),
         comment: workOrder.getComment(),
-        user: workOrder.getUser(),
+        user: {
+          name: workOrder.getUser().getName(),
+          surname: workOrder.getUser().getSurname(),
+          id: workOrder.getUser().getId(),
+        },
         asset: workOrder.getAsset(),
         state: workOrder.getState(),
         startDate: workOrder.getStartDate() ? workOrder.getStartDate() : null,
