@@ -20,7 +20,6 @@ import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import serviceArea from '../../../services/api/area';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
-import Slide from '@material-ui/core/Slide';
 
 class AreasTable extends React.Component {
   constructor(props) {
@@ -56,7 +55,10 @@ class AreasTable extends React.Component {
     //Se corta el string services y lo transforma en un array de strings
     let services = prop.visibleData[3].split(' - ');
 
-    this.setState({ area: { id: prop.id, name: prop.visibleData[0], services: services }, modal: true });
+    this.setState({
+      area: { id: prop.id, name: prop.visibleData[0], services: services, maps: prop.maps },
+      modal: true,
+    });
   };
 
   closeModal = () => {

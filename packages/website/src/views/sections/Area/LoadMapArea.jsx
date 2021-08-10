@@ -146,7 +146,7 @@ class LoadMapArea extends React.Component {
   render() {
     const { classes, area, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name, code, maps, services } = area;
+    const { id, name, maps } = area;
     if (this.state.area.id !== id) {
       this.setState({ area: area, selectedServices: area.services });
     }

@@ -15,6 +15,7 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
 import IndexWorkOrdersByAuthorAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
 import IndexWorkOrdersByWorkerAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByWorkerAction';
+import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 
 const router = express.Router();
 
@@ -131,7 +132,6 @@ router.get(
   }),
 );
 
-/*
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
@@ -142,7 +142,7 @@ router.get(
     await showWorkOrderAction.execute(request, response);
   }),
 );
-
+/*
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {

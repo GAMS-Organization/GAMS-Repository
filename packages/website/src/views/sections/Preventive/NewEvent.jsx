@@ -86,10 +86,8 @@ class NewEvent extends React.Component {
       description: formValues.description,
       workersId: this.state.selectedWorkers,
     };
-
     this.handleClose();
     this.props.closeHandler();
-
     const response = await servicePreventive.create(event);
 
     if (response.type === 'CREATED_SUCCESFUL') {

@@ -33,7 +33,7 @@ class ElementTableSection extends React.Component {
     let elements = [];
     for (const element of response.data.items) {
       let dataElement = {
-        visibleData: [element.name, element.code, element.service.name, element.description],
+        visibleData: [element.name, element.code, element.service.name],
         id: element.id,
       };
       elements.push(dataElement);
@@ -86,7 +86,7 @@ class ElementTableSection extends React.Component {
             <CardBody>
               <ElementTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Nombre', 'Codigo', 'Servicio', 'Descripcion']}
+                tableHead={['Nombre', 'Codigo', 'Servicio']}
                 tableData={this.state.element}
                 listElements={this.listElements}
               />

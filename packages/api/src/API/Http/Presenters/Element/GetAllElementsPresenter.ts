@@ -21,7 +21,6 @@ export default class GetAllElementsPresenter implements IPresenter {
         name: element.getName(),
         code: element.getCode(),
         service: element.getService(),
-        description: element.getDescription(),
       });
     });
 

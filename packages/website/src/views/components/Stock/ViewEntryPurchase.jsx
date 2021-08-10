@@ -25,8 +25,6 @@ class ViewEntryPurchase extends React.Component {
       notification: false,
       rolClicked: false,
     };
-    this.handleClose = this.handleClose.bind(this);
-    this.closeNotification = this.closeNotification.bind(this);
   }
 
   componentDidMount() {
@@ -37,17 +35,17 @@ class ViewEntryPurchase extends React.Component {
     this.props.onRef(undefined);
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ open: false, rolClicked: false });
-  }
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({ open: true });
-  }
+  };
 
-  closeNotification() {
+  closeNotification = () => {
     this.setState({ notification: false, errors: {} });
-  }
+  };
 
   showProducts = purchases => {
     return purchases.map(purchase => {
