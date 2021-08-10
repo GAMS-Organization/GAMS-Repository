@@ -23,7 +23,6 @@ class products {
     }
     return productAdapter.list(listResponse);
   }
-  PUT;
 
   async update(dataProduct) {
     const body = dataProduct;

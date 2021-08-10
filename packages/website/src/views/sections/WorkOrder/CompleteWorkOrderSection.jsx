@@ -95,7 +95,6 @@ class CompleteWorkOrderSection extends React.Component {
       });
     } else {
       const response = await serviceWorkOrder.complete(request);
-      console.log(response);
       if (response.type === 'COMPLETED_SUCCESSFUL') {
         this.setState({ notification: true });
       } else {
