@@ -173,7 +173,7 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Cancel"
-                        disabled={prop.visibleData[4] === 'cancelada'}
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickCancel(prop)}
                       >
@@ -191,7 +191,8 @@ class WorkOrderTable extends React.Component {
                         disabled={
                           prop.visibleData[4] === 'cancelada' ||
                           prop.visibleData[4] === 'tomada' ||
-                          prop.visibleData[4] === 'asignada'
+                          prop.visibleData[4] === 'asignada' ||
+                          prop.visibleData[4] === 'finalizada'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
@@ -210,7 +211,8 @@ class WorkOrderTable extends React.Component {
                         disabled={
                           prop.visibleData[4] === 'cancelada' ||
                           prop.visibleData[4] === 'asignada' ||
-                          prop.visibleData[4] === 'tomada'
+                          prop.visibleData[4] === 'tomada' ||
+                          prop.visibleData[4] === 'finalizada'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickAssign(prop)}
@@ -226,7 +228,7 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Complete"
-                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'completada'}
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickComplete(prop)}
                       >

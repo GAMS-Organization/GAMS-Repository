@@ -38,12 +38,11 @@ class CompleteWorkOrderSection extends React.Component {
       columns: [],
       data: [],
     };
-    //this.listProducts();
   }
 
   handleClose = () => {
     this.props.close();
-    this.setState({ open: false, selectedWorkers: [] });
+    this.setState({ open: false, selectedWorkers: [], data: [] });
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -97,39 +96,13 @@ class CompleteWorkOrderSection extends React.Component {
       const response = await serviceWorkOrder.complete(request);
       if (response.type === 'COMPLETED_SUCCESSFUL') {
         this.setState({ notification: true });
+        this.props.listWorkOrders();
+        this.props.close();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
     }
   };
-
-  /*completeWorkOrder = async e => {
-    e.preventDefault();
-
-    const fields = ['startDate', 'workers'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
-    const assignData = {
-      id: this.props.workOrder.id,
-      startDate: formValues.startDate,
-      workersId: this.state.selectedWorkers,
-    };
-
-    const response = await serviceWorkOrder.assign(assignData);
-    this.handleClose();
-    if (response.type === 'ASSIGN_SUCCESSFUL') {
-      this.setState({ notification: true, open: false });
-      this.props.listWorkOrders();
-      this.props.close();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  };*/
 
   render() {
     const { classes, workOrder, Transition, open, close } = this.props;

@@ -193,6 +193,7 @@ class NewWorkOrder extends React.Component {
     const response = await serviceWorkOrder.create(formValues);
     if (response.type === 'CREATED_SUCCESFUL') {
       this.setState({ notification: true });
+      window.location.reload();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
