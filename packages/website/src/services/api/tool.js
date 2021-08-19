@@ -4,7 +4,6 @@ import toolAdapter from '../adapters/toolAdapter';
 class tool {
   async create(dataTool) {
     const body = dataTool;
-
     let createResponse;
     try {
       createResponse = await Api.post('tool/', body);

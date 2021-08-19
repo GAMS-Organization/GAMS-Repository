@@ -37,7 +37,7 @@ class NewToolSection extends React.Component {
   createTool = async e => {
     e.preventDefault();
 
-    const fields = ['name, totalQuantity, borrowQuantity'];
+    const fields = ['name', 'totalQuantity', 'borrowQuantity'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
