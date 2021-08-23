@@ -12,22 +12,24 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
+import PanToolIcon from '@material-ui/icons/PanTool';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
-import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
-import serviceArea from '../../../services/api/area';
-import LoadMapArea from '../../sections/Area/LoadMapArea';
-import MapIcon from '@material-ui/icons/Map';
 
-class AreasTable extends React.Component {
+import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
+import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
+import AssignWorkOrderSection from '../../sections/WorkOrder/AssignWorkOrderSection';
+
+class WorkOrderTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      mapModal: false,
-      area: {},
+      cancelModal: false,
+      takeModal: false,
+      assignModal: false,
+      workOrder: {},
       errors: {},
       notification: false,
     };
@@ -37,44 +39,20 @@ class AreasTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se crea la ventana emergente en donde se cargaran los mapas
-  handleClickLoadMap = async prop => {
-    this.setState({
-      area: {
-        id: prop.id,
-        name: prop.visibleData[0],
-        services: prop.services,
-        maps: prop.maps,
-      },
-      mapModal: true,
-    });
+  handleClickCancel = async prop => {
+    this.setState({ workOrder: { id: prop.id }, cancelModal: true });
   };
 
-  //se crea la ventana emergente en donde se editaran las areas
-  handleClickUpdate = prop => {
-    //Se corta el string services y lo transforma en un array de strings
-    let services = prop.visibleData[3].split(' - ');
+  handleClickTake = async prop => {
+    this.setState({ workOrder: { id: prop.id }, takeModal: true });
+  };
 
-    this.setState({
-      area: { id: prop.id, name: prop.visibleData[0], services: services, maps: prop.maps },
-      modal: true,
-    });
+  handleClickAssign = async prop => {
+    this.setState({ workOrder: { id: prop.id }, assignModal: true });
   };
 
   closeModal = () => {
-    this.setState({ modal: false, mapModal: false });
-  };
-
-  //se elimina el area
-  deleteArea = async prop => {
-    const response = await serviceArea.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listAreas();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+    this.setState({ cancelModal: false, takeModal: false, assignModal: false });
   };
 
   render() {
@@ -88,23 +66,29 @@ class AreasTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Area eliminada correctamente'
+              : 'Orden de trabajo cancelada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateAreaSection
-          area={this.state.area}
-          open={this.state.modal}
+        <CancelWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.cancelModal}
           close={this.closeModal}
-          listAreas={this.props.listAreas}
+          listWorkOrders={this.props.listWorkOrders}
         />
-        <LoadMapArea
-          area={this.state.area}
-          open={this.state.mapModal}
+        <TakeWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.takeModal}
           close={this.closeModal}
-          listAreas={this.props.listAreas}
+          listWorkOrders={this.props.listWorkOrders}
+        />
+        <AssignWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.assignModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -132,41 +116,57 @@ class AreasTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                      <IconButton
-                        aria-label="Edit"
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickUpdate(prop)}
-                      >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
-                      title="Eliminar"
+                      title="Cancelar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
-                        aria-label="Close"
+                        aria-label="Cancel"
+                        disabled={prop.visibleData[4] === 'cancelada'}
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteArea(prop)}
+                        onClick={() => this.handleClickCancel(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
-                      id="tooltip-top-map"
-                      title="Ver mapa"
+                      id="tooltip-top-start"
+                      title="Tomar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
-                        aria-label="Maps"
+                        aria-label="Take"
+                        disabled={
+                          prop.visibleData[4] === 'cancelada' ||
+                          prop.visibleData[4] === 'tomada' ||
+                          prop.visibleData[4] === 'asignada'
+                        }
                         className={classes.tableActionButton}
-                        onClick={() => this.handleClickLoadMap(prop)}
+                        onClick={() => this.handleClickTake(prop)}
                       >
-                        <MapIcon className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                        <PanToolIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Assign"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Assign"
+                        disabled={
+                          prop.visibleData[4] === 'cancelada' ||
+                          prop.visibleData[4] === 'asignada' ||
+                          prop.visibleData[4] === 'tomada'
+                        }
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickAssign(prop)}
+                      >
+                        <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
@@ -180,11 +180,11 @@ class AreasTable extends React.Component {
   }
 }
 
-AreasTable.defaultProps = {
+WorkOrderTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-AreasTable.propTypes = {
+WorkOrderTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -202,7 +202,7 @@ AreasTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  listAreas: PropTypes.func,
+  listWorkOrders: PropTypes.func,
 };
 
-export default withStyles(tableStyle)(AreasTable);
+export default withStyles(tableStyle)(WorkOrderTable);

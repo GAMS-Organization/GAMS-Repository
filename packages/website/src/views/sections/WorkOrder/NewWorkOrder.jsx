@@ -203,7 +203,7 @@ class NewWorkOrder extends React.Component {
   };
 
   render() {
-    const { classes, name } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-product">
@@ -502,19 +502,10 @@ class NewWorkOrder extends React.Component {
                         />
                       </GridItem>
                       <GridContainer>
-                        <GridItem justify={'center'} xs={4} sm={7} md={8}>
-                          <CardFooter>
-                            <Button type="submit" color="gamsRed">
-                              Crear
-                            </Button>
-                          </CardFooter>
-                        </GridItem>
-                        <GridItem justify={'center'} xs={8} sm={5} md={4}>
-                          <CardFooter>
-                            <Button color="danger" simple onClick={this.closeNotification}>
-                              Cancelar
-                            </Button>
-                          </CardFooter>
+                        <GridItem justify={'center'} xs={12} sm={12} md={12}>
+                          <Button type="submit" color="gamsRed">
+                            Crear
+                          </Button>
                         </GridItem>
                       </GridContainer>
                     </GridItem>

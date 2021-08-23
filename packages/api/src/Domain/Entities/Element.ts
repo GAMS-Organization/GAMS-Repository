@@ -13,18 +13,15 @@ export default class Element {
   @Column({ unique: true })
   public code: string;
   @Column({ nullable: true })
-  public description: string;
-  @Column({ nullable: true })
   public steps: string;
   @ManyToOne(_type => Service, service => service.elements)
   public service: Service;
   @OneToMany(_type => Asset, asset => asset.element)
   public assets: Asset[];
 
-  public constructor(name: string, code: string, service: Service, description: string, steps: string) {
+  public constructor(name: string, code: string, service: Service, steps: string) {
     this.name = name;
     this.code = code;
-    this.description = description;
     this.service = service;
     this.steps = steps;
   }
@@ -39,10 +36,6 @@ export default class Element {
 
   public getCode(): string {
     return this.code;
-  }
-
-  public getDescription(): string {
-    return this.description;
   }
 
   public getSteps(): string {
@@ -63,9 +56,5 @@ export default class Element {
 
   public setSteps(steps: string): void {
     this.steps = steps;
-  }
-
-  public setDescription(description: string): void {
-    this.description = description;
   }
 }

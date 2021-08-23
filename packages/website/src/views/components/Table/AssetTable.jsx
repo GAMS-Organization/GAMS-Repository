@@ -102,7 +102,7 @@ class AssetTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteAsset.bind(this, prop)}
+                        onClick={() => this.deleteAsset(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

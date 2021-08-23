@@ -19,6 +19,7 @@ export default class GetAllAssetsPresenter implements IPresenter {
       assetResult.push({
         id: asset.getId(),
         code: asset.getCode(),
+        description: asset.getDescription(),
         sector: asset.getSector(),
         area: asset.getArea(),
         service: asset.getService(),

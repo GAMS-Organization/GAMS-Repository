@@ -124,7 +124,7 @@ class ElementTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteElement.bind(this, prop)}
+                        onClick={() => this.deleteElement(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

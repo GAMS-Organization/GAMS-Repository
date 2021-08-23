@@ -20,11 +20,6 @@ export default class UpdateElementAdapter {
       throw new ValidationException(JSON.stringify(this.validator.validationResult(error.details)));
     }
 
-    return new UpdateElementCommand(
-      parseInt(request.params.id),
-      request.body.name,
-      request.body.description,
-      request.body.steps,
-    );
+    return new UpdateElementCommand(parseInt(request.params.id), request.body.name, request.body.steps);
   }
 }

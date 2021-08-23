@@ -113,7 +113,7 @@ class ServiceTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={this.deleteService.bind(this, prop)}
+                        onClick={() => this.deleteService(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
