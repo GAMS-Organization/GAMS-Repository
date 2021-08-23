@@ -5,8 +5,7 @@ import StoreEducationalElementAction from '../API/Http/Actions/EducationalElemen
 import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
 import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementAction';
 //import ShowEducationalElementAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementAction';
-//import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
-//import ShowEducationalElementByNameAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementByNameAction';
+import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
@@ -63,31 +62,18 @@ router.put(
     await updateEducationalElementAction.execute(request, response);
   }),
 );
-//
-// router.get(
-//   '/name/:name([a-z0-9-]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showEducationalElementByNameAction: ShowEducationalElementByNameAction = DIContainer.resolve<
-//       ShowEducationalElementByNameAction
-//     >(ShowEducationalElementByNameAction);
-//     await showEducationalElementByNameAction.execute(request, response);
-//   }),
-// );
-//
-// router.delete(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyEducationalElementAction: DestroyEducationalElementAction = DIContainer.resolve<
-//       DestroyEducationalElementAction
-//     >(DestroyEducationalElementAction);
-//     await destroyEducationalElementAction.execute(request, response);
-//   }),
-// );
+
+router.delete(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyEducationalElementAction: DestroyEducationalElementAction = DIContainer.resolve<
+      DestroyEducationalElementAction
+    >(DestroyEducationalElementAction);
+    await destroyEducationalElementAction.execute(request, response);
+  }),
+);
 
 export default router;

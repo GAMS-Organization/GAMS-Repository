@@ -5,8 +5,7 @@ import StoreToolAction from '../API/Http/Actions/Tool/StoreToolAction';
 import UpdateToolAction from '../API/Http/Actions/Tool/UpdateToolAction';
 import IndexToolsAction from '../API/Http/Actions/Tool/IndexToolAction';
 //import ShowToolAction from '../API/Http/Actions/Tool/ShowToolAction';
-//import DestroyToolAction from '../API/Http/Actions/Tool/DestroyToolAction';
-//import ShowToolByNameAction from '../API/Http/Actions/Tool/ShowToolByNameAction';
+import DestroyToolAction from '../API/Http/Actions/Tool/DestroyToolAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 
@@ -57,31 +56,16 @@ router.put(
     await updateToolAction.execute(request, response);
   }),
 );
-//
-// router.get(
-//   '/name/:name([a-z0-9-]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showToolByNameAction: ShowToolByNameAction = DIContainer.resolve<
-//       ShowToolByNameAction
-//     >(ShowToolByNameAction);
-//     await showToolByNameAction.execute(request, response);
-//   }),
-// );
-//
-// router.delete(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyToolAction: DestroyToolAction = DIContainer.resolve<
-//       DestroyToolAction
-//     >(DestroyToolAction);
-//     await destroyToolAction.execute(request, response);
-//   }),
-// );
+
+router.delete(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyToolAction: DestroyToolAction = DIContainer.resolve<DestroyToolAction>(DestroyToolAction);
+    await destroyToolAction.execute(request, response);
+  }),
+);
 
 export default router;
