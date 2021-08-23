@@ -5,8 +5,7 @@ import StoreElementRequestAction from '../API/Http/Actions/ElementRequest/StoreE
 //import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
 import IndexElementRequestsAction from '../API/Http/Actions/ElementRequest/IndexElementRequestAction';
 //import ShowElementRequestAction from '../API/Http/Actions/ElementRequest/ShowElementRequestAction';
-//import DestroyElementRequestAction from '../API/Http/Actions/ElementRequest/DestroyElementRequestAction';
-//import ShowElementRequestByNameAction from '../API/Http/Actions/ElementRequest/ShowElementRequestByNameAction';
+import DestroyElementRequestAction from '../API/Http/Actions/ElementRequest/DestroyElementRequestAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
@@ -64,31 +63,18 @@ router.put(
     await updateElementRequestAction.execute(request, response);
   }),
 );
-//
-// router.get(
-//   '/name/:name([a-z0-9-]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showElementRequestByNameAction: ShowElementRequestByNameAction = DIContainer.resolve<
-//       ShowElementRequestByNameAction
-//     >(ShowElementRequestByNameAction);
-//     await showElementRequestByNameAction.execute(request, response);
-//   }),
-// );
-//
-// router.delete(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyElementRequestAction: DestroyElementRequestAction = DIContainer.resolve<
-//       DestroyElementRequestAction
-//     >(DestroyElementRequestAction);
-//     await destroyElementRequestAction.execute(request, response);
-//   }),
-// );
+
+router.delete(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyElementRequestAction: DestroyElementRequestAction = DIContainer.resolve<DestroyElementRequestAction>(
+      DestroyElementRequestAction,
+    );
+    await destroyElementRequestAction.execute(request, response);
+  }),
+);
 
 export default router;

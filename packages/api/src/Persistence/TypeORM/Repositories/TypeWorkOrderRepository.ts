@@ -13,7 +13,16 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
     return await this.repository(WorkOrder).find({
       skip: initialIndex,
       take: limit,
-      relations: ['user', 'asset', 'userWorkOrders', 'userWorkOrders.user'],
+      relations: [
+        'user',
+        'asset',
+        'userWorkOrders',
+        'userWorkOrders.user',
+        'asset.area',
+        'asset.sector',
+        'asset.service',
+        'asset.element',
+      ],
     });
   }
 

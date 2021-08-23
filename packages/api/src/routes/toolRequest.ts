@@ -5,8 +5,7 @@ import StoreToolRequestAction from '../API/Http/Actions/ToolRequest/StoreToolReq
 //import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
 import IndexToolRequestsAction from '../API/Http/Actions/ToolRequest/IndexToolRequestAction';
 //import ShowToolRequestAction from '../API/Http/Actions/ToolRequest/ShowToolRequestAction';
-//import DestroyToolRequestAction from '../API/Http/Actions/ToolRequest/DestroyToolRequestAction';
-//import ShowToolRequestByNameAction from '../API/Http/Actions/ToolRequest/ShowToolRequestByNameAction';
+import DestroyToolRequestAction from '../API/Http/Actions/ToolRequest/DestroyToolRequestAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
@@ -64,31 +63,18 @@ router.put(
     await updateToolRequestAction.execute(request, response);
   }),
 );
-//
-// router.get(
-//   '/name/:name([a-z0-9-]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const showToolRequestByNameAction: ShowToolRequestByNameAction = DIContainer.resolve<
-//       ShowToolRequestByNameAction
-//     >(ShowToolRequestByNameAction);
-//     await showToolRequestByNameAction.execute(request, response);
-//   }),
-// );
-//
-// router.delete(
-//   '/:id([0-9]+)',
-//   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
-//   },
-//   asyncMiddleware(async (request: express.Request, response: express.Response) => {
-//     const destroyToolRequestAction: DestroyToolRequestAction = DIContainer.resolve<
-//       DestroyToolRequestAction
-//     >(DestroyToolRequestAction);
-//     await destroyToolRequestAction.execute(request, response);
-//   }),
-// );
+
+router.delete(
+  '/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, ['admin', 'personal']);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const destroyToolRequestAction: DestroyToolRequestAction = DIContainer.resolve<DestroyToolRequestAction>(
+      DestroyToolRequestAction,
+    );
+    await destroyToolRequestAction.execute(request, response);
+  }),
+);
 
 export default router;
