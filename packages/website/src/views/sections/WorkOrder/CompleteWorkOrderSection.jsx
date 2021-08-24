@@ -131,7 +131,7 @@ class CompleteWorkOrderSection extends React.Component {
           }}
           open={open}
           TransitionComponent={Transition}
-          onClose={this.handleClose}
+          onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >

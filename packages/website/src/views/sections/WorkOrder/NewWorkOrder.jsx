@@ -173,8 +173,11 @@ class NewWorkOrder extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  closeNotificationSucces = () => {
-    this.setState({ notification: false, errors: {} });
+  closeNotificationSuccess = () => {
+    this.setState({
+      notification: false,
+      errors: {},
+    });
   };
 
   //Se crea la orden de trabajo
@@ -190,9 +193,29 @@ class NewWorkOrder extends React.Component {
       comment: observations,
       assetId: this.state.idAsset,
     };
+
     const response = await serviceWorkOrder.create(formValues);
+
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
+      formElements.namedItem('observations').value = '';
+      const date = (formElements.namedItem('date').value = '');
+      this.setState({
+        notification: true,
+        selectedService: '',
+        selectedSector: '',
+        selectedArea: '',
+        selectedElement: '',
+        dateNow: '',
+        prioritySelected: '',
+        idSector: '',
+        idArea: '',
+        idService: '',
+        idElement: '',
+        idAsset: '',
+        selectedAsset: '',
+        comment: '',
+        map: '',
+      });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -217,7 +240,7 @@ class NewWorkOrder extends React.Component {
               : 'Orden de trabajo creada correctamente.'
           }
           open={this.state.notification}
-          closeNotification={this.closeNotificationSucces}
+          closeNotification={this.closeNotificationSuccess}
           close
         />
         <GridContainer>
