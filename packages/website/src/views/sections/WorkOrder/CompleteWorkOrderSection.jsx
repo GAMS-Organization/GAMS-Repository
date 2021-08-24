@@ -40,8 +40,9 @@ class CompleteWorkOrderSection extends React.Component {
     };
   }
 
-  cleanData = () => {
-    this.setState({ data: [] });
+  handleClose = () => {
+    this.setState({ open: false, data: [] });
+    this.props.close();
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -96,8 +97,7 @@ class CompleteWorkOrderSection extends React.Component {
       if (response.type === 'COMPLETED_SUCCESSFUL') {
         this.setState({ notification: true });
         this.props.listWorkOrders();
-        this.cleanData();
-        this.props.close();
+        this.handleClose();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
@@ -243,8 +243,7 @@ class CompleteWorkOrderSection extends React.Component {
                 </GridItem>
                 <GridItem justify={'center'} xs={8} sm={5} md={4}>
                   <CardFooter>
-                    {/*<Button type="reset" color="danger" simple onClick={this.handleClose}>*/}
-                    <Button type="reset" color="danger" simple onClick={() => close()}>
+                    <Button type="reset" color="danger" simple onClick={this.handleClose}>
                       No
                     </Button>
                   </CardFooter>

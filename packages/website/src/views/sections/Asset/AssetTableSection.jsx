@@ -93,6 +93,7 @@ class AssetTableSection extends React.Component {
                 tableHeaderColor="gamsBlue"
                 tableHead={['ID', 'Código', 'Sector', 'Área', 'Servicio', 'Elemento', 'Descripción']}
                 tableData={this.state.asset}
+                listAssets={this.listAssets}
               />
             </CardBody>
           </Card>

@@ -198,7 +198,7 @@ class NewWorkOrder extends React.Component {
 
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('observations').value = '';
-      const date = (formElements.namedItem('date').value = '');
+      formElements.namedItem('date').value = '';
       this.setState({
         notification: true,
         selectedService: '',

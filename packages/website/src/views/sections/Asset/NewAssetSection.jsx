@@ -110,6 +110,7 @@ class NewAssetSection extends React.Component {
   //Se crea el activo
   createAsset = async e => {
     e.preventDefault();
+    const formElements = e.target.elements;
 
     const formValues = {
       sector: this.state.selectedSector,
@@ -122,7 +123,15 @@ class NewAssetSection extends React.Component {
     const response = await serviceAsset.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
+      formElements.namedItem('description').value = '';
+      this.setState({
+        notification: true,
+        selectedService: '',
+        selectedSector: '',
+        selectedArea: '',
+        selectedElement: '',
+        description: '',
+      });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
