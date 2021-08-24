@@ -161,13 +161,11 @@ export const completeWorkOrderSchema = {
     }),
   productsId: Joi.array()
     .items(Joi.number().positive())
-    .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
   quantities: Joi.array()
     .items(Joi.number().positive())
-    .required()
     .error(errors => {
       return customErrorMessages.default(errors);
     }),
