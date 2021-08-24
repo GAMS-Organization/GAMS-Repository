@@ -41,7 +41,7 @@ class CompleteWorkOrderSection extends React.Component {
   }
 
   cleanData = () => {
-    this.setState({ open: false, data: [] });
+    this.setState({ data: [] });
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {

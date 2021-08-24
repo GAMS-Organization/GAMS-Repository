@@ -65,6 +65,7 @@ class WorkOrderTable extends React.Component {
   };
 
   handleClickComplete = async prop => {
+    console.log(this.state.workOrder);
     this.setState({ workOrder: { id: prop.id }, completeModal: true });
   };
 
