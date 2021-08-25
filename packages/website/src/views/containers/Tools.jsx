@@ -5,6 +5,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 
 import NewToolSection from '../sections/Tools/NewToolSection';
+import ToolTableSection from '../sections/Tools/ToolTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -37,6 +38,7 @@ class Tools extends React.Component {
     return (
       <div>
         <NewToolSection />
+        <ToolTableSection />
       </div>
     );
   }

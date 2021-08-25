@@ -13,17 +13,17 @@ class tool {
     return toolAdapter.create(createResponse);
   }
 
-  /*async list(page = 1, itemsPerPage = 15) {
+  async list(page = 1, itemsPerPage = 15) {
     let listResponse;
     try {
-      listResponse = await Api.get(`product/?page=${page}&items_per_page=${itemsPerPage}`);
+      listResponse = await Api.get(`tool/?page=${page}&items_per_page=${itemsPerPage}`);
     } catch (err) {
       listResponse = err;
     }
-    return productAdapter.list(listResponse);
+    return toolAdapter.list(listResponse);
   }
 
-  async update(dataProduct) {
+  /*async update(dataProduct) {
     const body = dataProduct;
     let updateResponse;
     try {

@@ -21,7 +21,7 @@ class toolAdapter {
     }
   }
 
-  /*list(listResponse) {
+  list(listResponse) {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
@@ -41,7 +41,7 @@ class toolAdapter {
     }
   }
 
-  update(updateResponse) {
+  /*update(updateResponse) {
     let { status, data } = updateResponse;
 
     if (!isError(status)) {
