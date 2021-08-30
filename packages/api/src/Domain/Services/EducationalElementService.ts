@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import IEducationalElementRepository from '../Interfaces/IEducationalElementRepository';
 import EducationalElement from '../Entities/EducationalElement';
-import ValidationException from '../../Application/Exceptions/ValidationException';
+import EntityNotFoundException from '../../Application/Exceptions/EntityNotFoundException';
 
 @injectable()
 export default class EducationalElementService {
@@ -41,7 +41,7 @@ export default class EducationalElementService {
     if (type === 'borrow') {
       const available = totalQuantity - borrowedQuantity;
       if (quantity > available) {
-        throw new ValidationException('The amount requested is bigger than the available amount');
+        throw new EntityNotFoundException('The amount requested is bigger than the available amount');
       }
       educationalElement.setBorrowQuantity(borrowedQuantity + quantity);
     } else {

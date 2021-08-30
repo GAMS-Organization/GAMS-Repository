@@ -4,6 +4,7 @@ import Sector from './Sector';
 import Asset from './Asset';
 import AreaService from './AreaService';
 import ElementRequest from './ElementRequest';
+import ToolRequest from './ToolRequest';
 
 @Entity('area')
 // eslint-disable-next-line require-jsdoc
@@ -22,6 +23,8 @@ export default class Area {
   public assets: Asset[];
   @OneToMany(_type => ElementRequest, elementRequests => elementRequests.area)
   public elementRequests: ElementRequest[];
+  @OneToMany(_type => ToolRequest, toolRequests => toolRequests.area)
+  public toolRequests: ToolRequest[];
 
   public constructor(name: string, code: string, sector: Sector) {
     this.name = name;

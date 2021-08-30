@@ -39,12 +39,12 @@ export default class ConsumptionService {
         let index = productsId.indexOf(productId);
         let quantity = quantities[index];
         const consumption = new Consumption(quantity, product, departure);
-        if (workOrder) {
-          consumption.setWorkOrder(workOrder);
-        }
         await this.consumptionRepository.persist(consumption);
         await this.stockDepartureService.setStockDeparture(departure, product, quantity);
       }
+    }
+    if (workOrder) {
+      departure.setWorkOrder(workOrder);
     }
     return departure;
   }

@@ -13,7 +13,16 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
     return await this.repository(WorkOrder).find({
       skip: initialIndex,
       take: limit,
-      relations: ['user', 'asset', 'userWorkOrders', 'userWorkOrders.user'],
+      relations: [
+        'user',
+        'asset',
+        'userWorkOrders',
+        'userWorkOrders.user',
+        'asset.area',
+        'asset.sector',
+        'asset.service',
+        'asset.element',
+      ],
     });
   }
 
@@ -51,6 +60,16 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   public async findByUserId(id: number, initialIndex: number, limit: number): Promise<WorkOrder[]> {
     return await this.repository(WorkOrder).find({
       where: { user: id },
+      relations: [
+        'user',
+        'asset',
+        'userWorkOrders',
+        'userWorkOrders.user',
+        'asset.area',
+        'asset.sector',
+        'asset.service',
+        'asset.element',
+      ],
       skip: initialIndex,
       take: limit,
     });
