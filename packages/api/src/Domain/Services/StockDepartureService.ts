@@ -24,11 +24,11 @@ export default class StockDepartureService {
   public async setStockDeparture(departure: Departure, product: Product, quantity: number): Promise<void> {
     let stock = await this.stockRepository.findOneByStockProduct(product.getId());
     if (!stock) {
-      stock = new Stock(product, 0);
-      await this.stockRepository.persist(stock);
+      stock = await this.stockRepository.persist(new Stock(product, -quantity));
+    } else {
+      const actualQuantity = stock.getQuantity();
+      stock.setQuantity(actualQuantity - quantity);
     }
-    const actualQuantity = stock.getQuantity();
-    stock.setQuantity(actualQuantity - quantity);
     const stockDeparture = new StockDeparture(stock, departure);
     await this.stockDepartureRepository.persist(stockDeparture);
     await this.stockRepository.persist(stock);

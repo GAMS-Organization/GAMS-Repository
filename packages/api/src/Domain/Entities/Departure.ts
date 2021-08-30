@@ -1,8 +1,9 @@
 // eslint-disable-next-line require-jsdoc
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import StockDeparture from './StockDeparture';
 import Consumption from './Consumption';
 import Product from './Product';
+import WorkOrder from './WorkOrder';
 
 @Entity('departure')
 // eslint-disable-next-line require-jsdoc
@@ -17,6 +18,9 @@ export default class Departure {
   public consumptions: Consumption[];
   @OneToMany(_type => StockDeparture, stockDepartures => stockDepartures.departure)
   public stockDepartures: StockDeparture[];
+  @OneToOne(_type => WorkOrder)
+  @JoinColumn()
+  public workOrder: WorkOrder;
 
   public constructor(date: string, observations: string) {
     this.date = date;
@@ -33,6 +37,10 @@ export default class Departure {
 
   public getObservations(): string {
     return this.observations;
+  }
+
+  public getWorkOrder(): WorkOrder {
+    return this.workOrder;
   }
 
   public setDate(date: string): void {
@@ -57,5 +65,9 @@ export default class Departure {
 
   public setConsumptions(value: Consumption[]): void {
     this.consumptions = value;
+  }
+
+  public setWorkOrder(workOrder: WorkOrder): void {
+    this.workOrder = workOrder;
   }
 }

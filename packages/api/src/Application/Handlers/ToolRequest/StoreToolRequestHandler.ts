@@ -52,11 +52,6 @@ export default class StoreToolRequestHandler {
 
     const toolUpdated = await this.toolService.updateQuantity(command.getQuantity(), tool, 'borrow');
 
-    console.log(
-      '*********************************************',
-      toolUpdated,
-      '*********************************************',
-    );
     const toolRequest = new ToolRequest(
       toolUpdated,
       user,
