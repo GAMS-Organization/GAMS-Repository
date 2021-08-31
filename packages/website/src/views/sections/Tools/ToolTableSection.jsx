@@ -8,8 +8,10 @@ import ToolTable from '../../components/Table/ToolTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
+import serviceTool from '../../../services/api/tool';
 
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
+import Pagination from '../../components/Pagination/Pagination';
 
 class ToolTableSection extends React.Component {
   constructor(props) {
@@ -19,21 +21,52 @@ class ToolTableSection extends React.Component {
     };
   }
 
-  //se obtienen los productos
-  /*async componentWillMount() {
+  async componentWillMount() {
     await this.listTools();
-  }*/
+  }
 
-  /*listTools = async (page = 1, itemsPerPage = 500) => {
-    const response = await serviceProduct.list(page, itemsPerPage);
-    let products = [];
-    for (const product of response.data.items) {
-      let dataProduct = { visibleData: [product.name], id: product.id.toString() };
-      products.push(dataProduct);
+  listTools = async (page = 1, itemsPerPage = 500) => {
+    const response = await serviceTool.list(page, itemsPerPage);
+    let tools = [];
+    for (const tool of response.data.items) {
+      let dataProduct = { visibleData: [tool.name, tool.totalQuantity, tool.borrowQuantity], id: tool.id.toString() };
+      tools.push(dataProduct);
     }
 
-    this.setState({ product: products, totalPages: response.data.pageCount });
-  };*/
+    this.setState({ tool: tools, totalPages: response.data.pageCount });
+  };
+
+  pagination = () => {
+    const pages = [
+      {
+        text: 'PREV',
+        onClick: () => {
+          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
+        },
+      },
+    ];
+    for (let index = 1; index <= this.state.totalPages; index++) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: async () => {
+            this.listTools(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: 'NEXT',
+      onClick: () => {
+        this.state.page === this.state.totalPages
+          ? this.listTools(this.state.totalPages)
+          : this.listTools(this.state.page + 1);
+      },
+    });
+    return pages;
+  };
 
   render() {
     const { classes } = this.props;
@@ -53,6 +86,11 @@ class ToolTableSection extends React.Component {
                 listTools={this.listTools}
               />
             </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem>
+          <Card className={classes.cardCenter}>
+            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>
