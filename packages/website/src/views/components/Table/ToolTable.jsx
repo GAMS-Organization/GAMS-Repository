@@ -57,12 +57,12 @@ class ToolTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<UpdateProductSection
-          product={this.state.product}
+        <UpdateToolSection
+          product={this.state.tool}
           open={this.state.modal}
           close={this.closeModal}
-          listProducts={this.props.listProducts}
-        />*/}
+          listProducts={this.props.listTools}
+        />
         <div className={classes.searchInputContainer}>
           <CustomInput
             labelText="Buscar"
