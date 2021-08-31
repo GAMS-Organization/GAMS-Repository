@@ -1290,14 +1290,14 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     );
 
     //Create activos
-    await queryRunner.query(
-      `insert into asset values 
-      (1,'E01-110-Ce-PuM1', 'Puerta de madera', '2','22','4','1'),
-      (2,'E01-110-Ce-PuM2', 'Puerta de madera', '2','22','4','1'),
-      (3,'E01-110-Ce-VenM1', 'Ventana exterior', '2','22','4','2'),
-      (4,'E01-110-Ce-VenM2', 'Ventana exterior', '2','22','4','2'),
-      (5,'E01-110-Ce-VenM3', 'Ventana exterior', '2','22','4','2');`,
-    );
+    // await queryRunner.query(
+    //   `insert into asset values
+    //   (1,'E01-110-Ce-PuM1', 'Puerta de madera', '2','22','4','1'),
+    //   (2,'E01-110-Ce-PuM2', 'Puerta de madera', '2','22','4','1'),
+    //   (3,'E01-110-Ce-VenM1', 'Ventana exterior', '2','22','4','2'),
+    //   (4,'E01-110-Ce-VenM2', 'Ventana exterior', '2','22','4','2'),
+    //   (5,'E01-110-Ce-VenM3', 'Ventana exterior', '2','22','4','2');`,
+    // );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
