@@ -42,7 +42,7 @@ class AssetTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-    window.location.reload();
+    this.props.listAssets();
   };
 
   componentWillMount = () => {
@@ -140,6 +140,7 @@ AssetTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listAssets: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(AssetTable);

@@ -42,7 +42,6 @@ class workOrderAdapter {
 
   update(updateResponse) {
     let { status, data } = updateResponse;
-
     if (!isError(status)) {
       return {
         type: 'UPDATED_SUCCESFUL',
@@ -150,6 +149,44 @@ class workOrderAdapter {
       const { code, details } = data.errors;
       return {
         type: 'ASSIGN_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  complete(completeResponse) {
+    let { status, data } = completeResponse;
+    if (!isError(status)) {
+      return {
+        type: 'COMPLETED_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'COMPLETED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  show(showResponse) {
+    let { status, data } = showResponse;
+    if (!isError(status)) {
+      return {
+        data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'SHOW_FAIL',
         error: {
           code: status,
           type: code,

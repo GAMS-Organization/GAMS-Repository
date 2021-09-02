@@ -14,6 +14,9 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import Visibility from '@material-ui/icons/Visibility';
+
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
@@ -21,6 +24,9 @@ import Snackbar from '../Snackbar/Snackbar';
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
 import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
 import AssignWorkOrderSection from '../../sections/WorkOrder/AssignWorkOrderSection';
+import CompleteWorkOrderSection from '../../sections/WorkOrder/CompleteWorkOrderSection';
+import DetailWorkOrderSection from '../../sections/WorkOrder/DetailWorkOrderSection';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 class WorkOrderTable extends React.Component {
   constructor(props) {
@@ -29,6 +35,8 @@ class WorkOrderTable extends React.Component {
       cancelModal: false,
       takeModal: false,
       assignModal: false,
+      completeModal: false,
+      detailModal: false,
       workOrder: {},
       errors: {},
       notification: false,
@@ -37,6 +45,11 @@ class WorkOrderTable extends React.Component {
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
+  };
+
+  handleClickDetail = async prop => {
+    const workOrderDetails = await serviceWorkOrder.show(prop.id);
+    this.setState({ workOrder: workOrderDetails.data.data, detailModal: true });
   };
 
   handleClickCancel = async prop => {
@@ -51,8 +64,18 @@ class WorkOrderTable extends React.Component {
     this.setState({ workOrder: { id: prop.id }, assignModal: true });
   };
 
+  handleClickComplete = async prop => {
+    this.setState({ workOrder: { id: prop.id }, completeModal: true });
+  };
+
   closeModal = () => {
-    this.setState({ cancelModal: false, takeModal: false, assignModal: false });
+    this.setState({
+      cancelModal: false,
+      takeModal: false,
+      assignModal: false,
+      completeModal: false,
+      detailModal: false,
+    });
   };
 
   render() {
@@ -72,6 +95,12 @@ class WorkOrderTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
+        <DetailWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.detailModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />
         <CancelWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.cancelModal}
@@ -87,6 +116,12 @@ class WorkOrderTable extends React.Component {
         <AssignWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.assignModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />
+        <CompleteWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.completeModal}
           close={this.closeModal}
           listWorkOrders={this.props.listWorkOrders}
         />
@@ -118,13 +153,27 @@ class WorkOrderTable extends React.Component {
                   <TableCell className={classes.tableActions}>
                     <Tooltip
                       id="tooltip-top-start"
+                      title="Detalles"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Details"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickDetail(prop)}
+                      >
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
                       title="Cancelar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
                         aria-label="Cancel"
-                        disabled={prop.visibleData[4] === 'cancelada'}
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickCancel(prop)}
                       >
@@ -142,7 +191,8 @@ class WorkOrderTable extends React.Component {
                         disabled={
                           prop.visibleData[4] === 'cancelada' ||
                           prop.visibleData[4] === 'tomada' ||
-                          prop.visibleData[4] === 'asignada'
+                          prop.visibleData[4] === 'asignada' ||
+                          prop.visibleData[4] === 'finalizada'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
@@ -152,7 +202,7 @@ class WorkOrderTable extends React.Component {
                     </Tooltip>
                     <Tooltip
                       id="tooltip-top-start"
-                      title="Assign"
+                      title="Asignar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
                     >
@@ -161,12 +211,28 @@ class WorkOrderTable extends React.Component {
                         disabled={
                           prop.visibleData[4] === 'cancelada' ||
                           prop.visibleData[4] === 'asignada' ||
-                          prop.visibleData[4] === 'tomada'
+                          prop.visibleData[4] === 'tomada' ||
+                          prop.visibleData[4] === 'finalizada'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickAssign(prop)}
                       >
                         <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top-start"
+                      title="Completar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="Complete"
+                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickComplete(prop)}
+                      >
+                        <AssignmentIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
