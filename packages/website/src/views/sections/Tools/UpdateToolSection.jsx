@@ -14,10 +14,10 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceProduct from '../../../services/api/products';
+import serviceTool from '../../../services/api/tool';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
-class UpdateProductSection extends React.Component {
+class UpdateToolSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +28,7 @@ class UpdateProductSection extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log(this.state.tool);
     return this.props !== nextProps || this.state.notification !== nextState.notification;
   }
 
@@ -35,15 +36,14 @@ class UpdateProductSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*updateTool = async e => {
+  updateTool = async e => {
     e.preventDefault();
 
     const formValues = {
       id: this.props.product.id,
-      name: this.state.product.name ? this.state.product.name : this.props.product.name,
     };
 
-    const response = await serviceProduct.update(formValues);
+    const response = await serviceTool.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false });
@@ -52,16 +52,16 @@ class UpdateProductSection extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
-
-  handleChange = event => {
-    this.setState({ product: { ...this.state.product, [event.target.name]: event.target.value } });
   };
 
+  /*handleChange = event => {
+    this.setState({ product: { ...this.state.product, [event.target.name]: event.target.value } });
+  };*/
+
   render() {
-    const { classes, product, Transition, open, close } = this.props;
+    const { classes, tool, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id, name } = product;
+    const { name, totalQuantity, borrowQuantity } = tool;
     return (
       <div>
         <Snackbar
@@ -71,7 +71,7 @@ class UpdateProductSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Producto actualizado correctamente'
+              : 'Herramienta actualizada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -90,28 +90,12 @@ class UpdateProductSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar producto</h4>
+            <h4 className={classes.modalTitle}>Actualizar Herramienta</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.updateProduct}>
+            <form onSubmit={this.updateTool}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
+                <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -123,6 +107,38 @@ class UpdateProductSection extends React.Component {
                       required: true,
                       defaultValue: name,
                       name: 'name',
+                      onChange: this.handleChange,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Cantidad"
+                    id="totalQuantity"
+                    error={errors.totalQuantity}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: totalQuantity,
+                      name: 'totalQuantity',
+                      onChange: this.handleChange,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Cantidad Prestada"
+                    id="borrowQuantity"
+                    error={errors.borrowQuantity}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      required: true,
+                      defaultValue: borrowQuantity,
+                      name: 'borrowQuantity',
                       onChange: this.handleChange,
                     }}
                   />
@@ -142,12 +158,12 @@ class UpdateProductSection extends React.Component {
   }
 }
 
-UpdateProductSection.propTypes = {
+UpdateToolSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  product: PropTypes.object,
+  tool: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
   listProducts: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(UpdateProductSection);
+export default withStyles(modalStyle)(UpdateToolSection);

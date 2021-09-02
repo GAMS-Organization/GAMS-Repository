@@ -15,12 +15,13 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateProductSection from '../../sections/Products/UpdateProductSection';
+import UpdateToolSection from '../../sections/Tools/UpdateToolSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
+import serviceProduct from '../../../services/api/products';
 
 class ToolTable extends React.Component {
   constructor(props) {
@@ -33,6 +34,32 @@ class ToolTable extends React.Component {
       search: '',
     };
   }
+
+  closeNotification = () => {
+    this.setState({ notification: false, errors: {} });
+  };
+
+  handleClickUpdate = prop => {
+    this.setState({
+      tool: { id: prop.id, name: prop.name, totalQuantity: prop.totalQuantity, borrowQuantity: prop.borrowQuantity },
+      modal: true,
+    });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
+  /*deleteProduct = async prop => {
+    const response = await serviceProduct.delete(prop.id);
+
+    if (response.type === 'DELETED_SUCCESFUL') {
+      this.setState({ notification: true });
+      this.props.listProducts();
+    } else {
+      this.setState({ notification: true, errors: response.error });
+    }
+  };*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -58,10 +85,10 @@ class ToolTable extends React.Component {
           close
         />
         <UpdateToolSection
-          product={this.state.tool}
+          tool={this.state.tool}
           open={this.state.modal}
           close={this.closeModal}
-          listProducts={this.props.listTools}
+          listTools={this.props.listTools}
         />
         <div className={classes.searchInputContainer}>
           <CustomInput

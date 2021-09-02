@@ -23,18 +23,18 @@ class tool {
     return toolAdapter.list(listResponse);
   }
 
-  /*async update(dataProduct) {
-    const body = dataProduct;
+  async update(dataTool) {
+    const body = dataTool;
     let updateResponse;
     try {
-      updateResponse = await Api.put(`product/${body.id}`, body);
+      updateResponse = await Api.put(`tool/${body.id}`, body);
     } catch (err) {
       updateResponse = err;
     }
-    return productAdapter.update(updateResponse);
+    return toolAdapter.update(updateResponse);
   }
 
-  async delete(id) {
+  /*async delete(id) {
     let deleteResponse;
 
     try {

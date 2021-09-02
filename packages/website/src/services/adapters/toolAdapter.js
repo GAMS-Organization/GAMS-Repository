@@ -41,7 +41,7 @@ class toolAdapter {
     }
   }
 
-  /*update(updateResponse) {
+  update(updateResponse) {
     let { status, data } = updateResponse;
 
     if (!isError(status)) {
@@ -61,7 +61,7 @@ class toolAdapter {
     }
   }
 
-  delete(deleteResponse) {
+  /*delete(deleteResponse) {
     let { status, data } = deleteResponse;
 
     if (!isError(status)) {
