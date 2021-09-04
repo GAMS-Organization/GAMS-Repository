@@ -23,7 +23,6 @@ class workOrderAdapter {
 
   list(listResponse) {
     let { status, data } = listResponse;
-
     if (!isError(status)) {
       return {
         ...data,
@@ -41,29 +40,8 @@ class workOrderAdapter {
     }
   }
 
-  /*listBySector(listBySectorResponse) {
-    let { status, data } = listBySectorResponse;
-
-    if (!isError(status)) {
-      return {
-        areas: data.data,
-      };
-    } else {
-      const { code, details } = data.errors;
-      return {
-        type: 'LIST_BY_SECTOR_FAIL',
-        error: {
-          code: status,
-          type: code,
-          errors: details.error,
-        },
-      };
-    }
-  }
-
   update(updateResponse) {
     let { status, data } = updateResponse;
-
     if (!isError(status)) {
       return {
         type: 'UPDATED_SUCCESFUL',
@@ -121,7 +99,102 @@ class workOrderAdapter {
         },
       };
     }
-  }*/
+  }
+
+  cancel(dataWorkOrder) {
+    let { status, data } = dataWorkOrder;
+    if (!isError(status)) {
+      return {
+        type: 'CANCEL_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'CANCEL_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  take(takeResponse) {
+    let { status, data } = takeResponse;
+    if (!isError(status)) {
+      return {
+        type: 'TAKE_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'TAKE_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  assign(assignResponse) {
+    let { status, data } = assignResponse;
+    if (!isError(status)) {
+      return {
+        type: 'ASSIGN_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'ASSIGN_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  complete(completeResponse) {
+    let { status, data } = completeResponse;
+    if (!isError(status)) {
+      return {
+        type: 'COMPLETED_SUCCESSFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'COMPLETED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
+
+  show(showResponse) {
+    let { status, data } = showResponse;
+    if (!isError(status)) {
+      return {
+        data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'SHOW_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
 }
 
 export default new workOrderAdapter();

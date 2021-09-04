@@ -10,7 +10,6 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 
 import serviceProduct from '../../../services/api/products';
-import Pagination from '../../components/Pagination/Pagination';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 
 class ProductTableSection extends React.Component {

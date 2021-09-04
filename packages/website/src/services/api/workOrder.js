@@ -1,5 +1,6 @@
 import Api from './api';
 import workOrderAdapter from '../adapters/workOrderAdapter';
+import departureConsumptionStockAdapter from '../adapters/departureConsumptionStockAdapter';
 
 class workOrder {
   async create(dataWorkOrder) {
@@ -55,16 +56,59 @@ class workOrder {
     return workOrderAdapter.update(updateResponse);
   }
 
-  async delete(id) {
-    let deleteResponse;
-
+  async cancel(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let cancelResponse;
     try {
-      deleteResponse = await Api.delete(`workOrder/${id}`);
+      cancelResponse = await Api.put(`workOrder/cancel/${body.id}`, body);
     } catch (err) {
-      deleteResponse = err;
+      cancelResponse = err;
     }
 
-    return workOrderAdapter.delete(deleteResponse);
+    return workOrderAdapter.cancel(cancelResponse);
+  }
+
+  async take(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let takeResponse;
+    try {
+      takeResponse = await Api.put(`workOrder/take/${body.id}`, body);
+    } catch (err) {
+      takeResponse = err;
+    }
+    return workOrderAdapter.take(takeResponse);
+  }
+
+  async assign(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let assignResponse;
+    try {
+      assignResponse = await Api.put(`workOrder/assign/${body.id}`, body);
+    } catch (err) {
+      assignResponse = err;
+    }
+    return workOrderAdapter.assign(assignResponse);
+  }
+
+  async complete(dataWorkOrder) {
+    const body = dataWorkOrder;
+    let completeResponse;
+    try {
+      completeResponse = await Api.post(`workOrder/complete/${body.id}`, body);
+    } catch (err) {
+      completeResponse = err;
+    }
+    return workOrderAdapter.complete(completeResponse);
+  }
+
+  async show(idWorkOrder) {
+    let completeResponse;
+    try {
+      completeResponse = await Api.get(`workOrder/${idWorkOrder}`);
+    } catch (err) {
+      completeResponse = err;
+    }
+    return workOrderAdapter.show(completeResponse);
   }
 }
 

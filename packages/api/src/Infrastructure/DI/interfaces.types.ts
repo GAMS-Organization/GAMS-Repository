@@ -22,6 +22,10 @@ const INTERFACES = {
   IEventRepository: Symbol.for('IEventRepository'),
   IUserEventRepository: Symbol.for('IUserEventRepository'),
   IStorageService: Symbol.for('IStorageService'),
+  IEducationalElementRepository: Symbol.for('IEducationalElementRepository'),
+  IElementRequestRepository: Symbol.for('IElementRequestRepository'),
+  IToolRepository: Symbol.for('IToolRepository'),
+  IToolRequestRepository: Symbol.for('IToolRequestRepository'),
 };
 
 export { INTERFACES };

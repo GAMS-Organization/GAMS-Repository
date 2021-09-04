@@ -24,6 +24,7 @@ import Asset from 'views/containers/Asset.jsx';
 import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
 import Activities from 'views/containers/Activities';
+import ListWorkOrder from 'views/containers/ListWorkOrder';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -63,6 +64,16 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Nueva órden de trabajo',
+        roles: ['admin', 'personal', 'user'],
+      },
+      {
+        path: '/ListWorkOrder',
+        name: 'Ver O.T.',
+        icon: OfflineBolt,
+        component: ListWorkOrder,
+        layout: '/admin',
+        group: true,
+        title: 'Ver O.T.',
         roles: ['admin', 'personal', 'user'],
       },
     ],

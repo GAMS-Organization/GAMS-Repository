@@ -23,6 +23,7 @@ import { InputLabel, Input } from '@material-ui/core';
 import serviceService from '../../../services/api/service';
 import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
+import CustomInput from '../../components/CustomInput/CustomInput';
 
 class NewAssetSection extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class NewAssetSection extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
+      description: '',
     };
   }
 
@@ -108,18 +110,28 @@ class NewAssetSection extends React.Component {
   //Se crea el activo
   createAsset = async e => {
     e.preventDefault();
+    const formElements = e.target.elements;
 
     const formValues = {
       sector: this.state.selectedSector,
       area: this.state.selectedArea,
       service: this.state.selectedService,
       element: this.state.selectedElement,
+      description: this.state.description,
     };
 
     const response = await serviceAsset.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
+      formElements.namedItem('description').value = '';
+      this.setState({
+        notification: true,
+        selectedService: '',
+        selectedSector: '',
+        selectedArea: '',
+        selectedElement: '',
+        description: '',
+      });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -288,6 +300,20 @@ class NewAssetSection extends React.Component {
                           ))}
                         </Select>
                       </FormControl>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={10}>
+                      <CustomInput
+                        labelText="Descripcion"
+                        id="description"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          required: false,
+                          name: 'description',
+                          onChange: e => this.setState({ description: e.target.value }),
+                        }}
+                      />
                     </GridItem>
                   </GridContainer>
                 </CardBody>

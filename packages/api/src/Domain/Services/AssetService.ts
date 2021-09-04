@@ -53,6 +53,7 @@ export default class AssetService {
     commandArea: string,
     commandService: string,
     commandElement: string,
+    commandDescription: string,
   ): Promise<Asset> {
     const sector = await this.sectorRepository.findOneBySectorName(commandSector);
     if (!sector) {
@@ -73,7 +74,7 @@ export default class AssetService {
 
     const code = await this.createAssetCode(sector, area, service, element);
 
-    const asset = new Asset(sector, area, service, element, code);
+    const asset = new Asset(sector, area, service, element, code, commandDescription);
 
     return await this.assetRepository.persist(asset);
   }

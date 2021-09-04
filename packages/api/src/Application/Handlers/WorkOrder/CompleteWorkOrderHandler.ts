@@ -35,17 +35,23 @@ export default class CompleteWorkOrderHandler {
 
     workOrder = await this.workOrderRepository.persist(workOrder);
 
-    const departure = new Departure(
-      command.getRealizationDate(),
-      `Consumido por la órden de trabajo con id ${command.getId()}`,
-    );
+    if (command.getProductsId().length !== 0) {
+      let departure = new Departure(
+        command.getRealizationDate(),
+        `Consumido por la órden de trabajo con id ${command.getId()}`,
+      );
 
-    await this.consumptionService.setConsumptionToDeparture(
-      await this.departureRepository.persist(departure),
-      command.getProductsId(),
-      command.getQuantities(),
-      workOrder,
-    );
+      departure = await this.departureRepository.persist(departure);
+
+      departure = await this.consumptionService.setConsumptionToDeparture(
+        departure,
+        command.getProductsId(),
+        command.getQuantities(),
+        workOrder,
+      );
+
+      await this.departureRepository.persist(departure);
+    }
 
     workOrder = await this.workOrderRepository.findOneById(command.getId());
 
