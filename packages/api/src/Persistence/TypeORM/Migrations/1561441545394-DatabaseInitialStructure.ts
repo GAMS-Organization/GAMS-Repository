@@ -33,6 +33,14 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
+      'CREATE TABLE `tool` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `totalQuantity` int NOT NULL, `borrowQuantity` int NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      undefined,
+    );
+    await queryRunner.query(
+      'CREATE TABLE `tool_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` varchar(255) NOT NULL, `quantity` int NOT NULL, `toolId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      undefined,
+    );
+    await queryRunner.query(
       "CREATE TABLE `users` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(255) NOT NULL, `surname` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `state` varchar(255) NOT NULL DEFAULT 'active', `createdAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), `updatedAt` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), UNIQUE INDEX `IDX_97672ac88f789774dd47f7c8be` (`email`), PRIMARY KEY (`id`)) ENGINE=InnoDB",
       undefined,
     );
@@ -89,11 +97,11 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `departure` (`id` int NOT NULL AUTO_INCREMENT, `date` varchar(255) NOT NULL, `observations` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `departure` (`id` int NOT NULL AUTO_INCREMENT, `date` varchar(255) NOT NULL, `observations` varchar(255) NOT NULL,  `workOrderId` int NULL, UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `consumption` (`id` int NOT NULL AUTO_INCREMENT, `quantity` int NOT NULL, `productId` int NULL, `departureId` int NULL, `workOrderId` int NULL, UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `consumption` (`id` int NOT NULL AUTO_INCREMENT, `quantity` int NOT NULL, `productId` int NULL, `departureId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -130,6 +138,18 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     );
     await queryRunner.query(
       'ALTER TABLE `element_request` ADD CONSTRAINT `FK_600aa92c0b433d38e08e83b7f1c` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `tool_request` ADD CONSTRAINT `FK_eb17bb26807cdcf5f6d388eb345` FOREIGN KEY (`toolId`) REFERENCES `tool`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `tool_request` ADD CONSTRAINT `FK_845d9daf45d8ca8509c312b2051` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      undefined,
+    );
+    await queryRunner.query(
+      'ALTER TABLE `tool_request` ADD CONSTRAINT `FK_81dc7fa40112c9880b2655e2738` FOREIGN KEY (`areaId`) REFERENCES `area`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
     await queryRunner.query(
@@ -209,13 +229,13 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'ALTER TABLE `consumption` ADD CONSTRAINT `FK_23d383f2776aa87b544e24d392a` FOREIGN KEY (`workOrderId`) REFERENCES `work_order`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
+      'ALTER TABLE `departure` ADD CONSTRAINT `FK_23d383f2776aa87b544e24d392a` FOREIGN KEY (`workOrderId`) REFERENCES `work_order`(`id`) ON DELETE NO ACTION ON UPDATE NO ACTION',
       undefined,
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_23d383f2776aa87b544e24d392a`', undefined);
+    await queryRunner.query('ALTER TABLE `departure` DROP FOREIGN KEY `FK_23d383f2776aa87b544e24d392a`', undefined);
     await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_3cf430ce18c99afa34c6f607750`', undefined);
     await queryRunner.query('ALTER TABLE `consumption` DROP FOREIGN KEY `FK_461bbf4235654cac96842e8f5f7`', undefined);
     await queryRunner.query(
@@ -241,6 +261,9 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('ALTER TABLE `element` DROP FOREIGN KEY `FK_42e4c2a1cfb51ff941af50e3d38`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_2046c91e37525f7609487efdde8`', undefined);
     await queryRunner.query('ALTER TABLE `work_order` DROP FOREIGN KEY `FK_0967520a5843ce4e307fb1302ec`', undefined);
+    await queryRunner.query('ALTER TABLE `tool_request` DROP FOREIGN KEY `FK_81dc7fa40112c9880b2655e2738`', undefined);
+    await queryRunner.query('ALTER TABLE `tool_request` DROP FOREIGN KEY `FK_845d9daf45d8ca8509c312b2051`', undefined);
+    await queryRunner.query('ALTER TABLE `tool_request` DROP FOREIGN KEY `FK_eb17bb26807cdcf5f6d388eb345`', undefined);
     await queryRunner.query(
       'ALTER TABLE `element_request` DROP FOREIGN KEY `FK_600aa92c0b433d38e08e83b7f1c`',
       undefined,
@@ -265,7 +288,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     );
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_86033897c009fcca8b6505d6be2`', undefined);
     await queryRunner.query('ALTER TABLE `user_roles` DROP FOREIGN KEY `FK_472b25323af01488f1f66a06b67`', undefined);
-    await queryRunner.query('DROP INDEX `REL_23d383f2776aa87b544e24d392` ON `consumption`', undefined);
+    await queryRunner.query('DROP INDEX `REL_23d383f2776aa87b544e24d392` ON `departure`', undefined);
     await queryRunner.query('DROP TABLE `consumption`', undefined);
     await queryRunner.query('DROP TABLE `departure`', undefined);
     await queryRunner.query('DROP TABLE `stock_departure`', undefined);
@@ -291,6 +314,8 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
     await queryRunner.query('DROP TABLE `work_order`', undefined);
     await queryRunner.query('DROP INDEX `IDX_97672ac88f789774dd47f7c8be` ON `users`', undefined);
     await queryRunner.query('DROP TABLE `users`', undefined);
+    await queryRunner.query('DROP TABLE `tool_request`', undefined);
+    await queryRunner.query('DROP TABLE `tool`', undefined);
     await queryRunner.query('DROP TABLE `element_request`', undefined);
     await queryRunner.query('DROP TABLE `educational_element`', undefined);
     await queryRunner.query('DROP TABLE `user_event`', undefined);

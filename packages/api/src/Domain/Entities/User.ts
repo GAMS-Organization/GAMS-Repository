@@ -7,6 +7,7 @@ import UserWorkOrder from './UserWorkOrder';
 import WorkOrder from './WorkOrder';
 import UserEvent from './UserEvent';
 import ElementRequest from './ElementRequest';
+import ToolRequest from './ToolRequest';
 
 @Entity('users')
 // eslint-disable-next-line require-jsdoc
@@ -37,6 +38,8 @@ export default class User {
   public workOrders: WorkOrder[];
   @OneToMany(_type => ElementRequest, elementRequest => elementRequest.user)
   public elementRequests: ElementRequest[];
+  @OneToMany(_type => ToolRequest, toolRequest => toolRequest.user)
+  public toolRequests: ToolRequest[];
   @OneToMany(_type => UserEvent, userEvent => userEvent.user)
   public userEvents: UserEvent[];
 

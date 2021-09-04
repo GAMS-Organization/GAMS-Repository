@@ -250,6 +250,36 @@ import UpdateEducationalElementHandler from '../../Application/Handlers/Educatio
 import ShowWorkOrderAction from '../../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
 import ShowWorkOrderAdapter from '../../API/Http/Adapters/WorkOrder/ShowWorkOrderAdapter';
 import ShowWorkOrderHandler from '../../Application/Handlers/WorkOrder/ShowWorkOrderHandler';
+import IToolRepository from '../../Domain/Interfaces/IToolRepository';
+import TypeToolRepository from '../../Persistence/TypeORM/Repositories/TypeToolRepository';
+import IToolRequestRepository from '../../Domain/Interfaces/IToolRequestRepository';
+import TypeToolRequestRepository from '../../Persistence/TypeORM/Repositories/TypeToolRequestRepository';
+import ToolService from '../../Domain/Services/ToolService';
+import ToolRequestService from '../../Domain/Services/ToolRequestService';
+import StoreToolHandler from '../../Application/Handlers/Tool/StoreToolHandler';
+import UpdateToolHandler from '../../Application/Handlers/Tool/UpdateToolHandler';
+import StoreToolRequestHandler from '../../Application/Handlers/ToolRequest/StoreToolRequestHandler';
+import UpdateToolRequestHandler from '../../Application/Handlers/ToolRequest/UpdateToolRequestHandler';
+import StoreToolAdapter from '../../API/Http/Adapters/Tool/StoreToolAdapter';
+import UpdateToolAdapter from '../../API/Http/Adapters/Tool/UpdateToolAdapter';
+import StoreToolRequestAdapter from '../../API/Http/Adapters/ToolRequest/StoreToolRequestAdapter';
+import UpdateToolRequestAdapter from '../../API/Http/Adapters/ToolRequest/UpdateToolRequestAdapter';
+import StoreToolAction from '../../API/Http/Actions/Tool/StoreToolAction';
+import UpdateToolAction from '../../API/Http/Actions/Tool/UpdateToolAction';
+import StoreToolRequestAction from '../../API/Http/Actions/ToolRequest/StoreToolRequestAction';
+import UpdateToolRequestAction from '../../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
+import DestroyEducationalElementAction from '../../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
+import DestroyElementRequestAction from '../../API/Http/Actions/ElementRequest/DestroyElementRequestAction';
+import DestroyToolAction from '../../API/Http/Actions/Tool/DestroyToolAction';
+import DestroyToolRequestAction from '../../API/Http/Actions/ToolRequest/DestroyToolRequestAction';
+import DestroyToolRequestAdapter from '../../API/Http/Adapters/ToolRequest/DestroyToolRequestAdapter';
+import DestroyToolAdapter from '../../API/Http/Adapters/Tool/DestroyToolAdapter';
+import DestroyElementRequestAdapter from '../../API/Http/Adapters/ElementRequest/DestroyElementRequestAdapter';
+import DestroyEducationalElementAdapter from '../../API/Http/Adapters/EducationalElement/DestroyEducationalElementAdapter';
+import DestroyToolRequestHandler from '../../Application/Handlers/ToolRequest/DestroyToolRequestHandler';
+import DestroyToolHandler from '../../Application/Handlers/Tool/DestroyToolHandler';
+import DestroyElementRequestHandler from '../../Application/Handlers/ElementRequest/DestroyElementRequestHandler';
+import DestroyEducationalElementHandler from '../../Application/Handlers/EducationalElement/DestroyEducationalElementHandler';
 const DIContainer = new Container();
 
 /**
@@ -333,9 +363,19 @@ DIContainer.bind<DestroyEventAction>(DestroyEventAction).toSelf();
 
 DIContainer.bind<StoreEducationalElementAction>(StoreEducationalElementAction).toSelf();
 DIContainer.bind<UpdateEducationalElementAction>(UpdateEducationalElementAction).toSelf();
+DIContainer.bind<DestroyEducationalElementAction>(DestroyEducationalElementAction).toSelf();
 
 DIContainer.bind<StoreElementRequestAction>(StoreElementRequestAction).toSelf();
 DIContainer.bind<UpdateElementRequestAction>(UpdateElementRequestAction).toSelf();
+DIContainer.bind<DestroyElementRequestAction>(DestroyElementRequestAction).toSelf();
+
+DIContainer.bind<StoreToolAction>(StoreToolAction).toSelf();
+DIContainer.bind<UpdateToolAction>(UpdateToolAction).toSelf();
+DIContainer.bind<DestroyToolAction>(DestroyToolAction).toSelf();
+
+DIContainer.bind<StoreToolRequestAction>(StoreToolRequestAction).toSelf();
+DIContainer.bind<UpdateToolRequestAction>(UpdateToolRequestAction).toSelf();
+DIContainer.bind<DestroyToolRequestAction>(DestroyToolRequestAction).toSelf();
 
 /**
  * Adapters
@@ -404,9 +444,19 @@ DIContainer.bind<DestroyEventAdapter>(DestroyEventAdapter).toSelf();
 
 DIContainer.bind<StoreEducationalElementAdapter>(StoreEducationalElementAdapter).toSelf();
 DIContainer.bind<UpdateEducationalElementAdapter>(UpdateEducationalElementAdapter).toSelf();
+DIContainer.bind<DestroyEducationalElementAdapter>(DestroyEducationalElementAdapter).toSelf();
 
 DIContainer.bind<StoreElementRequestAdapter>(StoreElementRequestAdapter).toSelf();
 DIContainer.bind<UpdateElementRequestAdapter>(UpdateElementRequestAdapter).toSelf();
+DIContainer.bind<DestroyElementRequestAdapter>(DestroyElementRequestAdapter).toSelf();
+
+DIContainer.bind<StoreToolAdapter>(StoreToolAdapter).toSelf();
+DIContainer.bind<UpdateToolAdapter>(UpdateToolAdapter).toSelf();
+DIContainer.bind<DestroyToolAdapter>(DestroyToolAdapter).toSelf();
+
+DIContainer.bind<StoreToolRequestAdapter>(StoreToolRequestAdapter).toSelf();
+DIContainer.bind<UpdateToolRequestAdapter>(UpdateToolRequestAdapter).toSelf();
+DIContainer.bind<DestroyToolRequestAdapter>(DestroyToolRequestAdapter).toSelf();
 
 /**
  * Handlers
@@ -475,9 +525,19 @@ DIContainer.bind<DestroyEventHandler>(DestroyEventHandler).toSelf();
 
 DIContainer.bind<StoreEducationalElementHandler>(StoreEducationalElementHandler).toSelf();
 DIContainer.bind<UpdateEducationalElementHandler>(UpdateEducationalElementHandler).toSelf();
+DIContainer.bind<DestroyEducationalElementHandler>(DestroyEducationalElementHandler).toSelf();
 
 DIContainer.bind<StoreElementRequestHandler>(StoreElementRequestHandler).toSelf();
 DIContainer.bind<UpdateElementRequestHandler>(UpdateElementRequestHandler).toSelf();
+DIContainer.bind<DestroyElementRequestHandler>(DestroyElementRequestHandler).toSelf();
+
+DIContainer.bind<StoreToolHandler>(StoreToolHandler).toSelf();
+DIContainer.bind<UpdateToolHandler>(UpdateToolHandler).toSelf();
+DIContainer.bind<DestroyToolHandler>(DestroyToolHandler).toSelf();
+
+DIContainer.bind<StoreToolRequestHandler>(StoreToolRequestHandler).toSelf();
+DIContainer.bind<UpdateToolRequestHandler>(UpdateToolRequestHandler).toSelf();
+DIContainer.bind<DestroyToolRequestHandler>(DestroyToolRequestHandler).toSelf();
 
 /*
  * Services
@@ -502,6 +562,8 @@ DIContainer.bind<WorkOrderService>(WorkOrderService).toSelf();
 DIContainer.bind<EventService>(EventService).toSelf();
 DIContainer.bind<EducationalElementService>(EducationalElementService).toSelf();
 DIContainer.bind<ElementRequestService>(ElementRequestService).toSelf();
+DIContainer.bind<ToolService>(ToolService).toSelf();
+DIContainer.bind<ToolRequestService>(ToolRequestService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);
@@ -523,7 +585,9 @@ DIContainer.bind<IProductRepository>(INTERFACES.IProductRepository).to(TypeProdu
 DIContainer.bind<IEducationalElementRepository>(INTERFACES.IEducationalElementRepository).to(
   TypeEducationalElementRepository,
 );
+DIContainer.bind<IToolRepository>(INTERFACES.IToolRepository).to(TypeToolRepository);
 DIContainer.bind<IElementRequestRepository>(INTERFACES.IElementRequestRepository).to(TypeElementRequestRepository);
+DIContainer.bind<IToolRequestRepository>(INTERFACES.IToolRequestRepository).to(TypeToolRequestRepository);
 DIContainer.bind<ISectorRepository>(INTERFACES.ISectorRepository).to(TypeSectorRepository);
 DIContainer.bind<IAreaRepository>(INTERFACES.IAreaRepository).to(TypeAreaRepository);
 DIContainer.bind<IAreaServiceRepository>(INTERFACES.IAreaServiceRepository).to(TypeAreaServiceRepository);
