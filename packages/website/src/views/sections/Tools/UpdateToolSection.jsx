@@ -28,7 +28,6 @@ class UpdateToolSection extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(this.state.tool);
     return this.props !== nextProps || this.state.notification !== nextState.notification;
   }
 
@@ -39,15 +38,21 @@ class UpdateToolSection extends React.Component {
   updateTool = async e => {
     e.preventDefault();
 
-    const formValues = {
-      id: this.props.product.id,
-    };
+    const fields = ['name', 'totalQuantity', 'borrowQuantity'];
+    const formElements = e.target.elements;
+    const formValues = fields
+      .map(field => ({
+        [field]: formElements.namedItem(field).value,
+      }))
+      .reduce((current, next) => ({ ...current, ...next }));
+
+    formValues.id = this.props.tool.id;
 
     const response = await serviceTool.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false });
-      this.props.listProducts();
+      this.props.listTools();
       this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -107,7 +112,6 @@ class UpdateToolSection extends React.Component {
                       required: true,
                       defaultValue: name,
                       name: 'name',
-                      onChange: this.handleChange,
                     }}
                   />
                 </GridItem>
@@ -123,7 +127,6 @@ class UpdateToolSection extends React.Component {
                       required: true,
                       defaultValue: totalQuantity,
                       name: 'totalQuantity',
-                      onChange: this.handleChange,
                     }}
                   />
                 </GridItem>
@@ -139,7 +142,6 @@ class UpdateToolSection extends React.Component {
                       required: true,
                       defaultValue: borrowQuantity,
                       name: 'borrowQuantity',
-                      onChange: this.handleChange,
                     }}
                   />
                 </GridItem>
@@ -163,7 +165,7 @@ UpdateToolSection.propTypes = {
   tool: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
-  listProducts: PropTypes.func,
+  listTools: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(UpdateToolSection);

@@ -40,8 +40,14 @@ class ToolTable extends React.Component {
   };
 
   handleClickUpdate = prop => {
+    console.log(prop);
     this.setState({
-      tool: { id: prop.id, name: prop.name, totalQuantity: prop.totalQuantity, borrowQuantity: prop.borrowQuantity },
+      tool: {
+        id: prop.id,
+        name: prop.visibleData[0],
+        totalQuantity: prop.visibleData[1],
+        borrowQuantity: prop.visibleData[2],
+      },
       modal: true,
     });
   };
