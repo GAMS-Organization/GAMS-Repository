@@ -34,17 +34,16 @@ class tool {
     return toolAdapter.update(updateResponse);
   }
 
-  /*async delete(id) {
+  async delete(id) {
     let deleteResponse;
-
     try {
-      deleteResponse = await Api.delete(`product/${id}`);
+      deleteResponse = await Api.delete(`tool/${id}`);
     } catch (err) {
       deleteResponse = err;
     }
 
-    return productAdapter.delete(deleteResponse);
-  }*/
+    return toolAdapter.delete(deleteResponse);
+  }
 }
 
 export default new tool();

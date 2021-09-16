@@ -61,7 +61,7 @@ class toolAdapter {
     }
   }
 
-  /*delete(deleteResponse) {
+  delete(deleteResponse) {
     let { status, data } = deleteResponse;
 
     if (!isError(status)) {
@@ -79,7 +79,7 @@ class toolAdapter {
         },
       };
     }
-  }*/
+  }
 }
 
 export default new toolAdapter();

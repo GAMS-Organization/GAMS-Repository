@@ -21,7 +21,7 @@ import Snackbar from '../Snackbar/Snackbar';
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
-import serviceProduct from '../../../services/api/products';
+import serviceTool from '../../../services/api/tool.js';
 
 class ToolTable extends React.Component {
   constructor(props) {
@@ -40,7 +40,6 @@ class ToolTable extends React.Component {
   };
 
   handleClickUpdate = prop => {
-    console.log(prop);
     this.setState({
       tool: {
         id: prop.id,
@@ -56,16 +55,16 @@ class ToolTable extends React.Component {
     this.setState({ modal: false });
   };
 
-  /*deleteProduct = async prop => {
-    const response = await serviceProduct.delete(prop.id);
+  handleClickDelete = async prop => {
+    const response = await serviceTool.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listProducts();
+      this.props.listTools();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -159,7 +158,7 @@ class ToolTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteProduct(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
