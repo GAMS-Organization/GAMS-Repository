@@ -12,14 +12,24 @@ export default class MailerService {
     this.userService = userService;
     this.sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
-
+  //@ts-ignore
   public async sendEmail(subject: string, workOrder: WorkOrder, type: string, userId?: number[]) {
     //Recipient contiene el/los email del destinatario
+    const { dynamicTemplateData, templateId } = this.getCustomMessage(type, workOrder);
     const msg = {
-      to: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
       from: process.env.EMAIL_SENDER, // Change to your verified sender
       subject: subject,
-      text: this.getCustomMessage(type, workOrder),
+      templateId: templateId,
+      personalizations: [
+        {
+          to: [
+            {
+              email: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
+            },
+          ],
+          dynamicTemplateData: dynamicTemplateData,
+        },
+      ],
     };
     this.sgMail
       .send(msg)
@@ -30,7 +40,7 @@ export default class MailerService {
         console.error(error);
       });
   }
-
+  //@ts-ignore
   private async getRecipientMail(usersId?: number[]) {
     const user: User[] = [];
     if (usersId) {
@@ -53,115 +63,130 @@ export default class MailerService {
     return recipient;
   }
 
-  private getCustomMessage(type: string, workOrder: WorkOrder): string {
-    let message: string = '';
+  private getCustomMessage(type: string, workOrder: WorkOrder): { dynamicTemplateData: object; templateId: string } {
+    let dynamicTemplateData: object;
+    let templateId: string;
     switch (type) {
       case 'newWorkOrder':
-        message =
-          `Al elemento ${workOrder
+        dynamicTemplateData = {
+          author: `${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()}`,
+          element: workOrder
             .getAsset()
             .getElement()
-            .getName()} que se encuentra dentro del sector ` +
-          `${workOrder
+            .getName(),
+          sector: workOrder
             .getAsset()
             .getSector()
-            .getName()}, área ${workOrder
+            .getName(),
+          area: workOrder
             .getAsset()
             .getArea()
-            .getName()}, le ha ` +
-          `sido asignada una nueva órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
-          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+            .getName(),
+          comment: workOrder.getComment(),
+          asset: workOrder.getAsset().getCode(),
+          priority: workOrder.getPriority(),
+          orderDate: workOrder.getOrderDate(),
+        };
+        templateId = process.env.MAIL_TEMPLATE_CREATE_ID;
         break;
       case 'assignWorkOrder':
-        message =
-          `Te ha sido asignada una orden de trabajo` +
-          ' ' +
-          `Al elemento ${workOrder
+        dynamicTemplateData = {
+          author: `${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()}`,
+          element: workOrder
             .getAsset()
             .getElement()
-            .getName()} que se encuentra dentro del sector ` +
-          `${workOrder
+            .getName(),
+          sector: workOrder
             .getAsset()
             .getSector()
-            .getName()}, área ${workOrder
+            .getName(),
+          area: workOrder
             .getAsset()
             .getArea()
-            .getName()}, le ha ` +
-          `sido asignada una nueva órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
-          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+            .getName(),
+          comment: workOrder.getComment(),
+          asset: workOrder.getAsset().getCode(),
+          priority: workOrder.getPriority(),
+          workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
+          orderDate: workOrder.getOrderDate(),
+          startDate: workOrder.getStartDate(),
+        };
+        templateId = process.env.MAIL_TEMPLATE_ASSIGN_ID;
         break;
       case 'takeWorkOrder':
-        message =
-          `Una orden de trabajo ha sido tomada por ${workOrder
-            .getUserWorkOrders()[0]
-            .getUser()
-            .getName()} ${workOrder
-            .getUserWorkOrders()[0]
-            .getUser()
-            .getSurname()} ` +
-          ' ' +
-          `Al elemento ${workOrder
+        dynamicTemplateData = {
+          author: `${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()}`,
+          element: workOrder
             .getAsset()
             .getElement()
-            .getName()} que se encuentra dentro del sector ` +
-          `${workOrder
+            .getName(),
+          sector: workOrder
             .getAsset()
             .getSector()
-            .getName()}, área ${workOrder
+            .getName(),
+          area: workOrder
             .getAsset()
             .getArea()
-            .getName()}, le ha ` +
-          `sido asignada una nueva órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} ha dejado el siguiente ` +
-          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
-        break;
-      case 'completeWorkOrder':
-        message =
-          `La orden de trabajo ha sido completada por ${workOrder.getWorkersNameByUserWorkOrders().join(', ')}` +
-          ' ' +
-          `Al elemento ${workOrder
-            .getAsset()
-            .getElement()
-            .getName()} que se encuentra dentro del sector ` +
-          `${workOrder
-            .getAsset()
-            .getSector()
-            .getName()}, área ${workOrder
-            .getAsset()
-            .getArea()
-            .getName()}, le había ` +
-          `sido asignada una órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} había dejado el siguiente ` +
-          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder
-            .getAsset()
-            .getCode()}` +
-          ' ' +
-          `Descripción del trabajo: ${workOrder.getTaskDescription()}.`;
+            .getName(),
+          comment: workOrder.getComment(),
+          asset: workOrder.getAsset().getCode(),
+          priority: workOrder.getPriority(),
+          workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
+          orderDate: workOrder.getOrderDate(),
+          startDate: workOrder.getStartDate(),
+        };
+        templateId = process.env.MAIL_TEMPLATE_TAKE_ID;
         break;
       case 'cancelWorkOrder':
-        message =
-          `La orden de trabajo ha sido cancelada` +
-          ' ' +
-          `Al elemento ${workOrder
+        dynamicTemplateData = {
+          author: `${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()}`,
+          element: workOrder
             .getAsset()
             .getElement()
-            .getName()} que se encuentra dentro del sector ` +
-          `${workOrder
+            .getName(),
+          sector: workOrder
             .getAsset()
             .getSector()
-            .getName()}, área ${workOrder
+            .getName(),
+          area: workOrder
             .getAsset()
             .getArea()
-            .getName()}, le ha ` +
-          `sido cancelada la órden de trabajo.` +
-          `El usuario ${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()} había dejado el siguiente ` +
-          `comentario: ${workOrder.getComment()}. Código del activo correspondiente: ${workOrder.getAsset().getCode()}`;
+            .getName(),
+          comment: workOrder.getComment(),
+          asset: workOrder.getAsset().getCode(),
+          taskDescription: workOrder.getTaskDescription(),
+        };
+        templateId = process.env.MAIL_TEMPLATE_CANCEL_ID;
+        break;
+      case 'completeWorkOrder':
+        dynamicTemplateData = {
+          author: `${workOrder.getUser().getName()} ${workOrder.getUser().getSurname()}`,
+          element: workOrder
+            .getAsset()
+            .getElement()
+            .getName(),
+          sector: workOrder
+            .getAsset()
+            .getSector()
+            .getName(),
+          area: workOrder
+            .getAsset()
+            .getArea()
+            .getName(),
+          comment: workOrder.getComment(),
+          asset: workOrder.getAsset().getCode(),
+          priority: workOrder.getPriority(),
+          workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
+          orderDate: workOrder.getOrderDate(),
+          startDate: workOrder.getStartDate(),
+          realizationDate: workOrder.getRealizationDate(),
+          taskDescription: workOrder.getTaskDescription(),
+        };
+        templateId = process.env.MAIL_TEMPLATE_COMPLETE_ID;
         break;
       default:
         break;
     }
-    return message;
+    return { dynamicTemplateData, templateId };
   }
 }
