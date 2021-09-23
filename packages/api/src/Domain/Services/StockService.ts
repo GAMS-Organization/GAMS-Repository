@@ -9,6 +9,7 @@ import StockEntryService from './StockEntryService';
 import Departure from '../Entities/Departure';
 import IDepartureRepository from '../Interfaces/IDepartureRepository';
 import StockDepartureService from './StockDepartureService';
+import { StockStates } from '../Enums/StockStates';
 
 @injectable()
 export default class StockService {
@@ -73,5 +74,16 @@ export default class StockService {
       await this.stockRepository.persist(stock);
     }
     return stock;
+  }
+
+  public async getCriticalAndInsufficientStock(): Promise<Stock[]> {
+    const stock = await this.stockRepository.findAll();
+    const criticalAndInsufficientStock = [];
+    stock.forEach((item: Stock) => {
+      if (item.getState() !== StockStates.stock_sufficient) {
+        criticalAndInsufficientStock.push(item);
+      }
+    });
+    return criticalAndInsufficientStock;
   }
 }
