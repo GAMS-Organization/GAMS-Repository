@@ -27,6 +27,7 @@ import WorkOrder from 'views/containers/WorkOrder';
 import Activities from 'views/containers/Activities';
 import ListWorkOrder from 'views/containers/ListWorkOrder';
 import Tools from 'views/containers/Tools';
+import CreateToolRequestSection from 'views/sections/Tools/CreateToolRequestSection';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -163,13 +164,32 @@ const dashboardRoutes = [
     ],
   },
   {
-    path: '/tool',
     name: 'Herramientas',
     icon: BuildIcon,
-    component: Tools,
+    group: true,
     layout: '/admin',
     title: 'Herramientas',
-    roles: ['admin'],
+    roles: ['admin', 'personal', 'user'],
+    children: [
+      {
+        path: '/tools',
+        name: 'Gestión',
+        icon: BuildIcon,
+        component: Tools,
+        layout: '/admin',
+        title: 'Gestión',
+        roles: ['admin', 'personal', 'user'],
+      },
+      {
+        path: '/CreateToolRequestSection',
+        name: 'Solicitar',
+        icon: BuildIcon,
+        component: CreateToolRequestSection,
+        layout: '/admin',
+        title: 'Solicitar',
+        roles: ['admin', 'personal', 'user'],
+      },
+    ],
   },
   {
     path: '/login-page',
