@@ -41,7 +41,6 @@ class ProductTable extends React.Component {
 
   //se crea la ventana emergente en donde se editaran los productos
   handleClickUpdate = prop => {
-    console.log(prop);
     this.setState({ product: { id: prop.id, name: prop[0] }, modal: true });
   };
 
