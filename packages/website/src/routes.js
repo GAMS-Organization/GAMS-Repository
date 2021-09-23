@@ -12,6 +12,7 @@ import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
 import Explore from '@material-ui/icons/Explore';
+import BuildIcon from '@material-ui/icons/Build';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -25,6 +26,7 @@ import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
 import Activities from 'views/containers/Activities';
 import ListWorkOrder from 'views/containers/ListWorkOrder';
+import Tools from 'views/containers/Tools';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -159,6 +161,15 @@ const dashboardRoutes = [
         roles: ['admin', 'personal'],
       },
     ],
+  },
+  {
+    path: '/tool',
+    name: 'Herramientas',
+    icon: BuildIcon,
+    component: Tools,
+    layout: '/admin',
+    title: 'Herramientas',
+    roles: ['admin'],
   },
   {
     path: '/login-page',
