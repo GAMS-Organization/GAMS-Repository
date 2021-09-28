@@ -44,6 +44,18 @@ class tool {
 
     return toolAdapter.delete(deleteResponse);
   }
+
+  async createToolRequest(dataTool) {
+    const body = dataTool;
+    let createResponse;
+    console.log(dataTool);
+    try {
+      createResponse = await Api.post('toolRequest/', body);
+    } catch (err) {
+      createResponse = err;
+    }
+    return toolAdapter.createToolRequest(createResponse);
+  }
 }
 
 export default new tool();

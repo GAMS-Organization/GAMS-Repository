@@ -20,6 +20,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
+import serviceTool from '../../../services/api/tool';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 class createToolRequestSection extends React.Component {
   constructor(props) {
@@ -30,7 +32,11 @@ class createToolRequestSection extends React.Component {
       sector: [],
       selectedSector: '',
       area: [],
-      selectedArea: '',
+      selectedAreaName: '',
+      selectedAreaId: '',
+      tool: [],
+      selectedToolName: '',
+      selectedToolId: '',
     };
   }
 
@@ -40,20 +46,33 @@ class createToolRequestSection extends React.Component {
 
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
-
+    const responseTool = await serviceTool.list(1, 500);
     let sectores = [];
+    let tools = [];
+
     for (const sector of responseSector.data.items) {
       let dataSector = sector;
       sectores.push(dataSector);
     }
 
-    this.setState({ sector: sectores });
+    for (const tool of responseTool.data.items) {
+      let dataTool = tool;
+      tools.push(dataTool);
+    }
+
+    this.setState({ sector: sectores, tool: tools });
   };
+
+  handleChangeTool = async event => {
+    const tool = this.state.tool.find(tool => tool.name === event.target.value);
+    const nameTool = tool.name;
+    const idTool = tool.id;
+    this.setState({ selectedToolName: nameTool, selectedToolId: idTool });
+  };
+
   handleChangeSector = async event => {
     const sector = this.state.sector.find(sector => sector.name === event.target.value);
-    const idSector = sector.id;
     const nameSector = sector.name;
-    const mapSector = sector.map;
 
     //areas
     const responseArea = await serviceArea.listBySector(nameSector.replace(/\s/gi, '-'));
@@ -64,14 +83,8 @@ class createToolRequestSection extends React.Component {
 
     this.setState({
       selectedSector: nameSector,
-      map: mapSector,
-      idSector: idSector,
       area: areas,
-      service: [],
-      element: [],
-      selectedArea: '',
-      selectedService: '',
-      selectedElement: '',
+      selectedAreaName: '',
     });
   };
 
@@ -80,37 +93,42 @@ class createToolRequestSection extends React.Component {
     const idArea = area.id;
     const nameArea = area.name;
 
-    let mapsAreas = [];
-    for (const mapa of area.maps) {
-      mapsAreas.push(mapa);
-    }
-
     this.setState({
-      selectedArea: nameArea,
-      service: area.services,
-      idArea: idArea,
+      selectedAreaName: nameArea,
+      selectedAreaId: idArea,
     });
   };
 
-  /* = async e => {
+  createToolRequest = async e => {
     e.preventDefault();
-
-    const fields = ['name', 'code'];
     const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
+    const date = formElements.namedItem('date').value;
+    const quantity = formElements.namedItem('quantity').value;
 
-    const response = await serviceSector.create(formValues);
-
+    const formValues = {
+      toolId: this.state.selectedToolId,
+      date: date,
+      areaId: this.state.selectedAreaId,
+      quantity: quantity,
+    };
+    console.log(formValues);
+    const response = await serviceTool.createToolRequest(formValues);
+    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
+      formElements.namedItem('quantity').value = '';
+      formElements.namedItem('date').value = '';
+      this.setState({
+        notification: true,
+        selectedToolName: '',
+        selectedToolId: '',
+        selectedAreaName: '',
+        selectedAreaId: '',
+        selectedSector: '',
+      });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, name, code } = this.props;
@@ -132,7 +150,7 @@ class createToolRequestSection extends React.Component {
         />
         <GridContainer>
           <GridItem align={'center'} xs={12} sm={12} md={12}>
-            <form onSubmit={this.createSector}>
+            <form onSubmit={this.createToolRequest}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Solicitud de herramientas</h4>
@@ -141,18 +159,40 @@ class createToolRequestSection extends React.Component {
                 <CardBody>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
-                      <CustomInput
-                        labelText="Herramienta"
-                        id="tool"
-                        error={errors.name}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          required: true,
-                          name: 'name',
-                        }}
-                      />
+                      <FormControl fullWidth className={classes.selectFormControl}>
+                        <InputLabel htmlFor="tool" className={classes.selectLabel}>
+                          Herramienta
+                        </InputLabel>
+                        <Select
+                          MenuProps={{
+                            className: classes.selectMenu,
+                          }}
+                          classes={{
+                            select: classes.select,
+                          }}
+                          value={this.state.selectedToolName}
+                          onChange={this.handleChangeTool}
+                          input={<Input />}
+                          inputProps={{
+                            required: true,
+                            name: 'tool',
+                            id: 'tool',
+                          }}
+                        >
+                          {this.state.tool.map(tool => (
+                            <MenuItem
+                              key={tool.name}
+                              value={tool.name}
+                              classes={{
+                                root: classes.selectMenuItem,
+                                selected: classes.selectMenuItemSelected,
+                              }}
+                            >
+                              {tool.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
@@ -169,7 +209,7 @@ class createToolRequestSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <FormControl fullWidth className={classes.selectFormControl}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Sector
@@ -205,7 +245,7 @@ class createToolRequestSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <FormControl fullWidth className={classes.selectFormControl}>
                         <InputLabel htmlFor="Area" className={classes.selectLabel}>
                           Área
@@ -217,7 +257,7 @@ class createToolRequestSection extends React.Component {
                           classes={{
                             select: classes.select,
                           }}
-                          value={this.state.selectedArea}
+                          value={this.state.selectedAreaName}
                           onChange={this.handleChangeArea}
                           inputProps={{
                             required: true,
@@ -240,27 +280,31 @@ class createToolRequestSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                  </GridContainer>
+                  <GridContainer justify={'center'}>
+                    <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="Cantidad"
-                        id="cuantity"
-                        error={errors.cuantity}
+                        id="quantity"
+                        error={errors.quantity}
                         formControlProps={{
                           fullWidth: true,
                         }}
                         inputProps={{
                           required: true,
-                          name: 'code',
+                          name: 'quantity',
                         }}
                       />
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter align={'center'}>
-                  <Button type="submit" color="gamsRed">
-                    Solicitar
-                  </Button>
-                </CardFooter>
+                <GridContainer justify={'center'}>
+                  <CardFooter>
+                    <Button type="submit" color="gamsRed">
+                      Solicitar
+                    </Button>
+                  </CardFooter>
+                </GridContainer>
               </Card>
             </form>
           </GridItem>
