@@ -28,6 +28,7 @@ import Activities from 'views/containers/Activities';
 import ListWorkOrder from 'views/containers/ListWorkOrder';
 import Tools from 'views/containers/Tools';
 import CreateToolRequestSection from 'views/sections/Tools/CreateToolRequestSection';
+import ToolRequestTableSection from './views/sections/Tools/ToolRequestTableSection';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -187,6 +188,15 @@ const dashboardRoutes = [
         component: CreateToolRequestSection,
         layout: '/admin',
         title: 'Solicitar',
+        roles: ['admin', 'personal', 'user'],
+      },
+      {
+        path: '/ToolRequestTableSection',
+        name: 'Solicitudes',
+        icon: BuildIcon,
+        component: ToolRequestTableSection,
+        layout: '/admin',
+        title: 'Solicitudes',
         roles: ['admin', 'personal', 'user'],
       },
     ],
