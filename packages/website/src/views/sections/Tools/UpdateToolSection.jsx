@@ -59,10 +59,6 @@ class UpdateToolSection extends React.Component {
     }
   };
 
-  /*handleChange = event => {
-    this.setState({ product: { ...this.state.product, [event.target.name]: event.target.value } });
-  };*/
-
   render() {
     const { classes, tool, Transition, open, close } = this.props;
     const { errors } = this.state;

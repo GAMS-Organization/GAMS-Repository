@@ -66,6 +66,17 @@ class tool {
     }
     return toolAdapter.listToolRequest(listResponse);
   }
+
+  async updateToolRequest(dataToolRequest) {
+    const body = dataToolRequest;
+    let updateResponse;
+    try {
+      updateResponse = await Api.put(`toolRequest/${body.id}`, body);
+    } catch (err) {
+      updateResponse = err;
+    }
+    return toolAdapter.updateToolRequest(updateResponse);
+  }
 }
 
 export default new tool();

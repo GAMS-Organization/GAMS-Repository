@@ -17,7 +17,7 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceElement from '../../../services/api/element';
-import UpdateElementSection from '../../sections/Element/UpdateElementSection';
+import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
 
 class ToolRequestTable extends React.Component {
@@ -35,9 +35,15 @@ class ToolRequestTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*handleClickUpdate = async prop => {
-    const res = await serviceElement.getById(prop.id);
-    this.setState({ element: res, modal: true });
+  handleClickUpdate = prop => {
+    this.setState({
+      toolRequest: {
+        id: prop.id,
+        status: prop.status,
+        areaId: prop.areaId,
+      },
+      modal: true,
+    });
   };
 
   closeModal = () => {
@@ -45,7 +51,7 @@ class ToolRequestTable extends React.Component {
   };
 
   //se elimina el elemento
-  deleteElement = async prop => {
+  /*deleteElement = async prop => {
     const response = await serviceElement.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -74,12 +80,12 @@ class ToolRequestTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<UpdateElementSection
-          element={this.state.element}
+        <UpdateToolRequestSection
+          toolRequest={this.state.toolRequest}
           open={this.state.modal}
           close={this.closeModal}
-          listElements={this.props.listElements}
-        />*/}
+          listToolRequest={this.props.listToolRequest}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -162,7 +168,7 @@ ToolRequestTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  listToolRequest: PropTypes.func,
+  listToolsRequest: PropTypes.func,
 };
 
 export default withStyles(tableStyle)(ToolRequestTable);

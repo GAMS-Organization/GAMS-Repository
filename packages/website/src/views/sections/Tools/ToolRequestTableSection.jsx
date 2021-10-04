@@ -23,7 +23,6 @@ class ToolRequestTableSection extends React.Component {
 
   async componentWillMount() {
     await this.listToolsRequest();
-    console.log(this.state.toolRequest);
   }
 
   listToolsRequest = async (page = 1, itemsPerPage = 500) => {
@@ -40,6 +39,7 @@ class ToolRequestTableSection extends React.Component {
           toolRequest.date,
         ],
         id: toolRequest.id.toString(),
+        areaId: toolRequest.area.id.toString(),
       };
       toolsRequest.push(dataToolRequest);
     }
