@@ -56,6 +56,16 @@ class tool {
     }
     return toolAdapter.createToolRequest(createResponse);
   }
+
+  async listToolRequest(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`toolRequest/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return toolAdapter.listToolRequest(listResponse);
+  }
 }
 
 export default new tool();

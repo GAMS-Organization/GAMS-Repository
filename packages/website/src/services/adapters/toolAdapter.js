@@ -100,6 +100,26 @@ class toolAdapter {
       };
     }
   }
+
+  listToolRequest(listResponse) {
+    let { status, data } = listResponse;
+
+    if (!isError(status)) {
+      return {
+        data,
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LIST_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
 }
 
 export default new toolAdapter();

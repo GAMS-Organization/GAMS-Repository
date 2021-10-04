@@ -13,27 +13,38 @@ import serviceTool from '../../../services/api/tool';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 import Pagination from '../../components/Pagination/Pagination';
 
-class ToolRequestTableSectionTableSection extends React.Component {
+class ToolRequestTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tool: [],
+      toolRequest: [],
     };
   }
 
   async componentWillMount() {
-    await this.listTools();
+    await this.listToolsRequest();
+    console.log(this.state.toolRequest);
   }
 
-  listTools = async (page = 1, itemsPerPage = 500) => {
-    const response = await serviceTool.list(page, itemsPerPage);
-    let tools = [];
-    for (const tool of response.data.items) {
-      let dataProduct = { visibleData: [tool.name, tool.totalQuantity, tool.borrowQuantity], id: tool.id.toString() };
-      tools.push(dataProduct);
+  listToolsRequest = async (page = 1, itemsPerPage = 500) => {
+    const response = await serviceTool.listToolRequest(page, itemsPerPage);
+    let toolsRequest = [];
+    for (const toolRequest of response.data.items) {
+      let dataToolRequest = {
+        visibleData: [
+          toolRequest.tool.name,
+          toolRequest.quantity,
+          toolRequest.user.name,
+          toolRequest.status,
+          toolRequest.area.name,
+          toolRequest.date,
+        ],
+        id: toolRequest.id.toString(),
+      };
+      toolsRequest.push(dataToolRequest);
     }
 
-    this.setState({ tool: tools, totalPages: response.data.pageCount });
+    this.setState({ toolRequest: toolsRequest, totalPages: response.data.pageCount });
   };
 
   pagination = () => {
@@ -41,7 +52,7 @@ class ToolRequestTableSectionTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
+          this.state.page === 1 ? this.listToolsRequest(1) : this.listToolsRequest(this.state.page - 1);
         },
       },
     ];
@@ -52,7 +63,7 @@ class ToolRequestTableSectionTableSection extends React.Component {
         pages.push({
           text: index,
           onClick: async () => {
-            this.listTools(index);
+            this.listToolsRequest(index);
           },
         });
       }
@@ -61,8 +72,8 @@ class ToolRequestTableSectionTableSection extends React.Component {
       text: 'NEXT',
       onClick: () => {
         this.state.page === this.state.totalPages
-          ? this.listTools(this.state.totalPages)
-          : this.listTools(this.state.page + 1);
+          ? this.listToolsRequest(this.state.totalPages)
+          : this.listToolsRequest(this.state.page + 1);
       },
     });
     return pages;
@@ -81,9 +92,9 @@ class ToolRequestTableSectionTableSection extends React.Component {
             <CardBody>
               <ToolRequestTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Nombre', 'Cantidad', 'Cantidad Prestada']}
-                tableData={this.state.tool}
-                listTools={this.listTools}
+                tableHead={['Herramienta', 'Cantidad', 'Usuario', 'Estado', 'Área', 'Fecha']}
+                tableData={this.state.toolRequest}
+                listToolsRequest={this.listToolsRequest}
               />
             </CardBody>
           </Card>
@@ -98,4 +109,4 @@ class ToolRequestTableSectionTableSection extends React.Component {
   }
 }
 
-export default withStyles(tablesSectionsstyle)(ToolRequestTableSectionTableSection);
+export default withStyles(tablesSectionsstyle)(ToolRequestTableSection);
