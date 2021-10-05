@@ -84,7 +84,7 @@ class ToolRequestTable extends React.Component {
           toolRequest={this.state.toolRequest}
           open={this.state.modal}
           close={this.closeModal}
-          listToolRequest={this.props.listToolRequest}
+          listToolsRequest={this.props.listToolsRequest}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (

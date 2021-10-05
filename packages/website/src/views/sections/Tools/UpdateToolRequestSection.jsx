@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -155,6 +154,15 @@ class UpdateToolRequestSection extends React.Component {
                         value="Devuelto"
                       >
                         Devuelto
+                      </MenuItem>
+                      <MenuItem
+                        classes={{
+                          root: classes.selectMenuItem,
+                          selected: classes.selectMenuItemSelected,
+                        }}
+                        value="Cancelado"
+                      >
+                        Cancelado
                       </MenuItem>
                     </Select>
                   </FormControl>
