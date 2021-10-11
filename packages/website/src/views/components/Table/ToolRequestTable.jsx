@@ -16,7 +16,7 @@ import Close from '@material-ui/icons/Close';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceElement from '../../../services/api/element';
+import serviceTool from '../../../services/api/tool';
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
 
@@ -51,12 +51,12 @@ class ToolRequestTable extends React.Component {
   };
 
   //se elimina el elemento
-  /*deleteElement = async prop => {
-    const response = await serviceElement.delete(prop.id);
+  /*deleteToolRequest = async prop => {
+    const response = await serviceTool.deleteToolRequest(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listElements();
+      this.props.listToolsRequest();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -130,7 +130,7 @@ class ToolRequestTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteElement(prop)}
+                        onClick={() => this.deleteToolRequest(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
