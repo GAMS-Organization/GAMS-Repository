@@ -39,7 +39,7 @@ class ToolRequestTable extends React.Component {
     this.setState({
       toolRequest: {
         id: prop.id,
-        status: prop.status,
+        status: prop.visibleData[3],
         areaId: prop.areaId,
       },
       modal: true,

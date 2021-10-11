@@ -32,15 +32,17 @@ class UpdateToolRequestSection extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log(this.props.toolRequest.status);
     return this.props !== nextProps || this.state.notification !== nextState.notification;
   }
 
   closeNotification = () => {
-    this.setState({ notification: false, errors: {} });
+    this.setState({ notification: false, errors: {}, statusSelected: '' });
   };
 
   handleChangeStatus = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    //this.setState({ [event.target.name]: event.target.value });
+    this.setState({ statusSelected: event.target.value });
   };
 
   updateToolRequest = async e => {
@@ -51,12 +53,11 @@ class UpdateToolRequestSection extends React.Component {
       areaId: this.props.toolRequest.areaId,
       id: this.props.toolRequest.id,
     };
-    console.log(formValues);
 
     const response = await serviceTool.updateToolRequest(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
-      this.setState({ notification: true, open: false });
+      this.setState({ notification: true, open: false, statusSelected: '' });
       this.props.listToolsRequest();
       this.props.close();
     } else {
@@ -118,6 +119,7 @@ class UpdateToolRequestSection extends React.Component {
                       inputProps={{
                         name: 'statusSelected',
                         id: 'status',
+                        defaultValue: status,
                       }}
                     >
                       <MenuItem
