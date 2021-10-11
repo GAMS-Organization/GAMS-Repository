@@ -16,7 +16,7 @@ import Close from '@material-ui/icons/Close';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceElement from '../../../services/api/element';
+import serviceTool from '../../../services/api/tool';
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
 
@@ -51,8 +51,8 @@ class ToolRequestTable extends React.Component {
   };
 
   //se elimina el elemento
-  /*deleteElement = async prop => {
-    const response = await serviceElement.delete(prop.id);
+  deleteElement = async prop => {
+    const response = await serviceTool.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -60,7 +60,7 @@ class ToolRequestTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

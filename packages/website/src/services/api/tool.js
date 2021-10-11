@@ -48,7 +48,6 @@ class tool {
   async createToolRequest(dataTool) {
     const body = dataTool;
     let createResponse;
-    console.log(dataTool);
     try {
       createResponse = await Api.post('toolRequest/', body);
     } catch (err) {
