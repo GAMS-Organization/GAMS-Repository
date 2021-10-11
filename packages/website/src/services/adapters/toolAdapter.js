@@ -140,6 +140,26 @@ class toolAdapter {
       };
     }
   }
+
+  deleteToolRequest(deleteResponse) {
+    let { status, data } = deleteResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'DELETED_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'DELETED_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
 }
 
 export default new toolAdapter();

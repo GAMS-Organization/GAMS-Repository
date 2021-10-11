@@ -50,13 +50,12 @@ class ToolRequestTable extends React.Component {
     this.setState({ modal: false });
   };
 
-  //se elimina el elemento
-  deleteElement = async prop => {
-    const response = await serviceTool.delete(prop.id);
+  deleteToolRequest = async prop => {
+    const response = await serviceTool.deleteToolRequest(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listElements();
+      this.props.listToolsRequest();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -130,7 +129,7 @@ class ToolRequestTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteElement(prop)}
+                        onClick={() => this.deleteToolRequest(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

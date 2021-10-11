@@ -76,6 +76,17 @@ class tool {
     }
     return toolAdapter.updateToolRequest(updateResponse);
   }
+
+  async deleteToolRequest(id) {
+    let deleteResponse;
+    try {
+      deleteResponse = await Api.delete(`toolRequest/${id}`);
+    } catch (err) {
+      deleteResponse = err;
+    }
+
+    return toolAdapter.deleteToolRequest(deleteResponse);
+  }
 }
 
 export default new tool();

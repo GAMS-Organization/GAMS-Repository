@@ -32,7 +32,6 @@ class UpdateToolRequestSection extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(this.props.toolRequest.status);
     return this.props !== nextProps || this.state.notification !== nextState.notification;
   }
 
