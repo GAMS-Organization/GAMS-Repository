@@ -32,19 +32,24 @@ class UpdateToolRequestSection extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return this.props !== nextProps || this.state.notification !== nextState.notification;
+    return this.props !== nextProps || this.state !== nextState;
   }
+
+  handleClose = () => {
+    this.props.close();
+    this.setState({ open: false, statusSelected: '' });
+  };
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {}, statusSelected: '' });
   };
 
   handleChangeStatus = event => {
-    //this.setState({ [event.target.name]: event.target.value });
     this.setState({ statusSelected: event.target.value });
   };
 
   updateToolRequest = async e => {
+    console.log(this.props.toolRequest.status);
     e.preventDefault();
     const formValues = {
       toolId: this.props.toolRequest.id,
@@ -118,7 +123,7 @@ class UpdateToolRequestSection extends React.Component {
                       inputProps={{
                         name: 'statusSelected',
                         id: 'status',
-                        defaultValue: status,
+                        defaultValue: this.props.toolRequest.status,
                       }}
                     >
                       <MenuItem
@@ -172,7 +177,7 @@ class UpdateToolRequestSection extends React.Component {
               <Button type="submit" color="gamsRed">
                 Actualizar
               </Button>
-              <Button color="danger" simple onClick={() => close()}>
+              <Button color="danger" simple onClick={this.handleClose}>
                 Cancelar
               </Button>
             </form>
