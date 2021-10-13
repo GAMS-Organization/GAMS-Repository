@@ -13,6 +13,7 @@ import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
 import Explore from '@material-ui/icons/Explore';
 import BuildIcon from '@material-ui/icons/Build';
+import EditIcon from '@material-ui/icons/Edit';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -26,6 +27,7 @@ import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
 import Activities from 'views/containers/Activities';
 import ListWorkOrder from 'views/containers/ListWorkOrder';
+import EducationalElement from 'views/containers/EducationalElement';
 import Tools from 'views/containers/Tools';
 import CreateToolRequestSection from 'views/sections/Tools/CreateToolRequestSection';
 import ToolRequestTableSection from './views/sections/Tools/ToolRequestTableSection';
@@ -179,7 +181,7 @@ const dashboardRoutes = [
         component: Tools,
         layout: '/admin',
         title: 'Gestión',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'personal'],
       },
       {
         path: '/CreateToolRequestSection',
@@ -198,6 +200,25 @@ const dashboardRoutes = [
         layout: '/admin',
         title: 'Solicitudes',
         roles: ['admin', 'personal', 'user'],
+      },
+    ],
+  },
+  {
+    name: 'Elem. Educ.',
+    icon: EditIcon,
+    group: true,
+    layout: '/admin',
+    title: 'Elem. Educ.',
+    roles: ['admin', 'personal', 'user'],
+    children: [
+      {
+        path: '/educationalElement',
+        name: 'Gestión',
+        icon: EditIcon,
+        component: EducationalElement,
+        layout: '/admin',
+        title: 'Gestión',
+        roles: ['admin', 'personal'],
       },
     ],
   },
