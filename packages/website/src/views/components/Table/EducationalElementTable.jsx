@@ -23,7 +23,7 @@ import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
 import serviceTool from '../../../services/api/tool.js';
 
-class ToolTable extends React.Component {
+class EducationalElementTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -198,4 +198,4 @@ ToolTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(ToolTable);
+export default withStyles(tableStyle)(EducationalElementTable);
