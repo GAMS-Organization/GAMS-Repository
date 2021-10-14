@@ -12,7 +12,7 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceTools from '../../../services/api/tool';
+import serviceEducationalElement from '../../../services/api/educationalElement';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
 import newElementEducationalStyle from '../../../styles/jss/material-dashboard-react/sections/newElementEducationalSectionStyle';
@@ -34,7 +34,7 @@ class NewElementEducationalSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*createTool = async e => {
+  createEducationalElement = async e => {
     e.preventDefault();
 
     const fields = ['name', 'totalQuantity', 'borrowQuantity'];
@@ -44,17 +44,20 @@ class NewElementEducationalSection extends React.Component {
         [field]: formElements.namedItem(field).value,
       }))
       .reduce((current, next) => ({ ...current, ...next }));
-    const response = await serviceTools.create(formValues);
+    const response = await serviceEducationalElement.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
+      formElements.namedItem('name').value = '';
+      formElements.namedItem('totalQuantity').value = '';
+      formElements.namedItem('borrowQuantity').value = '';
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
-    const { classes, name } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-educational-element">
@@ -73,10 +76,10 @@ class NewElementEducationalSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createTool}>
+            <form onSubmit={this.createEducationalElement}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nueva Articulo</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Articulo</h4>
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
                 <CardBody>

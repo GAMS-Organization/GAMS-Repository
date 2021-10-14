@@ -204,11 +204,11 @@ const dashboardRoutes = [
     ],
   },
   {
-    name: 'Elem. Educ.',
+    name: 'Articulos',
     icon: EditIcon,
     group: true,
     layout: '/admin',
-    title: 'Elem. Educ.',
+    title: 'Articulos',
     roles: ['admin', 'personal', 'user'],
     children: [
       {
