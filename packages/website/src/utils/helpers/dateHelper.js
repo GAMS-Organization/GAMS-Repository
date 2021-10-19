@@ -4,8 +4,10 @@ export const toDateTime = date => {
   return moment(date).format('DD-MM-YYYY HH:mm');
 };
 
-export const toDate = date => {
-  return moment(date).format('DD-MM-YYYY');
+export const toDate = (date, plus = 0) => {
+  return moment(date)
+    .add(plus, 'hours')
+    .format('DD-MM-YYYY');
 };
 
 export const toTime = date => {
