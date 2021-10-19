@@ -21,7 +21,7 @@ import Snackbar from '../Snackbar/Snackbar';
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
-import serviceTool from '../../../services/api/tool.js';
+import serviceEducationalElement from '../../../services/api/educationalElement.js';
 
 class EducationalElementTable extends React.Component {
   constructor(props) {
@@ -55,8 +55,8 @@ class EducationalElementTable extends React.Component {
     this.setState({ modal: false });
   };
 
-  /*handleClickDelete = async prop => {
-    const response = await serviceTool.delete(prop.id);
+  handleClickDelete = async prop => {
+    const response = await serviceEducationalElement.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -64,7 +64,7 @@ class EducationalElementTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
