@@ -31,7 +31,7 @@ import EducationalElement from 'views/containers/EducationalElement';
 import Tools from 'views/containers/Tools';
 import CreateToolRequestSection from 'views/sections/Tools/CreateToolRequestSection';
 import ToolRequestTableSection from './views/sections/Tools/ToolRequestTableSection';
-
+import CreateRequestEducationalElementSection from 'views/sections/EducationalElement/CreateRequestEducationalElementSection';
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
 
@@ -219,6 +219,15 @@ const dashboardRoutes = [
         layout: '/admin',
         title: 'Gestión',
         roles: ['admin', 'personal'],
+      },
+      {
+        path: '/CreateRequestEducationalElementSection',
+        name: 'Solicitar',
+        icon: EditIcon,
+        component: CreateRequestEducationalElementSection,
+        layout: '/admin',
+        title: 'Solicitar',
+        roles: ['admin', 'personal', 'user'],
       },
     ],
   },
