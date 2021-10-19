@@ -15,7 +15,7 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateToolSection from '../../sections/Tools/UpdateToolSection';
+import UpdateEducationalElementSection from '../../sections/EducationalElement/UpdateEducationalElementSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import CustomInput from '../CustomInput/CustomInput';
@@ -39,9 +39,9 @@ class EducationalElementTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  /*handleClickUpdate = prop => {
+  handleClickUpdate = prop => {
     this.setState({
-      tool: {
+      educationalElement: {
         id: prop.id,
         name: prop.visibleData[0],
         totalQuantity: prop.visibleData[1],
@@ -49,7 +49,7 @@ class EducationalElementTable extends React.Component {
       },
       modal: true,
     });
-  };*/
+  };
 
   closeModal = () => {
     this.setState({ modal: false });
@@ -89,12 +89,12 @@ class EducationalElementTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<UpdateToolSection
-          tool={this.state.tool}
+        <UpdateEducationalElementSection
+          educationalElement={this.state.educationalElement}
           open={this.state.modal}
           close={this.closeModal}
-          listTools={this.props.listTools}
-        />*/}
+          listEducationalElements={this.props.listEducationalElements}
+        />
         <div className={classes.searchInputContainer}>
           <CustomInput
             labelText="Buscar"
