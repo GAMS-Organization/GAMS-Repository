@@ -6,5 +6,6 @@ export default interface IEventRepository {
   count(): Promise<number>;
   findOneById(id: number): Promise<Event>;
   persist(event: Event): Promise<Event>;
+  findWeekEvents(startDate: string, endDate: string): Promise<Event[]>;
   destroy(event: Event): Promise<boolean>;
 }

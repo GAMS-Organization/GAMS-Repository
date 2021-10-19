@@ -9,13 +9,14 @@ import DestroyElementRequestAction from '../API/Http/Actions/ElementRequest/Dest
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import UpdateElementRequestAction from '../API/Http/Actions/ElementRequest/UpdateElementRequestAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexElementRequestAction: IndexElementRequestsAction = DIContainer.resolve<IndexElementRequestsAction>(
@@ -28,7 +29,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeElementRequestAction: StoreElementRequestAction = DIContainer.resolve<StoreElementRequestAction>(
@@ -41,7 +42,7 @@ router.post(
 // router.get(
 //   '/:id([0-9]+)',
 //   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
+//     authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
 //     const showElementRequestAction: ShowElementRequestAction = DIContainer.resolve<ShowElementRequestAction>(
@@ -54,7 +55,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateElementRequestAction: UpdateElementRequestAction = DIContainer.resolve<UpdateElementRequestAction>(
@@ -67,7 +68,7 @@ router.put(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyElementRequestAction: DestroyElementRequestAction = DIContainer.resolve<DestroyElementRequestAction>(

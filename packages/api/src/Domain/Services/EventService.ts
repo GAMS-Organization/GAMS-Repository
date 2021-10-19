@@ -7,7 +7,7 @@ import IEventRepository from '../Interfaces/IEventRepository';
 import UserEvent from '../Entities/UserEvent';
 
 @injectable()
-export default class UserRoleService {
+export default class EventService {
   private userEventRepository: IUserEventRepository;
   private userRepository: IUserRepository;
   private eventRepository: IEventRepository;
@@ -63,6 +63,10 @@ export default class UserRoleService {
       totalDataQuantity: entriesQuantity,
       totalPages: Math.ceil(entriesQuantity / itemsPerPage),
     };
+  }
+
+  public async returnWeekEvents(startDate: string, endDate: string): Promise<Event[]> {
+    return await this.eventRepository.findWeekEvents(startDate, endDate);
   }
 
   public async destroyEvent(event): Promise<boolean> {

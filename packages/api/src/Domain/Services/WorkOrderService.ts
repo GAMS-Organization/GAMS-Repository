@@ -104,4 +104,8 @@ export default class WorkOrderService {
 
     return this.workOrderRepository.findOneById(workOrder.id);
   }
+
+  public async returnAllUnfinished(): Promise<WorkOrder[]> {
+    return await this.workOrderRepository.findAllUnfinished();
+  }
 }
