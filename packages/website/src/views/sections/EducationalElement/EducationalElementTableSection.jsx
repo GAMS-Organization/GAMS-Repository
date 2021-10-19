@@ -4,11 +4,11 @@ import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ToolTable from '../../components/Table/ToolTable';
+import EducationalElementTable from '../../components/Table/EducationalElementTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
-import serviceTool from '../../../services/api/tool';
+import serviceEducationalElement from '../../../services/api/educationalElement';
 
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
 import Pagination from '../../components/Pagination/Pagination';
@@ -22,26 +22,29 @@ class EducationalElementTableSection extends React.Component {
   }
 
   async componentWillMount() {
-    await this.listTools();
+    await this.listEducationalElements();
   }
 
-  /*listTools = async (page = 1, itemsPerPage = 500) => {
-    const response = await serviceTool.list(page, itemsPerPage);
-    let tools = [];
-    for (const tool of response.data.items) {
-      let dataProduct = { visibleData: [tool.name, tool.totalQuantity, tool.borrowQuantity], id: tool.id.toString() };
-      tools.push(dataProduct);
+  listEducationalElements = async (page = 1, itemsPerPage = 500) => {
+    const response = await serviceEducationalElement.list(page, itemsPerPage);
+    let educationalElements = [];
+    for (const educationalElement of response.data.items) {
+      let dataEducationalElements = {
+        visibleData: [educationalElement.name, educationalElement.totalQuantity, educationalElement.borrowQuantity],
+        id: educationalElement.id.toString(),
+      };
+      educationalElements.push(dataEducationalElements);
     }
 
-    this.setState({ tool: tools, totalPages: response.data.pageCount });
-  };*/
+    this.setState({ educationalElement: educationalElements, totalPages: response.data.pageCount });
+  };
 
   pagination = () => {
     const pages = [
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
+          this.state.page === 1 ? this.listEducationalElements(1) : this.listEducationalElements(this.state.page - 1);
         },
       },
     ];
@@ -52,7 +55,7 @@ class EducationalElementTableSection extends React.Component {
         pages.push({
           text: index,
           onClick: async () => {
-            this.listTools(index);
+            this.listEducationalElements(index);
           },
         });
       }
@@ -61,8 +64,8 @@ class EducationalElementTableSection extends React.Component {
       text: 'NEXT',
       onClick: () => {
         this.state.page === this.state.totalPages
-          ? this.listTools(this.state.totalPages)
-          : this.listTools(this.state.page + 1);
+          ? this.listEducationalElements(this.state.totalPages)
+          : this.listEducationalElements(this.state.page + 1);
       },
     });
     return pages;
@@ -79,11 +82,11 @@ class EducationalElementTableSection extends React.Component {
               <p className={classes.cardCategoryWhite}>Aquí se listan todas las Herramientas</p>
             </CardHeader>
             <CardBody>
-              <ToolTable
+              <EducationalElementTable
                 tableHeaderColor="gamsBlue"
                 tableHead={['Nombre', 'Cantidad', 'Cantidad Prestada']}
-                tableData={this.state.tool}
-                listTools={this.listTools}
+                tableData={this.state.educationalElement}
+                listEducationalElements={this.listEducationalElements}
               />
             </CardBody>
           </Card>

@@ -28,7 +28,7 @@ class EducationalElementTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      tool: {},
+      educationalElement: {},
       errors: {},
       notification: false,
       search: '',
@@ -39,7 +39,7 @@ class EducationalElementTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  handleClickUpdate = prop => {
+  /*handleClickUpdate = prop => {
     this.setState({
       tool: {
         id: prop.id,
@@ -49,22 +49,22 @@ class EducationalElementTable extends React.Component {
       },
       modal: true,
     });
-  };
+  };*/
 
   closeModal = () => {
     this.setState({ modal: false });
   };
 
-  handleClickDelete = async prop => {
+  /*handleClickDelete = async prop => {
     const response = await serviceTool.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listTools();
+      this.props.listEducationalElements();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -83,18 +83,18 @@ class EducationalElementTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Herramienta eliminada correctamente'
+              : 'Articulo eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateToolSection
+        {/*<UpdateToolSection
           tool={this.state.tool}
           open={this.state.modal}
           close={this.closeModal}
           listTools={this.props.listTools}
-        />
+        />*/}
         <div className={classes.searchInputContainer}>
           <CustomInput
             labelText="Buscar"
@@ -174,11 +174,11 @@ class EducationalElementTable extends React.Component {
   }
 }
 
-ToolTable.defaultProps = {
+EducationalElementTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-ToolTable.propTypes = {
+EducationalElementTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import NewElementEducationalSection from '../sections/EducationalElement/NewElementEducationalSection';
+import EducationalElementTableSection from '../sections/EducationalElement/EducationalElementTableSection';
 
 const styles = {
   cardCategoryWhite: {
@@ -36,6 +37,7 @@ class EducationalElement extends React.Component {
     return (
       <div>
         <NewElementEducationalSection />
+        <EducationalElementTableSection />
       </div>
     );
   }
