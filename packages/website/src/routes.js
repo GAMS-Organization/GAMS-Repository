@@ -37,7 +37,7 @@ const dashboardRoutes = [
     component: Activities,
     layout: '/admin',
     title: 'Historial de actividades',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
   },
   {
     path: '/stock',
@@ -46,7 +46,7 @@ const dashboardRoutes = [
     component: Stock,
     layout: '/admin',
     title: 'Stock',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     name: 'O. trabajo',
@@ -54,7 +54,7 @@ const dashboardRoutes = [
     layout: '/admin',
     group: true,
     title: 'Ordenes de Trabajo',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
     children: [
       {
         path: '/WorkOrder',
@@ -64,7 +64,7 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Nueva órden de trabajo',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
       {
         path: '/ListWorkOrder',
@@ -74,7 +74,7 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Ver O.T.',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
     ],
   },
@@ -85,7 +85,7 @@ const dashboardRoutes = [
     component: Preventive,
     layout: '/admin',
     title: 'Mantenimiento preventivo',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     path: '/products',
@@ -94,7 +94,7 @@ const dashboardRoutes = [
     component: Products,
     layout: '/admin',
     title: 'Productos',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     path: '/users',
@@ -111,7 +111,7 @@ const dashboardRoutes = [
     layout: '/admin',
     group: true,
     title: 'Gestión',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
     children: [
       {
         path: '/sector',
@@ -120,7 +120,7 @@ const dashboardRoutes = [
         component: Sector,
         layout: '/admin',
         title: 'Sectores',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/area',
@@ -129,7 +129,7 @@ const dashboardRoutes = [
         component: Area,
         layout: '/admin',
         title: 'Áreas',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/service',
@@ -138,7 +138,7 @@ const dashboardRoutes = [
         component: Service,
         layout: '/admin',
         title: 'Servicios',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/element',
@@ -147,7 +147,7 @@ const dashboardRoutes = [
         component: Element,
         layout: '/admin',
         title: 'Elementos',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/asset',
@@ -156,7 +156,7 @@ const dashboardRoutes = [
         component: Asset,
         layout: '/admin',
         title: 'Activos',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
     ],
   },
@@ -167,7 +167,7 @@ const dashboardRoutes = [
     component: LoginPage,
     layout: '/auth',
     title: 'Salir',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
   },
 ];
 

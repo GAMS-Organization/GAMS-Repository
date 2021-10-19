@@ -187,6 +187,8 @@ class NewWorkOrder extends React.Component {
     const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
 
+    console.log(date);
+
     const formValues = {
       orderDate: date,
       priority: this.state.prioritySelected,

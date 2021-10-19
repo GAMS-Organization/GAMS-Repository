@@ -22,3 +22,7 @@ export const createDateTime = (date, time) => {
   }
   return moment(date, 'DD-MM-YYYY HH:mm');
 };
+
+export const toSQLFormat = date => {
+  return moment(date, 'DD-MM-YYYY').format('YYYY-MM-DD');
+};

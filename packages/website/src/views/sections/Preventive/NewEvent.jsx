@@ -15,7 +15,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import { createDate, createDateTime, toDate, toTime } from '../../../utils/helpers/dateHelper';
+import { createDate, createDateTime, toDate, toSQLFormat, toTime } from '../../../utils/helpers/dateHelper';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
@@ -80,8 +80,8 @@ class NewEvent extends React.Component {
 
     const event = {
       title: formValues.title,
-      startDate: formValues.startDate + ' ' + formValues.startTime,
-      endDate: formValues.endDate + ' ' + formValues.endTime,
+      startDate: toSQLFormat(formValues.startDate) + ' ' + formValues.startTime,
+      endDate: toSQLFormat(formValues.endDate) + ' ' + formValues.endTime,
       allDay: this.state.allDay,
       description: formValues.description,
       workersId: this.state.selectedWorkers,

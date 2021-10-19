@@ -12,6 +12,7 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import serviceWorkOrder from '../../../services/api/workOrder';
 import Pagination from '../../components/Pagination/Pagination';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
+import { toDate } from '../../../utils/helpers/dateHelper';
 
 class WorkOrderTableSection extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class WorkOrderTableSection extends React.Component {
         comment: workOrder.comment,
         realizationDate: workOrder.realizationDate,
         visibleData: [
-          workOrder.orderDate,
+          toDate(workOrder.orderDate),
           workOrder.priority,
           workOrder.user.name + ' ' + workOrder.user.surname,
           workOrder.asset.code,

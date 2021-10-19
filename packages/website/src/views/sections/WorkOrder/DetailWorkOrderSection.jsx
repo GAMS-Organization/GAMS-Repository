@@ -122,7 +122,7 @@ class DetailWorkOrderSection extends React.Component {
                     disabled: true,
                     type: 'date',
                     name: 'orderDate',
-                    defaultValue: workOrder.orderDate,
+                    defaultValue: workOrder.orderDate ? workOrder.orderDate.slice(0, 10) : '',
                   }}
                 />
               </GridItem>

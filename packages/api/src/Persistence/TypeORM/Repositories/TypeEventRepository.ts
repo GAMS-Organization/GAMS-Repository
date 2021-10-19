@@ -34,6 +34,10 @@ export default class TypeEventRepository extends TypeRepository implements IEven
     return await this.repository(Event).find({ startDate: Between(startDate, endDate) });
   }
 
+  public async findMonthEvents(startDate: string, endDate: string): Promise<Event[]> {
+    return await this.repository(Event).find({ startDate: Between(startDate, endDate) });
+  }
+
   public async destroy(event: Event): Promise<boolean> {
     const result = await this.repository(Event).delete(event.getId());
 
