@@ -86,8 +86,8 @@ class ToolRequestTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Herramientas</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todas las Herramientas</p>
+              <h4 className={classes.cardTitleWhite}>Solicitudes de Herramientas</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las Solicitudes de Herramientas</p>
             </CardHeader>
             <CardBody>
               <ToolRequestTable

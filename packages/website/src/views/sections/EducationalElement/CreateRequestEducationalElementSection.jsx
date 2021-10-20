@@ -63,7 +63,9 @@ class createRequestEducationalElementSection extends React.Component {
   };
 
   handleChangeEducationalElement = async event => {
-    const educationalElement = this.state.educationalElement.find(tool => tool.name === event.target.value);
+    const educationalElement = this.state.educationalElement.find(
+      educationalElement => educationalElement.name === event.target.value,
+    );
     const nameEducationalElement = educationalElement.name;
     const idEducationalElement = educationalElement.id;
     this.setState({
@@ -108,7 +110,7 @@ class createRequestEducationalElementSection extends React.Component {
     const quantity = formElements.namedItem('quantity').value;
 
     const formValues = {
-      educationalElementId: this.state.selectedToolId,
+      educationalElementId: this.state.selectedEducationalElementId,
       date: date,
       areaId: this.state.selectedAreaId,
       quantity: quantity,
@@ -160,7 +162,7 @@ class createRequestEducationalElementSection extends React.Component {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <FormControl fullWidth className={classes.selectFormControl}>
-                        <InputLabel htmlFor="tool" className={classes.selectLabel}>
+                        <InputLabel htmlFor="educationalElement" className={classes.selectLabel}>
                           Artículo
                         </InputLabel>
                         <Select
@@ -170,7 +172,7 @@ class createRequestEducationalElementSection extends React.Component {
                           classes={{
                             select: classes.select,
                           }}
-                          value={this.state.selectedToolName}
+                          value={this.state.selectedEducationalElementName}
                           onChange={this.handleChangeEducationalElement}
                           input={<Input />}
                           inputProps={{
@@ -179,7 +181,7 @@ class createRequestEducationalElementSection extends React.Component {
                             id: 'educationalElement',
                           }}
                         >
-                          {this.state.educationalElement.map(tool => (
+                          {this.state.educationalElement.map(educationalElement => (
                             <MenuItem
                               key={educationalElement.name}
                               value={educationalElement.name}
