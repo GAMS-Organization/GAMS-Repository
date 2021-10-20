@@ -196,7 +196,7 @@ class LoadMapArea extends React.Component {
                           <GridContainer justify={'center'}>
                             <GridItem xs={12} sm={12} md={10}>
                               <img
-                                src={`http://localhost/api/static/${this.state.area.maps[index]}`}
+                                src={`http://${window.location.hostname}/api/static/${this.state.area.maps[index]}`}
                                 width="100%"
                                 height="100%"
                                 align="center"
