@@ -27,6 +27,8 @@ import serviceElement from '../../../services/api/element';
 import serviceWorkOrder from '../../../services/api/workOrder';
 import sector from '../../../services/api/sector';
 
+import mapImage from '../../../styles/img/Mapa.png';
+
 class NewWorkOrder extends React.Component {
   constructor(props) {
     super(props);
@@ -258,6 +260,7 @@ class NewWorkOrder extends React.Component {
                       <img
                         src={`http://${window.location.hostname}/api/static/${this.state.map}`}
                         width="100%"
+                        alt={''}
                         height="100%"
                         border="10"
                       />
