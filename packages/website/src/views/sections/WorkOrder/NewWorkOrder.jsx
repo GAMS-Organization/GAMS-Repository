@@ -256,7 +256,7 @@ class NewWorkOrder extends React.Component {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <img
-                        src={`http://localhost/api/static/${this.state.map}`}
+                        src={`http://${window.location.hostname}/api/static/${this.state.map}`}
                         width="100%"
                         height="100%"
                         border="10"
