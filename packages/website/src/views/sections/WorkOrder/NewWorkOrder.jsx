@@ -14,7 +14,6 @@ import Button from '../../components/CustomButtons/Button.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
-import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import newWorkOrderStyle from '../../../styles/jss/material-dashboard-react/sections/newWorkOrderStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
@@ -24,6 +23,7 @@ import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import serviceService from '../../../services/api/service';
 import serviceAsset from '../../../services/api/asset';
+import serviceElement from '../../../services/api/element';
 import serviceWorkOrder from '../../../services/api/workOrder';
 import sector from '../../../services/api/sector';
 
@@ -126,11 +126,12 @@ class NewWorkOrder extends React.Component {
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
 
+    const allElements = await serviceElement.getByAreaId(this.state.idArea);
+
+    const elements = allElements.filter(element => element.service.id === idService);
+
     const map = this.state.mapsAreas[this.state.service.indexOf(service.name)];
 
-    const elements = service.elements.map(element => {
-      return element;
-    });
     this.setState({
       selectedService: event.target.value,
       map: map,
@@ -186,8 +187,6 @@ class NewWorkOrder extends React.Component {
     const formElements = e.target.elements;
     const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
-
-    console.log(date);
 
     const formValues = {
       orderDate: date,

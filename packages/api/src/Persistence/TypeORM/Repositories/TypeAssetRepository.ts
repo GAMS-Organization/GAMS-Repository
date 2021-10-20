@@ -34,7 +34,7 @@ export default class TypeAssetRepository extends TypeRepository implements IAsse
   }
 
   public async findByAreaId(id: number): Promise<Asset[]> {
-    return await this.repository(Asset).find({ where: { area: id }, relations: ['area'] });
+    return await this.repository(Asset).find({ where: { area: id }, relations: ['area', 'element'] });
   }
 
   public async findByServiceId(id: number): Promise<Asset[]> {

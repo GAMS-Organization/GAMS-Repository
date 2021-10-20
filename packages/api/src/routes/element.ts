@@ -9,6 +9,7 @@ import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import ShowElementAction from '../API/Http/Actions/Element/ShowElementAction';
 import { ROL } from '../API/Http/Enums/UserRoles';
+import ShowElementsByAreaAction from '../API/Http/Actions/Element/ShowElementsByAreaAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 
@@ -55,6 +56,19 @@ router.get(
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showElementAction: ShowElementAction = DIContainer.resolve<ShowElementAction>(ShowElementAction);
     await showElementAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/area/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const showElementsByAreaAction: ShowElementsByAreaAction = DIContainer.resolve<ShowElementsByAreaAction>(
+      ShowElementsByAreaAction,
+    );
+    await showElementsByAreaAction.execute(request, response);
   }),
 );
 /*
