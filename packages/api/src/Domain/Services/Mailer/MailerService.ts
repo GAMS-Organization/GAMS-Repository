@@ -40,6 +40,33 @@ export default class MailerService {
         console.error(error);
       });
   }
+
+  public async sendWeekly(message: object) {
+    const templateId = process.env.MAIL_TEMPLATE_WEEKLY_ID;
+    const msg = {
+      from: process.env.EMAIL_SENDER, // Change to your verified sender
+      subject: 'Reporte semanal',
+      templateId,
+      personalizations: [
+        {
+          to: [
+            {
+              email: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
+            },
+          ],
+          dynamicTemplateData: message,
+        },
+      ],
+    };
+    this.sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent');
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
   //@ts-ignore
   private async getRecipientMail(usersId?: number[]) {
     const user: User[] = [];

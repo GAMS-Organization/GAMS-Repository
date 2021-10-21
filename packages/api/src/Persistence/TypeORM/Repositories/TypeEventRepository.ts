@@ -31,7 +31,10 @@ export default class TypeEventRepository extends TypeRepository implements IEven
   }
 
   public async findWeekEvents(startDate: string, endDate: string): Promise<Event[]> {
-    return await this.repository(Event).find({ startDate: Between(startDate, endDate) });
+    return await this.repository(Event).find({
+      where: { startDate: Between(startDate, endDate) },
+      relations: ['userEvents', 'userEvents.user'],
+    });
   }
 
   public async findMonthEvents(startDate: string, endDate: string): Promise<Event[]> {

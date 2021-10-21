@@ -27,8 +27,6 @@ import serviceElement from '../../../services/api/element';
 import serviceWorkOrder from '../../../services/api/workOrder';
 import sector from '../../../services/api/sector';
 
-import mapImage from '../../../styles/img/Mapa.png';
-
 class NewWorkOrder extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +59,7 @@ class NewWorkOrder extends React.Component {
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
-    const imagenGlobal = 'global/Edificios+Parques.jpg';
+    const imagenGlobal = 'global/Mapa.png';
 
     let sectores = [];
     for (const sector of responseSector.data.items) {

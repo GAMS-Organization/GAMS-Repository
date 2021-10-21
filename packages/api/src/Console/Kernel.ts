@@ -4,6 +4,7 @@ import StockService from '../Domain/Services/StockService';
 import WorkOrderService from '../Domain/Services/WorkOrderService';
 import { STATE } from '../API/Http/Enums/WorkOrder';
 import EventService from '../Domain/Services/EventService';
+import MailerService from '../Domain/Services/Mailer/MailerService';
 // import { exec } from 'child_process';
 class ConsoleKernel {
   public handle() {
@@ -15,30 +16,18 @@ class ConsoleKernel {
       const stockService = DIContainer.get<StockService>(StockService);
       const workOrderService = DIContainer.get<WorkOrderService>(WorkOrderService);
       const eventService = DIContainer.get<EventService>(EventService);
+      const mailService = DIContainer.get<MailerService>(MailerService);
 
       const criticalAndInsufficientStock = await stockService.getCriticalAndInsufficientStock();
-      const productNames = criticalAndInsufficientStock.map(current => {
+
+      const stock = {
+        alert: criticalAndInsufficientStock.length > 0,
+        products: [],
+      };
+
+      stock.products = criticalAndInsufficientStock.map(current => {
         return current.getProduct().getName();
       });
-      const message = 'Los productos con stock insuficiente y critico son: ' + productNames.join(', ');
-      console.log(message);
-
-      const unfinishedWorkOrders = await workOrderService.returnAllUnfinished();
-      const freeWorkOrders = [];
-      const inProgressWorkOrders = [];
-      unfinishedWorkOrders.forEach(workOrder => {
-        if (workOrder.getState() === STATE.FREE) {
-          freeWorkOrders.push(workOrder.getComment());
-        } else {
-          inProgressWorkOrders.push(workOrder.getComment());
-        }
-      });
-      const freeWorkOrdersMessage = 'Las órdenes de trabajo libres son: \n - ' + freeWorkOrders.join('\n - ');
-      const inProgressWorkOrdersMessage =
-        'Las órdenes de trabajo en progreso son: \n - ' + inProgressWorkOrders.join('\n - ');
-      console.log(freeWorkOrdersMessage);
-      console.log(inProgressWorkOrdersMessage);
-      // exec('./life-guard.sh');
 
       const startDate = new Date();
       let endDate = new Date();
@@ -48,10 +37,59 @@ class ConsoleKernel {
       const endDateString = `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
 
       const weekEvents = await eventService.returnWeekEvents(startDateString, endDateString);
-      console.log('Los mantenimientos preventivos para esta semana son: ');
+
+      const preventive = {
+        alert: weekEvents.length > 0,
+        events: [],
+      };
+
       weekEvents.forEach(event => {
-        console.log(event.getTitle());
+        const title = event.title;
+        const workerNames = event.getWorkers().map(worker => {
+          return worker.getUser().getName();
+        });
+        const workers = workerNames.join(', ');
+        preventive.events.push({ title, workers });
       });
+
+      const unfinishedWorkOrders = await workOrderService.returnAllUnfinished();
+      const freeWorkOrders = {
+        alert: false,
+        workOrders: [],
+      };
+      const progressWorkOrders = {
+        alert: false,
+        workOrders: [],
+      };
+      unfinishedWorkOrders.forEach(workOrder => {
+        if (workOrder.getState() === STATE.FREE) {
+          freeWorkOrders.workOrders.push({
+            comment: workOrder.getComment(),
+            priority: workOrder.getPriority(),
+            code: workOrder.getAsset().getCode(),
+          });
+        } else {
+          progressWorkOrders.workOrders.push({
+            comment: workOrder.getComment(),
+            priority: workOrder.getPriority(),
+            code: workOrder.getAsset().getCode(),
+            workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
+          });
+        }
+      });
+      freeWorkOrders.alert = freeWorkOrders.workOrders.length > 0;
+      progressWorkOrders.alert = progressWorkOrders.workOrders.length > 0;
+
+      const message = {
+        stock,
+        preventive,
+        freeWorkOrders,
+        progressWorkOrders,
+      };
+      console.log(message);
+      //todo está comentado el servicio de mail pero funciona bien
+      //await mailService.sendWeekly(message);
+      // exec('./life-guard.sh');
     });
   }
 }

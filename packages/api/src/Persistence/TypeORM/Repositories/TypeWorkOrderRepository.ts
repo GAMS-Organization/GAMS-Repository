@@ -34,6 +34,7 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   public async findAllUnfinished(): Promise<WorkOrder[]> {
     return await this.repository(WorkOrder).find({
       where: [{ state: STATE.FREE }, { state: STATE.TAKEN }, { state: STATE.ASSIGNED }],
+      relations: ['asset', 'userWorkOrders', 'userWorkOrders.user'],
     });
   }
 

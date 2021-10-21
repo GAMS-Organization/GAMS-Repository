@@ -45,7 +45,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` datetime(6) NOT NULL, `startDate` datetime(6) NULL, `realizationDate` datetime(6) NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDespcription` varchar(255) NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` datetime(6) NOT NULL, `startDate` datetime(6) NULL, `realizationDate` datetime(6) NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDescription` varchar(255) NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(

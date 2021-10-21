@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import '../../../styles/sass/styles.scss';
-import { rooftopBlueColor } from '../../../styles/jss/material-dashboard-react';
+import { gamsBlueColor } from '../../../styles/jss/material-dashboard-react';
 import NewEvent from './NewEvent';
 import Slide from '@material-ui/core/Slide';
 import UpdateEvent from './UpdateEvent';
@@ -80,7 +80,7 @@ class PreventiveCalendar extends React.Component {
           style={{
             height: 500,
             fontWeight: 400,
-            color: rooftopBlueColor[0],
+            color: gamsBlueColor[0],
           }}
           messages={{
             next: 'Siguiente',
