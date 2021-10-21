@@ -16,9 +16,10 @@ import Close from '@material-ui/icons/Close';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-//import serviceEducationalElement from '../../../services/api/educationalElement';
+import serviceEducationalElement from '../../../services/api/educationalElement';
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
+import UpdateEducationalElementRequestSection from '../../sections/EducationalElement/UpdateEducationalElementRequestSection';
 
 class EducationalElementRequestTable extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class EducationalElementRequestTable extends React.Component {
     this.setState({ modal: false });
   };
 
-  /*deleteEducationalElementRequest = async prop => {
+  deleteEducationalElementRequest = async prop => {
     const response = await serviceEducationalElement.deleteElementRequest(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -59,7 +60,7 @@ class EducationalElementRequestTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };*/
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -79,12 +80,12 @@ class EducationalElementRequestTable extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-        {/*<UpdateToolRequestSection
-          toolRequest={this.state.toolRequest}
+        <UpdateEducationalElementRequestSection
+          educationalElementRequest={this.state.educationalElementRequest}
           open={this.state.modal}
           close={this.closeModal}
-          listToolsRequest={this.props.listToolsRequest}
-        />*/}
+          listEducationalElementRequest={this.props.listEducationalElementRequest}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>

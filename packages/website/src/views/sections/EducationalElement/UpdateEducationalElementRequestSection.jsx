@@ -61,7 +61,7 @@ class UpdateEducationalElementRequestSection extends React.Component {
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false, statusSelected: '' });
-      this.props.listToolsRequest();
+      this.props.listEducationalElementRequest();
       this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -69,9 +69,9 @@ class UpdateEducationalElementRequestSection extends React.Component {
   };
 
   render() {
-    const { classes, toolRequest, Transition, open, close } = this.props;
+    const { classes, educationalElementRequest, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { status } = toolRequest;
+    const { status } = educationalElementRequest;
     return (
       <div>
         <Snackbar
@@ -122,7 +122,7 @@ class UpdateEducationalElementRequestSection extends React.Component {
                       inputProps={{
                         name: 'statusSelected',
                         id: 'status',
-                        defaultValue: this.props.toolRequest.status,
+                        defaultValue: this.props.educationalElementRequest.status,
                       }}
                     >
                       <MenuItem
@@ -189,10 +189,10 @@ class UpdateEducationalElementRequestSection extends React.Component {
 
 UpdateEducationalElementRequestSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  toolRequest: PropTypes.object,
+  educationalElementRequest: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
-  listToolsRequest: PropTypes.func,
+  listEducationalElementRequest: PropTypes.func,
 };
 
 export default withStyles(modalStyle)(UpdateEducationalElementRequestSection);
