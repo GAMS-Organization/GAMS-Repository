@@ -14,7 +14,6 @@ export default class MailerService {
   }
 
   public async sendEmail(subject: string, workOrder: WorkOrder, type: string, userId?: number[]) {
-    //Recipient contiene el/los email del destinatario
     const { dynamicTemplateData, templateId } = MailerService.getCustomMessage(type, workOrder);
     const msg = {
       from: process.env.EMAIL_SENDER, // Change to your verified sender
