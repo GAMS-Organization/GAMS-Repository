@@ -15,20 +15,20 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateToolSection from '../../sections/Tools/UpdateToolSection';
+import UpdateEducationalElementSection from '../../sections/EducationalElement/UpdateEducationalElementSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
-import serviceTool from '../../../services/api/tool.js';
+import serviceEducationalElement from '../../../services/api/educationalElement.js';
 
-class ToolTable extends React.Component {
+class EducationalElementTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      tool: {},
+      educationalElement: {},
       errors: {},
       notification: false,
       search: '',
@@ -41,7 +41,7 @@ class ToolTable extends React.Component {
 
   handleClickUpdate = prop => {
     this.setState({
-      tool: {
+      educationalElement: {
         id: prop.id,
         name: prop.visibleData[0],
         totalQuantity: prop.visibleData[1],
@@ -56,11 +56,11 @@ class ToolTable extends React.Component {
   };
 
   handleClickDelete = async prop => {
-    const response = await serviceTool.delete(prop.id);
+    const response = await serviceEducationalElement.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listTools();
+      this.props.listEducationalElements();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -83,17 +83,17 @@ class ToolTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Herramienta eliminada correctamente'
+              : 'Articulo eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateToolSection
-          tool={this.state.tool}
+        <UpdateEducationalElementSection
+          educationalElement={this.state.educationalElement}
           open={this.state.modal}
           close={this.closeModal}
-          listTools={this.props.listTools}
+          listEducationalElements={this.props.listEducationalElements}
         />
         <div className={classes.searchInputContainer}>
           <CustomInput
@@ -174,11 +174,11 @@ class ToolTable extends React.Component {
   }
 }
 
-ToolTable.defaultProps = {
+EducationalElementTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-ToolTable.propTypes = {
+EducationalElementTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -198,4 +198,4 @@ ToolTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
 };
 
-export default withStyles(tableStyle)(ToolTable);
+export default withStyles(tableStyle)(EducationalElementTable);

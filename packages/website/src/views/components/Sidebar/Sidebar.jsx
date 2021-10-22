@@ -89,9 +89,13 @@ const Sidebar = ({ ...props }) => {
                 <prop.icon className={classNames(classes.itemIcon, whiteFontClasses)} />
               )}
               {open === prop.name ? (
-                <KeyboardArrowUp className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
+                <KeyboardArrowUp
+                  className={classNames(classes.itemIcon, classes.Arrow, whiteFontClasses, classes.floatRight)}
+                />
               ) : (
-                <KeyboardArrowDown className={classNames(classes.itemIcon, whiteFontClasses, classes.floatRight)} />
+                <KeyboardArrowDown
+                  className={classNames(classes.itemIcon, classes.Arrow, whiteFontClasses, classes.floatRight)}
+                />
               )}
               <ListItemText
                 primary={prop.name}

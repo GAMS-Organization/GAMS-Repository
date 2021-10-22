@@ -12,12 +12,12 @@ import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 
-import serviceTools from '../../../services/api/tool';
+import serviceEducationalElement from '../../../services/api/educationalElement';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Snackbar from '../../components/Snackbar/Snackbar';
-import newToolStyle from '../../../styles/jss/material-dashboard-react/sections/NewToolStyle';
+import newElementEducationalStyle from '../../../styles/jss/material-dashboard-react/sections/newElementEducationalSectionStyle';
 
-class NewToolSection extends React.Component {
+class NewElementEducationalSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class NewToolSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  createTool = async e => {
+  createEducationalElement = async e => {
     e.preventDefault();
 
     const fields = ['name', 'totalQuantity', 'borrowQuantity'];
@@ -44,7 +44,7 @@ class NewToolSection extends React.Component {
         [field]: formElements.namedItem(field).value,
       }))
       .reduce((current, next) => ({ ...current, ...next }));
-    const response = await serviceTools.create(formValues);
+    const response = await serviceEducationalElement.create(formValues);
 
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('name').value = '';
@@ -57,10 +57,10 @@ class NewToolSection extends React.Component {
   };
 
   render() {
-    const { classes, name } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
-      <div id="section-new-tool">
+      <div id="section-new-educational-element">
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -68,7 +68,7 @@ class NewToolSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Herramienta creada correctamente'
+              : 'Elemento educacional creado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -76,10 +76,10 @@ class NewToolSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createTool}>
+            <form onSubmit={this.createEducationalElement}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nueva herramienta</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Articulo</h4>
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
                 <CardBody>
@@ -142,7 +142,7 @@ class NewToolSection extends React.Component {
   }
 }
 
-NewToolSection.propTypes = {
+NewElementEducationalSection.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   surname: PropTypes.string,
@@ -151,4 +151,4 @@ NewToolSection.propTypes = {
   type: PropTypes.string,
 };
 
-export default withStyles(newToolStyle)(NewToolSection);
+export default withStyles(newElementEducationalStyle)(NewElementEducationalSection);

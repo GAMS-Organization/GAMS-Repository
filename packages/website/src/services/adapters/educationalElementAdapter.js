@@ -1,6 +1,6 @@
 import { isError } from '../../utils/helpers/isError';
 
-class toolAdapter {
+class educationalElementAdapter {
   create(createResponse) {
     let { status, data } = createResponse;
 
@@ -81,8 +81,9 @@ class toolAdapter {
     }
   }
 
-  createToolRequest(createResponse) {
+  createElementRequest(createResponse) {
     let { status, data } = createResponse;
+    console.log();
     if (!isError(status)) {
       return {
         type: 'CREATED_SUCCESFUL',
@@ -100,7 +101,7 @@ class toolAdapter {
     }
   }
 
-  listToolRequest(listResponse) {
+  listElementRequest(listResponse) {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
@@ -120,7 +121,7 @@ class toolAdapter {
     }
   }
 
-  updateToolRequest(updateResponse) {
+  updateElementRequest(updateResponse) {
     let { status, data } = updateResponse;
 
     if (!isError(status)) {
@@ -140,7 +141,7 @@ class toolAdapter {
     }
   }
 
-  deleteToolRequest(deleteResponse) {
+  deleteElementRequest(deleteResponse) {
     let { status, data } = deleteResponse;
 
     if (!isError(status)) {
@@ -161,4 +162,4 @@ class toolAdapter {
   }
 }
 
-export default new toolAdapter();
+export default new educationalElementAdapter();

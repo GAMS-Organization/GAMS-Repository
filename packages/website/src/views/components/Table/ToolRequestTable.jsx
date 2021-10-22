@@ -12,26 +12,22 @@ import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
-import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import UpdateToolSection from '../../sections/Tools/UpdateToolSection';
 import Snackbar from '../Snackbar/Snackbar';
 
-import CustomInput from '../CustomInput/CustomInput';
-import Search from '@material-ui/icons/Search';
-import classNames from 'classnames';
-import serviceTool from '../../../services/api/tool.js';
+import serviceTool from '../../../services/api/tool';
+import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
+import Edit from '@material-ui/icons/Edit';
 
-class ToolTable extends React.Component {
+class ToolRequestTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      tool: {},
+      toolRequest: {},
       errors: {},
       notification: false,
-      search: '',
     };
   }
 
@@ -41,11 +37,10 @@ class ToolTable extends React.Component {
 
   handleClickUpdate = prop => {
     this.setState({
-      tool: {
+      toolRequest: {
         id: prop.id,
-        name: prop.visibleData[0],
-        totalQuantity: prop.visibleData[1],
-        borrowQuantity: prop.visibleData[2],
+        status: prop.visibleData[3],
+        areaId: prop.areaId,
       },
       modal: true,
     });
@@ -55,12 +50,12 @@ class ToolTable extends React.Component {
     this.setState({ modal: false });
   };
 
-  handleClickDelete = async prop => {
-    const response = await serviceTool.delete(prop.id);
+  deleteToolRequest = async prop => {
+    const response = await serviceTool.deleteToolRequest(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listTools();
+      this.props.listToolsRequest();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -68,12 +63,7 @@ class ToolTable extends React.Component {
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
-    let filteredData = tableData;
-    if (this.state.search !== '') {
-      filteredData = tableData.filter(item => {
-        return item[1].toLowerCase().includes(this.state.search.toLowerCase());
-      });
-    }
+
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -83,37 +73,18 @@ class ToolTable extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Herramienta eliminada correctamente'
+              : 'Solicitud de elemento eliminada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
-        <UpdateToolSection
-          tool={this.state.tool}
+        <UpdateToolRequestSection
+          toolRequest={this.state.toolRequest}
           open={this.state.modal}
           close={this.closeModal}
-          listTools={this.props.listTools}
+          listToolsRequest={this.props.listToolsRequest}
         />
-        <div className={classes.searchInputContainer}>
-          <CustomInput
-            labelText="Buscar"
-            id="search"
-            formControlProps={{
-              fullWidth: true,
-              className: 'mt0',
-            }}
-            inputProps={{
-              required: true,
-              defaultValue: '',
-              name: 'search',
-              onChange: e => {
-                this.setState({ search: e.target.value });
-              },
-            }}
-          />
-          <Search className={classNames(classes.itemIcon)}>{}</Search>
-        </div>
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -129,7 +100,7 @@ class ToolTable extends React.Component {
             </TableHead>
           ) : null}
           <TableBody>
-            {filteredData.map((prop, key) => {
+            {tableData.map((prop, key) => {
               return (
                 <TableRow key={key} hover>
                   {prop.visibleData.map((prop, key) => {
@@ -158,7 +129,7 @@ class ToolTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.handleClickDelete(prop)}
+                        onClick={() => this.deleteToolRequest(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
@@ -174,11 +145,11 @@ class ToolTable extends React.Component {
   }
 }
 
-ToolTable.defaultProps = {
+ToolRequestTable.defaultProps = {
   tableHeaderColor: 'gray',
 };
 
-ToolTable.propTypes = {
+ToolRequestTable.propTypes = {
   classes: PropTypes.object.isRequired,
   tableHeaderColor: PropTypes.oneOf([
     'warning',
@@ -196,6 +167,7 @@ ToolTable.propTypes = {
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  listToolsRequest: PropTypes.func,
 };
 
-export default withStyles(tableStyle)(ToolTable);
+export default withStyles(tableStyle)(ToolRequestTable);

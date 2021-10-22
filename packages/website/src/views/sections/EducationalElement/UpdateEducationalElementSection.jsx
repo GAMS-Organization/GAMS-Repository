@@ -14,14 +14,14 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceTool from '../../../services/api/tool';
+import serviceEducationalELement from '../../../services/api/educationalElement';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
-class UpdateToolSection extends React.Component {
+class UpdateEducationalElementSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tool: {},
+      educationalElement: {},
       errors: {},
       notification: false,
     };
@@ -35,7 +35,7 @@ class UpdateToolSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  updateTool = async e => {
+  updateEducationalElement = async e => {
     e.preventDefault();
 
     const fields = ['name', 'totalQuantity', 'borrowQuantity'];
@@ -46,13 +46,12 @@ class UpdateToolSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.id = this.props.tool.id;
-
-    const response = await serviceTool.update(formValues);
+    formValues.id = this.props.educationalElement.id;
+    const response = await serviceEducationalELement.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
       this.setState({ notification: true, open: false });
-      this.props.listTools();
+      this.props.listEducationalElements();
       this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -60,9 +59,9 @@ class UpdateToolSection extends React.Component {
   };
 
   render() {
-    const { classes, tool, Transition, open, close } = this.props;
+    const { classes, educationalElement, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { name, totalQuantity, borrowQuantity } = tool;
+    const { name, totalQuantity, borrowQuantity } = educationalElement;
     return (
       <div>
         <Snackbar
@@ -72,7 +71,7 @@ class UpdateToolSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Herramienta actualizada correctamente'
+              : 'Articulo actualizado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -91,10 +90,10 @@ class UpdateToolSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar Herramienta</h4>
+            <h4 className={classes.modalTitle}>Actualizar Artículo</h4>
           </DialogTitle>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.updateTool}>
+            <form onSubmit={this.updateEducationalElement}>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
@@ -156,12 +155,12 @@ class UpdateToolSection extends React.Component {
   }
 }
 
-UpdateToolSection.propTypes = {
+UpdateEducationalElementSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  tool: PropTypes.object,
+  educationalElement: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
-  listTools: PropTypes.func,
+  listEducationalElements: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(UpdateToolSection);
+export default withStyles(modalStyle)(UpdateEducationalElementSection);
