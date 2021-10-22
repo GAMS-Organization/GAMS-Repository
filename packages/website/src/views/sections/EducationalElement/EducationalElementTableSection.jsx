@@ -1,45 +1,42 @@
 import React from 'react';
-
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ElementTable from '../../components/Table/ElementTable.jsx';
+import EducationalElementTable from '../../components/Table/EducationalElementTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
+import serviceEducationalElement from '../../../services/api/educationalElement';
 
-import serviceElement from '../../../services/api/element';
-import Pagination from '../../components/Pagination/Pagination';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
+import Pagination from '../../components/Pagination/Pagination';
 
-class ElementTableSection extends React.Component {
+class EducationalElementTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      element: [],
-      totalPages: 1,
-      page: 1,
+      educationalElement: [],
     };
   }
 
-  //se obtienen los elementos
   async componentWillMount() {
-    this.listElements();
+    await this.listEducationalElements();
   }
 
-  listElements = async (page = 1, itemsPerPage = 15) => {
-    const response = await serviceElement.list(page, itemsPerPage);
-    let elements = [];
-    for (const element of response.data.items) {
-      let dataElement = {
-        visibleData: [element.name, element.code, element.service.name],
-        id: element.id,
+  listEducationalElements = async (page = 1, itemsPerPage = 500) => {
+    const response = await serviceEducationalElement.list(page, itemsPerPage);
+    let educationalElements = [];
+    for (const educationalElement of response.data.items) {
+      let dataEducationalElements = {
+        visibleData: [educationalElement.name, educationalElement.totalQuantity, educationalElement.borrowQuantity],
+        id: educationalElement.id.toString(),
       };
-      elements.push(dataElement);
+      educationalElements.push(dataEducationalElements);
     }
-    this.setState({ element: elements, totalPages: response.data.pageCount, page: page });
+
+    this.setState({ educationalElement: educationalElements, totalPages: response.data.pageCount });
   };
 
   pagination = () => {
@@ -47,7 +44,7 @@ class ElementTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1 ? this.listElements(1) : this.listElements(this.state.page - 1);
+          this.state.page === 1 ? this.listEducationalElements(1) : this.listEducationalElements(this.state.page - 1);
         },
       },
     ];
@@ -58,7 +55,7 @@ class ElementTableSection extends React.Component {
         pages.push({
           text: index,
           onClick: async () => {
-            this.listElements(index);
+            this.listEducationalElements(index);
           },
         });
       }
@@ -67,8 +64,8 @@ class ElementTableSection extends React.Component {
       text: 'NEXT',
       onClick: () => {
         this.state.page === this.state.totalPages
-          ? this.listElements(this.state.totalPages)
-          : this.listElements(this.state.page + 1);
+          ? this.listEducationalElements(this.state.totalPages)
+          : this.listEducationalElements(this.state.page + 1);
       },
     });
     return pages;
@@ -81,15 +78,15 @@ class ElementTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Elementos</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los Elementos</p>
+              <h4 className={classes.cardTitleWhite}>Artículos</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todos los Artículos</p>
             </CardHeader>
             <CardBody>
-              <ElementTable
+              <EducationalElementTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Nombre', 'Codigo', 'Servicio']}
-                tableData={this.state.element}
-                listElements={this.listElements}
+                tableHead={['Nombre', 'Cantidad', 'Cantidad Prestada']}
+                tableData={this.state.educationalElement}
+                listEducationalElements={this.listEducationalElements}
               />
             </CardBody>
           </Card>
@@ -104,4 +101,4 @@ class ElementTableSection extends React.Component {
   }
 }
 
-export default withStyles(tablesSectionsstyle)(ElementTableSection);
+export default withStyles(tablesSectionsstyle)(EducationalElementTableSection);

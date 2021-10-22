@@ -1,45 +1,39 @@
 import React from 'react';
-
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import ElementTable from '../../components/Table/ElementTable.jsx';
+import ToolTable from '../../components/Table/ToolTable';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
+import serviceTool from '../../../services/api/tool';
 
-import serviceElement from '../../../services/api/element';
-import Pagination from '../../components/Pagination/Pagination';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
+import Pagination from '../../components/Pagination/Pagination';
 
-class ElementTableSection extends React.Component {
+class ToolTableSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      element: [],
-      totalPages: 1,
-      page: 1,
+      tool: [],
     };
   }
 
-  //se obtienen los elementos
   async componentWillMount() {
-    this.listElements();
+    await this.listTools();
   }
 
-  listElements = async (page = 1, itemsPerPage = 15) => {
-    const response = await serviceElement.list(page, itemsPerPage);
-    let elements = [];
-    for (const element of response.data.items) {
-      let dataElement = {
-        visibleData: [element.name, element.code, element.service.name],
-        id: element.id,
-      };
-      elements.push(dataElement);
+  listTools = async (page = 1, itemsPerPage = 500) => {
+    const response = await serviceTool.list(page, itemsPerPage);
+    let tools = [];
+    for (const tool of response.data.items) {
+      let dataProduct = { visibleData: [tool.name, tool.totalQuantity, tool.borrowQuantity], id: tool.id.toString() };
+      tools.push(dataProduct);
     }
-    this.setState({ element: elements, totalPages: response.data.pageCount, page: page });
+
+    this.setState({ tool: tools, totalPages: response.data.pageCount });
   };
 
   pagination = () => {
@@ -47,7 +41,7 @@ class ElementTableSection extends React.Component {
       {
         text: 'PREV',
         onClick: () => {
-          this.state.page === 1 ? this.listElements(1) : this.listElements(this.state.page - 1);
+          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
         },
       },
     ];
@@ -58,7 +52,7 @@ class ElementTableSection extends React.Component {
         pages.push({
           text: index,
           onClick: async () => {
-            this.listElements(index);
+            this.listTools(index);
           },
         });
       }
@@ -67,8 +61,8 @@ class ElementTableSection extends React.Component {
       text: 'NEXT',
       onClick: () => {
         this.state.page === this.state.totalPages
-          ? this.listElements(this.state.totalPages)
-          : this.listElements(this.state.page + 1);
+          ? this.listTools(this.state.totalPages)
+          : this.listTools(this.state.page + 1);
       },
     });
     return pages;
@@ -81,15 +75,15 @@ class ElementTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Elementos</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todos los Elementos</p>
+              <h4 className={classes.cardTitleWhite}>Herramientas</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las Herramientas</p>
             </CardHeader>
             <CardBody>
-              <ElementTable
+              <ToolTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Nombre', 'Codigo', 'Servicio']}
-                tableData={this.state.element}
-                listElements={this.listElements}
+                tableHead={['Nombre', 'Cantidad', 'Cantidad Prestada']}
+                tableData={this.state.tool}
+                listTools={this.listTools}
               />
             </CardBody>
           </Card>
@@ -104,4 +98,4 @@ class ElementTableSection extends React.Component {
   }
 }
 
-export default withStyles(tablesSectionsstyle)(ElementTableSection);
+export default withStyles(tablesSectionsstyle)(ToolTableSection);

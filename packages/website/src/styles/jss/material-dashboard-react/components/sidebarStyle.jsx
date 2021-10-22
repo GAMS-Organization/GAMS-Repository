@@ -168,6 +168,9 @@ const sidebarStyle = theme => ({
     verticalAlign: 'middle',
     color: 'rgba(' + hexToRgb(whiteColor) + ', 0.8)',
   },
+  Arrow: {
+    margin: '0px',
+  },
   itemIconRTL: {
     marginRight: '3px',
     marginLeft: '15px',
