@@ -25,7 +25,6 @@ import serviceService from '../../../services/api/service';
 import serviceAsset from '../../../services/api/asset';
 import serviceElement from '../../../services/api/element';
 import serviceWorkOrder from '../../../services/api/workOrder';
-import sector from '../../../services/api/sector';
 
 class NewWorkOrder extends React.Component {
   constructor(props) {
@@ -228,7 +227,6 @@ class NewWorkOrder extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { errors } = this.state;
     return (
       <div id="section-new-product">
         <Snackbar

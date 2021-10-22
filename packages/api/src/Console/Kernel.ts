@@ -12,7 +12,8 @@ class ConsoleKernel {
   }
 
   private initCron() {
-    schedule.scheduleJob('45 * * * * *', async () => {
+    //Ejecuta la tarea todos los dias de Lunes a Viernes a las 8:00:00 am (8 + 3 por el utc)
+    schedule.scheduleJob('00 00 11 ? * 1-5', async () => {
       const stockService = DIContainer.get<StockService>(StockService);
       const workOrderService = DIContainer.get<WorkOrderService>(WorkOrderService);
       const eventService = DIContainer.get<EventService>(EventService);
@@ -86,9 +87,8 @@ class ConsoleKernel {
         freeWorkOrders,
         progressWorkOrders,
       };
-      console.log(message);
-      //todo está comentado el servicio de mail pero funciona bien
-      //await mailService.sendWeekly(message);
+
+      await mailService.sendWeekly(message);
       // exec('./life-guard.sh');
     });
   }

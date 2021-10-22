@@ -214,6 +214,7 @@ class UpdateSectorSection extends React.Component {
                   width="100%"
                   height="100%"
                   border="10"
+                  alt={''}
                 />
               ) : null}
             </GridItem>

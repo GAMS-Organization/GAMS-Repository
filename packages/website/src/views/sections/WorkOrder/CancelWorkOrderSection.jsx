@@ -60,9 +60,8 @@ class CancelWorkOrderSection extends React.Component {
   };
 
   render() {
-    const { classes, workOrder, Transition, open, close } = this.props;
+    const { classes, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id } = workOrder;
     return (
       <div>
         <Snackbar

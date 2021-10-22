@@ -15,7 +15,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import { createDate, createDateTime, toDate, toSQLFormat, toTime } from '../../../utils/helpers/dateHelper';
+import { toDate, toSQLFormat, toTime } from '../../../utils/helpers/dateHelper';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';

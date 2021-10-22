@@ -12,10 +12,10 @@ export default class MailerService {
     this.userService = userService;
     this.sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
-  //@ts-ignore
+
   public async sendEmail(subject: string, workOrder: WorkOrder, type: string, userId?: number[]) {
     //Recipient contiene el/los email del destinatario
-    const { dynamicTemplateData, templateId } = this.getCustomMessage(type, workOrder);
+    const { dynamicTemplateData, templateId } = MailerService.getCustomMessage(type, workOrder);
     const msg = {
       from: process.env.EMAIL_SENDER, // Change to your verified sender
       subject: subject,
@@ -24,7 +24,9 @@ export default class MailerService {
         {
           to: [
             {
-              email: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
+              email: process.env.DEV_ENVIRONMENT
+                ? process.env.RECIPIENT_EMAIL_TEST
+                : await this.getRecipientMail(userId),
             },
           ],
           dynamicTemplateData: dynamicTemplateData,
@@ -51,7 +53,7 @@ export default class MailerService {
         {
           to: [
             {
-              email: process.env.RECIPIENT_EMAIL_TEST, // Cambiar por recipient
+              email: process.env.DEV_ENVIRONMENT ? process.env.RECIPIENT_EMAIL_TEST : await this.getRecipientMail(null),
             },
           ],
           dynamicTemplateData: message,
@@ -67,7 +69,7 @@ export default class MailerService {
         console.error(error);
       });
   }
-  //@ts-ignore
+
   private async getRecipientMail(usersId?: number[]) {
     const user: User[] = [];
     if (usersId) {
@@ -82,7 +84,7 @@ export default class MailerService {
         recipient.push(user.getEmail());
       });
     } else {
-      const users: User[] = await this.userService.findByRole('personal');
+      const users: User[] = await this.userService.findByRole('boss');
       users.forEach(user => {
         recipient.push(user.getEmail());
       });
@@ -90,7 +92,10 @@ export default class MailerService {
     return recipient;
   }
 
-  private getCustomMessage(type: string, workOrder: WorkOrder): { dynamicTemplateData: object; templateId: string } {
+  private static getCustomMessage(
+    type: string,
+    workOrder: WorkOrder,
+  ): { dynamicTemplateData: object; templateId: string } {
     let dynamicTemplateData: object;
     let templateId: string;
     switch (type) {
