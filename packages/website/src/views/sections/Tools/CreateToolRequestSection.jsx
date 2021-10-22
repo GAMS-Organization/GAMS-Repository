@@ -111,9 +111,7 @@ class createToolRequestSection extends React.Component {
       areaId: this.state.selectedAreaId,
       quantity: quantity,
     };
-    console.log(formValues);
     const response = await serviceTool.createToolRequest(formValues);
-    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('quantity').value = '';
       formElements.namedItem('date').value = '';
