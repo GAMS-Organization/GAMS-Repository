@@ -21,7 +21,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import serviceTool from '../../../services/api/tool';
-import serviceWorkOrder from '../../../services/api/workOrder';
 
 class createToolRequestSection extends React.Component {
   constructor(props) {
@@ -109,7 +108,7 @@ class createToolRequestSection extends React.Component {
       toolId: this.state.selectedToolId,
       date: date,
       areaId: this.state.selectedAreaId,
-      quantity: quantity,
+      quantity: parseInt(quantity),
     };
     const response = await serviceTool.createToolRequest(formValues);
     if (response.type === 'CREATED_SUCCESFUL') {
@@ -129,7 +128,7 @@ class createToolRequestSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
       <div id="">

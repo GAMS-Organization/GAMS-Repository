@@ -2,6 +2,8 @@ import UserService from '../UserService';
 import { inject, injectable } from 'inversify';
 import User from '../../Entities/User';
 import WorkOrder from '../../Entities/WorkOrder';
+import ToolRequest from '../../Entities/ToolRequest';
+import ElementRequest from '../../Entities/ElementRequest';
 
 @injectable()
 export default class MailerService {
@@ -56,6 +58,43 @@ export default class MailerService {
             },
           ],
           dynamicTemplateData: message,
+        },
+      ],
+    };
+    this.sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent');
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  public async sendToolAndElementRequestEmail(subject: string, toolOrElementRequest: ToolRequest | ElementRequest) {
+    const templateId = process.env.MAIL_TEMPLATE_TOOL_AND_ELEMENT_ID;
+    const msg = {
+      from: process.env.EMAIL_SENDER, // Change to your verified sender
+      subject: subject,
+      templateId,
+      personalizations: [
+        {
+          to: [
+            {
+              email: process.env.DEV_ENVIRONMENT ? process.env.RECIPIENT_EMAIL_TEST : await this.getRecipientMail(null),
+            },
+          ],
+          dynamicTemplateData: {
+            subject: subject,
+            author: `${toolOrElementRequest.getUser().getName()} ${toolOrElementRequest.getUser().getSurname()}`,
+            item: toolOrElementRequest.getItemName(),
+            quantity: toolOrElementRequest.getQuantity(),
+            area: toolOrElementRequest.getArea().getName(),
+            sector: toolOrElementRequest
+              .getArea()
+              .getSector()
+              .getName(),
+          },
         },
       ],
     };

@@ -174,7 +174,7 @@ const dashboardRoutes = [
     group: true,
     layout: '/admin',
     title: 'Herramientas',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
     children: [
       {
         path: '/tools',
@@ -183,7 +183,7 @@ const dashboardRoutes = [
         component: Tools,
         layout: '/admin',
         title: 'Gestión',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/CreateToolRequestSection',
@@ -192,7 +192,7 @@ const dashboardRoutes = [
         component: CreateToolRequestSection,
         layout: '/admin',
         title: 'Solicitar',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
       {
         path: '/ToolRequestTableSection',
@@ -201,7 +201,7 @@ const dashboardRoutes = [
         component: ToolRequestTableSection,
         layout: '/admin',
         title: 'Solicitudes',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
     ],
   },
@@ -211,7 +211,7 @@ const dashboardRoutes = [
     group: true,
     layout: '/admin',
     title: 'Articulos',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
     children: [
       {
         path: '/educationalElement',
@@ -220,7 +220,7 @@ const dashboardRoutes = [
         component: EducationalElement,
         layout: '/admin',
         title: 'Gestión',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/CreateRequestEducationalElementSection',
@@ -229,7 +229,7 @@ const dashboardRoutes = [
         component: CreateRequestEducationalElementSection,
         layout: '/admin',
         title: 'Solicitar',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
       {
         path: '/EducationalElementRequestTableSection',
@@ -238,7 +238,7 @@ const dashboardRoutes = [
         component: EducationalElementRequestTableSection,
         layout: '/admin',
         title: 'Solicitudes',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
     ],
   },

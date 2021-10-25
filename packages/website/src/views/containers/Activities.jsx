@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import WorkOrdersAuthorHistory from '../sections/Activities/WorkOrdersAuthorHistory';
 import WorkOrdersWorkerHistory from '../sections/Activities/WorkOrdersWorkerHistory';
+import ToolRequestsAuthorHistory from '../sections/Activities/ToolRequestsAuthorHistory';
+import EducationalElementRequestsAuthorHistory from '../sections/Activities/EducationalElementRequestsAuthorHistory';
 
 const styles = {
   cardCategoryWhite: {
@@ -36,8 +38,10 @@ class Activities extends React.Component {
     const { roles } = this.props;
     return (
       <div>
-        {roles.includes('personal') ? <WorkOrdersWorkerHistory /> : null}
+        {roles.includes('personal') || roles.includes('boss') ? <WorkOrdersWorkerHistory /> : null}
         <WorkOrdersAuthorHistory />
+        <ToolRequestsAuthorHistory />
+        <EducationalElementRequestsAuthorHistory />
       </div>
     );
   }

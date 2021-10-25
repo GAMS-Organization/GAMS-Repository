@@ -10,12 +10,12 @@ import CardFooter from '../../components/Card/CardFooter';
 import Button from '../../components/CustomButtons/Button';
 import SnackbarContent from '../../components/Snackbar/SnackbarContent';
 
-import workOrderService from '../../../services/api/workOrder';
+import educationalElementService from '../../../services/api/educationalElement';
 import Info from '../../components/Typography/Info';
 import Warning from '../../components/Typography/Warning';
 import Success from '../../components/Typography/Success';
-import Danger from '../../components/Typography/Danger';
 import OfflineBolt from '@material-ui/icons/OfflineBolt';
+import Danger from '../../components/Typography/Danger';
 
 const styles = {
   cardCategoryWhite: {
@@ -40,27 +40,32 @@ const styles = {
   },
 };
 
-class WorkOrdersAuthorHistory extends React.Component {
+class EducationalElementRequestsAuthorHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      workOrdersAuthor: [],
-      totalWorkOrderAuthorPages: 1,
-      workOrderAuthorPage: 1,
+      educationalElementRequestsAuthor: [],
+      totalEducationalElementRequestsHistoryAuthorPages: 1,
+      educationalElementRequestsHistoryAuthorPage: 1,
     };
   }
 
   componentWillMount = async () => {
-    const response = await workOrderService.listByUser();
-    this.setState({ workOrdersAuthor: response.items, totalWorkOrderAuthorPages: response.pageCount });
+    const response = await educationalElementService.listByUser();
+    this.setState({
+      educationalElementRequestsAuthor: response.data.items,
+      totalEducationalElementRequestsHistoryAuthorPages: response.data.pageCount,
+    });
   };
 
   handleOnClick = async () => {
-    const response = await workOrderService.listByUser(this.state.workOrderAuthorPage + 1);
+    const response = await educationalElementService.listByUser(
+      this.state.educationalElementRequestsHistoryAuthorPage + 1,
+    );
     this.setState({
-      workOrdersAuthor: this.state.workOrdersAuthor.concat(response.items),
-      totalWorkOrderAuthorPages: response.pageCount,
-      workOrderAuthorPage: this.state.workOrderAuthorPage + 1,
+      educationalElementRequestsAuthor: this.state.educationalElementRequestsAuthor.concat(response.data.items),
+      totalEducationalElementRequestsHistoryAuthorPages: response.data.pageCount,
+      educationalElementRequestsHistoryAuthorPage: this.state.educationalElementRequestsHistoryAuthorPage + 1,
     });
   };
 
@@ -68,12 +73,11 @@ class WorkOrdersAuthorHistory extends React.Component {
     const { classes } = this.props;
 
     const state = {
-      libre: 'info',
-      pausada: 'warning',
-      finalizada: 'success',
-      asignada: 'warning',
-      tomada: 'warning',
-      cancelada: 'danger',
+      pendiente: 'info',
+      llevando: 'warning',
+      entregado: 'warning',
+      devuelto: 'success',
+      cancelado: 'danger',
     };
 
     return (
@@ -81,39 +85,41 @@ class WorkOrdersAuthorHistory extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Solicitudes de Órdenes de trabajo</h4>
+              <h4 className={classes.cardTitleWhite}>Solicitudes de Artículos</h4>
               <GridContainer>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
-                  Todas sus órdenes de trabajo son listadas aquí.
+                  Todas sus solicitudes de artículos son listadas aquí.
                 </p>
                 <Info badge>Notificada</Info>
-                <Warning badge>En proceso</Warning>
-                <Success badge>Realizada</Success>
+                <Warning badge>En camino</Warning>
+                <Warning badge>En uso</Warning>
+                <Success badge>Devuelta</Success>
                 <Danger badge>Cancelada</Danger>
               </GridContainer>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  {this.state.workOrdersAuthor.length !== 0 ? (
-                    this.state.workOrdersAuthor.map(workOrder => {
+                  {this.state.educationalElementRequestsAuthor.length !== 0 ? (
+                    this.state.educationalElementRequestsAuthor.map(educationalElementRequest => {
                       return (
                         <SnackbarContent
-                          message={`${workOrder.orderDate} - ${workOrder.comment} - Propridad: ${workOrder.priority}`}
-                          color={state[workOrder.state]}
+                          message={`${educationalElementRequest.date} - ${educationalElementRequest.area.name} - Artículo: ${educationalElementRequest.educationalElement.name} - Cantidad: ${educationalElementRequest.quantity}`}
+                          color={state[educationalElementRequest.status]}
                           icon={OfflineBolt}
                         />
                       );
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
                     </GridContainer>
                   )}
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.workOrderAuthorPage !== this.state.totalWorkOrderAuthorPages ? (
+            {this.state.educationalElementRequestsHistoryAuthorPage !==
+            this.state.totalEducationalElementRequestsHistoryAuthorPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12}>
                   <Button
@@ -134,8 +140,8 @@ class WorkOrdersAuthorHistory extends React.Component {
   }
 }
 
-WorkOrdersAuthorHistory.propTypes = {
+EducationalElementRequestsAuthorHistory.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(WorkOrdersAuthorHistory);
+export default withStyles(styles)(EducationalElementRequestsAuthorHistory);

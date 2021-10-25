@@ -23,6 +23,16 @@ class educationalElement {
     return educationalElementAdapter.list(listResponse);
   }
 
+  async listByUser(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`elementRequest/myElementRequests/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return educationalElementAdapter.list(listResponse);
+  }
+
   async update(dataEducationalElement) {
     const body = dataEducationalElement;
     let updateResponse;

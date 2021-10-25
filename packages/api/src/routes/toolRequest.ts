@@ -10,6 +10,7 @@ import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
 import { ROL } from '../API/Http/Enums/UserRoles';
+import IndexToolRequestsByAuthorAction from '../API/Http/Actions/ToolRequest/IndexToolRequestByAuthorAction';
 
 const router = express.Router();
 
@@ -62,6 +63,19 @@ router.put(
       UpdateToolRequestAction,
     );
     await updateToolRequestAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/myToolRequests',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexToolRequestsByAuthorAction: IndexToolRequestsByAuthorAction = DIContainer.resolve<
+      IndexToolRequestsByAuthorAction
+    >(IndexToolRequestsByAuthorAction);
+    await indexToolRequestsByAuthorAction.execute(request, response);
   }),
 );
 

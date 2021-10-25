@@ -28,6 +28,14 @@ export default class TypeToolRequestRepository extends TypeRepository implements
     return await this.repository(ToolRequest).count();
   }
 
+  public async countByUserId(userId: number): Promise<number> {
+    return await this.repository(ToolRequest).count({ where: { user: userId }, relations: ['user'] });
+  }
+
+  public async findByUserId(id: number): Promise<ToolRequest[]> {
+    return await this.repository(ToolRequest).find({ where: { user: id }, relations: ['area', 'tool', 'user'] });
+  }
+
   public async findOneByToolRequestName(name: string): Promise<ToolRequest> {
     return await this.repository(ToolRequest).findOne({ where: { name: name } });
   }

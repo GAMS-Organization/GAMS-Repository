@@ -50,13 +50,11 @@ class createRequestEducationalElementSection extends React.Component {
     let educationalElements = [];
 
     for (const sector of responseSector.data.items) {
-      let dataSector = sector;
-      sectores.push(dataSector);
+      sectores.push(sector);
     }
 
     for (const educationalElement of responseEducationalElement.data.items) {
-      let dataEducationalElement = educationalElement;
-      educationalElements.push(dataEducationalElement);
+      educationalElements.push(educationalElement);
     }
 
     this.setState({ sector: sectores, educationalElement: educationalElements });
@@ -113,7 +111,7 @@ class createRequestEducationalElementSection extends React.Component {
       educationalElementId: this.state.selectedEducationalElementId,
       date: date,
       areaId: this.state.selectedAreaId,
-      quantity: quantity,
+      quantity: parseInt(quantity),
     };
     const response = await serviceEducationalElement.createElementRequest(formValues);
     if (response.type === 'CREATED_SUCCESFUL') {
@@ -133,7 +131,7 @@ class createRequestEducationalElementSection extends React.Component {
   };
 
   render() {
-    const { classes, name, code } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
       <div id="">

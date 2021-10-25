@@ -25,7 +25,6 @@ class PreventiveCalendar extends React.Component {
 
   async componentWillMount() {
     const response = await preventive.listByMonth(this.state.month);
-    console.log(response);
     this.setState({ events: response.events });
   }
 

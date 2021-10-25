@@ -26,4 +26,23 @@ export default class ToolRequestService {
       totalPages: Math.ceil(toolRequestQuantity / itemsPerPage),
     };
   }
+
+  public async returnAllPaginatedByAuthor(
+    userId: number,
+    page: number = 1,
+    itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
+  ): Promise<PaginatedSuccessData> {
+    const toolRequestQuantity = await this.toolRequestRepository.countByUserId(userId);
+    const toolRequests = await this.toolRequestRepository.findByUserId(
+      userId,
+      itemsPerPage * page - itemsPerPage,
+      itemsPerPage,
+    );
+    return {
+      data: toolRequests,
+      dataLength: toolRequests.length,
+      totalDataQuantity: toolRequestQuantity,
+      totalPages: Math.ceil(toolRequestQuantity / itemsPerPage),
+    };
+  }
 }

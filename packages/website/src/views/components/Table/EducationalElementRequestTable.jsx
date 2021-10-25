@@ -17,7 +17,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceEducationalElement from '../../../services/api/educationalElement';
-import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
 import UpdateEducationalElementRequestSection from '../../sections/EducationalElement/UpdateEducationalElementRequestSection';
 

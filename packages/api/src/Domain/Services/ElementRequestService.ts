@@ -28,4 +28,23 @@ export default class ElementRequestService {
       totalPages: Math.ceil(elementRequestQuantity / itemsPerPage),
     };
   }
+
+  public async returnAllPaginatedByAuthor(
+    userId: number,
+    page: number = 1,
+    itemsPerPage: number = parseInt(process.env.PAGINATED_RESULTS),
+  ): Promise<PaginatedSuccessData> {
+    const elementRequestQuantity = await this.elementRequestRepository.countByUserId(userId);
+    const elementRequests = await this.elementRequestRepository.findByUserId(
+      userId,
+      itemsPerPage * page - itemsPerPage,
+      itemsPerPage,
+    );
+    return {
+      data: elementRequests,
+      dataLength: elementRequests.length,
+      totalDataQuantity: elementRequestQuantity,
+      totalPages: Math.ceil(elementRequestQuantity / itemsPerPage),
+    };
+  }
 }
