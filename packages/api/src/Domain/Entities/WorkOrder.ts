@@ -21,7 +21,7 @@ export default class WorkOrder {
   @Column()
   public state: string;
   @Column({ nullable: true })
-  public taskDespcription: string;
+  public taskDescription: string;
   @Column()
   public comment: string;
   @ManyToOne(_type => User, user => user.workOrders)
@@ -49,7 +49,7 @@ export default class WorkOrder {
   }
 
   public getTaskDescription(): string {
-    return this.taskDespcription;
+    return this.taskDescription;
   }
 
   public getPriority(): string {
@@ -94,12 +94,22 @@ export default class WorkOrder {
     return workersId;
   }
 
+  public getWorkersNameByUserWorkOrders(): string[] {
+    const workersFullName = [];
+    if (this.userWorkOrders) {
+      for (const userWorkOrder of this.userWorkOrders) {
+        workersFullName.push(`${userWorkOrder.getUser().getName()} ${userWorkOrder.getUser().getSurname()}`);
+      }
+    }
+    return workersFullName;
+  }
+
   public setOrderDate(orderDate: string): void {
     this.orderDate = orderDate;
   }
 
-  public setTaskDescription(taskDespcription: string): void {
-    this.taskDespcription = taskDespcription;
+  public setTaskDescription(taskDescription: string): void {
+    this.taskDescription = taskDescription;
   }
 
   public setPriority(priority: string): void {

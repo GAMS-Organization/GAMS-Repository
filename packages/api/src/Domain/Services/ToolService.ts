@@ -32,7 +32,7 @@ export default class ToolService {
     if (type === 'borrow') {
       const available = totalQuantity - borrowedQuantity;
       if (quantity > available) {
-        throw new EntityNotFoundException('The amount requested is bigger than the available amount');
+        throw new EntityNotFoundException('The amount requested is bigger than the available');
       }
       tool.setBorrowQuantity(borrowedQuantity + quantity);
     } else {

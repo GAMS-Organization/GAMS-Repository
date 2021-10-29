@@ -81,10 +81,10 @@ class WorkOrdersAuthorHistory extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
+              <h4 className={classes.cardTitleWhite}>Solicitudes de Órdenes de trabajo</h4>
               <GridContainer>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
-                  Todas sus actividades son listadas aquí.
+                  Todas sus órdenes de trabajo son listadas aquí.
                 </p>
                 <Info badge>Notificada</Info>
                 <Warning badge>En proceso</Warning>

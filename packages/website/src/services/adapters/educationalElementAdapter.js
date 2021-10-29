@@ -83,7 +83,6 @@ class educationalElementAdapter {
 
   createElementRequest(createResponse) {
     let { status, data } = createResponse;
-    console.log();
     if (!isError(status)) {
       return {
         type: 'CREATED_SUCCESFUL',

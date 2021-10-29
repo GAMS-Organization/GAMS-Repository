@@ -3,4 +3,5 @@ export const STATUS = {
   ARRIVING: 'llevando',
   DELIVERED: 'entregado',
   RETURNED: 'devuelto',
+  CANCELED: 'cancelado',
 };

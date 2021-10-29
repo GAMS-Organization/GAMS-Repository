@@ -3,6 +3,7 @@ import WorkOrder from '../Entities/WorkOrder';
 export default interface IWorkOrderRepository {
   findAll(): Promise<WorkOrder[]>;
   findAllPaginated(initialIndex: number, limit: number): Promise<WorkOrder[]>;
+  findAllUnfinished(): Promise<WorkOrder[]>;
   count(): Promise<number>;
   countByUser(userId: number): Promise<number>;
   findOneById(id: number): Promise<WorkOrder>;

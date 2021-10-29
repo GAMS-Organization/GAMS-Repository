@@ -14,6 +14,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import { toDate } from '../../../utils/helpers/dateHelper';
 
 class ViewEntryPurchase extends React.Component {
   constructor(props) {
@@ -158,7 +159,7 @@ class ViewEntryPurchase extends React.Component {
                       }}
                       inputProps={{
                         disabled: true,
-                        defaultValue: entry.date,
+                        defaultValue: toDate(entry.date, 3),
                         name: 'date',
                       }}
                     />

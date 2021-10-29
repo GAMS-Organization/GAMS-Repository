@@ -53,6 +53,8 @@ export default class CompleteWorkOrderHandler {
       await this.departureRepository.persist(departure);
     }
 
+    workOrder = await this.workOrderRepository.findOneById(command.getId());
+
     return workOrder;
   }
 }

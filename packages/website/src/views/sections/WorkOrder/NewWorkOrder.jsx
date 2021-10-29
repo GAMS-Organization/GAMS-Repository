@@ -14,7 +14,6 @@ import Button from '../../components/CustomButtons/Button.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
-import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import newWorkOrderStyle from '../../../styles/jss/material-dashboard-react/sections/newWorkOrderStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
@@ -24,8 +23,8 @@ import serviceSector from '../../../services/api/sector';
 import serviceArea from '../../../services/api/area';
 import serviceService from '../../../services/api/service';
 import serviceAsset from '../../../services/api/asset';
+import serviceElement from '../../../services/api/element';
 import serviceWorkOrder from '../../../services/api/workOrder';
-import sector from '../../../services/api/sector';
 
 class NewWorkOrder extends React.Component {
   constructor(props) {
@@ -59,7 +58,7 @@ class NewWorkOrder extends React.Component {
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
-    const imagenGlobal = 'global/Edificios+Parques.jpg';
+    const imagenGlobal = 'global/Mapa.png';
 
     let sectores = [];
     for (const sector of responseSector.data.items) {
@@ -126,11 +125,12 @@ class NewWorkOrder extends React.Component {
     const { service } = await serviceService.getByName(event.target.value.replace(/\s/gi, '-'));
     const idService = service.id;
 
+    const allElements = await serviceElement.getByAreaId(this.state.idArea);
+
+    const elements = allElements.filter(element => element.service.id === idService);
+
     const map = this.state.mapsAreas[this.state.service.indexOf(service.name)];
 
-    const elements = service.elements.map(element => {
-      return element;
-    });
     this.setState({
       selectedService: event.target.value,
       map: map,
@@ -227,7 +227,6 @@ class NewWorkOrder extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { errors } = this.state;
     return (
       <div id="section-new-product">
         <Snackbar
@@ -255,8 +254,9 @@ class NewWorkOrder extends React.Component {
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <img
-                        src={`http://localhost/api/static/${this.state.map}`}
+                        src={`http://${window.location.hostname}/api/static/${this.state.map}`}
                         width="100%"
+                        alt={''}
                         height="100%"
                         border="10"
                       />

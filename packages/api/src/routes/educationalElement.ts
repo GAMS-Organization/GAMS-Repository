@@ -8,13 +8,14 @@ import IndexEducationalElementsAction from '../API/Http/Actions/EducationalEleme
 import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
+import { ROL } from '../API/Http/Enums/UserRoles';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexEducationalElementAction: IndexEducationalElementsAction = DIContainer.resolve<
@@ -27,7 +28,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeEducationalElementAction: StoreEducationalElementAction = DIContainer.resolve<
@@ -40,7 +41,7 @@ router.post(
 // router.get(
 //   '/:id([0-9]+)',
 //   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
+//     authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
 //     const showEducationalElementAction: ShowEducationalElementAction = DIContainer.resolve<ShowEducationalElementAction>(
@@ -53,7 +54,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateEducationalElementAction: UpdateEducationalElementAction = DIContainer.resolve<
@@ -66,7 +67,7 @@ router.put(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyEducationalElementAction: DestroyEducationalElementAction = DIContainer.resolve<

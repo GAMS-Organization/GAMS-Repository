@@ -7,25 +7,24 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
     await queryRunner.query(
       `insert into roles values 
       (1, 'admin'),
-      (2, 'personal'),
-      (3, 'user');`,
+      (2, 'boss'),
+      (3, 'personal'),
+      (4, 'user');`,
     );
     //Create users
     await queryRunner.query(
       `insert into users values 
-      (1,'admin','admin','admin@gams.com','$2a$08$4dFb7Jq.o4bbpp.oohEFFOWUOhDKntZI2DEMC2yXIKe.BuhS.HKvu','active','2020-04-26 20:19:12.267999','2020-04-26 20:19:12.267999'),
-      (2,'Lucas','Ringelsten','riki@gams.com','$2a$08$VU2CJVBE6rib8KHYcapwq.GGiZ46MUO3CSGZp3kAGYq3A4eR9PsMC','active','2020-04-26 20:23:19.958672','2020-04-26 20:23:19.958672'),
-      (4,'Joel','Mercol','joelmercol@gmail.com','$2a$08$LL2y3W.QMgkrGCPevA31EOeu.WoasXd.9b7AzxYP4tqE7xJTKYIby','active','2020-07-09 00:06:22.621727','2020-07-09 00:06:22.621727');`,
+      (1,'Alejandro','Minacori','alejandrominacori@gmail.com','$2a$08$h7Xs4jFXIrNcCaLdLHamdOma/HnP.HttOAx5NqrNH6Yy6hLLfQe/e','active','2021-10-18 17:45:38.324731','2021-10-18 17:45:38.324731'),
+      (2,'Javier','Sicardi','javisicardi94@gmail.com','$2a$08$KsROpq0uQ.yyvREbS0JeNuGNnzTF/56ShEZmfbZkTju89VIDw6rvi','active','2021-10-18 17:49:14.879381','2021-10-18 17:49:14.879381'),
+      (3,'Joel','Mercol','joelmercol@gmail.com','$2a$08$LL2y3W.QMgkrGCPevA31EOeu.WoasXd.9b7AzxYP4tqE7xJTKYIby','active','2020-07-09 00:06:22.621727','2020-07-09 00:06:22.621727');`,
     );
 
     //Create user_roles
     await queryRunner.query(
       `insert into user_roles values 
       (1,1,1),
-      (2,1,2),
-      (3,1,3),
-      (5,4,1),
-      (6,2,1);
+      (2,2,1),
+      (3,3,3);
     `,
     );
 

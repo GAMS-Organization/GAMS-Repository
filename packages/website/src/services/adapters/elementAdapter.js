@@ -79,6 +79,24 @@ class elementAdapter {
     }
   }
 
+  getByAreaId(loadResponse) {
+    let { status, data } = loadResponse;
+
+    if (!isError(status)) {
+      return data.data;
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'LOAD_FAIL',
+        error: {
+          code: status,
+          type: code,
+          errors: details.error,
+        },
+      };
+    }
+  }
+
   delete(deleteResponse) {
     let { status, data } = deleteResponse;
 

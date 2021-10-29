@@ -31,6 +31,12 @@ export default class MockUserRepository implements IUserRepository {
     return users[0];
   }
 
+  public async findByRole(_role: string): Promise<User[]> {
+    const users = await this.findAll();
+
+    return users;
+  }
+
   public async findOneByUsername(_username: string): Promise<User> {
     const users = await this.findAll();
 

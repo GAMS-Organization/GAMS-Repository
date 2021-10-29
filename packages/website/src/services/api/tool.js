@@ -23,6 +23,16 @@ class tool {
     return toolAdapter.list(listResponse);
   }
 
+  async listByUser(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`toolRequest/myToolRequests/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return toolAdapter.list(listResponse);
+  }
+
   async update(dataTool) {
     const body = dataTool;
     let updateResponse;

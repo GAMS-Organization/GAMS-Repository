@@ -12,7 +12,6 @@ import routes from '../routes.js';
 
 import pagesStyle from '../styles/jss/material-dashboard-react/layouts/authStyle.jsx';
 
-import register from '../styles/img/register.jpeg';
 import login from '../styles/img/imagenTaller.jpg';
 
 const switchRoutes = (
@@ -31,11 +30,7 @@ class Pages extends React.Component {
     document.body.style.overflow = 'unset';
   }
   getBgImage = () => {
-    if (window.location.pathname.indexOf('/auth/register-page') !== -1) {
-      return register;
-    } else if (window.location.pathname.indexOf('/auth/login-page') !== -1) {
-      return login;
-    }
+    return login;
   };
   getActiveRoute = routes => {
     let activeRoute = 'Default Brand Text';

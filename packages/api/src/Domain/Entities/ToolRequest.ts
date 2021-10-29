@@ -59,6 +59,10 @@ export default class ToolRequest {
     return this.quantity;
   }
 
+  public getItemName(): string {
+    return this.tool.getName();
+  }
+
   public setStatus(status: string): void {
     this.status = status;
   }

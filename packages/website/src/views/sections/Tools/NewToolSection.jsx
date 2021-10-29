@@ -57,7 +57,7 @@ class NewToolSection extends React.Component {
   };
 
   render() {
-    const { classes, name } = this.props;
+    const { classes } = this.props;
     const { errors } = this.state;
     return (
       <div id="section-new-tool">

@@ -144,4 +144,8 @@ export default class AssetService {
   ): Promise<Asset[]> {
     return await this.assetRepository.findBySectorAreaServiceElementIds(sectorId, areaId, serviceId, elementId);
   }
+
+  public async findAssetsFromArea(areaId: number): Promise<Asset[]> {
+    return await this.assetRepository.findByAreaId(areaId);
+  }
 }

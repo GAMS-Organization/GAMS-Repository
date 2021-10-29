@@ -15,6 +15,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import { toDate } from '../../../utils/helpers/dateHelper';
 
 class ViewDepartureConsumption extends React.Component {
   constructor(props) {
@@ -146,7 +147,7 @@ class ViewDepartureConsumption extends React.Component {
                       }}
                       inputProps={{
                         disabled: true,
-                        defaultValue: departure.date,
+                        defaultValue: toDate(departure.date, 3),
                         name: 'date',
                       }}
                     />

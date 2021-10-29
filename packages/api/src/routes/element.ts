@@ -8,6 +8,8 @@ import DestroyElementAction from '../API/Http/Actions/Element/DestroyElementActi
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
 import ShowElementAction from '../API/Http/Actions/Element/ShowElementAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
+import ShowElementsByAreaAction from '../API/Http/Actions/Element/ShowElementsByAreaAction';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 // import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 
@@ -16,7 +18,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexElementsAction: IndexElementsAction = DIContainer.resolve<IndexElementsAction>(IndexElementsAction);
@@ -27,7 +29,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeElementAction: StoreElementAction = DIContainer.resolve<StoreElementAction>(StoreElementAction);
@@ -38,7 +40,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateElementAction: UpdateElementAction = DIContainer.resolve<UpdateElementAction>(UpdateElementAction);
@@ -49,11 +51,24 @@ router.put(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showElementAction: ShowElementAction = DIContainer.resolve<ShowElementAction>(ShowElementAction);
     await showElementAction.execute(request, response);
+  }),
+);
+
+router.get(
+  '/area/:id([0-9]+)',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const showElementsByAreaAction: ShowElementsByAreaAction = DIContainer.resolve<ShowElementsByAreaAction>(
+      ShowElementsByAreaAction,
+    );
+    await showElementsByAreaAction.execute(request, response);
   }),
 );
 /*
@@ -73,7 +88,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyElementAction: DestroyElementAction = DIContainer.resolve<DestroyElementAction>(DestroyElementAction);

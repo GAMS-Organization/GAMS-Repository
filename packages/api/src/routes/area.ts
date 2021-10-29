@@ -9,6 +9,7 @@ import StoreAreaAction from '../API/Http/Actions/Area/StoreAreaAction';
 import ShowAreaBySectorAction from '../API/Http/Actions/Area/ShowAreaBySectorAction';
 import UpdateAreaAction from '../API/Http/Actions/Area/UpdateAreaAction';
 import UploadImageAction from '../API/Http/Actions/Area/UploadMapAreaAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
 // import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
 
 const router = express.Router();
@@ -16,7 +17,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexAreasAction: IndexAreasAction = DIContainer.resolve<IndexAreasAction>(IndexAreasAction);
@@ -27,7 +28,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeAreaAction: StoreAreaAction = DIContainer.resolve<StoreAreaAction>(StoreAreaAction);
@@ -38,7 +39,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateAreaAction: UpdateAreaAction = DIContainer.resolve<UpdateAreaAction>(UpdateAreaAction);
@@ -50,7 +51,7 @@ router.put(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
@@ -61,7 +62,7 @@ router.get(
 router.get(
   '/sector/:name([a-z0-9-]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showAreaBySectorAction: ShowAreaBySectorAction = DIContainer.resolve<ShowAreaBySectorAction>(
@@ -74,7 +75,7 @@ router.get(
 router.post(
   '/map/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
@@ -85,7 +86,7 @@ router.post(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyAreaAction: DestroyAreaAction = DIContainer.resolve<DestroyAreaAction>(DestroyAreaAction);

@@ -1,6 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import IUserRepository from '../Interfaces/IUserRepository';
+import User from '../Entities/User';
 
 @injectable()
 export default class UserService {
@@ -22,5 +23,13 @@ export default class UserService {
       totalDataQuantity: userQuantity,
       totalPages: Math.ceil(userQuantity / itemsPerPage),
     };
+  }
+
+  public async findByRole(role: string): Promise<User[]> {
+    return await this.userRepository.findByRole(role);
+  }
+
+  public async findOneById(id: number): Promise<User> {
+    return await this.userRepository.findOneById(id);
   }
 }

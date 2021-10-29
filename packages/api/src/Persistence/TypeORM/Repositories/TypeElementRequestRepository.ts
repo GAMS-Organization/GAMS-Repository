@@ -28,6 +28,14 @@ export default class TypeElementRequestRepository extends TypeRepository impleme
     return await this.repository(ElementRequest).count();
   }
 
+  public async countByUserId(userId: number): Promise<number> {
+    return await this.repository(ElementRequest).count({ where: { user: userId }, relations: ['user'] });
+  }
+
+  public async findByUserId(id: number): Promise<ElementRequest[]> {
+    return await this.repository(ElementRequest).find({ where: { user: id }, relations: ['area', 'element', 'user'] });
+  }
+
   public async findOneByElementRequestName(name: string): Promise<ElementRequest> {
     return await this.repository(ElementRequest).findOne({ where: { name: name } });
   }

@@ -229,6 +229,7 @@ import IndexWorkOrdersByWorkerAction from '../../API/Http/Actions/WorkOrder/Inde
 import ShowElementAction from '../../API/Http/Actions/Element/ShowElementAction';
 import ShowElementAdapter from '../../API/Http/Adapters/Element/ShowElementAdapter';
 import ShowElementHandler from '../../Application/Handlers/Element/ShowElementHandler';
+import MailerService from '../../Domain/Services/Mailer/MailerService';
 import StoreEducationalElementAction from '../../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
 import StoreEducationalElementAdapter from '../../API/Http/Adapters/EducationalElement/StoreEducationalElementAdapter';
 import StoreEducationalElementHandler from '../../Application/Handlers/EducationalElement/StoreEducationalElementHandler';
@@ -280,6 +281,9 @@ import DestroyToolRequestHandler from '../../Application/Handlers/ToolRequest/De
 import DestroyToolHandler from '../../Application/Handlers/Tool/DestroyToolHandler';
 import DestroyElementRequestHandler from '../../Application/Handlers/ElementRequest/DestroyElementRequestHandler';
 import DestroyEducationalElementHandler from '../../Application/Handlers/EducationalElement/DestroyEducationalElementHandler';
+import ShowElementsByAreaAction from '../../API/Http/Actions/Element/ShowElementsByAreaAction';
+import ShowElementsByAreaAdapter from '../../API/Http/Adapters/Element/ShowElementsByAreaAdapter';
+import ShowElementsByAreaHandler from '../../Application/Handlers/Element/ShowElementsByAreaHandler';
 const DIContainer = new Container();
 
 /**
@@ -338,6 +342,7 @@ DIContainer.bind<IndexElementsAction>(IndexElementsAction).toSelf();
 DIContainer.bind<DestroyElementAction>(DestroyElementAction).toSelf();
 DIContainer.bind<UpdateElementAction>(UpdateElementAction).toSelf();
 DIContainer.bind<ShowElementAction>(ShowElementAction).toSelf();
+DIContainer.bind<ShowElementsByAreaAction>(ShowElementsByAreaAction).toSelf();
 
 DIContainer.bind<StoreAssetAction>(StoreAssetAction).toSelf();
 DIContainer.bind<IndexAssetsAction>(IndexAssetsAction).toSelf();
@@ -424,6 +429,7 @@ DIContainer.bind<StoreElementAdapter>(StoreElementAdapter).toSelf();
 DIContainer.bind<DestroyElementAdapter>(DestroyElementAdapter).toSelf();
 DIContainer.bind<UpdateElementAdapter>(UpdateElementAdapter).toSelf();
 DIContainer.bind<ShowElementAdapter>(ShowElementAdapter).toSelf();
+DIContainer.bind<ShowElementsByAreaAdapter>(ShowElementsByAreaAdapter).toSelf();
 
 DIContainer.bind<StoreAssetAdapter>(StoreAssetAdapter).toSelf();
 DIContainer.bind<DestroyAssetAdapter>(DestroyAssetAdapter).toSelf();
@@ -505,6 +511,7 @@ DIContainer.bind<StoreElementHandler>(StoreElementHandler).toSelf();
 DIContainer.bind<DestroyElementHandler>(DestroyElementHandler).toSelf();
 DIContainer.bind<UpdateElementHandler>(UpdateElementHandler).toSelf();
 DIContainer.bind<ShowElementHandler>(ShowElementHandler).toSelf();
+DIContainer.bind<ShowElementsByAreaHandler>(ShowElementsByAreaHandler).toSelf();
 
 DIContainer.bind<StoreAssetHandler>(StoreAssetHandler).toSelf();
 DIContainer.bind<DestroyAssetHandler>(DestroyAssetHandler).toSelf();
@@ -564,6 +571,7 @@ DIContainer.bind<EducationalElementService>(EducationalElementService).toSelf();
 DIContainer.bind<ElementRequestService>(ElementRequestService).toSelf();
 DIContainer.bind<ToolService>(ToolService).toSelf();
 DIContainer.bind<ToolRequestService>(ToolRequestService).toSelf();
+DIContainer.bind<MailerService>(MailerService).toSelf();
 
 DIContainer.bind<ILoggerService>(INTERFACES.ILoggerService).to(WinstonLogger);
 DIContainer.bind<IStorageService>(INTERFACES.IStorageService).to(StorageService);

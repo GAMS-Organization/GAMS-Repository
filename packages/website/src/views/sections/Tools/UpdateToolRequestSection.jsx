@@ -68,10 +68,16 @@ class UpdateToolRequestSection extends React.Component {
     }
   };
 
+  statusList = {
+    pendiente: 'Pendiente',
+    llevando: 'En proceso de entrega',
+    entregado: 'Entregado',
+    devuelto: 'Devuelto',
+    cancelado: 'Cancelado',
+  };
+
   render() {
-    const { classes, toolRequest, Transition, open, close } = this.props;
-    const { errors } = this.state;
-    const { status } = toolRequest;
+    const { classes, Transition, open, close } = this.props;
     return (
       <div>
         <Snackbar
@@ -133,42 +139,19 @@ class UpdateToolRequestSection extends React.Component {
                       >
                         Estado
                       </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="Pendiente"
-                      >
-                        Pendiente
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="Prestado"
-                      >
-                        Prestado
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="Devuelto"
-                      >
-                        Devuelto
-                      </MenuItem>
-                      <MenuItem
-                        classes={{
-                          root: classes.selectMenuItem,
-                          selected: classes.selectMenuItemSelected,
-                        }}
-                        value="Cancelado"
-                      >
-                        Cancelado
-                      </MenuItem>
+                      {Object.keys(this.statusList).map(key => {
+                        return (
+                          <MenuItem
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected,
+                            }}
+                            value={key}
+                          >
+                            {this.statusList[key]}
+                          </MenuItem>
+                        );
+                      })}
                     </Select>
                   </FormControl>
                 </GridItem>

@@ -66,6 +66,10 @@ export default class ElementRequest {
     return this.quantity;
   }
 
+  public getItemName(): string {
+    return this.element.getName();
+  }
+
   public setStatus(status: string): void {
     this.status = status;
   }

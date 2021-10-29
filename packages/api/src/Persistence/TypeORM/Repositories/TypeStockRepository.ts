@@ -6,7 +6,7 @@ import Stock from '../../../Domain/Entities/Stock';
 @injectable()
 export default class TypeStockRepository extends TypeRepository implements IStockRepository {
   public async findAll(): Promise<Stock[]> {
-    return await this.repository(Stock).find();
+    return await this.repository(Stock).find({ relations: ['product'] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Stock[]> {
