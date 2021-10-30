@@ -29,7 +29,7 @@ export default class StoreWorkOrderAction {
 
     const result = await this.handler.execute(command);
 
-    await this.mailerService.sendEmail(mailTitles.workOrderCreated, result, 'newWorkOrder');
+    await this.mailerService.sendEmail(mailTitles.workOrderCreated, result, 'newWorkOrder', null);
 
     const presenter = new StoreWorkOrderPresenter(result);
 

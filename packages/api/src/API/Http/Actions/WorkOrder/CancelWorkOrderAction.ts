@@ -29,7 +29,7 @@ export default class CancelWorkOrderAction {
 
     const result = await this.handler.execute(command);
 
-    await this.mailerService.sendEmail(mailTitles.workOrderCancelled, result, 'cancelWorkOrder');
+    await this.mailerService.sendEmail(mailTitles.workOrderCancelled, result, 'cancelWorkOrder', null);
 
     const presenter = new UpdateWorkOrderPresenter(result);
 

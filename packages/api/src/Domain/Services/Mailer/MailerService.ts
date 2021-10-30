@@ -17,19 +17,28 @@ export default class MailerService {
 
   public async sendEmail(subject: string, workOrder: WorkOrder, type: string, userId?: number[]) {
     const { dynamicTemplateData, templateId } = MailerService.getCustomMessage(type, workOrder);
+    const recipients = [];
+    if (process.env.APP_ENVIRONMENT === 'development') {
+      const to = {
+        email: process.env.RECIPIENT_EMAIL_TEST,
+      };
+      recipients.push(to);
+    } else {
+      const emails = await this.getRecipientMail(userId);
+      emails.forEach(email => {
+        const to = {
+          email: email,
+        };
+        recipients.push(to);
+      });
+    }
     const msg = {
       from: process.env.EMAIL_SENDER, // Change to your verified sender
       subject: subject,
       templateId: templateId,
       personalizations: [
         {
-          to: [
-            {
-              email: process.env.DEV_ENVIRONMENT
-                ? process.env.RECIPIENT_EMAIL_TEST
-                : await this.getRecipientMail(userId),
-            },
-          ],
+          to: recipients,
           dynamicTemplateData: dynamicTemplateData,
         },
       ],
@@ -45,6 +54,21 @@ export default class MailerService {
   }
 
   public async sendWeekly(message: object) {
+    const recipients = [];
+    if (process.env.APP_ENVIRONMENT === 'development') {
+      const to = {
+        email: process.env.RECIPIENT_EMAIL_TEST,
+      };
+      recipients.push(to);
+    } else {
+      const emails = await this.getRecipientMail(null);
+      emails.forEach(email => {
+        const to = {
+          email: email,
+        };
+        recipients.push(to);
+      });
+    }
     const templateId = process.env.MAIL_TEMPLATE_WEEKLY_ID;
     const msg = {
       from: process.env.EMAIL_SENDER, // Change to your verified sender
@@ -52,11 +76,7 @@ export default class MailerService {
       templateId,
       personalizations: [
         {
-          to: [
-            {
-              email: process.env.DEV_ENVIRONMENT ? process.env.RECIPIENT_EMAIL_TEST : await this.getRecipientMail(null),
-            },
-          ],
+          to: recipients,
           dynamicTemplateData: message,
         },
       ],
@@ -72,6 +92,21 @@ export default class MailerService {
   }
 
   public async sendToolAndElementRequestEmail(subject: string, toolOrElementRequest: ToolRequest | ElementRequest) {
+    const recipients = [];
+    if (process.env.APP_ENVIRONMENT === 'development') {
+      const to = {
+        email: process.env.RECIPIENT_EMAIL_TEST,
+      };
+      recipients.push(to);
+    } else {
+      const emails = await this.getRecipientMail(null);
+      emails.forEach(email => {
+        const to = {
+          email: email,
+        };
+        recipients.push(to);
+      });
+    }
     const templateId = process.env.MAIL_TEMPLATE_TOOL_AND_ELEMENT_ID;
     const msg = {
       from: process.env.EMAIL_SENDER, // Change to your verified sender
@@ -79,11 +114,7 @@ export default class MailerService {
       templateId,
       personalizations: [
         {
-          to: [
-            {
-              email: process.env.DEV_ENVIRONMENT ? process.env.RECIPIENT_EMAIL_TEST : await this.getRecipientMail(null),
-            },
-          ],
+          to: recipients,
           dynamicTemplateData: {
             subject: subject,
             author: `${toolOrElementRequest.getUser().getName()} ${toolOrElementRequest.getUser().getSurname()}`,
