@@ -17,6 +17,7 @@ import Edit from '@material-ui/icons/Edit';
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
+import DeleteAreaSection from '../../sections/Area/DeleteAreaSection';
 import serviceArea from '../../../services/api/area';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
@@ -65,8 +66,15 @@ class AreasTable extends React.Component {
     this.setState({ modal: false, mapModal: false });
   };
 
+  handleClickDelete = prop => {
+    this.setState({
+      area: { id: prop.id, name: prop.visibleData[0] },
+      modal: true,
+    });
+  };
+
   //se elimina el area
-  deleteArea = async prop => {
+  /*deleteArea = async prop => {
     const response = await serviceArea.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -75,7 +83,7 @@ class AreasTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -95,6 +103,12 @@ class AreasTable extends React.Component {
           close
         />
         <UpdateAreaSection
+          area={this.state.area}
+          open={this.state.modal}
+          close={this.closeModal}
+          listAreas={this.props.listAreas}
+        />
+        <DeleteAreaSection
           area={this.state.area}
           open={this.state.modal}
           close={this.closeModal}
@@ -150,7 +164,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteArea(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

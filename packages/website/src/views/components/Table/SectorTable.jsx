@@ -45,7 +45,7 @@ class SectorTable extends React.Component {
   };
 
   //se eliminan los sectores
-  deleteSector = async prop => {
+  /*deleteSector = async prop => {
     const response = await serviceSector.delete(prop.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -54,7 +54,7 @@ class SectorTable extends React.Component {
     } else {
       this.setState({ notification: true, errors: response.error });
     }
-  };
+  };*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
