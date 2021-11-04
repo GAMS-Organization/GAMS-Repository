@@ -22,11 +22,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceService from '../../../services/api/service';
 
-class UpdateAreaSection extends React.Component {
+class DeleteAreaSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       area: {},
+      service: [],
+      selectedServices: [],
       errors: {},
       notification: false,
     };
@@ -46,6 +48,7 @@ class UpdateAreaSection extends React.Component {
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
       this.props.listAreas();
+      this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -79,10 +82,10 @@ class UpdateAreaSection extends React.Component {
   render() {
     const { classes, area, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name, services } = area;
-    /*if (this.state.area.id !== id) {
+    const { id, name } = area;
+    if (this.state.area.id !== id) {
       this.setState({ area: area, selectedServices: area.services });
-    }*/
+    }
     return (
       <div>
         <Snackbar
@@ -110,13 +113,15 @@ class UpdateAreaSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Eliminar Area</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
+              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente área?</h4>
+            </DialogTitle>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteArea}>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
+              <GridContainer justify={'center'}>
+                {/*<GridItem xs={12} sm={12} md={1}>
                   <CustomInput
                     labelText="ID"
                     id="id"
@@ -131,29 +136,37 @@ class UpdateAreaSection extends React.Component {
                       name: 'id',
                     }}
                   />
-                </GridItem>
+                </GridItem>*/}
                 <GridItem xs={12} sm={12} md={8}>
-                  <CustomInput
-                    labelText="Nombre"
-                    id="name"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      required: true,
-                      defaultValue: name,
-                      name: 'name',
-                    }}
-                  />
+                  <GridContainer justify={'center'}>
+                    <CustomInput
+                      labelText="Nombre"
+                      id="name"
+                      error={errors.name}
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        required: true,
+                        defaultValue: name,
+                        name: 'name',
+                        disabled: true,
+                        justify: 'center',
+                      }}
+                    />
+                  </GridContainer>
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <GridItem>
+                  <Button type="submit" color="gamsRed">
+                    Sí
+                  </Button>
+                  <Button color="danger" simple onClick={() => close()}>
+                    No
+                  </Button>
+                </GridItem>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>
@@ -162,7 +175,7 @@ class UpdateAreaSection extends React.Component {
   }
 }
 
-UpdateAreaSection.propTypes = {
+DeleteAreaSection.propTypes = {
   classes: PropTypes.object.isRequired,
   area: PropTypes.object,
   open: PropTypes.bool,
@@ -170,4 +183,4 @@ UpdateAreaSection.propTypes = {
   listAreas: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(UpdateAreaSection);
+export default withStyles(modalStyle)(DeleteAreaSection);

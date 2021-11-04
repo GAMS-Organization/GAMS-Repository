@@ -27,6 +27,7 @@ class AreasTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       mapModal: false,
       area: {},
       errors: {},
@@ -63,13 +64,14 @@ class AreasTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false, mapModal: false });
+    this.setState({ modal: false, mapModal: false, deleteModal: false });
   };
 
   handleClickDelete = prop => {
+    console.log('llego');
     this.setState({
-      area: { id: prop.id, name: prop.visibleData[0] },
-      modal: true,
+      area: { id: prop.id, name: prop.visibleData[0], services: prop.services, maps: prop.maps },
+      deleteModal: true,
     });
   };
 
@@ -110,7 +112,7 @@ class AreasTable extends React.Component {
         />
         <DeleteAreaSection
           area={this.state.area}
-          open={this.state.modal}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listAreas={this.props.listAreas}
         />
