@@ -68,24 +68,11 @@ class AreasTable extends React.Component {
   };
 
   handleClickDelete = prop => {
-    console.log('llego');
     this.setState({
       area: { id: prop.id, name: prop.visibleData[0], services: prop.services, maps: prop.maps },
       deleteModal: true,
     });
   };
-
-  //se elimina el area
-  /*deleteArea = async prop => {
-    const response = await serviceArea.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listAreas();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  };*/
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;

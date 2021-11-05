@@ -16,12 +16,6 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
-import FormControl from '@material-ui/core/FormControl';
-import { InputLabel } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import serviceService from '../../../services/api/service';
-
 class DeleteAreaSection extends React.Component {
   constructor(props) {
     super(props);
@@ -42,8 +36,9 @@ class DeleteAreaSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteArea = async prop => {
-    const response = await serviceArea.delete(prop.id);
+  deleteArea = async e => {
+    e.preventDefault();
+    const response = await serviceArea.delete(this.props.area.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
@@ -53,31 +48,6 @@ class DeleteAreaSection extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
   };
-
-  //se actualiza el area luego de ser editado
-  /*updateArea = async e => {
-    e.preventDefault();
-
-    const fields = ['id', 'name', 'services'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
-    formValues.services = formValues.services.split(',');
-
-    const response = await serviceArea.update(formValues);
-
-    if (response.type === 'UPDATED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listAreas();
-      this.props.close();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  };*/
 
   render() {
     const { classes, area, Transition, close, open } = this.props;
@@ -117,43 +87,18 @@ class DeleteAreaSection extends React.Component {
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
               <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente área?</h4>
             </DialogTitle>
+            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
+              <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
+            </DialogTitle>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteArea}>
               <GridContainer justify={'center'}>
-                {/*<GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>*/}
                 <GridItem xs={12} sm={12} md={8}>
                   <GridContainer justify={'center'}>
-                    <CustomInput
-                      labelText="Nombre"
-                      id="name"
-                      error={errors.name}
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        required: true,
-                        defaultValue: name,
-                        name: 'name',
-                        disabled: true,
-                        justify: 'center',
-                      }}
-                    />
+                    <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
+                      <h5 className={classes.modalTitle}>{name}</h5>
+                    </DialogTitle>
                   </GridContainer>
                 </GridItem>
               </GridContainer>
