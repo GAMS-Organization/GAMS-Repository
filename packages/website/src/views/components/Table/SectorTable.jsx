@@ -19,12 +19,14 @@ import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceSector from '../../../services/api/sector';
+import DeleteSectorSection from '../../sections/Sector/DeleteSectorSection';
 
 class SectorTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       sector: {},
       errors: {},
       notification: false,
@@ -37,24 +39,19 @@ class SectorTable extends React.Component {
 
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop.id, name: prop[0], code: prop[1], map: prop[2] }, modal: true });
+    this.setState({ sector: { id: prop.id, name: prop.visibleData[0], code: prop[1], map: prop[2] }, modal: true });
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  //se eliminan los sectores
-  /*deleteSector = async prop => {
-    const response = await serviceSector.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listSectors();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-  };*/
+  handleClickDelete = prop => {
+    this.setState({
+      sector: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
+  };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
@@ -76,6 +73,12 @@ class SectorTable extends React.Component {
         <UpdateSectorSection
           sector={this.state.sector}
           open={this.state.modal}
+          close={this.closeModal}
+          listSectors={this.props.listSectors}
+        />
+        <DeleteSectorSection
+          sector={this.state.sector}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listSectors={this.props.listSectors}
         />
@@ -114,7 +117,7 @@ class SectorTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteSector(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
