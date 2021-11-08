@@ -18,7 +18,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import DeleteAreaSection from '../../sections/Area/DeleteAreaSection';
-import serviceArea from '../../../services/api/area';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
 
