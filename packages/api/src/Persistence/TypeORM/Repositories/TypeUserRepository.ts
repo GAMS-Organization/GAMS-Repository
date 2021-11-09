@@ -33,11 +33,11 @@ export default class TypeUserRepository extends TypeRepository implements IUserR
       where: { email: email },
     });
   }
-
+  //@ts-ignore
   public async findByRole(role: string): Promise<User[]> {
     return await this.repository(User).find({
       relations: ['userRoles', 'userRoles.role'],
-      where: { role: { name: role } },
+      where: { userRoles: { id: 2 } },
     });
   }
 
