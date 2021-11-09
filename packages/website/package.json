@@ -8,7 +8,7 @@
     "@material-ui/core": "3.9.3",
     "@material-ui/icons": "3.0.2",
     "@types/node": "^12.11.7",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "chartist": "0.10.1",
     "classnames": "2.2.6",
     "eslint": "^6.6.0",
