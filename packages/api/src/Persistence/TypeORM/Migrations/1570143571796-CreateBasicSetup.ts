@@ -1373,7 +1373,11 @@ export class CreateBasicSetup1570143571796 implements MigrationInterface {
       (147,'TomaTrifasico','TrtC','..',7),
       (152,'ProyectorLED Color','PryLe','..',9),
       (153,'Fotocontrol','Ftcrt','..',9),
-      (159,'Foco BC 20W','BcfC','..',9);`,
+      (159,'Foco BC 20W','BcfC','..',9),
+      (160,'Halógena exterior', 'HgEx', '..', 9),
+      (161,'2 x Foco BC 20 W', 'Fbtwo', '..', 9),
+      (162,'Termotanque Gas', 'TrG', '..', 8),
+      (163,'Cocina Industrial', 'CindTr', '..', 8);`,
     );
 
     //Create activos
