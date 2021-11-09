@@ -7,13 +7,14 @@ import IndexEventAction from '../API/Http/Actions/Event/IndexEventAction';
 import UpdateEventAction from '../API/Http/Actions/Event/UpdateEventAction';
 import IndexEventsByMonthAction from '../API/Http/Actions/Event/IndexEventsByMonthAction';
 import DestroyEventAction from '../API/Http/Actions/Event/DestroyEventAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexEventAction: IndexEventAction = DIContainer.resolve<IndexEventAction>(IndexEventAction);
@@ -24,7 +25,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeEventAction: StoreEventAction = DIContainer.resolve<StoreEventAction>(StoreEventAction);
@@ -35,7 +36,7 @@ router.post(
 // router.get(
 //   '/:id([0-9]+)',
 //   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
+//     authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
 //     const showProductAction: ShowProductAction = DIContainer.resolve<ShowProductAction>(ShowProductAction);
@@ -47,7 +48,7 @@ router.post(
 router.get(
   '/:month([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexEventsByMonth: IndexEventsByMonthAction = DIContainer.resolve<IndexEventsByMonthAction>(
@@ -60,7 +61,7 @@ router.get(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateEventAction: UpdateEventAction = DIContainer.resolve<UpdateEventAction>(UpdateEventAction);
@@ -71,7 +72,7 @@ router.put(
 // router.get(
 //   '/name/:name([a-z0-9-]+)',
 //   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
+//     authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
 //     const showProductByNameAction: ShowProductByNameAction = DIContainer.resolve<ShowProductByNameAction>(
@@ -84,7 +85,7 @@ router.put(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyEventAction: DestroyEventAction = DIContainer.resolve<DestroyEventAction>(DestroyEventAction);

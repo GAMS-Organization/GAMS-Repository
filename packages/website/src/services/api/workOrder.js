@@ -1,6 +1,5 @@
 import Api from './api';
 import workOrderAdapter from '../adapters/workOrderAdapter';
-import departureConsumptionStockAdapter from '../adapters/departureConsumptionStockAdapter';
 
 class workOrder {
   async create(dataWorkOrder) {

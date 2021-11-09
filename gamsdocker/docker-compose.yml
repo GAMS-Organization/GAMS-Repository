@@ -15,7 +15,7 @@ services:
       USER: 1000
 
   api:
-    image: node:10.15
+    image: node:14.17.1
     hostname: api
     ports:
       - '3001:3001'
@@ -25,7 +25,7 @@ services:
     command: ['./wait-for-it.sh', 'mysql:3306', '--', 'yarn', 'start']
 
   website:
-    image: node:10.15
+    image: node:14.17.1
     hostname: website
     links:
       - mysql

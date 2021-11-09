@@ -12,6 +12,8 @@ import OfflineBolt from '@material-ui/icons/OfflineBolt';
 import Today from '@material-ui/icons/Today';
 import Input from '@material-ui/icons/Input';
 import Explore from '@material-ui/icons/Explore';
+import BuildIcon from '@material-ui/icons/Build';
+import EditIcon from '@material-ui/icons/Edit';
 // core components/views for Admin layout
 import Users from 'views/containers/Users.jsx';
 import Products from 'views/containers/Products';
@@ -25,6 +27,12 @@ import Preventive from 'views/containers/Preventive';
 import WorkOrder from 'views/containers/WorkOrder';
 import Activities from 'views/containers/Activities';
 import ListWorkOrder from 'views/containers/ListWorkOrder';
+import EducationalElement from 'views/containers/EducationalElement';
+import Tools from 'views/containers/Tools';
+import CreateToolRequestSection from 'views/sections/Tools/CreateToolRequestSection';
+import ToolRequestTableSection from './views/sections/Tools/ToolRequestTableSection';
+import CreateRequestEducationalElementSection from 'views/sections/EducationalElement/CreateRequestEducationalElementSection';
+import EducationalElementRequestTableSection from 'views/sections/EducationalElement/EducationalElementRequestTableSection';
 
 // core components/views for Auth layout
 import LoginPage from 'views/containers/LoginPage.jsx';
@@ -37,7 +45,7 @@ const dashboardRoutes = [
     component: Activities,
     layout: '/admin',
     title: 'Historial de actividades',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
   },
   {
     path: '/stock',
@@ -46,7 +54,7 @@ const dashboardRoutes = [
     component: Stock,
     layout: '/admin',
     title: 'Stock',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     name: 'O. trabajo',
@@ -54,7 +62,7 @@ const dashboardRoutes = [
     layout: '/admin',
     group: true,
     title: 'Ordenes de Trabajo',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
     children: [
       {
         path: '/WorkOrder',
@@ -64,7 +72,7 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Nueva órden de trabajo',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
       {
         path: '/ListWorkOrder',
@@ -74,7 +82,7 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Ver O.T.',
-        roles: ['admin', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
     ],
   },
@@ -85,7 +93,7 @@ const dashboardRoutes = [
     component: Preventive,
     layout: '/admin',
     title: 'Mantenimiento preventivo',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     path: '/products',
@@ -94,7 +102,7 @@ const dashboardRoutes = [
     component: Products,
     layout: '/admin',
     title: 'Productos',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
   },
   {
     path: '/users',
@@ -111,7 +119,7 @@ const dashboardRoutes = [
     layout: '/admin',
     group: true,
     title: 'Gestión',
-    roles: ['admin', 'personal'],
+    roles: ['admin', 'boss', 'personal'],
     children: [
       {
         path: '/sector',
@@ -120,7 +128,7 @@ const dashboardRoutes = [
         component: Sector,
         layout: '/admin',
         title: 'Sectores',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/area',
@@ -129,7 +137,7 @@ const dashboardRoutes = [
         component: Area,
         layout: '/admin',
         title: 'Áreas',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/service',
@@ -138,7 +146,7 @@ const dashboardRoutes = [
         component: Service,
         layout: '/admin',
         title: 'Servicios',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/element',
@@ -147,7 +155,7 @@ const dashboardRoutes = [
         component: Element,
         layout: '/admin',
         title: 'Elementos',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
       },
       {
         path: '/asset',
@@ -156,7 +164,81 @@ const dashboardRoutes = [
         component: Asset,
         layout: '/admin',
         title: 'Activos',
-        roles: ['admin', 'personal'],
+        roles: ['admin', 'boss', 'personal'],
+      },
+    ],
+  },
+  {
+    name: 'Herramientas',
+    icon: BuildIcon,
+    group: true,
+    layout: '/admin',
+    title: 'Herramientas',
+    roles: ['admin', 'boss', 'personal', 'user'],
+    children: [
+      {
+        path: '/tools',
+        name: 'Gestión',
+        icon: BuildIcon,
+        component: Tools,
+        layout: '/admin',
+        title: 'Gestión',
+        roles: ['admin', 'boss', 'personal'],
+      },
+      {
+        path: '/CreateToolRequestSection',
+        name: 'Solicitar',
+        icon: BuildIcon,
+        component: CreateToolRequestSection,
+        layout: '/admin',
+        title: 'Solicitar',
+        roles: ['admin', 'boss', 'personal', 'user'],
+      },
+      {
+        path: '/ToolRequestTableSection',
+        name: 'Solicitudes',
+        icon: BuildIcon,
+        component: ToolRequestTableSection,
+        layout: '/admin',
+        title: 'Solicitudes',
+        roles: ['admin', 'boss', 'personal', 'user'],
+      },
+    ],
+  },
+  {
+    name: 'Articulos',
+    icon: EditIcon,
+    group: true,
+    layout: '/admin',
+    title: 'Articulos',
+    roles: ['admin', 'boss', 'personal', 'user'],
+    children: [
+      {
+        path: '/educationalElement',
+        name: 'Gestión',
+        icon: EditIcon,
+        component: EducationalElement,
+        layout: '/admin',
+        title: 'Gestión',
+        roles: ['admin', 'boss', 'personal'],
+      },
+      {
+        path: '/CreateRequestEducationalElementSection',
+        name: 'Solicitar',
+        icon: EditIcon,
+        component: CreateRequestEducationalElementSection,
+        layout: '/admin',
+        title: 'Solicitar',
+        roles: ['admin', 'boss', 'personal', 'user'],
+      },
+      {
+        path: '/EducationalElementRequestTableSection',
+        name: 'Solicitudes',
+        icon: EditIcon,
+        component: EducationalElementRequestTableSection,
+        layout: '/admin',
+        title: 'Solicitudes',
+        roles: ['admin', 'boss', 'personal', 'user'],
       },
     ],
   },
@@ -167,7 +249,7 @@ const dashboardRoutes = [
     component: LoginPage,
     layout: '/auth',
     title: 'Salir',
-    roles: ['admin', 'personal', 'user'],
+    roles: ['admin', 'boss', 'personal', 'user'],
   },
 ];
 

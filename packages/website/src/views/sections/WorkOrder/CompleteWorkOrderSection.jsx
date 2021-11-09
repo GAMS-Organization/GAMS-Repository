@@ -18,14 +18,8 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
-import FormControl from '@material-ui/core/FormControl';
-import { InputLabel } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import serviceProducts from '../../../services/api/products';
 import MaterialTable from 'material-table';
 import serviceProduct from '../../../services/api/products';
-import serviceDeparture from '../../../services/api/departureConsumptionStock';
 
 class CompleteWorkOrderSection extends React.Component {
   constructor(props) {
@@ -105,9 +99,8 @@ class CompleteWorkOrderSection extends React.Component {
   };
 
   render() {
-    const { classes, workOrder, Transition, open, close } = this.props;
+    const { classes, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id } = workOrder;
     return (
       <div>
         <Snackbar

@@ -17,7 +17,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `event` (`id` int NOT NULL AUTO_INCREMENT, `title` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `startDate` varchar(255) NULL, `endDate` varchar(255) NULL, `allDay` tinyint NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `event` (`id` int NOT NULL AUTO_INCREMENT, `title` varchar(255) NOT NULL, `description` varchar(255) NOT NULL, `startDate` datetime(6) NULL, `endDate` datetime(6) NULL, `allDay` tinyint NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -29,7 +29,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `element_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` varchar(255) NOT NULL, `quantity` int NOT NULL, `elementId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `element_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` datetime(6) NOT NULL, `quantity` int NOT NULL, `elementId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -37,7 +37,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `tool_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` varchar(255) NOT NULL, `quantity` int NOT NULL, `toolId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `tool_request` (`id` int NOT NULL AUTO_INCREMENT, `status` varchar(255) NOT NULL, `date` datetime(6) NOT NULL, `quantity` int NOT NULL, `toolId` int NULL, `userId` int NULL, `areaId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -45,7 +45,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` varchar(255) NOT NULL, `startDate` varchar(255) NULL, `realizationDate` varchar(255) NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDespcription` varchar(255) NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `work_order` (`id` int NOT NULL AUTO_INCREMENT, `orderDate` datetime(6) NOT NULL, `startDate` datetime(6) NULL, `realizationDate` datetime(6) NULL, `priority` varchar(255) NOT NULL, `state` varchar(255) NOT NULL, `taskDescription` varchar(255) NULL, `comment` varchar(255) NOT NULL, `userId` int NULL, `assetId` int NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -77,7 +77,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `entry` (`id` int NOT NULL AUTO_INCREMENT, `date` varchar(255) NOT NULL, `observations` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `entry` (`id` int NOT NULL AUTO_INCREMENT, `date` datetime(6) NOT NULL, `observations` varchar(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(
@@ -97,7 +97,7 @@ export class DatabaseInitialStructure1561441545394 implements MigrationInterface
       undefined,
     );
     await queryRunner.query(
-      'CREATE TABLE `departure` (`id` int NOT NULL AUTO_INCREMENT, `date` varchar(255) NOT NULL, `observations` varchar(255) NOT NULL,  `workOrderId` int NULL, UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
+      'CREATE TABLE `departure` (`id` int NOT NULL AUTO_INCREMENT, `date` datetime(6) NOT NULL, `observations` varchar(255) NOT NULL,  `workOrderId` int NULL, UNIQUE INDEX `REL_23d383f2776aa87b544e24d392` (`workOrderId`), PRIMARY KEY (`id`)) ENGINE=InnoDB',
       undefined,
     );
     await queryRunner.query(

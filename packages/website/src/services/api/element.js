@@ -46,6 +46,16 @@ class element {
     return elementAdapter.getById(loadResponse);
   }
 
+  async getByAreaId(areaId) {
+    let loadResponse;
+    try {
+      loadResponse = await Api.get(`element/area/${areaId}`);
+    } catch (err) {
+      loadResponse = err;
+    }
+    return elementAdapter.getByAreaId(loadResponse);
+  }
+
   async delete(id) {
     let deleteResponse;
 

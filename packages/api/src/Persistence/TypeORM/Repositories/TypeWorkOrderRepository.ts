@@ -2,6 +2,7 @@ import IWorkOrderRepository from '../../../Domain/Interfaces/IWorkOrderRepositor
 import WorkOrder from '../../../Domain/Entities/WorkOrder';
 import { injectable } from 'inversify';
 import TypeRepository from './TypeRepository';
+import { STATE } from '../../../API/Http/Enums/WorkOrder';
 
 @injectable()
 export default class TypeWorkOrderRepository extends TypeRepository implements IWorkOrderRepository {
@@ -30,6 +31,13 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
     return await this.repository(WorkOrder).count();
   }
 
+  public async findAllUnfinished(): Promise<WorkOrder[]> {
+    return await this.repository(WorkOrder).find({
+      where: [{ state: STATE.FREE }, { state: STATE.TAKEN }, { state: STATE.ASSIGNED }],
+      relations: ['asset', 'userWorkOrders', 'userWorkOrders.user'],
+    });
+  }
+
   public async countByUser(userId: number): Promise<number> {
     return await this.repository(WorkOrder).count({ where: { user: userId }, relations: ['user'] });
   }
@@ -37,7 +45,7 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
   public async countByWorker(userWorkerId: number): Promise<number> {
     return await this.repository(WorkOrder).count({
       where: { userWorkOrders: userWorkerId },
-      relations: ['user_work_order'],
+      relations: ['userWorkOrders', 'userWorkOrders.user'],
     });
   }
 

@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import TypeRepository from './TypeRepository';
 import Event from '../../../Domain/Entities/Event';
 import IEventRepository from '../../../Domain/Interfaces/IEventRepository';
+import { Between } from 'typeorm';
 
 @injectable()
 export default class TypeEventRepository extends TypeRepository implements IEventRepository {
@@ -27,6 +28,17 @@ export default class TypeEventRepository extends TypeRepository implements IEven
 
   public async persist(event: Event): Promise<Event> {
     return await this.repository(Event).save(event);
+  }
+
+  public async findWeekEvents(startDate: string, endDate: string): Promise<Event[]> {
+    return await this.repository(Event).find({
+      where: { startDate: Between(startDate, endDate) },
+      relations: ['userEvents', 'userEvents.user'],
+    });
+  }
+
+  public async findMonthEvents(startDate: string, endDate: string): Promise<Event[]> {
+    return await this.repository(Event).find({ startDate: Between(startDate, endDate) });
   }
 
   public async destroy(event: Event): Promise<boolean> {

@@ -10,7 +10,7 @@ export default class TypeUserWorkOrderRepository extends TypeRepository implemen
   }
 
   public async findOneById(id: number): Promise<UserWorkOrder> {
-    return await this.repository(UserWorkOrder).findOne(id);
+    return await this.repository(UserWorkOrder).findOne({ where: { id: id }, relations: ['user'] });
   }
 
   public async findByUserId(id: number): Promise<UserWorkOrder[]> {

@@ -24,6 +24,12 @@ class workOrderAdapter {
   list(listResponse) {
     let { status, data } = listResponse;
     if (!isError(status)) {
+      data.items = data.items.map(workOrder => {
+        workOrder.orderDate = workOrder.orderDate.slice(0, 10);
+        workOrder.startDate = workOrder.startDate ? workOrder.startDate.slice(0, 10) : '';
+        workOrder.realizationDate = workOrder.realizationDate ? workOrder.realizationDate.slice(0, 10) : '';
+        return workOrder;
+      });
       return {
         ...data,
       };
@@ -180,6 +186,10 @@ class workOrderAdapter {
   show(showResponse) {
     let { status, data } = showResponse;
     if (!isError(status)) {
+      data.data.orderDate = data.data.orderDate.slice(0, 10);
+      data.data.startDate = data.data.startDate ? data.data.startDate.slice(0, 10) : '';
+      data.data.realizationDate = data.data.realizationDate ? data.data.realizationDate.slice(0, 10) : '';
+
       return {
         data,
       };

@@ -16,6 +16,7 @@ import DepartureConsumption from '../../components/Stock/DepartureConsumption';
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import serviceCurrentStock from '../../../services/api/currentStock';
 import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
+import { toDate } from '../../../utils/helpers/dateHelper';
 
 const styles = {
   cardCategoryWhite: {
@@ -70,7 +71,7 @@ class TableStockSection extends React.Component {
     let stocks = [];
     let departures = [];
     for (const entry of responseEntry.data.items) {
-      let dataEntry = { visibleData: [entry.date.slice(0, 10), entry.observations], id: entry.id.toString() };
+      let dataEntry = { visibleData: [toDate(entry.date.slice(0, 10)), entry.observations], id: entry.id.toString() };
       entries.push(dataEntry);
     }
 
@@ -84,7 +85,7 @@ class TableStockSection extends React.Component {
 
     for (const departure of responseDeparture.data.items) {
       let dataDeparture = {
-        visibleData: [departure.date.slice(0, 10), departure.observations],
+        visibleData: [toDate(departure.date.slice(0, 10)), departure.observations],
         id: departure.id.toString(),
       };
       departures.push(dataDeparture);

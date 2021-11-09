@@ -33,6 +33,13 @@ export default class TypeUserRepository extends TypeRepository implements IUserR
       where: { email: email },
     });
   }
+  //@ts-ignore
+  public async findByRole(role: string): Promise<User[]> {
+    return await this.repository(User).find({
+      relations: ['userRoles', 'userRoles.role'],
+      where: { userRoles: { id: 2 } },
+    });
+  }
 
   public async persist(user: User): Promise<User> {
     return await this.repository(User).save(user);

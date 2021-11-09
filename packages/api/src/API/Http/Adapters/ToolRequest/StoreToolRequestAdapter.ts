@@ -25,7 +25,7 @@ export default class StoreToolRequestAdapter {
       request.body.authorId,
       request.body.date,
       request.body.areaId,
-      request.body.quantity,
+      parseInt(request.body.quantity),
     );
   }
 }

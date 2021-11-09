@@ -4,9 +4,6 @@ import {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
-  rooftopOrangeCardHeader,
-  rooftopBlueCardHeader,
-  rooftopYellowCardHeader,
   roseCardHeader,
   whiteColor,
   gamsWhiteCardHeader,
@@ -119,24 +116,6 @@ const cardHeaderStyle = {
     color: whiteColor,
     '&:not($cardHeaderIcon)': {
       ...primaryCardHeader,
-    },
-  },
-  rooftopOrangeCardHeader: {
-    color: whiteColor,
-    '&:not($cardHeaderIcon)': {
-      ...rooftopOrangeCardHeader,
-    },
-  },
-  rooftopBlueCardHeader: {
-    color: whiteColor,
-    '&:not($cardHeaderIcon)': {
-      ...rooftopBlueCardHeader,
-    },
-  },
-  rooftopYellowCardHeader: {
-    color: whiteColor,
-    '&:not($cardHeaderIcon)': {
-      ...rooftopYellowCardHeader,
     },
   },
   roseCardHeader: {

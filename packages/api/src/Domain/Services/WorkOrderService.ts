@@ -67,9 +67,11 @@ export default class WorkOrderService {
       itemsPerPage * page - itemsPerPage,
       itemsPerPage,
     );
-    const workOrders = userWorkOrders.map(userWorkOrder => {
-      return userWorkOrder.workOrder;
-    });
+    const workOrders = [];
+    for (const userWorkOrder of userWorkOrders) {
+      const workOrderComplete = await this.workOrderRepository.findOneById(userWorkOrder.getWorkOrder().getId());
+      workOrders.push(workOrderComplete);
+    }
     return {
       data: workOrders,
       dataLength: userWorkOrders.length,
@@ -101,5 +103,9 @@ export default class WorkOrderService {
     }
 
     return this.workOrderRepository.findOneById(workOrder.id);
+  }
+
+  public async returnAllUnfinished(): Promise<WorkOrder[]> {
+    return await this.workOrderRepository.findAllUnfinished();
   }
 }

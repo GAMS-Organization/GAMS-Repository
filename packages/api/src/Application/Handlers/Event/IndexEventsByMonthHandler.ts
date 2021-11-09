@@ -13,12 +13,15 @@ export default class IndexEventsByMonthHandler {
   }
 
   public async execute(command: IndexEventsByMonthCommand): Promise<Event[]> {
-    const events = await this.eventRepository.findAll();
+    const month = command.getMonth();
 
-    if (events) {
-      return events.filter(event => parseInt(event.getStartDate().slice(3, 5)) === command.getMonth());
-    }
+    let date = new Date();
+    let firstDay = new Date(date.getFullYear(), month - 1, 1);
+    let lastDay = new Date(date.getFullYear(), month, 0);
 
-    return events;
+    const firstDayString = `${firstDay.getFullYear()}-${firstDay.getMonth() + 1}-${firstDay.getDate()}`;
+    const lastDayString = `${lastDay.getFullYear()}-${lastDay.getMonth() + 1}-${lastDay.getDate()}`;
+
+    return await this.eventRepository.findMonthEvents(firstDayString, lastDayString);
   }
 }

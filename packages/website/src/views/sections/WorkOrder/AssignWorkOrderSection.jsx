@@ -95,9 +95,7 @@ class AssignWorkOrderSection extends React.Component {
   };
 
   render() {
-    const { classes, workOrder, Transition, open, close } = this.props;
-    const { errors } = this.state;
-    const { id } = workOrder;
+    const { classes, Transition, open } = this.props;
     return (
       <div>
         <Snackbar

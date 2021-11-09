@@ -7,13 +7,14 @@ import DestroyDepartureAction from '../API/Http/Actions/Departure/DestroyDepartu
 import ShowDepartureAction from '../API/Http/Actions/Departure/ShowDepartureAction';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import { authMiddleware } from '../config/authMiddleware';
+import { ROL } from '../API/Http/Enums/UserRoles';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexDepartureAction: IndexDepartureAction = DIContainer.resolve<IndexDepartureAction>(IndexDepartureAction);
@@ -24,7 +25,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeDepartureAction: StoreDepartureAction = DIContainer.resolve<StoreDepartureAction>(StoreDepartureAction);
@@ -35,7 +36,7 @@ router.post(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showDepartureAction: ShowDepartureAction = DIContainer.resolve<ShowDepartureAction>(ShowDepartureAction);
@@ -46,7 +47,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyDepartureAction: DestroyDepartureAction = DIContainer.resolve<DestroyDepartureAction>(

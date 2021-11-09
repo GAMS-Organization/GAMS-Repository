@@ -9,13 +9,15 @@ import DestroyToolRequestAction from '../API/Http/Actions/ToolRequest/DestroyToo
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import UpdateToolRequestAction from '../API/Http/Actions/ToolRequest/UpdateToolRequestAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
+import IndexToolRequestsByAuthorAction from '../API/Http/Actions/ToolRequest/IndexToolRequestByAuthorAction';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexToolRequestAction: IndexToolRequestsAction = DIContainer.resolve<IndexToolRequestsAction>(
@@ -28,7 +30,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeToolRequestAction: StoreToolRequestAction = DIContainer.resolve<StoreToolRequestAction>(
@@ -41,7 +43,7 @@ router.post(
 // router.get(
 //   '/:id([0-9]+)',
 //   (req, res, next): void => {
-//     authMiddleware(req, res, next, ['admin', 'personal']);
+//     authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
 //   },
 //   asyncMiddleware(async (request: express.Request, response: express.Response) => {
 //     const showToolRequestAction: ShowToolRequestAction = DIContainer.resolve<ShowToolRequestAction>(
@@ -54,7 +56,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateToolRequestAction: UpdateToolRequestAction = DIContainer.resolve<UpdateToolRequestAction>(
@@ -64,10 +66,23 @@ router.put(
   }),
 );
 
+router.get(
+  '/myToolRequests',
+  (req, res, next): void => {
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
+  },
+  asyncMiddleware(async (request: express.Request, response: express.Response) => {
+    const indexToolRequestsByAuthorAction: IndexToolRequestsByAuthorAction = DIContainer.resolve<
+      IndexToolRequestsByAuthorAction
+    >(IndexToolRequestsByAuthorAction);
+    await indexToolRequestsByAuthorAction.execute(request, response);
+  }),
+);
+
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyToolRequestAction: DestroyToolRequestAction = DIContainer.resolve<DestroyToolRequestAction>(

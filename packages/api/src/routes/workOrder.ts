@@ -16,13 +16,14 @@ import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkO
 import IndexWorkOrdersByAuthorAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByAuthorAction';
 import IndexWorkOrdersByWorkerAction from '../API/Http/Actions/WorkOrder/IndexWorkOrdersByWorkerAction';
 import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
 
 const router = express.Router();
 
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexWorkOrdersAction: IndexWorkOrdersAction = DIContainer.resolve<IndexWorkOrdersAction>(
@@ -35,7 +36,7 @@ router.get(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeWorkOrderAction: StoreWorkOrderAction = DIContainer.resolve<StoreWorkOrderAction>(StoreWorkOrderAction);
@@ -46,7 +47,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateWorkOrderAction: UpdateWorkOrderAction = DIContainer.resolve<UpdateWorkOrderAction>(
@@ -59,7 +60,7 @@ router.put(
 router.put(
   '/assign/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const assignWorkOrderAction: AssignWorkOrderAction = DIContainer.resolve<AssignWorkOrderAction>(
@@ -72,7 +73,7 @@ router.put(
 router.put(
   '/take/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const takeWorkOrderAction: TakeWorkOrderAction = DIContainer.resolve<TakeWorkOrderAction>(TakeWorkOrderAction);
@@ -83,7 +84,7 @@ router.put(
 router.put(
   '/cancel/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const cancelWorkOrderAction: CancelWorkOrderAction = DIContainer.resolve<CancelWorkOrderAction>(
@@ -96,7 +97,7 @@ router.put(
 router.post(
   '/complete/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const comppleteWorkOrderAction: CompleteWorkOrderAction = DIContainer.resolve<CompleteWorkOrderAction>(
@@ -109,7 +110,7 @@ router.post(
 router.get(
   '/myWorkOrders',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal', 'user']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexWorkOrdersByAuthorAction: IndexWorkOrdersByAuthorAction = DIContainer.resolve<
@@ -122,7 +123,7 @@ router.get(
 router.get(
   '/byWorker',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexWorkOrdersByWorkerAction: IndexWorkOrdersByWorkerAction = DIContainer.resolve<
@@ -135,7 +136,7 @@ router.get(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showWorkOrderAction: ShowWorkOrderAction = DIContainer.resolve<ShowWorkOrderAction>(ShowWorkOrderAction);
@@ -146,7 +147,7 @@ router.get(
 router.get(
   '/name/:name([a-z0-9-]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showWorkOrderByNameAction: ShowWorkOrderByNameAction = DIContainer.resolve<ShowWorkOrderByNameAction>(
@@ -159,7 +160,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyWorkOrderAction: DestroyWorkOrderAction = DIContainer.resolve<DestroyWorkOrderAction>(DestroyWorkOrderAction);

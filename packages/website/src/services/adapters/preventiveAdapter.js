@@ -1,5 +1,5 @@
 import { isError } from '../../utils/helpers/isError';
-import { createDateTime } from '../../utils/helpers/dateHelper';
+import { createDate, toDate } from '../../utils/helpers/dateHelper';
 
 class preventiveAdapter {
   create = createResponse => {
@@ -46,6 +46,12 @@ class preventiveAdapter {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
+      data.items = data.items.map(event => {
+        event.startDate = toDate(event.startDate);
+        event.endDate = toDate(event.endDate);
+        return event;
+      });
+
       return {
         data,
       };
@@ -67,13 +73,15 @@ class preventiveAdapter {
 
     if (!isError(status)) {
       const events = data.data.map(event => {
-        const workers = event.workers.map(worker => {
-          return worker.user.id;
-        });
+        const workers = event.workers
+          ? event.workers.map(worker => {
+              return worker.user.id;
+            })
+          : [];
         return {
           title: event.title,
-          start: createDateTime(event.startDate).toDate(),
-          end: createDateTime(event.endDate).toDate(),
+          start: createDate(event.startDate).add(3, 'hours'),
+          end: createDate(event.endDate).add(3, 'hours'),
           allDay: event.allDay,
           resource: {
             description: event.description,

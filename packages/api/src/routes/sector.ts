@@ -9,6 +9,7 @@ import StoreSectorAction from '../API/Http/Actions/Sector/StoreSectorAction';
 import UploadImageAction from '../API/Http/Actions/Sector/UploadMapSectorAction';
 import UpdateSectorAction from '../API/Http/Actions/Sector/UpdateSectorAction';
 import ShowSectorAction from '../API/Http/Actions/Sector/ShowSectorAction';
+import { ROL } from '../API/Http/Enums/UserRoles';
 // import ShowSectorByNameAction from '../API/Http/Actions/Sector/ShowSectorByNameAction';
 
 const router = express.Router();
@@ -16,7 +17,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
 
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
@@ -28,7 +29,7 @@ router.get(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateSectorAction: UpdateSectorAction = DIContainer.resolve<UpdateSectorAction>(UpdateSectorAction);
@@ -39,7 +40,7 @@ router.put(
 router.post(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const storeSectorAction: StoreSectorAction = DIContainer.resolve<StoreSectorAction>(StoreSectorAction);
@@ -50,7 +51,7 @@ router.post(
 router.get(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showSectorAction: ShowSectorAction = DIContainer.resolve<ShowSectorAction>(ShowSectorAction);
@@ -61,7 +62,7 @@ router.get(
 router.post(
   '/map/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin', 'personal']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const uploadImageAction: UploadImageAction = DIContainer.resolve<UploadImageAction>(UploadImageAction);
@@ -86,7 +87,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, ['admin']);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroySectorAction: DestroySectorAction = DIContainer.resolve<DestroySectorAction>(DestroySectorAction);
