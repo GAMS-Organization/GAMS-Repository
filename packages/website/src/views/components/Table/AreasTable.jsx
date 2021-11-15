@@ -15,7 +15,6 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
 import DeleteAreaSection from '../../sections/Area/DeleteAreaSection';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
@@ -71,25 +70,13 @@ class AreasTable extends React.Component {
       area: { id: prop.id, name: prop.visibleData[0], services: prop.services, maps: prop.maps },
       deleteModal: true,
     });
+    console.log(this.state.area);
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Area eliminada correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateAreaSection
           area={this.state.area}
           open={this.state.modal}
