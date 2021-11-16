@@ -70,7 +70,6 @@ class AreasTable extends React.Component {
       area: { id: prop.id, name: prop.visibleData[0], services: prop.services, maps: prop.maps },
       deleteModal: true,
     });
-    console.log(this.state.area);
   };
 
   render() {
