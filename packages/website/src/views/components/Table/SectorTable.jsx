@@ -57,19 +57,6 @@ class SectorTable extends React.Component {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Sector eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateSectorSection
           sector={this.state.sector}
           open={this.state.modal}

@@ -64,19 +64,6 @@ class ServiceTable extends React.Component {
     });
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Servicio eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateServiceSection service={this.state.service} onRef={ref => (this.child = ref)} Transition={Transition} />
         <DeleteServiceSection
           service={this.state.service}

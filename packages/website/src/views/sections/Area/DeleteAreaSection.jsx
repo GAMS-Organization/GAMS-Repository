@@ -71,7 +71,6 @@ class DeleteAreaSection extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,
