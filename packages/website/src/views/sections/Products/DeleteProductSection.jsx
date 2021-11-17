@@ -13,14 +13,14 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
 import AddAlert from '@material-ui/icons/AddAlert';
 
-import serviceElement from '../../../services/api/element';
+import serviceProduct from '../../../services/api/products';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
-class DeleteElementSection extends React.Component {
+class DeleteProductSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      element: {},
+      product: {},
       errors: {},
       notification: false,
     };
@@ -34,13 +34,13 @@ class DeleteElementSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteArea = async e => {
+  deleteProduct = async e => {
     e.preventDefault();
-    const response = await serviceElement.delete(this.props.element.id);
+    const response = await serviceProduct.delete(this.props.product.id);
 
     if (response.type === 'DELETED_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listElements();
+      this.props.listProducts();
       this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -48,9 +48,9 @@ class DeleteElementSection extends React.Component {
   };
 
   render() {
-    const { classes, element, Transition, close, open } = this.props;
+    const { classes, product, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name } = element;
+    const { name } = product;
     return (
       <div>
         <Snackbar
@@ -60,7 +60,7 @@ class DeleteElementSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Elemento Eliminada correctamente'
+              : 'Producto Eliminado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -80,14 +80,14 @@ class DeleteElementSection extends React.Component {
         >
           <GridContainer justify={'center'}>
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente elemento?</h4>
+              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente producto?</h4>
             </DialogTitle>
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
               <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
             </DialogTitle>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.deleteArea}>
+            <form onSubmit={this.deleteProduct}>
               <GridContainer justify={'center'}>
                 <GridItem xs={12} sm={12} md={8}>
                   <GridContainer justify={'center'}>
@@ -115,12 +115,12 @@ class DeleteElementSection extends React.Component {
   }
 }
 
-DeleteElementSection.propTypes = {
+DeleteProductSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  element: PropTypes.object,
+  product: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
-  listElements: PropTypes.func,
+  listProducts: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(DeleteElementSection);
+export default withStyles(modalStyle)(DeleteProductSection);
