@@ -47,7 +47,6 @@ class area {
   }
 
   async delete(id) {
-    console.log(id);
     let deleteResponse;
 
     try {
