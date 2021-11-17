@@ -10,24 +10,23 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateEducationalElementSection from '../../sections/EducationalElement/UpdateEducationalElementSection';
-import Snackbar from '../Snackbar/Snackbar';
 
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
-import serviceEducationalElement from '../../../services/api/educationalElement.js';
+import DeleteEducationalElementSection from '../../sections/EducationalElement/DeleteEducationalElementSection';
 
 class EducationalElementTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       educationalElement: {},
       errors: {},
       notification: false,
@@ -52,18 +51,14 @@ class EducationalElementTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  handleClickDelete = async prop => {
-    const response = await serviceEducationalElement.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listEducationalElements();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      educationalElement: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -76,22 +71,15 @@ class EducationalElementTable extends React.Component {
     }
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Articulo eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateEducationalElementSection
           educationalElement={this.state.educationalElement}
           open={this.state.modal}
+          close={this.closeModal}
+          listEducationalElements={this.props.listEducationalElements}
+        />
+        <DeleteEducationalElementSection
+          educationalElement={this.state.educationalElement}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listEducationalElements={this.props.listEducationalElements}
         />
