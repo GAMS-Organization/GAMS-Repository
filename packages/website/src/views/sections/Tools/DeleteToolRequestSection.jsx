@@ -60,7 +60,7 @@ class DeleteToolRequestSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Solicitud de elemento eliminada correctamente'
+              : 'Solicitud eliminada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}

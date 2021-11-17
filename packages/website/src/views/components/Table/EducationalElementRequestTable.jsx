@@ -10,21 +10,21 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
 import serviceEducationalElement from '../../../services/api/educationalElement';
 import Edit from '@material-ui/icons/Edit';
 import UpdateEducationalElementRequestSection from '../../sections/EducationalElement/UpdateEducationalElementRequestSection';
+import DeleteRequestEducationalElementSection from '../../sections/EducationalElement/DeleteRequestEducationalElementSection';
 
 class EducationalElementRequestTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       educationalElementRequest: {},
       errors: {},
       notification: false,
@@ -47,18 +47,14 @@ class EducationalElementRequestTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  deleteEducationalElementRequest = async prop => {
-    const response = await serviceEducationalElement.deleteElementRequest(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listEducationalElementRequest();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      educationalElementRequest: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -66,22 +62,15 @@ class EducationalElementRequestTable extends React.Component {
 
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Solicitud de elemento eliminada correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateEducationalElementRequestSection
           educationalElementRequest={this.state.educationalElementRequest}
           open={this.state.modal}
+          close={this.closeModal}
+          listEducationalElementRequest={this.props.listEducationalElementRequest}
+        />
+        <DeleteRequestEducationalElementSection
+          educationalElementRequest={this.state.educationalElementRequest}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listEducationalElementRequest={this.props.listEducationalElementRequest}
         />
@@ -129,7 +118,7 @@ class EducationalElementRequestTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteEducationalElementRequest(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
