@@ -8,9 +8,15 @@ import User from './User';
 export default class UserRole {
   @PrimaryGeneratedColumn()
   public id: number;
-  @ManyToOne(_type => User, user => user.userRoles)
+  @ManyToOne(
+    _type => User,
+    user => user.userRoles,
+  )
   public user: User;
-  @ManyToOne(_type => Role, role => role.userRoles)
+  @ManyToOne(
+    _type => Role,
+    role => role.userRoles,
+  )
   public role: Role;
 
   public constructor(user: User, role: Role) {

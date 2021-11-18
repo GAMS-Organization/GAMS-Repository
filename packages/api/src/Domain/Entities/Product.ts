@@ -10,9 +10,15 @@ export default class Product {
   public id: number;
   @Column({ unique: true })
   public name: string;
-  @OneToMany(_type => Purchase, purchase => purchase.product)
+  @OneToMany(
+    _type => Purchase,
+    purchase => purchase.product,
+  )
   public purchases: Purchase[];
-  @OneToMany(_type => Consumption, consumption => consumption.product)
+  @OneToMany(
+    _type => Consumption,
+    consumption => consumption.product,
+  )
   public consumptions: Consumption[];
 
   public constructor(name: string) {
