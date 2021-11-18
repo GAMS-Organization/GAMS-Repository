@@ -14,9 +14,15 @@ export default class Element {
   public code: string;
   @Column({ nullable: true })
   public steps: string;
-  @ManyToOne(_type => Service, service => service.elements)
+  @ManyToOne(
+    _type => Service,
+    service => service.elements,
+  )
   public service: Service;
-  @OneToMany(_type => Asset, asset => asset.element)
+  @OneToMany(
+    _type => Asset,
+    asset => asset.element,
+  )
   public assets: Asset[];
 
   public constructor(name: string, code: string, service: Service, steps: string) {

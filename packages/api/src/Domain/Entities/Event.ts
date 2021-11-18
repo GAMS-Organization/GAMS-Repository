@@ -17,7 +17,10 @@ export default class Event {
   public endDate: string;
   @Column({ nullable: true })
   public allDay: boolean;
-  @OneToMany(_type => UserEvent, userEvents => userEvents.event)
+  @OneToMany(
+    _type => UserEvent,
+    userEvents => userEvents.event,
+  )
   public userEvents: UserEvent[];
 
   public constructor(title: string, description: string, startDate: string, endDate: string, allDay: boolean) {

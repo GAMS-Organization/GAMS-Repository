@@ -10,9 +10,15 @@ export default class Consumption {
   public id: number;
   @Column()
   public quantity: number;
-  @ManyToOne(_type => Product, product => product.consumptions)
+  @ManyToOne(
+    _type => Product,
+    product => product.consumptions,
+  )
   public product: Product;
-  @ManyToOne(_type => Departure, departure => departure.consumptions)
+  @ManyToOne(
+    _type => Departure,
+    departure => departure.consumptions,
+  )
   public departure: Departure;
 
   public constructor(quantity: number, product: Product, departure: Departure) {
