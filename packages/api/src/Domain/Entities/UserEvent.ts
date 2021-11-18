@@ -8,9 +8,15 @@ import Event from './Event';
 export default class UserEvent {
   @PrimaryGeneratedColumn()
   public id: number;
-  @ManyToOne(_type => User, user => user.userEvents)
+  @ManyToOne(
+    _type => User,
+    user => user.userEvents,
+  )
   public user: User;
-  @ManyToOne(_type => Event, event => event.userEvents)
+  @ManyToOne(
+    _type => Event,
+    event => event.userEvents,
+  )
   public event: Event;
 
   public constructor(user: User, event: Event) {

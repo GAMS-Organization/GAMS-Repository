@@ -8,9 +8,15 @@ import WorkOrder from './WorkOrder';
 export default class UserWorkOrder {
   @PrimaryGeneratedColumn()
   public id: number;
-  @ManyToOne(_type => User, user => user.userWorkOrders)
+  @ManyToOne(
+    _type => User,
+    user => user.userWorkOrders,
+  )
   public user: User;
-  @ManyToOne(_type => WorkOrder, workOrder => workOrder.userWorkOrders)
+  @ManyToOne(
+    _type => WorkOrder,
+    workOrder => workOrder.userWorkOrders,
+  )
   public workOrder: WorkOrder;
 
   public constructor(user: User, workOrder: WorkOrder) {

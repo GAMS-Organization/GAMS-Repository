@@ -8,9 +8,15 @@ import Area from './Area';
 export default class AreaService {
   @PrimaryGeneratedColumn()
   public id: number;
-  @ManyToOne(_type => Area, area => area.areaServices)
+  @ManyToOne(
+    _type => Area,
+    area => area.areaServices,
+  )
   public area: Area;
-  @ManyToOne(_type => Service, service => service.areaServices)
+  @ManyToOne(
+    _type => Service,
+    service => service.areaServices,
+  )
   public service: Service;
   @Column({ nullable: true })
   public map: string;

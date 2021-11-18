@@ -8,9 +8,15 @@ import Stock from './Stock';
 export default class StockEntry {
   @PrimaryGeneratedColumn()
   public id: number;
-  @ManyToOne(_type => Stock, stock => stock.stockEntries)
+  @ManyToOne(
+    _type => Stock,
+    stock => stock.stockEntries,
+  )
   public stock: Stock;
-  @ManyToOne(_type => Entry, entry => entry.stockEntries)
+  @ManyToOne(
+    _type => Entry,
+    entry => entry.stockEntries,
+  )
   public entry: Entry;
 
   public constructor(stock: Stock, entry: Entry) {
