@@ -19,11 +19,13 @@ import Snackbar from '../Snackbar/Snackbar';
 import serviceElement from '../../../services/api/element';
 import UpdateElementSection from '../../sections/Element/UpdateElementSection';
 import Edit from '@material-ui/icons/Edit';
+import DeleteElementSection from '../../sections/Element/DeleteElementSection';
 
 class ElementTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deleteModal: false,
       modal: false,
       element: {},
       errors: {},
@@ -41,19 +43,14 @@ class ElementTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  //se elimina el elemento
-  deleteElement = async prop => {
-    const response = await serviceElement.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listElements();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      element: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -61,22 +58,15 @@ class ElementTable extends React.Component {
 
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Elemento eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateElementSection
           element={this.state.element}
           open={this.state.modal}
+          close={this.closeModal}
+          listElements={this.props.listElements}
+        />
+        <DeleteElementSection
+          element={this.state.element}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listElements={this.props.listElements}
         />
@@ -124,7 +114,7 @@ class ElementTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteElement(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

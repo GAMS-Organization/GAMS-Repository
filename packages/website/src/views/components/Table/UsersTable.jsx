@@ -19,12 +19,14 @@ import UpdateUserSection from '../../sections/Users/UpdateUserSection';
 import Snackbar from '../Snackbar/Snackbar';
 
 import serviceUser from '../../../services/api/user';
+import DeleteUserSection from '../../sections/Users/DeleteUserSection';
 
 class UsersTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       user: {},
       errors: {},
       notification: false,
@@ -35,16 +37,11 @@ class UsersTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se eliminan el usuario
-  deleteUser = async prop => {
-    const response = await serviceUser.delete(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listUsers();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      user: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   //se crea la ventana emergente en donde se editaran los usuarios
@@ -54,7 +51,7 @@ class UsersTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
   render() {
@@ -77,6 +74,12 @@ class UsersTable extends React.Component {
         <UpdateUserSection
           user={this.state.user}
           open={this.state.modal}
+          close={this.closeModal}
+          listUsers={this.props.listUsers}
+        />
+        <DeleteUserSection
+          user={this.state.user}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listUsers={this.props.listUsers}
         />
@@ -124,7 +127,7 @@ class UsersTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteUser(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

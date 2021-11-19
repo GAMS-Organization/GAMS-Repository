@@ -10,24 +10,23 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateProductSection from '../../sections/Products/UpdateProductSection';
-import Snackbar from '../Snackbar/Snackbar';
 
-import serviceProduct from '../../../services/api/products';
 import CustomInput from '../CustomInput/CustomInput';
 import Search from '@material-ui/icons/Search';
 import classNames from 'classnames';
+import DeleteProductSection from '../../sections/Products/DeleteProductSection';
 
 class ProductTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       product: {},
       errors: {},
       notification: false,
@@ -45,19 +44,14 @@ class ProductTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  //se elimina el producto
-  deleteProduct = async prop => {
-    const response = await serviceProduct.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listProducts();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      product: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -70,22 +64,15 @@ class ProductTable extends React.Component {
     }
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Producto eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateProductSection
           product={this.state.product}
           open={this.state.modal}
+          close={this.closeModal}
+          listProducts={this.props.listProducts}
+        />
+        <DeleteProductSection
+          product={this.state.product}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listProducts={this.props.listProducts}
         />
@@ -152,7 +139,7 @@ class ProductTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteProduct(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

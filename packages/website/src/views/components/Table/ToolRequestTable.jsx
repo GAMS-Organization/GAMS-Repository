@@ -14,17 +14,17 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
-import serviceTool from '../../../services/api/tool';
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
+import DeleteToolRequestSection from '../../sections/Tools/DeleteToolRequestSection';
 
 class ToolRequestTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       toolRequest: {},
       errors: {},
       notification: false,
@@ -47,18 +47,14 @@ class ToolRequestTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false });
+    this.setState({ modal: false, deleteModal: false });
   };
 
-  deleteToolRequest = async prop => {
-    const response = await serviceTool.deleteToolRequest(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listToolsRequest();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      toolRequest: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -66,22 +62,15 @@ class ToolRequestTable extends React.Component {
 
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Solicitud de elemento eliminada correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateToolRequestSection
           toolRequest={this.state.toolRequest}
           open={this.state.modal}
+          close={this.closeModal}
+          listToolsRequest={this.props.listToolsRequest}
+        />
+        <DeleteToolRequestSection
+          toolRequest={this.state.toolRequest}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listToolsRequest={this.props.listToolsRequest}
         />
@@ -129,7 +118,7 @@ class ToolRequestTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteToolRequest(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

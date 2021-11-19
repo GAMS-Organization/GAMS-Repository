@@ -19,11 +19,13 @@ import tasksStyle from '../../../styles/jss/material-dashboard-react/components/
 import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock';
 import Snackbar from '../Snackbar/Snackbar';
 import ViewEntryPurchase from './ViewEntryPurchase.jsx';
+import DeleteEntryPurchase from './DeleteEntryPurchase';
 
 class EntryPurchase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deleteModal: false,
       modal: false,
       entry: {},
       errors: {},
@@ -35,15 +37,8 @@ class EntryPurchase extends React.Component {
     this.setState({ notification: false });
   };
 
-  deleteEntry = async prop => {
-    const response = await serviceEntryPurchaseStock.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listEntries();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  closeModal = () => {
+    this.setState({ deleteModal: false });
   };
 
   handleClickSeeDetails = async prop => {
@@ -52,6 +47,13 @@ class EntryPurchase extends React.Component {
       entry: entryDetails.data.data,
     });
     this.child.showModal();
+  };
+
+  handleClickDelete = prop => {
+    this.setState({
+      entry: { id: prop.id },
+      deleteModal: true,
+    });
   };
 
   render() {
@@ -73,6 +75,12 @@ class EntryPurchase extends React.Component {
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
+        />
+        <DeleteEntryPurchase
+          entry={this.state.entry}
+          open={this.state.deleteModal}
+          close={this.closeModal}
+          listEntries={this.props.listEntries}
         />
         <ViewEntryPurchase entry={this.state.entry} onRef={ref => (this.child = ref)} Transition={Transition} />
         <Table className={classes.table}>
@@ -119,7 +127,7 @@ class EntryPurchase extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteEntry(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

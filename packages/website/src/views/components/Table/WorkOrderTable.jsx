@@ -82,19 +82,6 @@ class WorkOrderTable extends React.Component {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Orden de trabajo cancelada correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <DetailWorkOrderSection
           workOrder={this.state.workOrder}
           open={this.state.detailModal}

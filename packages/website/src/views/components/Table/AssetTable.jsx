@@ -14,15 +14,15 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
-import serviceAsset from '../../../services/api/asset';
+import DeleteAssetSection from '../../sections/Asset/DeleteAssetSection';
 
 class AssetTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       asset: {},
       errors: {},
       notification: false,
@@ -33,8 +33,12 @@ class AssetTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
+  closeModal = () => {
+    this.setState({ deleteModal: false });
+  };
+
   //se elimina el activo
-  deleteAsset = async prop => {
+  /*deleteAsset = async prop => {
     const response = await serviceAsset.delete(prop[0]);
 
     if (response.type === 'DELETED_SUCCESFUL') {
@@ -43,6 +47,13 @@ class AssetTable extends React.Component {
       this.setState({ notification: true, errors: response.error });
     }
     this.props.listAssets();
+  };*/
+
+  handleClickDelete = prop => {
+    this.setState({
+      asset: { id: prop[0], code: prop[1] },
+      deleteModal: true,
+    });
   };
 
   componentWillMount = () => {
@@ -54,18 +65,11 @@ class AssetTable extends React.Component {
 
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Activo eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
+        <DeleteAssetSection
+          asset={this.state.asset}
+          open={this.state.deleteModal}
+          close={this.closeModal}
+          listAssets={this.props.listAssets}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -102,7 +106,7 @@ class AssetTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteAsset(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
