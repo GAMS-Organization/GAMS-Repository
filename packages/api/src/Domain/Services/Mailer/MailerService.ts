@@ -153,8 +153,10 @@ export default class MailerService {
         recipient.push(user.getEmail());
       });
     } else {
-      const user: User = await this.userService.findOneById(5);
-      recipient.push(user.getEmail());
+      const users: User[] = await this.userService.findByRole(2);
+      users.forEach(user => {
+        recipient.push(user.getEmail());
+      });
     }
     return recipient;
   }

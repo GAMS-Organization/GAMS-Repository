@@ -17,6 +17,10 @@ export default class TypeUserRoleRepository extends TypeRepository implements IU
     return await this.repository(UserRole).find({ relations: ['role'], where: { user: userId } });
   }
 
+  public async findByRole(roleId: number): Promise<UserRole[]> {
+    return await this.repository(UserRole).find({ relations: ['user'], where: { role: roleId } });
+  }
+
   public async persist(userRole: UserRole): Promise<UserRole> {
     return await this.repository(UserRole).save(userRole);
   }
