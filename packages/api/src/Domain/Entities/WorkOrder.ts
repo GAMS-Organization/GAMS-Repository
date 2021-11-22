@@ -24,20 +24,11 @@ export default class WorkOrder {
   public taskDescription: string;
   @Column()
   public comment: string;
-  @ManyToOne(
-    _type => User,
-    user => user.workOrders,
-  )
+  @ManyToOne(_type => User, user => user.workOrders)
   public user: User;
-  @ManyToOne(
-    _type => Asset,
-    asset => asset.workOrders,
-  )
+  @ManyToOne(_type => Asset, asset => asset.workOrders)
   public asset: Asset;
-  @OneToMany(
-    _type => UserWorkOrder,
-    userWorkOrders => userWorkOrders.workOrder,
-  )
+  @OneToMany(_type => UserWorkOrder, userWorkOrders => userWorkOrders.workOrder)
   public userWorkOrders: UserWorkOrder[];
 
   public constructor(orderDate: string, priority: string, comment: string, asset: Asset, user: User) {

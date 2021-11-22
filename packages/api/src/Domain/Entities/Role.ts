@@ -9,10 +9,7 @@ export default class Role {
   public id: number;
   @Column()
   public name: string;
-  @OneToMany(
-    _type => UserRole,
-    userRole => userRole.role,
-  )
+  @OneToMany(_type => UserRole, userRole => userRole.role)
   public userRoles: UserRole[];
 
   public constructor(name: string) {

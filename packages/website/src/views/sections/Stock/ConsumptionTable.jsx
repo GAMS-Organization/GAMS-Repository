@@ -70,10 +70,7 @@ class ConsumptionTable extends React.Component {
     }
 
     this.setState({
-      columns: [
-        { title: 'Producto', field: 'product', lookup: dataProduct },
-        { title: 'Cantidad', field: 'quantity' },
-      ],
+      columns: [{ title: 'Producto', field: 'product', lookup: dataProduct }, { title: 'Cantidad', field: 'quantity' }],
     });
   }
 

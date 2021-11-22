@@ -12,15 +12,9 @@ export default class Sector {
   public name: string;
   @Column()
   public code: string;
-  @OneToMany(
-    _type => Area,
-    area => area.sector,
-  )
+  @OneToMany(_type => Area, area => area.sector)
   public areas: Area[];
-  @OneToMany(
-    _type => Asset,
-    asset => asset.sector,
-  )
+  @OneToMany(_type => Asset, asset => asset.sector)
   public assets: Asset[];
   @Column({ nullable: true })
   public map: string;

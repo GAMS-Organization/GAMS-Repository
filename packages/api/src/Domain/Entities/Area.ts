@@ -15,30 +15,15 @@ export default class Area {
   public name: string;
   @Column()
   public code: string;
-  @ManyToOne(
-    _type => Sector,
-    sector => sector.areas,
-  )
+  @ManyToOne(_type => Sector, sector => sector.areas)
   public sector: Sector;
-  @OneToMany(
-    _type => AreaService,
-    areaServices => areaServices.area,
-  )
+  @OneToMany(_type => AreaService, areaServices => areaServices.area)
   public areaServices: AreaService[];
-  @OneToMany(
-    _type => Asset,
-    asset => asset.area,
-  )
+  @OneToMany(_type => Asset, asset => asset.area)
   public assets: Asset[];
-  @OneToMany(
-    _type => ElementRequest,
-    elementRequests => elementRequests.area,
-  )
+  @OneToMany(_type => ElementRequest, elementRequests => elementRequests.area)
   public elementRequests: ElementRequest[];
-  @OneToMany(
-    _type => ToolRequest,
-    toolRequests => toolRequests.area,
-  )
+  @OneToMany(_type => ToolRequest, toolRequests => toolRequests.area)
   public toolRequests: ToolRequest[];
 
   public constructor(name: string, code: string, sector: Sector) {

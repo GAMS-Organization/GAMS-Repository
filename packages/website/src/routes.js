@@ -111,7 +111,7 @@ const dashboardRoutes = [
     component: Users,
     layout: '/admin',
     title: 'Usuarios',
-    roles: ['admin'],
+    roles: ['admin', 'boss'],
   },
   {
     name: 'Gestión',

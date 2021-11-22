@@ -14,15 +14,9 @@ export default class Departure {
   public date: string;
   @Column()
   public observations: string;
-  @OneToMany(
-    _type => Consumption,
-    consumption => consumption.departure,
-  )
+  @OneToMany(_type => Consumption, consumption => consumption.departure)
   public consumptions: Consumption[];
-  @OneToMany(
-    _type => StockDeparture,
-    stockDepartures => stockDepartures.departure,
-  )
+  @OneToMany(_type => StockDeparture, stockDepartures => stockDepartures.departure)
   public stockDepartures: StockDeparture[];
   @OneToOne(_type => WorkOrder)
   @JoinColumn()

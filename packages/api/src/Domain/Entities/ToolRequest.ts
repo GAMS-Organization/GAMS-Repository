@@ -15,20 +15,11 @@ export default class ToolRequest {
   public date: string;
   @Column()
   public quantity: number;
-  @ManyToOne(
-    _type => Tool,
-    tool => tool.toolRequests,
-  )
+  @ManyToOne(_type => Tool, tool => tool.toolRequests)
   public tool: Tool;
-  @ManyToOne(
-    _type => User,
-    user => user.toolRequests,
-  )
+  @ManyToOne(_type => User, user => user.toolRequests)
   public user: User;
-  @ManyToOne(
-    _type => Area,
-    area => area.toolRequests,
-  )
+  @ManyToOne(_type => Area, area => area.toolRequests)
   public area: Area;
 
   public constructor(tool: Tool, user: User, status: string, date: string, area: Area, quantity: number) {

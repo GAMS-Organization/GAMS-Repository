@@ -13,10 +13,7 @@ export default class Tool {
   public totalQuantity: number;
   @Column()
   public borrowQuantity: number;
-  @OneToMany(
-    _type => ToolRequest,
-    toolRequest => toolRequest.tool,
-  )
+  @OneToMany(_type => ToolRequest, toolRequest => toolRequest.tool)
   public toolRequests: ToolRequest[];
 
   public constructor(name: string, totalQuantity: number, borrowQuantity: number) {

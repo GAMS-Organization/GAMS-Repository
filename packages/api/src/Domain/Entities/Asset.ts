@@ -15,30 +15,15 @@ export default class Asset {
   public code: string;
   @Column({ nullable: true })
   public description: string;
-  @ManyToOne(
-    _type => Sector,
-    sector => sector.assets,
-  )
+  @ManyToOne(_type => Sector, sector => sector.assets)
   public sector: Sector;
-  @ManyToOne(
-    _type => Area,
-    area => area.assets,
-  )
+  @ManyToOne(_type => Area, area => area.assets)
   public area: Area;
-  @ManyToOne(
-    _type => Service,
-    service => service.assets,
-  )
+  @ManyToOne(_type => Service, service => service.assets)
   public service: Service;
-  @ManyToOne(
-    _type => Element,
-    element => element.assets,
-  )
+  @ManyToOne(_type => Element, element => element.assets)
   public element: Element;
-  @OneToMany(
-    _type => WorkOrder,
-    workOrder => workOrder.asset,
-  )
+  @OneToMany(_type => WorkOrder, workOrder => workOrder.asset)
   public workOrders: WorkOrder[];
 
   public constructor(

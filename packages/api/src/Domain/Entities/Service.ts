@@ -13,20 +13,11 @@ export default class Service {
   public name: string;
   @Column({ unique: true })
   public code: string;
-  @OneToMany(
-    _type => Element,
-    element => element.service,
-  )
+  @OneToMany(_type => Element, element => element.service)
   public elements: Element[];
-  @OneToMany(
-    _type => AreaService,
-    areaServices => areaServices.service,
-  )
+  @OneToMany(_type => AreaService, areaServices => areaServices.service)
   public areaServices: AreaService[];
-  @OneToMany(
-    _type => Asset,
-    asset => asset.service,
-  )
+  @OneToMany(_type => Asset, asset => asset.service)
   public assets: Asset[];
 
   public constructor(name: string, code: string) {

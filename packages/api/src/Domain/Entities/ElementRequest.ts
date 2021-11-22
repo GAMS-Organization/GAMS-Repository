@@ -15,20 +15,11 @@ export default class ElementRequest {
   public date: string;
   @Column()
   public quantity: number;
-  @ManyToOne(
-    _type => EducationalElement,
-    educationalElement => educationalElement.elementRequests,
-  )
+  @ManyToOne(_type => EducationalElement, educationalElement => educationalElement.elementRequests)
   public element: EducationalElement;
-  @ManyToOne(
-    _type => User,
-    user => user.elementRequests,
-  )
+  @ManyToOne(_type => User, user => user.elementRequests)
   public user: User;
-  @ManyToOne(
-    _type => Area,
-    area => area.elementRequests,
-  )
+  @ManyToOne(_type => Area, area => area.elementRequests)
   public area: Area;
 
   public constructor(

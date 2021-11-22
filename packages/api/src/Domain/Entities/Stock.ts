@@ -19,15 +19,9 @@ export default class Stock {
   @OneToOne(_type => Product)
   @JoinColumn()
   public product: Product;
-  @OneToMany(
-    _type => StockEntry,
-    stockEntries => stockEntries.stock,
-  )
+  @OneToMany(_type => StockEntry, stockEntries => stockEntries.stock)
   public stockEntries: StockEntry[];
-  @OneToMany(
-    _type => StockDeparture,
-    stockDepartures => stockDepartures.stock,
-  )
+  @OneToMany(_type => StockDeparture, stockDepartures => stockDepartures.stock)
   public stockDepartures: StockDeparture[];
 
   public constructor(product: Product, quantity: number, minimunQuantity: number = 0) {

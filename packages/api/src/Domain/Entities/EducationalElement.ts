@@ -13,10 +13,7 @@ export default class EducationalElement {
   public totalQuantity: number;
   @Column()
   public borrowQuantity: number;
-  @OneToMany(
-    _type => ElementRequest,
-    elementRequest => elementRequest.element,
-  )
+  @OneToMany(_type => ElementRequest, elementRequest => elementRequest.element)
   public elementRequests: ElementRequest[];
 
   public constructor(name: string, totalQuantity: number, borrowQuantity: number) {

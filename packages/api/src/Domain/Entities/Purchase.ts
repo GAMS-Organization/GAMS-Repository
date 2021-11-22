@@ -12,15 +12,9 @@ export default class Purchase {
   public quantity: number;
   @Column()
   public provider: string;
-  @ManyToOne(
-    _type => Product,
-    product => product.purchases,
-  )
+  @ManyToOne(_type => Product, product => product.purchases)
   public product: Product;
-  @ManyToOne(
-    _type => Entry,
-    entry => entry.purchases,
-  )
+  @ManyToOne(_type => Entry, entry => entry.purchases)
   public entry: Entry;
 
   public constructor(quantity: number, provider: string, product: Product, entry: Entry) {
