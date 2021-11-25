@@ -15,6 +15,7 @@ export default class IndexSectorsAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
+    //@ts-ignore
     const sectorsData = await this.sectorService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
     const getAllPresenter = new GetAllSectorsPresenter(sectorsData.data);

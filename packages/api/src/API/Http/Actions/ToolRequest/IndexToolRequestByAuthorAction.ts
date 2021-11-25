@@ -17,6 +17,7 @@ export default class IndexToolRequestsByAuthorAction {
   public async execute(request: Request, response: Response): Promise<Response> {
     const toolRequestsData = await this.toolRequestService.returnAllPaginatedByAuthor(
       request.body.authorId,
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

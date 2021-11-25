@@ -16,6 +16,7 @@ export default class IndexToolRequestAction {
 
   public async execute(request: Request, response: Response): Promise<Response> {
     const toolRequestsData = await this.toolRequestService.returnAllPaginated(
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

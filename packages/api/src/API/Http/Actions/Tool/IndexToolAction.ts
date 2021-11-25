@@ -15,6 +15,7 @@ export default class IndexToolAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
+    //@ts-ignore
     const toolsData = await this.toolService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
     const getAllPresenter = new GetAllToolPresenter(toolsData.data);

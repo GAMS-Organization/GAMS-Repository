@@ -6,18 +6,22 @@ import ShowAssetCommand from '../../../../Application/Commands/Asset/ShowAssetCo
 @injectable()
 export default class ShowAssetAdapter {
   public from(request: Request): ShowAssetCommand {
+    //@ts-ignore
     const sector = parseInt(request.query.sector);
     if (!sector) {
       throw new ValidationException('Sector id is required');
     }
+    //@ts-ignore
     const area = parseInt(request.query.area);
     if (!area) {
       throw new ValidationException('Area id is required');
     }
+    //@ts-ignore
     const service = parseInt(request.query.service);
     if (!service) {
       throw new ValidationException('Service id is required');
     }
+    //@ts-ignore
     const element = parseInt(request.query.element);
     if (!element) {
       throw new ValidationException('Element id is required');

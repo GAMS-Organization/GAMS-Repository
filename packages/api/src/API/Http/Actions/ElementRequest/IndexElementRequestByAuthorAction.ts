@@ -17,6 +17,7 @@ export default class IndexElementRequestsByAuthorAction {
   public async execute(request: Request, response: Response): Promise<Response> {
     const elementRequestsData = await this.elementRequestService.returnAllPaginatedByAuthor(
       request.body.authorId,
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

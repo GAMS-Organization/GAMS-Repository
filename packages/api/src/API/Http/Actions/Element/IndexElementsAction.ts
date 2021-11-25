@@ -15,6 +15,7 @@ export default class IndexElementsAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
+    //@ts-ignore
     const elementsData = await this.elementService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
     const getAllPresenter = new GetAllElementsPresenter(elementsData.data);
