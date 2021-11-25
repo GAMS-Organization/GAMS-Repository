@@ -13,9 +13,15 @@ export default class Entry {
   public date: string;
   @Column()
   public observations: string;
-  @OneToMany(_type => Purchase, purchase => purchase.entry)
+  @OneToMany(
+    _type => Purchase,
+    purchase => purchase.entry,
+  )
   public purchases: Purchase[];
-  @OneToMany(_type => StockEntry, stockEntries => stockEntries.entry)
+  @OneToMany(
+    _type => StockEntry,
+    stockEntries => stockEntries.entry,
+  )
   public stockEntries: StockEntry[];
 
   public constructor(date: string, observations: string) {
