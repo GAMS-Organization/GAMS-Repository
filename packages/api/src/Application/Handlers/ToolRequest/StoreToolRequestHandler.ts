@@ -56,6 +56,7 @@ export default class StoreToolRequestHandler {
       toolUpdated,
       user,
       STATUS.PENDING,
+      //@ts-ignore
       command.getDate(),
       area,
       command.getQuantity(),

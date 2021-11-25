@@ -23,6 +23,7 @@ export default class StoreDepartureHandler {
   }
 
   public async execute(command: StoreDepartureCommand): Promise<Departure> {
+    //@ts-ignore
     const departure = new Departure(command.getDate(), command.getObservations());
 
     for (const product of command.getProducts()) {

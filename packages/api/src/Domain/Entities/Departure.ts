@@ -11,7 +11,7 @@ export default class Departure {
   @PrimaryGeneratedColumn()
   public id: number;
   @Column()
-  public date: string;
+  public date: Date;
   @Column()
   public observations: string;
   @OneToMany(
@@ -28,7 +28,7 @@ export default class Departure {
   @JoinColumn()
   public workOrder: WorkOrder;
 
-  public constructor(date: string, observations: string) {
+  public constructor(date: Date, observations: string) {
     this.date = date;
     this.observations = observations;
   }
@@ -37,7 +37,7 @@ export default class Departure {
     return this.id;
   }
 
-  public getDate(): string {
+  public getDate(): Date {
     return this.date;
   }
 
@@ -49,7 +49,7 @@ export default class Departure {
     return this.workOrder;
   }
 
-  public setDate(date: string): void {
+  public setDate(date: Date): void {
     this.date = date;
   }
 

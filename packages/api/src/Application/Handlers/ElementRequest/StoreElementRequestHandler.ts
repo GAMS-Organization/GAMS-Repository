@@ -54,6 +54,7 @@ export default class StoreElementRequestHandler {
       await this.educationalElementService.updateQuantity(command.getQuantity(), educationalElement, 'borrow'),
       user,
       STATUS.PENDING,
+      //@ts-ignore
       command.getDate(),
       area,
       command.getQuantity(),

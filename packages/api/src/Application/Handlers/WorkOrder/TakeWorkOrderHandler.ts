@@ -28,7 +28,7 @@ export default class TakeWorkOrderHandler {
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
-    }
+    } //@ts-ignore
     workOrder.setStartDate(command.getStartDate());
     workOrder.setState(STATE.TAKEN);
 

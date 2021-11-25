@@ -12,7 +12,7 @@ export default class ElementRequest {
   @Column()
   public status: string;
   @Column()
-  public date: string;
+  public date: Date;
   @Column()
   public quantity: number;
   @ManyToOne(
@@ -35,7 +35,7 @@ export default class ElementRequest {
     element: EducationalElement,
     user: User,
     status: string,
-    date: string,
+    date: Date,
     area: Area,
     quantity: number,
   ) {
@@ -63,7 +63,7 @@ export default class ElementRequest {
     return this.status;
   }
 
-  public getDate(): string {
+  public getDate(): Date {
     return this.date;
   }
 

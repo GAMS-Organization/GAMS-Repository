@@ -34,9 +34,9 @@ export default class StockDepartureService {
     await this.stockRepository.persist(stock);
   }
 
-  public async destroyStockEntriesFromDeparture(departureId: number): Promise<void> {
-    const stockEntries = await this.stockDepartureRepository.findByDepartureId(departureId);
-    for (const stockDeparture of stockEntries) {
+  public async destroyStockDeparturesFromDeparture(departureId: number): Promise<void> {
+    const stockDepartures = await this.stockDepartureRepository.findByDepartureId(departureId);
+    for (const stockDeparture of stockDepartures) {
       try {
         await this.stockDepartureRepository.destroy(stockDeparture);
       } catch (e) {

@@ -29,6 +29,7 @@ export default class CompleteWorkOrderHandler {
     if (!workOrder) {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
     }
+    //@ts-ignore
     workOrder.setRealizationDate(command.getRealizationDate());
     workOrder.setState(STATE.FINISHED);
     workOrder.setTaskDescription(command.getTaskDescription());
@@ -37,6 +38,7 @@ export default class CompleteWorkOrderHandler {
 
     if (command.getProductsId().length !== 0) {
       let departure = new Departure(
+        //@ts-ignore
         command.getRealizationDate(),
         `Consumido por la órden de trabajo con id ${command.getId()}`,
       );

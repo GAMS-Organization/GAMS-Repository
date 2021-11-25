@@ -27,7 +27,9 @@ export default class UpdateEventHandler {
     event.setTitle(command.getTitle());
     event.setAllDay(command.getAllDay());
     event.setDescription(command.getDescription());
+    //@ts-ignore
     event.setEndDate(command.getEndDate());
+    //@ts-ignore
     event.setStartDate(command.getStartDate());
 
     if (event.getWorkersId() !== command.getWorkersId()) {

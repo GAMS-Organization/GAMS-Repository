@@ -11,11 +11,11 @@ export default class WorkOrder {
   @PrimaryGeneratedColumn()
   public id: number;
   @Column()
-  public orderDate: string;
+  public orderDate: Date;
   @Column({ nullable: true })
-  public startDate: string;
+  public startDate: Date;
   @Column({ nullable: true })
-  public realizationDate: string;
+  public realizationDate: Date;
   @Column()
   public priority: string;
   @Column()
@@ -40,7 +40,7 @@ export default class WorkOrder {
   )
   public userWorkOrders: UserWorkOrder[];
 
-  public constructor(orderDate: string, priority: string, comment: string, asset: Asset, user: User) {
+  public constructor(orderDate: Date, priority: string, comment: string, asset: Asset, user: User) {
     this.orderDate = orderDate;
     this.comment = comment;
     this.priority = priority;
@@ -53,7 +53,7 @@ export default class WorkOrder {
     return this.id;
   }
 
-  public getOrderDate(): string {
+  public getOrderDate(): Date {
     return this.orderDate;
   }
 
@@ -77,11 +77,11 @@ export default class WorkOrder {
     return this.state;
   }
 
-  public getStartDate(): string {
+  public getStartDate(): Date {
     return this.startDate;
   }
 
-  public getRealizationDate(): string {
+  public getRealizationDate(): Date {
     return this.realizationDate;
   }
 
@@ -113,7 +113,7 @@ export default class WorkOrder {
     return workersFullName;
   }
 
-  public setOrderDate(orderDate: string): void {
+  public setOrderDate(orderDate: Date): void {
     this.orderDate = orderDate;
   }
 
@@ -137,11 +137,11 @@ export default class WorkOrder {
     this.state = state;
   }
 
-  public setStartDate(startDate: string): void {
+  public setStartDate(startDate: Date): void {
     this.startDate = startDate;
   }
 
-  public setRealizationDate(realizationDate: string): void {
+  public setRealizationDate(realizationDate: Date): void {
     this.realizationDate = realizationDate;
   }
 
