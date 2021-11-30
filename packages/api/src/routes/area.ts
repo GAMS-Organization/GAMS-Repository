@@ -17,7 +17,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexAreasAction: IndexAreasAction = DIContainer.resolve<IndexAreasAction>(IndexAreasAction);
@@ -62,7 +62,7 @@ router.get(
 router.get(
   '/sector/:name([a-z0-9-]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showAreaBySectorAction: ShowAreaBySectorAction = DIContainer.resolve<ShowAreaBySectorAction>(

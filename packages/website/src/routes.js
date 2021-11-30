@@ -82,7 +82,7 @@ const dashboardRoutes = [
         layout: '/admin',
         group: true,
         title: 'Ver O.T.',
-        roles: ['admin', 'boss', 'personal', 'user'],
+        roles: ['admin', 'boss', 'personal'],
       },
     ],
   },

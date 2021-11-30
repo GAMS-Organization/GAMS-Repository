@@ -17,7 +17,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexAssetsAction: IndexAssetsAction = DIContainer.resolve<IndexAssetsAction>(IndexAssetsAction);
@@ -39,7 +39,7 @@ router.post(
 router.get(
   '/filters/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const showAssetAction: ShowAssetAction = DIContainer.resolve<ShowAssetAction>(ShowAssetAction);

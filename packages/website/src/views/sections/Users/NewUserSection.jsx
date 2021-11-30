@@ -218,6 +218,15 @@ class NewUserSection extends React.Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected,
                             }}
+                            value="boss"
+                          >
+                            Jefe
+                          </MenuItem>
+                          <MenuItem
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected,
+                            }}
                             value="admin"
                           >
                             Administrador
