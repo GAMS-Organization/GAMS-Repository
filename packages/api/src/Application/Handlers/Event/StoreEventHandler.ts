@@ -14,6 +14,7 @@ export default class StoreEventHandler {
     const event = new Event(
       command.getTitle(),
       command.getDescription(),
+      //@ts-ignore
       command.getStartDate(),
       command.getEndDate(),
       command.getAllDay(),

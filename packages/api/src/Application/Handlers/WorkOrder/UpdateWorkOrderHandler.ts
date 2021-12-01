@@ -30,11 +30,14 @@ export default class UpdateWorkOrderHandler {
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
-    }
+    } //@ts-ignore
     workOrder.getOrderDate() !== command.getOrderDate() ? workOrder.setOrderDate(command.getOrderDate()) : null;
+    //@ts-ignore
     workOrder.getStartDate() !== command.getStartDate() ? workOrder.setStartDate(command.getStartDate()) : null;
+    //@ts-ignore
     workOrder.getRealizationDate() !== command.getRealizationDate()
-      ? workOrder.setRealizationDate(command.getRealizationDate())
+      ? //@ts-ignore
+        workOrder.setRealizationDate(command.getRealizationDate())
       : null;
     workOrder.getPriority() !== command.getPriority() ? workOrder.setPriority(command.getPriority()) : null;
     workOrder.getState() !== command.getState() ? workOrder.setState(command.getState()) : null;

@@ -15,6 +15,7 @@ export default class IndexDepartureAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
+    //@ts-ignore
     const usersData = await this.DepartureService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
     const getAllPresenter = new GetAllDeparturePresenter(usersData.data);

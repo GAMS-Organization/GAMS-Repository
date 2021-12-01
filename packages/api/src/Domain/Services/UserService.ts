@@ -2,13 +2,20 @@ import { inject, injectable } from 'inversify';
 import { INTERFACES } from '../../Infrastructure/DI/interfaces.types';
 import IUserRepository from '../Interfaces/IUserRepository';
 import User from '../Entities/User';
+import IUserRoleRepository from '../Interfaces/IUserRoleRepository';
+import UserRole from '../Entities/UserRole';
 
 @injectable()
 export default class UserService {
   private userRepository: IUserRepository;
+  private userRoleRepository: IUserRoleRepository;
 
-  public constructor(@inject(INTERFACES.IUserRepository) userRepository: IUserRepository) {
+  public constructor(
+    @inject(INTERFACES.IUserRepository) userRepository: IUserRepository,
+    @inject(INTERFACES.IUserRoleRepository) userRoleRepository: IUserRoleRepository,
+  ) {
     this.userRepository = userRepository;
+    this.userRoleRepository = userRoleRepository;
   }
 
   public async returnAllPaginated(
@@ -25,8 +32,11 @@ export default class UserService {
     };
   }
 
-  public async findByRole(role: string): Promise<User[]> {
-    return await this.userRepository.findByRole(role);
+  public async findByRole(roleId: number): Promise<User[]> {
+    const usersRole = await this.userRoleRepository.findByRole(roleId);
+    return usersRole.map((userRole: UserRole) => {
+      return userRole.getUser();
+    });
   }
 
   public async findOneById(id: number): Promise<User> {

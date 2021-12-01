@@ -34,9 +34,11 @@ class Asset extends React.Component {
   }
 
   render() {
+    const { roles } = this.props;
+
     return (
       <div>
-        <NewAssetSection />
+        {(roles.includes('admin') || roles.includes('boss')) && <NewAssetSection />}
         <AssetTableSection />
       </div>
     );

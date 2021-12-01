@@ -19,11 +19,13 @@ import tasksStyle from '../../../styles/jss/material-dashboard-react/components/
 import Snackbar from '../Snackbar/Snackbar';
 import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
 import ViewDepartureConsumption from './ViewDepartureConsumption';
+import DeleteDepartureConsumption from './DeleteDepartureConsumption';
 
 class DepartureConsumption extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deleteModal: false,
       modal: false,
       departure: {},
       errors: {},
@@ -35,15 +37,15 @@ class DepartureConsumption extends React.Component {
     this.setState({ notification: false });
   };
 
-  deleteDeparture = async prop => {
-    const response = await serviceDepartureConsumptionStock.delete(prop.id);
+  closeModal = () => {
+    this.setState({ deleteModal: false });
+  };
 
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listDeparture();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      departure: { id: prop.id },
+      deleteModal: true,
+    });
   };
 
   handleClickSeeDetails = async prop => {
@@ -78,6 +80,12 @@ class DepartureConsumption extends React.Component {
           departure={this.state.departure}
           onRef={ref => (this.child = ref)}
           Transition={Transition}
+        />
+        <DeleteDepartureConsumption
+          departure={this.state.departure}
+          open={this.state.deleteModal}
+          close={this.closeModal}
+          listDepartures={this.props.listDepartures}
         />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
@@ -123,7 +131,7 @@ class DepartureConsumption extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteDeparture(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

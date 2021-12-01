@@ -12,9 +12,9 @@ export default class Event {
   @Column()
   public description: string;
   @Column({ nullable: true })
-  public startDate: string;
+  public startDate: Date;
   @Column({ nullable: true })
-  public endDate: string;
+  public endDate: Date;
   @Column({ nullable: true })
   public allDay: boolean;
   @OneToMany(
@@ -23,7 +23,7 @@ export default class Event {
   )
   public userEvents: UserEvent[];
 
-  public constructor(title: string, description: string, startDate: string, endDate: string, allDay: boolean) {
+  public constructor(title: string, description: string, startDate: Date, endDate: Date, allDay: boolean) {
     this.title = title;
     this.description = description;
     this.startDate = startDate;
@@ -43,11 +43,11 @@ export default class Event {
     return this.description;
   }
 
-  public getStartDate(): string {
+  public getStartDate(): Date {
     return this.startDate;
   }
 
-  public getEndDate(): string {
+  public getEndDate(): Date {
     return this.endDate;
   }
 
@@ -73,11 +73,11 @@ export default class Event {
     this.description = description;
   }
 
-  public setStartDate(startDate: string): void {
+  public setStartDate(startDate: Date): void {
     this.startDate = startDate;
   }
 
-  public setEndDate(endDate: string): void {
+  public setEndDate(endDate: Date): void {
     this.endDate = endDate;
   }
 

@@ -12,7 +12,7 @@ export default class ToolRequest {
   @Column()
   public status: string;
   @Column()
-  public date: string;
+  public date: Date;
   @Column()
   public quantity: number;
   @ManyToOne(
@@ -31,7 +31,7 @@ export default class ToolRequest {
   )
   public area: Area;
 
-  public constructor(tool: Tool, user: User, status: string, date: string, area: Area, quantity: number) {
+  public constructor(tool: Tool, user: User, status: string, date: Date, area: Area, quantity: number) {
     this.tool = tool;
     this.status = status;
     this.user = user;
@@ -56,7 +56,7 @@ export default class ToolRequest {
     return this.status;
   }
 
-  public getDate(): string {
+  public getDate(): Date {
     return this.date;
   }
 

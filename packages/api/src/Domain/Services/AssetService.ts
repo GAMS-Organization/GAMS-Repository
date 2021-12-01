@@ -87,13 +87,13 @@ export default class AssetService {
 
     let numero = 1;
 
-    let assetCode = sectorCode + '-' + areaCode + '-' + serviceCode + '-' + elementCode + numero;
+    let assetCode = sectorCode + '-' + areaCode + '-' + serviceCode + '-' + elementCode + '-' + numero;
 
     let asset = await this.assetRepository.findOneByCode(assetCode);
 
     while (asset) {
       numero++;
-      assetCode = sectorCode + '-' + areaCode + '-' + serviceCode + '-' + elementCode + numero;
+      assetCode = sectorCode + '-' + areaCode + '-' + serviceCode + '-' + elementCode + '-' + numero;
       asset = await this.assetRepository.findOneByCode(assetCode);
     }
 

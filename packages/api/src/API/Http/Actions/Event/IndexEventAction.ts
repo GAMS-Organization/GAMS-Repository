@@ -15,6 +15,7 @@ export default class IndexEventAction {
   }
 
   public async execute(request: Request, response: Response): Promise<Response> {
+    //@ts-ignore
     const eventsData = await this.eventService.returnAllPaginated(request.query.page, request.query.items_per_page);
 
     const getAllPresenter = new GetAllEventsPresenter(eventsData.data);

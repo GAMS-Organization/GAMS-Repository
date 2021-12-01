@@ -30,7 +30,7 @@ export default class DestroyDepartureHandler {
       throw new EntityNotFoundException(`Departure with id: ${command.getId()} not found`);
     }
     await this.consumptionService.destroyConsumptionsFromDeparture(departure.id);
-    await this.stockDepartureService.destroyStockEntriesFromDeparture(departure.id);
+    await this.stockDepartureService.destroyStockDeparturesFromDeparture(departure.id);
     const departureWasDestroyed = await this.departureRepository.destroy(departure);
 
     if (!departureWasDestroyed) {

@@ -28,6 +28,7 @@ export default class AssignWorkOrderHandler {
     if (!workOrder) {
       throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
     }
+    //@ts-ignore
     workOrder.setStartDate(command.getStartDate());
     workOrder.setState(STATE.ASSIGNED);
 

@@ -18,6 +18,7 @@ export default class StoreEntryHandler {
   }
 
   public async execute(command: StoreEntryCommand): Promise<Entry> {
+    //@ts-ignore
     const entry = new Entry(command.getDate(), command.getObservations());
 
     return this.purchaseService.setPurchaseToEntry(

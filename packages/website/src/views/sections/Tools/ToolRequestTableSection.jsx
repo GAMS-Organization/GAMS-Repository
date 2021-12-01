@@ -50,13 +50,23 @@ class ToolRequestTableSection extends React.Component {
   pagination = () => {
     const pages = [
       {
-        text: 'PREV',
+        text: '<<',
+        onClick: () => {
+          this.listToolsRequest(1);
+        },
+      },
+      {
+        text: '<',
         onClick: () => {
           this.state.page === 1 ? this.listToolsRequest(1) : this.listToolsRequest(this.state.page - 1);
         },
       },
     ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
       if (index === this.state.page) {
         pages.push({ text: index, active: true });
       } else {
@@ -69,11 +79,17 @@ class ToolRequestTableSection extends React.Component {
       }
     }
     pages.push({
-      text: 'NEXT',
+      text: '>',
       onClick: () => {
         this.state.page === this.state.totalPages
           ? this.listToolsRequest(this.state.totalPages)
           : this.listToolsRequest(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listToolsRequest(this.state.totalPages);
       },
     });
     return pages;

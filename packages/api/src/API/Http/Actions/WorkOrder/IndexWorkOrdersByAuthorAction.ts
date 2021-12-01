@@ -17,6 +17,7 @@ export default class IndexWorkOrdersByAuthorAction {
   public async execute(request: Request, response: Response): Promise<Response> {
     const workOrdersData = await this.workOrderService.returnAllPaginatedByAuthor(
       request.body.authorId,
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

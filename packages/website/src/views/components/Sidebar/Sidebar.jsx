@@ -109,6 +109,9 @@ const Sidebar = ({ ...props }) => {
                   let listItemClasses = classNames({
                     [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
                   });
+                  if (!isAvailableRoute(prop.roles)) {
+                    return null;
+                  }
                   return (
                     <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={key}>
                       <ListItem button className={classes.itemLink + listItemClasses}>

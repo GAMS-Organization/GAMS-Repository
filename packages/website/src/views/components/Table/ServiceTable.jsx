@@ -18,12 +18,13 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 import UpdateServiceSection from '../../sections/Service/UpdateServiceSection.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 
-import serviceService from '../../../services/api/service';
+import DeleteServiceSection from '../../sections/Service/DeleteServiceSection';
 
 class ServiceTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      deleteModal: false,
       modal: false,
       service: {},
       errors: {},
@@ -35,16 +36,8 @@ class ServiceTable extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  //se eliminan los servicios
-  deleteService = async prop => {
-    const response = await serviceService.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listServices();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  closeModal = () => {
+    this.setState({ deleteModal: false });
   };
 
   //se crea la ventana emergente en donde se editaran los servicios
@@ -57,6 +50,13 @@ class ServiceTable extends React.Component {
     this.setState({ modal: false });
   };
 
+  handleClickDelete = prop => {
+    this.setState({
+      service: { id: prop.id, name: prop.visibleData[0] },
+      deleteModal: true,
+    });
+  };
+
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     const Transition = React.forwardRef(function Transition(props, ref) {
@@ -64,20 +64,13 @@ class ServiceTable extends React.Component {
     });
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Servicio eliminado correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateServiceSection service={this.state.service} onRef={ref => (this.child = ref)} Transition={Transition} />
+        <DeleteServiceSection
+          service={this.state.service}
+          open={this.state.deleteModal}
+          close={this.closeModal}
+          listServices={this.props.listServices}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -113,7 +106,7 @@ class ServiceTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteService(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

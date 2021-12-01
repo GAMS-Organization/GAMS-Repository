@@ -16,6 +16,7 @@ export default class IndexWorkOrdersAction {
 
   public async execute(request: Request, response: Response): Promise<Response> {
     const workOrdersData = await this.workOrderService.returnAllPaginated(
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

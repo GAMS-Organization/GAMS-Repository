@@ -35,7 +35,7 @@ export default class StoreWorkOrderHandler {
     if (!user) {
       throw new EntityNotFoundException(`User with id: ${command.getUserId()} not found`);
     }
-
+    //@ts-ignore
     const workOrder = new WorkOrder(command.getOrderDate(), command.getpriority(), command.getComment(), asset, user);
 
     const workOrderCreated = await this.workOrderRepository.persist(workOrder);

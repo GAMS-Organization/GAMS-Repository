@@ -15,9 +15,8 @@ import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 import UpdateAreaSection from '../../sections/Area/UpdateAreaSection';
-import serviceArea from '../../../services/api/area';
+import DeleteAreaSection from '../../sections/Area/DeleteAreaSection';
 import LoadMapArea from '../../sections/Area/LoadMapArea';
 import MapIcon from '@material-ui/icons/Map';
 
@@ -26,6 +25,7 @@ class AreasTable extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
       mapModal: false,
       area: {},
       errors: {},
@@ -62,41 +62,29 @@ class AreasTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false, mapModal: false });
+    this.setState({ modal: false, mapModal: false, deleteModal: false });
   };
 
-  //se elimina el area
-  deleteArea = async prop => {
-    const response = await serviceArea.delete(prop.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-      this.props.listAreas();
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
+  handleClickDelete = prop => {
+    this.setState({
+      area: { id: prop.id, name: prop.visibleData[0], services: prop.services, maps: prop.maps },
+      deleteModal: true,
+    });
   };
 
   render() {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     return (
       <div className={classes.tableResponsive}>
-        <Snackbar
-          place="tr"
-          color={this.state.errors.code ? 'danger' : 'success'}
-          icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
-              : 'Area eliminada correctamente'
-          }
-          open={this.state.notification}
-          closeNotification={this.closeNotification}
-          close
-        />
         <UpdateAreaSection
           area={this.state.area}
           open={this.state.modal}
+          close={this.closeModal}
+          listAreas={this.props.listAreas}
+        />
+        <DeleteAreaSection
+          area={this.state.area}
+          open={this.state.deleteModal}
           close={this.closeModal}
           listAreas={this.props.listAreas}
         />
@@ -150,7 +138,7 @@ class AreasTable extends React.Component {
                       <IconButton
                         aria-label="Close"
                         className={classes.tableActionButton}
-                        onClick={() => this.deleteArea(prop)}
+                        onClick={() => this.handleClickDelete(prop)}
                       >
                         <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>

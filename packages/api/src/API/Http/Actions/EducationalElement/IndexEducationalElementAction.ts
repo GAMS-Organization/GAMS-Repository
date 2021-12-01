@@ -16,6 +16,7 @@ export default class IndexEducationalElementAction {
 
   public async execute(request: Request, response: Response): Promise<Response> {
     const educationalElementsData = await this.educationalElementService.returnAllPaginated(
+      //@ts-ignore
       request.query.page,
       request.query.items_per_page,
     );

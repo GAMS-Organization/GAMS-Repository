@@ -51,7 +51,11 @@ export default class StockService {
     if (stock.getQuantity() !== command.getQuantity()) {
       if (stock.getQuantity() < command.getQuantity()) {
         const date: Date = new Date(Date.now());
-        const entry = new Entry(date.toISOString(), `Ajuste de stock, producto: ${stock.getProduct().getName()}`);
+        const amount = command.getQuantity() - stock.getQuantity();
+        const entry = new Entry(
+          date,
+          `Ajuste de stock, producto: ${stock.getProduct().getName()}, cantidad: ${amount}`,
+        );
         stock.setQuantity(command.getQuantity());
         stock.setMinimunQuantity(command.getMinimunQuantity());
         await this.entryRepository.persist(entry);
@@ -59,9 +63,10 @@ export default class StockService {
         await this.stockEntryService.newStockEntry(entry, stock);
       } else {
         const date: Date = new Date(Date.now());
+        const amount = stock.getQuantity() - command.getQuantity();
         const departure = new Departure(
-          date.toISOString(),
-          `Ajuste de stock, producto: ${stock.getProduct().getName()}`,
+          date,
+          `Ajuste de stock, producto: ${stock.getProduct().getName()}, cantidad: ${amount}`,
         );
         stock.setQuantity(command.getQuantity());
         stock.setMinimunQuantity(command.getMinimunQuantity());
