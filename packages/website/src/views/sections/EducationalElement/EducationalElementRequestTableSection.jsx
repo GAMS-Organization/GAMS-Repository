@@ -50,7 +50,13 @@ class EducationalElementRequestTableSection extends React.Component {
   pagination = () => {
     const pages = [
       {
-        text: 'PREV',
+        text: '<<',
+        onClick: () => {
+          this.listEducationalElementRequest(1);
+        },
+      },
+      {
+        text: '<',
         onClick: () => {
           this.state.page === 1
             ? this.listEducationalElementRequest(1)
@@ -58,7 +64,11 @@ class EducationalElementRequestTableSection extends React.Component {
         },
       },
     ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
       if (index === this.state.page) {
         pages.push({ text: index, active: true });
       } else {
@@ -71,11 +81,17 @@ class EducationalElementRequestTableSection extends React.Component {
       }
     }
     pages.push({
-      text: 'NEXT',
+      text: '>',
       onClick: () => {
         this.state.page === this.state.totalPages
           ? this.listEducationalElementRequest(this.state.totalPages)
           : this.listEducationalElementRequest(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listEducationalElementRequest(this.state.totalPages);
       },
     });
     return pages;
@@ -88,13 +104,13 @@ class EducationalElementRequestTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Herramientas</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todas las Herramientas</p>
+              <h4 className={classes.cardTitleWhite}>Solicitudes de Artículos</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las Solicitudes de Artículos</p>
             </CardHeader>
             <CardBody>
               <EducationalElementRequestTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Herramienta', 'Cantidad', 'Usuario', 'Estado', 'Área', 'Fecha']}
+                tableHead={['Artículo', 'Cantidad', 'Usuario', 'Estado', 'Área', 'Fecha']}
                 tableData={this.state.educationalElementRequest}
                 listEducationalElementRequest={this.listEducationalElementRequest}
               />

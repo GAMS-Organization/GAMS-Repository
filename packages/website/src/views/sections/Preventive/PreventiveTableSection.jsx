@@ -42,13 +42,23 @@ class EventTableSection extends React.Component {
   pagination = () => {
     const pages = [
       {
-        text: 'PREV',
+        text: '<<',
+        onClick: () => {
+          this.listEvents(1);
+        },
+      },
+      {
+        text: '<',
         onClick: () => {
           this.state.page === 1 ? this.listEvents(1) : this.listEvents(this.state.page - 1);
         },
       },
     ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
       if (index === this.state.page) {
         pages.push({ text: index, active: true });
       } else {
@@ -61,11 +71,17 @@ class EventTableSection extends React.Component {
       }
     }
     pages.push({
-      text: 'NEXT',
+      text: '>',
       onClick: () => {
         this.state.page === this.state.totalPages
           ? this.listEvents(this.state.totalPages)
           : this.listEvents(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listEvents(this.state.totalPages);
       },
     });
     return pages;

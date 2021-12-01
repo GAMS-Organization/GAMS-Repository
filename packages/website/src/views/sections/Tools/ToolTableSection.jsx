@@ -39,13 +39,23 @@ class ToolTableSection extends React.Component {
   pagination = () => {
     const pages = [
       {
-        text: 'PREV',
+        text: '<<',
+        onClick: () => {
+          this.listTools(1);
+        },
+      },
+      {
+        text: '<',
         onClick: () => {
           this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
         },
       },
     ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
       if (index === this.state.page) {
         pages.push({ text: index, active: true });
       } else {
@@ -58,11 +68,17 @@ class ToolTableSection extends React.Component {
       }
     }
     pages.push({
-      text: 'NEXT',
+      text: '>',
       onClick: () => {
         this.state.page === this.state.totalPages
           ? this.listTools(this.state.totalPages)
           : this.listTools(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listTools(this.state.totalPages);
       },
     });
     return pages;

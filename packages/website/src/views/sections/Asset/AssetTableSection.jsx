@@ -49,13 +49,23 @@ class AssetTableSection extends React.Component {
   pagination = () => {
     const pages = [
       {
-        text: 'PREV',
+        text: '<<',
+        onClick: () => {
+          this.listAssets(1);
+        },
+      },
+      {
+        text: '<',
         onClick: () => {
           this.state.page === 1 ? this.listAssets(1) : this.listAssets(this.state.page - 1);
         },
       },
     ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
       if (index === this.state.page) {
         pages.push({ text: index, active: true });
       } else {
@@ -68,11 +78,17 @@ class AssetTableSection extends React.Component {
       }
     }
     pages.push({
-      text: 'NEXT',
+      text: '>',
       onClick: () => {
         this.state.page === this.state.totalPages
           ? this.listAssets(this.state.totalPages)
           : this.listAssets(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listAssets(this.state.totalPages);
       },
     });
     return pages;
