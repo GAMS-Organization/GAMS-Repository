@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import Edit from '@material-ui/icons/Edit';
+import CheckIcon from '@material-ui/icons/Check';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateUserSection from '../../sections/Users/UpdateUserSection';
@@ -104,7 +105,7 @@ class UsersTable extends React.Component {
                   {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
-                        {prop}
+                        {prop === 'active' ? 'Activo' : prop === 'inactive' ? 'Inactivo' : prop}
                       </TableCell>
                     );
                   })}
@@ -118,20 +119,37 @@ class UsersTable extends React.Component {
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickDelete(prop)}
+                    {prop.visibleData[4] === 'active' ? (
+                      <Tooltip
+                        id="tooltip-top-start"
+                        title="Desactivar"
+                        placement="top"
+                        classes={{ tooltip: classes.tooltip }}
                       >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          aria-label="Close"
+                          className={classes.tableActionButton}
+                          onClick={() => this.handleClickDelete(prop)}
+                        >
+                          <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        </IconButton>
+                      </Tooltip>
+                    ) : (
+                      <Tooltip
+                        id="tooltip-top-start"
+                        title="Activar"
+                        placement="top"
+                        classes={{ tooltip: classes.tooltip }}
+                      >
+                        <IconButton
+                          aria-label="Close"
+                          className={classes.tableActionButton}
+                          onClick={() => this.handleClickDelete(prop)}
+                        >
+                          <CheckIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                   </TableCell>
                 </TableRow>
               );

@@ -29,19 +29,7 @@ class Dashboard extends React.Component {
       mobileOpen: false,
     };
   }
-  handleImageClick = image => {
-    this.setState({ image: image });
-  };
-  handleColorClick = color => {
-    this.setState({ color: color });
-  };
-  handleFixedClick = () => {
-    if (this.state.fixedClasses === 'dropdown') {
-      this.setState({ fixedClasses: 'dropdown show' });
-    } else {
-      this.setState({ fixedClasses: 'dropdown' });
-    }
-  };
+
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
