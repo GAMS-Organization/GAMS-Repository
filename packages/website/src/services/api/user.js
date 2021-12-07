@@ -50,7 +50,7 @@ class User {
     let deleteResponse;
 
     try {
-      deleteResponse = await Api.delete(`users/${id}`);
+      deleteResponse = await Api.get(`users/${id}/Disable`);
     } catch (err) {
       deleteResponse = err;
     }
