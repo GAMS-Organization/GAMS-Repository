@@ -105,7 +105,7 @@ class UsersTable extends React.Component {
                   {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
-                        {prop === 'active' ? 'Activo' : prop === 'inactive' ? 'Inactivo' : prop}
+                        {prop}
                       </TableCell>
                     );
                   })}
