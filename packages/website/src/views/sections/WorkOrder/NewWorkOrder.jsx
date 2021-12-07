@@ -432,7 +432,9 @@ class NewWorkOrder extends React.Component {
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {asset.code.split('-')[3]}
+                                {`${asset.code.split('-')[asset.code.split('-').length - 2]}-${
+                                  asset.code.split('-')[asset.code.split('-').length - 1]
+                                }`}
                               </MenuItem>
                             ))}
                           </Select>
