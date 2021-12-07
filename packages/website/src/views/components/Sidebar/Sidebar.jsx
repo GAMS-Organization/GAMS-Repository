@@ -138,7 +138,7 @@ const Sidebar = ({ ...props }) => {
   );
   let brand = (
     <div className={classes.logo}>
-      <a href="https://www.sanfrancisco.utn.edu.ar" className={classNames(classes.logoLink)}>
+      <a href={routes[0].layout + routes[0].path} className={classNames(classes.logoLink)}>
         {logoText}
       </a>
     </div>
@@ -159,10 +159,7 @@ const Sidebar = ({ ...props }) => {
           }}
         >
           {brand}
-          <div className={classes.sidebarWrapper}>
-            {/*<AdminNavbarLinks />*/}
-            {links}
-          </div>
+          <div className={classes.sidebarWrapper}>{links}</div>
           {image !== undefined ? (
             <div className={classes.background} style={{ backgroundImage: 'url(' + image + ')' }} />
           ) : null}
