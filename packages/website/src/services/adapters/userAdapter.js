@@ -98,6 +98,26 @@ class UserAdapter {
       };
     }
   }
+
+  enable(deleteResponse) {
+    let { status, data } = deleteResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'ENABLE_SUCCESFUL',
+      };
+    } else {
+      const { code, details } = data.errors;
+      return {
+        type: 'ENABLE_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: details,
+        },
+      };
+    }
+  }
 }
 
 export default new UserAdapter();

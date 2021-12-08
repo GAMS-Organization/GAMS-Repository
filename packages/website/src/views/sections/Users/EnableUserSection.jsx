@@ -17,7 +17,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import serviceUser from '../../../services/api/user';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 
-class DeleteUserSection extends React.Component {
+class EnableUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +35,11 @@ class DeleteUserSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteUser = async e => {
+  enableUser = async e => {
     e.preventDefault();
-    const response = await serviceUser.delete(this.props.user.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
+    const response = await serviceUser.enable(this.props.user.id);
+    console.log(response);
+    if (response.type === 'ENABLE_SUCCESFUL') {
       this.setState({ notification: true });
       this.props.listUsers();
       this.props.close();
@@ -61,7 +61,7 @@ class DeleteUserSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Usuario desactivado correctamente'
+              : 'Usuario activado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -81,14 +81,11 @@ class DeleteUserSection extends React.Component {
         >
           <GridContainer justify={'center'}>
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea desactivar el siguiente usuario?</h4>
+              <h4 className={classes.modalTitle}>¿Está seguro que desea activar el siguiente usuario?</h4>
             </DialogTitle>
-            {/*<DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
-            </DialogTitle>*/}
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.deleteUser}>
+            <form onSubmit={this.enableUser}>
               <GridContainer justify={'center'}>
                 <GridItem xs={12} sm={12} md={8}>
                   <GridContainer justify={'center'}>
@@ -118,7 +115,7 @@ class DeleteUserSection extends React.Component {
   }
 }
 
-DeleteUserSection.propTypes = {
+EnableUserSection.propTypes = {
   classes: PropTypes.object.isRequired,
   user: PropTypes.object,
   open: PropTypes.bool,
@@ -126,4 +123,4 @@ DeleteUserSection.propTypes = {
   listUsers: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(DeleteUserSection);
+export default withStyles(modalStyle)(EnableUserSection);
