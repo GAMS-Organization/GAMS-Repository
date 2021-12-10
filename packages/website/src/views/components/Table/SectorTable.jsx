@@ -39,7 +39,10 @@ class SectorTable extends React.Component {
 
   //se crea la ventana emergente en donde se cargaran los mapas
   handleClickLoad = async prop => {
-    this.setState({ sector: { id: prop.id, name: prop.visibleData[0], code: prop[1], map: prop[2] }, modal: true });
+    this.setState({
+      sector: { id: prop.id, name: prop.visibleData[0], code: prop.visibleData[1], map: prop.visibleData[2] },
+      modal: true,
+    });
   };
 
   closeModal = () => {
