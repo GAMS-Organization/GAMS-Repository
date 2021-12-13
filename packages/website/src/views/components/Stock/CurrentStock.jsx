@@ -73,7 +73,7 @@ class CurrentStock extends React.Component {
           icon={AddAlert}
           message={
             this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.errors}`
+              ? `Error ${this.state.errors.code}. ${this.state.errors.errors}`
               : 'Stock eliminado correctamente'
           }
           open={this.state.notification}

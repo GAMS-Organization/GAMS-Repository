@@ -15,7 +15,7 @@ class assetAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el activo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class assetAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el activo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class assetAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el activo. Por favor intente más tarde.',
         },
       };
     }

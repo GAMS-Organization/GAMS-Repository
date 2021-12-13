@@ -15,7 +15,7 @@ class productAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el producto. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class productAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el producto. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class productAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el producto. Por favor intente más tarde.',
         },
       };
     }

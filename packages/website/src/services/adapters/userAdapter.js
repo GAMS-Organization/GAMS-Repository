@@ -15,7 +15,7 @@ class UserAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el usuario. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class UserAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el usuario. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -93,7 +93,7 @@ class UserAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al desactivar el usuario. Por favor intente más tarde.',
         },
       };
     }
@@ -113,7 +113,7 @@ class UserAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al activar el usuario. Por favor intente más tarde.',
         },
       };
     }

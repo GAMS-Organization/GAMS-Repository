@@ -15,7 +15,7 @@ class serviceAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el servicio. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class serviceAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el servicio. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -95,7 +95,7 @@ class serviceAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el servicio. Por favor intente más tarde.',
         },
       };
     }

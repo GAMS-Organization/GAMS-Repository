@@ -16,7 +16,7 @@ class preventiveAdapter {
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al crear el evento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -36,7 +36,7 @@ class preventiveAdapter {
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al actualizar el evento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -121,7 +121,7 @@ class preventiveAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el evento. Por favor intente más tarde.',
         },
       };
     }

@@ -15,7 +15,7 @@ class entryStockAdapter {
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al crear la entrada. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class entryStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la entrada. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class entryStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la entrada. Por favor intente más tarde.',
         },
       };
     }

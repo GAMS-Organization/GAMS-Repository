@@ -15,7 +15,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el elemento educacional. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el elemento educacional. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el elemento educacional. Por favor intente más tarde.',
         },
       };
     }
@@ -94,7 +94,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear la solicitud. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -134,7 +134,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la solicitud. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -154,7 +154,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la solicitud. Por favor intente más tarde.',
         },
       };
     }

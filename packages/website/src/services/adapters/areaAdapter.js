@@ -15,7 +15,7 @@ class areaAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el área. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -76,7 +76,7 @@ class areaAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el área. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -96,7 +96,7 @@ class areaAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el área. Por favor intente más tarde.',
         },
       };
     }
@@ -118,7 +118,7 @@ class areaAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }

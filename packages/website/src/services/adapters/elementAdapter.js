@@ -15,7 +15,7 @@ class elementAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el elemento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class elementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el elemento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -111,7 +111,7 @@ class elementAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el elemento. Por favor intente más tarde.',
         },
       };
     }

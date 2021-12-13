@@ -15,7 +15,7 @@ class sectorAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el sector. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class sectorAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el sector. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class sectorAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el sector. Por favor intente más tarde.',
         },
       };
     }
@@ -95,7 +95,7 @@ class sectorAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }
@@ -117,7 +117,7 @@ class sectorAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }

@@ -15,7 +15,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear la orden de trabajo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -59,7 +59,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la orden de trabajo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -79,7 +79,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -101,7 +101,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }
@@ -120,7 +120,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al cancelar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -139,7 +139,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al tomar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -158,7 +158,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al asignar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -177,7 +177,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al completar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -200,7 +200,7 @@ class workOrderAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al visualizar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }

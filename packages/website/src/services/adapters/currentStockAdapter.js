@@ -15,7 +15,7 @@ class currentStockAdapter {
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el stock. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class currentStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el stock. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class currentStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el stock. Por favor intente más tarde.',
         },
       };
     }
