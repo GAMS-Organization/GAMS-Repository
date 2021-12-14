@@ -32,9 +32,28 @@ class UsersTableSection extends React.Component {
     const response = await serviceUser.list(page, itemsPerPage);
 
     let users = [];
+    let estado;
     for (const user of response.data.items) {
+      estado = user.state === 'active' ? 'Activo' : 'Inactivo';
+
+      var rol;
+      switch (user.roles[0]) {
+        case 'admin':
+          rol = 'Administrador';
+          break;
+        case 'boss':
+          rol = 'Jefe';
+          break;
+        case 'user':
+          rol = 'Usuario';
+          break;
+        case 'personal':
+          rol = 'Personal';
+          break;
+      }
+
       let dataUser = {
-        visibleData: [user.name, user.surname, user.email, user.roles[0], user.state],
+        visibleData: [user.name, user.surname, user.email, rol, estado],
         id: user.id.toString(),
       };
       users.push(dataUser);

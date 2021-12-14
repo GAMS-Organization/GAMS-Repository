@@ -8,18 +8,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
+import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
-import serviceEducationalElement from '../../../services/api/educationalElement';
-import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import AddAlert from '@material-ui/icons/AddAlert';
 
-class DeleteEducationalElementSection extends React.Component {
+import serviceUser from '../../../services/api/user';
+import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+
+class EnableUserSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      educationalElement: {},
+      user: {},
       errors: {},
       notification: false,
     };
@@ -33,13 +35,12 @@ class DeleteEducationalElementSection extends React.Component {
     this.setState({ notification: false, errors: {} });
   };
 
-  deleteTool = async e => {
+  enableUser = async e => {
     e.preventDefault();
-    const response = await serviceEducationalElement.delete(this.props.educationalElement.id);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
+    const response = await serviceUser.enable(this.props.user.id);
+    if (response.type === 'ENABLE_SUCCESFUL') {
       this.setState({ notification: true });
-      this.props.listEducationalElements();
+      this.props.listUsers();
       this.props.close();
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -47,9 +48,9 @@ class DeleteEducationalElementSection extends React.Component {
   };
 
   render() {
-    const { classes, educationalElement, Transition, close, open } = this.props;
+    const { classes, user, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { name } = educationalElement;
+    const { id, name, surname } = user;
     return (
       <div>
         <Snackbar
@@ -59,12 +60,13 @@ class DeleteEducationalElementSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Artículo Eliminado correctamente'
+              : 'Usuario activado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
         />
+
         <Dialog
           classes={{
             root: classes.modalRoot,
@@ -78,19 +80,18 @@ class DeleteEducationalElementSection extends React.Component {
         >
           <GridContainer justify={'center'}>
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente artículo?</h4>
-            </DialogTitle>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
+              <h4 className={classes.modalTitle}>¿Está seguro que desea activar el siguiente usuario?</h4>
             </DialogTitle>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <form onSubmit={this.deleteTool}>
+            <form onSubmit={this.enableUser}>
               <GridContainer justify={'center'}>
                 <GridItem xs={12} sm={12} md={8}>
                   <GridContainer justify={'center'}>
                     <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-                      <h5 className={classes.modalTitle}>{name}</h5>
+                      <h5 className={classes.modalTitle}>
+                        {name} {surname}
+                      </h5>
                     </DialogTitle>
                   </GridContainer>
                 </GridItem>
@@ -113,12 +114,12 @@ class DeleteEducationalElementSection extends React.Component {
   }
 }
 
-DeleteEducationalElementSection.propTypes = {
+EnableUserSection.propTypes = {
   classes: PropTypes.object.isRequired,
-  educationalElement: PropTypes.object,
+  user: PropTypes.object,
   open: PropTypes.bool,
   close: PropTypes.func,
-  listEducationalElements: PropTypes.func,
+  listUsers: PropTypes.func,
 };
 
-export default withStyles(modalStyle)(DeleteEducationalElementSection);
+export default withStyles(modalStyle)(EnableUserSection);

@@ -12,7 +12,7 @@ import routes from '../routes.js';
 
 import pagesStyle from '../styles/jss/material-dashboard-react/layouts/authStyle.jsx';
 
-import login from '../styles/img/imagenTaller.jpg';
+import login from '../styles/img/fondoUTN.jpeg';
 
 const switchRoutes = (
   <Switch>

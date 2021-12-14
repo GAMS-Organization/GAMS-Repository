@@ -9,13 +9,13 @@ class UserAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el usuario. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class UserAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el usuario. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -87,13 +87,33 @@ class UserAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al desactivar el usuario. Por favor intente más tarde.',
+        },
+      };
+    }
+  }
+
+  enable(deleteResponse) {
+    let { status, data } = deleteResponse;
+
+    if (!isError(status)) {
+      return {
+        type: 'ENABLE_SUCCESFUL',
+      };
+    } else {
+      const { code } = data.errors;
+      return {
+        type: 'ENABLE_FAIL',
+        error: {
+          code: status,
+          type: code,
+          details: 'Error al activar el usuario. Por favor intente más tarde.',
         },
       };
     }

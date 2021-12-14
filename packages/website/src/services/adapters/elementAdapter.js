@@ -9,13 +9,13 @@ class elementAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el elemento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class elementAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el elemento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -105,13 +105,13 @@ class elementAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el elemento. Por favor intente más tarde.',
         },
       };
     }

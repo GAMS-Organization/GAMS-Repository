@@ -9,13 +9,13 @@ class productAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el producto. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class productAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el producto. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -69,13 +69,13 @@ class productAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el producto. Por favor intente más tarde.',
         },
       };
     }
