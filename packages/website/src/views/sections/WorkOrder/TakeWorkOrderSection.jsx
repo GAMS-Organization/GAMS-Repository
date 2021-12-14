@@ -69,7 +69,7 @@ class TakeWorkOrderSection extends React.Component {
           icon={AddAlert}
           message={
             this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
+              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
               : 'Orden de trabajo tomada correctamente'
           }
           open={this.state.notification}

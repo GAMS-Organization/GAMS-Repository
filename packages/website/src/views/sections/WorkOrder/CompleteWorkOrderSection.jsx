@@ -84,20 +84,14 @@ class CompleteWorkOrderSection extends React.Component {
       productsId: products,
       quantities: quantities,
     };
-    if (products.length !== quantities.length || products.length === 0 || quantities.length === 0) {
-      this.setState({
-        notification: true,
-        errors: { code: 422, errors: 'No se puedo completar la orden de trabajo. Campos incompletos' },
-      });
+
+    const response = await serviceWorkOrder.complete(request);
+    if (response.type === 'COMPLETED_SUCCESSFUL') {
+      this.setState({ notification: true });
+      this.props.listWorkOrders();
+      this.handleClose();
     } else {
-      const response = await serviceWorkOrder.complete(request);
-      if (response.type === 'COMPLETED_SUCCESSFUL') {
-        this.setState({ notification: true });
-        this.props.listWorkOrders();
-        this.handleClose();
-      } else {
-        this.setState({ notification: true, errors: response.error });
-      }
+      this.setState({ notification: true, errors: response.error });
     }
   };
 
@@ -112,7 +106,7 @@ class CompleteWorkOrderSection extends React.Component {
           icon={AddAlert}
           message={
             this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
+              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
               : 'Orden de trabajo completada correctamente'
           }
           open={this.state.notification}

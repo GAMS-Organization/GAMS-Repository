@@ -10,13 +10,13 @@ class preventiveAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al crear el evento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -30,13 +30,13 @@ class preventiveAdapter {
         type: 'UPDATED_SUCCESSFULLY',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_UNSUCCESSFULLY',
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al actualizar el evento. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -115,13 +115,13 @@ class preventiveAdapter {
         type: 'DELETED_SUCCESSFULLY',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el evento. Por favor intente más tarde.',
         },
       };
     }

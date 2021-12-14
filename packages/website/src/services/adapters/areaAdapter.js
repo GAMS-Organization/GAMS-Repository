@@ -9,13 +9,13 @@ class areaAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el área. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -70,13 +70,13 @@ class areaAdapter {
         area: data.data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el área. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -90,13 +90,13 @@ class areaAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el área. Por favor intente más tarde.',
         },
       };
     }
@@ -111,14 +111,14 @@ class areaAdapter {
         data: data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }

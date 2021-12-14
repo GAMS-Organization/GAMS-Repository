@@ -9,13 +9,13 @@ class educationalElementAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el elemento educacional. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class educationalElementAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el elemento educacional. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -69,13 +69,13 @@ class educationalElementAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el elemento educacional. Por favor intente más tarde.',
         },
       };
     }
@@ -88,13 +88,13 @@ class educationalElementAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear la solicitud. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -128,13 +128,13 @@ class educationalElementAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la solicitud. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -148,13 +148,13 @@ class educationalElementAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la solicitud. Por favor intente más tarde.',
         },
       };
     }

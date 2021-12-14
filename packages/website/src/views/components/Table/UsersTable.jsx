@@ -21,6 +21,7 @@ import Snackbar from '../Snackbar/Snackbar';
 
 import serviceUser from '../../../services/api/user';
 import DeleteUserSection from '../../sections/Users/DeleteUserSection';
+import EnableUserSection from '../../sections/Users/EnableUserSection';
 
 class UsersTable extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class UsersTable extends React.Component {
     this.state = {
       modal: false,
       deleteModal: false,
+      enableModal: false,
       user: {},
       errors: {},
       notification: false,
@@ -40,8 +42,15 @@ class UsersTable extends React.Component {
 
   handleClickDelete = prop => {
     this.setState({
-      user: { id: prop.id, name: prop.visibleData[0] },
+      user: { id: prop.id, name: prop.visibleData[0], surname: prop.visibleData[1] },
       deleteModal: true,
+    });
+  };
+
+  handleClickEnable = prop => {
+    this.setState({
+      user: { id: prop.id, name: prop.visibleData[0], surname: prop.visibleData[1] },
+      enableModal: true,
     });
   };
 
@@ -52,7 +61,7 @@ class UsersTable extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ modal: false, deleteModal: false });
+    this.setState({ modal: false, deleteModal: false, enableModal: false });
   };
 
   render() {
@@ -84,6 +93,12 @@ class UsersTable extends React.Component {
           close={this.closeModal}
           listUsers={this.props.listUsers}
         />
+        <EnableUserSection
+          user={this.state.user}
+          open={this.state.enableModal}
+          close={this.closeModal}
+          listUsers={this.props.listUsers}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -105,7 +120,7 @@ class UsersTable extends React.Component {
                   {prop.visibleData.map((prop, key) => {
                     return (
                       <TableCell className={classes.tableCell} key={key}>
-                        {prop === 'active' ? 'Activo' : prop === 'inactive' ? 'Inactivo' : prop}
+                        {prop}
                       </TableCell>
                     );
                   })}
@@ -119,7 +134,7 @@ class UsersTable extends React.Component {
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
-                    {prop.visibleData[4] === 'active' ? (
+                    {prop.visibleData[4] === 'Activo' ? (
                       <Tooltip
                         id="tooltip-top-start"
                         title="Desactivar"
@@ -144,7 +159,7 @@ class UsersTable extends React.Component {
                         <IconButton
                           aria-label="Close"
                           className={classes.tableActionButton}
-                          onClick={() => this.handleClickDelete(prop)}
+                          onClick={() => this.handleClickEnable(prop)}
                         >
                           <CheckIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                         </IconButton>
