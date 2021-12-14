@@ -9,13 +9,13 @@ class entryStockAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al crear la entrada. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class entryStockAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la entrada. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -69,13 +69,13 @@ class entryStockAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la entrada. Por favor intente más tarde.',
         },
       };
     }

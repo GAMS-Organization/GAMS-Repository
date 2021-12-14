@@ -1,5 +1,4 @@
 import { drawerWidth, transition, container } from '../../material-dashboard-react.jsx';
-import image from '../../../img/imagenTaller2.jpg';
 
 const appStyle = theme => ({
   wrapper: {
@@ -24,9 +23,7 @@ const appStyle = theme => ({
     marginTop: '70px',
     padding: '30px 15px',
     minHeight: 'calc(100vh - 123px)',
-    backgroundImage: 'url(' + image + ')',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
+    backgroundColor: '#c9c8dc',
     height: '100%',
   },
   container,

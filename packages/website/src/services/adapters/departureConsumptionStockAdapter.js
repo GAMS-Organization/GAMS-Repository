@@ -9,13 +9,13 @@ class departureStockAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details,
+          errors: 'Error al crear la salida. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -55,7 +55,7 @@ class departureStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la salida. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -75,7 +75,7 @@ class departureStockAdapter {
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la salida. Por favor intente más tarde.',
         },
       };
     }

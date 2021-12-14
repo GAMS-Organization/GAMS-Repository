@@ -9,13 +9,13 @@ class sectorAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear el sector. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -49,13 +49,13 @@ class sectorAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el sector. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -69,13 +69,13 @@ class sectorAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar el sector. Por favor intente más tarde.',
         },
       };
     }
@@ -89,13 +89,13 @@ class sectorAdapter {
         type: 'UPLOAD_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPLOAD_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }
@@ -110,14 +110,14 @@ class sectorAdapter {
         data: data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }

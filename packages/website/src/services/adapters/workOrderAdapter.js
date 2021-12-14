@@ -9,13 +9,13 @@ class workOrderAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: details.error,
+          errors: 'Error al crear la orden de trabajo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -53,13 +53,13 @@ class workOrderAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar la orden de trabajo. Por favor revise los campos ingresados.',
         },
       };
     }
@@ -73,13 +73,13 @@ class workOrderAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al eliminar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -94,14 +94,14 @@ class workOrderAdapter {
         data: data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al actualizar el mapa. Por favor intente más tarde.',
         },
       };
     }
@@ -114,13 +114,13 @@ class workOrderAdapter {
         type: 'CANCEL_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CANCEL_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al cancelar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -133,13 +133,13 @@ class workOrderAdapter {
         type: 'TAKE_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'TAKE_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al tomar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -152,13 +152,13 @@ class workOrderAdapter {
         type: 'ASSIGN_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'ASSIGN_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al asignar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -171,13 +171,13 @@ class workOrderAdapter {
         type: 'COMPLETED_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'COMPLETED_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al completar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }
@@ -194,13 +194,13 @@ class workOrderAdapter {
         data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'SHOW_FAIL',
         error: {
           code: status,
           type: code,
-          details: details,
+          details: 'Error al visualizar la orden de trabajo. Por favor intente más tarde.',
         },
       };
     }

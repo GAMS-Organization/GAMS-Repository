@@ -51,7 +51,7 @@ class DeleteUserSection extends React.Component {
   render() {
     const { classes, user, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name } = user;
+    const { id, name, surname } = user;
     return (
       <div>
         <Snackbar
@@ -60,8 +60,8 @@ class DeleteUserSection extends React.Component {
           icon={AddAlert}
           message={
             this.state.errors.code
-              ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Usuario Eliminado correctamente'
+              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
+              : 'Usuario desactivado correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -81,11 +81,11 @@ class DeleteUserSection extends React.Component {
         >
           <GridContainer justify={'center'}>
             <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente usuario?</h4>
+              <h4 className={classes.modalTitle}>¿Está seguro que desea desactivar el siguiente usuario?</h4>
             </DialogTitle>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
+            {/*<DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
               <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
-            </DialogTitle>
+            </DialogTitle>*/}
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteUser}>
@@ -93,7 +93,9 @@ class DeleteUserSection extends React.Component {
                 <GridItem xs={12} sm={12} md={8}>
                   <GridContainer justify={'center'}>
                     <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-                      <h5 className={classes.modalTitle}>{name}</h5>
+                      <h5 className={classes.modalTitle}>
+                        {name} {surname}
+                      </h5>
                     </DialogTitle>
                   </GridContainer>
                 </GridItem>

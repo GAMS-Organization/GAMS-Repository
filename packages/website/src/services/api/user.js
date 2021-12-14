@@ -48,14 +48,22 @@ class User {
 
   async delete(id) {
     let deleteResponse;
-
     try {
       deleteResponse = await Api.get(`users/${id}/Disable`);
     } catch (err) {
       deleteResponse = err;
     }
-
     return userAdapter.delete(deleteResponse);
+  }
+
+  async enable(id) {
+    let enableResponse;
+    try {
+      enableResponse = await Api.get(`users/${id}/Enable`);
+    } catch (err) {
+      enableResponse = err;
+    }
+    return userAdapter.enable(enableResponse);
   }
 }
 
