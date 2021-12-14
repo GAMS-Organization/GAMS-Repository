@@ -9,7 +9,7 @@ class UserAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
@@ -49,7 +49,7 @@ class UserAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
@@ -87,7 +87,7 @@ class UserAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
@@ -107,7 +107,7 @@ class UserAdapter {
         type: 'ENABLE_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'ENABLE_FAIL',
         error: {

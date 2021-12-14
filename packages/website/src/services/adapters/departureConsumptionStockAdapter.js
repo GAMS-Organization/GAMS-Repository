@@ -9,7 +9,7 @@ class departureStockAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {

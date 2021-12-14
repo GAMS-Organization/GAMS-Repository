@@ -10,7 +10,7 @@ class preventiveAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
@@ -30,7 +30,7 @@ class preventiveAdapter {
         type: 'UPDATED_SUCCESSFULLY',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_UNSUCCESSFULLY',
         error: {
@@ -115,7 +115,7 @@ class preventiveAdapter {
         type: 'DELETED_SUCCESSFULLY',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {

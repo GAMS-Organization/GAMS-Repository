@@ -9,7 +9,7 @@ class sectorAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
@@ -49,7 +49,7 @@ class sectorAdapter {
         type: 'UPDATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
@@ -69,7 +69,7 @@ class sectorAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
@@ -89,7 +89,7 @@ class sectorAdapter {
         type: 'UPLOAD_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPLOAD_FAIL',
         error: {
@@ -110,7 +110,7 @@ class sectorAdapter {
         data: data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',

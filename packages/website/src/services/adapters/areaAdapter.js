@@ -9,7 +9,7 @@ class areaAdapter {
         type: 'CREATED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
@@ -70,7 +70,7 @@ class areaAdapter {
         area: data.data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
@@ -90,7 +90,7 @@ class areaAdapter {
         type: 'DELETED_SUCCESFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {
@@ -111,7 +111,7 @@ class areaAdapter {
         data: data,
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
 
       return {
         type: 'UPLOAD_IMAGE_FAIL',
