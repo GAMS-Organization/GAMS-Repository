@@ -44,8 +44,8 @@ class NewWorkOrder extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
-      dateNow: '',
-      //dateNow: date,
+      //dateNow: '',
+      dateNow: date,
       prioritySelected: '',
       idSector: '',
       idArea: '',
@@ -190,7 +190,8 @@ class NewWorkOrder extends React.Component {
     const formElements = e.target.elements;
     const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
-    console.log(date);
+    var today = new Date();
+    var date2 = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + today.getDate();
 
     const formValues = {
       orderDate: date,
@@ -198,8 +199,9 @@ class NewWorkOrder extends React.Component {
       comment: observations,
       assetId: this.state.idAsset,
     };
+    console.log(formValues);
     const response = await serviceWorkOrder.create(formValues);
-
+    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('observations').value = '';
       formElements.namedItem('date').value = '';
@@ -466,15 +468,16 @@ class NewWorkOrder extends React.Component {
                             fullWidth: true,
                           }}
                           inputProps={{
-                            type: 'date',
-                            required: true,
+                            //type: 'date',
+                            //required: true,
                             name: 'date',
-                            disabled:
+                            disable: true,
+                            /*disabled:
                               this.state.selectedSector === '' ||
                               this.state.selectedArea === '' ||
                               this.state.selectedService === '' ||
                               this.state.selectedElement === '' ||
-                              this.state.selectedAsset === '',
+                              this.state.selectedAsset === '',*/
                           }}
                         />
                       </GridItem>
