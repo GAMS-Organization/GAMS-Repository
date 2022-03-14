@@ -31,8 +31,7 @@ class NewWorkOrder extends React.Component {
     super(props);
     var today = new Date(),
       date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    //date = today.getDate() + '-' + +(today.getMonth() + 1) + '-' + today.getFullYear();
-    console.log(date);
+
     this.state = {
       errors: {},
       notification: false,
@@ -44,7 +43,6 @@ class NewWorkOrder extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
-      //dateNow: '',
       dateNow: date,
       prioritySelected: '',
       idSector: '',
@@ -188,10 +186,9 @@ class NewWorkOrder extends React.Component {
   CreateWorkOrder = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
-    const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
     var today = new Date();
-    var date2 = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + today.getDate();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     const formValues = {
       orderDate: date,
@@ -199,9 +196,7 @@ class NewWorkOrder extends React.Component {
       comment: observations,
       assetId: this.state.idAsset,
     };
-    console.log(formValues);
     const response = await serviceWorkOrder.create(formValues);
-    console.log(response);
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('observations').value = '';
       formElements.namedItem('date').value = '';
@@ -211,7 +206,7 @@ class NewWorkOrder extends React.Component {
         selectedSector: '',
         selectedArea: '',
         selectedElement: '',
-        dateNow: '',
+        dateNow: date,
         prioritySelected: '',
         idSector: '',
         idArea: '',
@@ -468,16 +463,8 @@ class NewWorkOrder extends React.Component {
                             fullWidth: true,
                           }}
                           inputProps={{
-                            //type: 'date',
-                            //required: true,
                             name: 'date',
-                            disable: true,
-                            /*disabled:
-                              this.state.selectedSector === '' ||
-                              this.state.selectedArea === '' ||
-                              this.state.selectedService === '' ||
-                              this.state.selectedElement === '' ||
-                              this.state.selectedAsset === '',*/
+                            disabled: true,
                           }}
                         />
                       </GridItem>
