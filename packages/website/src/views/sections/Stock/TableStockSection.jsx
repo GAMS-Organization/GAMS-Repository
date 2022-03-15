@@ -17,6 +17,9 @@ import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock'
 import serviceCurrentStock from '../../../services/api/currentStock';
 import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
 import { toDate } from '../../../utils/helpers/dateHelper';
+import Card from '../../components/Card/Card';
+import Pagination from '../../components/Pagination/Pagination';
+import serviceWorkOrder from '../../../services/api/workOrder';
 
 const styles = {
   cardCategoryWhite: {
@@ -92,6 +95,92 @@ class TableStockSection extends React.Component {
     }
 
     this.setState({ entry: entries, stock: stocks, departure: departures });
+  };
+
+  /*listEntriesStockDepartures = async (page = 1, itemsPerPage = 15) => {
+    const responseEntry = await serviceEntryPurchaseStock.list(page, itemsPerPage);
+    const responseCurrentStock = await serviceCurrentStock.list(page, itemsPerPage);
+    const responseDeparture = await serviceDepartureConsumptionStock.list(page, itemsPerPage);
+    let entries = [];
+    let stocks = [];
+    let departures = [];
+
+    for (const workOrder of response.items) {
+      let name = '';
+      for (const worker of workOrder.workers) {
+        if (name === '') {
+          name = worker.user.name;
+        } else {
+          name = name + ' - ' + worker.user.name;
+        }
+      }
+      let dataWorkOrder = {
+        id: workOrder.id,
+        startDate: workOrder.startDate,
+        comment: workOrder.comment,
+        realizationDate: workOrder.realizationDate,
+        visibleData: [
+          toDate(workOrder.orderDate),
+          workOrder.priority,
+          workOrder.user.name + ' ' + workOrder.user.surname,
+          workOrder.asset.code,
+          workOrder.state,
+          name,
+        ],
+      };
+      workOrders.push(dataWorkOrder);
+    }
+    this.setState({ workOrder: workOrders, totalPages: response.pageCount, page: page });
+  };*/
+
+  pagination = () => {
+    const pages = [
+      {
+        text: '<<',
+        onClick: () => {
+          this.listEntriesStockDepartures(1);
+        },
+      },
+      {
+        text: '<',
+        onClick: () => {
+          this.state.page === 1
+            ? this.listEntriesStockDepartures(1)
+            : this.listEntriesStockDepartures(this.state.page - 1);
+        },
+      },
+    ];
+    for (
+      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
+      index <= this.state.page + 7 && index <= this.state.totalPages;
+      index++
+    ) {
+      if (index === this.state.page) {
+        pages.push({ text: index, active: true });
+      } else {
+        pages.push({
+          text: index,
+          onClick: async () => {
+            this.listEntriesStockDepartures(index);
+          },
+        });
+      }
+    }
+    pages.push({
+      text: '>',
+      onClick: () => {
+        this.state.page === this.state.totalPages
+          ? this.listEntriesStockDepartures(this.state.totalPages)
+          : this.listEntriesStockDepartures(this.state.page + 1);
+      },
+    });
+    pages.push({
+      text: '>>',
+      onClick: () => {
+        this.listEntriesStockDepartures(this.state.totalPages);
+      },
+    });
+    return pages;
   };
 
   render() {
