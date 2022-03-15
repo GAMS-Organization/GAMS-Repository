@@ -187,11 +187,9 @@ class NewWorkOrder extends React.Component {
     e.preventDefault();
     const formElements = e.target.elements;
     const observations = formElements.namedItem('observations').value;
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     const formValues = {
-      orderDate: date,
+      orderDate: this.state.dateNow,
       priority: this.state.prioritySelected,
       comment: observations,
       assetId: this.state.idAsset,
@@ -206,7 +204,6 @@ class NewWorkOrder extends React.Component {
         selectedSector: '',
         selectedArea: '',
         selectedElement: '',
-        dateNow: date,
         prioritySelected: '',
         idSector: '',
         idArea: '',

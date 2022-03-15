@@ -27,12 +27,16 @@ import serviceUser from '../../../services/api/user';
 class AssignWorkOrderSection extends React.Component {
   constructor(props) {
     super(props);
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     this.state = {
       workOrder: {},
       errors: {},
       notification: false,
       selectedWorkers: [],
       workers: [],
+      dateNow: date,
     };
     this.listWorkers();
   }
@@ -69,17 +73,9 @@ class AssignWorkOrderSection extends React.Component {
   assignWorkOrder = async e => {
     e.preventDefault();
 
-    const fields = ['startDate', 'workers'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
-
     const assignData = {
       id: this.props.workOrder.id,
-      startDate: formValues.startDate,
+      startDate: this.state.dateNow,
       workersId: this.state.selectedWorkers,
     };
 
@@ -132,16 +128,15 @@ class AssignWorkOrderSection extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText=""
+                      labelText={this.state.dateNow}
                       id="startDate"
                       value={this.state.dateNow}
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: 'date',
-                        required: true,
                         name: 'date',
+                        disabled: true,
                       }}
                     />
                   </GridItem>
