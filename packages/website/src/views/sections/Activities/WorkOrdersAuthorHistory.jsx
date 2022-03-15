@@ -99,7 +99,7 @@ class WorkOrdersAuthorHistory extends React.Component {
                     this.state.workOrdersAuthor.map(workOrder => {
                       return (
                         <SnackbarContent
-                          message={`${workOrder.orderDate} - ${workOrder.comment} - Propridad: ${workOrder.priority}`}
+                          message={`${workOrder.orderDate} - ${workOrder.comment} - Prioridad: ${workOrder.priority}`}
                           color={state[workOrder.state]}
                           icon={OfflineBolt}
                         />
