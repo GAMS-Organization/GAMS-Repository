@@ -66,7 +66,7 @@ class TableStockSection extends React.Component {
     await this.listEntriesStockDepartures();
   };
 
-  listEntriesStockDepartures = async () => {
+  /*listEntriesStockDepartures = async () => {
     const responseEntry = await serviceEntryPurchaseStock.list();
     const responseCurrentStock = await serviceCurrentStock.list();
     const responseDeparture = await serviceDepartureConsumptionStock.list();
@@ -95,9 +95,9 @@ class TableStockSection extends React.Component {
     }
 
     this.setState({ entry: entries, stock: stocks, departure: departures });
-  };
+  };*/
 
-  /*listEntriesStockDepartures = async (page = 1, itemsPerPage = 15) => {
+  listEntriesStockDepartures = async (page = 1, itemsPerPage = 1) => {
     const responseEntry = await serviceEntryPurchaseStock.list(page, itemsPerPage);
     const responseCurrentStock = await serviceCurrentStock.list(page, itemsPerPage);
     const responseDeparture = await serviceDepartureConsumptionStock.list(page, itemsPerPage);
@@ -105,33 +105,35 @@ class TableStockSection extends React.Component {
     let stocks = [];
     let departures = [];
 
-    for (const workOrder of response.items) {
-      let name = '';
-      for (const worker of workOrder.workers) {
-        if (name === '') {
-          name = worker.user.name;
-        } else {
-          name = name + ' - ' + worker.user.name;
-        }
-      }
-      let dataWorkOrder = {
-        id: workOrder.id,
-        startDate: workOrder.startDate,
-        comment: workOrder.comment,
-        realizationDate: workOrder.realizationDate,
-        visibleData: [
-          toDate(workOrder.orderDate),
-          workOrder.priority,
-          workOrder.user.name + ' ' + workOrder.user.surname,
-          workOrder.asset.code,
-          workOrder.state,
-          name,
-        ],
-      };
-      workOrders.push(dataWorkOrder);
+    for (const entry of responseEntry.data.items) {
+      let dataEntry = { visibleData: [toDate(entry.date.slice(0, 10)), entry.observations], id: entry.id.toString() };
+      entries.push(dataEntry);
     }
-    this.setState({ workOrder: workOrders, totalPages: response.pageCount, page: page });
-  };*/
+
+    for (const stock of responseCurrentStock.data.items) {
+      let dataStock = {
+        visibleData: [stock.product, stock.quantity, stock.minimunQuantity, stock.state],
+        id: stock.id.toString(),
+      };
+      stocks.push(dataStock);
+    }
+
+    for (const departure of responseDeparture.data.items) {
+      let dataDeparture = {
+        visibleData: [toDate(departure.date.slice(0, 10)), departure.observations],
+        id: departure.id.toString(),
+      };
+      departures.push(dataDeparture);
+    }
+
+    this.setState({
+      entry: entries,
+      stock: stocks,
+      departure: departures,
+      totalPages: responseEntry.pageCount,
+      page: page,
+    });
+  };
 
   pagination = () => {
     const pages = [
@@ -184,6 +186,7 @@ class TableStockSection extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
@@ -229,6 +232,11 @@ class TableStockSection extends React.Component {
               },
             ]}
           />
+        </GridItem>
+        <GridItem>
+          <Card className={classes.cardCenter}>
+            <Pagination pages={this.pagination()} color="gamsRed" />
+          </Card>
         </GridItem>
       </GridContainer>
     );
