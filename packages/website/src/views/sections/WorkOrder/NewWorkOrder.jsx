@@ -29,6 +29,9 @@ import serviceWorkOrder from '../../../services/api/workOrder';
 class NewWorkOrder extends React.Component {
   constructor(props) {
     super(props);
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     this.state = {
       errors: {},
       notification: false,
@@ -40,7 +43,7 @@ class NewWorkOrder extends React.Component {
       selectedArea: '',
       element: [],
       selectedElement: '',
-      dateNow: '',
+      dateNow: date,
       prioritySelected: '',
       idSector: '',
       idArea: '',
@@ -59,7 +62,6 @@ class NewWorkOrder extends React.Component {
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
     const imagenGlobal = 'global/Mapa.png';
-
     let sectores = [];
     for (const sector of responseSector.data.items) {
       let dataSector = sector;
@@ -184,18 +186,15 @@ class NewWorkOrder extends React.Component {
   CreateWorkOrder = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
-    const date = formElements.namedItem('date').value;
     const observations = formElements.namedItem('observations').value;
 
     const formValues = {
-      orderDate: date,
+      orderDate: this.state.dateNow,
       priority: this.state.prioritySelected,
       comment: observations,
       assetId: this.state.idAsset,
     };
-
     const response = await serviceWorkOrder.create(formValues);
-
     if (response.type === 'CREATED_SUCCESFUL') {
       formElements.namedItem('observations').value = '';
       formElements.namedItem('date').value = '';
@@ -205,7 +204,6 @@ class NewWorkOrder extends React.Component {
         selectedSector: '',
         selectedArea: '',
         selectedElement: '',
-        dateNow: '',
         prioritySelected: '',
         idSector: '',
         idArea: '',
@@ -317,6 +315,7 @@ class NewWorkOrder extends React.Component {
                               name: 'area',
                               id: 'area',
                             }}
+                            disabled={this.state.selectedSector === ''}
                           >
                             {this.state.area.map(area => (
                               <MenuItem
@@ -352,6 +351,7 @@ class NewWorkOrder extends React.Component {
                               name: 'service',
                               id: 'service',
                             }}
+                            disabled={this.state.selectedSector === '' || this.state.selectedArea === ''}
                           >
                             {this.state.service.map(service => (
                               <MenuItem
@@ -387,6 +387,11 @@ class NewWorkOrder extends React.Component {
                               name: 'element',
                               id: 'element',
                             }}
+                            disabled={
+                              this.state.selectedSector === '' ||
+                              this.state.selectedArea === '' ||
+                              this.state.selectedService === ''
+                            }
                           >
                             {this.state.element.map(element => (
                               <MenuItem
@@ -422,6 +427,12 @@ class NewWorkOrder extends React.Component {
                               name: 'asset',
                               id: 'asset',
                             }}
+                            disabled={
+                              this.state.selectedSector === '' ||
+                              this.state.selectedArea === '' ||
+                              this.state.selectedService === '' ||
+                              this.state.selectedElement === ''
+                            }
                           >
                             {this.state.asset.map(asset => (
                               <MenuItem
@@ -442,16 +453,15 @@ class NewWorkOrder extends React.Component {
                       </GridItem>
                       <GridItem xs={12} sm={12} md={10}>
                         <CustomInput
-                          labelText=""
+                          labelText={this.state.dateNow}
                           id="date"
                           value={this.state.dateNow}
                           formControlProps={{
                             fullWidth: true,
                           }}
                           inputProps={{
-                            type: 'date',
-                            required: true,
                             name: 'date',
+                            disabled: true,
                           }}
                         />
                       </GridItem>
@@ -473,6 +483,13 @@ class NewWorkOrder extends React.Component {
                               name: 'prioritySelected',
                               id: 'priority',
                             }}
+                            disabled={
+                              this.state.selectedSector === '' ||
+                              this.state.selectedArea === '' ||
+                              this.state.selectedService === '' ||
+                              this.state.selectedElement === '' ||
+                              this.state.selectedAsset === ''
+                            }
                           >
                             <MenuItem
                               disabled
@@ -523,6 +540,12 @@ class NewWorkOrder extends React.Component {
                             required: true,
                             defaultValue: '',
                             name: 'observations',
+                            disabled:
+                              this.state.selectedSector === '' ||
+                              this.state.selectedArea === '' ||
+                              this.state.selectedService === '' ||
+                              this.state.selectedElement === '' ||
+                              this.state.selectedAsset === '',
                           }}
                         />
                       </GridItem>
