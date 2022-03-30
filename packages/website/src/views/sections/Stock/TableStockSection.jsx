@@ -48,8 +48,6 @@ const styles = {
       fontSize: '65%',
       fontWeight: '400',
       lineHeight: '1',
-      totalPages: 1,
-      page: 1,
     },
   },
 };
