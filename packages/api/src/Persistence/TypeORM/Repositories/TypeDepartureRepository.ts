@@ -14,6 +14,9 @@ export default class TypeDepartureRepository extends TypeRepository implements I
       skip: initialIndex,
       take: limit,
       relations: ['consumptions', 'consumptions.product'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 
