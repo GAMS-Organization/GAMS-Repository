@@ -14,6 +14,9 @@ export default class TypeAreaRepository extends TypeRepository implements IAreaR
       skip: initialIndex,
       take: limit,
       relations: ['sector', 'areaServices', 'areaServices.service'],
+      order: {
+        name: 'ASC',
+      },
     });
   }
 

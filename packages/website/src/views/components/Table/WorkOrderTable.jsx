@@ -215,7 +215,11 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Complete"
-                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
+                        disabled={
+                          prop.visibleData[4] === 'cancelada' ||
+                          prop.visibleData[4] === 'finalizada' ||
+                          prop.visibleData[4] === 'libre'
+                        }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickComplete(prop)}
                       >

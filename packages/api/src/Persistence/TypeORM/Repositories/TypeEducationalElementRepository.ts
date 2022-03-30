@@ -10,7 +10,13 @@ export default class TypeEducationalElementRepository extends TypeRepository imp
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<EducationalElement[]> {
-    return await this.repository(EducationalElement).find({ skip: initialIndex, take: limit });
+    return await this.repository(EducationalElement).find({
+      skip: initialIndex,
+      take: limit,
+      order: {
+        name: 'ASC',
+      },
+    });
   }
 
   public async findOneById(id: number): Promise<EducationalElement> {

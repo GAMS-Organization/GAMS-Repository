@@ -24,6 +24,9 @@ import serviceProduct from '../../../services/api/products';
 class CompleteWorkOrderSection extends React.Component {
   constructor(props) {
     super(props);
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     this.state = {
       workOrder: {},
       errors: {},
@@ -31,6 +34,7 @@ class CompleteWorkOrderSection extends React.Component {
       products: [],
       columns: [],
       data: [],
+      dateNow: date,
     };
   }
 
@@ -74,12 +78,11 @@ class CompleteWorkOrderSection extends React.Component {
 
     const formElements = e.target.elements;
 
-    const realizationDate = formElements.namedItem('realizationDate').value;
     const taskDescription = formElements.namedItem('taskDescription').value;
 
     const request = {
       id: this.props.workOrder.id,
-      realizationDate: realizationDate,
+      realizationDate: this.state.dateNow,
       taskDescription: taskDescription,
       productsId: products,
       quantities: quantities,
@@ -193,16 +196,15 @@ class CompleteWorkOrderSection extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText=""
+                      labelText={this.state.dateNow}
                       id="realizationDate"
                       value={this.state.dateNow}
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: 'date',
-                        required: true,
                         name: 'date',
+                        disabled: true,
                       }}
                     />
                   </GridItem>

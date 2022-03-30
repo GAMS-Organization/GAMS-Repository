@@ -14,6 +14,9 @@ export default class TypeElementRequestRepository extends TypeRepository impleme
       skip: initialIndex,
       take: limit,
       relations: ['area', 'element', 'user'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 

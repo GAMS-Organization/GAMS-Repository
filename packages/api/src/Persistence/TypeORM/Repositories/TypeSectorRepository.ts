@@ -10,7 +10,13 @@ export default class TypeSectorRepository extends TypeRepository implements ISec
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Sector[]> {
-    return await this.repository(Sector).find({ skip: initialIndex, take: limit });
+    return await this.repository(Sector).find({
+      skip: initialIndex,
+      take: limit,
+      order: {
+        name: 'ASC',
+      },
+    });
   }
 
   public async count(): Promise<number> {

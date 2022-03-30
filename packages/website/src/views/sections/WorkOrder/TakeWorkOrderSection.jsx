@@ -22,10 +22,13 @@ import CardBody from '../../components/Card/CardBody';
 class TakeWorkOrderSection extends React.Component {
   constructor(props) {
     super(props);
+    var today = new Date(),
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     this.state = {
       workOrder: {},
       errors: {},
       notification: false,
+      dateNow: date,
     };
   }
 
@@ -44,10 +47,11 @@ class TakeWorkOrderSection extends React.Component {
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
-        [field]: formElements.namedItem(field).value,
+        [field]: formElements.namedItem(field),
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    formValues.startDate = this.state.dateNow;
     formValues.id = this.props.workOrder.id;
     const response = await serviceWorkOrder.take(formValues);
     if (response.type === 'TAKE_SUCCESSFUL') {
@@ -97,16 +101,15 @@ class TakeWorkOrderSection extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText=""
+                      labelText={this.state.dateNow}
                       id="startDate"
                       value={this.state.dateNow}
                       formControlProps={{
                         fullWidth: true,
                       }}
                       inputProps={{
-                        type: 'date',
-                        required: true,
                         name: 'date',
+                        disabled: true,
                       }}
                     />
                   </GridItem>

@@ -10,7 +10,13 @@ export default class TypeToolRepository extends TypeRepository implements IToolR
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Tool[]> {
-    return await this.repository(Tool).find({ skip: initialIndex, take: limit });
+    return await this.repository(Tool).find({
+      skip: initialIndex,
+      take: limit,
+      order: {
+        name: 'ASC',
+      },
+    });
   }
 
   public async findOneById(id: number): Promise<Tool> {

@@ -10,7 +10,13 @@ export default class TypeServiceRepository extends TypeRepository implements ISe
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Service[]> {
-    return await this.repository(Service).find({ skip: initialIndex, take: limit });
+    return await this.repository(Service).find({
+      skip: initialIndex,
+      take: limit,
+      order: {
+        name: 'ASC',
+      },
+    });
   }
 
   public async count(): Promise<number> {

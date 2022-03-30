@@ -10,7 +10,16 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Stock[]> {
-    return await this.repository(Stock).find({ skip: initialIndex, take: limit, relations: ['product'] });
+    return await this.repository(Stock).find({
+      skip: initialIndex,
+      take: limit,
+      relations: ['product'],
+      order: {
+        product: {
+          name: 'DESC',
+        },
+      },
+    });
   }
 
   public async count(): Promise<number> {

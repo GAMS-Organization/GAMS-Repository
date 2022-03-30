@@ -21,6 +21,7 @@ class CustomTabs extends React.Component {
   };
   handleChange = (event, value) => {
     this.setState({ value });
+    this.props.handleOnTabChange(value);
   };
   render() {
     const { classes, headerColor, plainTabs, tabs, title, rtlActive } = this.props;
@@ -93,6 +94,7 @@ CustomTabs.propTypes = {
   ),
   rtlActive: PropTypes.bool,
   plainTabs: PropTypes.bool,
+  handleOnTabChange: PropTypes.func,
 };
 
 export default withStyles(customTabsStyle)(CustomTabs);
