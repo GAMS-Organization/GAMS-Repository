@@ -58,9 +58,7 @@ class ProductTable extends React.Component {
     const { classes, tableHead, tableData, tableHeaderColor } = this.props;
     let filteredData = tableData;
     if (this.state.search !== '') {
-      console.log('tableData: ', tableData);
       filteredData = tableData.filter(item => {
-        console.log('item', item);
         return item.visibleData[0].toLowerCase().includes(this.state.search.toLowerCase());
       });
     }

@@ -65,7 +65,7 @@ class ToolTable extends React.Component {
     let filteredData = tableData;
     if (this.state.search !== '') {
       filteredData = tableData.filter(item => {
-        return item[1].toLowerCase().includes(this.state.search.toLowerCase());
+        return item.visibleData[0].toLowerCase().includes(this.state.search.toLowerCase());
       });
     }
     return (
