@@ -5,6 +5,7 @@ const modalStyle = theme => ({
   modalRoot: {
     overflow: 'auto',
     display: 'block',
+    maxHeight: '80vh',
   },
   modal: {
     [theme.breakpoints.up('sm')]: {
