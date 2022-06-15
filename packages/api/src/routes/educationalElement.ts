@@ -4,7 +4,6 @@ import DIContainer from '../Infrastructure/DI/di.config';
 import StoreEducationalElementAction from '../API/Http/Actions/EducationalElement/StoreEducationalElementAction';
 import UpdateEducationalElementAction from '../API/Http/Actions/EducationalElement/UpdateEducationalElementAction';
 import IndexEducationalElementsAction from '../API/Http/Actions/EducationalElement/IndexEducationalElementAction';
-//import ShowEducationalElementAction from '../API/Http/Actions/EducationalElement/ShowEducationalElementAction';
 import DestroyEducationalElementAction from '../API/Http/Actions/EducationalElement/DestroyEducationalElementAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
@@ -15,7 +14,7 @@ const router = express.Router();
 router.get(
   '/',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const indexEducationalElementAction: IndexEducationalElementsAction = DIContainer.resolve<
