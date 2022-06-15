@@ -39,7 +39,7 @@ class Users extends React.Component {
     return (
       <div>
         {roles.includes('admin') && <NewUserSection />}
-        <UsersTable />
+        <UsersTable roles={roles} />
       </div>
     );
   }

@@ -109,7 +109,7 @@ class WorkOrderTableSection extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, roles } = this.props;
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -124,6 +124,7 @@ class WorkOrderTableSection extends React.Component {
                 tableHead={['Fecha de solicitud', 'Prioridad', 'Usuario', 'Activo', 'Estado', 'Responsables']}
                 tableData={this.state.workOrder}
                 listWorkOrders={this.listWorkOrders}
+                roles={roles}
               />
             </CardBody>
           </Card>

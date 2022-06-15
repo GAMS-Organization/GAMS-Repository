@@ -79,7 +79,7 @@ class WorkOrderTable extends React.Component {
   };
 
   render() {
-    const { classes, tableHead, tableData, tableHeaderColor } = this.props;
+    const { classes, tableHead, tableData, tableHeaderColor, roles } = this.props;
     return (
       <div className={classes.tableResponsive}>
         <DetailWorkOrderSection
@@ -187,26 +187,28 @@ class WorkOrderTable extends React.Component {
                         <PanToolIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Asignar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Assign"
-                        disabled={
-                          prop.visibleData[4] === 'cancelada' ||
-                          prop.visibleData[4] === 'asignada' ||
-                          prop.visibleData[4] === 'tomada' ||
-                          prop.visibleData[4] === 'finalizada'
-                        }
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickAssign(prop)}
+                    {(roles.includes('boss') || roles.includes('admin')) && (
+                      <Tooltip
+                        id="tooltip-top-start"
+                        title="Asignar"
+                        placement="top"
+                        classes={{ tooltip: classes.tooltip }}
                       >
-                        <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                      </IconButton>
-                    </Tooltip>
+                        <IconButton
+                          aria-label="Assign"
+                          disabled={
+                            prop.visibleData[4] === 'cancelada' ||
+                            prop.visibleData[4] === 'asignada' ||
+                            prop.visibleData[4] === 'tomada' ||
+                            prop.visibleData[4] === 'finalizada'
+                          }
+                          className={classes.tableActionButton}
+                          onClick={() => this.handleClickAssign(prop)}
+                        >
+                          <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                     <Tooltip
                       id="tooltip-top-start"
                       title="Completar"
@@ -256,6 +258,7 @@ WorkOrderTable.propTypes = {
   tableHead: PropTypes.arrayOf(PropTypes.string),
   tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
   listWorkOrders: PropTypes.func,
+  roles: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default withStyles(tableStyle)(WorkOrderTable);
