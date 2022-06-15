@@ -2,10 +2,15 @@ import { whiteColor, grayColor } from '../material-dashboard-react';
 import customSelect from './components/customSelectStyle';
 
 const modalStyle = theme => ({
+  prueba: {
+    marginBottom: '130px',
+  },
+  pruebaDos: {
+    height: '0px',
+  },
   modalRoot: {
     overflow: 'auto',
     display: 'block',
-    maxHeight: '80vh',
   },
   modal: {
     [theme.breakpoints.up('sm')]: {

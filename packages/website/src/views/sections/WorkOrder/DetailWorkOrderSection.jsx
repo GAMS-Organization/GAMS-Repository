@@ -72,7 +72,6 @@ class DetailWorkOrderSection extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,
@@ -83,6 +82,13 @@ class DetailWorkOrderSection extends React.Component {
           onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
+          PaperProps={{
+            style: {
+              marginBottom: '130px',
+              //boxShadow: 'none',
+              //VER PAPER, AGREGAR MARGINbOTTOM: 130PX; Y HEIGTH A ELEMENTO PADRE;
+            },
+          }}
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
             <h4 className={classes.modalTitle}>Detalles</h4>
