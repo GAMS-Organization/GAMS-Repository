@@ -1,9 +1,11 @@
 import UserService from '../UserService';
 import { inject, injectable } from 'inversify';
 import User from '../../Entities/User';
+import Event from '../../Entities/Event';
 import WorkOrder from '../../Entities/WorkOrder';
 import ToolRequest from '../../Entities/ToolRequest';
 import ElementRequest from '../../Entities/ElementRequest';
+import UserEvent from '../../Entities/UserEvent';
 
 @injectable()
 export default class MailerService {
@@ -139,6 +141,56 @@ export default class MailerService {
       });
   }
 
+  public async sendEventEmail(subject: string, event: Event) {
+    const recipients = [];
+    if (process.env.APP_ENVIRONMENT === 'development') {
+      const to = {
+        email: process.env.RECIPIENT_EMAIL_TEST,
+      };
+      recipients.push(to);
+    } else {
+      const emails = await this.getRecipientMail(
+        event.getWorkers().map((userEvent: UserEvent) => {
+          return userEvent.getUser().getId();
+        }),
+      );
+      emails.forEach(email => {
+        const to = {
+          email: email,
+        };
+        recipients.push(to);
+      });
+    }
+    const templateId = process.env.MAIL_TEMPLATE_EVENT_ID;
+    const msg = {
+      from: process.env.EMAIL_SENDER, // Change to your verified sender
+      subject: subject,
+      templateId,
+      personalizations: [
+        {
+          to: recipients,
+          dynamicTemplateData: {
+            subject: subject,
+            title: event.getTitle(),
+            description: event.getDescription(),
+            startDate: event.getStartDate(),
+            endDate: `${event
+              .getEndDate()
+              .getDay()}/${event.getEndDate().getMonth()}/${event.getEndDate().getFullYear()}`,
+          },
+        },
+      ],
+    };
+    this.sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent');
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   private async getRecipientMail(usersId?: number[]) {
     const user: User[] = [];
     if (usersId) {
@@ -186,7 +238,9 @@ export default class MailerService {
           comment: workOrder.getComment(),
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
-          orderDate: workOrder.getOrderDate(),
+          orderDate: `${workOrder
+            .getOrderDate()
+            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_CREATE_ID;
         break;
@@ -209,8 +263,12 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: workOrder.getOrderDate(),
-          startDate: workOrder.getStartDate(),
+          orderDate: `${workOrder
+            .getOrderDate()
+            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder
+            .getStartDate()
+            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_ASSIGN_ID;
         break;
@@ -233,8 +291,12 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: workOrder.getOrderDate(),
-          startDate: workOrder.getStartDate(),
+          orderDate: `${workOrder
+            .getOrderDate()
+            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder
+            .getStartDate()
+            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_TAKE_ID;
         break;
@@ -278,9 +340,15 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: workOrder.getOrderDate(),
-          startDate: workOrder.getStartDate(),
-          realizationDate: workOrder.getRealizationDate(),
+          orderDate: `${workOrder
+            .getOrderDate()
+            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder
+            .getStartDate()
+            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
+          realizationDate: `${workOrder
+            .getRealizationDate()
+            .getDay()}/${workOrder.getRealizationDate().getMonth()}/${workOrder.getRealizationDate().getFullYear()}`,
           taskDescription: workOrder.getTaskDescription(),
         };
         templateId = process.env.MAIL_TEMPLATE_COMPLETE_ID;

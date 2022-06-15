@@ -10,7 +10,13 @@ export default class TypeProductRepository extends TypeRepository implements IPr
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Product[]> {
-    return await this.repository(Product).find({ skip: initialIndex, take: limit });
+    return await this.repository(Product).find({
+      skip: initialIndex,
+      take: limit,
+      order: {
+        name: 'ASC',
+      },
+    });
   }
 
   public async findOneById(id: number): Promise<Product> {

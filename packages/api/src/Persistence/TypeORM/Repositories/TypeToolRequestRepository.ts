@@ -14,6 +14,9 @@ export default class TypeToolRequestRepository extends TypeRepository implements
       skip: initialIndex,
       take: limit,
       relations: ['area', 'tool', 'user'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 

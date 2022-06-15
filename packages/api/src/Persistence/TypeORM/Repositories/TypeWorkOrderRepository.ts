@@ -24,6 +24,9 @@ export default class TypeWorkOrderRepository extends TypeRepository implements I
         'asset.service',
         'asset.element',
       ],
+      order: {
+        orderDate: 'DESC',
+      },
     });
   }
 

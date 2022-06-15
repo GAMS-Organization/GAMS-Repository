@@ -16,6 +16,9 @@ export default class TypeUserRepository extends TypeRepository implements IUserR
       relations: ['userRoles', 'userRoles.role'],
       skip: initialIndex,
       take: limit,
+      order: {
+        name: 'ASC',
+      },
     });
   }
 

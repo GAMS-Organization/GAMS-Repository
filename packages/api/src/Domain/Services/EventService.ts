@@ -35,7 +35,7 @@ export default class EventService {
         await this.userEventRepository.persist(new UserEvent(user, event));
       }
     }
-    return event;
+    return await this.eventRepository.findOneById(event.getId());
   }
 
   public async updateUserToEvent(event: Event, commandWorkers: number[]): Promise<Event> {

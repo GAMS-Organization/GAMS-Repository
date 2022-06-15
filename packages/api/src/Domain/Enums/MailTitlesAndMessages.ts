@@ -6,6 +6,7 @@ export const mailTitles = {
   workOrderCancelled: 'Una orden de trabajo ha sido cacncelada',
   toolRequest: 'Herramienta',
   elementRequest: 'Artículo',
+  event: 'Un mantenimiento preventivo te fue asignado',
 };
 
 export const mailMessages = {};

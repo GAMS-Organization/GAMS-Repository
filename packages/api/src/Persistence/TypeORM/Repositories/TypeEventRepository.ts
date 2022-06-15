@@ -15,6 +15,9 @@ export default class TypeEventRepository extends TypeRepository implements IEven
       skip: initialIndex,
       take: limit,
       relations: ['userEvents', 'userEvents.user'],
+      order: {
+        startDate: 'DESC',
+      },
     });
   }
 

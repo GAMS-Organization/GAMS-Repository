@@ -14,6 +14,9 @@ export default class TypeEntryRepository extends TypeRepository implements IEntr
       skip: initialIndex,
       take: limit,
       relations: ['purchases', 'purchases.product'],
+      order: {
+        date: 'DESC',
+      },
     });
   }
 
