@@ -109,20 +109,6 @@ class EducationalElementRequestTable extends React.Component {
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickDelete(prop)}
-                      >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                      </IconButton>
-                    </Tooltip>
                   </TableCell>
                 </TableRow>
               );
