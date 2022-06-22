@@ -47,15 +47,15 @@ export default class UpdateToolRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
-    if(toolRequest.getStatus() === STATUS.CANCELED) {
+    if (toolRequest.getStatus() === STATUS.CANCELED) {
       throw new CannotUpdateEntity('La solicitud ha sido cancelada y no puede ser actualizada');
     }
 
-    if(toolRequest.getStatus() === STATUS.RETURNED){
+    if (toolRequest.getStatus() === STATUS.RETURNED) {
       throw new CannotUpdateEntity('La herramienta ya ha sido devuelta');
     }
 
-    if(command.getStatus() === STATUS.CANCELED && toolRequest.getStatus() !== STATUS.PENDING) {
+    if (command.getStatus() === STATUS.CANCELED && toolRequest.getStatus() !== STATUS.PENDING) {
       throw new CannotUpdateEntity('La solicitud puede ser cancelada solamente si el estado actual es pendiente');
     }
 

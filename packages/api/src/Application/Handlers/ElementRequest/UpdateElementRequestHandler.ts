@@ -47,15 +47,15 @@ export default class UpdateElementRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
-    if(elementRequest.getStatus() === STATUS.CANCELED) {
+    if (elementRequest.getStatus() === STATUS.CANCELED) {
       throw new CannotUpdateEntity('La solicitud ha sido cancelada y no puede ser actualizada');
     }
 
-    if(elementRequest.getStatus() === STATUS.RETURNED){
+    if (elementRequest.getStatus() === STATUS.RETURNED) {
       throw new CannotUpdateEntity('El elemento ya ha sido devuelto');
     }
 
-    if(command.getStatus() === STATUS.CANCELED && elementRequest.getStatus() !== STATUS.PENDING) {
+    if (command.getStatus() === STATUS.CANCELED && elementRequest.getStatus() !== STATUS.PENDING) {
       throw new CannotUpdateEntity('La solicitud puede ser cancelada solamente si el estado actual es pendiente');
     }
 
