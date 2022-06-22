@@ -34,10 +34,22 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
-  mx3: {
-    marginLeft: '1rem',
-    marginRight: '.8rem',
+  cardHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
+  mx3: {
+    marginRight: '.5rem',
+    '&~ div': {
+      marginLeft: '0px',
+      marginRight: '.5rem'
+    },
+    '@media (max-width: 500px)': {
+      '&~ div' : {
+        marginTop: '.5rem',
+      }
+    }
+  }
 };
 
 class WorkOrdersWorkerHistory extends React.Component {
@@ -82,7 +94,7 @@ class WorkOrdersWorkerHistory extends React.Component {
           <Card>
             <CardHeader color="gamsBlue">
               <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
-              <GridContainer>
+              <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus actividades como personal de mantenimiento son listadas aqui.
                 </p>
@@ -92,7 +104,7 @@ class WorkOrdersWorkerHistory extends React.Component {
                 <Warning badge>Pausada</Warning>
                 <Success badge>Finalizada</Success>
                 <Danger badge>Cancelada</Danger>
-              </GridContainer>
+              </div>
             </CardHeader>
             <CardBody>
               <GridContainer>

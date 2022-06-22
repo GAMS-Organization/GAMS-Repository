@@ -34,10 +34,22 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
-  mx3: {
-    marginLeft: '1rem',
-    marginRight: '.8rem',
+  cardHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
   },
+  mx3: {
+    marginRight: '.5rem',
+    '&~ div': {
+      marginLeft: '0px',
+      marginRight: '.5rem'
+    },
+    '@media (max-width: 500px)': {
+      '&~ div' : {
+        marginTop: '.5rem',
+      }
+    }
+  }
 };
 
 class ToolRequestsAuthorHistory extends React.Component {
@@ -84,7 +96,7 @@ class ToolRequestsAuthorHistory extends React.Component {
           <Card>
             <CardHeader color="gamsBlue">
               <h4 className={classes.cardTitleWhite}>Solicitudes de Herramientas</h4>
-              <GridContainer>
+              <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus solicitudes de herramientas son listadas aquí.
                 </p>
@@ -93,7 +105,7 @@ class ToolRequestsAuthorHistory extends React.Component {
                 <Warning badge>En uso</Warning>
                 <Success badge>Devuelta</Success>
                 <Danger badge>Cancelada</Danger>
-              </GridContainer>
+              </div>
             </CardHeader>
             <CardBody>
               <GridContainer>
