@@ -75,20 +75,20 @@ class DetailWorkOrderSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
+            //paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
           onClose={close}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
-          PaperProps={{
+          /*PaperProps={{
             style: {
               marginBottom: '130px',
               //boxShadow: 'none',
               //VER PAPER, AGREGAR MARGINbOTTOM: 130PX; Y HEIGTH A ELEMENTO PADRE;
             },
-          }}
+          }}*/
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
             <h4 className={classes.modalTitle}>Detalles</h4>
@@ -289,9 +289,8 @@ class DetailWorkOrderSection extends React.Component {
                 </>
               ) : null}
             </GridContainer>
-            <GridContainer>
-              <GridItem justify={'center'} xs={4} sm={7} md={4}></GridItem>
-              <GridItem justify={'center'} xs={8} sm={5} md={4}>
+            <GridContainer justify={'center'}>
+              <GridItem xs={8} sm={5} md={4}>
                 <CardFooter>
                   <Button color="danger" simple onClick={() => close()}>
                     Cerrar
