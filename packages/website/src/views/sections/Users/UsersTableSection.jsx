@@ -110,7 +110,7 @@ class UsersTableSection extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, roles } = this.props;
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -125,6 +125,7 @@ class UsersTableSection extends React.Component {
                 tableHead={['Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
                 tableData={this.state.users}
                 listUsers={this.listUsers}
+                roles={roles}
               />
             </CardBody>
           </Card>

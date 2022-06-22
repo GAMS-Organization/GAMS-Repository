@@ -26,7 +26,12 @@ class EducationalElementRequestTableSection extends React.Component {
   }
 
   listEducationalElementRequest = async (page = 1, itemsPerPage = 500) => {
-    const response = await ServiceEducationalElement.listElementRequest(page, itemsPerPage);
+    let response;
+    if(this.props.roles[0] === 'user') {
+      response = await ServiceEducationalElement.listMyElementRequest(page, itemsPerPage);
+    } else {
+      response = await ServiceEducationalElement.listElementRequest(page, itemsPerPage);
+    }
     let educationalElementsRequest = [];
     for (const educationalElementRequest of response.data.items) {
       let dataEducationalRequest = {

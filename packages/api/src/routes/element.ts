@@ -10,8 +10,6 @@ import { authMiddleware } from '../config/authMiddleware';
 import ShowElementAction from '../API/Http/Actions/Element/ShowElementAction';
 import { ROL } from '../API/Http/Enums/UserRoles';
 import ShowElementsByAreaAction from '../API/Http/Actions/Element/ShowElementsByAreaAction';
-// import ShowProductAction from '../API/Http/Actions/Product/ShowProductAction';
-// import ShowProductByNameAction from '../API/Http/Actions/Product/ShowProductByNameAction';
 
 const router = express.Router();
 

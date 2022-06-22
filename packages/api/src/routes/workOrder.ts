@@ -7,9 +7,6 @@ import UpdateWorkOrderAction from '../API/Http/Actions/WorkOrder/UpdateWorkOrder
 import AssignWorkOrderAction from '../API/Http/Actions/WorkOrder/AssignWorkOrderAction';
 import TakeWorkOrderAction from '../API/Http/Actions/WorkOrder/TakeWorkOrderAction';
 import CancelWorkOrderAction from '../API/Http/Actions/WorkOrder/CancelWorkOrderAction';
-// import ShowWorkOrderAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderAction';
-// import DestroyWorkOrderAction from '../API/Http/Actions/WorkOrder/DestroyWorkOrderAction';
-// import ShowWorkOrderByNameAction from '../API/Http/Actions/WorkOrder/ShowWorkOrderByNameAction';
 import { authMiddleware } from '../config/authMiddleware';
 import { asyncMiddleware } from '../API/Http/Middleware/AsyncMiddleware';
 import CompleteWorkOrderAction from '../API/Http/Actions/WorkOrder/CompleteWorkOrderAction';
