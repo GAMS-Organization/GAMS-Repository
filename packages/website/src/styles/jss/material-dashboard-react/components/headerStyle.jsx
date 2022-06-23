@@ -44,15 +44,19 @@ const headerStyle = theme => ({
   },
   title: {
     ...defaultFont,
-    lineHeight: '30px',
+    lineHeight: '24px',
     fontSize: '18px',
     borderRadius: '3px',
     textTransform: 'none',
     color: 'inherit',
-    margin: '0',
+    margin: '0 0 0 12px',
     '&:hover,&:focus': {
       background: 'transparent',
     },
+    '@media (max-width : 500px)': {
+      fontSize: '18px',
+      lineHeight: '1.5em',
+    }
   },
   appResponsive: {
     top: '8px',
@@ -121,10 +125,21 @@ const headerStyle = theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    '@media (max-width : 500px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start'
+    }
   },
   userName: {
     margin: 0,
-    padding: '12px 30px',
+    padding: '12px',
+    textTransform: 'capitalize',
+    textAlign: 'right',
+    '@media (max-width : 500px)': {
+      fontSize: '14px',
+      padding: '0 12px'
+    }
   },
 });
 
