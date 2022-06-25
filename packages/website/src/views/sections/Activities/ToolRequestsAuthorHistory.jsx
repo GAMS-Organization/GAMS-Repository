@@ -49,6 +49,12 @@ const styles = {
         marginTop: '.5rem',
       }
     }
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center'
+    }
   }
 };
 
@@ -122,7 +128,9 @@ class ToolRequestsAuthorHistory extends React.Component {
                     })
                   ) : (
                     <GridContainer justify={'center'}>
+                      <div  className={classes.alternativeText}>
                       <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
@@ -130,7 +138,7 @@ class ToolRequestsAuthorHistory extends React.Component {
             </CardBody>
             {this.state.toolRequestsHistoryAuthorPage !== this.state.totalToolRequestsHistoryAuthorPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {

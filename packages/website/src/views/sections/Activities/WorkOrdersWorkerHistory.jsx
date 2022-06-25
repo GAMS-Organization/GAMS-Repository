@@ -49,6 +49,12 @@ const styles = {
         marginTop: '.5rem',
       }
     }
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center'
+    }
   }
 };
 
@@ -123,7 +129,9 @@ class WorkOrdersWorkerHistory extends React.Component {
                     })
                   ) : (
                     <GridContainer justify={'center'}>
+                      <div className={classes.alternativeText}>
                       <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
@@ -131,7 +139,7 @@ class WorkOrdersWorkerHistory extends React.Component {
             </CardBody>
             {this.state.workOrderWorkerPage !== this.state.totalWorkOrderWorkerPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {

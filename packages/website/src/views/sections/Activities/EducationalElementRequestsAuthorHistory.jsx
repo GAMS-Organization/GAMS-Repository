@@ -49,6 +49,12 @@ const styles = {
         marginTop: '.5rem',
       }
     }
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center'
+    }
   }
 };
 
@@ -124,7 +130,9 @@ class EducationalElementRequestsAuthorHistory extends React.Component {
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
+                      <div className={classes.alternativeText}>
+                        <h5>Todavía no haz realizado ninguna solicitud de artículos.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
@@ -133,7 +141,7 @@ class EducationalElementRequestsAuthorHistory extends React.Component {
             {this.state.educationalElementRequestsHistoryAuthorPage !==
             this.state.totalEducationalElementRequestsHistoryAuthorPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {
