@@ -27,7 +27,7 @@ class ToolRequestTableSection extends React.Component {
 
   listToolsRequest = async (page = 1, itemsPerPage = 500) => {
     let response;
-    if(this.props.roles[0] === 'user') {
+    if (this.props.roles[0] === 'user') {
       response = await serviceTool.listMyToolRequest(page, itemsPerPage);
     } else {
       response = await serviceTool.listToolRequest(page, itemsPerPage);
