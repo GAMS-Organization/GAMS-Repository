@@ -9,15 +9,11 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
     return await this.repository(Stock).find({ relations: ['product'] });
   }
 
-  //@ts-ignore
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Stock[]> {
     return await this.repository(Stock).find({
-      //skip: initialIndex,
-      //take: limit,
+      skip: initialIndex,
+      take: limit,
       relations: ['product'],
-      order: {
-        product: 'ASC',
-      },
     });
   }
 
