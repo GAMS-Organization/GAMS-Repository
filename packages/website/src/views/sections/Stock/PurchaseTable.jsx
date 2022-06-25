@@ -18,6 +18,7 @@ class PurchaseTable extends React.Component {
       columns: [],
       data: [],
       errors: {},
+      productsResponse: [],
       notification: false,
     };
   }
@@ -34,7 +35,7 @@ class PurchaseTable extends React.Component {
     const quantities = [];
     const providers = [];
     for (const purchase of this.state.data) {
-      products.push(parseInt(purchase.product));
+      products.push(this.state.productsResponse[parseInt(purchase.product)].id);
       quantities.push(parseInt(purchase.quantity));
       providers.push(purchase.provider);
     }
@@ -67,9 +68,9 @@ class PurchaseTable extends React.Component {
   async componentWillMount() {
     const response = await serviceProduct.list(1, 500);
     let dataProduct = {};
-    for (const product of response.data.items) {
-      dataProduct[product.id] = product.name;
-    }
+    response.data.items.forEach((product, index) => {
+      dataProduct[index] = product.name;
+    })
 
     this.setState({
       columns: [
@@ -77,6 +78,7 @@ class PurchaseTable extends React.Component {
         { title: 'Proveedor', field: 'provider' },
         { title: 'Cantidad', field: 'quantity' },
       ],
+      productsResponse: response.data.items,
     });
   }
 

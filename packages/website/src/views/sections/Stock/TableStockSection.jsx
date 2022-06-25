@@ -108,7 +108,7 @@ class TableStockSection extends React.Component {
     this.setState({ entry: entries, totalPagesEntry: responseEntry.data.pageCount, pageEntry: page });
   };
 
-  listStock = async (page = 1, itemsPerPage = 1) => {
+  listStock = async (page = 1, itemsPerPage = 15) => {
     const responseCurrentStock = await serviceCurrentStock.list(page, itemsPerPage);
     let stocks = [];
 
@@ -126,7 +126,7 @@ class TableStockSection extends React.Component {
     });
   };
 
-  listDeparture = async (page = 1, itemsPerPage = 1) => {
+  listDeparture = async (page = 1, itemsPerPage = 15) => {
     const responseDeparture = await serviceDepartureConsumptionStock.list(page, itemsPerPage);
     let departures = [];
 

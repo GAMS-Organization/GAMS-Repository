@@ -15,9 +15,7 @@ export default class TypeStockRepository extends TypeRepository implements IStoc
       take: limit,
       relations: ['product'],
       order: {
-        product: {
-          name: 'DESC',
-        },
+        product: 'ASC'
       },
     });
   }

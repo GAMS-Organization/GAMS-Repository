@@ -6,7 +6,11 @@ import TypeRepository from './TypeRepository';
 @injectable()
 export default class TypeProductRepository extends TypeRepository implements IProductRepository {
   public async findAll(): Promise<Product[]> {
-    return await this.repository(Product).find();
+    return await this.repository(Product).find({
+      order: {
+        name: 'ASC',
+      }
+    });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Product[]> {
