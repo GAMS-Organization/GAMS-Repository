@@ -56,7 +56,7 @@ const headerStyle = theme => ({
     '@media (max-width : 500px)': {
       fontSize: '18px',
       lineHeight: '1.5em',
-    }
+    },
   },
   appResponsive: {
     top: '8px',
@@ -128,8 +128,8 @@ const headerStyle = theme => ({
     '@media (max-width : 500px)': {
       flexDirection: 'column',
       alignItems: 'flex-start',
-      justifyContent: 'flex-start'
-    }
+      justifyContent: 'flex-start',
+    },
   },
   userName: {
     margin: 0,
@@ -138,8 +138,8 @@ const headerStyle = theme => ({
     textAlign: 'right',
     '@media (max-width : 500px)': {
       fontSize: '14px',
-      padding: '0 12px'
-    }
+      padding: '0 12px',
+    },
   },
 });
 

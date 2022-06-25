@@ -27,7 +27,7 @@ class EducationalElementRequestTableSection extends React.Component {
 
   listEducationalElementRequest = async (page = 1, itemsPerPage = 500) => {
     let response;
-    if(this.props.roles[0] === 'user') {
+    if (this.props.roles[0] === 'user') {
       response = await ServiceEducationalElement.listMyElementRequest(page, itemsPerPage);
     } else {
       response = await ServiceEducationalElement.listElementRequest(page, itemsPerPage);

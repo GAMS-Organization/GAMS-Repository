@@ -42,20 +42,20 @@ const styles = {
     marginRight: '.5rem',
     '&~ div': {
       marginLeft: '0px',
-      marginRight: '.5rem'
+      marginRight: '.5rem',
     },
     '@media (max-width: 500px)': {
-      '&~ div' : {
+      '&~ div': {
         marginTop: '.5rem',
-      }
-    }
+      },
+    },
   },
   alternativeText: {
     margin: '0 20px',
     '&> h5': {
-      textAlign: 'center'
-    }
-  }
+      textAlign: 'center',
+    },
+  },
 };
 
 class EducationalElementRequestsAuthorHistory extends React.Component {

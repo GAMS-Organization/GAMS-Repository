@@ -9,7 +9,7 @@ export default class TypeProductRepository extends TypeRepository implements IPr
     return await this.repository(Product).find({
       order: {
         name: 'ASC',
-      }
+      },
     });
   }
 

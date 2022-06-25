@@ -70,7 +70,7 @@ class PurchaseTable extends React.Component {
     let dataProduct = {};
     response.data.items.forEach((product, index) => {
       dataProduct[index] = product.name;
-    })
+    });
 
     this.setState({
       columns: [

@@ -42,20 +42,20 @@ const styles = {
     marginRight: '.5rem',
     '&~ div': {
       marginLeft: '0px',
-      marginRight: '.5rem'
+      marginRight: '.5rem',
     },
     '@media (max-width: 500px)': {
-      '&~ div' : {
+      '&~ div': {
         marginTop: '.5rem',
-      }
-    }
+      },
+    },
   },
   alternativeText: {
     margin: '0 20px',
     '&> h5': {
-      textAlign: 'center'
-    }
-  }
+      textAlign: 'center',
+    },
+  },
 };
 
 class ToolRequestsAuthorHistory extends React.Component {
@@ -128,8 +128,8 @@ class ToolRequestsAuthorHistory extends React.Component {
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <div  className={classes.alternativeText}>
-                      <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
+                      <div className={classes.alternativeText}>
+                        <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
                       </div>
                     </GridContainer>
                   )}
