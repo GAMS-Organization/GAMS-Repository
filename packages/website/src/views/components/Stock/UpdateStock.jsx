@@ -16,6 +16,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceStock from '../../../services/api/currentStock';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import CardFooter from '../Card/CardFooter';
 
 class UpdateStock extends React.Component {
   constructor(props) {
@@ -156,12 +157,22 @@ class UpdateStock extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <GridItem xs={4} sm={7} md={8}>
+                  <CardFooter>
+                    <Button type="submit" color="gamsRed">
+                      Actualizar
+                    </Button>
+                  </CardFooter>
+                </GridItem>
+                <GridItem xs={8} sm={5} md={4}>
+                  <CardFooter>
+                    <Button color="danger" simple onClick={this.handleClose}>
+                      Cancelar
+                    </Button>
+                  </CardFooter>
+                </GridItem>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>
