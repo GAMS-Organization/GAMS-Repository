@@ -107,7 +107,6 @@ class ViewDepartureConsumption extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            //paper: classes.modal,
           }}
           open={this.state.open}
           TransitionComponent={Transition}
