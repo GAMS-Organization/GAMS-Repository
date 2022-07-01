@@ -82,14 +82,15 @@ class NewProduct extends React.Component {
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
                 <CardBody>
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={10}>
+                  <GridContainer alignItems={'center'} justify={'center'}>
+                    <GridItem xs={12} sm={12} md={9}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.nameInput,
                         }}
                         inputProps={{
                           required: true,
@@ -98,13 +99,13 @@ class NewProduct extends React.Component {
                         }}
                       />
                     </GridItem>
+                    <GridItem xs={12} sm={12} md={3}>
+                      <Button type="submit" color="gamsRed" block={true} className={classes.createButton}>
+                        Crear
+                      </Button>
+                    </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
-                </CardFooter>
               </Card>
             </form>
           </GridItem>
