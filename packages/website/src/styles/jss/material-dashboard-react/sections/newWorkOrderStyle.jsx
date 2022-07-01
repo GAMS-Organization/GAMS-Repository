@@ -22,6 +22,17 @@ const newWorkOrderStyle = {
       marginTop: '13px',
     },
   },
+  workOrderForm: {
+    '@media (max-width: 960px)': {
+      '& > div > div': {
+        padding: '0px !important',
+      },
+    },
+  },
+  button: {
+    marginTop: '30px',
+    marginBottom: '20px',
+  },
   ...customSelect,
 };
 

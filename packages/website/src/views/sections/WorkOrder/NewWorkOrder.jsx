@@ -226,7 +226,7 @@ class NewWorkOrder extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div id="section-new-product">
+      <div id="section-new-work-order">
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -248,7 +248,7 @@ class NewWorkOrder extends React.Component {
                   <h4 className={classes.cardTitleWhite}>Nueva orden de trabajo</h4>
                   <p className={classes.cardCategoryWhite}>Complete los datos</p>
                 </CardHeader>
-                <CardBody>
+                <CardBody className={classes.workOrderForm}>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={6}>
                       <img
@@ -549,13 +549,11 @@ class NewWorkOrder extends React.Component {
                           }}
                         />
                       </GridItem>
-                      <GridContainer>
-                        <GridItem justify={'center'} xs={12} sm={12} md={12}>
-                          <Button type="submit" color="gamsRed">
-                            Crear
-                          </Button>
-                        </GridItem>
-                      </GridContainer>
+                      <GridItem xs={12} sm={12} md={10}>
+                        <Button className={classes.button} type="submit" color="gamsRed" block={true}>
+                          Crear
+                        </Button>
+                      </GridItem>
                     </GridItem>
                   </GridContainer>
                 </CardBody>
