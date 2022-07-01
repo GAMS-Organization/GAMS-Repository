@@ -10,6 +10,20 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = {
+  button: {
+    '@media (max-width: 960px)': {
+      marginTop: '20px',
+    },
+  },
+  consumptionInputs: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px',
+    },
+  },
+};
 
 class ConsumptionTable extends React.Component {
   constructor(props) {
@@ -78,8 +92,9 @@ class ConsumptionTable extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <GridItem xs={12} sm={12} md={5}>
+      <GridItem xs={12} sm={12} md={12} lg={5}>
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -161,6 +176,7 @@ class ConsumptionTable extends React.Component {
                     id="date"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.consumptionInputs,
                     }}
                     inputProps={{
                       type: 'date',
@@ -170,12 +186,13 @@ class ConsumptionTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Observaciones"
                     id="observations"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.consumptionInputs,
                     }}
                     inputProps={{
                       required: true,
@@ -184,8 +201,8 @@ class ConsumptionTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <Button type="submit" color="gamsRed" size={'sm'}>
+                <GridItem xs={12} sm={12} md={3}>
+                  <Button type="submit" color="gamsRed" className={classes.button} block={true}>
                     Consumir
                   </Button>
                 </GridItem>
@@ -198,4 +215,4 @@ class ConsumptionTable extends React.Component {
   }
 }
 
-export default ConsumptionTable;
+export default withStyles(styles)(ConsumptionTable);

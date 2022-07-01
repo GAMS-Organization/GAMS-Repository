@@ -10,6 +10,20 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = {
+  button: {
+    '@media (max-width: 960px)': {
+      marginTop: '20px',
+    },
+  },
+  purchaseInputs: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px',
+    },
+  },
+};
 
 class PurchaseTable extends React.Component {
   constructor(props) {
@@ -83,8 +97,9 @@ class PurchaseTable extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <GridItem xs={12} sm={12} md={7}>
+      <GridItem xs={12} sm={12} md={12} lg={7}>
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -165,6 +180,7 @@ class PurchaseTable extends React.Component {
                     id="date"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.purchaseInputs,
                     }}
                     inputProps={{
                       type: 'date',
@@ -174,12 +190,13 @@ class PurchaseTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Observaciones"
                     id="observations"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.purchaseInputs,
                     }}
                     inputProps={{
                       required: true,
@@ -188,8 +205,8 @@ class PurchaseTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <Button type="submit" color="gamsRed" size={'sm'}>
+                <GridItem xs={12} sm={12} md={3}>
+                  <Button type="submit" color="gamsRed" className={classes.button} block={true}>
                     Comprar
                   </Button>
                 </GridItem>
@@ -202,4 +219,4 @@ class PurchaseTable extends React.Component {
   }
 }
 
-export default PurchaseTable;
+export default withStyles(styles)(PurchaseTable);

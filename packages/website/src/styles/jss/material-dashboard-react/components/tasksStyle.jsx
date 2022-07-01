@@ -34,6 +34,10 @@ const tasksStyle = {
     height: '27px',
     padding: '0',
   },
+  tableResponsive: {
+    width: '100%',
+    overflow: 'auto',
+  },
   tableActionButtonIcon: {
     width: '17px',
     height: '17px',

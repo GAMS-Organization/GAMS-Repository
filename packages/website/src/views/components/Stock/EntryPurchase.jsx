@@ -20,6 +20,7 @@ import serviceEntryPurchaseStock from '../../../services/api/entryPurchaseStock'
 import Snackbar from '../Snackbar/Snackbar';
 import ViewEntryPurchase from './ViewEntryPurchase.jsx';
 import DeleteEntryPurchase from './DeleteEntryPurchase';
+import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 
 class EntryPurchase extends React.Component {
   constructor(props) {
