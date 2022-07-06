@@ -72,7 +72,7 @@ class DeleteEntryPurchase extends React.Component {
           }}
           open={open}
           TransitionComponent={Transition}
-          onClose={close}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >

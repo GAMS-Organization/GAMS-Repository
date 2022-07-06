@@ -48,7 +48,6 @@ class DeleteEducationalElementSection extends React.Component {
 
   render() {
     const { classes, educationalElement, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { name } = educationalElement;
     return (
       <div>

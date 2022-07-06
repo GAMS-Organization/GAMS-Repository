@@ -50,6 +50,8 @@ class UsersTableSection extends React.Component {
         case 'personal':
           rol = 'Personal';
           break;
+        default:
+          break;
       }
 
       let dataUser = {

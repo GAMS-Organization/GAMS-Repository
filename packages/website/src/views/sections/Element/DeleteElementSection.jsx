@@ -49,8 +49,7 @@ class DeleteElementSection extends React.Component {
 
   render() {
     const { classes, element, Transition, close, open } = this.props;
-    const { errors } = this.state;
-    const { id, name } = element;
+    const { name } = element;
     return (
       <div>
         <Snackbar

@@ -49,7 +49,6 @@ class DeleteServiceSection extends React.Component {
 
   render() {
     const { classes, service, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { name } = service;
     return (
       <div>

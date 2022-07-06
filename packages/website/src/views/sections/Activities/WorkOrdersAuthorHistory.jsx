@@ -114,12 +114,13 @@ class WorkOrdersAuthorHistory extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.workOrdersAuthor.length !== 0 ? (
-                    this.state.workOrdersAuthor.map(workOrder => {
+                    this.state.workOrdersAuthor.map((workOrder, index) => {
                       return (
                         <SnackbarContent
                           message={`${workOrder.orderDate} - ${workOrder.comment} - Prioridad: ${workOrder.priority}`}
                           color={state[workOrder.state]}
                           icon={OfflineBolt}
+                          key={workOrder.comment + index}
                         />
                       );
                     })
@@ -133,7 +134,8 @@ class WorkOrdersAuthorHistory extends React.Component {
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.workOrderAuthorPage !== this.state.totalWorkOrderAuthorPages ? (
+            {this.state.workOrderAuthorPage !== this.state.totalWorkOrderAuthorPages &&
+            this.state.totalWorkOrderAuthorPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button

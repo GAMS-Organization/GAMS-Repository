@@ -103,6 +103,11 @@ const tableStyle = theme => ({
     color: gamsRedColor[0],
     boxShadow: 'none',
   },
+  disabled: {
+    backgroundColor: 'transparent',
+    color: gamsGrayColor[1],
+    boxShadow: 'none',
+  },
   searchInputContainer: {
     width: '200px',
     display: 'flex',

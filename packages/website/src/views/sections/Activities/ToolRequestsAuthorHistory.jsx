@@ -117,12 +117,13 @@ class ToolRequestsAuthorHistory extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.toolRequestsAuthor.length !== 0 ? (
-                    this.state.toolRequestsAuthor.map(toolRequest => {
+                    this.state.toolRequestsAuthor.map((toolRequest, index) => {
                       return (
                         <SnackbarContent
                           message={`${toolRequest.date} - ${toolRequest.area.name} - Herramienta: ${toolRequest.tool.name}`}
                           color={state[toolRequest.status]}
                           icon={OfflineBolt}
+                          key={toolRequest.tool.name + index}
                         />
                       );
                     })
@@ -136,7 +137,8 @@ class ToolRequestsAuthorHistory extends React.Component {
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.toolRequestsHistoryAuthorPage !== this.state.totalToolRequestsHistoryAuthorPages ? (
+            {this.state.toolRequestsHistoryAuthorPage !== this.state.totalToolRequestsHistoryAuthorPages &&
+            this.state.totalToolRequestsHistoryAuthorPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button

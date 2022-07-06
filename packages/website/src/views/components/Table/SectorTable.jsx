@@ -10,15 +10,12 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import MapIcon from '@material-ui/icons/Map';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateSectorSection from '../../sections/Sector/UpdateSectorSection.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
-import serviceSector from '../../../services/api/sector';
 import DeleteSectorSection from '../../sections/Sector/DeleteSectorSection';
 
 class SectorTable extends React.Component {
@@ -158,7 +155,7 @@ SectorTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listSectors: PropTypes.func,
 };
 

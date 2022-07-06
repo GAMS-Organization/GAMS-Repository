@@ -121,7 +121,7 @@ class UpdateSectorSection extends React.Component {
       <div>
         <Snackbar
           place={this.state.notification.place}
-          color={this.state.notification.color}
+          color={this.state.notification.color || 'success'}
           icon={AddAlert}
           message={this.state.notification.message}
           open={this.state.notification.show}

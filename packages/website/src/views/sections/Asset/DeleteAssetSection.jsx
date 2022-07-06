@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -50,7 +49,6 @@ class DeleteAssetSection extends React.Component {
 
   render() {
     const { classes, asset, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { code } = asset;
     return (
       <div>

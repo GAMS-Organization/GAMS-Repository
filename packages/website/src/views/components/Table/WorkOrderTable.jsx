@@ -10,7 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
@@ -19,7 +18,6 @@ import Visibility from '@material-ui/icons/Visibility';
 
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
 import CancelWorkOrderSection from '../../sections/WorkOrder/CancelWorkOrderSection.jsx';
 import TakeWorkOrderSection from '../../sections/WorkOrder/TakeWorkOrderSection';
@@ -164,7 +162,15 @@ class WorkOrderTable extends React.Component {
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickCancel(prop)}
                       >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        <Close
+                          className={
+                            classes.tableActionButtonIcon +
+                            ' ' +
+                            (prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'
+                              ? classes.disabled
+                              : classes.close)
+                          }
+                        />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
@@ -184,7 +190,18 @@ class WorkOrderTable extends React.Component {
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
                       >
-                        <PanToolIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        <PanToolIcon
+                          className={
+                            classes.tableActionButtonIcon +
+                            ' ' +
+                            (prop.visibleData[4] === 'cancelada' ||
+                            prop.visibleData[4] === 'tomada' ||
+                            prop.visibleData[4] === 'asignada' ||
+                            prop.visibleData[4] === 'finalizada'
+                              ? classes.disabled
+                              : classes.close)
+                          }
+                        />
                       </IconButton>
                     </Tooltip>
                     {(roles.includes('boss') || roles.includes('admin')) && (
@@ -205,7 +222,18 @@ class WorkOrderTable extends React.Component {
                           className={classes.tableActionButton}
                           onClick={() => this.handleClickAssign(prop)}
                         >
-                          <AssignmentIndIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                          <AssignmentIndIcon
+                            className={
+                              classes.tableActionButtonIcon +
+                              ' ' +
+                              (prop.visibleData[4] === 'cancelada' ||
+                              prop.visibleData[4] === 'asignada' ||
+                              prop.visibleData[4] === 'tomada' ||
+                              prop.visibleData[4] === 'finalizada'
+                                ? classes.disabled
+                                : classes.close)
+                            }
+                          />
                         </IconButton>
                       </Tooltip>
                     )}
@@ -225,7 +253,17 @@ class WorkOrderTable extends React.Component {
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickComplete(prop)}
                       >
-                        <AssignmentIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                        <AssignmentIcon
+                          className={
+                            classes.tableActionButtonIcon +
+                            ' ' +
+                            (prop.visibleData[4] === 'cancelada' ||
+                            prop.visibleData[4] === 'finalizada' ||
+                            prop.visibleData[4] === 'libre'
+                              ? classes.disabled
+                              : classes.close)
+                          }
+                        />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
@@ -260,7 +298,7 @@ WorkOrderTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listWorkOrders: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
 };

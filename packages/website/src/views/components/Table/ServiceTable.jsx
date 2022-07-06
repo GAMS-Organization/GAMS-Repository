@@ -11,12 +11,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 import UpdateServiceSection from '../../sections/Service/UpdateServiceSection.jsx';
-import Snackbar from '../Snackbar/Snackbar';
 
 import DeleteServiceSection from '../../sections/Service/DeleteServiceSection';
 

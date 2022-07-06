@@ -176,7 +176,7 @@ ProductTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listProducts: PropTypes.func,
 };
 

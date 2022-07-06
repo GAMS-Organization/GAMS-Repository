@@ -199,7 +199,7 @@ UsersTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listUsers: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
 };
