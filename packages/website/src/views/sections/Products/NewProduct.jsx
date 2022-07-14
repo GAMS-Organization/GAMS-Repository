@@ -77,8 +77,8 @@ class NewProduct extends React.Component {
             <form onSubmit={this.createProduct}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo producto</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Producto</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer alignItems={'center'} justify={'center'}>

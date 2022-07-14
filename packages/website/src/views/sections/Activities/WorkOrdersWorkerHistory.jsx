@@ -99,7 +99,7 @@ class WorkOrdersWorkerHistory extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
+              <h4 className={classes.cardTitleWhite}>Actividades Recientes</h4>
               <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus actividades como personal de mantenimiento son listadas aqui.

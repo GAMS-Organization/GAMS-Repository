@@ -86,8 +86,8 @@ class NewUserSection extends React.Component {
             <form onSubmit={this.createUser}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo usuario</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Usuario</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>

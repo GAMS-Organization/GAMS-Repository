@@ -67,8 +67,8 @@ class WorkOrderTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Ordenes de trabajo</h4>
-              <p className={classes.cardCategoryWhite}>Aquí se listan todas las ordenes de trabajo</p>
+              <h4 className={classes.cardTitleWhite}>Órdenes de Trabajo</h4>
+              <p className={classes.cardCategoryWhite}>Aquí se listan todas las órdenes de trabajo</p>
             </CardHeader>
             <CardBody>
               <WorkOrderTable

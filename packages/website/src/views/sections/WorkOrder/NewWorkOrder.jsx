@@ -245,8 +245,8 @@ class NewWorkOrder extends React.Component {
             <form onSubmit={this.CreateWorkOrder}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nueva orden de trabajo</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nueva Orden de Trabajo</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody className={classes.workOrderForm}>
                   <GridContainer>

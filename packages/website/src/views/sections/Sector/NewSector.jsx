@@ -74,7 +74,7 @@ class NewSector extends React.Component {
             <form onSubmit={this.createSector}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo sector</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Sector</h4>
                   <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>

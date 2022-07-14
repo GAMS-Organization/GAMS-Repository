@@ -150,13 +150,13 @@ class createToolRequestSection extends React.Component {
             <form onSubmit={this.createToolRequest}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Solicitud de herramientas</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Solicitud de Herramientas</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="tool" className={classes.selectLabel}>
                           Herramienta
                         </InputLabel>
@@ -191,13 +191,29 @@ class createToolRequestSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="Cantidad"
+                        id="quantity"
+                        error={errors.quantity}
+                        formControlProps={{
+                          fullWidth: true,
+                          className: classes.customInput,
+                        }}
+                        inputProps={{
+                          required: true,
+                          name: 'quantity',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText=""
                         id="date"
                         value={this.state.dateNow}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           type: 'date',
@@ -207,7 +223,7 @@ class createToolRequestSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Sector
                         </InputLabel>
@@ -243,7 +259,7 @@ class createToolRequestSection extends React.Component {
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="Area" className={classes.selectLabel}>
                           Área
                         </InputLabel>
@@ -278,30 +294,16 @@ class createToolRequestSection extends React.Component {
                       </FormControl>
                     </GridItem>
                   </GridContainer>
+                </CardBody>
+                <CardFooter className={classes.buttonContainer}>
                   <GridContainer justify={'center'}>
                     <GridItem xs={12} sm={12} md={4}>
-                      <CustomInput
-                        labelText="Cantidad"
-                        id="quantity"
-                        error={errors.quantity}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          required: true,
-                          name: 'quantity',
-                        }}
-                      />
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Solicitar
+                      </Button>
                     </GridItem>
                   </GridContainer>
-                </CardBody>
-                <GridContainer justify={'center'}>
-                  <CardFooter>
-                    <Button type="submit" color="gamsRed">
-                      Solicitar
-                    </Button>
-                  </CardFooter>
-                </GridContainer>
+                </CardFooter>
               </Card>
             </form>
           </GridItem>

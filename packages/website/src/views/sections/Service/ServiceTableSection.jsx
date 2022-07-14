@@ -46,7 +46,7 @@ class ServiceTableSection extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>servicios</h4>
+              <h4 className={classes.cardTitleWhite}>Servicios</h4>
               <p className={classes.cardCategoryWhite}>Aquí se listan todos los servicios</p>
             </CardHeader>
             <CardBody>

@@ -80,17 +80,18 @@ class NewElementEducationalSection extends React.Component {
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo Articulo</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -98,13 +99,14 @@ class NewElementEducationalSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Cantidad"
                         id="totalQuantity"
                         error={errors.totalQuantity}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -112,13 +114,14 @@ class NewElementEducationalSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Cantidad prestada"
                         id="borrowQuantity"
                         error={errors.borrowQuantity}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -128,10 +131,14 @@ class NewElementEducationalSection extends React.Component {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
+                <CardFooter className={classes.buttonContainer}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Crear
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

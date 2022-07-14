@@ -98,7 +98,7 @@ class NewElementSection extends React.Component {
             <form onSubmit={this.createElement}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo elemento</h4>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Elemento</h4>
                   <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
