@@ -156,12 +156,14 @@ class UpdateToolRequestSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={this.handleClose}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

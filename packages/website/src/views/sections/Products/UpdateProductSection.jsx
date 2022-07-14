@@ -96,23 +96,7 @@ class UpdateProductSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateProduct}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
+                <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -129,12 +113,14 @@ class UpdateProductSection extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={() => close()}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

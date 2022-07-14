@@ -27,6 +27,7 @@ class UpdateStock extends React.Component {
       open: false,
       notification: false,
     };
+    console.log(this.state.current);
   }
 
   componentDidMount() {
@@ -51,15 +52,16 @@ class UpdateStock extends React.Component {
 
   updateStock = async e => {
     e.preventDefault();
-
-    const fields = ['id', 'quantity', 'minimunQuantity'];
     const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
 
+    const quantity = formElements.namedItem('quantity').value;
+    const minimunQuantity = formElements.namedItem('minimunQuantity').value;
+
+    const formValues = {
+      id: this.props.current.id,
+      quantity: quantity,
+      minimunQuantity: minimunQuantity,
+    };
     const response = await serviceStock.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
@@ -73,7 +75,7 @@ class UpdateStock extends React.Component {
   render() {
     const { classes, current, Transition } = this.props;
     const { errors } = this.state;
-    const { id, quantity, minimunQuantity } = current;
+    const { quantity, minimunQuantity } = current;
     return (
       <div>
         <Snackbar
@@ -107,23 +109,7 @@ class UpdateStock extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateStock}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                      required: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Cantidad"
                     id="quantity"
@@ -138,7 +124,7 @@ class UpdateStock extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Cantidad Minima"
                     id="minimunQuantity"

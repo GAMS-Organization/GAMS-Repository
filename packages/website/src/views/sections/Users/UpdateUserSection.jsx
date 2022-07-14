@@ -49,17 +49,21 @@ class UpdateUserSection extends React.Component {
   //se actualiza el usuario luego de ser editado
   updateUser = async e => {
     e.preventDefault();
-
-    const fields = ['id', 'name', 'surname', 'email', 'roles'];
+    //const fields = ['id', 'name', 'surname', 'email', 'roles'];
     const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field).value,
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
 
-    formValues.roles = [formValues.roles];
+    const name = formElements.namedItem('name').value;
+    const surname = formElements.namedItem('surname').value;
+    const email = formElements.namedItem('email').value;
+    const roles = formElements.namedItem('roles').value;
 
+    const formValues = {
+      id: this.props.user.id,
+      name: name,
+      surname: surname,
+      email: email,
+      roles: [roles],
+    };
     const response = await serviceUser.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
@@ -111,7 +115,7 @@ class UpdateUserSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateUser}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
+                {/*<GridItem xs={12} sm={12} md={1}>
                   <CustomInput
                     labelText="ID"
                     id="id"
@@ -126,8 +130,8 @@ class UpdateUserSection extends React.Component {
                       name: 'id',
                     }}
                   />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={5}>
+                </GridItem>*/}
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -230,12 +234,14 @@ class UpdateUserSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={() => close()}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

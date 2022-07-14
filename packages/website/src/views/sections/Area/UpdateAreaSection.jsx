@@ -57,7 +57,7 @@ class UpdateAreaSection extends React.Component {
   updateArea = async e => {
     e.preventDefault();
 
-    const fields = ['id', 'name', 'services'];
+    const fields = ['name', 'services'];
     const formElements = e.target.elements;
     const formValues = fields
       .map(field => ({
@@ -65,8 +65,8 @@ class UpdateAreaSection extends React.Component {
       }))
       .reduce((current, next) => ({ ...current, ...next }));
 
+    formValues.id = this.props.area.id;
     formValues.services = formValues.services.split(',');
-
     const response = await serviceArea.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESFUL') {
@@ -121,23 +121,7 @@ class UpdateAreaSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateArea}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={8}>
+                <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -152,7 +136,7 @@ class UpdateAreaSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={10}>
+                <GridItem xs={12} sm={12} md={12}>
                   <FormControl fullWidth className={classes.selectFormControl}>
                     <InputLabel htmlFor="multiple-select" className={classes.selectLabel}>
                       Servicios
@@ -198,12 +182,14 @@ class UpdateAreaSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={() => close()}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>
