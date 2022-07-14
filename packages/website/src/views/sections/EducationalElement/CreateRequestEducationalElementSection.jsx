@@ -114,7 +114,7 @@ class createRequestEducationalElementSection extends React.Component {
       quantity: parseInt(quantity),
     };
     const response = await serviceEducationalElement.createElementRequest(formValues);
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('quantity').value = '';
       formElements.namedItem('date').value = '';
       this.setState({

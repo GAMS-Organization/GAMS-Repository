@@ -39,54 +39,6 @@ class EventTableSection extends React.Component {
     this.setState({ event: events, totalPages: response.data.pageCount, page: page });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listEvents(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listEvents(1) : this.listEvents(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listEvents(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listEvents(this.state.totalPages)
-          : this.listEvents(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listEvents(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -108,7 +60,12 @@ class EventTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listEvents}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

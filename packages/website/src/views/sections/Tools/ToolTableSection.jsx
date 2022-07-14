@@ -36,54 +36,6 @@ class ToolTableSection extends React.Component {
     this.setState({ tool: tools, totalPages: response.data.pageCount });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listTools(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listTools(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listTools(this.state.totalPages)
-          : this.listTools(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listTools(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -106,7 +58,12 @@ class ToolTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listTools}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

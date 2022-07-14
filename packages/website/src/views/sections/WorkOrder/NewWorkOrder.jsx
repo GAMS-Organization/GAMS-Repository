@@ -195,7 +195,7 @@ class NewWorkOrder extends React.Component {
       assetId: this.state.idAsset,
     };
     const response = await serviceWorkOrder.create(formValues);
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('observations').value = '';
       formElements.namedItem('date').value = '';
       this.setState({

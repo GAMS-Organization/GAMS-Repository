@@ -44,38 +44,6 @@ class AreaTableSection extends React.Component {
     this.setState({ area: areas, totalPages: response.data.pageCount, page: page });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: 'PREV',
-        onClick: () => {
-          this.state.page === 1 ? this.listAreas(1) : this.listAreas(this.state.page - 1);
-        },
-      },
-    ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listAreas(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: 'NEXT',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listAreas(this.state.totalPages)
-          : this.listAreas(this.state.page + 1);
-      },
-    });
-    return pages;
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -98,7 +66,12 @@ class AreaTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listAreas}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

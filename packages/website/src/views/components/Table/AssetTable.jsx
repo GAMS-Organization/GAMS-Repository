@@ -40,7 +40,7 @@ class AssetTable extends React.Component {
   /*deleteAsset = async prop => {
     const response = await serviceAsset.delete(prop[0]);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });

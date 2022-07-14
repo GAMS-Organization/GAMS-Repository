@@ -56,7 +56,7 @@ class NewUserSection extends React.Component {
 
     const response = await serviceUser.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });

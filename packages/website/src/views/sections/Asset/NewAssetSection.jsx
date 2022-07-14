@@ -122,7 +122,7 @@ class NewAssetSection extends React.Component {
 
     const response = await serviceAsset.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('description').value = '';
       this.setState({
         notification: true,
@@ -160,12 +160,12 @@ class NewAssetSection extends React.Component {
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo Activo</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={10}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Sector
                         </InputLabel>
@@ -199,8 +199,8 @@ class NewAssetSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="Area" className={classes.selectLabel}>
                           Área
                         </InputLabel>
@@ -233,8 +233,8 @@ class NewAssetSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="servicio" className={classes.selectLabel}>
                           Servicio
                         </InputLabel>
@@ -267,8 +267,8 @@ class NewAssetSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="Elemento" className={classes.selectLabel}>
                           Elemento
                         </InputLabel>
@@ -301,12 +301,13 @@ class NewAssetSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Descripcion"
                         id="description"
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: false,
@@ -317,10 +318,14 @@ class NewAssetSection extends React.Component {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
+                <CardFooter className={classes.buttonContainer}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Crear
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

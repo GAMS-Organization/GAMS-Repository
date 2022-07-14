@@ -26,10 +26,6 @@ class NewSector extends React.Component {
     };
   }
 
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };
@@ -48,7 +44,7 @@ class NewSector extends React.Component {
 
     const response = await serviceSector.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -79,17 +75,18 @@ class NewSector extends React.Component {
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo sector</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={8}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -98,13 +95,14 @@ class NewSector extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={10}>
+                    <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="Codigo"
                         id="code"
                         error={errors.code}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -115,10 +113,14 @@ class NewSector extends React.Component {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
+                <CardFooter className={classes.buttonContainer}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Crear
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

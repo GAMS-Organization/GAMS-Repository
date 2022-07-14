@@ -37,7 +37,7 @@ class DeleteSectorSection extends React.Component {
   deleteSector = async e => {
     e.preventDefault();
     const response = await serviceSector.delete(this.props.sector.id);
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listSectors();
       this.props.close();

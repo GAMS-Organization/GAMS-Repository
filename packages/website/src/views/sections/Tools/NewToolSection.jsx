@@ -46,7 +46,7 @@ class NewToolSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
     const response = await serviceTools.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('name').value = '';
       formElements.namedItem('totalQuantity').value = '';
       formElements.namedItem('borrowQuantity').value = '';

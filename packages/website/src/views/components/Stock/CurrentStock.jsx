@@ -39,7 +39,7 @@ class CurrentStock extends React.Component {
   deleteStock = async prop => {
     const response = await serviceCurrentStock.delete(prop.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listStock();
     } else {

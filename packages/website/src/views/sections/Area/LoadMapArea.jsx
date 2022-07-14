@@ -92,7 +92,7 @@ class LoadMapArea extends React.Component {
         },
       });
     } else {
-      if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+      if (response.type === 'UPLOAD_IMAGE_SUCCESSFUL') {
         const urlService = nameArea.concat(response.data.path.split(/(\\|\/)/g).pop());
 
         const formValues = {
@@ -104,7 +104,7 @@ class LoadMapArea extends React.Component {
         };
         const response2 = await serviceArea.update(formValues);
 
-        if (response2.type === 'UPDATED_SUCCESFUL') {
+        if (response2.type === 'UPDATED_SUCCESSFUL') {
           this.setState({
             notification: {
               show: true,

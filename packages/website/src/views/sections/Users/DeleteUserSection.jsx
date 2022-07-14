@@ -38,7 +38,7 @@ class DeleteUserSection extends React.Component {
     e.preventDefault();
     const response = await serviceUser.delete(this.props.user.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listUsers();
       this.props.close();

@@ -37,7 +37,7 @@ class EnableUserSection extends React.Component {
   enableUser = async e => {
     e.preventDefault();
     const response = await serviceUser.enable(this.props.user.id);
-    if (response.type === 'ENABLE_SUCCESFUL') {
+    if (response.type === 'ENABLE_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listUsers();
       this.props.close();

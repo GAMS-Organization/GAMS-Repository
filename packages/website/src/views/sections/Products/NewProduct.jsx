@@ -47,7 +47,7 @@ class NewProduct extends React.Component {
 
     const response = await serviceProduct.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true });
     } else {
       this.setState({ notification: true, errors: response.error });

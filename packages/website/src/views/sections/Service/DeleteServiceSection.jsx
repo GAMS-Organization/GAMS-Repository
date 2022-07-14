@@ -38,7 +38,7 @@ class DeleteServiceSection extends React.Component {
     e.preventDefault();
     const response = await serviceService.delete(this.props.service.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listServices();
       this.props.close();

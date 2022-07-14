@@ -37,7 +37,7 @@ class DeleteToolSection extends React.Component {
     e.preventDefault();
     const response = await serviceTool.delete(this.props.tool.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listTools();
       this.props.close();

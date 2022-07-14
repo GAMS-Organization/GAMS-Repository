@@ -38,7 +38,7 @@ class DeleteAssetSection extends React.Component {
     e.preventDefault();
     const response = await serviceAsset.delete(this.props.asset.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listAssets();
       this.props.close();

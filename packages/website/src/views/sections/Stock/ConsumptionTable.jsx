@@ -68,7 +68,7 @@ class ConsumptionTable extends React.Component {
     } else {
       const response = await serviceDeparture.create(request);
 
-      if (response.type === 'CREATED_SUCCESFUL') {
+      if (response.type === 'CREATED_SUCCESSFUL') {
         this.setState({ notification: true });
       } else {
         this.setState({ notification: true, errors: response.error });

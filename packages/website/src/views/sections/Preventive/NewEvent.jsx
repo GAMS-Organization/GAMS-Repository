@@ -90,7 +90,7 @@ class NewEvent extends React.Component {
     this.props.closeHandler();
     const response = await servicePreventive.create(event);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
     } else {
       this.setState({ notification: true, errors: response.error });

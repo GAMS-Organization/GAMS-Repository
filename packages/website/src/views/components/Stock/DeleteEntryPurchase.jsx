@@ -38,7 +38,7 @@ class DeleteEntryPurchase extends React.Component {
     e.preventDefault();
     const response = await serviceEntryPurchaseStock.delete(this.props.entry.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listEntries();
       this.props.close();

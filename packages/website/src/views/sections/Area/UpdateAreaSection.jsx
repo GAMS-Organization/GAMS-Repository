@@ -69,7 +69,7 @@ class UpdateAreaSection extends React.Component {
 
     const response = await serviceArea.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listAreas();
       this.props.close();

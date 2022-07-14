@@ -47,7 +47,7 @@ class UpdateElementSection extends React.Component {
 
     const response = await serviceElement.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listElements();
       this.props.close();

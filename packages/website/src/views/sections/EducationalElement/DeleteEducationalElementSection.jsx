@@ -37,7 +37,7 @@ class DeleteEducationalElementSection extends React.Component {
     e.preventDefault();
     const response = await serviceEducationalElement.delete(this.props.educationalElement.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listEducationalElements();
       this.props.close();

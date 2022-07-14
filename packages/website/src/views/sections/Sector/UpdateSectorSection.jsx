@@ -74,14 +74,14 @@ class UpdateSectorSection extends React.Component {
         },
       });
     } else {
-      if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
+      if (response.type === 'UPLOAD_IMAGE_SUCCESSFUL') {
         const formValues = {
           id: formElements.namedItem('id').value,
           map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
         };
         const response2 = await serviceSector.update(formValues);
 
-        if (response2.type === 'UPDATED_SUCCESFUL') {
+        if (response2.type === 'UPDATED_SUCCESSFUL') {
           this.setState({
             notification: { show: true, color: 'success', message: 'El mapa fue cargado correctamente', place: 'tr' },
           });

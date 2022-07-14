@@ -6,7 +6,7 @@ class workOrderAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'CREATED_SUCCESFUL',
+        type: 'CREATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -50,7 +50,7 @@ class workOrderAdapter {
     let { status, data } = updateResponse;
     if (!isError(status)) {
       return {
-        type: 'UPDATED_SUCCESFUL',
+        type: 'UPDATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -70,7 +70,7 @@ class workOrderAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'DELETED_SUCCESFUL',
+        type: 'DELETED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -90,7 +90,7 @@ class workOrderAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'UPLOAD_IMAGE_SUCCESFUL',
+        type: 'UPLOAD_IMAGE_SUCCESSFUL',
         data: data,
       };
     } else {
