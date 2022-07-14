@@ -75,6 +75,15 @@ class educationalElement {
     }
     return educationalElementAdapter.listElementRequest(listResponse);
   }
+  async listMyElementRequest(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`elementRequest/myElementRequests/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return educationalElementAdapter.listElementRequest(listResponse);
+  }
 
   async updateElementRequest(dataEducationalElement) {
     const body = dataEducationalElement;

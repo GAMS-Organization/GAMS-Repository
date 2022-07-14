@@ -56,7 +56,7 @@ router.post(
 router.put(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL, ROL.USER]);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const updateToolRequestAction: UpdateToolRequestAction = DIContainer.resolve<UpdateToolRequestAction>(
@@ -82,7 +82,7 @@ router.get(
 router.delete(
   '/:id([0-9]+)',
   (req, res, next): void => {
-    authMiddleware(req, res, next, [ROL.ADMIN, ROL.BOSS, ROL.PERSONAL]);
+    authMiddleware(req, res, next, []);
   },
   asyncMiddleware(async (request: express.Request, response: express.Response) => {
     const destroyToolRequestAction: DestroyToolRequestAction = DIContainer.resolve<DestroyToolRequestAction>(

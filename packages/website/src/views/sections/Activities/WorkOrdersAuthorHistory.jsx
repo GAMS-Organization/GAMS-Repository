@@ -34,9 +34,27 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
+  cardHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
   mx3: {
-    marginLeft: '1rem',
-    marginRight: '.8rem',
+    marginRight: '.5rem',
+    '&~ div': {
+      marginLeft: '0px',
+      marginRight: '.5rem',
+    },
+    '@media (max-width: 500px)': {
+      '&~ div': {
+        marginTop: '.5rem',
+      },
+    },
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center',
+    },
   },
 };
 
@@ -82,7 +100,7 @@ class WorkOrdersAuthorHistory extends React.Component {
           <Card>
             <CardHeader color="gamsBlue">
               <h4 className={classes.cardTitleWhite}>Solicitudes de Órdenes de trabajo</h4>
-              <GridContainer>
+              <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus órdenes de trabajo son listadas aquí.
                 </p>
@@ -90,7 +108,7 @@ class WorkOrdersAuthorHistory extends React.Component {
                 <Warning badge>En proceso</Warning>
                 <Success badge>Realizada</Success>
                 <Danger badge>Cancelada</Danger>
-              </GridContainer>
+              </div>
             </CardHeader>
             <CardBody>
               <GridContainer>
@@ -107,7 +125,9 @@ class WorkOrdersAuthorHistory extends React.Component {
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      <div className={classes.alternativeText}>
+                        <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
@@ -115,7 +135,7 @@ class WorkOrdersAuthorHistory extends React.Component {
             </CardBody>
             {this.state.workOrderAuthorPage !== this.state.totalWorkOrderAuthorPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {

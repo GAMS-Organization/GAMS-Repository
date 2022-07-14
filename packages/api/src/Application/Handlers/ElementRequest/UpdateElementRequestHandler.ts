@@ -8,6 +8,7 @@ import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
 import IEducationalElementRepository from '../../../Domain/Interfaces/IEducationalElementRepository';
 import { STATUS } from '../../../API/Http/Enums/EducationalElement';
 import EducationalElementService from '../../../Domain/Services/EducationalElementService';
+import CannotUpdateEntity from '../../Exceptions/CannotUpdateEntity';
 
 @injectable()
 export default class UpdateElementRequestHandler {
@@ -46,13 +47,25 @@ export default class UpdateElementRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
+    if (elementRequest.getStatus() === STATUS.CANCELED) {
+      throw new CannotUpdateEntity('La solicitud ha sido cancelada y no puede ser actualizada');
+    }
+
+    if (elementRequest.getStatus() === STATUS.RETURNED) {
+      throw new CannotUpdateEntity('El elemento ya ha sido devuelto');
+    }
+
+    if (command.getStatus() === STATUS.CANCELED && elementRequest.getStatus() !== STATUS.PENDING) {
+      throw new CannotUpdateEntity('La solicitud puede ser cancelada solamente si el estado actual es pendiente');
+    }
+
     elementRequest.setStatus(command.getStatus());
     elementRequest.getArea().getId() !== command.getAreaId() ? elementRequest.setArea(area) : null;
     elementRequest.getElement().getId() !== command.getEducationalElementId()
       ? elementRequest.setElement(educationalElement)
       : null;
 
-    if (command.getStatus() === STATUS.RETURNED) {
+    if (command.getStatus() === STATUS.RETURNED || command.getStatus() === STATUS.CANCELED) {
       await this.educationalElementService.updateQuantity(elementRequest.getQuantity(), educationalElement, 'return');
     }
 
