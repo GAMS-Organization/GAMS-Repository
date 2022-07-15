@@ -103,6 +103,7 @@ class TableStockSection extends React.Component {
       let dataDeparture = {
         visibleData: [toDate(departure.date.slice(0, 10)), departure.observations],
         id: departure.id.toString(),
+        workOrderId: departure.workOrderId,
       };
       departures.push(dataDeparture);
     }

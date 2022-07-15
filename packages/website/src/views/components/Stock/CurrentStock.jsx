@@ -113,7 +113,7 @@ class CurrentStock extends React.Component {
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickUpdate(prop)}
                       >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

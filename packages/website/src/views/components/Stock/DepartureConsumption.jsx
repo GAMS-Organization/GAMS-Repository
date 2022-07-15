@@ -18,18 +18,22 @@ import Visibility from '@material-ui/icons/Visibility';
 import tasksStyle from '../../../styles/jss/material-dashboard-react/components/tasksStyle.jsx';
 import Snackbar from '../Snackbar/Snackbar';
 import serviceDepartureConsumptionStock from '../../../services/api/departureConsumptionStock';
+import serviceWorkOrder from '../../../services/api/workOrder';
 import ViewDepartureConsumption from './ViewDepartureConsumption';
 import DeleteDepartureConsumption from './DeleteDepartureConsumption';
+import DetailWorkOrderSection from '../../sections/WorkOrder/DetailWorkOrderSection';
 
 class DepartureConsumption extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       deleteModal: false,
+      detailModal: false,
       modal: false,
       departure: {},
       errors: {},
       notification: false,
+      workOrder: {},
     };
   }
 
@@ -38,7 +42,7 @@ class DepartureConsumption extends React.Component {
   };
 
   closeModal = () => {
-    this.setState({ deleteModal: false });
+    this.setState({ deleteModal: false, detailModal: false });
   };
 
   handleClickDelete = prop => {
@@ -54,6 +58,14 @@ class DepartureConsumption extends React.Component {
       departure: departureDetails.data.data,
     });
     this.child.showModal();
+  };
+
+  handleClickSeeOrderDetails = async prop => {
+    const workOrderResponse = await serviceWorkOrder.show(prop.workOrderId);
+    this.setState({
+      workOrder: workOrderResponse.data.data,
+    });
+    this.setState({ detailModal: true });
   };
 
   render() {
@@ -87,6 +99,12 @@ class DepartureConsumption extends React.Component {
           close={this.closeModal}
           listDepartures={this.props.listDepartures}
         />
+        <DetailWorkOrderSection
+          workOrder={this.state.workOrder}
+          open={this.state.detailModal}
+          close={this.closeModal}
+          listWorkOrders={this.props.listWorkOrders}
+        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
@@ -115,11 +133,30 @@ class DepartureConsumption extends React.Component {
                   <TableCell className={classes.tableActions}>
                     <Tooltip id="tooltip-top" title="Ver" placement="top" classes={{ tooltip: classes.tooltip }}>
                       <IconButton
-                        aria-label="Visibility"
+                        aria-label="Details"
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickSeeDetails(prop)}
                       >
-                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Ver orden de trabajo"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <IconButton
+                        aria-label="OrderDetails"
+                        className={classes.tableActionButton}
+                        onClick={() => this.handleClickSeeOrderDetails(prop)}
+                        disabled={!prop.workOrderId}
+                      >
+                        <Visibility
+                          className={
+                            classes.tableActionButtonIcon + ' ' + (prop.workOrderId ? classes.close : classes.disabled)
+                          }
+                        />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
@@ -129,7 +166,7 @@ class DepartureConsumption extends React.Component {
                       classes={{ tooltip: classes.tooltip }}
                     >
                       <IconButton
-                        aria-label="Close"
+                        aria-label="Delete"
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickDelete(prop)}
                       >

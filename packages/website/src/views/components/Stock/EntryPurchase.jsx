@@ -115,7 +115,7 @@ class EntryPurchase extends React.Component {
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickSeeDetails(prop)}
                       >
-                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip

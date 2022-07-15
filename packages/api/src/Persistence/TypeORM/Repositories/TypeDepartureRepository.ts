@@ -6,14 +6,14 @@ import IDepartureRepository from '../../../Domain/Interfaces/IDepartureRepositor
 @injectable()
 export default class TypeDepartureRepository extends TypeRepository implements IDepartureRepository {
   public async findAll(): Promise<Departure[]> {
-    return await this.repository(Departure).find({ relations: ['consumptions', 'consumptions.product'] });
+    return await this.repository(Departure).find({ relations: ['consumptions', 'consumptions.product', 'workOrder'] });
   }
 
   public async findAllPaginated(initialIndex: number, limit: number): Promise<Departure[]> {
     return await this.repository(Departure).find({
       skip: initialIndex,
       take: limit,
-      relations: ['consumptions', 'consumptions.product'],
+      relations: ['consumptions', 'consumptions.product', 'workOrder'],
       order: {
         date: 'DESC',
       },
@@ -27,7 +27,7 @@ export default class TypeDepartureRepository extends TypeRepository implements I
   public async findOneById(id: number): Promise<Departure> {
     return await this.repository(Departure).findOne({
       where: { id: id },
-      relations: ['consumptions', 'consumptions.product'],
+      relations: ['consumptions', 'consumptions.product', 'workOrder'],
     });
   }
 
