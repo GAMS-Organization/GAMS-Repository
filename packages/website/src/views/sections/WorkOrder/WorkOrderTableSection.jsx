@@ -73,7 +73,14 @@ class WorkOrderTableSection extends React.Component {
             <CardBody>
               <WorkOrderTable
                 tableHeaderColor="gamsBlue"
-                tableHead={['Fecha de solicitud', 'Prioridad', 'Usuario', 'Activo', 'Estado', 'Responsables']}
+                tableHead={[
+                  'Fecha de solicitud',
+                  'Prioridad',
+                  'Usuario solicitante',
+                  'Activo',
+                  'Estado',
+                  'Responsables',
+                ]}
                 tableData={this.state.workOrder}
                 listWorkOrders={this.listWorkOrders}
                 roles={roles}

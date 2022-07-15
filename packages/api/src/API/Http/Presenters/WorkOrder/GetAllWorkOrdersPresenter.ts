@@ -48,6 +48,7 @@ export default class GetAllWorkOrdersPresenter implements IPresenter {
         startDate: workOrder.getStartDate() ? workOrder.getStartDate() : null,
         realizationDate: workOrder.getRealizationDate() ? workOrder.getRealizationDate() : null,
         workers: workOrder.getUserWorkOrders() ? workOrder.getUserWorkOrders() : null,
+        taskDescription: workOrder.getTaskDescription(),
       });
     });
 

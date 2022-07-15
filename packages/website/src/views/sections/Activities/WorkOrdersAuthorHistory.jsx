@@ -86,12 +86,12 @@ class WorkOrdersAuthorHistory extends React.Component {
     const { classes } = this.props;
 
     const state = {
-      libre: 'info',
-      pausada: 'warning',
-      finalizada: 'success',
-      asignada: 'warning',
-      tomada: 'warning',
-      cancelada: 'danger',
+      Libre: 'info',
+      Pausada: 'warning',
+      Finalizada: 'success',
+      Asignada: 'warning',
+      Tomada: 'warning',
+      Cancelada: 'danger',
     };
 
     return (

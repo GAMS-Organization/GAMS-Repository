@@ -66,7 +66,7 @@ class DetailWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}, ${this.state.errors.details}`
-              : 'Orden de trabajo tomada correctamente'
+              : 'Orden de trabajo Tomada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -94,7 +94,7 @@ class DetailWorkOrderSection extends React.Component {
                 <>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText="Usuario"
+                      labelText="Usuario solicitante"
                       id="user"
                       formControlProps={{
                         fullWidth: true,
@@ -108,22 +108,6 @@ class DetailWorkOrderSection extends React.Component {
                   </GridItem>
                 </>
               ) : null}
-
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Fecha de la orden"
-                  id="orderDate"
-                  formControlProps={{
-                    fullWidth: true,
-                  }}
-                  inputProps={{
-                    disabled: true,
-                    type: 'date',
-                    name: 'orderDate',
-                    defaultValue: workOrder.orderDate ? workOrder.orderDate.slice(0, 10) : '',
-                  }}
-                />
-              </GridItem>
               <GridItem xs={12} sm={12} md={6}>
                 <CustomInput
                   labelText="Prioridad"
@@ -152,43 +136,54 @@ class DetailWorkOrderSection extends React.Component {
                   }}
                 />
               </GridItem>
+              <GridItem xs={12} sm={12} md={6}>
+                <CustomInput
+                  labelText="Fecha de solicitud"
+                  id="orderDate"
+                  formControlProps={{
+                    fullWidth: true,
+                  }}
+                  inputProps={{
+                    disabled: true,
+                    type: 'date',
+                    name: 'orderDate',
+                    defaultValue: workOrder.orderDate ? workOrder.orderDate.slice(0, 10) : '',
+                  }}
+                />
+              </GridItem>
               {workOrder.startDate ? (
-                <>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Día de comienzo"
-                      id="startDate"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        disabled: true,
-                        name: 'startDate',
-                        type: 'date',
-                        defaultValue: workOrder.startDate,
-                      }}
-                    />
-                  </GridItem>
-                </>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Fecha de comienzo"
+                    id="startDate"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      name: 'startDate',
+                      type: 'date',
+                      defaultValue: workOrder.startDate,
+                    }}
+                  />
+                </GridItem>
               ) : null}
               {workOrder.realizationDate ? (
-                <>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Día Completada"
-                      id="realizationDate"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        disabled: true,
-                        name: 'realizationDate',
-                        type: 'date',
-                        defaultValue: workOrder.realizationDate,
-                      }}
-                    />
-                  </GridItem>
-                </>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Fecha de finalización"
+                    id="realizationDate"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      name: 'realizationDate',
+                      type: 'date',
+                      defaultValue: workOrder.realizationDate,
+                    }}
+                  />
+                </GridItem>
               ) : null}
               {workOrder.asset ? (
                 <>
@@ -265,22 +260,36 @@ class DetailWorkOrderSection extends React.Component {
                 </>
               ) : null}
               {workOrder.comment ? (
-                <>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Comentario"
-                      id="comment"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        disabled: true,
-                        name: 'comment',
-                        defaultValue: workOrder.comment,
-                      }}
-                    />
-                  </GridItem>
-                </>
+                <GridItem xs={12} sm={12} md={12}>
+                  <CustomInput
+                    labelText="Comentario"
+                    id="comment"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      name: 'comment',
+                      defaultValue: workOrder.comment,
+                    }}
+                  />
+                </GridItem>
+              ) : null}
+              {workOrder.taskDescription ? (
+                <GridItem xs={12} sm={12} md={12}>
+                  <CustomInput
+                    labelText="Acciones realizadas"
+                    id="taskDescription"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      disabled: true,
+                      name: 'taskDescription',
+                      defaultValue: workOrder.taskDescription,
+                    }}
+                  />
+                </GridItem>
               ) : null}
             </GridContainer>
             <GridContainer>

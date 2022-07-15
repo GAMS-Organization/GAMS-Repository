@@ -158,7 +158,7 @@ class WorkOrderTable extends React.Component {
                     >
                       <IconButton
                         aria-label="Cancel"
-                        disabled={prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'}
+                        disabled={prop.visibleData[4] === 'Cancelada' || prop.visibleData[4] === 'Finalizada'}
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickCancel(prop)}
                       >
@@ -166,7 +166,7 @@ class WorkOrderTable extends React.Component {
                           className={
                             classes.tableActionButtonIcon +
                             ' ' +
-                            (prop.visibleData[4] === 'cancelada' || prop.visibleData[4] === 'finalizada'
+                            (prop.visibleData[4] === 'Cancelada' || prop.visibleData[4] === 'Finalizada'
                               ? classes.disabled
                               : classes.close)
                           }
@@ -182,10 +182,10 @@ class WorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Take"
                         disabled={
-                          prop.visibleData[4] === 'cancelada' ||
-                          prop.visibleData[4] === 'tomada' ||
-                          prop.visibleData[4] === 'asignada' ||
-                          prop.visibleData[4] === 'finalizada'
+                          prop.visibleData[4] === 'Cancelada' ||
+                          prop.visibleData[4] === 'Tomada' ||
+                          prop.visibleData[4] === 'Asignada' ||
+                          prop.visibleData[4] === 'Finalizada'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickTake(prop)}
@@ -194,10 +194,10 @@ class WorkOrderTable extends React.Component {
                           className={
                             classes.tableActionButtonIcon +
                             ' ' +
-                            (prop.visibleData[4] === 'cancelada' ||
-                            prop.visibleData[4] === 'tomada' ||
-                            prop.visibleData[4] === 'asignada' ||
-                            prop.visibleData[4] === 'finalizada'
+                            (prop.visibleData[4] === 'Cancelada' ||
+                            prop.visibleData[4] === 'Tomada' ||
+                            prop.visibleData[4] === 'Asignada' ||
+                            prop.visibleData[4] === 'Finalizada'
                               ? classes.disabled
                               : classes.close)
                           }
@@ -214,10 +214,10 @@ class WorkOrderTable extends React.Component {
                         <IconButton
                           aria-label="Assign"
                           disabled={
-                            prop.visibleData[4] === 'cancelada' ||
-                            prop.visibleData[4] === 'asignada' ||
-                            prop.visibleData[4] === 'tomada' ||
-                            prop.visibleData[4] === 'finalizada'
+                            prop.visibleData[4] === 'Cancelada' ||
+                            prop.visibleData[4] === 'Asignada' ||
+                            prop.visibleData[4] === 'Tomada' ||
+                            prop.visibleData[4] === 'Finalizada'
                           }
                           className={classes.tableActionButton}
                           onClick={() => this.handleClickAssign(prop)}
@@ -226,10 +226,10 @@ class WorkOrderTable extends React.Component {
                             className={
                               classes.tableActionButtonIcon +
                               ' ' +
-                              (prop.visibleData[4] === 'cancelada' ||
-                              prop.visibleData[4] === 'asignada' ||
-                              prop.visibleData[4] === 'tomada' ||
-                              prop.visibleData[4] === 'finalizada'
+                              (prop.visibleData[4] === 'Cancelada' ||
+                              prop.visibleData[4] === 'Asignada' ||
+                              prop.visibleData[4] === 'Tomada' ||
+                              prop.visibleData[4] === 'Finalizada'
                                 ? classes.disabled
                                 : classes.close)
                             }
@@ -246,9 +246,9 @@ class WorkOrderTable extends React.Component {
                       <IconButton
                         aria-label="Complete"
                         disabled={
-                          prop.visibleData[4] === 'cancelada' ||
-                          prop.visibleData[4] === 'finalizada' ||
-                          prop.visibleData[4] === 'libre'
+                          prop.visibleData[4] === 'Cancelada' ||
+                          prop.visibleData[4] === 'Finalizada' ||
+                          prop.visibleData[4] === 'Libre'
                         }
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickComplete(prop)}
@@ -257,9 +257,9 @@ class WorkOrderTable extends React.Component {
                           className={
                             classes.tableActionButtonIcon +
                             ' ' +
-                            (prop.visibleData[4] === 'cancelada' ||
-                            prop.visibleData[4] === 'finalizada' ||
-                            prop.visibleData[4] === 'libre'
+                            (prop.visibleData[4] === 'Cancelada' ||
+                            prop.visibleData[4] === 'Finalizada' ||
+                            prop.visibleData[4] === 'Libre'
                               ? classes.disabled
                               : classes.close)
                           }
