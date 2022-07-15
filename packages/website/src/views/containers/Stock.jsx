@@ -32,17 +32,22 @@ class Stock extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleClick = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     return (
       <div>
         <GridContainer>
-          <PurchaseTable />
-          <ConsumptionTable />
+          <PurchaseTable onSubmit={() => this.handleClick(true)} />
+          <ConsumptionTable onSubmit={() => this.handleClick(true)} />
         </GridContainer>
-        <TableStockSection />
+        <TableStockSection shouldLoad={this.state.shouldLoad} onLoad={this.handleClick} />
       </div>
     );
   }

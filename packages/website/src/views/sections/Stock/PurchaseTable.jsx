@@ -75,6 +75,7 @@ class PurchaseTable extends React.Component {
       if (response.type === 'CREATED_SUCCESSFUL') {
         this.setState({ notification: true, data: [] });
         this.formRef.reset();
+        this.props.onSubmit();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
