@@ -35,6 +35,7 @@ class PurchaseTable extends React.Component {
       productsResponse: [],
       notification: false,
     };
+    this.formRef = {};
   }
 
   closeNotification = () => {
@@ -72,7 +73,8 @@ class PurchaseTable extends React.Component {
       const response = await serviceEntry.create(request);
 
       if (response.type === 'CREATED_SUCCESSFUL') {
-        this.setState({ notification: true });
+        this.setState({ notification: true, data: [] });
+        this.formRef.reset();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
@@ -172,7 +174,7 @@ class PurchaseTable extends React.Component {
         />
         <Card>
           <CardBody>
-            <form onSubmit={this.handleConfirmPurchaseClick}>
+            <form onSubmit={this.handleConfirmPurchaseClick} ref={ref => (this.formRef = ref)}>
               <GridContainer alignItems={'center'}>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput

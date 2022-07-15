@@ -34,6 +34,7 @@ class ConsumptionTable extends React.Component {
       errors: {},
       notification: false,
     };
+    this.formRef = {};
   }
 
   closeNotification = () => {
@@ -69,7 +70,8 @@ class ConsumptionTable extends React.Component {
       const response = await serviceDeparture.create(request);
 
       if (response.type === 'CREATED_SUCCESSFUL') {
-        this.setState({ notification: true });
+        this.setState({ notification: true, data: [] });
+        this.formRef.reset();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
@@ -168,7 +170,7 @@ class ConsumptionTable extends React.Component {
         />
         <Card>
           <CardBody>
-            <form onSubmit={this.handleConfirmConsumptionClick}>
+            <form onSubmit={this.handleConfirmConsumptionClick} ref={ref => (this.formRef = ref)}>
               <GridContainer alignItems={'center'}>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
