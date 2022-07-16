@@ -141,6 +141,7 @@ class WorkOrderTable extends React.Component {
                       title="Detalles"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Details"
@@ -155,6 +156,7 @@ class WorkOrderTable extends React.Component {
                       title="Cancelar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Cancel"
@@ -178,6 +180,7 @@ class WorkOrderTable extends React.Component {
                       title="Tomar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Take"
@@ -210,6 +213,7 @@ class WorkOrderTable extends React.Component {
                         title="Asignar"
                         placement="top"
                         classes={{ tooltip: classes.tooltip }}
+                        disableFocusListener={true}
                       >
                         <IconButton
                           aria-label="Assign"
@@ -242,6 +246,7 @@ class WorkOrderTable extends React.Component {
                       title="Completar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Complete"

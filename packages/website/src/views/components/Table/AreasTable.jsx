@@ -119,7 +119,13 @@ class AreasTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Editar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
@@ -133,6 +139,7 @@ class AreasTable extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"
@@ -147,6 +154,7 @@ class AreasTable extends React.Component {
                       title="Ver mapa"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Maps"

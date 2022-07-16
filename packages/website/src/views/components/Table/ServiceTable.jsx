@@ -100,6 +100,7 @@ class ServiceTable extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"

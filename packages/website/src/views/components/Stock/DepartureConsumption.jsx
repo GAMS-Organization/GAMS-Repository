@@ -131,7 +131,13 @@ class DepartureConsumption extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Ver" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Ver"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Details"
                         className={classes.tableActionButton}
@@ -145,6 +151,7 @@ class DepartureConsumption extends React.Component {
                       title="Ver orden de trabajo"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="OrderDetails"
@@ -164,6 +171,7 @@ class DepartureConsumption extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Delete"

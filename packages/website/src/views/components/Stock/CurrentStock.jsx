@@ -107,7 +107,13 @@ class CurrentStock extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Editar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}

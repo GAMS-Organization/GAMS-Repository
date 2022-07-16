@@ -100,6 +100,7 @@ class SectorTable extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"
@@ -114,6 +115,7 @@ class SectorTable extends React.Component {
                       title="Ver mapa"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Maps"

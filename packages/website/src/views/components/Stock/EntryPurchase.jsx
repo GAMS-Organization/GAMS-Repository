@@ -109,7 +109,13 @@ class EntryPurchase extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Ver" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Ver"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Visibility"
                         className={classes.tableActionButton}
@@ -123,6 +129,7 @@ class EntryPurchase extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"

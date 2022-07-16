@@ -176,7 +176,7 @@ class TableStockSection extends React.Component {
                 totalPages={this.state.totalPagesEntry}
                 color="gamsRed"
               />
-            ) : this.state.active === 1 ? (
+            ) : this.state.activeTab === 1 ? (
               <Pagination
                 listCallback={this.listStock}
                 currentPage={this.state.pageStock}
