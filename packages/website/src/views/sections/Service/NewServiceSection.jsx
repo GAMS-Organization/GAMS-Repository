@@ -24,6 +24,7 @@ class NewServiceSection extends React.Component {
       errors: {},
       notification: false,
     };
+    this.formRef = {};
   }
 
   closeNotification = () => {
@@ -46,6 +47,8 @@ class NewServiceSection extends React.Component {
 
     if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -71,7 +74,7 @@ class NewServiceSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createService}>
+            <form onSubmit={this.createService} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo Servicio</h4>

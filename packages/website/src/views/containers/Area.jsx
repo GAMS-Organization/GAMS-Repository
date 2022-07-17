@@ -30,16 +30,23 @@ class Area extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     const { roles } = this.props;
 
     return (
       <div>
-        {(roles.includes('admin') || roles.includes('boss')) && <NewAreaSection />}
-        <AreaTableSection />
+        {(roles.includes('admin') || roles.includes('boss')) && (
+          <NewAreaSection onSubmit={() => this.handleOnSubmit(true)} />
+        )}
+        <AreaTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

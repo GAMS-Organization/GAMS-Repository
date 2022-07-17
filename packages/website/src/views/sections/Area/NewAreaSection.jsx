@@ -36,6 +36,7 @@ class NewAreaSection extends React.Component {
       sector: [],
       selectedSector: [],
     };
+    this.formRef = {};
   }
 
   //Se obtienen los servicios y sectores
@@ -89,7 +90,9 @@ class NewAreaSection extends React.Component {
     const response = await serviceArea.create(formValues);
 
     if (response.type === 'CREATED_SUCCESSFUL') {
-      this.setState({ notification: true });
+      this.setState({ notification: true, selectedServices: [], selectedSector: [] });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -115,7 +118,7 @@ class NewAreaSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.createArea}>
+            <form onSubmit={this.createArea} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nueva Area</h4>

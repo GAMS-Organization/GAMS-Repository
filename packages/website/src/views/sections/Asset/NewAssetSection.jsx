@@ -41,6 +41,7 @@ class NewAssetSection extends React.Component {
       selectedElement: '',
       description: '',
     };
+    this.formRef = {};
   }
 
   //se obtienen los sectores
@@ -132,6 +133,8 @@ class NewAssetSection extends React.Component {
         selectedElement: '',
         description: '',
       });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -156,7 +159,7 @@ class NewAssetSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.createAsset}>
+            <form onSubmit={this.createAsset} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo Activo</h4>

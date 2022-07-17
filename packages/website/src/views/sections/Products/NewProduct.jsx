@@ -26,10 +26,6 @@ class NewProduct extends React.Component {
     this.formRef = {};
   }
 
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
   };

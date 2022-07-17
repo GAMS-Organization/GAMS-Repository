@@ -32,6 +32,7 @@ class NewElementSection extends React.Component {
       service: [],
       selectedService: '',
     };
+    this.formRef = {};
   }
 
   //se obtienen los servicios
@@ -69,7 +70,9 @@ class NewElementSection extends React.Component {
     const response = await serviceElement.create(formValues);
 
     if (response.type === 'CREATED_SUCCESSFUL') {
-      this.setState({ notification: true });
+      this.setState({ notification: true, selectedService: '' });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -95,7 +98,7 @@ class NewElementSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.createElement}>
+            <form onSubmit={this.createElement} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nuevo Elemento</h4>

@@ -58,7 +58,7 @@ class NewUserSection extends React.Component {
     const response = await serviceUser.create(formValues);
 
     if (response.type === 'CREATED_SUCCESSFUL') {
-      this.setState({ notification: true });
+      this.setState({ notification: true, rolSelected: '' });
       this.formRef.reset();
       this.props.onSubmit(true);
     } else {
