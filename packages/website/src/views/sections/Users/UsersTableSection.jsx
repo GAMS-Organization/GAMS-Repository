@@ -64,7 +64,11 @@ class UsersTableSection extends React.Component {
   };
 
   render() {
-    const { classes, roles } = this.props;
+    const { classes, roles, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listUsers();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
