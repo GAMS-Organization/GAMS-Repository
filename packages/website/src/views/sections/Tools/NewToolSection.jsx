@@ -24,6 +24,7 @@ class NewToolSection extends React.Component {
       errors: {},
       notification: false,
     };
+    this.formRef = {};
   }
 
   handleRol = event => {
@@ -51,6 +52,8 @@ class NewToolSection extends React.Component {
       formElements.namedItem('totalQuantity').value = '';
       formElements.namedItem('borrowQuantity').value = '';
       this.setState({ notification: true });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -76,7 +79,7 @@ class NewToolSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createTool}>
+            <form onSubmit={this.createTool} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Nueva Herramienta</h4>
