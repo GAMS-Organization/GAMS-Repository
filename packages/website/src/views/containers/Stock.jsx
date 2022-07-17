@@ -36,7 +36,7 @@ class Stock extends React.Component {
     };
   }
 
-  handleClick = value => {
+  handleOnSubmit = value => {
     this.setState({ shouldLoad: value });
   };
 
@@ -44,10 +44,10 @@ class Stock extends React.Component {
     return (
       <div>
         <GridContainer>
-          <PurchaseTable onSubmit={() => this.handleClick(true)} />
-          <ConsumptionTable onSubmit={() => this.handleClick(true)} />
+          <PurchaseTable onSubmit={() => this.handleOnSubmit(true)} />
+          <ConsumptionTable onSubmit={() => this.handleOnSubmit(true)} />
         </GridContainer>
-        <TableStockSection shouldLoad={this.state.shouldLoad} onLoad={this.handleClick} />
+        <TableStockSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }
