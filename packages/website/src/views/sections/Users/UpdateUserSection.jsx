@@ -20,6 +20,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import serviceUser from '../../../services/api/user';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { InputLabel } from '@material-ui/core';
+import CardFooter from '../../components/Card/CardFooter';
 
 class UpdateUserSection extends React.Component {
   constructor(props) {
@@ -49,7 +50,6 @@ class UpdateUserSection extends React.Component {
   //se actualiza el usuario luego de ser editado
   updateUser = async e => {
     e.preventDefault();
-    //const fields = ['id', 'name', 'surname', 'email', 'roles'];
     const formElements = e.target.elements;
 
     const name = formElements.namedItem('name').value;
@@ -78,7 +78,7 @@ class UpdateUserSection extends React.Component {
   render() {
     const { classes, user, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name, surname, email, roles } = user;
+    const { name, surname, email, roles } = user;
     if (this.state.rolSelected !== roles && roles !== undefined && !this.state.rolClicked) {
       this.setState({ rolSelected: roles });
     }
@@ -115,22 +115,6 @@ class UpdateUserSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateUser}>
               <GridContainer>
-                {/*<GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>*/}
                 <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
@@ -234,14 +218,20 @@ class UpdateUserSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <Button type="submit" color="gamsRed">
-                  Actualizar
-                </Button>
-                <Button color="danger" simple onClick={() => close()}>
-                  Cancelar
-                </Button>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem>
+                    <Button type="submit" color="gamsRed">
+                      Actualizar
+                    </Button>
+                  </GridItem>
+                  <GridItem>
+                    <Button color="danger" simple onClick={() => close()}>
+                      Cancelar
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

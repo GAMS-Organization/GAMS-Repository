@@ -27,7 +27,6 @@ class UpdateStock extends React.Component {
       open: false,
       notification: false,
     };
-    console.log(this.state.current);
   }
 
   componentDidMount() {
@@ -143,22 +142,20 @@ class UpdateStock extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <GridItem xs={4} sm={7} md={8}>
-                  <CardFooter>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={4} sm={7} md={8}>
                     <Button type="submit" color="gamsRed">
                       Actualizar
                     </Button>
-                  </CardFooter>
-                </GridItem>
-                <GridItem xs={8} sm={5} md={4}>
-                  <CardFooter>
+                  </GridItem>
+                  <GridItem xs={8} sm={5} md={4}>
                     <Button color="danger" simple onClick={this.handleClose}>
                       Cancelar
                     </Button>
-                  </CardFooter>
-                </GridItem>
-              </GridContainer>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

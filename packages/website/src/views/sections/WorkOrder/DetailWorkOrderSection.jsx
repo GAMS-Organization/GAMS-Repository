@@ -281,15 +281,15 @@ class DetailWorkOrderSection extends React.Component {
                 </>
               ) : null}
             </GridContainer>
-            <GridContainer justify={'center'}>
-              <GridItem xs={8} sm={5} md={4}>
-                <CardFooter>
+            <CardFooter>
+              <GridContainer justify={'center'}>
+                <GridItem xs={8} sm={5} md={4}>
                   <Button color="danger" simple onClick={() => close()}>
                     Cerrar
                   </Button>
-                </CardFooter>
-              </GridItem>
-            </GridContainer>
+                </GridItem>
+              </GridContainer>
+            </CardFooter>
           </DialogContent>
         </Dialog>
       </div>

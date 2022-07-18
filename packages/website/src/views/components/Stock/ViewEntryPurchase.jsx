@@ -167,15 +167,15 @@ class ViewEntryPurchase extends React.Component {
                 </GridContainer>
               </>
             ) : null}
-            <GridContainer justify={'center'}>
-              <GridItem xs={8} sm={5} md={4}>
-                <CardFooter>
+            <CardFooter>
+              <GridContainer justify={'center'}>
+                <GridItem xs={8} sm={5} md={4}>
                   <Button color="gamsRed" onClick={this.handleClose}>
                     Cerrar
                   </Button>
-                </CardFooter>
-              </GridItem>
-            </GridContainer>
+                </GridItem>
+              </GridContainer>
+            </CardFooter>
           </DialogContent>
         </Dialog>
       </div>
