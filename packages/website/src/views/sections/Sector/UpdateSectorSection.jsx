@@ -53,12 +53,11 @@ class UpdateSectorSection extends React.Component {
   //se actualiza el mapa luego de ser editado
   uploadMapSector = async e => {
     e.preventDefault();
-    const formElements = e.target.elements;
 
     const formDataImage = new FormData();
     formDataImage.append('file', this.state.selectedImage, this.state.selectedImage.name);
 
-    const response = await serviceSector.imageMapUpload(formDataImage, formElements.namedItem('id').value);
+    const response = await serviceSector.imageMapUpload(formDataImage, this.props.sector.id);
 
     const NameSector = 'sector/';
     const invalid = / /;
@@ -76,7 +75,7 @@ class UpdateSectorSection extends React.Component {
     } else {
       if (response.type === 'UPLOAD_IMAGE_SUCCESFUL') {
         const formValues = {
-          id: formElements.namedItem('id').value,
+          id: this.props.sector.id,
           map: NameSector.concat(response.data.path.split(/(\\|\/)/g).pop()),
         };
         const response2 = await serviceSector.update(formValues);
@@ -115,7 +114,7 @@ class UpdateSectorSection extends React.Component {
   render() {
     const { classes, sector, Transition, close, open } = this.props;
     const { errors } = this.state;
-    const { id, name, map } = sector;
+    const { name, map } = sector;
 
     return (
       <div>
@@ -131,7 +130,6 @@ class UpdateSectorSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -145,23 +143,7 @@ class UpdateSectorSection extends React.Component {
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.uploadMapSector}>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={1}>
-                  <CustomInput
-                    labelText="ID"
-                    id="id"
-                    error={errors.name}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      disabled: true,
-                      required: true,
-                      defaultValue: id,
-                      name: 'id',
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={6}>
                   <CustomInput
                     labelText="Nombre"
                     id="name"
@@ -177,7 +159,7 @@ class UpdateSectorSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={7}>
+                <GridItem xs={12} sm={12} md={6}>
                   <br />
                   <br />
                   <input
@@ -198,12 +180,14 @@ class UpdateSectorSection extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={() => close()}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
           <GridContainer>
