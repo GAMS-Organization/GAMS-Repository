@@ -36,7 +36,7 @@ class EducationalElementTableSection extends React.Component {
       educationalElements.push(dataEducationalElements);
     }
 
-    this.setState({ educationalElement: educationalElements, totalPages: response.data.pageCount });
+    this.setState({ educationalElement: educationalElements });
   };
 
   render() {
@@ -61,16 +61,6 @@ class EducationalElementTableSection extends React.Component {
                 listEducationalElements={this.listEducationalElements}
               />
             </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem>
-          <Card className={classes.cardCenter}>
-            <Pagination
-              listCallback={this.listEducationalElements}
-              currentPage={this.state.page}
-              totalPages={this.state.totalPages}
-              color="gamsRed"
-            />
           </Card>
         </GridItem>
       </GridContainer>

@@ -33,7 +33,7 @@ class ToolTableSection extends React.Component {
       tools.push(dataProduct);
     }
 
-    this.setState({ tool: tools, totalPages: response.data.pageCount });
+    this.setState({ tool: tools });
   };
 
   render() {
@@ -58,16 +58,6 @@ class ToolTableSection extends React.Component {
                 listTools={this.listTools}
               />
             </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem>
-          <Card className={classes.cardCenter}>
-            <Pagination
-              listCallback={this.listTools}
-              currentPage={this.state.page}
-              totalPages={this.state.totalPages}
-              color="gamsRed"
-            />
           </Card>
         </GridItem>
       </GridContainer>
