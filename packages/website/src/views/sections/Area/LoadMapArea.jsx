@@ -164,7 +164,6 @@ class LoadMapArea extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           fullWidth={true}
           maxWidth={'lg'}

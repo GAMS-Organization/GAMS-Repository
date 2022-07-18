@@ -141,12 +141,14 @@ class UpdateEducationalElementSection extends React.Component {
                   />
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={() => close()}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={() => close()}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

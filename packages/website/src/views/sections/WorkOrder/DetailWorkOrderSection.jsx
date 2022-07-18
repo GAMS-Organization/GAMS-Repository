@@ -72,11 +72,9 @@ class DetailWorkOrderSection extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -292,16 +290,15 @@ class DetailWorkOrderSection extends React.Component {
                 </GridItem>
               ) : null}
             </GridContainer>
-            <GridContainer>
-              <GridItem justify={'center'} xs={4} sm={7} md={4}></GridItem>
-              <GridItem justify={'center'} xs={8} sm={5} md={4}>
-                <CardFooter>
+            <CardFooter>
+              <GridContainer justify={'center'}>
+                <GridItem xs={8} sm={5} md={4}>
                   <Button color="danger" simple onClick={() => close()}>
                     Cerrar
                   </Button>
-                </CardFooter>
-              </GridItem>
-            </GridContainer>
+                </GridItem>
+              </GridContainer>
+            </CardFooter>
           </DialogContent>
         </Dialog>
       </div>

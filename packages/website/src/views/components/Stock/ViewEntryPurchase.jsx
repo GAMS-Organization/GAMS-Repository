@@ -15,6 +15,7 @@ import Snackbar from '../../components/Snackbar/Snackbar';
 import AddAlert from '@material-ui/icons/AddAlert';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { toDate } from '../../../utils/helpers/dateHelper';
+import CardFooter from '../Card/CardFooter';
 
 class ViewEntryPurchase extends React.Component {
   constructor(props) {
@@ -119,7 +120,6 @@ class ViewEntryPurchase extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={this.state.open}
           TransitionComponent={Transition}
@@ -167,9 +167,15 @@ class ViewEntryPurchase extends React.Component {
                 </GridContainer>
               </>
             ) : null}
-            <Button color="gamsRed" onClick={this.handleClose}>
-              Cerrar
-            </Button>
+            <CardFooter>
+              <GridContainer justify={'center'}>
+                <GridItem xs={8} sm={5} md={4}>
+                  <Button color="gamsRed" onClick={this.handleClose}>
+                    Cerrar
+                  </Button>
+                </GridItem>
+              </GridContainer>
+            </CardFooter>
           </DialogContent>
         </Dialog>
       </div>
