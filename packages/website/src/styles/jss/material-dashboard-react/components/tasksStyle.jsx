@@ -1,4 +1,4 @@
-import { defaultFont, primaryColor, dangerColor, grayColor } from '../../material-dashboard-react.jsx';
+import { defaultFont, primaryColor, grayColor, gamsRedColor, gamsGrayColor } from '../../material-dashboard-react.jsx';
 import tooltipStyle from '../../material-dashboard-react/tooltipStyle.jsx';
 import checkboxAdnRadioStyle from '../../material-dashboard-react/checkboxAdnRadioStyle.jsx';
 const tasksStyle = {
@@ -34,6 +34,10 @@ const tasksStyle = {
     height: '27px',
     padding: '0',
   },
+  tableResponsive: {
+    width: '100%',
+    overflow: 'auto',
+  },
   tableActionButtonIcon: {
     width: '17px',
     height: '17px',
@@ -45,7 +49,12 @@ const tasksStyle = {
   },
   close: {
     backgroundColor: 'transparent',
-    color: dangerColor[0],
+    color: gamsRedColor[0],
+    boxShadow: 'none',
+  },
+  disabled: {
+    backgroundColor: 'transparent',
+    color: gamsGrayColor[1],
     boxShadow: 'none',
   },
 };

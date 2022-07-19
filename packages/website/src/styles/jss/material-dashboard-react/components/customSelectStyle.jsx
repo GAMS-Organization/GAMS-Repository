@@ -128,6 +128,11 @@ const customSelectStyle = {
     backgroundColor: 'transparent',
     maxHeight: '266px',
   },
+  customInput: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px !important',
+    },
+  },
 };
 
 export default customSelectStyle;

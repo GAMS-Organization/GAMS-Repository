@@ -31,14 +31,19 @@ class Tools extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     return (
       <div>
-        <NewToolSection />
-        <ToolTableSection />
+        <NewToolSection onSubmit={() => this.handleOnSubmit(true)} />
+        <ToolTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

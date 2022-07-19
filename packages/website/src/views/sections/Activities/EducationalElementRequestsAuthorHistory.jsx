@@ -119,12 +119,13 @@ class EducationalElementRequestsAuthorHistory extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.educationalElementRequestsAuthor.length !== 0 ? (
-                    this.state.educationalElementRequestsAuthor.map(educationalElementRequest => {
+                    this.state.educationalElementRequestsAuthor.map((educationalElementRequest, index) => {
                       return (
                         <SnackbarContent
                           message={`${educationalElementRequest.date} - ${educationalElementRequest.area.name} - Artículo: ${educationalElementRequest.educationalElement.name} - Cantidad: ${educationalElementRequest.quantity}`}
                           color={state[educationalElementRequest.status]}
                           icon={OfflineBolt}
+                          key={educationalElementRequest.educationalElement.name + index}
                         />
                       );
                     })
@@ -139,6 +140,7 @@ class EducationalElementRequestsAuthorHistory extends React.Component {
               </GridContainer>
             </CardBody>
             {this.state.educationalElementRequestsHistoryAuthorPage !==
+              this.state.totalEducationalElementRequestsHistoryAuthorPages &&
             this.state.totalEducationalElementRequestsHistoryAuthorPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12} sm={12} xs={12}>

@@ -30,14 +30,19 @@ class EducationalElement extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     return (
       <div>
-        <NewElementEducationalSection />
-        <EducationalElementTableSection />
+        <NewElementEducationalSection onSubmit={() => this.handleOnSubmit(true)} />
+        <EducationalElementTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

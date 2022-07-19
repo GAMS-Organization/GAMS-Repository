@@ -39,56 +39,12 @@ class SectorTableSection extends React.Component {
     this.setState({ sector: sectors, totalPages: response.data.pageCount, page: page });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listSectors(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listSectors(1) : this.listSectors(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listSectors(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listSectors(this.state.totalPages)
-          : this.listSectors(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listSectors(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listSectors();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -109,7 +65,12 @@ class SectorTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listSectors}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

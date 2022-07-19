@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 // @material-ui/core components
@@ -11,7 +11,16 @@ import Close from '@material-ui/icons/Close';
 import snackbarContentStyle from '../../../styles/jss/material-dashboard-react/components/snackbarContentStyle.jsx';
 
 function Snackbar({ ...props }) {
-  const { classes, message, color, close, icon, place, open, rtlActive } = props;
+  const { classes, message, color, close, icon, place, open, rtlActive, closeNotification = () => {} } = props;
+
+  useEffect(() => {
+    if (open && closeNotification) {
+      setTimeout(() => {
+        closeNotification();
+      }, 3000);
+    }
+  }, [open]);
+
   var action = [];
   const messageClasses = classNames({
     [classes.iconMessage]: icon !== undefined,
@@ -23,7 +32,7 @@ function Snackbar({ ...props }) {
         key="close"
         aria-label="Close"
         color="inherit"
-        onClick={() => props.closeNotification()}
+        onClick={() => closeNotification()}
       >
         <Close className={classes.close} />
       </IconButton>,

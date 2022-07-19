@@ -6,7 +6,7 @@ class areaAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'CREATED_SUCCESFUL',
+        type: 'CREATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -66,7 +66,7 @@ class areaAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'UPDATED_SUCCESFUL',
+        type: 'UPDATED_SUCCESSFUL',
         area: data.data,
       };
     } else {
@@ -87,7 +87,7 @@ class areaAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'DELETED_SUCCESFUL',
+        type: 'DELETED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -107,7 +107,7 @@ class areaAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'UPLOAD_IMAGE_SUCCESFUL',
+        type: 'UPLOAD_IMAGE_SUCCESSFUL',
         data: data,
       };
     } else {

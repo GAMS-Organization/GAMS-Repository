@@ -48,7 +48,7 @@ const snackbarContentStyle = {
     top: '40px',
   },
   info: {
-    backgroundColor: infoColor[3],
+    backgroundColor: infoColor[0],
     color: whiteColor,
     ...infoBoxShadow,
   },

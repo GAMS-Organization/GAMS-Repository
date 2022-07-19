@@ -61,12 +61,24 @@ class Tasks extends React.Component {
               </TableCell>
               <TableCell className={tableCellClasses}>{tasks[value]}</TableCell>
               <TableCell className={classes.tableActions}>
-                <Tooltip id="tooltip-top" title="Edit Task" placement="top" classes={{ tooltip: classes.tooltip }}>
+                <Tooltip
+                  id="tooltip-top"
+                  title="Edit Task"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                  disableFocusListener={true}
+                >
                   <IconButton aria-label="Edit" className={classes.tableActionButton}>
                     <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                   </IconButton>
                 </Tooltip>
-                <Tooltip id="tooltip-top-start" title="Remove" placement="top" classes={{ tooltip: classes.tooltip }}>
+                <Tooltip
+                  id="tooltip-top-start"
+                  title="Remove"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                  disableFocusListener={true}
+                >
                   <IconButton aria-label="Close" className={classes.tableActionButton}>
                     <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                   </IconButton>

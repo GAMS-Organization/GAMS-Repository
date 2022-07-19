@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -40,7 +39,7 @@ class DeleteAreaSection extends React.Component {
     e.preventDefault();
     const response = await serviceArea.delete(this.props.area.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listAreas();
       this.props.close();
@@ -51,7 +50,6 @@ class DeleteAreaSection extends React.Component {
 
   render() {
     const { classes, area, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { id, name } = area;
     if (this.state.area.id !== id) {
       this.setState({ area: area, selectedServices: area.services });

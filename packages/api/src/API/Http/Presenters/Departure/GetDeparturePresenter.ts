@@ -18,6 +18,7 @@ export default class GetDeparturePresenter implements IPresenter {
       date: this.result.getDate(),
       observations: this.result.getObservations(),
       consumptions: this.result.getConsumptions(),
+      workOrderId: this.result.getWorkOrder() ? this.result.getWorkOrder().getId() : null,
     };
   }
 }

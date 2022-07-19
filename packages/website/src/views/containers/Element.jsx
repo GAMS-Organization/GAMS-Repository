@@ -30,16 +30,23 @@ class Element extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     const { roles } = this.props;
 
     return (
       <div>
-        {(roles.includes('admin') || roles.includes('boss')) && <NewElementSection />}
-        <ElementTableSection />
+        {(roles.includes('admin') || roles.includes('boss')) && (
+          <NewElementSection onSubmit={() => this.handleOnSubmit(true)} />
+        )}
+        <ElementTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

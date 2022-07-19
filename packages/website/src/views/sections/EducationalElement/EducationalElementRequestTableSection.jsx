@@ -52,56 +52,6 @@ class EducationalElementRequestTableSection extends React.Component {
     this.setState({ educationalElementRequest: educationalElementsRequest, totalPages: response.data.pageCount });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listEducationalElementRequest(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1
-            ? this.listEducationalElementRequest(1)
-            : this.listEducationalElementRequest(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listEducationalElementRequest(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listEducationalElementRequest(this.state.totalPages)
-          : this.listEducationalElementRequest(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listEducationalElementRequest(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -124,7 +74,12 @@ class EducationalElementRequestTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listEducationalElementRequest}
+              totalPages={this.state.totalPages}
+              currentPage={this.state.page}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

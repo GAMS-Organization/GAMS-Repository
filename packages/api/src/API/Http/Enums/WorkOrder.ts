@@ -1,15 +1,15 @@
 export const STATE = {
-  FREE: 'libre',
-  PAUSED: 'pausada',
-  FINISHED: 'finalizada',
-  ASSIGNED: 'asignada',
-  TAKEN: 'tomada',
-  CANCELED: 'cancelada',
+  FREE: 'Libre',
+  PAUSED: 'Pausada',
+  FINISHED: 'Finalizada',
+  ASSIGNED: 'Asiganada',
+  TAKEN: 'Tomada',
+  CANCELED: 'Cancelada',
 };
 
 export const PRIORITY = {
-  LOW: 'baja',
-  MEDIUM: 'media',
-  HIGH: 'alta',
-  INMEDIATLY: 'inmediata',
+  LOW: 'Baja',
+  MEDIUM: 'Media',
+  HIGH: 'Alta',
+  INMEDIATLY: 'Inmediata',
 };

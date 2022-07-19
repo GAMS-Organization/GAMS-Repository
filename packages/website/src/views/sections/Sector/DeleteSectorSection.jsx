@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -38,7 +37,7 @@ class DeleteSectorSection extends React.Component {
   deleteSector = async e => {
     e.preventDefault();
     const response = await serviceSector.delete(this.props.sector.id);
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listSectors();
       this.props.close();
@@ -49,7 +48,6 @@ class DeleteSectorSection extends React.Component {
 
   render() {
     const { classes, sector, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { name } = sector;
     return (
       <div>

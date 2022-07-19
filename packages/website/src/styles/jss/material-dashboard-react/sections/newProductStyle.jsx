@@ -22,6 +22,16 @@ const newProductStyle = {
       marginTop: '13px',
     },
   },
+  createButton: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px',
+    },
+  },
+  nameInput: {
+    '@media (max-width: 960px)': {
+      marginTop: '0px',
+    },
+  },
   ...customSelect,
 };
 
