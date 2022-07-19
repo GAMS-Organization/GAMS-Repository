@@ -2,7 +2,7 @@ export const STATE = {
   FREE: 'Libre',
   PAUSED: 'Pausada',
   FINISHED: 'Finalizada',
-  ASSIGNED: 'Asiganada',
+  ASSIGNED: 'Asignada',
   TAKEN: 'Tomada',
   CANCELED: 'Cancelada',
 };
