@@ -36,18 +36,6 @@ class AssetTable extends React.Component {
     this.setState({ deleteModal: false });
   };
 
-  //se elimina el activo
-  /*deleteAsset = async prop => {
-    const response = await serviceAsset.delete(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESSFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    this.props.listAssets();
-  };*/
-
   handleClickDelete = prop => {
     this.setState({
       asset: { id: prop[0], code: prop[1] },
