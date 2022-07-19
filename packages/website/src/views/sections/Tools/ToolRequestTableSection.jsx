@@ -52,54 +52,6 @@ class ToolRequestTableSection extends React.Component {
     this.setState({ toolRequest: toolsRequest, totalPages: response.data.pageCount });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listToolsRequest(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listToolsRequest(1) : this.listToolsRequest(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listToolsRequest(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listToolsRequest(this.state.totalPages)
-          : this.listToolsRequest(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listToolsRequest(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
     const { classes } = this.props;
     return (
@@ -122,7 +74,12 @@ class ToolRequestTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listToolsRequest}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

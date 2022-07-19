@@ -59,7 +59,7 @@ class UpdateEducationalElementRequestSection extends React.Component {
 
     const response = await serviceEducationalElement.updateElementRequest(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, statusSelected: '' });
       this.props.listEducationalElementRequest();
       this.props.close();

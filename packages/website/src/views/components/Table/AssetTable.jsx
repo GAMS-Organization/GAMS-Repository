@@ -10,7 +10,6 @@ import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
 import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
@@ -36,18 +35,6 @@ class AssetTable extends React.Component {
   closeModal = () => {
     this.setState({ deleteModal: false });
   };
-
-  //se elimina el activo
-  /*deleteAsset = async prop => {
-    const response = await serviceAsset.delete(prop[0]);
-
-    if (response.type === 'DELETED_SUCCESFUL') {
-      this.setState({ notification: true });
-    } else {
-      this.setState({ notification: true, errors: response.error });
-    }
-    this.props.listAssets();
-  };*/
 
   handleClickDelete = prop => {
     this.setState({
@@ -102,6 +89,7 @@ class AssetTable extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"

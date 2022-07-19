@@ -63,7 +63,7 @@ class UpdateStock extends React.Component {
     };
     const response = await serviceStock.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
       window.location.reload();
     } else {
@@ -98,7 +98,7 @@ class UpdateStock extends React.Component {
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={this.state.open}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >

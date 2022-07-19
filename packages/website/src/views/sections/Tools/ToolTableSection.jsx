@@ -33,59 +33,15 @@ class ToolTableSection extends React.Component {
       tools.push(dataProduct);
     }
 
-    this.setState({ tool: tools, totalPages: response.data.pageCount });
-  };
-
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listTools(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listTools(1) : this.listTools(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listTools(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listTools(this.state.totalPages)
-          : this.listTools(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listTools(this.state.totalPages);
-      },
-    });
-    return pages;
+    this.setState({ tool: tools });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listTools();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -102,11 +58,6 @@ class ToolTableSection extends React.Component {
                 listTools={this.listTools}
               />
             </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem>
-          <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>

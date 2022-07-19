@@ -29,14 +29,19 @@ class Products extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     return (
       <div>
-        <NewProduct />
-        <ProductTableSection />
+        <NewProduct onSubmit={() => this.handleOnSubmit(true)} />
+        <ProductTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

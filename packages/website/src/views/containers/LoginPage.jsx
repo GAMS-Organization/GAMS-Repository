@@ -112,9 +112,13 @@ class LoginPage extends React.Component {
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button type="submit" color="gamsRed" simple size="lg" block>
-                    Entrar
-                  </Button>
+                  <GridContainer md={12} justify={'center'}>
+                    <GridItem xs={6} sm={6} md={6}>
+                      <Button type="submit" color="gamsRed" block>
+                        Entrar
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

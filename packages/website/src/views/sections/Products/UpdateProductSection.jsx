@@ -46,7 +46,7 @@ class UpdateProductSection extends React.Component {
 
     const response = await serviceProduct.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listProducts();
       this.props.close();

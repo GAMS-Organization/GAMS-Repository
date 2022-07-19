@@ -22,6 +22,9 @@ const newElementEducationalStyle = {
       marginTop: '13px',
     },
   },
+  buttonContainer: {
+    marginBottom: '20px',
+  },
   ...customSelect,
 };
 

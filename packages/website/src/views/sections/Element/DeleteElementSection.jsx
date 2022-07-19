@@ -38,7 +38,7 @@ class DeleteElementSection extends React.Component {
     e.preventDefault();
     const response = await serviceElement.delete(this.props.element.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listElements();
       this.props.close();
@@ -49,8 +49,7 @@ class DeleteElementSection extends React.Component {
 
   render() {
     const { classes, element, Transition, close, open } = this.props;
-    const { errors } = this.state;
-    const { id, name } = element;
+    const { name } = element;
     return (
       <div>
         <Snackbar

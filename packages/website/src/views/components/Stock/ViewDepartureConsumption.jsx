@@ -111,7 +111,7 @@ class ViewDepartureConsumption extends React.Component {
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={this.state.open}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >

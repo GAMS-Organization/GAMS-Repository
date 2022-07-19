@@ -86,12 +86,12 @@ class WorkOrdersWorkerHistory extends React.Component {
     const { classes } = this.props;
 
     const state = {
-      libre: 'info',
-      pausada: 'warning',
-      finalizada: 'success',
-      asignada: 'warning',
-      tomada: 'warning',
-      cancelada: 'danger',
+      Libre: 'info',
+      Pausada: 'warning',
+      Finalizada: 'success',
+      Asignada: 'warning',
+      Tomada: 'warning',
+      Cancelada: 'danger',
     };
 
     return (
@@ -99,7 +99,7 @@ class WorkOrdersWorkerHistory extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
+              <h4 className={classes.cardTitleWhite}>Actividades Recientes</h4>
               <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus actividades como personal de mantenimiento son listadas aqui.
@@ -116,7 +116,7 @@ class WorkOrdersWorkerHistory extends React.Component {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.workOrdersWorker.length !== 0 ? (
-                    this.state.workOrdersWorker.map(workOrder => {
+                    this.state.workOrdersWorker.map((workOrder, index) => {
                       return (
                         <SnackbarContent
                           message={`${workOrder.orderDate} - ${workOrder.state.toUpperCase()} - Prioridad: ${
@@ -124,6 +124,7 @@ class WorkOrdersWorkerHistory extends React.Component {
                           } - ${workOrder.comment} `}
                           color={state[workOrder.state]}
                           icon={OfflineBolt}
+                          key={workOrder.comment + index}
                         />
                       );
                     })
@@ -137,7 +138,8 @@ class WorkOrdersWorkerHistory extends React.Component {
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.workOrderWorkerPage !== this.state.totalWorkOrderWorkerPages ? (
+            {this.state.workOrderWorkerPage !== this.state.totalWorkOrderWorkerPages &&
+            this.state.totalWorkOrderWorkerPages ? (
               <CardFooter>
                 <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button

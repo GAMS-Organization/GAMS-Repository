@@ -22,6 +22,14 @@ const newUserSectionStyle = {
       marginTop: '13px',
     },
   },
+  customInput: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px',
+    },
+  },
+  buttonContainer: {
+    marginBottom: '20px',
+  },
   ...customSelect,
 };
 

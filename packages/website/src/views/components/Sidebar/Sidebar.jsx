@@ -50,7 +50,7 @@ const Sidebar = ({ ...props }) => {
 
   let links = (
     <List className={classes.list}>
-      {routes.map((prop, key) => {
+      {routes.map((prop, navKey) => {
         if (!isAvailableRoute(prop.roles)) {
           return null;
         }
@@ -61,7 +61,7 @@ const Sidebar = ({ ...props }) => {
           [' ' + classes.whiteFont]: activeRoute(prop.layout + prop.path),
         });
         return !prop.group ? (
-          <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={key}>
+          <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={`nav-${navKey}`}>
             <ListItem button className={classes.itemLink + listItemClasses}>
               {typeof prop.icon === 'string' ? (
                 <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
@@ -76,7 +76,7 @@ const Sidebar = ({ ...props }) => {
             </ListItem>
           </NavLink>
         ) : (
-          <>
+          <React.Fragment key={`nav-${navKey}`}>
             <ListItem
               button
               divider={activeGroup(prop.children)}
@@ -105,7 +105,7 @@ const Sidebar = ({ ...props }) => {
             </ListItem>
             <Collapse in={open === prop.name} timeout="auto" unmountOnExit className={classes.childrenContainer}>
               <List component="div" disablePadding>
-                {prop.children.map((prop, key) => {
+                {prop.children.map((prop, subNavKey) => {
                   let listItemClasses = classNames({
                     [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
                   });
@@ -113,7 +113,12 @@ const Sidebar = ({ ...props }) => {
                     return null;
                   }
                   return (
-                    <NavLink to={prop.layout + prop.path} className={classes.item} activeClassName="active" key={key}>
+                    <NavLink
+                      to={prop.layout + prop.path}
+                      className={classes.item}
+                      activeClassName="active"
+                      key={`${navKey}-subNav-${subNavKey}`}
+                    >
                       <ListItem button className={classes.itemLink + listItemClasses}>
                         {typeof prop.icon === 'string' ? (
                           <Icon className={classNames(classes.itemIcon, whiteFontClasses)}>{prop.icon}</Icon>
@@ -131,7 +136,7 @@ const Sidebar = ({ ...props }) => {
                 })}
               </List>
             </Collapse>
-          </>
+          </React.Fragment>
         );
       })}
     </List>

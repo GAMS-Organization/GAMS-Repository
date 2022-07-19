@@ -9,9 +9,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-// @material-ui/icons components
-import AddAlert from '@material-ui/icons/AddAlert';
-import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 
@@ -100,7 +97,13 @@ class ToolRequestTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Editar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}

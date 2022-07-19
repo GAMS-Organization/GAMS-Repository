@@ -32,6 +32,7 @@ class NewElementSection extends React.Component {
       service: [],
       selectedService: '',
     };
+    this.formRef = {};
   }
 
   //se obtienen los servicios
@@ -68,8 +69,10 @@ class NewElementSection extends React.Component {
 
     const response = await serviceElement.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
-      this.setState({ notification: true });
+    if (response.type === 'CREATED_SUCCESSFUL') {
+      this.setState({ notification: true, selectedService: '' });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -95,11 +98,11 @@ class NewElementSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <form onSubmit={this.createElement}>
+            <form onSubmit={this.createElement} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo elemento</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Elemento</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
@@ -110,6 +113,7 @@ class NewElementSection extends React.Component {
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -125,6 +129,7 @@ class NewElementSection extends React.Component {
                         error={errors.code}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -134,7 +139,7 @@ class NewElementSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
-                      <FormControl fullWidth required className={classes.selectFormControl}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Servicio
                         </InputLabel>
@@ -175,6 +180,7 @@ class NewElementSection extends React.Component {
                         error={errors.steps}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: false,
@@ -185,10 +191,14 @@ class NewElementSection extends React.Component {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
+                <CardFooter className={classes.buttonContainer}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Crear
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -38,7 +37,7 @@ class DeleteToolRequestSection extends React.Component {
     e.preventDefault();
     const response = await serviceTool.deleteToolRequest(this.props.toolRequest.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listToolsRequest();
       this.props.close();
@@ -49,7 +48,6 @@ class DeleteToolRequestSection extends React.Component {
 
   render() {
     const { classes, toolRequest, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { name } = toolRequest;
     return (
       <div>

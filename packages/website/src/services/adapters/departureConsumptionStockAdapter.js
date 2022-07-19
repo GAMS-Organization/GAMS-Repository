@@ -6,7 +6,7 @@ class departureStockAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'CREATED_SUCCESFUL',
+        type: 'CREATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -46,10 +46,10 @@ class departureStockAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'UPDATED_SUCCESFUL',
+        type: 'UPDATED_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
@@ -66,10 +66,10 @@ class departureStockAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'DELETED_SUCCESFUL',
+        type: 'DELETED_SUCCESSFUL',
       };
     } else {
-      const { code, details } = data.errors;
+      const { code } = data.errors;
       return {
         type: 'DELETED_FAIL',
         error: {

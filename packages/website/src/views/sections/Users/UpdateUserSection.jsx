@@ -66,7 +66,7 @@ class UpdateUserSection extends React.Component {
     };
     const response = await serviceUser.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
       this.props.listUsers();
       this.props.close();

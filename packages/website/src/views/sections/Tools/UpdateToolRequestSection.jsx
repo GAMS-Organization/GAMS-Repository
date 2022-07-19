@@ -59,7 +59,7 @@ class UpdateToolRequestSection extends React.Component {
 
     const response = await serviceTool.updateToolRequest(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, statusSelected: '' });
       this.props.listToolsRequest();
       this.props.close();

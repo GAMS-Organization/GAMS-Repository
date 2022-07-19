@@ -101,7 +101,7 @@ class AssignWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Orden de trabajo asignada correctamente'
+              : 'Orden de trabajo Asignada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}

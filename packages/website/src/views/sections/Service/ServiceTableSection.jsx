@@ -39,62 +39,18 @@ class ServiceTableSection extends React.Component {
     this.setState({ service: services, totalPages: response.data.pageCount, page: page });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listServices(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listServices(1) : this.listServices(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listServices(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listServices(this.state.totalPages)
-          : this.listServices(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listServices(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listServices();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>servicios</h4>
+              <h4 className={classes.cardTitleWhite}>Servicios</h4>
               <p className={classes.cardCategoryWhite}>Aquí se listan todos los servicios</p>
             </CardHeader>
             <CardBody>
@@ -109,7 +65,12 @@ class ServiceTableSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listServices}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

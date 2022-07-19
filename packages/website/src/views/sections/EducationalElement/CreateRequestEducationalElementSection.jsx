@@ -114,7 +114,7 @@ class createRequestEducationalElementSection extends React.Component {
       quantity: parseInt(quantity),
     };
     const response = await serviceEducationalElement.createElementRequest(formValues);
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('quantity').value = '';
       formElements.namedItem('date').value = '';
       this.setState({
@@ -154,12 +154,12 @@ class createRequestEducationalElementSection extends React.Component {
               <Card>
                 <CardHeader color="gamsBlue">
                   <h4 className={classes.cardTitleWhite}>Solicitud de Artículos</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="educationalElement" className={classes.selectLabel}>
                           Artículo
                         </InputLabel>
@@ -194,13 +194,29 @@ class createRequestEducationalElementSection extends React.Component {
                         </Select>
                       </FormControl>
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={6}>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="Cantidad"
+                        id="quantity"
+                        error={errors.quantity}
+                        formControlProps={{
+                          fullWidth: true,
+                          className: classes.customInput,
+                        }}
+                        inputProps={{
+                          required: true,
+                          name: 'quantity',
+                        }}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText=""
                         id="date"
                         value={this.state.dateNow}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           type: 'date',
@@ -210,7 +226,7 @@ class createRequestEducationalElementSection extends React.Component {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="sector" className={classes.selectLabel}>
                           Sector
                         </InputLabel>
@@ -246,7 +262,7 @@ class createRequestEducationalElementSection extends React.Component {
                       </FormControl>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
-                      <FormControl fullWidth className={classes.selectFormControl}>
+                      <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.customInput}>
                         <InputLabel htmlFor="Area" className={classes.selectLabel}>
                           Área
                         </InputLabel>
@@ -281,30 +297,16 @@ class createRequestEducationalElementSection extends React.Component {
                       </FormControl>
                     </GridItem>
                   </GridContainer>
+                </CardBody>
+                <CardFooter className={classes.buttonContainer}>
                   <GridContainer justify={'center'}>
                     <GridItem xs={12} sm={12} md={4}>
-                      <CustomInput
-                        labelText="Cantidad"
-                        id="quantity"
-                        error={errors.quantity}
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          required: true,
-                          name: 'quantity',
-                        }}
-                      />
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Solicitar
+                      </Button>
                     </GridItem>
                   </GridContainer>
-                </CardBody>
-                <GridContainer justify={'center'}>
-                  <CardFooter>
-                    <Button type="submit" color="gamsRed">
-                      Solicitar
-                    </Button>
-                  </CardFooter>
-                </GridContainer>
+                </CardFooter>
               </Card>
             </form>
           </GridItem>

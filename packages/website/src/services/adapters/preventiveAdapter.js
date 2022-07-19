@@ -7,7 +7,7 @@ class preventiveAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'CREATED_SUCCESFUL',
+        type: 'CREATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;

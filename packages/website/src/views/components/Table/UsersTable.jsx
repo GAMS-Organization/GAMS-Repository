@@ -126,7 +126,13 @@ class UsersTable extends React.Component {
                   })}
                   {roles.includes('admin') && (
                     <TableCell className={classes.tableActions}>
-                      <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                      <Tooltip
+                        id="tooltip-top"
+                        title="Editar"
+                        placement="top"
+                        classes={{ tooltip: classes.tooltip }}
+                        disableFocusListener={true}
+                      >
                         <IconButton
                           aria-label="Edit"
                           className={classes.tableActionButton}
@@ -141,6 +147,7 @@ class UsersTable extends React.Component {
                           title="Desactivar"
                           placement="top"
                           classes={{ tooltip: classes.tooltip }}
+                          disableFocusListener={true}
                         >
                           <IconButton
                             aria-label="Close"
@@ -156,6 +163,7 @@ class UsersTable extends React.Component {
                           title="Activar"
                           placement="top"
                           classes={{ tooltip: classes.tooltip }}
+                          disableFocusListener={true}
                         >
                           <IconButton
                             aria-label="Close"
@@ -199,7 +207,7 @@ UsersTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listUsers: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
 };

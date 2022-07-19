@@ -36,43 +36,15 @@ class EducationalElementTableSection extends React.Component {
       educationalElements.push(dataEducationalElements);
     }
 
-    this.setState({ educationalElement: educationalElements, totalPages: response.data.pageCount });
-  };
-
-  pagination = () => {
-    const pages = [
-      {
-        text: 'PREV',
-        onClick: () => {
-          this.state.page === 1 ? this.listEducationalElements(1) : this.listEducationalElements(this.state.page - 1);
-        },
-      },
-    ];
-    for (let index = 1; index <= this.state.totalPages; index++) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listEducationalElements(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: 'NEXT',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listEducationalElements(this.state.totalPages)
-          : this.listEducationalElements(this.state.page + 1);
-      },
-    });
-    return pages;
+    this.setState({ educationalElement: educationalElements });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listEducationalElements();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -89,11 +61,6 @@ class EducationalElementTableSection extends React.Component {
                 listEducationalElements={this.listEducationalElements}
               />
             </CardBody>
-          </Card>
-        </GridItem>
-        <GridItem>
-          <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
           </Card>
         </GridItem>
       </GridContainer>
