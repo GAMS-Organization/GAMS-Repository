@@ -66,6 +66,17 @@ const modalStyle = theme => ({
     paddingTop: '0',
     margin: '0',
   },
+  modalDeleteTitle: {
+    padding: '15px',
+    textAlign: 'center',
+    paddingTop: '40px',
+    margin: '5px',
+  },
+  modalDeleteText: {
+    padding: '15px',
+    textAlign: 'center',
+    margin: '5px',
+  },
   modalFooterCenter: {
     marginLeft: 'auto',
     marginRight: 'auto',

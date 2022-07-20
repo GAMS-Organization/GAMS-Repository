@@ -144,13 +144,13 @@ class UpdateStock extends React.Component {
               </GridContainer>
               <CardFooter>
                 <GridContainer justify={'center'}>
-                  <GridItem xs={4} sm={7} md={8}>
-                    <Button type="submit" color="gamsRed">
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
                       Actualizar
                     </Button>
                   </GridItem>
-                  <GridItem xs={8} sm={5} md={4}>
-                    <Button color="danger" simple onClick={this.handleClose}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={this.handleClose}>
                       Cancelar
                     </Button>
                   </GridItem>

@@ -77,21 +77,23 @@ class DeleteEntryPurchase extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar la siguiente compra?</h4>
-            </DialogTitle>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
-            </DialogTitle>
+            <GridItem>
+              <h3 className={classes.modalDeleteTitle}>¿Está seguro que desea eliminar la siguiente compra?</h3>
+            </GridItem>
+            <GridItem>
+              <h5 className={classes.modalDeleteText}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
+            </GridItem>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteEntry}>
               <GridContainer justify={'center'}>
-                <GridItem>
-                  <Button type="submit" color="gamsRed">
+                <GridItem xs={12} sm={6} md={6}>
+                  <Button block={true} type="submit" color="gamsRed">
                     Sí
                   </Button>
-                  <Button color="danger" simple onClick={() => close()}>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={6}>
+                  <Button block={true} color="danger" simple onClick={() => close()}>
                     No
                   </Button>
                 </GridItem>

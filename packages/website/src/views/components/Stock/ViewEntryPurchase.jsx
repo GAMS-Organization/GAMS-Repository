@@ -136,7 +136,7 @@ class ViewEntryPurchase extends React.Component {
               <>
                 {this.showProducts(entry.purchases)}
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={9}>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Observaciones"
                       id="observations"
@@ -147,10 +147,11 @@ class ViewEntryPurchase extends React.Component {
                         disabled: true,
                         defaultValue: entry.observations,
                         name: 'observations',
+                        multiline: true,
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={3}>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Fecha"
                       id="date"
@@ -170,7 +171,7 @@ class ViewEntryPurchase extends React.Component {
             <CardFooter>
               <GridContainer justify={'center'}>
                 <GridItem xs={8} sm={5} md={4}>
-                  <Button color="gamsRed" onClick={this.handleClose}>
+                  <Button block={true} color="gamsRed" onClick={this.handleClose}>
                     Cerrar
                   </Button>
                 </GridItem>
