@@ -76,7 +76,7 @@ const tableStyle = theme => ({
   tableResponsive: {
     width: '100%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+    overflow: 'auto',
   },
   tableActions: {
     display: 'flex',
@@ -101,6 +101,11 @@ const tableStyle = theme => ({
   close: {
     backgroundColor: 'transparent',
     color: gamsRedColor[0],
+    boxShadow: 'none',
+  },
+  disabled: {
+    backgroundColor: 'transparent',
+    color: gamsGrayColor[1],
     boxShadow: 'none',
   },
   searchInputContainer: {

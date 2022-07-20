@@ -9,12 +9,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-// @material-ui/icons components
-import Close from '@material-ui/icons/Close';
 // core components
 import tableStyle from '../../../styles/jss/material-dashboard-react/components/tableStyle.jsx';
 
-import serviceEducationalElement from '../../../services/api/educationalElement';
 import Edit from '@material-ui/icons/Edit';
 import UpdateEducationalElementRequestSection from '../../sections/EducationalElement/UpdateEducationalElementRequestSection';
 import DeleteRequestEducationalElementSection from '../../sections/EducationalElement/DeleteRequestEducationalElementSection';
@@ -100,27 +97,19 @@ class EducationalElementRequestTable extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Editar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickUpdate(prop)}
                       >
                         <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip
-                      id="tooltip-top-start"
-                      title="Eliminar"
-                      placement="top"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <IconButton
-                        aria-label="Close"
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickDelete(prop)}
-                      >
-                        <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

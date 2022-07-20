@@ -109,13 +109,19 @@ class EntryPurchase extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Ver" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Ver"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Visibility"
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickSeeDetails(prop)}
                       >
-                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.Visibility} />
+                        <Visibility className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
@@ -123,6 +129,7 @@ class EntryPurchase extends React.Component {
                       title="Eliminar"
                       placement="top"
                       classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
                     >
                       <IconButton
                         aria-label="Close"
@@ -164,7 +171,7 @@ EntryPurchase.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listEntries: PropTypes.func,
 };
 

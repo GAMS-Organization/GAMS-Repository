@@ -30,16 +30,23 @@ class Service extends React.Component {
     super(props);
     this.state = {
       errors: {},
+      shouldLoad: false,
     };
   }
+
+  handleOnSubmit = value => {
+    this.setState({ shouldLoad: value });
+  };
 
   render() {
     const { roles } = this.props;
 
     return (
       <div>
-        {(roles.includes('admin') || roles.includes('boss')) && <NewServiceSection />}
-        <ServiceTableSection />
+        {(roles.includes('admin') || roles.includes('boss')) && (
+          <NewServiceSection onSubmit={() => this.handleOnSubmit(true)} />
+        )}
+        <ServiceTableSection shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );
   }

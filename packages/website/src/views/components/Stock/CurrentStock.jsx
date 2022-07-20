@@ -39,7 +39,7 @@ class CurrentStock extends React.Component {
   deleteStock = async prop => {
     const response = await serviceCurrentStock.delete(prop.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listStock();
     } else {
@@ -107,13 +107,19 @@ class CurrentStock extends React.Component {
                     );
                   })}
                   <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
+                    <Tooltip
+                      id="tooltip-top"
+                      title="Editar"
+                      placement="top"
+                      classes={{ tooltip: classes.tooltip }}
+                      disableFocusListener={true}
+                    >
                       <IconButton
                         aria-label="Edit"
                         className={classes.tableActionButton}
                         onClick={() => this.handleClickUpdate(prop)}
                       >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
+                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.close} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
@@ -148,7 +154,7 @@ CurrentStock.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listStock: PropTypes.func,
 };
 

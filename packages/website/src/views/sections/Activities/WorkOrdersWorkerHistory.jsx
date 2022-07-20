@@ -34,9 +34,27 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
+  cardHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
   mx3: {
-    marginLeft: '1rem',
-    marginRight: '.8rem',
+    marginRight: '.5rem',
+    '&~ div': {
+      marginLeft: '0px',
+      marginRight: '.5rem',
+    },
+    '@media (max-width: 500px)': {
+      '&~ div': {
+        marginTop: '.5rem',
+      },
+    },
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center',
+    },
   },
 };
 
@@ -68,12 +86,12 @@ class WorkOrdersWorkerHistory extends React.Component {
     const { classes } = this.props;
 
     const state = {
-      libre: 'info',
-      pausada: 'warning',
-      finalizada: 'success',
-      asignada: 'warning',
-      tomada: 'warning',
-      cancelada: 'danger',
+      Libre: 'info',
+      Pausada: 'warning',
+      Finalizada: 'success',
+      Asignada: 'warning',
+      Tomada: 'warning',
+      Cancelada: 'danger',
     };
 
     return (
@@ -81,8 +99,8 @@ class WorkOrdersWorkerHistory extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="gamsBlue">
-              <h4 className={classes.cardTitleWhite}>Actividades recientes</h4>
-              <GridContainer>
+              <h4 className={classes.cardTitleWhite}>Actividades Recientes</h4>
+              <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus actividades como personal de mantenimiento son listadas aqui.
                 </p>
@@ -92,13 +110,13 @@ class WorkOrdersWorkerHistory extends React.Component {
                 <Warning badge>Pausada</Warning>
                 <Success badge>Finalizada</Success>
                 <Danger badge>Cancelada</Danger>
-              </GridContainer>
+              </div>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.workOrdersWorker.length !== 0 ? (
-                    this.state.workOrdersWorker.map(workOrder => {
+                    this.state.workOrdersWorker.map((workOrder, index) => {
                       return (
                         <SnackbarContent
                           message={`${workOrder.orderDate} - ${workOrder.state.toUpperCase()} - Prioridad: ${
@@ -106,20 +124,24 @@ class WorkOrdersWorkerHistory extends React.Component {
                           } - ${workOrder.comment} `}
                           color={state[workOrder.state]}
                           icon={OfflineBolt}
+                          key={workOrder.comment + index}
                         />
                       );
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      <div className={classes.alternativeText}>
+                        <h5>Todavía no haz realizado ninguna actividad.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.workOrderWorkerPage !== this.state.totalWorkOrderWorkerPages ? (
+            {this.state.workOrderWorkerPage !== this.state.totalWorkOrderWorkerPages &&
+            this.state.totalWorkOrderWorkerPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {

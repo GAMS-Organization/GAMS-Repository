@@ -38,7 +38,7 @@ class DeleteDepartureConsumption extends React.Component {
     e.preventDefault();
     const response = await serviceDepartureConsumptionStock.delete(this.props.departure.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listDepartures();
       this.props.close();
@@ -72,7 +72,7 @@ class DeleteDepartureConsumption extends React.Component {
           }}
           open={open}
           TransitionComponent={Transition}
-          onClose={close}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >

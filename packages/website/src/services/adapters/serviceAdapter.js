@@ -6,7 +6,7 @@ class serviceAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'CREATED_SUCCESFUL',
+        type: 'CREATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -46,7 +46,7 @@ class serviceAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'UPDATED_SUCCESFUL',
+        type: 'UPDATED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;
@@ -86,7 +86,7 @@ class serviceAdapter {
 
     if (!isError(status)) {
       return {
-        type: 'DELETED_SUCCESFUL',
+        type: 'DELETED_SUCCESSFUL',
       };
     } else {
       const { code } = data.errors;

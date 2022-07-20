@@ -50,6 +50,8 @@ class UsersTableSection extends React.Component {
         case 'personal':
           rol = 'Personal';
           break;
+        default:
+          break;
       }
 
       let dataUser = {
@@ -61,56 +63,12 @@ class UsersTableSection extends React.Component {
     this.setState({ users: users, totalPages: response.data.pageCount, page: page });
   };
 
-  pagination = () => {
-    const pages = [
-      {
-        text: '<<',
-        onClick: () => {
-          this.listUsers(1);
-        },
-      },
-      {
-        text: '<',
-        onClick: () => {
-          this.state.page === 1 ? this.listUsers(1) : this.listUsers(this.state.page - 1);
-        },
-      },
-    ];
-    for (
-      let index = this.state.page - 7 > 0 ? this.state.page - 7 : 1;
-      index <= this.state.page + 7 && index <= this.state.totalPages;
-      index++
-    ) {
-      if (index === this.state.page) {
-        pages.push({ text: index, active: true });
-      } else {
-        pages.push({
-          text: index,
-          onClick: async () => {
-            this.listUsers(index);
-          },
-        });
-      }
-    }
-    pages.push({
-      text: '>',
-      onClick: () => {
-        this.state.page === this.state.totalPages
-          ? this.listUsers(this.state.totalPages)
-          : this.listUsers(this.state.page + 1);
-      },
-    });
-    pages.push({
-      text: '>>',
-      onClick: () => {
-        this.listUsers(this.state.totalPages);
-      },
-    });
-    return pages;
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, roles, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.listUsers();
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -125,13 +83,19 @@ class UsersTableSection extends React.Component {
                 tableHead={['Nombre', 'Apellido', 'Correo', 'Usuario', 'Estado']}
                 tableData={this.state.users}
                 listUsers={this.listUsers}
+                roles={roles}
               />
             </CardBody>
           </Card>
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            <Pagination
+              listCallback={this.listUsers}
+              currentPage={this.state.page}
+              totalPages={this.state.totalPages}
+              color="gamsRed"
+            />
           </Card>
         </GridItem>
       </GridContainer>

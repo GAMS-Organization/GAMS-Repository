@@ -65,7 +65,7 @@ class UsersTable extends React.Component {
   };
 
   render() {
-    const { classes, tableHead, tableData, tableHeaderColor } = this.props;
+    const { classes, tableHead, tableData, tableHeaderColor, roles } = this.props;
     return (
       <div className={classes.tableResponsive}>
         <Snackbar
@@ -124,48 +124,58 @@ class UsersTable extends React.Component {
                       </TableCell>
                     );
                   })}
-                  <TableCell className={classes.tableActions}>
-                    <Tooltip id="tooltip-top" title="Editar" placement="top" classes={{ tooltip: classes.tooltip }}>
-                      <IconButton
-                        aria-label="Edit"
-                        className={classes.tableActionButton}
-                        onClick={() => this.handleClickUpdate(prop.id)}
-                      >
-                        <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
-                      </IconButton>
-                    </Tooltip>
-                    {prop.visibleData[4] === 'Activo' ? (
+                  {roles.includes('admin') && (
+                    <TableCell className={classes.tableActions}>
                       <Tooltip
-                        id="tooltip-top-start"
-                        title="Desactivar"
+                        id="tooltip-top"
+                        title="Editar"
                         placement="top"
                         classes={{ tooltip: classes.tooltip }}
+                        disableFocusListener={true}
                       >
                         <IconButton
-                          aria-label="Close"
+                          aria-label="Edit"
                           className={classes.tableActionButton}
-                          onClick={() => this.handleClickDelete(prop)}
+                          onClick={() => this.handleClickUpdate(prop.id)}
                         >
-                          <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                          <Edit className={classes.tableActionButtonIcon + ' ' + classes.edit} />
                         </IconButton>
                       </Tooltip>
-                    ) : (
-                      <Tooltip
-                        id="tooltip-top-start"
-                        title="Activar"
-                        placement="top"
-                        classes={{ tooltip: classes.tooltip }}
-                      >
-                        <IconButton
-                          aria-label="Close"
-                          className={classes.tableActionButton}
-                          onClick={() => this.handleClickEnable(prop)}
+                      {prop.visibleData[4] === 'Activo' ? (
+                        <Tooltip
+                          id="tooltip-top-start"
+                          title="Desactivar"
+                          placement="top"
+                          classes={{ tooltip: classes.tooltip }}
+                          disableFocusListener={true}
                         >
-                          <CheckIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
-                        </IconButton>
-                      </Tooltip>
-                    )}
-                  </TableCell>
+                          <IconButton
+                            aria-label="Close"
+                            className={classes.tableActionButton}
+                            onClick={() => this.handleClickDelete(prop)}
+                          >
+                            <Close className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                          </IconButton>
+                        </Tooltip>
+                      ) : (
+                        <Tooltip
+                          id="tooltip-top-start"
+                          title="Activar"
+                          placement="top"
+                          classes={{ tooltip: classes.tooltip }}
+                          disableFocusListener={true}
+                        >
+                          <IconButton
+                            aria-label="Close"
+                            className={classes.tableActionButton}
+                            onClick={() => this.handleClickEnable(prop)}
+                          >
+                            <CheckIcon className={classes.tableActionButtonIcon + ' ' + classes.close} />
+                          </IconButton>
+                        </Tooltip>
+                      )}
+                    </TableCell>
+                  )}
                 </TableRow>
               );
             })}
@@ -197,8 +207,9 @@ UsersTable.propTypes = {
     'gamsWhite',
   ]),
   tableHead: PropTypes.arrayOf(PropTypes.string),
-  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+  tableData: PropTypes.arrayOf(PropTypes.object),
   listUsers: PropTypes.func,
+  roles: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default withStyles(tableStyle)(UsersTable);

@@ -33,9 +33,10 @@ class ListWorkOrder extends React.Component {
   }
 
   render() {
+    const { roles } = this.props;
     return (
       <div>
-        <ListTableSection />
+        <ListTableSection roles={roles} />
       </div>
     );
   }

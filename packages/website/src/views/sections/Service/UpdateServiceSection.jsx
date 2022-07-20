@@ -65,7 +65,7 @@ class UpdateServiceSection extends React.Component {
 
     const response = await serviceService.update(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, rolClicked: false });
     } else {
       this.setState({ notification: true, errors: response.error });

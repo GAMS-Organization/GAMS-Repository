@@ -10,7 +10,6 @@ import Button from '../../components/CustomButtons/Button.jsx';
 import Card from '../../components/Card/Card.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
 import CardBody from '../../components/Card/CardBody.jsx';
-import CardFooter from '../../components/Card/CardFooter.jsx';
 
 import serviceProduct from '../../../services/api/products';
 import newProductStyle from '../../../styles/jss/material-dashboard-react/sections/newProductStyle';
@@ -24,11 +23,8 @@ class NewProduct extends React.Component {
       errors: {},
       notification: false,
     };
+    this.formRef = {};
   }
-
-  handleRol = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
   closeNotification = () => {
     this.setState({ notification: false, errors: {} });
@@ -48,8 +44,10 @@ class NewProduct extends React.Component {
 
     const response = await serviceProduct.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       this.setState({ notification: true });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -75,21 +73,22 @@ class NewProduct extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createProduct}>
+            <form onSubmit={this.createProduct} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nuevo producto</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nuevo Producto</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={10}>
+                  <GridContainer alignItems={'center'} justify={'center'}>
+                    <GridItem xs={12} sm={12} md={9}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.nameInput,
                         }}
                         inputProps={{
                           required: true,
@@ -98,13 +97,13 @@ class NewProduct extends React.Component {
                         }}
                       />
                     </GridItem>
+                    <GridItem xs={12} sm={12} md={3}>
+                      <Button type="submit" color="gamsRed" block={true} className={classes.createButton}>
+                        Crear
+                      </Button>
+                    </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
-                </CardFooter>
               </Card>
             </form>
           </GridItem>

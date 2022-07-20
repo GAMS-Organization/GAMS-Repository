@@ -38,7 +38,7 @@ class DeleteProductSection extends React.Component {
     e.preventDefault();
     const response = await serviceProduct.delete(this.props.product.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listProducts();
       this.props.close();
@@ -49,7 +49,6 @@ class DeleteProductSection extends React.Component {
 
   render() {
     const { classes, product, Transition, close, open } = this.props;
-    const { errors } = this.state;
     const { name } = product;
     return (
       <div>

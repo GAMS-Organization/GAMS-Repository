@@ -76,6 +76,16 @@ class tool {
     return toolAdapter.listToolRequest(listResponse);
   }
 
+  async listMyToolRequest(page = 1, itemsPerPage = 15) {
+    let listResponse;
+    try {
+      listResponse = await Api.get(`toolRequest/myToolRequests/?page=${page}&items_per_page=${itemsPerPage}`);
+    } catch (err) {
+      listResponse = err;
+    }
+    return toolAdapter.listToolRequest(listResponse);
+  }
+
   async updateToolRequest(dataToolRequest) {
     const body = dataToolRequest;
     let updateResponse;

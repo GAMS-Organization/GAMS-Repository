@@ -9,8 +9,6 @@ import IconButton from '@material-ui/core/IconButton/index';
 import Hidden from '@material-ui/core/Hidden/index';
 // @material-ui/icons
 import Menu from '@material-ui/icons/Menu';
-// core components
-import Button from '../CustomButtons/Button.jsx';
 
 import headerStyle from '../../../styles/jss/material-dashboard-react/components/headerStyle.jsx';
 
@@ -41,9 +39,9 @@ function Header({ ...props }) {
       <Toolbar className={classes.container}>
         <div className={classes.flex + ' ' + classes.customContainer}>
           {/* Here we create navbar brand, based on route name */}
-          <Button disabled color="transparent" href="#" className={classes.title}>
+          <h6 color="transparent" className={classes.title}>
             {makeBrand()}
-          </Button>
+          </h6>
           <h6 className={classes.userName}>{userInfo.name}</h6>
         </div>
         <Hidden smDown implementation="css">

@@ -40,7 +40,7 @@ export default class CompleteWorkOrderHandler {
       let departure = new Departure(
         //@ts-ignore
         command.getRealizationDate(),
-        `Consumido por la órden de trabajo con id ${command.getId()}`,
+        `Consumido por una orden de trabajo`,
       );
 
       departure = await this.departureRepository.persist(departure);

@@ -24,6 +24,7 @@ class NewToolSection extends React.Component {
       errors: {},
       notification: false,
     };
+    this.formRef = {};
   }
 
   handleRol = event => {
@@ -46,11 +47,13 @@ class NewToolSection extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
     const response = await serviceTools.create(formValues);
 
-    if (response.type === 'CREATED_SUCCESFUL') {
+    if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('name').value = '';
       formElements.namedItem('totalQuantity').value = '';
       formElements.namedItem('borrowQuantity').value = '';
       this.setState({ notification: true });
+      this.formRef.reset();
+      this.props.onSubmit(true);
     } else {
       this.setState({ notification: true, errors: response.error });
     }
@@ -76,21 +79,22 @@ class NewToolSection extends React.Component {
         />
         <GridContainer>
           <GridItem xs={12} sm={12} md={6}>
-            <form onSubmit={this.createTool}>
+            <form onSubmit={this.createTool} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">
-                  <h4 className={classes.cardTitleWhite}>Nueva herramienta</h4>
-                  <p className={classes.cardCategoryWhite}>Complete los datos</p>
+                  <h4 className={classes.cardTitleWhite}>Nueva Herramienta</h4>
+                  <p className={classes.cardCategoryWhite}>Complete los campos</p>
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={6}>
                       <CustomInput
                         labelText="Nombre"
                         id="name"
                         error={errors.name}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -98,13 +102,14 @@ class NewToolSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Cantidad"
                         id="totalQuantity"
                         error={errors.totalQuantity}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -112,13 +117,14 @@ class NewToolSection extends React.Component {
                         }}
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={12}>
+                    <GridItem xs={12} sm={12} md={3}>
                       <CustomInput
                         labelText="Cantidad prestada"
                         id="borrowQuantity"
                         error={errors.borrowQuantity}
                         formControlProps={{
                           fullWidth: true,
+                          className: classes.customInput,
                         }}
                         inputProps={{
                           required: true,
@@ -128,10 +134,14 @@ class NewToolSection extends React.Component {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
-                <CardFooter>
-                  <Button type="submit" color="gamsRed">
-                    Crear
-                  </Button>
+                <CardFooter className={classes.buttonContainer}>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <Button type="submit" color="gamsRed" block={true}>
+                        Crear
+                      </Button>
+                    </GridItem>
+                  </GridContainer>
                 </CardFooter>
               </Card>
             </form>

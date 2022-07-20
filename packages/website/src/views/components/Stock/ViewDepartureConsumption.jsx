@@ -16,6 +16,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import { toDate } from '../../../utils/helpers/dateHelper';
+import CardFooter from '../Card/CardFooter';
 
 class ViewDepartureConsumption extends React.Component {
   constructor(props) {
@@ -103,16 +104,14 @@ class ViewDepartureConsumption extends React.Component {
           closeNotification={this.closeNotification}
           close
         />
-
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={this.state.open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={this.state.open}
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
@@ -124,7 +123,7 @@ class ViewDepartureConsumption extends React.Component {
               <>
                 {this.showProducts(departure.consumptions)}
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={9}>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Observaciones"
                       id="observations"
@@ -138,7 +137,7 @@ class ViewDepartureConsumption extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={3}>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Fecha"
                       id="date"
@@ -155,9 +154,15 @@ class ViewDepartureConsumption extends React.Component {
                 </GridContainer>
               </>
             ) : null}
-            <Button color="gamsRed" onClick={this.handleClose}>
-              Cerrar
-            </Button>
+            <CardFooter>
+              <GridContainer justify={'center'}>
+                <GridItem xs={8} sm={5} md={4}>
+                  <Button color="gamsRed" onClick={this.handleClose}>
+                    Cerrar
+                  </Button>
+                </GridItem>
+              </GridContainer>
+            </CardFooter>
           </DialogContent>
         </Dialog>
       </div>

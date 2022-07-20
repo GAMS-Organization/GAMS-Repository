@@ -10,6 +10,20 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CardBody from '../../components/Card/CardBody';
 import Card from '../../components/Card/Card';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const styles = {
+  button: {
+    '@media (max-width: 960px)': {
+      marginTop: '20px',
+    },
+  },
+  purchaseInputs: {
+    '@media (max-width: 960px)': {
+      marginTop: '10px',
+    },
+  },
+};
 
 class PurchaseTable extends React.Component {
   constructor(props) {
@@ -18,8 +32,10 @@ class PurchaseTable extends React.Component {
       columns: [],
       data: [],
       errors: {},
+      productsResponse: [],
       notification: false,
     };
+    this.formRef = {};
   }
 
   closeNotification = () => {
@@ -34,7 +50,7 @@ class PurchaseTable extends React.Component {
     const quantities = [];
     const providers = [];
     for (const purchase of this.state.data) {
-      products.push(parseInt(purchase.product));
+      products.push(this.state.productsResponse[parseInt(purchase.product)].id);
       quantities.push(parseInt(purchase.quantity));
       providers.push(purchase.provider);
     }
@@ -56,8 +72,10 @@ class PurchaseTable extends React.Component {
     } else {
       const response = await serviceEntry.create(request);
 
-      if (response.type === 'CREATED_SUCCESFUL') {
-        this.setState({ notification: true });
+      if (response.type === 'CREATED_SUCCESSFUL') {
+        this.setState({ notification: true, data: [] });
+        this.formRef.reset();
+        this.props.onSubmit();
       } else {
         this.setState({ notification: true, errors: response.error });
       }
@@ -67,9 +85,9 @@ class PurchaseTable extends React.Component {
   async componentWillMount() {
     const response = await serviceProduct.list(1, 500);
     let dataProduct = {};
-    for (const product of response.data.items) {
-      dataProduct[product.id] = product.name;
-    }
+    response.data.items.forEach((product, index) => {
+      dataProduct[index] = product.name;
+    });
 
     this.setState({
       columns: [
@@ -77,12 +95,14 @@ class PurchaseTable extends React.Component {
         { title: 'Proveedor', field: 'provider' },
         { title: 'Cantidad', field: 'quantity' },
       ],
+      productsResponse: response.data.items,
     });
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <GridItem xs={12} sm={12} md={7}>
+      <GridItem xs={12} sm={12} md={12} lg={7}>
         <Snackbar
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
@@ -155,7 +175,7 @@ class PurchaseTable extends React.Component {
         />
         <Card>
           <CardBody>
-            <form onSubmit={this.handleConfirmPurchaseClick}>
+            <form onSubmit={this.handleConfirmPurchaseClick} ref={ref => (this.formRef = ref)}>
               <GridContainer alignItems={'center'}>
                 <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
@@ -163,6 +183,7 @@ class PurchaseTable extends React.Component {
                     id="date"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.purchaseInputs,
                     }}
                     inputProps={{
                       type: 'date',
@@ -172,12 +193,13 @@ class PurchaseTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
                     labelText="Observaciones"
                     id="observations"
                     formControlProps={{
                       fullWidth: true,
+                      className: classes.purchaseInputs,
                     }}
                     inputProps={{
                       required: true,
@@ -186,8 +208,8 @@ class PurchaseTable extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <Button type="submit" color="gamsRed" size={'sm'}>
+                <GridItem xs={12} sm={12} md={3}>
+                  <Button type="submit" color="gamsRed" className={classes.button} block={true}>
                     Comprar
                   </Button>
                 </GridItem>
@@ -200,4 +222,4 @@ class PurchaseTable extends React.Component {
   }
 }
 
-export default PurchaseTable;
+export default withStyles(styles)(PurchaseTable);

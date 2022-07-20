@@ -17,6 +17,9 @@ const newAreaSectionStyle = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
+  buttonContainer: {
+    marginBottom: '20px',
+  },
   ...customSelect,
 };
 

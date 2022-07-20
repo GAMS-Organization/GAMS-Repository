@@ -59,7 +59,7 @@ class UpdateToolRequestSection extends React.Component {
 
     const response = await serviceTool.updateToolRequest(formValues);
 
-    if (response.type === 'UPDATED_SUCCESFUL') {
+    if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, statusSelected: '' });
       this.props.listToolsRequest();
       this.props.close();
@@ -156,12 +156,14 @@ class UpdateToolRequestSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <Button type="submit" color="gamsRed">
-                Actualizar
-              </Button>
-              <Button color="danger" simple onClick={this.handleClose}>
-                Cancelar
-              </Button>
+              <GridContainer justify={'center'}>
+                <Button type="submit" color="gamsRed">
+                  Actualizar
+                </Button>
+                <Button color="danger" simple onClick={this.handleClose}>
+                  Cancelar
+                </Button>
+              </GridContainer>
             </form>
           </DialogContent>
         </Dialog>

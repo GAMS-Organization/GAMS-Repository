@@ -8,6 +8,7 @@ import IAreaRepository from '../../../Domain/Interfaces/IAreaRepository';
 import IToolRepository from '../../../Domain/Interfaces/IToolRepository';
 import { STATUS } from '../../../API/Http/Enums/Tool';
 import ToolService from '../../../Domain/Services/ToolService';
+import CannotUpdateEntity from '../../Exceptions/CannotUpdateEntity';
 
 @injectable()
 export default class UpdateToolRequestHandler {
@@ -46,11 +47,23 @@ export default class UpdateToolRequestHandler {
       throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
     }
 
+    if (toolRequest.getStatus() === STATUS.CANCELED) {
+      throw new CannotUpdateEntity('La solicitud ha sido cancelada y no puede ser actualizada');
+    }
+
+    if (toolRequest.getStatus() === STATUS.RETURNED) {
+      throw new CannotUpdateEntity('La herramienta ya ha sido devuelta');
+    }
+
+    if (command.getStatus() === STATUS.CANCELED && toolRequest.getStatus() !== STATUS.PENDING) {
+      throw new CannotUpdateEntity('La solicitud puede ser cancelada solamente si el estado actual es pendiente');
+    }
+
     toolRequest.setStatus(command.getStatus());
     toolRequest.getArea().getId() !== command.getAreaId() ? toolRequest.setArea(area) : null;
     toolRequest.getTool().getId() !== command.getToolId() ? toolRequest.setTool(tool) : null;
 
-    if (command.getStatus() === STATUS.RETURNED) {
+    if (command.getStatus() === STATUS.RETURNED || command.getStatus() === STATUS.CANCELED) {
       await this.toolService.updateQuantity(toolRequest.getQuantity(), tool, 'return');
     }
 

@@ -34,9 +34,27 @@ const styles = {
     marginBottom: '3px',
     textDecoration: 'none',
   },
+  cardHeader: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
   mx3: {
-    marginLeft: '1rem',
-    marginRight: '.8rem',
+    marginRight: '.5rem',
+    '&~ div': {
+      marginLeft: '0px',
+      marginRight: '.5rem',
+    },
+    '@media (max-width: 500px)': {
+      '&~ div': {
+        marginTop: '.5rem',
+      },
+    },
+  },
+  alternativeText: {
+    margin: '0 20px',
+    '&> h5': {
+      textAlign: 'center',
+    },
   },
 };
 
@@ -84,7 +102,7 @@ class ToolRequestsAuthorHistory extends React.Component {
           <Card>
             <CardHeader color="gamsBlue">
               <h4 className={classes.cardTitleWhite}>Solicitudes de Herramientas</h4>
-              <GridContainer>
+              <div className={classes.cardHeader}>
                 <p className={classes.cardCategoryWhite + ' ' + classes.mx3}>
                   Todas sus solicitudes de herramientas son listadas aquí.
                 </p>
@@ -93,32 +111,36 @@ class ToolRequestsAuthorHistory extends React.Component {
                 <Warning badge>En uso</Warning>
                 <Success badge>Devuelta</Success>
                 <Danger badge>Cancelada</Danger>
-              </GridContainer>
+              </div>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   {this.state.toolRequestsAuthor.length !== 0 ? (
-                    this.state.toolRequestsAuthor.map(toolRequest => {
+                    this.state.toolRequestsAuthor.map((toolRequest, index) => {
                       return (
                         <SnackbarContent
                           message={`${toolRequest.date} - ${toolRequest.area.name} - Herramienta: ${toolRequest.tool.name}`}
                           color={state[toolRequest.status]}
                           icon={OfflineBolt}
+                          key={toolRequest.tool.name + index}
                         />
                       );
                     })
                   ) : (
                     <GridContainer justify={'center'}>
-                      <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
+                      <div className={classes.alternativeText}>
+                        <h5>Todavía no haz realizado ninguna solicitud de herramientas.</h5>
+                      </div>
                     </GridContainer>
                   )}
                 </GridItem>
               </GridContainer>
             </CardBody>
-            {this.state.toolRequestsHistoryAuthorPage !== this.state.totalToolRequestsHistoryAuthorPages ? (
+            {this.state.toolRequestsHistoryAuthorPage !== this.state.totalToolRequestsHistoryAuthorPages &&
+            this.state.totalToolRequestsHistoryAuthorPages ? (
               <CardFooter>
-                <GridContainer justify="center" md={12}>
+                <GridContainer justify="center" md={12} sm={12} xs={12}>
                   <Button
                     color="gamsRed"
                     onClick={() => {

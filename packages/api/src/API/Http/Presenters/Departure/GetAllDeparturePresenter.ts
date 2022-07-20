@@ -32,6 +32,7 @@ export default class GetAllDeparturePresenter implements IPresenter {
         id: departure.getId(),
         date: departure.getDate(),
         observations: departure.getObservations(),
+        workOrderId: departure.getWorkOrder() ? departure.getWorkOrder().getId() : null,
         consumptions,
       });
     });

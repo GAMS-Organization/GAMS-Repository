@@ -74,7 +74,7 @@ class TakeWorkOrderSection extends React.Component {
           message={
             this.state.errors.code
               ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Orden de trabajo tomada correctamente'
+              : 'Orden de trabajo Tomada correctamente'
           }
           open={this.state.notification}
           closeNotification={this.closeNotification}
@@ -84,7 +84,6 @@ class TakeWorkOrderSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}

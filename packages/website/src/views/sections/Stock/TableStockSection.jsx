@@ -19,38 +19,7 @@ import serviceDepartureConsumptionStock from '../../../services/api/departureCon
 import { toDate } from '../../../utils/helpers/dateHelper';
 import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
-import serviceWorkOrder from '../../../services/api/workOrder';
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
 
 class TableStockSection extends React.Component {
   constructor(props) {
@@ -60,11 +29,11 @@ class TableStockSection extends React.Component {
       stock: [{ visibleData: [] }],
       departure: [{ visibleData: [] }],
       activeTab: 1,
-      totalPagesEntry: 1,
+      totalPagesEntry: 0,
       pageEntry: 1,
-      totalPagesStock: 1,
+      totalPagesStock: 0,
       pageStock: 1,
-      totalPagesDeparture: 1,
+      totalPagesDeparture: 0,
       pageDeparture: 1,
     };
   }
@@ -108,7 +77,7 @@ class TableStockSection extends React.Component {
     this.setState({ entry: entries, totalPagesEntry: responseEntry.data.pageCount, pageEntry: page });
   };
 
-  listStock = async (page = 1, itemsPerPage = 1) => {
+  listStock = async (page = 1, itemsPerPage = 15) => {
     const responseCurrentStock = await serviceCurrentStock.list(page, itemsPerPage);
     let stocks = [];
 
@@ -126,7 +95,7 @@ class TableStockSection extends React.Component {
     });
   };
 
-  listDeparture = async (page = 1, itemsPerPage = 1) => {
+  listDeparture = async (page = 1, itemsPerPage = 15) => {
     const responseDeparture = await serviceDepartureConsumptionStock.list(page, itemsPerPage);
     let departures = [];
 
@@ -134,6 +103,7 @@ class TableStockSection extends React.Component {
       let dataDeparture = {
         visibleData: [toDate(departure.date.slice(0, 10)), departure.observations],
         id: departure.id.toString(),
+        workOrderId: departure.workOrderId,
       };
       departures.push(dataDeparture);
     }
@@ -144,150 +114,12 @@ class TableStockSection extends React.Component {
     });
   };
 
-  pagination = () => {
-    if (this.state.activeTab === 0) {
-      const pages = [
-        {
-          text: '<<',
-          onClick: () => {
-            this.listEntries(1);
-          },
-        },
-        {
-          text: '<',
-          onClick: () => {
-            this.state.pageEntry === 1 ? this.listEntries(1) : this.listEntries(this.state.pageEntry - 1);
-          },
-        },
-      ];
-      for (
-        let index = this.state.pageEntry - 7 > 0 ? this.state.pageEntry - 7 : 1;
-        index <= this.state.pageEntry + 7 && index <= this.state.totalPagesEntry;
-        index++
-      ) {
-        if (index === this.state.pageEntry) {
-          pages.push({ text: index, active: true });
-        } else {
-          pages.push({
-            text: index,
-            onClick: async () => {
-              this.listEntries(index);
-            },
-          });
-        }
-      }
-      pages.push({
-        text: '>',
-        onClick: () => {
-          this.state.pageEntry === this.state.totalPagesEntry
-            ? this.listEntries(this.state.totalPagesEntry)
-            : this.listEntries(this.state.pageEntry + 1);
-        },
-      });
-      pages.push({
-        text: '>>',
-        onClick: () => {
-          this.listEntries(this.state.totalPagesEntry);
-        },
-      });
-      return pages;
-    } else if (this.state.activeTab === 1) {
-      const pages = [
-        {
-          text: '<<',
-          onClick: () => {
-            this.listStock(1);
-          },
-        },
-        {
-          text: '<',
-          onClick: () => {
-            this.state.pageStock === 1 ? this.listStock(1) : this.listStock(this.state.pageStock - 1);
-          },
-        },
-      ];
-      for (
-        let index = this.state.pageStock - 7 > 0 ? this.state.pageStock - 7 : 1;
-        index <= this.state.pageStock + 7 && index <= this.state.totalPagesStock;
-        index++
-      ) {
-        if (index === this.state.pageStock) {
-          pages.push({ text: index, active: true });
-        } else {
-          pages.push({
-            text: index,
-            onClick: async () => {
-              this.listStock(index);
-            },
-          });
-        }
-      }
-      pages.push({
-        text: '>',
-        onClick: () => {
-          this.state.pageStock === this.state.totalPagesStock
-            ? this.listStock(this.state.totalPagesStock)
-            : this.listStock(this.state.pageStock + 1);
-        },
-      });
-      pages.push({
-        text: '>>',
-        onClick: () => {
-          this.listStock(this.state.totalPagesStock);
-        },
-      });
-      return pages;
-    } else {
-      const pages = [
-        {
-          text: '<<',
-          onClick: () => {
-            this.listDeparture(1);
-          },
-        },
-        {
-          text: '<',
-          onClick: () => {
-            this.state.pageDeparture === 1 ? this.listDeparture(1) : this.listDeparture(this.state.pageDeparture - 1);
-          },
-        },
-      ];
-      for (
-        let index = this.state.pageDeparture - 7 > 0 ? this.state.pageDeparture - 7 : 1;
-        index <= this.state.pageDeparture + 7 && index <= this.state.totalPagesDeparture;
-        index++
-      ) {
-        if (index === this.state.pageDeparture) {
-          pages.push({ text: index, active: true });
-        } else {
-          pages.push({
-            text: index,
-            onClick: async () => {
-              this.listDeparture(index);
-            },
-          });
-        }
-      }
-      pages.push({
-        text: '>',
-        onClick: () => {
-          this.state.pageDeparture === this.state.totalPagesDeparture
-            ? this.listDeparture(this.state.totalPagesDeparture)
-            : this.listDeparture(this.state.pageDeparture + 1);
-        },
-      });
-      pages.push({
-        text: '>>',
-        onClick: () => {
-          this.listDeparture(this.state.totalPagesDeparture);
-        },
-      });
-      return pages;
-    }
-  };
-
   render() {
-    const { classes } = this.props;
+    const { classes, shouldLoad, onLoad } = this.props;
+    if (shouldLoad) {
+      this.handleOnTabChange(this.state.activeTab);
+      onLoad(false);
+    }
     return (
       <GridContainer justify={'center'}>
         <GridItem xs={12} sm={12} md={12}>
@@ -337,7 +169,28 @@ class TableStockSection extends React.Component {
         </GridItem>
         <GridItem>
           <Card className={classes.cardCenter}>
-            <Pagination pages={this.pagination()} color="gamsRed" />
+            {this.state.activeTab === 0 ? (
+              <Pagination
+                listCallback={this.listEntries}
+                currentPage={this.state.pageEntry}
+                totalPages={this.state.totalPagesEntry}
+                color="gamsRed"
+              />
+            ) : this.state.activeTab === 1 ? (
+              <Pagination
+                listCallback={this.listStock}
+                currentPage={this.state.pageStock}
+                totalPages={this.state.totalPagesStock}
+                color="gamsRed"
+              />
+            ) : (
+              <Pagination
+                listCallback={this.listDeparture}
+                currentPage={this.state.pageDeparture}
+                totalPages={this.state.totalPagesDeparture}
+                color="gamsRed"
+              />
+            )}
           </Card>
         </GridItem>
       </GridContainer>

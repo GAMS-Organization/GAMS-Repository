@@ -8,7 +8,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -39,7 +38,7 @@ class DeleteUserSection extends React.Component {
     e.preventDefault();
     const response = await serviceUser.delete(this.props.user.id);
 
-    if (response.type === 'DELETED_SUCCESFUL') {
+    if (response.type === 'DELETED_SUCCESSFUL') {
       this.setState({ notification: true });
       this.props.listUsers();
       this.props.close();
@@ -50,8 +49,7 @@ class DeleteUserSection extends React.Component {
 
   render() {
     const { classes, user, Transition, close, open } = this.props;
-    const { errors } = this.state;
-    const { id, name, surname } = user;
+    const { name, surname } = user;
     return (
       <div>
         <Snackbar
