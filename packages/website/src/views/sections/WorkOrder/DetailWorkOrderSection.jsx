@@ -269,6 +269,7 @@ class DetailWorkOrderSection extends React.Component {
                       disabled: true,
                       name: 'comment',
                       defaultValue: workOrder.comment,
+                      multiline: true,
                     }}
                   />
                 </GridItem>
@@ -285,6 +286,7 @@ class DetailWorkOrderSection extends React.Component {
                       disabled: true,
                       name: 'taskDescription',
                       defaultValue: workOrder.taskDescription,
+                      multiline: true,
                     }}
                   />
                 </GridItem>
@@ -293,7 +295,7 @@ class DetailWorkOrderSection extends React.Component {
             <CardFooter>
               <GridContainer justify={'center'}>
                 <GridItem xs={8} sm={5} md={4}>
-                  <Button color="danger" simple onClick={() => close()}>
+                  <Button block={true} color="danger" simple onClick={() => close()}>
                     Cerrar
                   </Button>
                 </GridItem>

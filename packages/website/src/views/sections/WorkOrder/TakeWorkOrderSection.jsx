@@ -91,45 +91,43 @@ class TakeWorkOrderSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>¿Esta seguro que desea tomar esta orden de trabajo?</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <GridItem>
+              <h4 className={classes.modalDeleteTitle}>¿Esta seguro que desea tomar esta orden de trabajo?</h4>
+            </GridItem>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.takeWorkOrder}>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText={this.state.dateNow}
-                      id="startDate"
-                      value={this.state.dateNow}
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: 'date',
-                        disabled: true,
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
               <GridContainer>
-                <GridItem justify={'center'} xs={4} sm={7} md={8}>
-                  <CardFooter>
-                    <Button type="submit" color="gamsRed">
-                      Sí
-                    </Button>
-                  </CardFooter>
-                </GridItem>
-                <GridItem justify={'center'} xs={8} sm={5} md={4}>
-                  <CardFooter>
-                    <Button color="danger" simple onClick={() => close()}>
-                      No
-                    </Button>
-                  </CardFooter>
+                <GridItem xs={12} sm={12} md={12}>
+                  <CustomInput
+                    labelText={this.state.dateNow}
+                    id="startDate"
+                    value={this.state.dateNow}
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      name: 'date',
+                      disabled: true,
+                    }}
+                  />
                 </GridItem>
               </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
+                      Sí
+                    </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
+                      No
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

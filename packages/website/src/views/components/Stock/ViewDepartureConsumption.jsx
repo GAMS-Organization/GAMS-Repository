@@ -134,6 +134,7 @@ class ViewDepartureConsumption extends React.Component {
                         disabled: true,
                         defaultValue: departure.observations,
                         name: 'observations',
+                        multiline: true,
                       }}
                     />
                   </GridItem>
@@ -157,7 +158,7 @@ class ViewDepartureConsumption extends React.Component {
             <CardFooter>
               <GridContainer justify={'center'}>
                 <GridItem xs={8} sm={5} md={4}>
-                  <Button color="gamsRed" onClick={this.handleClose}>
+                  <Button block={true} color="gamsRed" onClick={this.handleClose}>
                     Cerrar
                   </Button>
                 </GridItem>
