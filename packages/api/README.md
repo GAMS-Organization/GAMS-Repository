@@ -2,10 +2,8 @@
 
 > TODO: description
 
-## Usage
+## Tutorial "How to connect Google Drive API"
 
 ```
-const dashboardApi = require('dashboard-api');
-
-// TODO: DEMONSTRATE API
+https://blog.tericcabrel.com/upload-file-to-google-drive-with-nodejs/
 ```
