@@ -43,17 +43,12 @@ class TakeWorkOrderSection extends React.Component {
   takeWorkOrder = async e => {
     e.preventDefault();
 
-    const fields = ['startDate'];
-    const formElements = e.target.elements;
-    const formValues = fields
-      .map(field => ({
-        [field]: formElements.namedItem(field),
-      }))
-      .reduce((current, next) => ({ ...current, ...next }));
+    const TakeData = {
+      startDate: this.state.dateNow,
+      id: this.props.workOrder.id,
+    };
 
-    formValues.startDate = this.state.dateNow;
-    formValues.id = this.props.workOrder.id;
-    const response = await serviceWorkOrder.take(formValues);
+    const response = await serviceWorkOrder.take(TakeData);
     if (response.type === 'TAKE_SUCCESSFUL') {
       this.setState({ notification: true, open: false });
       this.props.listWorkOrders();
@@ -98,22 +93,6 @@ class TakeWorkOrderSection extends React.Component {
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.takeWorkOrder}>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <CustomInput
-                    labelText={this.state.dateNow}
-                    id="startDate"
-                    value={this.state.dateNow}
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      name: 'date',
-                      disabled: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
               <CardFooter>
                 <GridContainer justify={'center'}>
                   <GridItem xs={12} sm={6} md={6}>

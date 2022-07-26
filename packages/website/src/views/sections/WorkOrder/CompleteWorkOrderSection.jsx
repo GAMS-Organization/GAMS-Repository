@@ -224,22 +224,20 @@ class CompleteWorkOrderSection extends React.Component {
                   </GridItem>
                 </GridContainer>
               </CardBody>
-              <GridContainer>
-                <GridItem justify={'center'} xs={4} sm={7} md={8}>
-                  <CardFooter>
-                    <Button type="submit" color="gamsRed">
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
                       Sí
                     </Button>
-                  </CardFooter>
-                </GridItem>
-                <GridItem justify={'center'} xs={8} sm={5} md={4}>
-                  <CardFooter>
-                    <Button type="reset" color="danger" simple onClick={this.handleClose}>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="reset" color="danger" simple onClick={this.handleClose}>
                       No
                     </Button>
-                  </CardFooter>
-                </GridItem>
-              </GridContainer>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>
