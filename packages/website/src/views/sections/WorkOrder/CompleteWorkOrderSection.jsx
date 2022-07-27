@@ -127,16 +127,18 @@ class CompleteWorkOrderSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Completar Orden de Trabajo</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <GridItem>
+              <h4 className={classes.modalDeleteTitle}>Completar Orden de Trabajo</h4>
+            </GridItem>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.completeWorkOrder}>
               <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <MaterialTable
-                      title="Agregue los productos utilizados"
+                      title="Productos"
                       columns={this.state.columns}
                       data={this.state.data}
                       options={{ paging: false, search: false, draggable: false, actionsColumnIndex: 3 }}
@@ -190,20 +192,6 @@ class CompleteWorkOrderSection extends React.Component {
                               });
                             }, 600);
                           }),
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText={this.state.dateNow}
-                      id="realizationDate"
-                      value={this.state.dateNow}
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        name: 'date',
-                        disabled: true,
                       }}
                     />
                   </GridItem>
