@@ -77,12 +77,8 @@ class DeleteEntryPurchase extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <GridItem>
-              <h3 className={classes.modalDeleteTitle}>¿Está seguro que desea eliminar la siguiente compra?</h3>
-            </GridItem>
-            <GridItem>
-              <h5 className={classes.modalDeleteText}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
-            </GridItem>
+            <h3 className={classes.modalTitle}>¿Está seguro que desea eliminar la siguiente compra?</h3>
+            <h5 className={classes.modalSubtitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteEntry}>

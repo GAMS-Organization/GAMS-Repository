@@ -102,9 +102,9 @@ class UpdateStock extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar stock</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Actualizar stock</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateStock}>
               <GridContainer>

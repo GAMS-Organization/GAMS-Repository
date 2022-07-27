@@ -24,9 +24,20 @@ const modalStyle = theme => ({
     paddingLeft: '24px',
     minHeight: '16.43px',
   },
-  modalTitle: {
+  /*modalTitle: {
     margin: '0',
     lineHeight: '1.5',
+  },*/
+  modalTitle: {
+    padding: '15px',
+    textAlign: 'center',
+    paddingTop: '40px',
+    margin: '5px',
+  },
+  modalSubtitle: {
+    padding: '15px',
+    textAlign: 'center',
+    margin: '5px',
   },
   modalCloseButton: {
     '&, &:hover': {
@@ -53,7 +64,6 @@ const modalStyle = theme => ({
     height: '16px',
   },
   modalBody: {
-    paddingTop: '24px',
     paddingRight: '24px',
     paddingBottom: '16px',
     paddingLeft: '24px',
@@ -66,7 +76,7 @@ const modalStyle = theme => ({
     paddingTop: '0',
     margin: '0',
   },
-  modalDeleteTitle: {
+  /*modalDeleteTitle: {
     padding: '15px',
     textAlign: 'center',
     paddingTop: '40px',
@@ -76,7 +86,7 @@ const modalStyle = theme => ({
     padding: '15px',
     textAlign: 'center',
     margin: '5px',
-  },
+  },*/
   modalFooterCenter: {
     marginLeft: 'auto',
     marginRight: 'auto',
