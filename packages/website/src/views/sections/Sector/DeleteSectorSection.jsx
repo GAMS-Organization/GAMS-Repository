@@ -15,6 +15,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceSector from '../../../services/api/sector';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import CardFooter from '../../components/Card/CardFooter';
 
 class DeleteSectorSection extends React.Component {
   constructor(props) {
@@ -68,7 +69,6 @@ class DeleteSectorSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -77,34 +77,28 @@ class DeleteSectorSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente sector?</h4>
-            </DialogTitle>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h5 className={classes.modalTitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
-            </DialogTitle>
+            <h3 className={classes.modalTitle}>¿Está seguro que desea eliminar el siguiente sector?</h3>
+            <h5 className={classes.modalSubtitle}>CUIDADO: Al eliminar borrará todos los registros del mismo</h5>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.deleteSector}>
               <GridContainer justify={'center'}>
-                <GridItem xs={12} sm={12} md={8}>
-                  <GridContainer justify={'center'}>
-                    <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-                      <h5 className={classes.modalTitle}>{name}</h5>
-                    </DialogTitle>
-                  </GridContainer>
-                </GridItem>
+                <h6>{name}</h6>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <GridItem>
-                  <Button type="submit" color="gamsRed">
-                    Sí
-                  </Button>
-                  <Button color="danger" simple onClick={() => close()}>
-                    No
-                  </Button>
-                </GridItem>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
+                      Sí
+                    </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
+                      No
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

@@ -128,9 +128,7 @@ class CompleteWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <GridItem>
-              <h4 className={classes.modalDeleteTitle}>Completar Orden de Trabajo</h4>
-            </GridItem>
+            <h3 className={classes.modalTitle}>Completar Orden de Trabajo</h3>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.completeWorkOrder}>

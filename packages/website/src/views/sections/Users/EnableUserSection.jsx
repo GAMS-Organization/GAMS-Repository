@@ -15,6 +15,7 @@ import AddAlert from '@material-ui/icons/AddAlert';
 
 import serviceUser from '../../../services/api/user';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
+import CardFooter from '../../components/Card/CardFooter';
 
 class EnableUserSection extends React.Component {
   constructor(props) {
@@ -68,7 +69,6 @@ class EnableUserSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -77,33 +77,29 @@ class EnableUserSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-              <h4 className={classes.modalTitle}>¿Está seguro que desea activar el siguiente usuario?</h4>
-            </DialogTitle>
+            <h3 className={classes.modalTitle}>¿Está seguro que desea activar el siguiente usuario?</h3>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.enableUser}>
               <GridContainer justify={'center'}>
-                <GridItem xs={12} sm={12} md={8}>
-                  <GridContainer justify={'center'}>
-                    <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-                      <h5 className={classes.modalTitle}>
-                        {name} {surname}
-                      </h5>
-                    </DialogTitle>
-                  </GridContainer>
-                </GridItem>
+                <h6>
+                  {name} {surname}
+                </h6>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <GridItem>
-                  <Button type="submit" color="gamsRed">
-                    Sí
-                  </Button>
-                  <Button color="danger" simple onClick={() => close()}>
-                    No
-                  </Button>
-                </GridItem>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
+                      Sí
+                    </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
+                      No
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

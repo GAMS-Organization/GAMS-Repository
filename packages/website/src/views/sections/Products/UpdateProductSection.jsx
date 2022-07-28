@@ -39,12 +39,10 @@ class UpdateProductSection extends React.Component {
   //se actualiza el producto luego de ser editado
   updateProduct = async e => {
     e.preventDefault();
-
     const formValues = {
       id: this.props.product.id,
       name: this.state.product.name ? this.state.product.name : this.props.product.name,
     };
-
     const response = await serviceProduct.update(formValues);
 
     if (response.type === 'UPDATED_SUCCESSFUL') {
@@ -63,7 +61,7 @@ class UpdateProductSection extends React.Component {
   render() {
     const { classes, product, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id, name } = product;
+    const { name } = product;
     return (
       <div>
         <Snackbar
@@ -83,7 +81,6 @@ class UpdateProductSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -92,7 +89,7 @@ class UpdateProductSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <h4 className={classes.modalDeleteTitle}>Actualizar producto</h4>
+            <h3 className={classes.modalTitle}>Actualizar producto</h3>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateProduct}>

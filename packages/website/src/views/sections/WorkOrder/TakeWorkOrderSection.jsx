@@ -87,9 +87,7 @@ class TakeWorkOrderSection extends React.Component {
           aria-describedby="classic-modal-slide-description"
         >
           <GridContainer justify={'center'}>
-            <GridItem>
-              <h4 className={classes.modalDeleteTitle}>¿Esta seguro que desea tomar esta orden de trabajo?</h4>
-            </GridItem>
+            <h3 className={classes.modalTitle}>¿Esta seguro que desea tomar esta orden de trabajo?</h3>
           </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.takeWorkOrder}>

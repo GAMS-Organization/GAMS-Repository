@@ -16,6 +16,7 @@ import serviceArea from '../../../services/api/area';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CustomTabs from '../../components/CustomTabs/CustomTabs';
 import MapIcon from '@material-ui/icons/Map';
+import CardFooter from '../../components/Card/CardFooter';
 
 class LoadMapArea extends React.Component {
   constructor(props) {
@@ -173,9 +174,9 @@ class LoadMapArea extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Editar mapa: {name}</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Editar mapa: {name}</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form
               onSubmit={e => {
@@ -237,13 +238,15 @@ class LoadMapArea extends React.Component {
                   })}
                 />
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <GridItem>
-                  <Button color="danger" size={'lg'} simple onClick={() => close()}>
-                    Salir
-                  </Button>
-                </GridItem>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
+                      Salir
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

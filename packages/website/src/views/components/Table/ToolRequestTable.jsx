@@ -65,12 +65,6 @@ class ToolRequestTable extends React.Component {
           close={this.closeModal}
           listToolsRequest={this.props.listToolsRequest}
         />
-        <DeleteToolRequestSection
-          toolRequest={this.state.toolRequest}
-          open={this.state.deleteModal}
-          close={this.closeModal}
-          listToolsRequest={this.props.listToolsRequest}
-        />
         <Table className={classes.table}>
           {tableHead !== undefined ? (
             <TableHead className={classes[tableHeaderColor + 'TableHeader']}>
