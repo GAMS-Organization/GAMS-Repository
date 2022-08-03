@@ -52,7 +52,7 @@ class UpdateToolRequestSection extends React.Component {
   updateToolRequest = async e => {
     e.preventDefault();
     const formValues = {
-      toolId: this.props.toolRequest.id,
+      toolId: this.props.toolRequest.toolId,
       status: this.state.statusSelected,
       areaId: this.props.toolRequest.areaId,
       id: this.props.toolRequest.id,
@@ -85,11 +85,7 @@ class UpdateToolRequestSection extends React.Component {
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
           icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Estado actualizado correctamente'
-          }
+          message={this.state.errors.code ? `${this.state.errors.details}` : 'Estado actualizado correctamente'}
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close

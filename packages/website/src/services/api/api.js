@@ -45,7 +45,6 @@ class ApiFetch {
         endpoint: endpoint,
         body: body,
       };
-
       try {
         resolve(await this.makeRequest(requestData, customHead));
       } catch (error) {

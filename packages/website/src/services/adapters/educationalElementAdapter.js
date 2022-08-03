@@ -55,7 +55,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: 'Error al actualizar el elemento educacional. Por favor revise los campos ingresados.',
+          details: 'Error al eliminar el elemento educacional. Por favor intente más tarde.',
         },
       };
     }
@@ -128,13 +128,13 @@ class educationalElementAdapter {
         type: 'UPDATED_SUCCESSFUL',
       };
     } else {
-      const { code } = data.errors;
+      const { code, details } = data.errors;
       return {
         type: 'UPDATED_FAIL',
         error: {
           code: status,
           type: code,
-          details: 'Error al actualizar la solicitud. Por favor revise los campos ingresados.',
+          details: details,
         },
       };
     }

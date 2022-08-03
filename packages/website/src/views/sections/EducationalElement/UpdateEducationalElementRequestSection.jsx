@@ -52,14 +52,12 @@ class UpdateEducationalElementRequestSection extends React.Component {
   updateEducationalElementRequest = async e => {
     e.preventDefault();
     const formValues = {
-      educationalElementId: this.props.educationalElementRequest.id,
+      educationalElementId: this.props.educationalElementRequest.educationalElementId,
       status: this.state.statusSelected,
       areaId: this.props.educationalElementRequest.areaId,
       id: this.props.educationalElementRequest.id,
     };
-
     const response = await serviceEducationalElement.updateElementRequest(formValues);
-
     if (response.type === 'UPDATED_SUCCESSFUL') {
       this.setState({ notification: true, open: false, statusSelected: '' });
       this.props.listEducationalElementRequest();
@@ -85,11 +83,7 @@ class UpdateEducationalElementRequestSection extends React.Component {
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
           icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Estado actualizado correctamente'
-          }
+          message={this.state.errors.code ? `${this.state.errors.details}` : 'Estado actualizado correctamente'}
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close

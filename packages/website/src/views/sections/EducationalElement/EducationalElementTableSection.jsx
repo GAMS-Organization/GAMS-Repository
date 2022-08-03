@@ -35,7 +35,6 @@ class EducationalElementTableSection extends React.Component {
       };
       educationalElements.push(dataEducationalElements);
     }
-
     this.setState({ educationalElement: educationalElements });
   };
 
