@@ -62,7 +62,7 @@ class UpdateProductSection extends React.Component {
   render() {
     const { classes, product, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id, name } = product;
+    const { name } = product;
     return (
       <div>
         <Snackbar

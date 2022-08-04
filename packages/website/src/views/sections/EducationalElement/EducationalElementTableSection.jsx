@@ -11,7 +11,6 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import serviceEducationalElement from '../../../services/api/educationalElement';
 
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
-import Pagination from '../../components/Pagination/Pagination';
 
 class EducationalElementTableSection extends React.Component {
   constructor(props) {

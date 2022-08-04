@@ -63,7 +63,7 @@ class UpdateElementSection extends React.Component {
   render() {
     const { classes, element, Transition, open, close } = this.props;
     const { errors } = this.state;
-    const { id, name, code, steps, service } = element;
+    const { name, code, steps, service } = element;
     return (
       <div>
         <Snackbar
