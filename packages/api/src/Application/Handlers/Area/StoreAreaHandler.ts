@@ -27,7 +27,7 @@ export default class StoreAreaHandler {
     const sector = await this.sectorRepository.findOneBySectorName(command.getSector());
 
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with name: ${command.getSector()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sectorcon nombre: ${command.getSector()}`);
     }
     const area = new Area(command.getName(), command.getCode(), sector);
     return await this.areaServiceService.setServiceToArea(

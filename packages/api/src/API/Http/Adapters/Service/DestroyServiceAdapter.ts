@@ -9,11 +9,11 @@ export default class DestroyServiceAdapter {
     const serviceId = parseInt(request.params.id);
 
     if (!serviceId) {
-      throw new ValidationException('Service id are required');
+      throw new ValidationException('El id del servicio es requerido');
     }
 
     if (serviceId < 1) {
-      throw new ValidationException('Service id is not valid');
+      throw new ValidationException('El id del servicio no es válido');
     }
 
     return new DestroyServiceCommand(serviceId);

@@ -8,7 +8,7 @@ export default class ShowAreaBySectorAdapter {
   public from(request: Request): ShowAreaBySectorCommand {
     const name = request.params.name.replace(/-/gi, ' ');
     if (!name) {
-      throw new ValidationException('Sector name is required');
+      throw new ValidationException('El nombre del sector es requerido');
     }
 
     return new ShowAreaBySectorCommand(name);

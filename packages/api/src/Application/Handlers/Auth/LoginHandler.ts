@@ -21,10 +21,10 @@ export default class LoginHandler {
     const user = await this.userRepository.findOneByUsername(command.getEmail());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getEmail()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getEmail()}`);
     }
     if (user.getUserState() == UserStates.user_inactive) {
-      throw new AuthorizationFailed(`User with email: ${command.getEmail()} is inactive.`);
+      throw new AuthorizationFailed(`El usuario con email: ${command.getEmail()} está desactivado.`);
     }
     if (user.checkIfUnencryptedPasswordIsValid(command.getPassword())) {
       const token = jwt.sign(
@@ -36,7 +36,7 @@ export default class LoginHandler {
       );
       return { user, token };
     } else {
-      throw new AuthorizationFailed(`Wrong password on User with email: ${command.getEmail()}`);
+      throw new AuthorizationFailed(`Contraseña equivocada con el usuario de email: ${command.getEmail()}`);
     }
   }
 }

@@ -9,22 +9,22 @@ export default class ShowAssetAdapter {
     //@ts-ignore
     const sector = parseInt(request.query.sector);
     if (!sector) {
-      throw new ValidationException('Sector id is required');
+      throw new ValidationException('El id del sector es requerido');
     }
     //@ts-ignore
     const area = parseInt(request.query.area);
     if (!area) {
-      throw new ValidationException('Area id is required');
+      throw new ValidationException('El is del área es requerido');
     }
     //@ts-ignore
     const service = parseInt(request.query.service);
     if (!service) {
-      throw new ValidationException('Service id is required');
+      throw new ValidationException('El id del servicio es requerido');
     }
     //@ts-ignore
     const element = parseInt(request.query.element);
     if (!element) {
-      throw new ValidationException('Element id is required');
+      throw new ValidationException('El id del elemento es requerido');
     }
 
     return new ShowAssetCommand(sector, area, service, element);

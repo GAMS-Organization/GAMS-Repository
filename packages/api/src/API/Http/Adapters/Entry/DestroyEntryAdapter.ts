@@ -9,11 +9,11 @@ export default class DestroyEntryAdapter {
     const entryId = parseInt(request.params.id);
 
     if (!entryId) {
-      throw new ValidationException('Entry id are required');
+      throw new ValidationException('El id de la entrada es requerido');
     }
 
     if (entryId < 1) {
-      throw new ValidationException('Entry id is not valid');
+      throw new ValidationException('El id de la entrada no es válido');
     }
 
     return new DestroyEntryCommand(entryId);

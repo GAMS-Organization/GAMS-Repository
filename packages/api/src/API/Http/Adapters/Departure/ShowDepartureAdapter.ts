@@ -9,11 +9,11 @@ export default class ShowDepartureAdapter {
     const departureId = parseInt(request.params.id);
 
     if (!departureId) {
-      throw new ValidationException('Departure id are required');
+      throw new ValidationException('El id de la salida es requerido');
     }
 
     if (departureId < 1) {
-      throw new ValidationException('Departure id is not valid');
+      throw new ValidationException('El id de la salida no es válido');
     }
 
     return new ShowDepartureCommand(departureId);

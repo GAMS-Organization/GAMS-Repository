@@ -9,11 +9,11 @@ export default class DestroyEventAdapter {
     const eventId = parseInt(request.params.id);
 
     if (!eventId) {
-      throw new ValidationException('Event id are required');
+      throw new ValidationException('El id del evento es requerido');
     }
 
     if (eventId < 1) {
-      throw new ValidationException('Event id is not valid');
+      throw new ValidationException('El id del evento no es válido');
     }
 
     return new DestroyEventCommand(eventId);

@@ -9,11 +9,11 @@ export default class IndexEventsByMonthAdapter {
     const month = parseInt(request.params.month);
 
     if (!month) {
-      throw new ValidationException('Month are required');
+      throw new ValidationException('El mes es requerido');
     }
 
     if (month < 1 || month > 12) {
-      throw new ValidationException('Month is not valid');
+      throw new ValidationException('El mes no es válido');
     }
 
     return new IndexEventsByMonthCommand(month);
