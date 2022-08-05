@@ -19,13 +19,13 @@ export default class DestroyEducationalElementHandler {
     const educationalElement = await this.educationalElementRepository.findOneById(command.getId());
 
     if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el artículo con id: ${command.getId()}`);
     }
 
     const educationalElementWasDestroyed = await this.educationalElementRepository.destroy(educationalElement);
 
     if (!educationalElementWasDestroyed) {
-      throw new CannotDeleteEntity(`EducationalElement with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el artículo con id: ${command.getId()}`);
     }
 
     return educationalElementWasDestroyed;

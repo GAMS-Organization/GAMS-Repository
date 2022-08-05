@@ -31,13 +31,15 @@ export default class DestroyServiceHandler {
     const service = await this.serviceRepository.findOneById(command.getId());
 
     if (!service) {
-      throw new EntityNotFoundException(`Service with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el servicio con id: ${command.getId()}`);
     }
 
     const relationsWAsDestroyed = await this.areaServiceService.destroyRelationsByService(service);
 
     if (!relationsWAsDestroyed) {
-      throw new CannotDeleteEntity(`Areas relationed with the service id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(
+        `No se pudieron borrar las áreas relacionadas al servicio con id: ${command.getId()}`,
+      );
     }
 
     await this.assetService.deleteFromService(service);
@@ -45,13 +47,15 @@ export default class DestroyServiceHandler {
     const relationedElementWasDestroyed = await this.serviceService.deleteRelatedElements(service);
 
     if (!relationedElementWasDestroyed) {
-      throw new CannotDeleteEntity(`Elements relationed with the service id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(
+        `No se pudieron borrar los elementos relacionadas al servicio con id: ${command.getId()}`,
+      );
     }
 
     const serviceWasDestroyed = await this.serviceRepository.destroy(service);
 
     if (!serviceWasDestroyed) {
-      throw new CannotDeleteEntity(`Service with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el servicio con id: ${command.getId()}`);
     }
 
     return serviceWasDestroyed;

@@ -27,7 +27,7 @@ export default class DestroySectorHandler {
     const sector = await this.sectorRepository.findOneById(command.getId());
 
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con id: ${command.getId()}`);
     }
 
     await this.assetService.deleteFromSector(sector);
@@ -35,13 +35,13 @@ export default class DestroySectorHandler {
     const relationsWAsDestroyed = await this.sectorService.deleteRelatedAreas(sector);
 
     if (!relationsWAsDestroyed) {
-      throw new CannotDeleteEntity(`Areas relationed with the sector id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudieron borrar las áreas relacionadas al sector con id: ${command.getId()}`);
     }
 
     const sectorWasDestroyed = await this.sectorRepository.destroy(sector);
 
     if (!sectorWasDestroyed) {
-      throw new CannotDeleteEntity(`Sector with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el sector con id: ${command.getId()}`);
     }
 
     return sectorWasDestroyed;

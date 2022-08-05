@@ -23,13 +23,13 @@ export default class DestroyEventHandler {
     const event = await this.eventRepository.findOneById(command.getId());
 
     if (!event) {
-      throw new EntityNotFoundException(`Event with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el evento con id: ${command.getId()}`);
     }
 
     const eventWasDestroyed = await this.eventService.destroyEvent(event);
 
     if (!eventWasDestroyed) {
-      throw new CannotDeleteEntity(`Event with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el evento con id: ${command.getId()}`);
     }
 
     return eventWasDestroyed;

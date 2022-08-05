@@ -29,7 +29,7 @@ export default class UpdateWorkOrderHandler {
   public async execute(command: UpdateWorkOrderCommand): Promise<WorkOrder> {
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
-      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la orden de trabajo con id: ${command.getId()}`);
     } //@ts-ignore
     workOrder.getOrderDate() !== command.getOrderDate() ? workOrder.setOrderDate(command.getOrderDate()) : null;
     //@ts-ignore
@@ -48,13 +48,13 @@ export default class UpdateWorkOrderHandler {
 
     const asset = await this.assetRepository.findOneById(command.getAssetId());
     if (!asset) {
-      throw new EntityNotFoundException(`Asset with id: ${command.getAssetId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el activo con id: ${command.getAssetId()}`);
     }
     workOrder.getAsset() !== asset ? workOrder.setAsset(asset) : null;
 
     const user = await this.userRepository.findOneById(command.getUserId());
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getUserId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getUserId()}`);
     }
     workOrder.getUser() !== user ? workOrder.setUser(user) : null;
 
@@ -62,7 +62,7 @@ export default class UpdateWorkOrderHandler {
     for (const workerId of command.getWorkersId()) {
       const worker = await this.userRepository.findOneById(workerId);
       if (!worker) {
-        throw new EntityNotFoundException(`WorkerUser with id: ${workerId} not found`);
+        throw new EntityNotFoundException(`No se encontró el responsable con id: ${workerId}`);
       }
       workers.push(worker);
     }

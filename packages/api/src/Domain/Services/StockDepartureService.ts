@@ -40,7 +40,7 @@ export default class StockDepartureService {
       try {
         await this.stockDepartureRepository.destroy(stockDeparture);
       } catch (e) {
-        throw new CannotDeleteEntity(`StockDeparture with id: ${stockDeparture.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`No se pudo borrar la salida-stock con id: ${stockDeparture.getId()}`);
       }
     }
   }

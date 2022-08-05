@@ -40,7 +40,7 @@ export default class UserRoleService {
       try {
         await this.userRoleRepository.destroy(userRole);
       } catch (e) {
-        throw new CannotDeleteEntity(`UserRole with id: ${userRole.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`No se pudo borrar el rol-usuario con id: ${userRole.getId()}`);
       }
     }
   }

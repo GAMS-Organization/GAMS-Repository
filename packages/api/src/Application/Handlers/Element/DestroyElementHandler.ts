@@ -23,7 +23,7 @@ export default class DestroyElementHandler {
     const element = await this.elementRepository.findOneById(command.getId());
 
     if (!element) {
-      throw new EntityNotFoundException(`Element with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el elemento con id: ${command.getId()}`);
     }
 
     await this.assetService.deleteFromElement(element);
@@ -31,7 +31,7 @@ export default class DestroyElementHandler {
     const elementWasDestroyed = await this.elementRepository.destroy(element);
 
     if (!elementWasDestroyed) {
-      throw new CannotDeleteEntity(`Element with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el elemento con id: ${command.getId()}`);
     }
 
     return elementWasDestroyed;

@@ -16,7 +16,7 @@ export default class ShowElementHandler {
   public async execute(command: ShowElementCommand): Promise<Element> {
     const element = await this.elementRepository.findOneById(command.getId());
     if (!element) {
-      throw new EntityNotFoundException(`Element with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el artículo con id: ${command.getId()}`);
     }
     return element;
   }

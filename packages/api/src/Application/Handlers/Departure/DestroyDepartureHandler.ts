@@ -27,14 +27,14 @@ export default class DestroyDepartureHandler {
     const departure = await this.departureRepository.findOneById(command.getId());
 
     if (!departure) {
-      throw new EntityNotFoundException(`Departure with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la salida con id: ${command.getId()}`);
     }
     await this.consumptionService.destroyConsumptionsFromDeparture(departure.id);
     await this.stockDepartureService.destroyStockDeparturesFromDeparture(departure.id);
     const departureWasDestroyed = await this.departureRepository.destroy(departure);
 
     if (!departureWasDestroyed) {
-      throw new CannotDeleteEntity(`Departure with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar la salida con id: ${command.getId()}`);
     }
 
     return departureWasDestroyed;

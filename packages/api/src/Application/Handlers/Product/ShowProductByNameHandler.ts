@@ -17,7 +17,7 @@ export default class ShowProductByNameHandler {
     const product = await this.productRepository.findOneByProductName(command.getName());
 
     if (!product) {
-      throw new EntityNotFoundException(`Product with slug: ${command.getName()} not found`);
+      throw new EntityNotFoundException(`No se encontró el producto con nombre: ${command.getName()}`);
     }
 
     return product;
