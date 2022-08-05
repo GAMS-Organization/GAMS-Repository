@@ -45,6 +45,7 @@ class ToolRequestTableSection extends React.Component {
         ],
         id: toolRequest.id.toString(),
         areaId: toolRequest.area.id.toString(),
+        toolId: toolRequest.tool.id.toString(),
       };
       toolsRequest.push(dataToolRequest);
     }

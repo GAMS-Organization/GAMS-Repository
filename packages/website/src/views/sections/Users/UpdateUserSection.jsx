@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -101,7 +100,6 @@ class UpdateUserSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -109,9 +107,9 @@ class UpdateUserSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar usuario</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Actualizar usuario</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateUser}>
               <GridContainer>
@@ -220,13 +218,13 @@ class UpdateUserSection extends React.Component {
               </GridContainer>
               <CardFooter>
                 <GridContainer justify={'center'}>
-                  <GridItem>
-                    <Button type="submit" color="gamsRed">
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
                       Actualizar
                     </Button>
                   </GridItem>
-                  <GridItem>
-                    <Button color="danger" simple onClick={() => close()}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
                       Cancelar
                     </Button>
                   </GridItem>
