@@ -235,6 +235,7 @@ class LoadMapArea extends React.Component {
                       ),
                     };
                   })}
+                  handleOnTabChange={() => {}}
                 />
               </GridContainer>
               <CardFooter>

@@ -9,11 +9,11 @@ export default class DestroyElementRequestAdapter {
     const elementRequestId = parseInt(request.params.id);
 
     if (!elementRequestId) {
-      throw new ValidationException('ElementRequest id are required');
+      throw new ValidationException('El id de la solicitud de artículo es requerido');
     }
 
     if (elementRequestId < 1) {
-      throw new ValidationException('ElementRequest id is not valid');
+      throw new ValidationException('El id de la solicitud de artículo no es válido');
     }
 
     return new DestroyElementRequestCommand(elementRequestId);

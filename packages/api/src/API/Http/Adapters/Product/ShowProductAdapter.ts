@@ -9,11 +9,11 @@ export default class ShowProductAdapter {
     const productId = parseInt(request.params.id);
 
     if (!productId) {
-      throw new ValidationException('Product id are required');
+      throw new ValidationException('El id del producto es requerido');
     }
 
     if (productId < 1) {
-      throw new ValidationException('Product id is not valid');
+      throw new ValidationException('El id del producto no es válido');
     }
 
     return new ShowProductCommand(productId);

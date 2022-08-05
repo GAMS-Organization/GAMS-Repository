@@ -9,11 +9,11 @@ export default class ShowWorkOrderAdapter {
     const workOrderId = parseInt(request.params.id);
 
     if (!workOrderId) {
-      throw new ValidationException('Work order id are required');
+      throw new ValidationException('El id de la orden de trabajo es requerido');
     }
 
     if (workOrderId < 1) {
-      throw new ValidationException('Work order id is not valid');
+      throw new ValidationException('El id de la orden de trabajo no es válido');
     }
 
     return new ShowWorkOrderCommand(workOrderId);

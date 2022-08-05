@@ -23,7 +23,7 @@ export default class ShowAreaBySectorHandler {
     const sector = await this.sectorRepository.findOneBySectorName(command.getName());
 
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with slug: ${command.getName()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con slug: ${command.getName()}`);
     }
 
     const areas = await this.areaRepository.findBySectorId(sector.id);

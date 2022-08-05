@@ -9,11 +9,11 @@ export default class DestroyEducationalElementAdapter {
     const educationalElementId = parseInt(request.params.id);
 
     if (!educationalElementId) {
-      throw new ValidationException('EducationalElement id are required');
+      throw new ValidationException('El id del artículo es requerido');
     }
 
     if (educationalElementId < 1) {
-      throw new ValidationException('EducationalElement id is not valid');
+      throw new ValidationException('El id del artículo no es válido');
     }
 
     return new DestroyEducationalElementCommand(educationalElementId);
