@@ -14,7 +14,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
-import DeleteToolRequestSection from '../../sections/Tools/DeleteToolRequestSection';
 
 class ToolRequestTable extends React.Component {
   constructor(props) {

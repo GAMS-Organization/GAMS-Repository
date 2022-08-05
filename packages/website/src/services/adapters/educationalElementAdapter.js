@@ -55,7 +55,7 @@ class educationalElementAdapter {
         error: {
           code: status,
           type: code,
-          details: 'Error al eliminar el elemento educacional. Por favor intente más tarde.',
+          details: 'Error al actualizar el elemento educacional. Por favor intente más tarde.',
         },
       };
     }

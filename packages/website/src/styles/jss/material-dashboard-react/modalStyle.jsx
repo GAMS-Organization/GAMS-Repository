@@ -24,10 +24,6 @@ const modalStyle = theme => ({
     paddingLeft: '24px',
     minHeight: '16.43px',
   },
-  /*modalTitle: {
-    margin: '0',
-    lineHeight: '1.5',
-  },*/
   modalTitle: {
     padding: '15px',
     textAlign: 'center',
@@ -76,17 +72,6 @@ const modalStyle = theme => ({
     paddingTop: '0',
     margin: '0',
   },
-  /*modalDeleteTitle: {
-    padding: '15px',
-    textAlign: 'center',
-    paddingTop: '40px',
-    margin: '5px',
-  },
-  modalDeleteText: {
-    padding: '15px',
-    textAlign: 'center',
-    margin: '5px',
-  },*/
   modalFooterCenter: {
     marginLeft: 'auto',
     marginRight: 'auto',

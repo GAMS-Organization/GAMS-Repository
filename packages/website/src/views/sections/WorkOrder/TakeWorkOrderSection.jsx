@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
-import CustomInput from '../../components/CustomInput/CustomInput.jsx';
 import Button from '../../components/CustomButtons/Button.jsx';
 import Snackbar from '../../components/Snackbar/Snackbar';
 // @material-ui/icons components
@@ -17,7 +15,6 @@ import AddAlert from '@material-ui/icons/AddAlert';
 import serviceWorkOrder from '../../../services/api/workOrder';
 import modalStyle from '../../../styles/jss/material-dashboard-react/modalStyle';
 import CardFooter from '../../components/Card/CardFooter';
-import CardBody from '../../components/Card/CardBody';
 
 class TakeWorkOrderSection extends React.Component {
   constructor(props) {
