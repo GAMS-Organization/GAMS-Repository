@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
@@ -21,6 +20,7 @@ import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import serviceService from '../../../services/api/service';
+import CardFooter from '../../components/Card/CardFooter';
 
 class UpdateAreaSection extends React.Component {
   constructor(props) {
@@ -115,9 +115,9 @@ class UpdateAreaSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar Area</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Actualizar Área</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateArea}>
               <GridContainer>
@@ -182,14 +182,20 @@ class UpdateAreaSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <Button type="submit" color="gamsRed">
-                  Actualizar
-                </Button>
-                <Button color="danger" simple onClick={() => close()}>
-                  Cancelar
-                </Button>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
+                      Actualizar
+                    </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={() => close()}>
+                      Cancelar
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

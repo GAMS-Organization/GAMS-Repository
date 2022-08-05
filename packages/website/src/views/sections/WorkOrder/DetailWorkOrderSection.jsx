@@ -2,7 +2,6 @@ import React from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
@@ -82,9 +81,9 @@ class DetailWorkOrderSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Detalles</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Detalles</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <GridContainer>
               {workOrder.workers ? <>{this.showWorkers(workOrder.workers)}</> : null}
@@ -269,6 +268,7 @@ class DetailWorkOrderSection extends React.Component {
                       disabled: true,
                       name: 'comment',
                       defaultValue: workOrder.comment,
+                      multiline: true,
                     }}
                   />
                 </GridItem>
@@ -285,6 +285,7 @@ class DetailWorkOrderSection extends React.Component {
                       disabled: true,
                       name: 'taskDescription',
                       defaultValue: workOrder.taskDescription,
+                      multiline: true,
                     }}
                   />
                 </GridItem>
@@ -292,8 +293,8 @@ class DetailWorkOrderSection extends React.Component {
             </GridContainer>
             <CardFooter>
               <GridContainer justify={'center'}>
-                <GridItem xs={8} sm={5} md={4}>
-                  <Button color="danger" simple onClick={() => close()}>
+                <GridItem xs={12} sm={12} md={6}>
+                  <Button block={true} color="danger" simple onClick={() => close()}>
                     Cerrar
                   </Button>
                 </GridItem>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
@@ -115,9 +114,9 @@ class ViewDepartureConsumption extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Detalles de la salida</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Detalles de la salida</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             {departure.consumptions ? (
               <>
@@ -134,6 +133,7 @@ class ViewDepartureConsumption extends React.Component {
                         disabled: true,
                         defaultValue: departure.observations,
                         name: 'observations',
+                        multiline: true,
                       }}
                     />
                   </GridItem>
@@ -156,8 +156,8 @@ class ViewDepartureConsumption extends React.Component {
             ) : null}
             <CardFooter>
               <GridContainer justify={'center'}>
-                <GridItem xs={8} sm={5} md={4}>
-                  <Button color="gamsRed" onClick={this.handleClose}>
+                <GridItem xs={12} sm={12} md={6}>
+                  <Button block={true} color="gamsRed" onClick={this.handleClose}>
                     Cerrar
                   </Button>
                 </GridItem>

@@ -25,8 +25,15 @@ const modalStyle = theme => ({
     minHeight: '16.43px',
   },
   modalTitle: {
-    margin: '0',
-    lineHeight: '1.5',
+    padding: '15px',
+    textAlign: 'center',
+    paddingTop: '40px',
+    margin: '5px',
+  },
+  modalSubtitle: {
+    padding: '15px',
+    textAlign: 'center',
+    margin: '5px',
   },
   modalCloseButton: {
     '&, &:hover': {
@@ -53,7 +60,6 @@ const modalStyle = theme => ({
     height: '16px',
   },
   modalBody: {
-    paddingTop: '24px',
     paddingRight: '24px',
     paddingBottom: '16px',
     paddingLeft: '24px',

@@ -38,6 +38,7 @@ class EducationalElementRequestTable extends React.Component {
         id: prop.id,
         status: prop.visibleData[3],
         areaId: prop.areaId,
+        educationalElementId: prop.educationalElementId,
       },
       modal: true,
     });

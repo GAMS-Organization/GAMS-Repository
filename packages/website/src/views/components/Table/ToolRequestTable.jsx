@@ -14,7 +14,6 @@ import tableStyle from '../../../styles/jss/material-dashboard-react/components/
 
 import UpdateToolRequestSection from '../../sections/Tools/UpdateToolRequestSection';
 import Edit from '@material-ui/icons/Edit';
-import DeleteToolRequestSection from '../../sections/Tools/DeleteToolRequestSection';
 
 class ToolRequestTable extends React.Component {
   constructor(props) {
@@ -38,6 +37,7 @@ class ToolRequestTable extends React.Component {
         id: prop.id,
         status: prop.visibleData[3],
         areaId: prop.areaId,
+        toolId: prop.toolId,
       },
       modal: true,
     });
@@ -62,12 +62,6 @@ class ToolRequestTable extends React.Component {
         <UpdateToolRequestSection
           toolRequest={this.state.toolRequest}
           open={this.state.modal}
-          close={this.closeModal}
-          listToolsRequest={this.props.listToolsRequest}
-        />
-        <DeleteToolRequestSection
-          toolRequest={this.state.toolRequest}
-          open={this.state.deleteModal}
           close={this.closeModal}
           listToolsRequest={this.props.listToolsRequest}
         />
