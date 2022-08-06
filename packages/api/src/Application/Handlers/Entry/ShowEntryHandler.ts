@@ -16,7 +16,7 @@ export default class ShowEntryHandler {
   public async execute(command: ShowEntryCommand): Promise<Entry> {
     const entry = await this.entryRepository.findOneById(command.getId());
     if (!entry) {
-      throw new EntityNotFoundException(`Entry with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la entrada con id: ${command.getId()}`);
     }
     return entry;
   }

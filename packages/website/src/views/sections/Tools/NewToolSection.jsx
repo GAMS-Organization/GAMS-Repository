@@ -78,7 +78,7 @@ class NewToolSection extends React.Component {
           close
         />
         <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          <GridItem xs={12} sm={12} md={10}>
             <form onSubmit={this.createTool} ref={ref => (this.formRef = ref)}>
               <Card>
                 <CardHeader color="gamsBlue">

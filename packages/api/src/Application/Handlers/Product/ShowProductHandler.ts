@@ -16,7 +16,7 @@ export default class ShowProductHandler {
   public async execute(command: ShowProductCommand): Promise<Product> {
     const product = await this.productRepository.findOneById(command.getId());
     if (!product) {
-      throw new EntityNotFoundException(`Product with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el producto con id:: ${command.getId()}`);
     }
     return product;
   }

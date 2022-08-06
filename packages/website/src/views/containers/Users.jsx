@@ -43,7 +43,9 @@ class Users extends React.Component {
     const { roles } = this.props;
     return (
       <div>
-        {roles.includes('admin') && <NewUserSection onSubmit={() => this.handleOnSubmit(true)} />}
+        {(roles.includes('admin') || roles.includes('boss')) && (
+          <NewUserSection onSubmit={() => this.handleOnSubmit(true)} />
+        )}
         <UsersTable roles={roles} shouldLoad={this.state.shouldLoad} onLoad={this.handleOnSubmit} />
       </div>
     );

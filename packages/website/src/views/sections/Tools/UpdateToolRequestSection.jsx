@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 // core components
 import GridItem from '../../components/Grid/GridItem.jsx';
@@ -19,6 +18,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { InputLabel } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import CardFooter from '../../components/Card/CardFooter';
 
 class UpdateToolRequestSection extends React.Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class UpdateToolRequestSection extends React.Component {
   updateToolRequest = async e => {
     e.preventDefault();
     const formValues = {
-      toolId: this.props.toolRequest.id,
+      toolId: this.props.toolRequest.toolId,
       status: this.state.statusSelected,
       areaId: this.props.toolRequest.areaId,
       id: this.props.toolRequest.id,
@@ -84,11 +84,7 @@ class UpdateToolRequestSection extends React.Component {
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
           icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}. ${this.state.errors.details}`
-              : 'Estado actualizado correctamente'
-          }
+          message={this.state.errors.code ? `${this.state.errors.details}` : 'Estado actualizado correctamente'}
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
@@ -97,7 +93,6 @@ class UpdateToolRequestSection extends React.Component {
         <Dialog
           classes={{
             root: classes.modalRoot,
-            paper: classes.modal,
           }}
           open={open}
           TransitionComponent={Transition}
@@ -105,9 +100,9 @@ class UpdateToolRequestSection extends React.Component {
           aria-labelledby="classic-modal-slide-title"
           aria-describedby="classic-modal-slide-description"
         >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <h4 className={classes.modalTitle}>Actualizar Estado</h4>
-          </DialogTitle>
+          <GridContainer justify={'center'}>
+            <h3 className={classes.modalTitle}>Actualizar Estado</h3>
+          </GridContainer>
           <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
             <form onSubmit={this.updateToolRequest}>
               <GridContainer>
@@ -156,14 +151,20 @@ class UpdateToolRequestSection extends React.Component {
                   </FormControl>
                 </GridItem>
               </GridContainer>
-              <GridContainer justify={'center'}>
-                <Button type="submit" color="gamsRed">
-                  Actualizar
-                </Button>
-                <Button color="danger" simple onClick={this.handleClose}>
-                  Cancelar
-                </Button>
-              </GridContainer>
+              <CardFooter>
+                <GridContainer justify={'center'}>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} type="submit" color="gamsRed">
+                      Actualizar
+                    </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={6} md={6}>
+                    <Button block={true} color="danger" simple onClick={this.handleClose}>
+                      Cancelar
+                    </Button>
+                  </GridItem>
+                </GridContainer>
+              </CardFooter>
             </form>
           </DialogContent>
         </Dialog>

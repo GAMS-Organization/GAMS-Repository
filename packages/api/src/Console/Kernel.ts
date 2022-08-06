@@ -5,7 +5,18 @@ import WorkOrderService from '../Domain/Services/WorkOrderService';
 import { STATE } from '../API/Http/Enums/WorkOrder';
 import EventService from '../Domain/Services/EventService';
 import MailerService from '../Domain/Services/Mailer/MailerService';
-// import { exec } from 'child_process';
+import dotenv from 'dotenv';
+import fs from 'fs';
+import * as path from 'path';
+import { exec } from 'child_process';
+import { BackupService } from '../Domain/Services/Backup/BackupService';
+dotenv.config();
+
+const driveClientId = process.env.GOOGLE_DRIVE_CLIENT_ID || '';
+const driveClientSecret = process.env.GOOGLE_DRIVE_CLIENT_SECRET || '';
+const driveRedirectUri = process.env.GOOGLE_DRIVE_REDIRECT_URI || '';
+const driveRefreshToken = process.env.GOOGLE_DRIVE_REFRESH_TOKEN || '';
+
 class ConsoleKernel {
   public handle() {
     this.initCron();
@@ -89,7 +100,56 @@ class ConsoleKernel {
       };
 
       await mailService.sendWeekly(message);
-      // exec('./life-guard.sh');
+    });
+
+    //Ejecuta la tarea todos los Lunes a las 8:00:00 am (8 + 3 por el utc)
+    schedule.scheduleJob('00 00 11 ? * 0', async () => {
+      exec('./life-guard.sh');
+      setTimeout(async () => {
+        const googleDriveService = new BackupService(
+          driveClientId,
+          driveClientSecret,
+          driveRedirectUri,
+          driveRefreshToken,
+        );
+
+        const finalPath = path.resolve(__dirname, '../../backupDataBase.sql');
+        const folderName = 'Backups';
+
+        if (!fs.existsSync(finalPath)) {
+          throw new Error('File not found!');
+        }
+
+        let folder = await googleDriveService.searchFolder(folderName).catch(error => {
+          console.error(error);
+          return null;
+        });
+
+        if (!folder) {
+          folder = await googleDriveService.createFolder(folderName);
+        }
+
+        const today = new Date();
+
+        await googleDriveService
+          .saveFile(
+            `backup-${today
+              .toLocaleString()
+              .split(',')[0]
+              .replace(/\//gi, '-')}`,
+            finalPath,
+            'text/plain',
+            folder.id,
+          )
+          .catch(error => {
+            console.error(error);
+          });
+
+        console.info('File uploaded successfully!');
+
+        // Delete the file on the server
+        fs.unlinkSync(finalPath);
+      }, 30000);
     });
   }
 }

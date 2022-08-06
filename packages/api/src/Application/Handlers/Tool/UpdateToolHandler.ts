@@ -16,7 +16,7 @@ export default class UpdateToolHandler {
     const tool = await this.toolRepository.findOneById(command.getId());
 
     if (!tool) {
-      throw new EntityNotFoundException(`Tool with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la herramienta con id: ${command.getId()}`);
     }
 
     tool.getName() !== command.getName() ? tool.setName(command.getName()) : null;

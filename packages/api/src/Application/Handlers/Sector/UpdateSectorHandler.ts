@@ -15,7 +15,7 @@ export default class UpdateSectorHandler {
   public async execute(command: UpdateSectorCommand): Promise<Sector> {
     const sector = await this.sectorRepository.findOneById(command.getId());
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con id: ${command.getId()}`);
     }
     sector.setMap(command.getMap());
     return await this.sectorRepository.persist(sector);

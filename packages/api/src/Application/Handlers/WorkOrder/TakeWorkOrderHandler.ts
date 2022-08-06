@@ -27,7 +27,7 @@ export default class TakeWorkOrderHandler {
   public async execute(command: TakeWorkOrderCommand): Promise<WorkOrder> {
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
-      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la orden de trabajo con id: ${command.getId()}`);
     } //@ts-ignore
     workOrder.setStartDate(command.getStartDate());
     workOrder.setState(STATE.TAKEN);
@@ -42,7 +42,7 @@ export default class TakeWorkOrderHandler {
     }
     const worker = await this.userRepository.findOneById(command.getWorkerId());
     if (!worker) {
-      throw new EntityNotFoundException(`WorkerUser with id: ${command.getWorkerId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el responsable con id: ${command.getWorkerId()}`);
     }
     workers.push(worker);
 

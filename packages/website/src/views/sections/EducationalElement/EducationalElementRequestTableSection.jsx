@@ -45,6 +45,7 @@ class EducationalElementRequestTableSection extends React.Component {
         ],
         id: educationalElementRequest.id.toString(),
         areaId: educationalElementRequest.area.id.toString(),
+        educationalElementId: educationalElementRequest.educationalElement.id.toString(),
       };
       educationalElementsRequest.push(dataEducationalRequest);
     }

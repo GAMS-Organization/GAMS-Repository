@@ -16,7 +16,7 @@ export default class ShowDepartureHandler {
   public async execute(command: ShowDepartureCommand): Promise<Departure> {
     const departure = await this.departureRepository.findOneById(command.getId());
     if (!departure) {
-      throw new EntityNotFoundException(`Departure with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la salida con id: ${command.getId()}`);
     }
     return departure;
   }

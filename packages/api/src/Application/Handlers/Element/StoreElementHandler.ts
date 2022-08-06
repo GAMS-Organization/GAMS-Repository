@@ -23,7 +23,7 @@ export default class StoreElementHandler {
     const service = await this.serviceRepository.findOneByServiceName(command.getService());
 
     if (!service) {
-      throw new EntityNotFoundException(`Service with name: ${command.getService()} not found`);
+      throw new EntityNotFoundException(`No se encontró el servicio con nombre: ${command.getService()}`);
     }
 
     const element = new Element(command.getName(), command.getCode(), service, command.getSteps());

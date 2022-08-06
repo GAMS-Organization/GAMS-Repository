@@ -18,7 +18,7 @@ export default class UpdateEducationalElementHandler {
     const educationalElement = await this.educationalElementRepository.findOneById(command.getId());
 
     if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el artículo con id: ${command.getId()}`);
     }
 
     educationalElement.getName() !== command.getName() ? educationalElement.setName(command.getName()) : null;

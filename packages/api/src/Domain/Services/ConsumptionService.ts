@@ -8,8 +8,6 @@ import StockDepartureService from './StockDepartureService';
 import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 import WorkOrder from '../Entities/WorkOrder';
 
-// import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
-
 @injectable()
 export default class ConsumptionService {
   private consumptionRepository: IConsumptionRepository;
@@ -56,7 +54,7 @@ export default class ConsumptionService {
         await this.stockDepartureService.updateQuantityStock(consumption.getProduct(), consumption.getQuantity());
         await this.consumptionRepository.destroy(consumption);
       } catch (e) {
-        throw new CannotDeleteEntity(`Consumption with id: ${consumption.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`No se pudo borrar el consumo con id: ${consumption.getId()}`);
       }
     }
   }

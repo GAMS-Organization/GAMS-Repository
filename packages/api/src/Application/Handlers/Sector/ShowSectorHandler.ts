@@ -16,7 +16,7 @@ export default class ShowUserHandler {
   public async execute(command: ShowSectorCommand): Promise<Sector> {
     const sector = await this.sectorRepository.findOneById(command.getId());
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con id: ${command.getId()}`);
     }
     return sector;
   }

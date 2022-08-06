@@ -11,7 +11,6 @@ import CardBody from '../../components/Card/CardBody.jsx';
 import serviceTool from '../../../services/api/tool';
 
 import tablesSectionsstyle from '../../../styles/jss/material-dashboard-react/sections/tablesSectionsStyle';
-import Pagination from '../../components/Pagination/Pagination';
 
 class ToolTableSection extends React.Component {
   constructor(props) {

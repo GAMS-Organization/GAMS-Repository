@@ -53,7 +53,7 @@ export default class PurchaseService {
         await this.stockEntryService.updateQuantityStock(purchase.getProduct(), purchase.getQuantity());
         await this.purchaseRepository.destroy(purchase);
       } catch (e) {
-        throw new CannotDeleteEntity(`Purchase with id: ${purchase.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`No se pudo borrar la compra con id: ${purchase.getId()}`);
       }
     }
   }

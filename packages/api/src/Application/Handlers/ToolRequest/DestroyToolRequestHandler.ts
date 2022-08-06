@@ -17,13 +17,13 @@ export default class DestroyToolRequestHandler {
     const toolRequest = await this.toolRequestRepository.findOneById(command.getId());
 
     if (!toolRequest) {
-      throw new EntityNotFoundException(`ToolRequest with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la solicitud de herramienta con id: ${command.getId()}`);
     }
 
     const toolRequestWasDestroyed = await this.toolRequestRepository.destroy(toolRequest);
 
     if (!toolRequestWasDestroyed) {
-      throw new CannotDeleteEntity(`ToolRequest with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar la solicitud de herramienta con id: ${command.getId()}`);
     }
 
     return toolRequestWasDestroyed;

@@ -9,11 +9,11 @@ export default class EnableUserAdapter {
     const userId = parseInt(request.params.id);
 
     if (!userId) {
-      throw new ValidationException('User id are required');
+      throw new ValidationException('El id del usuario es requerido');
     }
 
     if (userId < 1) {
-      throw new ValidationException('User id is not valid');
+      throw new ValidationException('El id del usuario no es válido');
     }
 
     return new EnableUserCommand(userId);

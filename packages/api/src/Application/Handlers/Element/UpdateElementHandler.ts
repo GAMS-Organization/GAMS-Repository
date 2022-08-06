@@ -15,7 +15,7 @@ export default class UpdateElementHandler {
   public async execute(command: UpdateElementCommand): Promise<Element> {
     const Element = await this.ElementRepository.findOneById(command.getId());
     if (!Element) {
-      throw new EntityNotFoundException(`Element with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el elemento con id: ${command.getId()}`);
     }
     Element.setName(command.getName());
     Element.setSteps(command.getSteps());

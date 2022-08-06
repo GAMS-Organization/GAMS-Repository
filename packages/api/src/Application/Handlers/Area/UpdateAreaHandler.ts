@@ -22,7 +22,7 @@ export default class UpdateAreaHandler {
   public async execute(command: UpdateAreaCommand): Promise<Area> {
     let area = await this.areaRepository.findOneById(command.getId());
     if (!area) {
-      throw new EntityNotFoundException(`Area with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el Area con id: ${command.getId()}`);
     }
     area.setName(command.getName());
 

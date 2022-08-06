@@ -23,13 +23,13 @@ export default class DestroyUserHandler {
     const user = await this.userRepository.findOneById(command.getId());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getId()}`);
     }
     await this.userRoleService.destroyUserRolesFromUser(user.id);
     const userWasDestroyed = await this.userRepository.destroy(user);
 
     if (!userWasDestroyed) {
-      throw new CannotDeleteEntity(`User with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el usuario con id: ${command.getId()}`);
     }
 
     return userWasDestroyed;

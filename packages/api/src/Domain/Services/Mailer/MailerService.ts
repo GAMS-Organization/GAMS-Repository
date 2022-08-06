@@ -174,9 +174,8 @@ export default class MailerService {
             title: event.getTitle(),
             description: event.getDescription(),
             startDate: event.getStartDate(),
-            endDate: `${event
-              .getEndDate()
-              .getDay()}/${event.getEndDate().getMonth()}/${event.getEndDate().getFullYear()}`,
+            endDate: `${event.getEndDate().getDay()}/${event.getEndDate().getMonth() +
+              1}/${event.getEndDate().getFullYear()}`,
           },
         },
       ],
@@ -238,9 +237,8 @@ export default class MailerService {
           comment: workOrder.getComment(),
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
-          orderDate: `${workOrder
-            .getOrderDate()
-            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
+          orderDate: `${workOrder.getOrderDate().getDay()}/${workOrder.getOrderDate().getMonth() +
+            1}/${workOrder.getOrderDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_CREATE_ID;
         break;
@@ -263,12 +261,10 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: `${workOrder
-            .getOrderDate()
-            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
-          startDate: `${workOrder
-            .getStartDate()
-            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
+          orderDate: `${workOrder.getOrderDate().getDay()}/${workOrder.getOrderDate().getMonth() +
+            1}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder.getStartDate().getDay()}/${workOrder.getStartDate().getMonth() +
+            1}/${workOrder.getStartDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_ASSIGN_ID;
         break;
@@ -291,12 +287,10 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: `${workOrder
-            .getOrderDate()
-            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
-          startDate: `${workOrder
-            .getStartDate()
-            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
+          orderDate: `${workOrder.getOrderDate().getDay()}/${workOrder.getOrderDate().getMonth() +
+            1}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder.getStartDate().getDay()}/${workOrder.getStartDate().getMonth() +
+            1}/${workOrder.getStartDate().getFullYear()}`,
         };
         templateId = process.env.MAIL_TEMPLATE_TAKE_ID;
         break;
@@ -340,15 +334,12 @@ export default class MailerService {
           asset: workOrder.getAsset().getCode(),
           priority: workOrder.getPriority(),
           workers: workOrder.getWorkersNameByUserWorkOrders().join(', '),
-          orderDate: `${workOrder
-            .getOrderDate()
-            .getDay()}/${workOrder.getOrderDate().getMonth()}/${workOrder.getOrderDate().getFullYear()}`,
-          startDate: `${workOrder
-            .getStartDate()
-            .getDay()}/${workOrder.getStartDate().getMonth()}/${workOrder.getStartDate().getFullYear()}`,
-          realizationDate: `${workOrder
-            .getRealizationDate()
-            .getDay()}/${workOrder.getRealizationDate().getMonth()}/${workOrder.getRealizationDate().getFullYear()}`,
+          orderDate: `${workOrder.getOrderDate().getDay()}/${workOrder.getOrderDate().getMonth() +
+            1}/${workOrder.getOrderDate().getFullYear()}`,
+          startDate: `${workOrder.getStartDate().getDay()}/${workOrder.getStartDate().getMonth() +
+            1}/${workOrder.getStartDate().getFullYear()}`,
+          realizationDate: `${workOrder.getRealizationDate().getDay()}/${workOrder.getRealizationDate().getMonth() +
+            1}/${workOrder.getRealizationDate().getFullYear()}`,
           taskDescription: workOrder.getTaskDescription(),
         };
         templateId = process.env.MAIL_TEMPLATE_COMPLETE_ID;
