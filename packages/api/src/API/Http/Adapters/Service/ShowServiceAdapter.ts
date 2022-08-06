@@ -9,7 +9,7 @@ export default class ShowServiceAdapter {
     const name = request.params.name.replace(/-/gi, ' ');
 
     if (!name) {
-      throw new ValidationException('El id del servicio es requerido');
+      throw new ValidationException('El nombre del servicio es requerido');
     }
 
     return new ShowServiceCommand(name);

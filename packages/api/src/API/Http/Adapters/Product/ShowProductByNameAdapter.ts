@@ -9,7 +9,7 @@ export default class ShowProductByNameAdapter {
     const name = request.params.name;
 
     if (!name) {
-      throw new ValidationException('El id del producto es requerido');
+      throw new ValidationException('El nombre del producto es requerido');
     }
 
     return new ShowProductByNameCommand(name);

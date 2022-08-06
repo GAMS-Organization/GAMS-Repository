@@ -30,7 +30,7 @@ export default class DestroyAreaHandler {
 
     if (!relationsWasDestroyed) {
       throw new CannotDeleteEntity(
-        `No se pudieron borrar los sevicios relacionadas al área con id: ${command.getId()}`,
+        `No se pudieron borrar los sevicios relacionados al área con id: ${command.getId()}`,
       );
     }
 
