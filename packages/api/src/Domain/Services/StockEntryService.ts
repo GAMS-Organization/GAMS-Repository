@@ -7,7 +7,6 @@ import Entry from '../Entities/Entry';
 import Stock from '../Entities/Stock';
 import Product from '../Entities/Product';
 import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
-// import CannotDeleteEntity from '../../Application/Exceptions/CannotDeleteEntity';
 
 @injectable()
 export default class StockEntryService {
@@ -44,7 +43,7 @@ export default class StockEntryService {
       try {
         await this.stockEntryRepository.destroy(stockEntry);
       } catch (e) {
-        throw new CannotDeleteEntity(`StockEntry with id: ${stockEntry.getId()} could not be deleted`);
+        throw new CannotDeleteEntity(`No se pudo borrar la entrada-stock con id: ${stockEntry.getId()}`);
       }
     }
   }

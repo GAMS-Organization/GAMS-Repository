@@ -21,7 +21,7 @@ export default class UpdateUserHandler {
   public async execute(command: UpdateUserCommand): Promise<User> {
     const user = await this.userRepository.findOneById(command.getId());
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getId()}`);
     }
     user.setName(command.getName());
     user.setSurname(command.getSurname());

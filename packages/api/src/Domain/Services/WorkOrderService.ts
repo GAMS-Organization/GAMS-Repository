@@ -88,7 +88,7 @@ export default class WorkOrderService {
       }
     }
     if (error) {
-      throw new EntityNotFoundException(`One WorkerUser at least has a invalid rol account`);
+      throw new EntityNotFoundException(`Al menos un responsable posee un rol de usuario invalido`);
     }
 
     const workOrders = workOrder.getUserWorkOrders();

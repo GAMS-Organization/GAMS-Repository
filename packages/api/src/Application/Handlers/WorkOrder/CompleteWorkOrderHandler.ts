@@ -27,7 +27,7 @@ export default class CompleteWorkOrderHandler {
   public async execute(command: CompleteWorkOrderCommand): Promise<WorkOrder> {
     let workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
-      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la orden de trabajo con id: ${command.getId()}`);
     }
     //@ts-ignore
     workOrder.setRealizationDate(command.getRealizationDate());

@@ -17,12 +17,12 @@ export default class DestroyProductHandler {
     const product = await this.productRepository.findOneById(command.getId());
 
     if (!product) {
-      throw new EntityNotFoundException(`Product with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el producto con id: ${command.getId()}`);
     }
     const productWasDestroyed = await this.productRepository.destroy(product);
 
     if (!productWasDestroyed) {
-      throw new CannotDeleteEntity(`Product with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el producto con id: ${command.getId()}`);
     }
 
     return productWasDestroyed;

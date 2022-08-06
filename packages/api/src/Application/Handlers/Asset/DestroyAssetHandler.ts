@@ -17,12 +17,12 @@ export default class DestroyAssetHandler {
     const asset = await this.assetRepository.findOneById(command.getId());
 
     if (!asset) {
-      throw new EntityNotFoundException(`Asset with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el activo con id: ${command.getId()}`);
     }
     const assetWasDestroyed = await this.assetRepository.destroy(asset);
 
     if (!assetWasDestroyed) {
-      throw new CannotDeleteEntity(`Asset with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el activo con id: ${command.getId()}`);
     }
 
     return assetWasDestroyed;

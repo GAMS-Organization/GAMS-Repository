@@ -9,11 +9,11 @@ export default class ShowElementsByAreaAdapter {
     const areaId = parseInt(request.params.id);
 
     if (!areaId) {
-      throw new ValidationException('Area id are required');
+      throw new ValidationException('El id del área es requerido');
     }
 
     if (areaId < 1) {
-      throw new ValidationException('Area id is not valid');
+      throw new ValidationException('AEl id del área no es válido');
     }
 
     return new ShowElementsByAreaCommand(areaId);

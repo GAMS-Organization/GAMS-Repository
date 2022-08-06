@@ -9,11 +9,11 @@ export default class DestroyToolRequestAdapter {
     const toolRequestId = parseInt(request.params.id);
 
     if (!toolRequestId) {
-      throw new ValidationException('ToolRequest id are required');
+      throw new ValidationException('El id de la solicitud de herramienta es requerido');
     }
 
     if (toolRequestId < 1) {
-      throw new ValidationException('ToolRequest id is not valid');
+      throw new ValidationException('El id de la solicitud de herramienta no es válido');
     }
 
     return new DestroyToolRequestCommand(toolRequestId);

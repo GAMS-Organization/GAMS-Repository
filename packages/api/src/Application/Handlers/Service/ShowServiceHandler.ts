@@ -16,7 +16,7 @@ export default class ShowUserHandler {
   public async execute(command: ShowServiceCommand): Promise<Service> {
     const service = await this.serviceRepository.findOneByServiceName(command.getName());
     if (!service) {
-      throw new EntityNotFoundException(`Service with id: ${command.getName()} not found`);
+      throw new EntityNotFoundException(`No se encontró el servicio con id: ${command.getName()}`);
     }
     return service;
   }

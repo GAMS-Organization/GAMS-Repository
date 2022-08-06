@@ -27,13 +27,13 @@ export default class StoreWorkOrderHandler {
     const asset = await this.assetRepository.findOneById(command.getAssetId());
 
     if (!asset) {
-      throw new EntityNotFoundException(`Asset with id: ${command.getAssetId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el activo con id: ${command.getAssetId()}`);
     }
 
     const user = await this.userRepository.findOneById(command.getUserId());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getUserId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getUserId()}`);
     }
     //@ts-ignore
     const workOrder = new WorkOrder(command.getOrderDate(), command.getpriority(), command.getComment(), asset, user);

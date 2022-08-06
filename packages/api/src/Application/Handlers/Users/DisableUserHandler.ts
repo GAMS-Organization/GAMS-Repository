@@ -18,7 +18,7 @@ export default class DisableUserHandler {
     const user = await this.userRepository.findOneById(command.getId());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getId()}`);
     }
     user.setUserState(UserStates.user_inactive);
     return await this.userRepository.persist(user);

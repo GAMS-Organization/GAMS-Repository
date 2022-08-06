@@ -35,19 +35,19 @@ export default class StoreToolRequestHandler {
     const tool = await this.toolRepository.findOneById(command.getToolId());
 
     if (!tool) {
-      throw new EntityNotFoundException(`Tool with id: ${command.getToolId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la herramienta con id:: ${command.getToolId()}`);
     }
 
     const user = await this.userRepository.findOneById(command.getUserId());
 
     if (!user) {
-      throw new EntityNotFoundException(`User with id: ${command.getUserId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el usuario con id: ${command.getUserId()}`);
     }
 
     const area = await this.areaRepository.findOneById(command.getAreaId());
 
     if (!area) {
-      throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el área con id: ${command.getAreaId()}`);
     }
 
     const toolUpdated = await this.toolService.updateQuantity(command.getQuantity(), tool, 'borrow');

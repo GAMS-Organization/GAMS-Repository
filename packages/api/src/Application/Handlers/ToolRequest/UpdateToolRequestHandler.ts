@@ -32,19 +32,19 @@ export default class UpdateToolRequestHandler {
   public async execute(command: UpdateToolRequestCommand): Promise<ToolRequest> {
     const toolRequest = await this.toolRequestRepository.findOneById(command.getId());
     if (!toolRequest) {
-      throw new EntityNotFoundException(`ToolRequest with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la solicitud de herramienta con id: ${command.getId()}`);
     }
 
     const tool = await this.toolRepository.findOneById(command.getToolId());
 
     if (!tool) {
-      throw new EntityNotFoundException(`Tool with id: ${command.getToolId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la herramienta con id: ${command.getToolId()}`);
     }
 
     const area = await this.areaRepository.findOneById(command.getAreaId());
 
     if (!area) {
-      throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el área con id: ${command.getAreaId()}`);
     }
 
     if (toolRequest.getStatus() === STATUS.CANCELED) {

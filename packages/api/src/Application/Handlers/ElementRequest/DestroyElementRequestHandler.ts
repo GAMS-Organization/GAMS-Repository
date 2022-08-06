@@ -19,13 +19,13 @@ export default class DestroyElementRequestHandler {
     const elementRequest = await this.elementRequestRepository.findOneById(command.getId());
 
     if (!elementRequest) {
-      throw new EntityNotFoundException(`ElementRequest with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la solicitud de artículo con id: ${command.getId()}`);
     }
 
     const elementRequestWasDestroyed = await this.elementRequestRepository.destroy(elementRequest);
 
     if (!elementRequestWasDestroyed) {
-      throw new CannotDeleteEntity(`ElementRequest with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar la solicitud de artículo con id: ${command.getId()}`);
     }
 
     return elementRequestWasDestroyed;

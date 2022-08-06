@@ -26,7 +26,7 @@ export default class ShowElementsByAreaHandler {
   public async execute(command: ShowElementsByAreaCommand): Promise<Element[]> {
     const area = await this.areaRepository.findOneById(command.getAreaId());
     if (!area) {
-      throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el área con id: ${command.getAreaId()}`);
     }
 
     const assets = await this.assetService.findAssetsFromArea(area.getId());

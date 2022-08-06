@@ -32,15 +32,15 @@ export default function customErrorMessages(errors: any, customOptions?: any) {
         break;
       case 'string.min':
         err.type = codeErrors.STRING.ATTRIBUTES.MIN.code;
-        err.message = `${codeErrors.STRING.ATTRIBUTES.MIN.message} ${err.context.limit} characters`;
+        err.message = `${codeErrors.STRING.ATTRIBUTES.MIN.message} ${err.context.limit} caracteres`;
         break;
       case 'string.max':
         err.type = codeErrors.STRING.ATTRIBUTES.MAX.code;
-        err.message = `${codeErrors.STRING.ATTRIBUTES.MAX.message} ${err.context.limit} characters`;
+        err.message = `${codeErrors.STRING.ATTRIBUTES.MAX.message} ${err.context.limit} caracteres`;
         break;
       case 'string.regex.base':
         err.type = codeErrors.STRING.ATTRIBUTES.REGEX.code;
-        err.message = `${codeErrors.STRING.ATTRIBUTES.REGEX.message}. Pattern example: ${customOptions.pattern}`;
+        err.message = `${codeErrors.STRING.ATTRIBUTES.REGEX.message}. Patron de ejemplo: ${customOptions.pattern}`;
         break;
       case 'number.base':
         err.type = codeErrors.NUMBER.code;

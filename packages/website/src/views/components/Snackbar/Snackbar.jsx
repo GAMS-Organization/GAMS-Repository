@@ -19,7 +19,7 @@ function Snackbar({ ...props }) {
         closeNotification();
       }, 3000);
     }
-  }, [open]);
+  }, [open, closeNotification]);
 
   var action = [];
   const messageClasses = classNames({

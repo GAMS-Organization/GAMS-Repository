@@ -23,19 +23,21 @@ export default class DestroyAreaHandler {
     const area = await this.areaRepository.findOneById(command.getId());
 
     if (!area) {
-      throw new EntityNotFoundException(`Sector with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con id: ${command.getId()}`);
     }
 
     const relationsWasDestroyed = await this.areaServiceService.safeDestroyAreaRelationsByArea(area);
 
     if (!relationsWasDestroyed) {
-      throw new CannotDeleteEntity(`Services relationed with the area id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(
+        `No se pudieron borrar los sevicios relacionados al área con id: ${command.getId()}`,
+      );
     }
 
     const areaWasDestroyed = await this.areaRepository.destroy(area);
 
     if (!areaWasDestroyed) {
-      throw new CannotDeleteEntity(`Area with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar el área con id: ${command.getId()}`);
     }
 
     return areaWasDestroyed;

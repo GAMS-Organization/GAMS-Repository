@@ -32,19 +32,19 @@ export default class UpdateElementRequestHandler {
   public async execute(command: UpdateElementRequestCommand): Promise<ElementRequest> {
     const elementRequest = await this.elementRequestRepository.findOneById(command.getId());
     if (!elementRequest) {
-      throw new EntityNotFoundException(`ElementRequest with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la solicitud de artículo con id: ${command.getId()}`);
     }
 
     const educationalElement = await this.educationalElementRepository.findOneById(command.getEducationalElementId());
 
     if (!educationalElement) {
-      throw new EntityNotFoundException(`EducationalElement with id: ${command.getEducationalElementId()} not found`);
+      throw new EntityNotFoundException(`ENo se encontró el artículo con id: ${command.getEducationalElementId()}`);
     }
 
     const area = await this.areaRepository.findOneById(command.getAreaId());
 
     if (!area) {
-      throw new EntityNotFoundException(`Area with id: ${command.getAreaId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el área con id: ${command.getAreaId()}`);
     }
 
     if (elementRequest.getStatus() === STATUS.CANCELED) {

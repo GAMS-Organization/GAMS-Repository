@@ -27,14 +27,14 @@ export default class DestroyEntryHandler {
     const entry = await this.entryRepository.findOneById(command.getId());
 
     if (!entry) {
-      throw new EntityNotFoundException(`Entry with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la entrada con id:: ${command.getId()}`);
     }
     await this.purchaseService.destroyPurchasesFromEntry(entry.id);
     await this.stockEntryService.destroyStockEntriesFromEntry(entry.id);
     const entryWasDestroyed = await this.entryRepository.destroy(entry);
 
     if (!entryWasDestroyed) {
-      throw new CannotDeleteEntity(`Entry with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar la entrada con id: ${command.getId()}`);
     }
 
     return entryWasDestroyed;

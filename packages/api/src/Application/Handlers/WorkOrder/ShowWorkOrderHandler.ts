@@ -16,7 +16,7 @@ export default class ShowWorkOrderHandler {
   public async execute(command: ShowWorkOrderCommand): Promise<WorkOrder> {
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
-      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la orden de trabajo con id: ${command.getId()}`);
     }
     return workOrder;
   }

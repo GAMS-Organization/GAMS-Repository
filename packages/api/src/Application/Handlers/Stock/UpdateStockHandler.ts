@@ -21,7 +21,7 @@ export default class UpdateUserHandler {
   public async execute(command: UpdateStockCommand): Promise<Stock> {
     const stock = await this.stockRepository.findOneById(command.getId());
     if (!stock) {
-      throw new EntityNotFoundException(`Stock with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el stock con id: ${command.getId()}`);
     }
     return await this.stockService.updateStock(stock, command);
   }

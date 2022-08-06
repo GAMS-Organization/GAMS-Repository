@@ -17,13 +17,13 @@ export default class DestroyToolHandler {
     const tool = await this.toolRepository.findOneById(command.getId());
 
     if (!tool) {
-      throw new EntityNotFoundException(`Tool with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la herramienta con id: ${command.getId()}`);
     }
 
     const toolWasDestroyed = await this.toolRepository.destroy(tool);
 
     if (!toolWasDestroyed) {
-      throw new CannotDeleteEntity(`Tool with id: ${command.getId()} could not be deleted`);
+      throw new CannotDeleteEntity(`No se pudo borrar la herramienta con id: ${command.getId()}`);
     }
 
     return toolWasDestroyed;

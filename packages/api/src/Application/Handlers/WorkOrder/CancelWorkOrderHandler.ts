@@ -24,16 +24,16 @@ export default class CancelWorkOrderHandler {
 
     const workOrder = await this.workOrderRepository.findOneById(command.getId());
     if (!workOrder) {
-      throw new EntityNotFoundException(`WorkOrder with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró la orden de trabajo con id: ${command.getId()}`);
     }
 
     if (user.getRolesFromUserRole()[0] === 'user') {
       if (user !== workOrder.getUser()) {
-        throw new EntityNotFoundException(`Can not cancel the work order, you are not the author`);
+        throw new EntityNotFoundException(`No puedes cancelar la orden de trabajo, no eres el creador de la misma`);
       }
       if (workOrder.getState() !== STATE.FREE) {
         throw new EntityNotFoundException(
-          `Can not cancel the work order, it is already on state: ${workOrder.getState()}`,
+          `No puedes cancelar la orden de trabajo, ya está en estado: ${workOrder.getState()}`,
         );
       }
     }

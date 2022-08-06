@@ -57,19 +57,19 @@ export default class AssetService {
   ): Promise<Asset> {
     const sector = await this.sectorRepository.findOneBySectorName(commandSector);
     if (!sector) {
-      throw new EntityNotFoundException(`Sector with name: ${commandSector} not found`);
+      throw new EntityNotFoundException(`No se encontró el sector con nombre: ${commandSector}`);
     }
     const area = await this.areaRepository.findOneByAreaName(commandArea, sector.getId());
     if (!area) {
-      throw new EntityNotFoundException(`Area with name: ${commandArea} not found`);
+      throw new EntityNotFoundException(`No se encontró el área con nombre: ${commandArea}`);
     }
     const service = await this.serviceRepository.findOneByServiceName(commandService);
     if (!service) {
-      throw new EntityNotFoundException(`Service with name: ${commandService} not found`);
+      throw new EntityNotFoundException(`No se encontró el servicio con nombre: ${commandService}`);
     }
     const element = await this.elementRepository.findOneByElementName(commandElement);
     if (!element) {
-      throw new EntityNotFoundException(`Element with name: ${commandElement} not found`);
+      throw new EntityNotFoundException(`No se encontró el elemento con nombre: ${commandElement}`);
     }
 
     const code = await this.createAssetCode(sector, area, service, element);

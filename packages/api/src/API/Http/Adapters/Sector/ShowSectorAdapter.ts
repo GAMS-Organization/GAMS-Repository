@@ -9,11 +9,11 @@ export default class ShowSectorAdapter {
     const sectorId = parseInt(request.params.id);
 
     if (!sectorId) {
-      throw new ValidationException('Sector id are required');
+      throw new ValidationException('El id del sector es requerido');
     }
 
     if (sectorId < 1) {
-      throw new ValidationException('Sector id is not valid');
+      throw new ValidationException('El id del sector no es válido');
     }
 
     return new ShowSectorCommand(sectorId);

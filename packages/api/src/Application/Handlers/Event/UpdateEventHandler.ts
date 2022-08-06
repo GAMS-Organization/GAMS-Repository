@@ -21,7 +21,7 @@ export default class UpdateEventHandler {
   public async execute(command: UpdateEventCommand): Promise<Event> {
     const event = await this.eventRepository.findOneById(command.getId());
     if (!event) {
-      throw new EntityNotFoundException(`Event with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el evento con id: ${command.getId()}`);
     }
 
     event.setTitle(command.getTitle());

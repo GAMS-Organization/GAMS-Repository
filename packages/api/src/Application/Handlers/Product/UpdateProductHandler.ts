@@ -15,7 +15,7 @@ export default class UpdateProductHandler {
   public async execute(command: UpdateProductCommand): Promise<Product> {
     const product = await this.productRepository.findOneById(command.getId());
     if (!product) {
-      throw new EntityNotFoundException(`Product with id: ${command.getId()} not found`);
+      throw new EntityNotFoundException(`No se encontró el producto con id: ${command.getId()}`);
     }
     product.setName(command.getName());
     return await this.productRepository.persist(product);

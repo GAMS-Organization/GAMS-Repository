@@ -9,11 +9,11 @@ export default class DestroyAssetAdapter {
     const assetId = parseInt(request.params.id);
 
     if (!assetId) {
-      throw new ValidationException('Asset id are required');
+      throw new ValidationException('El id del activo es requerido');
     }
 
     if (assetId < 1) {
-      throw new ValidationException('Asset id is not valid');
+      throw new ValidationException('El id del activo es inválido');
     }
 
     return new DestroyAssetCommand(assetId);
