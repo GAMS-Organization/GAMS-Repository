@@ -14,7 +14,7 @@ export default class ShowAssetAdapter {
     //@ts-ignore
     const area = parseInt(request.query.area);
     if (!area) {
-      throw new ValidationException('El is del área es requerido');
+      throw new ValidationException('El id del área es requerido');
     }
     //@ts-ignore
     const service = parseInt(request.query.service);
