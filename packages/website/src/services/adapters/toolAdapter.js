@@ -104,6 +104,10 @@ class toolAdapter {
     let { status, data } = listResponse;
 
     if (!isError(status)) {
+      /*for (var item in data.items) {
+        //data.data.date = item.data.date.slice(0, 10);
+        console.log(item);
+      }*/
       return {
         data,
       };

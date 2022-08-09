@@ -61,7 +61,7 @@ class NewWorkOrder extends React.Component {
   //se obtienen los sectores
   componentWillMount = async () => {
     const responseSector = await serviceSector.list(1, 50);
-    const imagenGlobal = 'global/Mapa.png';
+    const imagenGlobal = 'global/Mapa.jpg';
     let sectores = [];
     for (const sector of responseSector.data.items) {
       let dataSector = sector;
@@ -197,7 +197,6 @@ class NewWorkOrder extends React.Component {
     const response = await serviceWorkOrder.create(formValues);
     if (response.type === 'CREATED_SUCCESSFUL') {
       formElements.namedItem('observations').value = '';
-      formElements.namedItem('date').value = '';
       this.setState({
         notification: true,
         selectedService: '',
@@ -212,7 +211,7 @@ class NewWorkOrder extends React.Component {
         idAsset: '',
         selectedAsset: '',
         comment: '',
-        map: '',
+        map: 'global/Mapa.jpg',
       });
     } else {
       this.setState({ notification: true, errors: response.error });
@@ -290,7 +289,7 @@ class NewWorkOrder extends React.Component {
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {sector.name}
+                                {sector.name} - ({sector.code})
                               </MenuItem>
                             ))}
                           </Select>
@@ -326,7 +325,7 @@ class NewWorkOrder extends React.Component {
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {area.name}
+                                {area.name} - ({area.code})
                               </MenuItem>
                             ))}
                           </Select>
@@ -402,7 +401,7 @@ class NewWorkOrder extends React.Component {
                                   selected: classes.selectMenuItemSelected,
                                 }}
                               >
-                                {element.name}
+                                {element.name} - ({element.code})
                               </MenuItem>
                             ))}
                           </Select>
@@ -450,20 +449,6 @@ class NewWorkOrder extends React.Component {
                             ))}
                           </Select>
                         </FormControl>
-                      </GridItem>
-                      <GridItem xs={12} sm={12} md={10}>
-                        <CustomInput
-                          labelText={this.state.dateNow}
-                          id="date"
-                          value={this.state.dateNow}
-                          formControlProps={{
-                            fullWidth: true,
-                          }}
-                          inputProps={{
-                            name: 'date',
-                            disabled: true,
-                          }}
-                        />
                       </GridItem>
                       <GridItem xs={12} sm={12} md={10}>
                         <FormControl fullWidth className={classes.selectFormControl}>

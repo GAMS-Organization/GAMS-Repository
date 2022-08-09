@@ -34,6 +34,7 @@ class DetailWorkOrderSection extends React.Component {
   };
 
   showWorkers = workers => {
+    console.log(this.props.workOrder);
     return workers.map(worker => {
       return (
         <GridItem xs={12} sm={12} md={6}>
