@@ -9,13 +9,13 @@ class areaAdapter {
         type: 'CREATED_SUCCESSFUL',
       };
     } else {
-      const { code } = data.errors;
+      const { code, details } = data.errors;
       return {
         type: 'CREATED_FAIL',
         error: {
           code: status,
           type: code,
-          errors: 'Error al crear el área. Por favor revise los campos ingresados.',
+          errors: details.errors.code.message,
         },
       };
     }

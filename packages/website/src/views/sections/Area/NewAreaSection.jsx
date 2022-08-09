@@ -107,11 +107,7 @@ class NewAreaSection extends React.Component {
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
           icon={AddAlert}
-          message={
-            this.state.errors.code
-              ? `Error ${this.state.errors.code}. ${this.state.errors.errors}`
-              : 'Area creada correctamente'
-          }
+          message={this.state.errors.code ? `Error. ${this.state.errors.details}` : 'Area creada correctamente'}
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close

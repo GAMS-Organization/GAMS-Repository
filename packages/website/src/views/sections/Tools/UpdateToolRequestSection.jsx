@@ -84,7 +84,7 @@ class UpdateToolRequestSection extends React.Component {
           place="tr"
           color={this.state.errors.code ? 'danger' : 'success'}
           icon={AddAlert}
-          message={this.state.errors.code ? `${this.state.errors.details}` : 'Estado actualizado correctamente'}
+          message={this.state.errors.code ? `Error. ${this.state.errors.details}` : 'Estado actualizado correctamente'}
           open={this.state.notification}
           closeNotification={this.closeNotification}
           close
